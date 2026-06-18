@@ -3,266 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard — Ethiopian Peace Archive</title>
+    <title>Admin — Ethiopian Peace Archive</title>
     <style>
-        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--red:#ef4444;--blue:#3b82f6}
+        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--red:#ef4444}
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
         
         #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
-        .login-card{background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:40px;width:100%;max-width:400px;text-align:center}
-        .login-card h1{color:var(--gold);margin-bottom:8px;font-size:1.5rem}
-        .login-card p{color:var(--text-dim);margin-bottom:24px;font-size:0.9rem}
-        input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid var(--green-border);background:var(--bg);color:var(--text);font-size:0.95rem;margin-bottom:12px;font-family:inherit}
-        textarea{min-height:200px;resize:vertical}
-        .btn{display:inline-block;padding:12px 24px;border-radius:25px;text-decoration:none;font-weight:700;font-size:0.9rem;cursor:pointer;border:none;font-family:inherit;transition:all 0.3s}
-        .btn-primary{background:var(--green);color:#000;width:100%}
-        .btn-primary:hover{background:var(--green-bright)}
-        .btn-sm{padding:6px 14px;font-size:0.75rem;border-radius:15px;width:auto}
-        .btn-danger{background:var(--red);color:#fff}
-        .btn-blue{background:var(--blue);color:#fff}
-
-        #dashboard{display:none;max-width:1200px;margin:0 auto;padding:16px}
-        .dash-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:16px 0;border-bottom:1px solid var(--green-border);margin-bottom:24px}
-        .dash-header h1{color:var(--gold);font-size:1.3rem}
-        .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
-        .stat-box{background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:14px;text-align:center}
-        .stat-box .big{font-size:1.8rem;font-weight:800;color:var(--green-bright)}
-        .stat-box .lbl{font-size:0.7rem;color:var(--text-dim)}
-
-        .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-        .dash-card{background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:18px}
-        .dash-card h3{color:var(--gold);margin-bottom:10px;font-size:1rem}
-        .dash-card a{display:block;padding:10px 14px;border-radius:8px;color:var(--text-dim);text-decoration:none;margin-bottom:4px;transition:all 0.2s;font-size:0.85rem;border:1px solid transparent;cursor:pointer}
-        .dash-card a:hover{background:var(--green-dim);color:var(--green-bright);border-color:var(--green-border)}
-
-        #editor{display:none;max-width:800px;margin:0 auto;padding:16px}
-        .editor-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
-        .msg{padding:10px 16px;border-radius:8px;margin-bottom:12px;font-size:0.85rem;display:none}
-        .msg-success{background:var(--green-dim);color:var(--green-bright);border:1px solid var(--green)}
-        .msg-error{background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.3)}
-
-        table{width:100%;border-collapse:collapse;font-size:0.8rem;margin-top:12px}
-        th{text-align:left;padding:8px 10px;color:var(--text-dim);border-bottom:1px solid var(--green-border);font-size:0.7rem;text-transform:uppercase}
-        td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.03)}
-        tr:hover td{background:rgba(34,197,94,0.03)}
-
-        @media(max-width:768px){.dash-grid{grid-template-columns:1fr}}
+        .login-box{background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;width:100%;max-width:380px;text-align:center}
+        .login-box h1{color:var(--gold);margin-bottom:16px;font-size:1.4rem}
+        input,textarea,select{width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--green-border);background:var(--bg);color:var(--text);font-size:0.9rem;margin-bottom:10px;font-family:inherit}
+        textarea{min-height:100px;resize:vertical}
+        .btn{display:inline-block;padding:12px 20px;border-radius:25px;font-weight:700;font-size:0.9rem;cursor:pointer;border:none;font-family:inherit;background:var(--green);color:#000;width:100%}
+        .btn:hover{background:var(--green-bright)}
+        .btn-sm{padding:6px 14px;font-size:0.75rem;width:auto;border-radius:15px}
+        .btn-red{background:var(--red);color:#fff}
+        
+        #panel{display:none;max-width:700px;margin:0 auto;padding:16px}
+        .topbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:12px 0;border-bottom:1px solid var(--green-border);margin-bottom:16px}
+        .topbar h2{color:var(--gold);font-size:1.1rem}
+        
+        .tab-row{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+        .tab-btn{padding:8px 16px;border-radius:20px;border:none;cursor:pointer;font-size:0.8rem;font-family:inherit;background:var(--card);color:var(--text-dim)}
+        .tab-btn.active{background:var(--green);color:#000;font-weight:700}
+        
+        .form-card{background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px;margin-bottom:14px}
+        .form-card h3{color:var(--gold);margin-bottom:12px;font-size:0.95rem}
+        .form-row{display:flex;gap:8px;flex-wrap:wrap}
+        .form-row input{flex:1;min-width:120px}
+        
+        .msg{padding:10px;border-radius:8px;margin-bottom:10px;font-size:0.85rem;display:none}
+        .msg-ok{background:rgba(34,197,94,0.12);color:var(--green-bright);border:1px solid var(--green)}
+        .msg-err{background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.3)}
+        
+        table{width:100%;border-collapse:collapse;font-size:0.78rem;margin-top:8px}
+        th,td{padding:8px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05)}
+        th{color:var(--text-dim);font-size:0.7rem}
     </style>
 </head>
 <body>
 
 <!-- LOGIN -->
 <div id="loginScreen">
-    <div class="login-card">
-        <h1>🔐 Admin Dashboard</h1>
-        <p>Ethiopian Peace Archive</p>
+    <div class="login-box">
+        <h1>🔐 Admin Panel</h1>
         <form onsubmit="login(event)">
-            <input type="email" id="loginEmail" placeholder="Admin Email" required>
-            <input type="password" id="loginPassword" placeholder="Password" required>
-            <button type="submit" class="btn btn-primary">Sign In</button>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="pass" placeholder="Password" required>
+            <button class="btn">Sign In</button>
         </form>
-        <div id="loginMsg" class="msg msg-error" style="margin-top:12px;"></div>
+        <div id="loginMsg" class="msg msg-err" style="margin-top:10px"></div>
     </div>
 </div>
 
-<!-- DASHBOARD -->
-<div id="dashboard">
-    <div class="dash-header">
-        <h1>⚙️ Admin Dashboard</h1>
-        <div style="display:flex;gap:8px;align-items:center">
-            <span style="color:var(--text-dim);font-size:0.85rem" id="userDisplay"></span>
-            <button class="btn btn-danger btn-sm" onclick="logout()">Logout</button>
-        </div>
+<!-- PANEL -->
+<div id="panel">
+    <div class="topbar">
+        <h2>⚙️ Admin Panel</h2>
+        <button class="btn btn-sm btn-red" onclick="logout()">Logout</button>
     </div>
     
-    <div class="stats-row">
-        <div class="stat-box"><div class="big" id="blogCount">0</div><div class="lbl">Blog Posts</div></div>
-        <div class="stat-box"><div class="big" id="courseCount">0</div><div class="lbl">Courses</div></div>
-        <div class="stat-box"><div class="big" id="galleryCount">0</div><div class="lbl">Gallery</div></div>
+    <div class="tab-row">
+        <button class="tab-btn active" onclick="showTab('course')">🎓 Add Course</button>
+        <button class="tab-btn" onclick="showTab('lesson')">📚 Add Lesson</button>
+        <button class="tab-btn" onclick="showTab('blog')">📝 Add Blog</button>
+        <button class="tab-btn" onclick="showTab('gallery')">🖼️ Add Photo</button>
     </div>
-
-    <div class="dash-grid">
-        <div class="dash-card">
-            <h3>📝 Blog Management</h3>
-            <a onclick="openEditor('blog','new')">➕ New Blog Post</a>
-            <a onclick="listItems('blogs')">📋 View All Posts</a>
-        </div>
-        <div class="dash-card">
-            <h3>🎓 Course Management</h3>
-            <a onclick="openEditor('course','new')">➕ New Course</a>
-            <a onclick="listItems('courses')">📋 View All Courses</a>
-        </div>
-        <div class="dash-card">
-            <h3>🖼️ Gallery Management</h3>
-            <a onclick="openEditor('gallery','new')">➕ Add Photo</a>
-            <a onclick="listItems('gallery')">📋 View All Photos</a>
-        </div>
-        <div class="dash-card">
-            <h3>🗣️ Voice Management</h3>
-            <a onclick="window.open('https://supabase.com/dashboard/project/rnafjznurgnrdonyxfgs/editor','_blank')">📋 Manage in Supabase</a>
-        </div>
+    
+    <div id="msgBox" class="msg"></div>
+    
+    <!-- COURSE FORM -->
+    <div class="form-card" id="tab-course">
+        <h3>➕ New Course</h3>
+        <form onsubmit="saveCourse(event)">
+            <input type="text" id="cTitle" placeholder="Course Title *" required>
+            <input type="text" id="cSlug" placeholder="slug-url-name *" required>
+            <input type="text" id="cDesc" placeholder="Short description">
+            <select id="cLevel">
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+                <option value="All Levels">All Levels</option>
+            </select>
+            <input type="number" id="cModules" placeholder="Number of modules" value="4">
+            <button class="btn">💾 Save Course</button>
+        </form>
     </div>
-</div>
-
-<!-- EDITOR -->
-<div id="editor">
-    <div class="editor-toolbar">
-        <button class="btn btn-sm" onclick="closeEditor()">← Back</button>
-        <span id="editorTitle" style="color:var(--gold);font-weight:700"></span>
+    
+    <!-- LESSON FORM -->
+    <div class="form-card" id="tab-lesson" style="display:none">
+        <h3>📚 Add Lesson</h3>
+        <form onsubmit="saveLesson(event)">
+            <input type="number" id="lCourseId" placeholder="Course ID *" required>
+            <input type="text" id="lTitle" placeholder="Lesson Title *" required>
+            <textarea id="lContent" placeholder="Lesson content..."></textarea>
+            <input type="number" id="lOrder" placeholder="Lesson order (1,2,3...)" value="1">
+            <button class="btn">💾 Save Lesson</button>
+        </form>
     </div>
-    <div id="editorMsg" class="msg"></div>
-    <form id="editorForm" onsubmit="saveContent(event)">
-        <input type="hidden" id="editType">
-        <input type="text" id="editTitle" placeholder="Title *" required>
-        <input type="text" id="editSlug" placeholder="slug-url-name *" required>
-        <select id="editCategory" style="display:none">
-            <option value="Story">Story</option>
-            <option value="Research">Research</option>
-            <option value="Announcement">Announcement</option>
-            <option value="Impact">Impact</option>
-            <option value="Media">Media</option>
-        </select>
-        <input type="text" id="editExcerpt" placeholder="Short excerpt/description">
-        <input type="text" id="editImage" placeholder="Image URL (optional)">
-        <textarea id="editContent" placeholder="Write your content here..."></textarea>
-        <button type="submit" class="btn btn-primary">💾 Save & Publish</button>
-    </form>
-    <div id="listView" style="display:none"></div>
+    
+    <!-- BLOG FORM -->
+    <div class="form-card" id="tab-blog" style="display:none">
+        <h3>📝 New Blog Post</h3>
+        <form onsubmit="saveBlog(event)">
+            <input type="text" id="bTitle" placeholder="Blog Title *" required>
+            <input type="text" id="bSlug" placeholder="slug-url-name *" required>
+            <textarea id="bContent" placeholder="Blog content..."></textarea>
+            <input type="text" id="bExcerpt" placeholder="Short excerpt">
+            <select id="bCategory">
+                <option value="Story">Story</option>
+                <option value="Research">Research</option>
+                <option value="Announcement">Announcement</option>
+                <option value="Impact">Impact</option>
+                <option value="Media">Media</option>
+            </select>
+            <button class="btn">💾 Save Blog Post</button>
+        </form>
+    </div>
+    
+    <!-- GALLERY FORM -->
+    <div class="form-card" id="tab-gallery" style="display:none">
+        <h3>🖼️ Add Gallery Photo</h3>
+        <form onsubmit="saveGallery(event)">
+            <input type="text" id="gTitle" placeholder="Photo title">
+            <input type="text" id="gImage" placeholder="Image URL *" required>
+            <input type="text" id="gCategory" placeholder="Category (Events, Community, Workshop...)">
+            <button class="btn">💾 Save Photo</button>
+        </form>
+    </div>
 </div>
 
 <script>
-const API = 'https://peace-api.peace-01d.workers.dev';
-const ADMIN_EMAIL = 'admin@peacearchive.org';
-const ADMIN_PASS = 'Peace2026!';
+const URL='https://rnafjznurgnrdonyxfgs.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
-// Auth
 function login(e){
     e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    const pass = document.getElementById('loginPassword').value;
-    if(email === ADMIN_EMAIL && pass === ADMIN_PASS){
-        localStorage.setItem('epa_admin','true');
+    if(document.getElementById('email').value==='admin@peacearchive.org' && document.getElementById('pass').value==='Peace2026!'){
+        localStorage.setItem('epa','1');
         document.getElementById('loginScreen').style.display='none';
-        document.getElementById('dashboard').style.display='block';
-        document.getElementById('userDisplay').textContent=email;
-        loadStats();
+        document.getElementById('panel').style.display='block';
     }else{
-        document.getElementById('loginMsg').textContent='Invalid credentials';
+        document.getElementById('loginMsg').textContent='Wrong email or password';
         document.getElementById('loginMsg').style.display='block';
     }
 }
+function logout(){localStorage.removeItem('epa');location.reload();}
+if(localStorage.getItem('epa')==='1'){document.getElementById('loginScreen').style.display='none';document.getElementById('panel').style.display='block';}
 
-function logout(){localStorage.removeItem('epa_admin');location.reload();}
-
-if(localStorage.getItem('epa_admin')==='true'){
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('dashboard').style.display='block';
-    document.getElementById('userDisplay').textContent=ADMIN_EMAIL;
-    loadStats();
+function showTab(t){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    event.target.classList.add('active');
+    ['course','lesson','blog','gallery'].forEach(id=>document.getElementById('tab-'+id).style.display='none');
+    document.getElementById('tab-'+t).style.display='block';
 }
 
-async function loadStats(){
-    try{
-        const [blogs,courses,gallery]=await Promise.all([
-            fetch(`${API}/api/blogs`).then(r=>r.json()),
-            fetch(`${API}/api/courses`).then(r=>r.json()),
-            fetch(`${API}/api/gallery`).then(r=>r.json())
-        ]);
-        document.getElementById('blogCount').textContent=blogs.length||0;
-        document.getElementById('courseCount').textContent=courses.length||0;
-        document.getElementById('galleryCount').textContent=gallery.length||0;
-    }catch(e){}
-}
+function ok(msg){document.getElementById('msgBox').textContent='✅ '+msg;document.getElementById('msgBox').className='msg msg-ok';document.getElementById('msgBox').style.display='block';setTimeout(()=>document.getElementById('msgBox').style.display='none',3000)}
+function err(msg){document.getElementById('msgBox').textContent='❌ '+msg;document.getElementById('msgBox').className='msg msg-err';document.getElementById('msgBox').style.display='block'}
 
-// Editor
-function openEditor(type,mode){
-    document.getElementById('dashboard').style.display='none';
-    document.getElementById('editor').style.display='block';
-    document.getElementById('editorForm').style.display='block';
-    document.getElementById('listView').style.display='none';
-    document.getElementById('editType').value=type;
-    document.getElementById('editTitle').value='';
-    document.getElementById('editSlug').value='';
-    document.getElementById('editContent').value='';
-    document.getElementById('editExcerpt').value='';
-    document.getElementById('editImage').value='';
-    
-    const titles={blog:'New Blog Post',course:'New Course',gallery:'New Gallery Item'};
-    document.getElementById('editorTitle').textContent=titles[type]||'Editor';
-    document.getElementById('editCategory').style.display=type==='blog'?'block':'none';
-    document.getElementById('editContent').style.display=type==='gallery'?'none':'block';
-    document.getElementById('editExcerpt').style.display=type==='gallery'?'none':'block';
-}
-
-function closeEditor(){
-    document.getElementById('editor').style.display='none';
-    document.getElementById('dashboard').style.display='block';
-    loadStats();
-}
-
-async function saveContent(e){
+async function saveCourse(e){
     e.preventDefault();
-    const type=document.getElementById('editType').value;
-    const title=document.getElementById('editTitle').value;
-    const slug=document.getElementById('editSlug').value;
-    const content=document.getElementById('editContent').value;
-    const excerpt=document.getElementById('editExcerpt').value;
-    const category=document.getElementById('editCategory').value;
-    const image_url=document.getElementById('editImage').value;
-    const msg=document.getElementById('editorMsg');
-    
-    const body={title,slug,content,excerpt,category,image_url};
-    
+    const data={
+        title:document.getElementById('cTitle').value,
+        slug:document.getElementById('cSlug').value,
+        description:document.getElementById('cDesc').value,
+        level:document.getElementById('cLevel').value,
+        module_count:parseInt(document.getElementById('cModules').value),
+        is_published:true
+    };
     try{
-        const r=await fetch(`${API}/api/${type}s`,{
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify(body)
-        });
-        if(r.ok){
-            msg.textContent='✅ Saved & Published!';
-            msg.className='msg msg-success';
-            msg.style.display='block';
-            setTimeout(()=>{msg.style.display='none';closeEditor();},1500);
-        }else{
-            throw new Error('Save failed');
-        }
-    }catch(e){
-        msg.textContent='❌ Error saving. Try again.';
-        msg.className='msg msg-error';
-        msg.style.display='block';
-    }
+        const r=await fetch(`${URL}/rest/v1/courses`,{method:'POST',headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(data)});
+        if(r.ok){ok('Course saved!');e.target.reset();}else{err('Failed. Check slug is unique.');}
+    }catch(e){err('Network error');}
 }
 
-async function listItems(type){
-    document.getElementById('dashboard').style.display='none';
-    document.getElementById('editor').style.display='block';
-    document.getElementById('editorForm').style.display='none';
-    document.getElementById('listView').style.display='block';
-    document.getElementById('editorTitle').textContent=`📋 All ${type}`;
-    
+async function saveLesson(e){
+    e.preventDefault();
+    const data={
+        course_id:parseInt(document.getElementById('lCourseId').value),
+        title:document.getElementById('lTitle').value,
+        content:document.getElementById('lContent').value,
+        lesson_order:parseInt(document.getElementById('lOrder').value),
+        is_published:true
+    };
     try{
-        const r=await fetch(`${API}/api/${type}`);
-        const items=await r.json();
-        const view=document.getElementById('listView');
-        
-        if(!items.length){
-            view.innerHTML=`<p style="color:var(--text-dim);padding:20px">No items yet. <a onclick="openEditor('${type.slice(0,-1)}','new')" style="color:var(--green-bright);cursor:pointer">Create one →</a></p>`;
-            return;
-        }
-        
-        view.innerHTML=`<table>
-            <tr><th>Title</th><th>Slug</th><th>Status</th></tr>
-            ${items.map(i=>`<tr>
-                <td>${i.title}</td>
-                <td>${i.slug}</td>
-                <td>✅ Published</td>
-            </tr>`).join('')}
-        </table>`;
-    }catch(e){
-        document.getElementById('listView').innerHTML='<p style="color:var(--red)">Error loading.</p>';
-    }
+        const r=await fetch(`${URL}/rest/v1/course_lessons`,{method:'POST',headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(data)});
+        if(r.ok){ok('Lesson saved!');e.target.reset();}else{err('Failed.');}
+    }catch(e){err('Network error');}
+}
+
+async function saveBlog(e){
+    e.preventDefault();
+    const data={
+        title:document.getElementById('bTitle').value,
+        slug:document.getElementById('bSlug').value,
+        content:document.getElementById('bContent').value,
+        excerpt:document.getElementById('bExcerpt').value,
+        category:document.getElementById('bCategory').value,
+        is_published:true
+    };
+    try{
+        const r=await fetch(`${URL}/rest/v1/blog_posts`,{method:'POST',headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(data)});
+        if(r.ok){ok('Blog saved!');e.target.reset();}else{err('Failed. Check slug is unique.');}
+    }catch(e){err('Network error');}
+}
+
+async function saveGallery(e){
+    e.preventDefault();
+    const data={
+        title:document.getElementById('gTitle').value,
+        image_url:document.getElementById('gImage').value,
+        category:document.getElementById('gCategory').value||'General',
+        is_published:true
+    };
+    try{
+        const r=await fetch(`${URL}/rest/v1/gallery`,{method:'POST',headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(data)});
+        if(r.ok){ok('Photo saved!');e.target.reset();}else{err('Failed.');}
+    }catch(e){err('Network error');}
 }
 </script>
 </body>
