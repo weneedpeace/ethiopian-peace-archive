@@ -3,72 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore 1,000+ peace voices from Ethiopia and the world. Filter by region, language, and theme.">
+    <meta name="description" content="Explore 1,000+ peace voices from Ethiopia and the world. Share voices for peace.">
     <title>Voice Archive — Ethiopian Peace Archive</title>
     <style>
-        :root {
-            --bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;
-            --green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);
-            --gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b;
-        }
+        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b}
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
-        nav{
-            background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);
-            padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
-        }
-        nav a{color:var(--text-dim);text-decoration:none;padding:8px 16px;border-radius:25px;font-size:0.85rem;font-family:-apple-system,sans-serif}
-        nav a:hover{color:var(--green-bright);background:var(--green-dim)}
-        nav .logo{font-size:1.2rem;font-weight:bold;color:var(--gold);font-family:-apple-system,sans-serif}
+        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;overflow-x:hidden}
+        
+        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:12px 16px;position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between}
+        nav .logo{font-size:1rem;font-weight:bold;color:var(--gold);font-family:-apple-system,sans-serif;text-decoration:none}
         nav .logo span{color:var(--green-bright)}
-        .container{max-width:1000px;margin:30px auto;padding:0 20px}
-        .section-title{font-size:1.8rem;color:var(--gold);margin-bottom:24px;border-left:5px solid var(--green);padding-left:16px;font-family:-apple-system,sans-serif}
+        .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:1001;width:36px;height:36px;position:relative}
+        .hamburger span{display:block;width:24px;height:2px;background:var(--green-bright);position:absolute;left:6px;transition:all 0.3s;border-radius:2px}
+        .hamburger span:nth-child(1){top:10px}.hamburger span:nth-child(2){top:17px}.hamburger span:nth-child(3){top:24px}
+        .hamburger.open span:nth-child(1){top:17px;transform:rotate(45deg)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){top:17px;transform:rotate(-45deg)}
+        nav .desktop-links{display:flex;gap:3px;flex-wrap:wrap;align-items:center}
+        nav .desktop-links a{color:var(--text-dim);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:0.8rem;font-family:-apple-system,sans-serif;font-weight:500}
+        nav .desktop-links a:hover{color:var(--green-bright);background:var(--green-dim)}
+        nav .desktop-links a.active{color:var(--green-bright);background:var(--green-dim);font-weight:700}
+        
+        .slide-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:998;opacity:0;visibility:hidden;transition:all 0.4s}
+        .slide-overlay.open{opacity:1;visibility:visible}
+        .slide-menu{position:fixed;top:0;right:-320px;width:300px;height:100%;background:linear-gradient(180deg,#0a1628,#0d1b33 50%,#060f1e);border-left:2px solid var(--green-border);z-index:999;transition:right 0.4s cubic-bezier(0.25,0.8,0.25,1.2);padding:80px 20px 30px;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,0.6)}
+        .slide-menu.open{right:0}
+        .slide-menu .menu-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid var(--green-border)}
+        .slide-menu .menu-header .flag{font-size:2.5rem;margin-bottom:8px}
+        .slide-menu .menu-header h3{color:var(--gold);font-family:-apple-system,sans-serif;font-size:1rem}
+        .slide-menu a{display:flex;align-items:center;gap:12px;padding:14px 18px;margin-bottom:6px;border-radius:12px;color:var(--text-dim);text-decoration:none;font-family:-apple-system,sans-serif;font-size:0.9rem;transition:all 0.25s}
+        .slide-menu a:hover{color:var(--green-bright);transform:translateX(4px);background:var(--green-dim)}
+        .slide-menu a .menu-icon{font-size:1.2rem;width:24px;text-align:center}
+        
+        .container{max-width:1000px;margin:30px auto;padding:0 16px}
+        h1{color:var(--gold);margin-bottom:20px;border-left:4px solid var(--green);padding-left:12px;font-family:-apple-system,sans-serif;font-size:1.5rem}
         .tabs{display:flex;gap:4px;margin-bottom:20px;background:var(--card);border-radius:12px;padding:5px}
         .tab{flex:1;padding:12px;border-radius:8px;cursor:pointer;border:none;background:transparent;color:var(--text-dim);font-size:0.9rem;font-family:-apple-system,sans-serif}
         .tab.active{background:var(--green-dim);color:var(--green-bright);font-weight:700}
-        .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+        .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
         .filters select{padding:10px 14px;border-radius:8px;border:1px solid var(--green-border);background:var(--card);color:var(--text);font-size:0.85rem;font-family:-apple-system,sans-serif}
-        .quote-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:14px;padding:22px;margin-bottom:14px;transition:all 0.3s}
+        
+        .quote-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:14px;padding:22px;margin-bottom:14px;transition:all 0.3s;position:relative}
         .quote-card:hover{border-color:var(--green-border);transform:translateY(-2px)}
         .quote-card .loc{color:var(--green-bright);font-size:0.85rem;font-weight:600;margin-bottom:8px;font-family:-apple-system,sans-serif}
         .quote-card .txt{font-size:1.1rem;line-height:1.8;margin-bottom:14px}
         .badge{display:inline-block;padding:4px 12px;border-radius:15px;font-size:0.75rem;margin:2px 4px;font-family:-apple-system,sans-serif}
-        .bdg-yr{background:rgba(234,179,8,0.15);color:#facc15}
-        .bdg-th{background:rgba(59,130,246,0.15);color:#60a5fa}
-        .bdg-th2{background:rgba(168,85,247,0.15);color:#c084fc}
-        .bdg-th3{background:rgba(236,72,153,0.15);color:#f472b6}
+        .bdg-yr{background:rgba(234,179,8,0.15);color:#facc15}.bdg-th{background:rgba(59,130,246,0.15);color:#60a5fa}.bdg-th2{background:rgba(168,85,247,0.15);color:#c084fc}
         .sentiment-bar{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;margin-top:10px}
         .sentiment-fill{height:100%;background:linear-gradient(90deg,#eab308,#22c55e);border-radius:3px}
-        .loading{text-align:center;padding:40px;color:var(--text-dim)}
-        .spinner{display:inline-block;width:22px;height:22px;border:3px solid var(--green-border);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin-right:8px;vertical-align:middle}
-        @keyframes spin{to{transform:rotate(360deg)}}
+        
+        /* Share Buttons */
+        .share-btns{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+        .share-btn{display:inline-block;padding:6px 14px;border-radius:20px;font-size:0.7rem;font-family:-apple-system,sans-serif;cursor:pointer;border:none;text-decoration:none;font-weight:600;transition:all 0.2s}
+        .share-tw{background:#1da1f2;color:#fff}.share-tw:hover{background:#0d8bd9}
+        .share-fb{background:#1877f2;color:#fff}.share-fb:hover{background:#0d65d9}
+        .share-wa{background:#25d366;color:#fff}.share-wa:hover{background:#1da851}
+        .share-copy{background:var(--green-dim);color:var(--green-bright);border:1px solid var(--green-border)}
+        .share-copy:hover{background:var(--green);color:#000}
+        .copied{background:var(--gold)!important;color:#000!important}
+        
+        .loading{text-align:center;padding:40px;color:var(--text-dim);font-family:-apple-system,sans-serif}
         footer{text-align:center;padding:30px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.85rem}
-        @media(max-width:600px){.filters select{flex:1;min-width:0}}
+        
+        @media(max-width:768px){nav .desktop-links{display:none}.hamburger{display:block}.filters select{flex:1;min-width:0}}
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="index.html" style="text-decoration:none"><div class="logo">🕊️ Ethiopian <span>Peace</span> Archive</div></a>
-    <div style="display:flex;gap:4px;flex-wrap:wrap">
-        <a href="index.html">Home</a>
-        <a href="voices.html" style="color:var(--green-bright);background:var(--green-dim)">Voices</a>
-        <a href="blog.html">Blog</a>
-        <a href="courses.html">Courses</a>
-        <a href="dashboard.html">Impact</a>
-        <a href="contribute.html">Contribute</a>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html">Home</a><a href="voices.html" class="active">Voices</a>
+        <a href="blog.html">Blog</a><a href="courses.html">Courses</a>
+        <a href="dashboard.html">Impact</a><a href="media.html">Media</a>
         <a href="support.html">Support</a>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html" onclick="toggleMenu()"><span class="menu-icon">🏠</span>Home</a>
+    <a href="voices.html" onclick="toggleMenu()"><span class="menu-icon">🗣️</span>Voice Archive</a>
+    <a href="blog.html" onclick="toggleMenu()"><span class="menu-icon">📝</span>Blog</a>
+    <a href="courses.html" onclick="toggleMenu()"><span class="menu-icon">🎓</span>Courses</a>
+    <a href="dashboard.html" onclick="toggleMenu()"><span class="menu-icon">📊</span>Impact</a>
+    <a href="media.html" onclick="toggleMenu()"><span class="menu-icon">📰</span>Media</a>
+    <a href="gallery.html" onclick="toggleMenu()"><span class="menu-icon">🖼️</span>Gallery</a>
+    <a href="contribute.html" onclick="toggleMenu()"><span class="menu-icon">🤝</span>Contribute</a>
+    <a href="support.html" onclick="toggleMenu()"><span class="menu-icon">❤️</span>Support</a>
+</div>
+
 <main class="container">
-    <h1 class="section-title">🗣️ Voice Archive</h1>
-    
+    <h1>🗣️ Voice Archive</h1>
+    <p style="color:var(--text-dim);margin-bottom:16px">Share these voices for peace. Every share amplifies a message of hope.</p>
     <div class="tabs">
         <button class="tab active" id="tabEth" onclick="switchTab('ethiopian')">🇪🇹 Ethiopian Voices</button>
         <button class="tab" id="tabGlobal" onclick="switchTab('global')">🌍 Global Voices</button>
     </div>
-
     <div class="filters" id="ethFilters">
         <select id="regionFilter" onchange="render()"><option value="">All Regions</option></select>
         <select id="yearFilter" onchange="render()"><option value="">All Years</option></select>
@@ -80,90 +111,72 @@
         <select id="globalYearFilter" onchange="render()"><option value="">All Years</option></select>
         <select id="continentFilter" onchange="render()"><option value="">All Continents</option></select>
     </div>
-
-    <div id="quotesContainer"><div class="loading"><span class="spinner"></span>Loading voices...</div></div>
+    <div id="quotesContainer"><div class="loading">Loading voices...</div></div>
 </main>
 
-<footer>
-    <p>Ethiopian Peace Archive &copy; 2026 · <a href="privacy.html" style="color:var(--text-dim)">Privacy</a> · <a href="terms.html" style="color:var(--text-dim)">Terms</a></p>
-</footer>
+<footer><p>Ethiopian Peace Archive &copy; 2026 · <a href="privacy.html" style="color:var(--text-dim)">Privacy</a> · <a href="contact.html" style="color:var(--text-dim)">Contact</a></p></footer>
 
 <script>
+function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('slideMenu').classList.toggle('open');document.getElementById('slideOverlay').classList.toggle('open');document.body.style.overflow=document.body.style.overflow==='hidden'?'':'hidden'}
+
 const URL='https://rnafjznurgnrdonyxfgs.supabase.co';
 const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 let eth=[],global=[],tab='ethiopian';
 
-async function fetchTable(t){
-    const r=await fetch(`${URL}/rest/v1/${t}?select=*&is_published=eq.true&order=year.desc`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}});
-    return r.json();
-}
-
+async function fetchTable(t){const r=await fetch(`${URL}/rest/v1/${t}?select=*&is_published=eq.true&order=year.desc`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}});return r.json()}
 async function init(){
     [eth,global]=await Promise.all([fetchTable('ethiopian_voices'),fetchTable('global_voices')]);
-    const regions=[...new Set(eth.map(v=>v.region).filter(Boolean))].sort();
-    const years=[...new Set(eth.map(v=>v.year).filter(Boolean))].sort((a,b)=>b-a);
-    const themes=[...new Set(eth.flatMap(v=>v.themes||[]))].sort();
-    const langs=[...new Set(eth.map(v=>v.language).filter(Boolean))].sort();
-    const countries=[...new Set(global.map(v=>v.country).filter(Boolean))].sort();
-    const gyears=[...new Set(global.map(v=>v.year).filter(Boolean))].sort((a,b)=>b-a);
-    const continents=[...new Set(global.map(v=>v.continent).filter(Boolean))].sort();
-    ['regionFilter','yearFilter','themeFilter','langFilter','countryFilter','globalYearFilter','continentFilter'].forEach(id=>{document.getElementById(id).innerHTML='<option value="">All</option>'});
-    regions.forEach(r=>document.getElementById('regionFilter').innerHTML+=`<option>${r}</option>`);
-    years.forEach(y=>document.getElementById('yearFilter').innerHTML+=`<option>${y}</option>`);
-    themes.forEach(t=>document.getElementById('themeFilter').innerHTML+=`<option>${t}</option>`);
-    langs.forEach(l=>document.getElementById('langFilter').innerHTML+=`<option>${l}</option>`);
-    countries.forEach(c=>document.getElementById('countryFilter').innerHTML+=`<option>${c}</option>`);
-    gyears.forEach(y=>document.getElementById('globalYearFilter').innerHTML+=`<option>${y}</option>`);
-    continents.forEach(c=>document.getElementById('continentFilter').innerHTML+=`<option>${c}</option>`);
+    ['regionFilter','yearFilter','themeFilter','langFilter','countryFilter','globalYearFilter','continentFilter'].forEach(id=>document.getElementById(id).innerHTML='<option value="">All</option>');
+    [...new Set(eth.map(v=>v.region).filter(Boolean))].sort().forEach(r=>document.getElementById('regionFilter').innerHTML+=`<option>${r}</option>`);
+    [...new Set(eth.map(v=>v.year).filter(Boolean))].sort((a,b)=>b-a).forEach(y=>document.getElementById('yearFilter').innerHTML+=`<option>${y}</option>`);
+    [...new Set(eth.flatMap(v=>v.themes||[]))].sort().forEach(t=>document.getElementById('themeFilter').innerHTML+=`<option>${t}</option>`);
+    [...new Set(eth.map(v=>v.language).filter(Boolean))].sort().forEach(l=>document.getElementById('langFilter').innerHTML+=`<option>${l}</option>`);
+    [...new Set(global.map(v=>v.country).filter(Boolean))].sort().forEach(c=>document.getElementById('countryFilter').innerHTML+=`<option>${c}</option>`);
+    [...new Set(global.map(v=>v.year).filter(Boolean))].sort((a,b)=>b-a).forEach(y=>document.getElementById('globalYearFilter').innerHTML+=`<option>${y}</option>`);
+    [...new Set(global.map(v=>v.continent).filter(Boolean))].sort().forEach(c=>document.getElementById('continentFilter').innerHTML+=`<option>${c}</option>`);
     render();
 }
 
-function switchTab(t){
-    tab=t;
-    document.getElementById('tabEth').classList.toggle('active',t==='ethiopian');
-    document.getElementById('tabGlobal').classList.toggle('active',t==='global');
-    document.getElementById('ethFilters').style.display=t==='ethiopian'?'flex':'none';
-    document.getElementById('globalFilters').style.display=t==='global'?'flex':'none';
-    render();
+function switchTab(t){tab=t;document.getElementById('tabEth').classList.toggle('active',t==='ethiopian');document.getElementById('tabGlobal').classList.toggle('active',t==='global');document.getElementById('ethFilters').style.display=t==='ethiopian'?'flex':'none';document.getElementById('globalFilters').style.display=t==='global'?'flex':'none';render()}
+
+function shareTwitter(text){window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&hashtags=EthiopianPeaceArchive,VoicesForPeace`,'_blank')}
+function shareFacebook(text){window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(text)}`,'_blank')}
+function shareWhatsApp(text){window.open(`https://wa.me/?text=${encodeURIComponent(text+' #EthiopianPeaceArchive #VoicesForPeace')}`,'_blank')}
+function copyText(text,btn){
+    navigator.clipboard.writeText(text).then(()=>{
+        btn.textContent='✅ Copied!';btn.classList.add('copied');
+        setTimeout(()=>{btn.textContent='📋 Copy';btn.classList.remove('copied')},2000);
+    });
 }
 
 function render(){
     let voices=tab==='ethiopian'?[...eth]:[...global];
-    if(tab==='ethiopian'){
-        const r=document.getElementById('regionFilter').value;
-        const y=document.getElementById('yearFilter').value;
-        const t=document.getElementById('themeFilter').value;
-        const l=document.getElementById('langFilter').value;
-        if(r) voices=voices.filter(v=>v.region===r);
-        if(y) voices=voices.filter(v=>v.year===parseInt(y));
-        if(t) voices=voices.filter(v=>(v.themes||[]).includes(t));
-        if(l) voices=voices.filter(v=>v.language===l);
-    }else{
-        const c=document.getElementById('countryFilter').value;
-        const y=document.getElementById('globalYearFilter').value;
-        const cont=document.getElementById('continentFilter').value;
-        if(c) voices=voices.filter(v=>v.country===c);
-        if(y) voices=voices.filter(v=>v.year===parseInt(y));
-        if(cont) voices=voices.filter(v=>v.continent===cont);
-    }
+    if(tab==='ethiopian'){const r=document.getElementById('regionFilter').value;const y=document.getElementById('yearFilter').value;const t=document.getElementById('themeFilter').value;const l=document.getElementById('langFilter').value;if(r)voices=voices.filter(v=>v.region===r);if(y)voices=voices.filter(v=>v.year===parseInt(y));if(t)voices=voices.filter(v=>(v.themes||[]).includes(t));if(l)voices=voices.filter(v=>v.language===l)}
+    else{const c=document.getElementById('countryFilter').value;const y=document.getElementById('globalYearFilter').value;const cont=document.getElementById('continentFilter').value;if(c)voices=voices.filter(v=>v.country===c);if(y)voices=voices.filter(v=>v.year===parseInt(y));if(cont)voices=voices.filter(v=>v.continent===cont)}
     const container=document.getElementById('quotesContainer');
-    if(voices.length===0){container.innerHTML='<div class="loading">No voices found.</div>';return}
-    const tc=['bdg-th','bdg-th2','bdg-th3','bdg-th'];
+    if(!voices.length){container.innerHTML='<div class="loading">No voices found.</div>';return}
     container.innerHTML=voices.map((v,i)=>{
         const loc=tab==='ethiopian'?v.region:v.country;
         const sp=Math.round((v.sentiment||0.5)*100);
-        return `<div class="quote-card" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i*0.03}s">
+        const quoteText = '"'+(v.quote_english||v.quote_original)+'" — '+ (loc||'') + ', ' + (v.year||'');
+        return`<div class="quote-card" id="voice-${i}">
             <div class="loc">${tab==='ethiopian'?'📍':'🌍'} ${loc||'Unknown'} · ${v.language||''} · ${v.year||''}</div>
             <div class="txt">"${esc(v.quote_english||v.quote_original)}"</div>
             <span class="badge bdg-yr">📅 ${v.year||'N/A'}</span>
-            ${(v.themes||[]).map((t,j)=>`<span class="badge ${tc[j%4]}">${esc(t)}</span>`).join('')}
+            ${(v.themes||[]).map((t,j)=>`<span class="badge ${['bdg-th','bdg-th2','bdg-th','bdg-th2'][j%4]}">${esc(t)}</span>`).join('')}
             <div class="sentiment-bar"><div class="sentiment-fill" style="width:${sp}%"></div></div>
+            <div class="share-btns">
+                <button class="share-btn share-tw" onclick="shareTwitter('${escJS(quoteText)}')">🐦 Twitter</button>
+                <button class="share-btn share-fb" onclick="shareFacebook('${escJS(quoteText)}')">📘 Facebook</button>
+                <button class="share-btn share-wa" onclick="shareWhatsApp('${escJS(quoteText)}')">💬 WhatsApp</button>
+                <button class="share-btn share-copy" onclick="copyText('${escJS(quoteText)}', this)">📋 Copy</button>
+            </div>
         </div>`;
     }).join('');
 }
 
 function esc(t){if(!t)return'';const d=document.createElement('div');d.textContent=t;return d.innerHTML}
-const s=document.createElement('style');s.textContent='@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}';document.head.appendChild(s);
+function escJS(t){return t.replace(/'/g,"\\'").replace(/"/g,'\\"')}
 init();
 </script>
 </body>
