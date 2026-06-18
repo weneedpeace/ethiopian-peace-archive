@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact the Ethiopian Peace Archive. Get in touch for partnerships, media, or questions.">
+    <title>Contact — Ethiopian Peace Archive</title>
+    <style>
+        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.8}
+        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+        nav a{color:var(--text-dim);text-decoration:none;padding:8px 16px;border-radius:25px;font-size:0.85rem;font-family:-apple-system,sans-serif}
+        nav a:hover{color:var(--green-bright);background:var(--green-dim)}
+        nav .logo{font-size:1.2rem;font-weight:bold;color:var(--gold)}
+        nav .logo span{color:var(--green-bright)}
+        .container{max-width:700px;margin:40px auto;padding:0 20px}
+        h1{color:var(--gold);margin-bottom:20px;border-left:5px solid var(--green);padding-left:16px;font-family:-apple-system,sans-serif;font-size:1.8rem}
+        .card{background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:28px;margin-bottom:20px}
+        .card h3{color:var(--gold);margin-bottom:12px;font-family:-apple-system,sans-serif}
+        .card p{color:var(--text-dim);margin-bottom:8px}
+        label{display:block;color:var(--text-dim);margin-bottom:6px;font-family:-apple-system,sans-serif;font-size:0.85rem}
+        input,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid var(--green-border);background:var(--bg);color:var(--text);font-size:0.95rem;font-family:inherit;margin-bottom:16px}
+        textarea{min-height:120px;resize:vertical}
+        .btn{display:inline-block;padding:14px 28px;border-radius:25px;text-decoration:none;font-weight:700;font-size:0.95rem;font-family:-apple-system,sans-serif;transition:all 0.3s;cursor:pointer;border:none;background:var(--green);color:#000}
+        .btn:hover{background:var(--green-bright)}
+        .contact-methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:30px}
+        .contact-method{background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center}
+        .contact-method .icon{font-size:2rem;margin-bottom:8px}
+        .contact-method h4{color:var(--gold);font-family:-apple-system,sans-serif;margin-bottom:4px}
+        .contact-method p{color:var(--text-dim);font-size:0.85rem}
+        footer{text-align:center;padding:30px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.85rem}
+        footer a{color:var(--text-dim);text-decoration:none}
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" style="text-decoration:none"><div class="logo">🕊️ Ethiopian <span>Peace</span> Archive</div></a>
+    <div style="display:flex;gap:4px;flex-wrap:wrap">
+        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
+        <a href="contribute.html">Contribute</a><a href="support.html">Support</a>
+    </div>
+</nav>
+
+<main class="container">
+    <h1>📬 Contact Us</h1>
+    <p style="color:var(--text-dim);margin-bottom:30px">We welcome partnerships, media inquiries, research collaboration, and questions.</p>
+
+    <div class="contact-methods">
+        <div class="contact-method"><div class="icon">📧</div><h4>Email</h4><p>peace@ethiopianarchive.org</p></div>
+        <div class="contact-method"><div class="icon">🐦</div><h4>Twitter / X</h4><p>@EthPeaceArchive</p></div>
+        <div class="contact-method"><div class="icon">📘</div><h4>Facebook</h4><p>/EthiopianPeaceArchive</p></div>
+        <div class="contact-method"><div class="icon">📸</div><h4>Instagram</h4><p>@ethiopianpeacearchive</p></div>
+    </div>
+
+    <div class="card">
+        <h3>Send Us a Message</h3>
+        <form onsubmit="alert('Thank you! We will respond soon.');return false">
+            <label>Your Name</label>
+            <input type="text" placeholder="Your name" required>
+            <label>Your Email</label>
+            <input type="email" placeholder="your@email.com" required>
+            <label>Subject</label>
+            <input type="text" placeholder="Partnership, Media, Research, Other...">
+            <label>Message</label>
+            <textarea placeholder="How can we help?" required></textarea>
+            <button type="submit" class="btn">Send Message →</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <p>Ethiopian Peace Archive &copy; 2026 · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+</footer>
+</body>
+</html>
