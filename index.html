@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ethiopian Peace Archive - Preserving 1,000+ voices for peace from Ethiopia and around the world">
+    <meta name="keywords" content="Ethiopia, peace, archive, voices, unity, coexistence">
+    <meta property="og:title" content="Ethiopian Peace Archive">
+    <meta property="og:description" content="1,000 voices from Ethiopia and the world, preserved for peace">
+    <meta property="og:type" content="website">
+    <title>Ethiopian Peace Archive — Voices for Peace</title>
+    <style>
+        :root {
+            --bg-deep: #0a1628;
+            --bg-card: #132238;
+            --green: #22c55e;
+            --green-dim: rgba(34, 197, 94, 0.15);
+            --green-border: rgba(34, 197, 94, 0.3);
+            --gold: #fbbf24;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --text-muted: #64748b;
+            --red: #ef4444;
+            --yellow-dim: rgba(234, 179, 8, 0.2);
+            --yellow-text: #facc15;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            background: rgba(10, 22, 40, 0.95);
+            border-bottom: 1px solid var(--green-border);
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        nav .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--gold);
+            white-space: nowrap;
+        }
+
+        nav .logo span {
+            color: var(--green);
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        nav .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        nav .nav-links a:hover,
+        nav .nav-links a.active {
+            color: var(--green);
+            background: var(--green-dim);
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            background: linear-gradient(180deg, rgba(10, 22, 40, 0.8) 0%, rgba(19, 34, 56, 0.9) 50%, var(--bg-deep) 100%);
+            padding: 80px 20px 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--green-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(34, 197, 94, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(251, 191, 36, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(239, 68, 68, 0.03) 0%, transparent 50%);
+            animation: heroGlow 15s ease-in-out infinite;
+        }
+
+        @keyframes heroGlow {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+            33% {
+                transform: translate(2%, -1%);
+            }
+            66% {
+                transform: translate(-1%, 2%);
+            }
+        }
+
+        .hero>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            color: var(--green);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin-bottom: 16px;
+            padding: 6px 18px;
+            border: 1px solid var(--green-border);
+            border-radius: 25px;
+            background: var(--green-dim);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            color: var(--gold);
+            margin-bottom: 16px;
+            text-shadow: 0 2px 20px rgba(251, 191, 36, 0.2);
+            letter-spacing: -1px;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-dim);
+            max-width: 650px;
+            margin: 0 auto 40px;
+            font-style: italic;
+        }
+
+        .hero .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--green-border);
+            color: var(--green);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--green-dim);
+            transform: translateY(-2px);
+        }
+
+        /* ========== STATS ========== */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 30px 20px;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-card {
+            background: rgba(19, 34, 56, 0.95);
+            border: 1px solid var(--green-border);
+            border-radius: 16px;
+            padding: 20px 30px;
+            text-align: center;
+            min-width: 130px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--green);
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--green);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .stat-card .label {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-top: 4px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .container {
+            max-width: 900px;
+            margin: 30px auto 60px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 24px;
+            border-left: 4px solid var(--green);
+            padding-left: 16px;
+        }
+
+        /* ========== TABS ========== */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 5px;
+            border: 1px solid var(--green-border);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            background: var(--green-dim);
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--text);
+        }
+
+        /* ========== FILTERS ========== */
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .filters select {
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--green-border);
+            background: var(--bg-card);
+            color: var(--text);
+            font-size: 0.9rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+            min-width: 140px;
+        }
+
+        .filters select:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        /* ========== QUOTE CARDS ========== */
+        .quote-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(34, 197, 94, 0.15);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .quote-card:hover {
+            border-color: var(--green-border);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .quote-card .region-badge {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--green);
+            margin-bottom: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 600;
+        }
+
+        .quote-card .quote-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            color: #f1f5f9;
+        }
+
+        .quote-card .quote-text::before {
+            content: '\201C';
+            color: var(--green);
+            font-size: 2rem;
+            line-height: 0;
+            vertical-align: -8px;
+            margin-right: 4px;
+        }
+
+        .quote-card .quote-text::after {
+            content: '\201D';
+            color: var(--green);
+            font-size: 2rem;
+            line-height: 0;
+            vertical-align: -8px;
+            margin-left: 4px;
+        }
+
+        .quote-card .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .badge-location {
+            background: var(--green-dim);
+            color: #4ade80;
+        }
+
+        .badge-year {
+            background: var(--yellow-dim);
+            color: var(--yellow-text);
+        }
+
+        .badge-theme {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+
+        .badge-theme2 {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+        }
+
+        .badge-theme3 {
+            background: rgba(236, 72, 153, 0.15);
+            color: #f472b6;
+        }
+
+        .badge-theme4 {
+            background: rgba(251, 146, 60, 0.15);
+            color: #fb923c;
+        }
+
+        .sentiment-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .sentiment-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .sentiment-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #eab308, #22c55e);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .sentiment-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* ========== LOADING & EMPTY ========== */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-dim);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--green-border);
+            border-top-color: var(--green);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-dim);
+        }
+
+        .no-results .icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(34, 197, 94, 0.15);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        footer .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        footer .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+
+        footer .footer-links a:hover {
+            color: var(--green);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 50px 16px 40px;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .stats {
+                gap: 10px;
+                margin-top: -25px;
+            }
+            .stat-card {
+                padding: 14px 18px;
+                min-width: 90px;
+            }
+            .stat-card .number {
+                font-size: 1.8rem;
+            }
+            .quote-card {
+                padding: 18px;
+            }
+            .quote-card .quote-text {
+                font-size: 1rem;
+            }
+            .filters select {
+                flex: 1;
+                min-width: 0;
+                font-size: 0.8rem;
+                padding: 8px 28px 8px 10px;
+            }
+            .tab {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+            nav .nav-links a {
+                padding: 4px 10px;
+                font-size: 0.78rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav>
+        <div class="logo">🇪🇹 Ethiopian <span>Peace</span> Archive</div>
+        <div class="nav-links">
+            <a href="#" class="active" onclick="switchTab('ethiopian'); return false;">Voices</a>
+            <a href="#" onclick="switchTab('global'); return false;">Global</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <header class="hero">
+        <div class="tagline">1,000 Voices for Peace</div>
+        <h1>Ethiopian Peace Archive</h1>
+        <p class="subtitle">"We wish good, speak good, do good"<br>— Ethiopia, 2020</p>
+        <div class="cta-buttons">
+            <button class="btn btn-primary" onclick="switchTab('ethiopian'); document.querySelector('.container').scrollIntoView({behavior:'smooth'});">
+                Explore Voices
+            </button>
+            <a href="#about" class="btn btn-outline">About the Project</a>
+        </div>
+    </header>
+
+    <!-- ========== STATS ========== -->
+    <div class="stats">
+        <div class="stat-card">
+            <div class="number" id="ethCount">0</div>
+            <div class="label">Ethiopian Voices</div>
+        </div>
+        <div class="stat-card">
+            <div class="number" id="globalCount">0</div>
+            <div class="label">Global Voices</div>
+        </div>
+        <div class="stat-card">
+            <div class="number" id="regionCount">0</div>
+            <div class="label">Regions</div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="container" id="mainContent">
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" id="tabEthiopian" onclick="switchTab('ethiopian')">Ethiopian Voices</button>
+            <button class="tab" id="tabGlobal" onclick="switchTab('global')">Global Voices</button>
+        </div>
+
+        <!-- Ethiopian Filters -->
+        <div class="filters" id="ethFilters">
+            <select id="regionFilter" onchange="renderQuotes()" aria-label="Filter by region">
+                <option value="">All Regions</option>
+            </select>
+            <select id="yearFilter" onchange="renderQuotes()" aria-label="Filter by year">
+                <option value="">All Years</option>
+            </select>
+            <select id="themeFilter" onchange="renderQuotes()" aria-label="Filter by theme">
+                <option value="">All Themes</option>
+            </select>
+        </div>
+
+        <!-- Global Filters -->
+        <div class="filters" id="globalFilters" style="display:none;">
+            <select id="countryFilter" onchange="renderQuotes()" aria-label="Filter by country">
+                <option value="">All Countries</option>
+            </select>
+            <select id="globalYearFilter" onchange="renderQuotes()" aria-label="Filter by year">
+                <option value="">All Years</option>
+            </select>
+        </div>
+
+        <!-- Quotes Container -->
+        <div id="quotesContainer">
+            <div class="loading">
+                <span class="spinner"></span> Loading voices from Ethiopia and the world...
+            </div>
+        </div>
+    </main>
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <section id="about" style="max-width:800px;margin:60px auto;padding:0 20px;">
+        <h2 class="section-title">About This Project</h2>
+        <div style="background:var(--bg-card);border:1px solid var(--green-border);border-radius:16px;padding:30px;">
+            <p style="margin-bottom:16px;color:var(--text-dim);line-height:1.8;">
+                The Ethiopian Peace Archive preserves and amplifies the voices of everyday Ethiopians
+                and global supporters who believe in peace, unity, and coexistence. Over 1,000 voices
+                were collected across all Ethiopian regions—Tigray, Amhara, Oromia, Somali, Afar, and
+                beyond—alongside messages of solidarity from around the world.
+            </p>
+            <p style="color:var(--text-dim);line-height:1.8;">
+                This archive stands as a permanent, searchable counter-narrative to conflict,
+                built on what people actually want: peace.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <p>Ethiopian Peace Archive &copy; 2024</p>
+        <div class="footer-links">
+            <a href="#">Share</a>
+            <a href="#">Research</a>
+            <a href="#">Collaborate</a>
+            <a href="#">Contact</a>
+        </div>
+        <p style="margin-top:16px;font-size:0.8rem;">Preserving voices for peace. Built with hope.</p>
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script>
+        // ============================================
+        // CONFIGURATION
+        // ============================================
+        const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+        const SUPABASE_KEY =
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+
+        // ============================================
+        // STATE
+        // ============================================
+        let ethiopianVoices = [];
+        let globalVoices = [];
+        let currentTab = 'ethiopian';
+
+        // ============================================
+        // FETCH FROM SUPABASE
+        // ============================================
+        async function fetchTable(tableName) {
+            const url = `${SUPABASE_URL}/rest/v1/${tableName}?select=*&is_published=eq.true&order=year.desc`;
+            const response = await fetch(url, {
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to load ${tableName}: ${response.status}`);
+            }
+
+            return response.json();
+        }
+
+        // ============================================
+        // INITIALIZE
+        // ============================================
+        async function init() {
+            try {
+                // Fetch all data in parallel
+                [ethiopianVoices, globalVoices] = await Promise.all([
+                    fetchTable('ethiopian_voices'),
+                    fetchTable('global_voices')
+                ]);
+
+                // Update stats
+                updateStats();
+
+                // Populate filter dropdowns
+                populateFilters();
+
+                // Render quotes
+                renderQuotes();
+            } catch (error) {
+                document.getElementById('quotesContainer').innerHTML = `
+                    <div class="no-results">
+                        <div class="icon">⚠️</div>
+                        <p>Unable to load voices. Please check your connection.</p>
+                        <p style="font-size:0.8rem;margin-top:8px;">${error.message}</p>
+                    </div>
+                `;
+                console.error('Init error:', error);
+            }
+        }
+
+        // ============================================
+        // UPDATE STATS
+        // ============================================
+        function updateStats() {
+            // Animate numbers
+            animateNumber('ethCount', ethiopianVoices.length);
+            animateNumber('globalCount', globalVoices.length);
+
+            const regions = new Set(ethiopianVoices.map(v => v.region).filter(Boolean));
+            animateNumber('regionCount', regions.size);
+        }
+
+        function animateNumber(elementId, target) {
+            const element = document.getElementById(elementId);
+            const start = parseInt(element.textContent) || 0;
+            const duration = 1000;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease out
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(start + (target - start) * eased);
+                element.textContent = current;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // ============================================
+        // POPULATE FILTER DROPDOWNS
+        // ============================================
+        function populateFilters() {
+            // Ethiopian regions
+            const regions = [...new Set(ethiopianVoices.map(v => v.region).filter(Boolean))].sort();
+            populateSelect('regionFilter', regions);
+
+            // Ethiopian years
+            const years = [...new Set(ethiopianVoices.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
+            populateSelect('yearFilter', years);
+
+            // Themes
+            const themes = [...new Set(ethiopianVoices.flatMap(v => v.themes || []))].sort();
+            populateSelect('themeFilter', themes);
+
+            // Global countries
+            const countries = [...new Set(globalVoices.map(v => v.country).filter(Boolean))].sort();
+            populateSelect('countryFilter', countries);
+
+            // Global years
+            const globalYears = [...new Set(globalVoices.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
+            populateSelect('globalYearFilter', globalYears);
+        }
+
+        function populateSelect(selectId, options) {
+            const select = document.getElementById(selectId);
+            const defaultOption = select.options[0]; // Keep "All" option
+            select.innerHTML = '';
+            select.appendChild(defaultOption);
+            options.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt;
+                option.textContent = opt;
+                select.appendChild(option);
+            });
+        }
+
+        // ============================================
+        // SWITCH TABS
+        // ============================================
+        function switchTab(tab) {
+            currentTab = tab;
+
+            // Update tab buttons
+            document.getElementById('tabEthiopian').classList.toggle('active', tab === 'ethiopian');
+            document.getElementById('tabGlobal').classList.toggle('active', tab === 'global');
+
+            // Show/hide filters
+            document.getElementById('ethFilters').style.display = tab === 'ethiopian' ? 'flex' : 'none';
+            document.getElementById('globalFilters').style.display = tab === 'global' ? 'flex' : 'none';
+
+            // Update nav links
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            if (tab === 'global') {
+                document.querySelector('.nav-links a:nth-child(2)').classList.add('active');
+            } else {
+                document.querySelector('.nav-links a:nth-child(1)').classList.add('active');
+            }
+
+            // Reset filters
+            resetFilters();
+
+            // Re-render
+            renderQuotes();
+        }
+
+        function resetFilters() {
+            document.getElementById('regionFilter').value = '';
+            document.getElementById('yearFilter').value = '';
+            document.getElementById('themeFilter').value = '';
+            document.getElementById('countryFilter').value = '';
+            document.getElementById('globalYearFilter').value = '';
+        }
+
+        // ============================================
+        // RENDER QUOTES
+        // ============================================
+        function renderQuotes() {
+            let voices = currentTab === 'ethiopian' ? [...ethiopianVoices] : [...globalVoices];
+            const container = document.getElementById('quotesContainer');
+
+            // Apply filters
+            if (currentTab === 'ethiopian') {
+                const region = document.getElementById('regionFilter').value;
+                const year = document.getElementById('yearFilter').value;
+                const theme = document.getElementById('themeFilter').value;
+
+                if (region) voices = voices.filter(v => v.region === region);
+                if (year) voices = voices.filter(v => v.year === parseInt(year));
+                if (theme) voices = voices.filter(v => (v.themes || []).includes(theme));
+            } else {
+                const country = document.getElementById('countryFilter').value;
+                const year = document.getElementById('globalYearFilter').value;
+
+                if (country) voices = voices.filter(v => v.country === country);
+                if (year) voices = voices.filter(v => v.year === parseInt(year));
+            }
+
+            // Empty state
+            if (voices.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <div class="icon">🔍</div>
+                        <p>No voices found matching your filters.</p>
+                        <button class="btn btn-outline" style="margin-top:16px;padding:10px 24px;" onclick="resetFilters();renderQuotes();">
+                            Clear Filters
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            // Theme badge color classes
+            const themeColors = ['badge-theme', 'badge-theme2', 'badge-theme3', 'badge-theme4'];
+
+            // Render cards
+            container.innerHTML = voices.map((voice, index) => {
+                const location = currentTab === 'ethiopian' ? voice.region : voice.country;
+                const sentimentPercent = Math.round((voice.sentiment || 0.5) * 100);
+                const themes = voice.themes || [];
+
+                return `
+                <article class="quote-card" style="animation: fadeInUp 0.4s ease forwards; animation-delay: ${index * 0.05}s;">
+                    <div class="region-badge">
+                        ${currentTab === 'ethiopian' ? '📍' : '🌍'} ${location || 'Unknown'}
+                    </div>
+                    <blockquote class="quote-text">${escapeHtml(voice.quote_english || voice.quote_original)}</blockquote>
+                    <div class="meta">
+                        <span class="badge badge-year">📅 ${voice.year || 'N/A'}</span>
+                        ${themes.map((t, i) => `
+                            <span class="badge ${themeColors[i % themeColors.length]}">${escapeHtml(t)}</span>
+                        `).join('')}
+                    </div>
+                    <div class="sentiment-row">
+                        <div class="sentiment-bar">
+                            <div class="sentiment-fill" style="width:${sentimentPercent}%"></div>
+                        </div>
+                        <span class="sentiment-label">${getSentimentLabel(sentimentPercent)}</span>
+                    </div>
+                </article>
+                `;
+            }).join('');
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function getSentimentLabel(percent) {
+            if (percent >= 90) return '💚 Very Hopeful';
+            if (percent >= 75) return '💛 Hopeful';
+            if (percent >= 60) return '🤍 Somewhat Hopeful';
+            if (percent >= 40) return '🤎 Mixed';
+            return '❤️ Concerned';
+        }
+
+        // ============================================
+        // ADD FADE-IN ANIMATION
+        // ============================================
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ============================================
+        // START THE APP
+        // ============================================
+        init();
+    </script>
+
+</body>
+</html>
