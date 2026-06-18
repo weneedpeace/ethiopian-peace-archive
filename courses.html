@@ -3,106 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free peace education courses. Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required.">
+    <meta name="description" content="Free peace education courses. No signup required.">
     <title>Free Courses — Ethiopian Peace Archive</title>
     <style>
         :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b}
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}
-        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-        nav a{color:var(--text-dim);text-decoration:none;padding:8px 16px;border-radius:25px;font-size:0.85rem;font-family:-apple-system,sans-serif}
+        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+        nav a{color:var(--text-dim);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:0.8rem;font-family:-apple-system,sans-serif}
         nav a:hover{color:var(--green-bright);background:var(--green-dim)}
-        nav .logo{font-size:1.2rem;font-weight:bold;color:var(--gold)}
+        nav .logo{font-size:1rem;font-weight:bold;color:var(--gold)}
         nav .logo span{color:var(--green-bright)}
-        .container{max-width:1000px;margin:40px auto;padding:0 20px}
-        .section-title{font-size:1.8rem;color:var(--gold);margin-bottom:16px;border-left:5px solid var(--green);padding-left:16px;font-family:-apple-system,sans-serif}
-        .section-subtitle{color:var(--text-dim);margin-bottom:30px;font-size:1.05rem}
-        .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:40px}
-        .course-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:16px;padding:28px;transition:all 0.3s}
-        .course-card:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.5)}
-        .course-card .icon{font-size:2.5rem;margin-bottom:14px}
-        .course-card h3{color:var(--gold);margin-bottom:8px;font-family:-apple-system,sans-serif;font-size:1.2rem}
-        .course-card p{color:var(--text-dim);font-size:0.9rem;line-height:1.6;margin-bottom:16px}
-        .course-card .tag{display:inline-block;padding:4px 12px;border-radius:12px;font-size:0.7rem;background:var(--green-dim);color:var(--green-bright);margin:2px 4px;font-family:-apple-system,sans-serif}
-        .btn{display:inline-block;padding:12px 24px;border-radius:25px;text-decoration:none;font-weight:700;font-size:0.9rem;font-family:-apple-system,sans-serif;transition:all 0.3s}
-        .btn-primary{background:var(--green);color:#000}
-        .btn-primary:hover{background:var(--green-bright)}
-        .cta-banner{background:linear-gradient(135deg,rgba(34,197,94,0.10),rgba(251,191,36,0.08));border:2px solid var(--green-border);border-radius:16px;padding:36px;text-align:center;margin:40px 0}
-        .cta-banner h2{color:var(--gold);margin-bottom:12px;font-family:-apple-system,sans-serif}
-        .cta-banner p{color:var(--text-dim);margin-bottom:20px}
-        footer{text-align:center;padding:30px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.85rem}
-        footer a{color:var(--text-dim);text-decoration:none}
+        .container{max-width:1000px;margin:30px auto;padding:0 16px}
+        h1{color:var(--gold);margin-bottom:8px;border-left:4px solid var(--green);padding-left:12px;font-family:-apple-system,sans-serif;font-size:1.5rem}
+        .subtitle{color:var(--text-dim);margin-bottom:24px}
+        .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+        .course-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:14px;padding:22px;transition:all 0.3s;cursor:pointer}
+        .course-card:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
+        .course-card .icon{font-size:2.2rem;margin-bottom:10px}
+        .course-card h3{color:var(--gold);margin-bottom:6px;font-family:-apple-system,sans-serif;font-size:1.1rem}
+        .course-card p{color:var(--text-dim);font-size:0.82rem;line-height:1.5;margin-bottom:10px}
+        .course-card .tag{display:inline-block;padding:3px 10px;border-radius:10px;font-size:0.7rem;background:var(--green-dim);color:var(--green-bright);font-family:-apple-system,sans-serif;margin:2px}
+        .btn{display:inline-block;padding:10px 20px;border-radius:20px;background:var(--green);color:#000;text-decoration:none;font-weight:700;font-family:-apple-system,sans-serif;font-size:0.85rem;border:none;cursor:pointer;margin-top:8px}
+        .btn:hover{background:var(--green-bright)}
+        .loading{text-align:center;padding:40px;color:var(--text-dim)}
+        #courseDetail{display:none}
+        #courseDetail h2{color:var(--gold);margin-bottom:16px}
+        .lesson-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:10px;padding:14px 18px;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+        .lesson-card .num{width:32px;height:32px;border-radius:50%;background:var(--green);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:-apple-system,sans-serif;font-size:0.85rem;flex-shrink:0}
+        .lesson-card h4{color:var(--text);font-family:-apple-system,sans-serif;font-size:0.9rem}
+        .back-btn{margin-bottom:16px;cursor:pointer;color:var(--green-bright);font-family:-apple-system,sans-serif;font-size:0.9rem}
+        footer{text-align:center;padding:24px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.78rem}
+        @media(max-width:768px){.course-grid{grid-template-columns:1fr}}
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="index.html" style="text-decoration:none"><div class="logo">🕊️ Ethiopian <span>Peace</span> Archive</div></a>
-    <div style="display:flex;gap:4px;flex-wrap:wrap">
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div style="display:flex;gap:2px;flex-wrap:wrap">
         <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
         <a href="courses.html" style="color:var(--green-bright);background:var(--green-dim)">Courses</a>
-        <a href="dashboard.html">Impact</a><a href="contribute.html">Contribute</a><a href="support.html">Support</a>
+        <a href="dashboard.html">Impact</a><a href="gallery.html">Gallery</a><a href="support.html">Support</a>
     </div>
 </nav>
 
 <main class="container">
-    <h1 class="section-title">🎓 Free Peace Courses</h1>
-    <p class="section-subtitle">Open to everyone. No registration required. Learn at your own pace.</p>
-    
-    <div class="course-grid">
-        <div class="course-card">
-            <div class="icon">🕊️</div>
-            <h3>Introduction to Peacebuilding</h3>
-            <p>Understand the foundations of peace and conflict resolution. Learn how everyday people can build peace in their communities.</p>
-            <span class="tag">Beginner</span><span class="tag">6 Modules</span><span class="tag">Free</span>
-            <div style="margin-top:16px"><a href="#" class="btn btn-primary">Start Learning →</a></div>
-        </div>
-        <div class="course-card">
-            <div class="icon">🇪🇹</div>
-            <h3>Ethiopian History & Unity</h3>
-            <p>Explore Ethiopia's rich history of coexistence. Understand the roots of conflict and the paths to lasting peace.</p>
-            <span class="tag">Intermediate</span><span class="tag">8 Modules</span><span class="tag">Free</span>
-            <div style="margin-top:16px"><a href="#" class="btn btn-primary">Start Learning →</a></div>
-        </div>
-        <div class="course-card">
-            <div class="icon">🗣️</div>
-            <h3>Voices of Reconciliation</h3>
-            <p>Hear real stories from communities that chose peace. Learn reconciliation practices from Ethiopian and global examples.</p>
-            <span class="tag">All Levels</span><span class="tag">10 Stories</span><span class="tag">Free</span>
-            <div style="margin-top:16px"><a href="#" class="btn btn-primary">Start Learning →</a></div>
-        </div>
-        <div class="course-card">
-            <div class="icon">🌍</div>
-            <h3>Diaspora & Peace</h3>
-            <p>How diaspora communities can support peace in Ethiopia. Practical actions, advocacy, and community organizing.</p>
-            <span class="tag">All Levels</span><span class="tag">5 Modules</span><span class="tag">Free</span>
-            <div style="margin-top:16px"><a href="#" class="btn btn-primary">Start Learning →</a></div>
-        </div>
-        <div class="course-card">
-            <div class="icon">📚</div>
-            <h3>Research Methods for Peace</h3>
-            <p>Learn how to document voices, conduct ethical interviews, and contribute to peace research in your community.</p>
-            <span class="tag">Advanced</span><span class="tag">7 Modules</span><span class="tag">Free</span>
-            <div style="margin-top:16px"><a href="#" class="btn btn-primary">Start Learning →</a></div>
-        </div>
-        <div class="course-card">
-            <div class="icon">🤝</div>
-            <h3>Community Organizing for Peace</h3>
-            <p>Practical skills for bringing people together. How to start peace dialogues, events, and initiatives locally.</p>
-            <span class="tag">All Levels</span><span class="tag">6 Modules</span><span class="tag">Free</span>
-            <div style="margin-top:16px"><a href="#" class="btn btn-primary">Start Learning →</a></div>
-        </div>
+    <div id="courseList">
+        <h1>🎓 Free Peace Courses</h1>
+        <p class="subtitle">Open to everyone. No registration required. Learn at your own pace.</p>
+        <div class="course-grid" id="courseGrid"><div class="loading">Loading courses...</div></div>
     </div>
-
-    <div class="cta-banner">
-        <h2>📢 Want to Contribute a Course?</h2>
-        <p>Are you a peace educator, researcher, or practitioner? Share your knowledge with our global community.</p>
-        <a href="contribute.html" class="btn btn-primary">Contribute Content →</a>
+    
+    <div id="courseDetail">
+        <div class="back-btn" onclick="showList()">← Back to All Courses</div>
+        <h2 id="detailTitle"></h2>
+        <p style="color:var(--text-dim);margin-bottom:16px" id="detailDesc"></p>
+        <div id="lessonList"></div>
     </div>
 </main>
 
-<footer>
-    <p>Ethiopian Peace Archive &copy; 2026 · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
-</footer>
+<footer><p>Ethiopian Peace Archive &copy; 2026</p></footer>
+
+<script>
+const URL='https://rnafjznurgnrdonyxfgs.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+
+let allCourses = [];
+
+async function loadCourses(){
+    try{
+        const r = await fetch(`${URL}/rest/v1/courses?select=*&is_published=eq.true&order=created_at.desc`,{
+            headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}
+        });
+        allCourses = await r.json();
+        const grid = document.getElementById('courseGrid');
+        
+        if(!allCourses.length){ grid.innerHTML='<div class="loading">No courses yet.</div>'; return; }
+        
+        const icons = ['🕊️','🇪🇹','🗣️','🌍','📚','🤝'];
+        grid.innerHTML = allCourses.map((c,i) => `
+            <div class="course-card" onclick="showDetail(${c.id})">
+                <div class="icon">${icons[i%6]}</div>
+                <h3>${c.title}</h3>
+                <p>${c.description||'Learn peacebuilding skills.'}</p>
+                <span class="tag">${c.level||'All Levels'}</span>
+                <span class="tag">${c.module_count||'?'} Modules</span>
+                <span class="tag">Free</span>
+                <div><button class="btn">View Course →</button></div>
+            </div>
+        `).join('');
+    }catch(e){ document.getElementById('courseGrid').innerHTML='<div class="loading">Error loading.</div>'; }
+}
+
+async function showDetail(courseId){
+    try{
+        const course = allCourses.find(c=>c.id===courseId);
+        if(!course) return;
+        
+        document.getElementById('courseList').style.display='none';
+        document.getElementById('courseDetail').style.display='block';
+        document.getElementById('detailTitle').textContent=course.title;
+        document.getElementById('detailDesc').textContent=course.description;
+        
+        const r = await fetch(`${URL}/rest/v1/course_lessons?select=*&course_id=eq.${courseId}&is_published=eq.true&order=lesson_order`,{
+            headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}
+        });
+        const lessons = await r.json();
+        
+        document.getElementById('lessonList').innerHTML = lessons.length ? 
+            '<h3 style="color:var(--gold);margin-bottom:12px">📚 Lessons</h3>' +
+            lessons.map(l => `
+                <div class="lesson-card">
+                    <div class="num">${l.lesson_order}</div>
+                    <div><h4>${l.title}</h4>
+                    ${l.content?`<p style="color:var(--text-dim);font-size:0.8rem;margin-top:4px">${l.content.substring(0,150)}...</p>`:''}
+                    </div>
+                </div>
+            `).join('')
+            : '<p style="color:var(--text-dim)">Lessons coming soon.</p>';
+            
+        window.scrollTo(0,0);
+    }catch(e){}
+}
+
+function showList(){
+    document.getElementById('courseList').style.display='block';
+    document.getElementById('courseDetail').style.display='none';
+}
+
+loadCourses();
+</script>
 </body>
 </html>
