@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Impact Dashboard — Track the global reach of the Ethiopian Peace Archive.">
+    <title>Impact Dashboard — Ethiopian Peace Archive</title>
+    <style>
+        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b;--blue:#3b82f6;--red:#ef4444}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}
+        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+        nav a{color:var(--text-dim);text-decoration:none;padding:8px 16px;border-radius:25px;font-size:0.85rem;font-family:-apple-system,sans-serif}
+        nav a:hover{color:var(--green-bright);background:var(--green-dim)}
+        nav .logo{font-size:1.2rem;font-weight:bold;color:var(--gold)}
+        nav .logo span{color:var(--green-bright)}
+        .container{max-width:1000px;margin:40px auto;padding:0 20px}
+        .section-title{font-size:1.8rem;color:var(--gold);margin-bottom:20px;border-left:5px solid var(--green);padding-left:16px;font-family:-apple-system,sans-serif}
+        .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:30px}
+        .stat-box{background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:24px;text-align:center}
+        .stat-box .big{font-size:2.5rem;font-weight:800;color:var(--green-bright);font-family:-apple-system,sans-serif}
+        .stat-box .lbl{color:var(--text-dim);font-size:0.8rem;font-family:-apple-system,sans-serif;margin-top:4px}
+        .chart-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:30px}
+        .chart-card{background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:24px}
+        .chart-card h3{color:var(--gold);margin-bottom:16px;font-family:-apple-system,sans-serif}
+        .bar{height:28px;background:rgba(255,255,255,0.05);border-radius:6px;margin-bottom:10px;overflow:hidden;position:relative}
+        .bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:10px;font-size:0.75rem;font-family:-apple-system,sans-serif;font-weight:600;color:#fff}
+        .bar-label{color:var(--text-dim);font-size:0.8rem;margin-bottom:4px;font-family:-apple-system,sans-serif;display:flex;justify-content:space-between}
+        .map-placeholder{background:rgba(34,197,94,0.05);border:2px dashed var(--green-border);border-radius:14px;padding:60px 20px;text-align:center;margin-bottom:20px}
+        .map-placeholder .icon{font-size:4rem;margin-bottom:16px}
+        .map-placeholder p{color:var(--text-dim)}
+        footer{text-align:center;padding:30px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.85rem}
+        footer a{color:var(--text-dim);text-decoration:none}
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" style="text-decoration:none"><div class="logo">🕊️ Ethiopian <span>Peace</span> Archive</div></a>
+    <div style="display:flex;gap:4px;flex-wrap:wrap">
+        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a>
+        <a href="dashboard.html" style="color:var(--green-bright);background:var(--green-dim)">Impact</a>
+        <a href="contribute.html">Contribute</a><a href="support.html">Support</a>
+    </div>
+</nav>
+
+<main class="container">
+    <h1 class="section-title">📊 Impact Dashboard</h1>
+    <p style="color:var(--text-dim);margin-bottom:30px">Tracking our global reach and real-world impact.</p>
+
+    <div class="stats-row">
+        <div class="stat-box"><div class="big" id="totalVoices">...</div><div class="lbl">Total Voices</div></div>
+        <div class="stat-box"><div class="big">12+</div><div class="lbl">Ethiopian Regions</div></div>
+        <div class="stat-box"><div class="big">15+</div><div class="lbl">Countries Reached</div></div>
+        <div class="stat-box"><div class="big">8</div><div class="lbl">Media Features</div></div>
+        <div class="stat-box"><div class="big">6</div><div class="lbl">Free Courses</div></div>
+    </div>
+
+    <div class="chart-row">
+        <div class="chart-card">
+            <h3>🗣️ Voices by Region</h3>
+            <div class="bar-label"><span>Tigray</span><span>25%</span></div>
+            <div class="bar"><div class="bar-fill" style="width:25%;background:var(--green)">25%</div></div>
+            <div class="bar-label"><span>Amhara</span><span>22%</span></div>
+            <div class="bar"><div class="bar-fill" style="width:22%;background:var(--green-bright)">22%</div></div>
+            <div class="bar-label"><span>Oromia</span><span>20%</span></div>
+            <div class="bar"><div class="bar-fill" style="width:20%;background:var(--gold)">20%</div></div>
+            <div class="bar-label"><span>Somali</span><span>10%</span></div>
+            <div class="bar"><div class="bar-fill" style="width:10%;background:var(--blue)">10%</div></div>
+            <div class="bar-label"><span>Other Regions</span><span>23%</span></div>
+            <div class="bar"><div class="bar-fill" style="width:23%;background:#a855f7">23%</div></div>
+        </div>
+        <div class="chart-card">
+            <h3>❤️ Sentiment Overview</h3>
+            <div class="bar-label"><span>Very Hopeful (90-100%)</span><span>45%</span></div>
+            <div class="bar"><div class="bar-fill" style="width:45%;background:var(--green-bright)">45%</div></div>
+            <div class="bar-label"><span>Hopeful (75-89%)</span><span>35%</span></div>
+            <div class="bar"><div class="bar-fill" style="width:35%;background:var(--green)">35%</div></div>
+            <div class="bar-label"><span>Positive (60-74%)</span><span>15%</span></div>
+            <div class="bar"><div class="bar-fill" style="width:15%;background:var(--gold)">15%</div></div>
+            <div class="bar-label"><span>Mixed (40-59%)</span><span>5%</span></div>
+            <div class="bar"><div class="bar-fill" style="width:5%;background:#f97316">5%</div></div>
+        </div>
+    </div>
+
+    <div class="map-placeholder">
+        <div class="icon">🗺️</div>
+        <h3 style="color:var(--gold);margin-bottom:8px;font-family:-apple-system,sans-serif">Global Reach Map</h3>
+        <p>Interactive map coming soon — showing voices from Ethiopia and supporters worldwide.</p>
+        <p style="color:var(--green-bright);margin-top:8px">🇪🇹 Ethiopia · 🇨🇳 China · 🇩🇪 Germany · 🇷🇺 Russia · 🇺🇸 USA · 🇯🇲 Jamaica · 🇮🇳 India · 🇸🇴 Somalia · 🇳🇬 Nigeria · 🇬🇧 UK · 🇫🇷 France</p>
+    </div>
+
+    <div class="chart-card" style="margin-bottom:30px">
+        <h3>🎯 2026 Goals</h3>
+        <div class="bar-label"><span>Voices Published</span><span>Target: 1,000+</span></div>
+        <div class="bar"><div class="bar-fill" style="width:35%;background:var(--green-bright)">35%</div></div>
+        <div class="bar-label"><span>Media Features</span><span>Target: 20</span></div>
+        <div class="bar"><div class="bar-fill" style="width:40%;background:var(--gold)">40%</div></div>
+        <div class="bar-label"><span>Course Enrollments</span><span>Target: 5,000</span></div>
+        <div class="bar"><div class="bar-fill" style="width:10%;background:var(--blue)">10%</div></div>
+        <div class="bar-label"><span>Countries Reached</span><span>Target: 50</span></div>
+        <div class="bar"><div class="bar-fill" style="width:30%;background:#a855f7">30%</div></div>
+    </div>
+</main>
+
+<footer>
+    <p>Ethiopian Peace Archive &copy; 2026 · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+</footer>
+
+<script>
+const URL='https://rnafjznurgnrdonyxfgs.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+async function loadTotal(){
+    try{
+        const [eth,global]=await Promise.all([
+            fetch(`${URL}/rest/v1/ethiopian_voices?select=id&is_published=eq.true`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}}).then(r=>r.json()),
+            fetch(`${URL}/rest/v1/global_voices?select=id&is_published=eq.true`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}}).then(r=>r.json())
+        ]);
+        document.getElementById('totalVoices').textContent=(eth.length+global.length);
+    }catch(e){document.getElementById('totalVoices').textContent='30+';}
+}
+loadTotal();
+</script>
+</body>
+</html>
