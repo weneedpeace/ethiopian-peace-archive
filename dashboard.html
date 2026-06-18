@@ -3,124 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Impact Dashboard — Track the global reach of the Ethiopian Peace Archive.">
-    <title>Impact Dashboard — Ethiopian Peace Archive</title>
+    <meta name="description" content="Free peace education courses. No signup required.">
+    <title>Free Courses — Ethiopian Peace Archive</title>
     <style>
-        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b;--blue:#3b82f6;--red:#ef4444}
+        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b}
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}
-        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-        nav a{color:var(--text-dim);text-decoration:none;padding:8px 16px;border-radius:25px;font-size:0.85rem;font-family:-apple-system,sans-serif}
-        nav a:hover{color:var(--green-bright);background:var(--green-dim)}
-        nav .logo{font-size:1.2rem;font-weight:bold;color:var(--gold)}
+        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7;overflow-x:hidden}
+        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:12px 16px;position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between}
+        nav .logo{font-size:1rem;font-weight:bold;color:var(--gold);font-family:-apple-system,sans-serif;text-decoration:none}
         nav .logo span{color:var(--green-bright)}
-        .container{max-width:1000px;margin:40px auto;padding:0 20px}
-        .section-title{font-size:1.8rem;color:var(--gold);margin-bottom:20px;border-left:5px solid var(--green);padding-left:16px;font-family:-apple-system,sans-serif}
-        .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:30px}
-        .stat-box{background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:24px;text-align:center}
-        .stat-box .big{font-size:2.5rem;font-weight:800;color:var(--green-bright);font-family:-apple-system,sans-serif}
-        .stat-box .lbl{color:var(--text-dim);font-size:0.8rem;font-family:-apple-system,sans-serif;margin-top:4px}
-        .chart-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:30px}
-        .chart-card{background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:24px}
-        .chart-card h3{color:var(--gold);margin-bottom:16px;font-family:-apple-system,sans-serif}
-        .bar{height:28px;background:rgba(255,255,255,0.05);border-radius:6px;margin-bottom:10px;overflow:hidden;position:relative}
-        .bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:10px;font-size:0.75rem;font-family:-apple-system,sans-serif;font-weight:600;color:#fff}
-        .bar-label{color:var(--text-dim);font-size:0.8rem;margin-bottom:4px;font-family:-apple-system,sans-serif;display:flex;justify-content:space-between}
-        .map-placeholder{background:rgba(34,197,94,0.05);border:2px dashed var(--green-border);border-radius:14px;padding:60px 20px;text-align:center;margin-bottom:20px}
-        .map-placeholder .icon{font-size:4rem;margin-bottom:16px}
-        .map-placeholder p{color:var(--text-dim)}
-        footer{text-align:center;padding:30px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.85rem}
-        footer a{color:var(--text-dim);text-decoration:none}
+        .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:1001;width:36px;height:36px;position:relative}
+        .hamburger span{display:block;width:24px;height:2px;background:var(--green-bright);position:absolute;left:6px;transition:all 0.3s;border-radius:2px}
+        .hamburger span:nth-child(1){top:10px}.hamburger span:nth-child(2){top:17px}.hamburger span:nth-child(3){top:24px}
+        .hamburger.open span:nth-child(1){top:17px;transform:rotate(45deg)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){top:17px;transform:rotate(-45deg)}
+        nav .desktop-links{display:flex;gap:3px;flex-wrap:wrap;align-items:center}
+        nav .desktop-links a{color:var(--text-dim);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:0.8rem;font-family:-apple-system,sans-serif}
+        nav .desktop-links a:hover{color:var(--green-bright);background:var(--green-dim)}
+        nav .desktop-links a.active{color:var(--green-bright);background:var(--green-dim);font-weight:700}
+        .slide-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:998;opacity:0;visibility:hidden;transition:all 0.4s}
+        .slide-overlay.open{opacity:1;visibility:visible}
+        .slide-menu{position:fixed;top:0;right:-320px;width:300px;height:100%;background:linear-gradient(180deg,#0a1628,#0d1b33 50%,#060f1e);border-left:2px solid var(--green-border);z-index:999;transition:right 0.4s;padding:80px 20px 30px;overflow-y:auto}
+        .slide-menu.open{right:0}
+        .slide-menu .menu-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid var(--green-border)}
+        .slide-menu .menu-header .flag{font-size:2.5rem;margin-bottom:8px}
+        .slide-menu a{display:flex;align-items:center;gap:12px;padding:14px 18px;margin-bottom:6px;border-radius:12px;color:var(--text-dim);text-decoration:none;font-family:-apple-system,sans-serif;font-size:0.9rem}
+        .slide-menu a:hover{color:var(--green-bright);background:var(--green-dim);transform:translateX(4px)}
+        .slide-menu a .menu-icon{font-size:1.2rem;width:24px;text-align:center}
+        .container{max-width:1000px;margin:30px auto;padding:0 16px}
+        h1{color:var(--gold);margin-bottom:8px;border-left:4px solid var(--green);padding-left:12px;font-family:-apple-system,sans-serif;font-size:1.5rem}
+        .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:30px}
+        .course-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:14px;padding:22px;transition:all 0.3s;cursor:pointer}
+        .course-card:hover{border-color:var(--green);transform:translateY(-3px)}
+        .course-card .icon{font-size:2.2rem;margin-bottom:10px}
+        .course-card h3{color:var(--gold);margin-bottom:6px;font-family:-apple-system,sans-serif;font-size:1.1rem}
+        .course-card p{color:var(--text-dim);font-size:0.82rem;line-height:1.5;margin-bottom:10px}
+        .course-card .tag{display:inline-block;padding:3px 10px;border-radius:10px;font-size:0.7rem;background:var(--green-dim);color:var(--green-bright);font-family:-apple-system,sans-serif;margin:2px}
+        .btn{display:inline-block;padding:10px 20px;border-radius:20px;background:var(--green);color:#000;text-decoration:none;font-weight:700;font-family:-apple-system,sans-serif;font-size:0.85rem;border:none;cursor:pointer;margin-top:8px}
+        .btn:hover{background:var(--green-bright)}
+        #courseDetail{display:none}
+        #courseDetail h2{color:var(--gold);margin-bottom:16px}
+        .lesson-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:10px;padding:14px 18px;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+        .lesson-card .num{width:32px;height:32px;border-radius:50%;background:var(--green);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:-apple-system,sans-serif;font-size:0.85rem;flex-shrink:0}
+        .lesson-card h4{color:var(--text);font-family:-apple-system,sans-serif;font-size:0.9rem}
+        .loading{text-align:center;padding:40px;color:var(--text-dim)}
+        footer{text-align:center;padding:24px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.78rem}
+        @media(max-width:768px){nav .desktop-links{display:none}.hamburger{display:block}.course-grid{grid-template-columns:1fr}}
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="index.html" style="text-decoration:none"><div class="logo">🕊️ Ethiopian <span>Peace</span> Archive</div></a>
-    <div style="display:flex;gap:4px;flex-wrap:wrap">
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
         <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-        <a href="courses.html">Courses</a>
-        <a href="dashboard.html" style="color:var(--green-bright);background:var(--green-dim)">Impact</a>
-        <a href="contribute.html">Contribute</a><a href="support.html">Support</a>
+        <a href="courses.html" class="active">Courses</a><a href="dashboard.html">Impact</a>
+        <a href="media.html">Media</a><a href="gallery.html">Gallery</a><a href="support.html">Support</a>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html" onclick="toggleMenu()"><span class="menu-icon">🏠</span>Home</a>
+    <a href="voices.html" onclick="toggleMenu()"><span class="menu-icon">🗣️</span>Voices</a>
+    <a href="blog.html" onclick="toggleMenu()"><span class="menu-icon">📝</span>Blog</a>
+    <a href="courses.html" onclick="toggleMenu()"><span class="menu-icon">🎓</span>Courses</a>
+    <a href="dashboard.html" onclick="toggleMenu()"><span class="menu-icon">📊</span>Impact</a>
+    <a href="media.html" onclick="toggleMenu()"><span class="menu-icon">📰</span>Media</a>
+    <a href="gallery.html" onclick="toggleMenu()"><span class="menu-icon">🖼️</span>Gallery</a>
+    <a href="support.html" onclick="toggleMenu()"><span class="menu-icon">❤️</span>Support</a>
+</div>
+
 <main class="container">
-    <h1 class="section-title">📊 Impact Dashboard</h1>
-    <p style="color:var(--text-dim);margin-bottom:30px">Tracking our global reach and real-world impact.</p>
-
-    <div class="stats-row">
-        <div class="stat-box"><div class="big" id="totalVoices">...</div><div class="lbl">Total Voices</div></div>
-        <div class="stat-box"><div class="big">12+</div><div class="lbl">Ethiopian Regions</div></div>
-        <div class="stat-box"><div class="big">15+</div><div class="lbl">Countries Reached</div></div>
-        <div class="stat-box"><div class="big">8</div><div class="lbl">Media Features</div></div>
-        <div class="stat-box"><div class="big">6</div><div class="lbl">Free Courses</div></div>
+    <div id="courseList">
+        <h1>🎓 Free Peace Courses</h1>
+        <p style="color:var(--text-dim);margin-bottom:20px">Open to everyone. No registration required.</p>
+        <div class="course-grid" id="courseGrid"><div class="loading">Loading courses...</div></div>
     </div>
-
-    <div class="chart-row">
-        <div class="chart-card">
-            <h3>🗣️ Voices by Region</h3>
-            <div class="bar-label"><span>Tigray</span><span>25%</span></div>
-            <div class="bar"><div class="bar-fill" style="width:25%;background:var(--green)">25%</div></div>
-            <div class="bar-label"><span>Amhara</span><span>22%</span></div>
-            <div class="bar"><div class="bar-fill" style="width:22%;background:var(--green-bright)">22%</div></div>
-            <div class="bar-label"><span>Oromia</span><span>20%</span></div>
-            <div class="bar"><div class="bar-fill" style="width:20%;background:var(--gold)">20%</div></div>
-            <div class="bar-label"><span>Somali</span><span>10%</span></div>
-            <div class="bar"><div class="bar-fill" style="width:10%;background:var(--blue)">10%</div></div>
-            <div class="bar-label"><span>Other Regions</span><span>23%</span></div>
-            <div class="bar"><div class="bar-fill" style="width:23%;background:#a855f7">23%</div></div>
-        </div>
-        <div class="chart-card">
-            <h3>❤️ Sentiment Overview</h3>
-            <div class="bar-label"><span>Very Hopeful (90-100%)</span><span>45%</span></div>
-            <div class="bar"><div class="bar-fill" style="width:45%;background:var(--green-bright)">45%</div></div>
-            <div class="bar-label"><span>Hopeful (75-89%)</span><span>35%</span></div>
-            <div class="bar"><div class="bar-fill" style="width:35%;background:var(--green)">35%</div></div>
-            <div class="bar-label"><span>Positive (60-74%)</span><span>15%</span></div>
-            <div class="bar"><div class="bar-fill" style="width:15%;background:var(--gold)">15%</div></div>
-            <div class="bar-label"><span>Mixed (40-59%)</span><span>5%</span></div>
-            <div class="bar"><div class="bar-fill" style="width:5%;background:#f97316">5%</div></div>
-        </div>
-    </div>
-
-    <div class="map-placeholder">
-        <div class="icon">🗺️</div>
-        <h3 style="color:var(--gold);margin-bottom:8px;font-family:-apple-system,sans-serif">Global Reach Map</h3>
-        <p>Interactive map coming soon — showing voices from Ethiopia and supporters worldwide.</p>
-        <p style="color:var(--green-bright);margin-top:8px">🇪🇹 Ethiopia · 🇨🇳 China · 🇩🇪 Germany · 🇷🇺 Russia · 🇺🇸 USA · 🇯🇲 Jamaica · 🇮🇳 India · 🇸🇴 Somalia · 🇳🇬 Nigeria · 🇬🇧 UK · 🇫🇷 France</p>
-    </div>
-
-    <div class="chart-card" style="margin-bottom:30px">
-        <h3>🎯 2026 Goals</h3>
-        <div class="bar-label"><span>Voices Published</span><span>Target: 1,000+</span></div>
-        <div class="bar"><div class="bar-fill" style="width:35%;background:var(--green-bright)">35%</div></div>
-        <div class="bar-label"><span>Media Features</span><span>Target: 20</span></div>
-        <div class="bar"><div class="bar-fill" style="width:40%;background:var(--gold)">40%</div></div>
-        <div class="bar-label"><span>Course Enrollments</span><span>Target: 5,000</span></div>
-        <div class="bar"><div class="bar-fill" style="width:10%;background:var(--blue)">10%</div></div>
-        <div class="bar-label"><span>Countries Reached</span><span>Target: 50</span></div>
-        <div class="bar"><div class="bar-fill" style="width:30%;background:#a855f7">30%</div></div>
+    <div id="courseDetail">
+        <div style="color:var(--green-bright);cursor:pointer;margin-bottom:16px;font-family:-apple-system,sans-serif" onclick="showList()">← Back to Courses</div>
+        <h2 id="detailTitle"></h2>
+        <p style="color:var(--text-dim);margin-bottom:16px" id="detailDesc"></p>
+        <div id="lessonList"></div>
     </div>
 </main>
 
-<footer>
-    <p>Ethiopian Peace Archive &copy; 2026 · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
-</footer>
+<footer><p>Ethiopian Peace Archive &copy; 2026</p></footer>
 
 <script>
+function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('slideMenu').classList.toggle('open');document.getElementById('slideOverlay').classList.toggle('open');document.body.style.overflow=document.body.style.overflow==='hidden'?'':'hidden'}
 const URL='https://rnafjznurgnrdonyxfgs.supabase.co';
 const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
-async function loadTotal(){
+let allCourses=[];
+async function loadCourses(){
     try{
-        const [eth,global]=await Promise.all([
-            fetch(`${URL}/rest/v1/ethiopian_voices?select=id&is_published=eq.true`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}}).then(r=>r.json()),
-            fetch(`${URL}/rest/v1/global_voices?select=id&is_published=eq.true`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}}).then(r=>r.json())
-        ]);
-        document.getElementById('totalVoices').textContent=(eth.length+global.length);
-    }catch(e){document.getElementById('totalVoices').textContent='30+';}
+        const r=await fetch(`${URL}/rest/v1/courses?select=*&is_published=eq.true&order=created_at.desc`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}});
+        allCourses=await r.json();
+        const g=document.getElementById('courseGrid');
+        if(!allCourses.length){g.innerHTML='<div class="loading">No courses yet.</div>';return}
+        const icons=['🕊️','🇪🇹','🗣️','🌍','📚','🤝'];
+        g.innerHTML=allCourses.map((c,i)=>`<div class="course-card" onclick="showDetail(${c.id})"><div class="icon">${icons[i%6]}</div><h3>${c.title}</h3><p>${c.description||'Learn peacebuilding skills.'}</p><span class="tag">${c.level||'All Levels'}</span><span class="tag">${c.module_count||'?'} Modules</span><span class="tag">Free</span><div><button class="btn">View Course →</button></div></div>`).join('')
+    }catch(e){document.getElementById('courseGrid').innerHTML='<div class="loading">Error loading.</div>'}
 }
-loadTotal();
+async function showDetail(id){
+    const c=allCourses.find(x=>x.id===id);if(!c)return;
+    document.getElementById('courseList').style.display='none';document.getElementById('courseDetail').style.display='block';
+    document.getElementById('detailTitle').textContent=c.title;document.getElementById('detailDesc').textContent=c.description;
+    try{
+        const r=await fetch(`${URL}/rest/v1/course_lessons?select=*&course_id=eq.${id}&is_published=eq.true&order=lesson_order`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}});
+        const lessons=await r.json();
+        document.getElementById('lessonList').innerHTML=lessons.length?lessons.map(l=>`<div class="lesson-card"><div class="num">${l.lesson_order}</div><div><h4>${l.title}</h4>${l.content?`<p style="color:var(--text-dim);font-size:0.8rem;margin-top:4px">${l.content.substring(0,150)}...</p>`:''}</div></div>`).join(''):'<p style="color:var(--text-dim)">Lessons coming soon.</p>'
+    }catch(e){}
+    window.scrollTo(0,0)
+}
+function showList(){document.getElementById('courseList').style.display='block';document.getElementById('courseDetail').style.display='none'}
+loadCourses();
 </script>
 </body>
 </html>
