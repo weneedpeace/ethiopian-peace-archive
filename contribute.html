@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contribute to the Ethiopian Peace Archive. Submit your voice, volunteer, partner, or share your expertise.">
+    <title>Contribute — Ethiopian Peace Archive</title>
+    <style>
+        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}
+        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+        nav a{color:var(--text-dim);text-decoration:none;padding:8px 16px;border-radius:25px;font-size:0.85rem;font-family:-apple-system,sans-serif}
+        nav a:hover{color:var(--green-bright);background:var(--green-dim)}
+        nav .logo{font-size:1.2rem;font-weight:bold;color:var(--gold)}
+        nav .logo span{color:var(--green-bright)}
+        .container{max-width:800px;margin:40px auto;padding:0 20px}
+        .section-title{font-size:1.8rem;color:var(--gold);margin-bottom:16px;border-left:5px solid var(--green);padding-left:16px;font-family:-apple-system,sans-serif}
+        .card{background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:28px;margin-bottom:20px}
+        .card h3{color:var(--gold);margin-bottom:12px;font-family:-apple-system,sans-serif}
+        .card p{color:var(--text-dim);margin-bottom:16px}
+        label{display:block;color:var(--text-dim);margin-bottom:6px;font-family:-apple-system,sans-serif;font-size:0.85rem}
+        input,textarea,select{width:100%;padding:12px;border-radius:8px;border:1px solid var(--green-border);background:var(--bg);color:var(--text);font-size:0.95rem;font-family:inherit;margin-bottom:16px}
+        textarea{min-height:100px;resize:vertical}
+        .btn{display:inline-block;padding:14px 28px;border-radius:30px;text-decoration:none;font-weight:700;font-size:0.95rem;font-family:-apple-system,sans-serif;transition:all 0.3s;cursor:pointer;border:none}
+        .btn-primary{background:var(--green);color:#000}
+        .btn-primary:hover{background:var(--green-bright)}
+        .msg{padding:12px;border-radius:8px;margin-bottom:16px;display:none;font-family:-apple-system,sans-serif}
+        .msg-success{background:var(--green-dim);color:var(--green-bright);border:1px solid var(--green)}
+        footer{text-align:center;padding:30px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.85rem}
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" style="text-decoration:none"><div class="logo">🕊️ Ethiopian <span>Peace</span> Archive</div></a>
+    <div style="display:flex;gap:4px;flex-wrap:wrap">
+        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
+        <a href="contribute.html" style="color:var(--green-bright);background:var(--green-dim)">Contribute</a>
+        <a href="support.html">Support</a>
+    </div>
+</nav>
+
+<main class="container">
+    <h1 class="section-title">🤝 Contribute to Peace</h1>
+    <p style="color:var(--text-dim);margin-bottom:30px">Your voice. Your skills. Your passion. There are many ways to contribute.</p>
+
+    <div class="card">
+        <h3>🗣️ Submit Your Voice</h3>
+        <p>Share your message of peace, unity, and hope. Your voice becomes part of the permanent archive.</p>
+        <div id="voiceMsg" class="msg msg-success"></div>
+        <form id="voiceForm" onsubmit="submitVoice(event)">
+            <label>Your Name (will be kept private)</label>
+            <input type="text" id="name" placeholder="Your name" required>
+            <label>Region or Country</label>
+            <input type="text" id="location" placeholder="Tigray, Oromia, Diaspora, etc." required>
+            <label>Language</label>
+            <input type="text" id="language" placeholder="Amharic, Oromo, English..." required>
+            <label>Your Message of Peace</label>
+            <textarea id="message" placeholder="What do you want to say about peace, unity, and hope for Ethiopia?" required></textarea>
+            <button type="submit" class="btn btn-primary">Submit Your Voice →</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h3>🙋 Volunteer</h3>
+        <p>Join our team. We need translators, researchers, community organizers, and tech support.</p>
+        <a href="contact.html" class="btn btn-primary">Apply to Volunteer →</a>
+    </div>
+
+    <div class="card">
+        <h3>🤝 Partner With Us</h3>
+        <p>Universities, NGOs, media, and community organizations — let's collaborate for peace.</p>
+        <a href="contact.html" class="btn btn-primary">Partner →</a>
+    </div>
+</main>
+
+<footer>
+    <p>Ethiopian Peace Archive &copy; 2026 · <a href="privacy.html" style="color:var(--text-dim)">Privacy</a> · <a href="terms.html" style="color:var(--text-dim)">Terms</a></p>
+</footer>
+
+<script>
+const URL='https://rnafjznurgnrdonyxfgs.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+
+async function submitVoice(e){
+    e.preventDefault();
+    const msg=document.getElementById('voiceMsg');
+    const data={
+        document_id:'SUB-'+Date.now(),
+        region:document.getElementById('location').value,
+        language:document.getElementById('language').value,
+        year:2026,
+        quote_original:document.getElementById('message').value,
+        quote_english:document.getElementById('message').value,
+        themes:['Peace'],
+        sentiment:0.95,
+        is_published:false
+    };
+    try{
+        const r=await fetch(`${URL}/rest/v1/ethiopian_voices`,{
+            method:'POST',
+            headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},
+            body:JSON.stringify(data)
+        });
+        if(r.ok){
+            msg.textContent='✅ Thank you! Your voice has been submitted for review.';
+            msg.style.display='block';
+            document.getElementById('voiceForm').reset();
+        }else{
+            throw new Error('Submission failed');
+        }
+    }catch(err){
+        msg.textContent='Please try again or email us directly.';
+        msg.style.display='block';
+        msg.className='msg';
+        msg.style.background='rgba(239,68,68,0.1)';
+        msg.style.color='#ef4444';
+        msg.style.border='1px solid rgba(239,68,68,0.3)';
+    }
+}
+</script>
+</body>
+</html>
