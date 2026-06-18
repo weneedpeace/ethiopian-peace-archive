@@ -3,129 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blog — Stories, research, and updates from the Ethiopian Peace Archive movement.">
+    <meta name="description" content="Blog — Stories, research, and updates from the Ethiopian Peace Archive.">
     <title>Blog — Ethiopian Peace Archive</title>
     <style>
         :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b}
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}
-        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-        nav a{color:var(--text-dim);text-decoration:none;padding:8px 16px;border-radius:25px;font-size:0.85rem;font-family:-apple-system,sans-serif}
+        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+        nav a{color:var(--text-dim);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:0.8rem;font-family:-apple-system,sans-serif}
         nav a:hover{color:var(--green-bright);background:var(--green-dim)}
-        nav .logo{font-size:1.2rem;font-weight:bold;color:var(--gold)}
+        nav .logo{font-size:1rem;font-weight:bold;color:var(--gold)}
         nav .logo span{color:var(--green-bright)}
-        .container{max-width:900px;margin:40px auto;padding:0 20px}
-        .section-title{font-size:1.8rem;color:var(--gold);margin-bottom:20px;border-left:5px solid var(--green);padding-left:16px;font-family:-apple-system,sans-serif}
-        .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-        .blog-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:16px;overflow:hidden;transition:all 0.3s}
-        .blog-card:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.5)}
-        .blog-card .img{height:160px;background:linear-gradient(135deg,rgba(34,197,94,0.2),rgba(251,191,36,0.1));display:flex;align-items:center;justify-content:center;font-size:3rem}
-        .blog-card .content{padding:20px}
-        .blog-card .date{color:var(--text-muted);font-size:0.75rem;font-family:-apple-system,sans-serif;margin-bottom:8px}
+        .container{max-width:900px;margin:30px auto;padding:0 16px}
+        h1{color:var(--gold);margin-bottom:16px;border-left:4px solid var(--green);padding-left:12px;font-family:-apple-system,sans-serif;font-size:1.5rem}
+        .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+        .blog-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:14px;padding:22px;transition:all 0.3s;cursor:pointer;text-decoration:none;color:var(--text);display:block}
+        .blog-card:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
+        .blog-card .cat{display:inline-block;padding:3px 10px;border-radius:10px;font-size:0.7rem;background:var(--green-dim);color:var(--green-bright);margin-bottom:10px;font-family:-apple-system,sans-serif}
         .blog-card h3{color:var(--gold);margin-bottom:8px;font-family:-apple-system,sans-serif;font-size:1.1rem}
-        .blog-card p{color:var(--text-dim);font-size:0.85rem;line-height:1.6;margin-bottom:12px}
-        .blog-card .tag{display:inline-block;padding:3px 10px;border-radius:10px;font-size:0.7rem;background:var(--green-dim);color:var(--green-bright);margin:2px 4px;font-family:-apple-system,sans-serif}
-        .blog-card a{color:var(--green-bright);text-decoration:none;font-weight:600;font-family:-apple-system,sans-serif;font-size:0.85rem}
-        .newsletter{background:linear-gradient(135deg,rgba(34,197,94,0.10),rgba(251,191,36,0.08));border:2px solid var(--green-border);border-radius:16px;padding:36px;text-align:center;margin:40px 0}
-        .newsletter h2{color:var(--gold);margin-bottom:12px;font-family:-apple-system,sans-serif}
-        .newsletter p{color:var(--text-dim);margin-bottom:20px}
-        .newsletter input{padding:12px 20px;border-radius:25px;border:1px solid var(--green-border);background:var(--bg);color:var(--text);font-size:0.95rem;width:100%;max-width:350px;font-family:inherit}
-        .btn{display:inline-block;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:700;font-size:0.9rem;font-family:-apple-system,sans-serif;transition:all 0.3s;cursor:pointer;border:none;background:var(--green);color:#000;margin-top:10px}
-        .btn:hover{background:var(--green-bright)}
-        footer{text-align:center;padding:30px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.85rem}
-        footer a{color:var(--text-dim);text-decoration:none}
+        .blog-card p{color:var(--text-dim);font-size:0.85rem;line-height:1.5}
+        .blog-card .date{color:var(--text-muted);font-size:0.7rem;margin-top:10px;font-family:-apple-system,sans-serif}
+        .loading{text-align:center;padding:40px;color:var(--text-dim);font-family:-apple-system,sans-serif}
+        .btn{display:inline-block;padding:10px 20px;border-radius:20px;background:var(--green);color:#000;text-decoration:none;font-weight:700;font-family:-apple-system,sans-serif;font-size:0.85rem}
+        footer{text-align:center;padding:24px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:30px;font-family:-apple-system,sans-serif;font-size:0.78rem}
+        @media(max-width:768px){.blog-grid{grid-template-columns:1fr}}
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="index.html" style="text-decoration:none"><div class="logo">🕊️ Ethiopian <span>Peace</span> Archive</div></a>
-    <div style="display:flex;gap:4px;flex-wrap:wrap">
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div style="display:flex;gap:2px;flex-wrap:wrap">
         <a href="index.html">Home</a><a href="voices.html">Voices</a>
         <a href="blog.html" style="color:var(--green-bright);background:var(--green-dim)">Blog</a>
         <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
-        <a href="contribute.html">Contribute</a><a href="support.html">Support</a>
+        <a href="gallery.html">Gallery</a><a href="support.html">Support</a>
     </div>
 </nav>
 
 <main class="container">
-    <h1 class="section-title">📝 Blog & Stories</h1>
-    <p style="color:var(--text-dim);margin-bottom:30px">Stories from the field, research insights, and updates on the peace movement.</p>
-
-    <div class="blog-grid">
-        <div class="blog-card">
-            <div class="img">🗣️</div>
-            <div class="content">
-                <div class="date">June 15, 2026</div>
-                <h3>How 1,000 Voices Were Collected Across Ethiopia</h3>
-                <p>The journey of gathering peace messages from every region — the challenges, the hope, and the people behind the voices.</p>
-                <span class="tag">Story</span><span class="tag">Research</span>
-                <div style="margin-top:12px"><a href="#">Read More →</a></div>
-            </div>
-        </div>
-        <div class="blog-card">
-            <div class="img">🌍</div>
-            <div class="content">
-                <div class="date">May 28, 2026</div>
-                <h3>Diaspora Voices: Ethiopians Abroad Speak for Peace</h3>
-                <p>How the Ethiopian diaspora is contributing to peace from around the world — voices from 15+ countries.</p>
-                <span class="tag">Diaspora</span><span class="tag">Community</span>
-                <div style="margin-top:12px"><a href="#">Read More →</a></div>
-            </div>
-        </div>
-        <div class="blog-card">
-            <div class="img">📊</div>
-            <div class="content">
-                <div class="date">April 10, 2026</div>
-                <h3>What 1,000 Ethiopians Actually Want: Key Findings</h3>
-                <p>Analysis of themes across all submissions — peace, unity, and coexistence dominate the voices.</p>
-                <span class="tag">Research</span><span class="tag">Data</span>
-                <div style="margin-top:12px"><a href="#">Read More →</a></div>
-            </div>
-        </div>
-        <div class="blog-card">
-            <div class="img">🤝</div>
-            <div class="content">
-                <div class="date">March 5, 2026</div>
-                <h3>From Voices to Action: Community Peace Initiatives</h3>
-                <p>How the archive is inspiring real-world peace dialogues and community reconciliation efforts.</p>
-                <span class="tag">Impact</span><span class="tag">Community</span>
-                <div style="margin-top:12px"><a href="#">Read More →</a></div>
-            </div>
-        </div>
-        <div class="blog-card">
-            <div class="img">🎓</div>
-            <div class="content">
-                <div class="date">February 20, 2026</div>
-                <h3>Peace Education: Free Resources Now Available</h3>
-                <p>Launching our free course platform — peace education accessible to everyone, everywhere.</p>
-                <span class="tag">Education</span><span class="tag">Announcement</span>
-                <div style="margin-top:12px"><a href="#">Read More →</a></div>
-            </div>
-        </div>
-        <div class="blog-card">
-            <div class="img">📰</div>
-            <div class="content">
-                <div class="date">January 8, 2026</div>
-                <h3>Media Coverage: The World Is Listening</h3>
-                <p>Radio, TV, and newspapers across Ethiopia and beyond are amplifying the voices for peace.</p>
-                <span class="tag">Media</span><span class="tag">Press</span>
-                <div style="margin-top:12px"><a href="#">Read More →</a></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="newsletter">
-        <h2>📬 Stay Updated</h2>
-        <p>Get new stories, research, and peace voices delivered to your inbox.</p>
-        <input type="email" placeholder="Your email address">
-        <button class="btn" style="margin-left:8px">Subscribe →</button>
-        <p style="font-size:0.7rem;color:var(--text-muted);margin-top:10px">No spam. Unsubscribe anytime.</p>
-    </div>
+    <h1>📝 Blog & Stories</h1>
+    <div class="blog-grid" id="blogGrid"><div class="loading">Loading posts...</div></div>
 </main>
 
-<footer>
-    <p>Ethiopian Peace Archive &copy; 2026 · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
-</footer>
+<footer><p>Ethiopian Peace Archive &copy; 2026</p></footer>
+
+<script>
+const API = 'https://peace-api.peace-01d.workers.dev';
+
+async function loadBlogs(){
+    try{
+        const r = await fetch(`${API}/api/blogs`);
+        const posts = await r.json();
+        const grid = document.getElementById('blogGrid');
+        
+        if(!posts.length){
+            grid.innerHTML = '<div class="loading">No posts yet.</div>';
+            return;
+        }
+        
+        grid.innerHTML = posts.map(p => `
+            <a href="blog-post.html?slug=${p.slug}" class="blog-card">
+                <span class="cat">${p.category||'Story'}</span>
+                <h3>${p.title}</h3>
+                <p>${p.excerpt||p.content.substring(0,120)+'...'}</p>
+                <div class="date">${new Date(p.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+            </a>
+        `).join('');
+    }catch(e){
+        document.getElementById('blogGrid').innerHTML = '<div class="loading">Error loading posts.</div>';
+    }
+}
+loadBlogs();
+</script>
 </body>
 </html>
