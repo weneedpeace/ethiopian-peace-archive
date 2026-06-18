@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Detail — Ethiopian Peace Archive</title>
+    <style>
+        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.8}
+        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:12px 16px;display:flex;align-items:center;gap:12px}
+        nav a{color:var(--text-dim);text-decoration:none;font-size:0.85rem;font-family:-apple-system,sans-serif}
+        nav .logo{font-size:1rem;font-weight:bold;color:var(--gold)}
+        nav .logo span{color:var(--green-bright)}
+        .container{max-width:800px;margin:30px auto;padding:0 16px}
+        .course-header{background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;margin-bottom:24px;text-align:center}
+        .course-header .icon{font-size:3rem;margin-bottom:12px}
+        .course-header h1{color:var(--gold);margin-bottom:8px;font-family:-apple-system,sans-serif}
+        .course-header p{color:var(--text-dim)}
+        .lesson-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:12px;padding:18px;margin-bottom:10px;display:flex;align-items:center;gap:14px;transition:all 0.3s;cursor:pointer}
+        .lesson-card:hover{border-color:var(--green);background:var(--green-dim)}
+        .lesson-card .num{width:36px;height:36px;border-radius:50%;background:var(--green);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:-apple-system,sans-serif;font-size:0.9rem;flex-shrink:0}
+        .lesson-card .info h4{color:var(--text);font-family:-apple-system,sans-serif;font-size:0.95rem}
+        .lesson-card .info p{color:var(--text-dim);font-size:0.8rem}
+        .btn{display:inline-block;padding:12px 24px;border-radius:25px;text-decoration:none;font-weight:700;font-family:-apple-system,sans-serif;background:var(--green);color:#000}
+        footer{text-align:center;padding:24px;color:#64748b;border-top:1px solid rgba(34,197,94,0.10);margin-top:30px;font-family:-apple-system,sans-serif;font-size:0.78rem}
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="courses.html" class="logo">← <span>Back to Courses</span></a>
+</nav>
+
+<main class="container">
+    <div class="course-header">
+        <div class="icon">🕊️</div>
+        <h1>Introduction to Peacebuilding</h1>
+        <p>Understand the foundations of peace and conflict resolution. 6 modules · Beginner · Free</p>
+    </div>
+
+    <h2 style="color:var(--gold);margin-bottom:16px;font-family:-apple-system,sans-serif">📚 Course Lessons</h2>
+    
+    <div class="lesson-card"><div class="num">1</div><div class="info"><h4>What is Peace?</h4><p>Understanding peace beyond the absence of war</p></div></div>
+    <div class="lesson-card"><div class="num">2</div><div class="info"><h4>Roots of Conflict</h4><p>Why conflicts arise and how they escalate</p></div></div>
+    <div class="lesson-card"><div class="num">3</div><div class="info"><h4>Dialogue & Mediation</h4><p>Tools for peaceful resolution</p></div></div>
+    <div class="lesson-card"><div class="num">4</div><div class="info"><h4>Community Peacebuilding</h4><p>Grassroots approaches that work</p></div></div>
+    <div class="lesson-card"><div class="num">5</div><div class="info"><h4>The Ethiopian Context</h4><p>Applying peacebuilding to Ethiopia's reality</p></div></div>
+    <div class="lesson-card"><div class="num">6</div><div class="info"><h4>Taking Action</h4><p>Your role in building lasting peace</p></div></div>
+</main>
+
+<footer><p>Ethiopian Peace Archive &copy; 2026</p></footer>
+</body>
+</html>
