@@ -6,7 +6,6 @@
     <meta name="description" content="Ethiopian Peace Archive — Preserving 1,000+ voices for peace from Ethiopia and around the world">
     <meta property="og:title" content="Ethiopian Peace Archive">
     <meta property="og:description" content="1,000 voices from Ethiopia and the world, preserved for peace">
-    <meta property="og:type" content="website">
     <title>Ethiopian Peace Archive — Voices for Peace</title>
     <style>
         :root {
@@ -94,14 +93,25 @@
         .sentiment-bar { height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:10px; }
         .sentiment-fill { height:100%; background:linear-gradient(90deg,#eab308,#22c55e); border-radius:3px; }
 
+        /* Media Cards */
         .media-card {
             background:var(--card); border:1px solid var(--green-border); border-radius:14px;
-            padding:22px; margin-bottom:14px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;
+            padding:20px; margin-bottom:14px; display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap;
+            transition:all 0.3s; cursor:pointer;
         }
-        .media-card .icon { font-size:2.5rem; min-width:60px; text-align:center; }
-        .media-card .info { flex:1; min-width:200px; }
-        .media-card .info h3 { color:var(--gold); margin-bottom:4px; font-size:1.1rem; }
-        .media-card .info p { color:var(--text-dim); font-size:0.85rem; }
+        .media-card:hover { border-color:var(--green); transform:translateY(-2px); }
+        .media-card .media-icon { font-size:2.2rem; min-width:50px; text-align:center; }
+        .media-card .media-info { flex:1; min-width:180px; }
+        .media-card .media-info h3 { color:var(--gold); margin-bottom:4px; font-size:1rem; font-family:-apple-system,sans-serif; }
+        .media-card .media-info p { color:var(--text-dim); font-size:0.85rem; }
+        .media-card .media-info .lang-badge {
+            display:inline-block; padding:2px 10px; border-radius:10px; font-size:0.7rem;
+            background:var(--green-dim); color:var(--green); margin-top:6px; font-family:-apple-system,sans-serif;
+        }
+        .media-card audio, .media-card video {
+            width:100%; margin-top:10px; border-radius:8px;
+        }
+        .media-card img { max-width:200px; border-radius:8px; margin-top:10px; }
 
         .about-card {
             background:var(--card); border:1px solid var(--green-border); border-radius:14px;
@@ -128,10 +138,8 @@
             .hero h1 { font-size:1.6rem; }
             .stat-card { padding:12px 16px; min-width:80px; }
             .stat-card .num { font-size:1.4rem; }
-            .quote-card { padding:16px; }
-            .quote-card .text { font-size:1rem; }
-            .media-card { padding:16px; }
-            .media-card .icon { font-size:2rem; min-width:40px; }
+            .media-card { padding:14px; }
+            .media-card img { max-width:100%; }
         }
     </style>
 </head>
@@ -140,7 +148,7 @@
 <nav>
     <div class="logo">🇪🇹 Ethiopian <span>Peace</span> Archive</div>
     <div class="nav-links">
-        <a href="#voices" class="active">Voices</a>
+        <a href="#voices">Voices</a>
         <a href="#media">Media</a>
         <a href="#about">About</a>
     </div>
@@ -151,7 +159,7 @@
     <h1>Ethiopian Peace Archive</h1>
     <p class="subtitle">"We wish good, speak good, do good" — Ethiopia, 2020</p>
     <a href="#voices" class="btn btn-primary">Explore Voices</a>
-    <a href="#about" class="btn btn-outline">About the Project</a>
+    <a href="#media" class="btn btn-outline">Media Coverage</a>
 </header>
 
 <div class="stats">
@@ -186,33 +194,7 @@
 
 <section class="container" id="media">
     <h2 class="section-title">📰 Media Coverage</h2>
-    
-    <div class="media-card">
-        <div class="icon">📄</div>
-        <div class="info">
-            <h3>Journal Paper</h3>
-            <p>Academic publication based on the 1,000 voices research</p>
-            <p style="font-size:0.8rem;color:var(--text-muted);">Coming soon — PDF download available</p>
-        </div>
-    </div>
-    
-    <div class="media-card">
-        <div class="icon">🎙️</div>
-        <div class="info">
-            <h3>Radio Interviews</h3>
-            <p>Multiple radio appearances discussing the peace archive project</p>
-            <p style="font-size:0.8rem;color:var(--text-muted);">Audio recordings coming soon</p>
-        </div>
-    </div>
-    
-    <div class="media-card">
-        <div class="icon">📺</div>
-        <div class="info">
-            <h3>TV Interviews</h3>
-            <p>Television coverage of the Ethiopian Peace Archive initiative</p>
-            <p style="font-size:0.8rem;color:var(--text-muted);">Video links coming soon</p>
-        </div>
-    </div>
+    <div id="mediaContainer"><div class="loading"><span class="spinner"></span>Loading media...</div></div>
 </section>
 
 <section class="container" id="about">
@@ -263,10 +245,10 @@
 const URL='https://rnafjznurgnrdonyxfgs.supabase.co';
 const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
-let eth=[], global=[], tab='ethiopian';
+let eth=[], global=[], media=[], tab='ethiopian';
 
 async function fetchTable(t){
-    const r=await fetch(`${URL}/rest/v1/${t}?select=*&is_published=eq.true&order=year.desc`,{
+    const r=await fetch(`${URL}/rest/v1/${t}?select=*&is_published=eq.true&order=created_at.desc`,{
         headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}
     });
     return r.json();
@@ -274,7 +256,12 @@ async function fetchTable(t){
 
 async function init(){
     try{
-        [eth,global]=await Promise.all([fetchTable('ethiopian_voices'),fetchTable('global_voices')]);
+        [eth,global,media]=await Promise.all([
+            fetchTable('ethiopian_voices'),
+            fetchTable('global_voices'),
+            fetchTable('media_coverage')
+        ]);
+        
         document.getElementById('ethCount').textContent=eth.length;
         document.getElementById('globalCount').textContent=global.length;
         document.getElementById('regionCount').textContent=new Set(eth.map(v=>v.region).filter(Boolean)).size;
@@ -300,8 +287,9 @@ async function init(){
         continents.forEach(c=>document.getElementById('continentFilter').innerHTML+=`<option>${c}</option>`);
         
         render();
+        renderMedia();
     }catch(e){
-        document.getElementById('quotesContainer').innerHTML=`<div class="loading">Error loading data: ${e.message}</div>`;
+        document.getElementById('quotesContainer').innerHTML=`<div class="loading">Error: ${e.message}</div>`;
     }
 }
 
@@ -311,13 +299,6 @@ function switchTab(t){
     document.getElementById('tabGlobal').classList.toggle('active',t==='global');
     document.getElementById('ethFilters').style.display=t==='ethiopian'?'flex':'none';
     document.getElementById('globalFilters').style.display=t==='global'?'flex':'none';
-    document.getElementById('regionFilter').value='';
-    document.getElementById('yearFilter').value='';
-    document.getElementById('themeFilter').value='';
-    document.getElementById('langFilter').value='';
-    document.getElementById('countryFilter').value='';
-    document.getElementById('globalYearFilter').value='';
-    document.getElementById('continentFilter').value='';
     render();
 }
 
@@ -359,6 +340,44 @@ function render(){
             <span class="badge bdg-yr">📅 ${v.year||'N/A'}</span>
             ${(v.themes||[]).map((t,j)=>`<span class="badge ${tc[j%4]}">${esc(t)}</span>`).join('')}
             <div class="sentiment-bar"><div class="sentiment-fill" style="width:${sp}%"></div></div>
+        </div>`;
+    }).join('');
+}
+
+function renderMedia(){
+    const container=document.getElementById('mediaContainer');
+    
+    if(!media||media.length===0){
+        container.innerHTML='<div class="loading">Media coverage coming soon.</div>';
+        return;
+    }
+    
+    const icons={radio:'🎙️', tv:'📺', newspaper:'📰', online:'🌐'};
+    
+    container.innerHTML=media.map(m=>{
+        const icon=icons[m.media_type]||'📄';
+        let mediaContent='';
+        
+        if(m.media_type==='radio'&&m.audio_url){
+            mediaContent=`<audio controls src="${m.audio_url}" style="width:100%;margin-top:10px;"></audio>`;
+        }
+        if(m.media_type==='tv'&&m.video_url){
+            mediaContent=`<video controls src="${m.video_url}" style="width:100%;margin-top:10px;border-radius:8px;"></video>`;
+        }
+        if(m.media_type==='newspaper'&&m.thumbnail_url){
+            mediaContent=`<a href="${m.link||m.thumbnail_url}" target="_blank"><img src="${m.thumbnail_url}" alt="${esc(m.title)}" style="max-width:250px;border-radius:8px;margin-top:10px;"></a>`;
+        }
+        
+        return `
+        <div class="media-card">
+            <div class="media-icon">${icon}</div>
+            <div class="media-info">
+                <h3>${esc(m.title)}</h3>
+                <p>${esc(m.description||'')}</p>
+                <span class="lang-badge">${m.media_type?.toUpperCase()||'MEDIA'}</span>
+                ${m.date?`<span class="lang-badge" style="margin-left:6px;">📅 ${m.date}</span>`:''}
+                ${mediaContent}
+            </div>
         </div>`;
     }).join('');
 }
