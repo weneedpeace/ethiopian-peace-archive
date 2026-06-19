@@ -7,83 +7,94 @@
     <title>About — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .about-card { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; line-height: 1.8; }
-        .about-card h2 { color: var(--gold); margin-bottom: 12px; font-family: var(--font-ui); font-size: 1.2rem; }
-        .about-card p { color: var(--text-dim); margin-bottom: 12px; }
-        .highlight-about { background: linear-gradient(135deg, rgba(34,197,94,0.10), rgba(251,191,36,0.08)); border: 2px solid var(--green-border); border-radius: var(--radius); padding: 28px; text-align: center; margin: 20px 0; }
+        .about-card{background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius);padding:24px;margin-bottom:16px;line-height:1.8}
+        .about-card h2{color:var(--gold);margin-bottom:12px;font-family:var(--font-ui);font-size:1.2rem}
+        .about-card p{color:var(--text-dim);margin-bottom:12px}
+        .highlight-about{background:linear-gradient(135deg,rgba(34,197,94,0.10),rgba(251,191,36,0.08));border:2px solid var(--green-border);border-radius:var(--radius);padding:28px;text-align:center;margin:20px 0}
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="desktop-links">
-            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-            <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
-            <a href="media.html">Media</a><a href="gallery.html">Gallery</a>
-            <a href="thanks.html">Thanks</a><a href="contribute.html">Contribute</a>
-            <a href="support.html" class="cta-nav">Support</a>
-            <span style="display:flex;gap:2px;margin-left:6px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            </span>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-    </nav>
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="voices.html" data-i18n="voices">Voices</a>
+        <a href="blog.html" data-i18n="blog">Blog</a>
+        <a href="courses.html" data-i18n="courses">Courses</a>
+        <a href="dashboard.html" data-i18n="impact">Impact</a>
+        <a href="media.html" data-i18n="media">Media</a>
+        <a href="gallery.html" data-i18n="gallery">Gallery</a>
+        <a href="contribute.html" data-i18n="contribute">Contribute</a>
+        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+        <span style="display:flex;gap:2px;margin-left:6px">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+        </span>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
-        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
-        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
-        <a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
-        <a href="dashboard.html"><span class="menu-icon">📊</span>Impact</a>
-        <a href="about.html"><span class="menu-icon">📖</span>About</a>
-        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
+    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
+    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
+    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
+    <a href="about.html"><span class="menu-icon">📖</span> <span data-i18n="about">About</span></a>
+    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
+</div>
+
+<main class="container-sm">
+    <h1 class="section-title" data-i18n="aboutTitle">📖 About the Movement</h1>
+
+    <div class="about-card">
+        <h2 data-i18n="ourStory">Our Story</h2>
+        <p>The Ethiopian Peace Archive began with a simple belief: that everyday people want peace, and their voices deserve to be heard. Over five years (2017-2022), we collected over 1,000 voices from every region of Ethiopia — Tigray, Amhara, Oromia, Somali, Afar, Sidama, SNNPR, Gambella, Harari, Benishangul-Gumuz, Addis Ababa, and Dire Dawa.</p>
+        <p>We also received messages of solidarity from across the globe — China, Germany, Russia, USA, Jamaica, India, Somalia, Nigeria, UK, France, and more. These voices remind us that peace is not just an Ethiopian desire — it's a universal hope.</p>
     </div>
 
-    <main class="container-sm">
-        <h1 class="section-title">📖 About the Movement</h1>
+    <div class="about-card">
+        <h2 data-i18n="ourMission">Our Mission</h2>
+        <p>To preserve, share, and amplify the voices of everyday Ethiopians and global supporters who believe in peace, unity, and coexistence — creating a permanent, searchable, and accessible archive that counter-narratives conflict with hope.</p>
+    </div>
 
-        <div class="about-card">
-            <h2>Our Story</h2>
-            <p>The Ethiopian Peace Archive began with a simple belief: that everyday people want peace, and their voices deserve to be heard. Over five years (2017-2022), we collected over 1,000 voices from every region of Ethiopia — Tigray, Amhara, Oromia, Somali, Afar, Sidama, SNNPR, Gambella, Harari, Benishangul-Gumuz, Addis Ababa, and Dire Dawa.</p>
-            <p>We also received messages of solidarity from across the globe — China, Germany, Russia, USA, Jamaica, India, Somalia, Nigeria, UK, France, and more. These voices remind us that peace is not just an Ethiopian desire — it's a universal hope.</p>
-        </div>
+    <div class="about-card">
+        <h2 data-i18n="methodologyTitle">Methodology</h2>
+        <p>Voices were collected through in-person interviews, written submissions, and community gatherings across Ethiopia. All contributors gave informed consent for their anonymized words to be shared publicly. Personal identifying information is kept strictly confidential and offline.</p>
+    </div>
 
-        <div class="about-card">
-            <h2>Our Mission</h2>
-            <p>To preserve, share, and amplify the voices of everyday Ethiopians and global supporters who believe in peace, unity, and coexistence — creating a permanent, searchable, and accessible archive that counter-narratives conflict with hope.</p>
-        </div>
+    <div class="about-card">
+        <h2 data-i18n="whyAnonymity">Why Anonymity?</h2>
+        <p>We protect every contributor's identity. In times of conflict, speaking for peace can be dangerous. Anonymity ensures that voices are heard without putting anyone at risk. What matters is the message, not the messenger.</p>
+    </div>
 
-        <div class="about-card">
-            <h2>Methodology</h2>
-            <p>Voices were collected through in-person interviews, written submissions, and community gatherings across Ethiopia. All contributors gave informed consent for their anonymized words to be shared publicly. Personal identifying information is kept strictly confidential and offline.</p>
-            <p>Each voice was categorized by region, year, language, and theme. Sentiment analysis was applied to understand the emotional tone of each message — and the overwhelming majority express hope.</p>
-        </div>
+    <div class="highlight-about">
+        <h2 style="color:var(--gold);margin-bottom:8px;font-family:var(--font-ui)" data-i18n="joinMovement">🌍 Join the Movement</h2>
+        <p style="color:var(--text-dim);margin-bottom:16px" data-i18n="joinMovementSub">Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters.</p>
+        <a href="contribute.html" class="btn btn-primary" data-i18n="shareYourVoice">Share Your Voice →</a>
+    </div>
+</main>
 
-        <div class="about-card">
-            <h2>Why Anonymity?</h2>
-            <p>We protect every contributor's identity. In times of conflict, speaking for peace can be dangerous. Anonymity ensures that voices are heard without putting anyone at risk. What matters is the message, not the messenger.</p>
-        </div>
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
+        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
+    </div>
+    <div class="footer-bottom">
+        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
+        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+    </div>
+</footer>
 
-        <div class="highlight-about">
-            <h2 style="color:var(--gold);margin-bottom:8px;font-family:var(--font-ui)">🌍 Join the Movement</h2>
-            <p style="color:var(--text-dim);margin-bottom:16px">Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters.</p>
-            <a href="contribute.html" class="btn btn-primary">Share Your Voice →</a>
-        </div>
-    </main>
-
-    <footer>
-        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-            <p>Ethiopian Peace Archive &copy; 2026</p>
-            <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · <a href="thanks.html">Thank You</a></p>
-        </div>
-    </footer>
-
-    <script src="js/navigation.js"></script>
-    <script src="js/language.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/language.js"></script>
 </body>
 </html>
