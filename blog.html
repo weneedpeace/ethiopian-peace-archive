@@ -3,92 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blog — Stories, research, and updates from the Ethiopian Peace Archive.">
+    <meta name="description" content="Blog Post — Ethiopian Peace Archive">
     <title>Blog — Ethiopian Peace Archive</title>
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7;overflow-x:hidden}
-        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:12px 16px;position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between}
-        nav .logo{font-size:1rem;font-weight:bold;color:var(--gold);font-family:-apple-system,sans-serif;text-decoration:none}
-        nav .logo span{color:var(--green-bright)}
-        .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:1001;width:36px;height:36px;position:relative}
-        .hamburger span{display:block;width:24px;height:2px;background:var(--green-bright);position:absolute;left:6px;transition:all 0.3s;border-radius:2px}
-        .hamburger span:nth-child(1){top:10px}.hamburger span:nth-child(2){top:17px}.hamburger span:nth-child(3){top:24px}
-        .hamburger.open span:nth-child(1){top:17px;transform:rotate(45deg)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){top:17px;transform:rotate(-45deg)}
-        nav .desktop-links{display:flex;gap:3px;flex-wrap:wrap;align-items:center}
-        nav .desktop-links a{color:var(--text-dim);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:0.8rem;font-family:-apple-system,sans-serif}
-        nav .desktop-links a:hover{color:var(--green-bright);background:var(--green-dim)}
-        nav .desktop-links a.active{color:var(--green-bright);background:var(--green-dim);font-weight:700}
-        .slide-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:998;opacity:0;visibility:hidden;transition:all 0.4s}
-        .slide-overlay.open{opacity:1;visibility:visible}
-        .slide-menu{position:fixed;top:0;right:-320px;width:300px;height:100%;background:linear-gradient(180deg,#0a1628,#0d1b33 50%,#060f1e);border-left:2px solid var(--green-border);z-index:999;transition:right 0.4s cubic-bezier(0.25,0.8,0.25,1.2);padding:80px 20px 30px;overflow-y:auto}
-        .slide-menu.open{right:0}
-        .slide-menu .menu-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid var(--green-border)}
-        .slide-menu .menu-header .flag{font-size:2.5rem;margin-bottom:8px}
-        .slide-menu a{display:flex;align-items:center;gap:12px;padding:14px 18px;margin-bottom:6px;border-radius:12px;color:var(--text-dim);text-decoration:none;font-family:-apple-system,sans-serif;font-size:0.9rem}
-        .slide-menu a:hover{color:var(--green-bright);background:var(--green-dim);transform:translateX(4px)}
-        .slide-menu a .menu-icon{font-size:1.2rem;width:24px;text-align:center}
-        .container{max-width:900px;margin:30px auto;padding:0 16px}
-        h1{color:var(--gold);margin-bottom:16px;border-left:4px solid var(--green);padding-left:12px;font-family:-apple-system,sans-serif;font-size:1.5rem}
-        .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-        .blog-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:14px;padding:22px;transition:all 0.3s;text-decoration:none;color:var(--text);display:block}
-        .blog-card:hover{border-color:var(--green);transform:translateY(-3px)}
-        .blog-card .cat{display:inline-block;padding:3px 10px;border-radius:10px;font-size:0.7rem;background:var(--green-dim);color:var(--green-bright);margin-bottom:10px;font-family:-apple-system,sans-serif}
-        .blog-card h3{color:var(--gold);margin-bottom:8px;font-family:-apple-system,sans-serif;font-size:1.1rem}
-        .blog-card p{color:var(--text-dim);font-size:0.85rem;line-height:1.5}
-        .blog-card .date{color:var(--text-muted);font-size:0.7rem;margin-top:10px;font-family:-apple-system,sans-serif}
-        .loading{text-align:center;padding:40px;color:var(--text-dim)}
-        footer{text-align:center;padding:24px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:30px;font-family:-apple-system,sans-serif;font-size:0.78rem}
-        @media(max-width:768px){nav .desktop-links{display:none}.hamburger{display:block}.blog-grid{grid-template-columns:1fr}}
+        .post-content { color: var(--text-dim); font-size: 1.05rem; line-height: 1.9; }
+        .post-content p { margin-bottom: 16px; }
+        .post-header { margin-bottom: 24px; }
+        .post-header .cat { display: inline-block; padding: 4px 12px; border-radius: 10px; font-size: 0.75rem; background: var(--green-dim); color: var(--green-bright); margin-bottom: 12px; font-family: var(--font-ui); }
+        .post-header h1 { color: var(--gold); font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 8px; }
+        .post-header .date { color: var(--text-muted); font-size: 0.8rem; font-family: var(--font-ui); }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-    <div class="desktop-links">
-        <a href="index.html">Home</a><a href="voices.html">Voices</a>
-        <a href="blog.html" class="active">Blog</a><a href="courses.html">Courses</a>
-        <a href="dashboard.html">Impact</a><a href="media.html">Media</a><a href="support.html">Support</a>
+    <nav>
+        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+        <div class="desktop-links">
+            <a href="index.html">Home</a>
+            <a href="blog.html">Blog</a>
+            <span style="display:flex;gap:2px;margin-left:6px">
+                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            </span>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
+        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
+        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-</nav>
 
-<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-<div class="slide-menu" id="slideMenu">
-    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-    <a href="index.html" onclick="toggleMenu()"><span class="menu-icon">🏠</span>Home</a>
-    <a href="voices.html" onclick="toggleMenu()"><span class="menu-icon">🗣️</span>Voices</a>
-    <a href="blog.html" onclick="toggleMenu()"><span class="menu-icon">📝</span>Blog</a>
-    <a href="courses.html" onclick="toggleMenu()"><span class="menu-icon">🎓</span>Courses</a>
-    <a href="dashboard.html" onclick="toggleMenu()"><span class="menu-icon">📊</span>Impact</a>
-    <a href="media.html" onclick="toggleMenu()"><span class="menu-icon">📰</span>Media</a>
-    <a href="gallery.html" onclick="toggleMenu()"><span class="menu-icon">🖼️</span>Gallery</a>
-    <a href="support.html" onclick="toggleMenu()"><span class="menu-icon">❤️</span>Support</a>
-</div>
+    <main class="container-sm" id="postContainer">
+        <div class="loading"><span class="spinner"></span>Loading post...</div>
+    </main>
 
-<main class="container">
-    <h1>📝 Blog & Stories</h1>
-    <div class="blog-grid" id="blogGrid"><div class="loading">Loading posts...</div></div>
-</main>
+    <footer>
+        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
+            <p>Ethiopian Peace Archive &copy; 2026</p>
+        </div>
+    </footer>
 
-<footer><p>Ethiopian Peace Archive &copy; 2026</p></footer>
-
-<script>
-function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('slideMenu').classList.toggle('open');document.getElementById('slideOverlay').classList.toggle('open');document.body.style.overflow=document.body.style.overflow==='hidden'?'':'hidden'}
-const URL='https://rnafjznurgnrdonyxfgs.supabase.co';
-const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
-async function loadBlogs(){
-    try{
-        const r=await fetch(`${URL}/rest/v1/blog_posts?select=*&is_published=eq.true&order=created_at.desc`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}});
-        const posts=await r.json();
-        const g=document.getElementById('blogGrid');
-        if(!posts.length){g.innerHTML='<div class="loading">No posts yet.</div>';return}
-        g.innerHTML=posts.map(p=>`<a href="blog-post.html?slug=${p.slug}" class="blog-card"><span class="cat">${p.category||'Story'}</span><h3>${p.title}</h3><p>${p.excerpt||p.content.substring(0,120)+'...'}</p><div class="date">${new Date(p.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div></a>`).join('')
-    }catch(e){document.getElementById('blogGrid').innerHTML='<div class="loading">Error loading.</div>'}
-}
-loadBlogs();
-</script>
+    <script src="js/supabase.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/language.js"></script>
+    <script>
+        async function loadPost() {
+            const params = new URLSearchParams(window.location.search);
+            const slug = params.get('slug');
+            const container = document.getElementById('postContainer');
+            if (!slug) { container.innerHTML = '<div class="loading">Post not found.</div>'; return; }
+            try {
+                const post = await fetchFromSupabase('blog_posts', `slug=eq.${slug}&is_published=eq.true`);
+                if (!post.length) { container.innerHTML = '<div class="loading">Post not found.</div>'; return; }
+                const p = post[0];
+                document.title = p.title + ' — Ethiopian Peace Archive';
+                container.innerHTML = `
+                    <div class="post-header">
+                        <span class="cat">${p.category || 'Story'}</span>
+                        <h1>${p.title}</h1>
+                        <div class="date">${new Date(p.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} · ${p.author || 'Ethiopian Peace Archive'}</div>
+                    </div>
+                    <div class="post-content">${p.content.split('\n').map(para => `<p>${para}</p>`).join('')}</div>
+                    <div style="margin-top:30px"><a href="blog.html" class="btn btn-outline">← Back to All Posts</a></div>
+                `;
+            } catch (e) { container.innerHTML = '<div class="loading">Error loading post.</div>'; }
+        }
+        loadPost();
+    </script>
 </body>
 </html>
