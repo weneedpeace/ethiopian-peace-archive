@@ -8,198 +8,181 @@
     <meta property="og:description" content="1,000+ voices from Ethiopia and the world. Join the movement for peace.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ethiopian Peace Archive">
-    <meta name="twitter:description" content="1,000+ voices from Ethiopia and the world.">
     <title>Ethiopian Peace Archive — Global Movement for Peace</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- NAVIGATION -->
-    <nav>
-        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="desktop-links">
-            <a href="index.html" class="active" data-i18n="home">Home</a>
-            <a href="voices.html" data-i18n="voices">Voices</a>
-            <a href="blog.html" data-i18n="blog">Blog</a>
-            <a href="courses.html" data-i18n="courses">Courses</a>
-            <a href="dashboard.html" data-i18n="impact">Impact</a>
-            <a href="media.html" data-i18n="media">Media</a>
-            <a href="gallery.html" data-i18n="gallery">Gallery</a>
-            <a href="thanks.html" data-i18n="thanks">Thanks</a>
-            <a href="contribute.html" data-i18n="contribute">Contribute</a>
-            <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
-            <span style="display:flex;gap:2px;margin-left:6px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            </span>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </nav>
+<!-- NAVIGATION -->
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html" class="active" data-i18n="home">Home</a>
+        <a href="voices.html" data-i18n="voices">Voices</a>
+        <a href="blog.html" data-i18n="blog">Blog</a>
+        <a href="courses.html" data-i18n="courses">Courses</a>
+        <a href="dashboard.html" data-i18n="impact">Impact</a>
+        <a href="media.html" data-i18n="media">Media</a>
+        <a href="gallery.html" data-i18n="gallery">Gallery</a>
+        <a href="thanks.html" data-i18n="thanks">Thanks</a>
+        <a href="contribute.html" data-i18n="contribute">Contribute</a>
+        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+        <span style="display:flex;gap:2px;margin-left:6px">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+        </span>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
-    <!-- SLIDE OVERLAY -->
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-
-    <!-- SLIDE MENU -->
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-header">
-            <div class="flag">🇪🇹🕊️</div>
-            <h3>Ethiopian Peace Archive</h3>
-            <p style="color:var(--text-muted);font-size:0.7rem;margin-top:4px">Voices for Peace · Power of Unity</p>
+<!-- SLIDE MENU -->
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3><p style="color:var(--text-muted);font-size:0.7rem">Voices for Peace · Power of Unity</p></div>
+    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voice Archive</span></a>
+    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog & Stories</span></a>
+    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Free Courses</span></a>
+    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact Dashboard</span></a>
+    <a href="media.html"><span class="menu-icon">📰</span> <span data-i18n="media">Media Coverage</span></a>
+    <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
+    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thank You</span></a>
+    <a href="contribute.html"><span class="menu-icon">🤝</span> <span data-i18n="contribute">Contribute</span></a>
+    <a href="about.html"><span class="menu-icon">📖</span> <span data-i18n="about">About Us</span></a>
+    <a href="contact.html"><span class="menu-icon">📬</span> <span data-i18n="contact">Contact</span></a>
+    <a href="peace-techniques.html"><span class="menu-icon">🕊️</span> <span data-i18n="techniques">Peace Techniques</span></a>
+    <a href="research.html"><span class="menu-icon">🧠</span> <span data-i18n="research">AI Research</span></a>
+    <a href="support.html" class="cta-mobile">❤️ <span data-i18n="support">Support the Movement</span></a>
+    <div class="menu-footer">
+        <div style="display:flex;gap:4px;justify-content:center;margin-bottom:8px">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
         </div>
-        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
-        <a href="voices.html"><span class="menu-icon">🗣️</span>Voice Archive</a>
-        <a href="blog.html"><span class="menu-icon">📝</span>Blog & Stories</a>
-        <a href="courses.html"><span class="menu-icon">🎓</span>Free Courses</a>
-        <a href="dashboard.html"><span class="menu-icon">📊</span>Impact Dashboard</a>
-        <a href="media.html"><span class="menu-icon">📰</span>Media Coverage</a>
-        <a href="gallery.html"><span class="menu-icon">🖼️</span>Gallery</a>
-        <a href="thanks.html"><span class="menu-icon">🙏</span>Thank You</a>
-        <a href="contribute.html"><span class="menu-icon">🤝</span>Contribute</a>
-        <a href="about.html"><span class="menu-icon">📖</span>About Us</a>
-        <a href="contact.html"><span class="menu-icon">📬</span>Contact</a>
-        <a href="peace-techniques.html"><span class="menu-icon">🕊️</span>Peace Techniques</a>
-        <a href="support.html" class="cta-mobile">❤️ Support the Movement</a>
-        <div class="menu-footer">
-            <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            </div>
-            <p style="color:var(--text-muted);font-size:0.65rem">&copy; 2026</p>
-            <p style="margin-top:4px">
-                <a href="privacy.html" style="color:var(--text-muted);text-decoration:none;font-size:0.65rem">Privacy</a> · 
-                <a href="terms.html" style="color:var(--text-muted);text-decoration:none;font-size:0.65rem">Terms</a>
-            </p>
+        <p style="color:var(--text-muted);font-size:0.65rem">&copy; 2026 Ethiopian Peace Archive</p>
+        <p style="margin-top:4px"><a href="privacy.html" style="color:var(--text-muted);text-decoration:none;font-size:0.65rem">Privacy</a> · <a href="terms.html" style="color:var(--text-muted);text-decoration:none;font-size:0.65rem">Terms</a> · <a href="contact.html" style="color:var(--text-muted);text-decoration:none;font-size:0.65rem">Contact</a></p>
+    </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="badge-top" data-i18n="tagline">🌍 Global Peace Movement</div>
+    <h1 data-i18n="heroTitle">Voices of Peace.<br>Power of Unity.</h1>
+    <p class="hero-sub" data-i18n="heroSub">1,000+ voices from Ethiopia and the world — preserved, amplified, and driving real change for diaspora and local communities.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a href="voices.html" class="btn btn-primary">🔍 <span data-i18n="exploreVoices">Explore Voices</span></a>
+        <a href="courses.html" class="btn btn-outline">🎓 <span data-i18n="freeCourses">Free Courses</span></a>
+        <a href="support.html" class="btn btn-gold">❤️ <span data-i18n="supportUs">Support</span></a>
+    </div>
+</header>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="stat-card"><div class="num" id="ethCount">...</div><div class="lbl" data-i18n="ethiopianVoices">Ethiopian Voices</div></div>
+    <div class="stat-card"><div class="num" id="globalCount">...</div><div class="lbl" data-i18n="globalVoices">Global Voices</div></div>
+    <div class="stat-card"><div class="num" id="regionCount">...</div><div class="lbl" data-i18n="regions">Regions</div></div>
+    <div class="stat-card"><div class="num" id="countryCount">...</div><div class="lbl" data-i18n="countries">Countries</div></div>
+    <div class="stat-card"><div class="num" id="mediaCount">...</div><div class="lbl" data-i18n="mediaFeatures">Media Features</div></div>
+</div>
+
+<!-- WHAT WE DO -->
+<section class="section">
+    <h2 class="section-title" data-i18n="whatWeDo">What We Do</h2>
+    <p class="section-subtitle" data-i18n="whatWeDoSub">A global platform preserving voices, educating communities, and driving peace action.</p>
+    <div class="cards-grid">
+        <a href="voices.html" class="feature-card"><div class="icon">🗣️</div><h3 data-i18n="voiceArchive">Voice Archive</h3><p data-i18n="voiceArchiveDesc">Browse 1,000+ peace messages from all Ethiopian regions and global supporters.</p></a>
+        <a href="courses.html" class="feature-card"><div class="icon">🎓</div><h3 data-i18n="peaceCourses">Free Peace Courses</h3><p data-i18n="peaceCoursesDesc">Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required.</p></a>
+        <a href="blog.html" class="feature-card"><div class="icon">📝</div><h3 data-i18n="blogResearch">Blog & Research</h3><p data-i18n="blogResearchDesc">Stories from the field, research findings, and updates on peace initiatives.</p></a>
+        <a href="dashboard.html" class="feature-card"><div class="icon">📊</div><h3 data-i18n="impactDashboard">Impact Dashboard</h3><p data-i18n="impactDashboardDesc">Track our global reach. See how voices translate into action worldwide.</p></a>
+        <a href="contribute.html" class="feature-card"><div class="icon">🤝</div><h3 data-i18n="contributeTitle">Contribute</h3><p data-i18n="contributeDesc">Submit your voice, volunteer, partner with us, or share your expertise.</p></a>
+        <a href="support.html" class="feature-card"><div class="icon">❤️</div><h3 data-i18n="supportTitle">Support</h3><p data-i18n="supportDesc">Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.</p></a>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+    <div class="cta-banner">
+        <h2 data-i18n="joinVoices">🌍 Join 1,000+ Voices for Peace</h2>
+        <p data-i18n="joinVoicesSub">Whether you're in Ethiopia or the diaspora — your voice matters.</p>
+        <a href="contribute.html" class="btn btn-primary" data-i18n="shareYourVoice">Share Your Voice →</a>
+    </div>
+</section>
+
+<!-- PROFESSIONAL FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>🗣️ Explore</h4>
+            <a href="voices.html">Voice Archive</a>
+            <a href="blog.html">Blog & Stories</a>
+            <a href="dashboard.html">Impact Dashboard</a>
+            <a href="media.html">Media Coverage</a>
+            <a href="gallery.html">Gallery</a>
+        </div>
+        <div class="footer-col">
+            <h4>🎓 Learn</h4>
+            <a href="courses.html">Free Courses</a>
+            <a href="peace-techniques.html">Peace Techniques</a>
+            <a href="research.html">AI Research</a>
+            <a href="about.html">About Us</a>
+        </div>
+        <div class="footer-col">
+            <h4>🤝 Participate</h4>
+            <a href="contribute.html">Submit Your Voice</a>
+            <a href="support.html">Donate & Support</a>
+            <a href="thanks.html">Thank You</a>
+            <a href="contact.html">Volunteer</a>
+        </div>
+        <div class="footer-col">
+            <h4>📜 Legal & Contact</h4>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="admin.html">Admin Login</a>
+        </div>
+        <div class="footer-col">
+            <h4>🌍 Connect</h4>
+            <a href="#">𝕏 (Twitter)</a>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Telegram</a>
         </div>
     </div>
-
-    <!-- HERO -->
-    <header class="hero">
-        <div class="badge-top" data-i18n="tagline">🌍 Global Peace Movement</div>
-        <h1 data-i18n="heroTitle">Voices of Peace.<br>Power of Unity.</h1>
-        <p class="hero-sub" data-i18n="heroSub">1,000+ voices from Ethiopia and the world — preserved, amplified, and driving real change for diaspora and local communities.</p>
-        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-            <a href="voices.html" class="btn btn-primary" data-i18n="exploreVoices">🔍 Explore Voices</a>
-            <a href="courses.html" class="btn btn-outline" data-i18n="freeCourses">🎓 Free Courses</a>
-            <a href="support.html" class="btn btn-gold" data-i18n="supportUs">❤️ Support</a>
-        </div>
-    </header>
-
-    <!-- STATS -->
-    <div class="stats">
-        <div class="stat-card"><div class="num" id="ethCount">...</div><div class="lbl" data-i18n="ethiopianVoices">Ethiopian Voices</div></div>
-        <div class="stat-card"><div class="num" id="globalCount">...</div><div class="lbl" data-i18n="globalVoices">Global Voices</div></div>
-        <div class="stat-card"><div class="num" id="regionCount">...</div><div class="lbl" data-i18n="regions">Regions</div></div>
-        <div class="stat-card"><div class="num" id="countryCount">...</div><div class="lbl" data-i18n="countries">Countries</div></div>
-        <div class="stat-card"><div class="num" id="mediaCount">...</div><div class="lbl" data-i18n="mediaFeatures">Media Features</div></div>
+    <div class="footer-bottom">
+        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace · Built with ❤️ for Ethiopia and the World</p>
+        <p style="margin-top:6px;font-size:0.7rem">
+            <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · <a href="thanks.html">Thank You</a> · <a href="admin.html">Admin</a>
+        </p>
+        <p style="margin-top:8px;color:var(--green-bright);font-weight:600">#EthiopianPeaceArchive #VoicesForPeace</p>
     </div>
+</footer>
 
-    <!-- WHAT WE DO -->
-    <section class="section">
-        <h2 class="section-title" data-i18n="whatWeDo">What We Do</h2>
-        <p class="section-subtitle" data-i18n="whatWeDoSub">A global platform preserving voices, educating communities, and driving peace action.</p>
-        <div class="cards-grid">
-            <a href="voices.html" class="feature-card">
-                <div class="icon">🗣️</div><h3 data-i18n="voiceArchive">Voice Archive</h3>
-                <p data-i18n="voiceArchiveDesc">Browse 1,000+ peace messages from all Ethiopian regions and global supporters.</p>
-            </a>
-            <a href="courses.html" class="feature-card">
-                <div class="icon">🎓</div><h3 data-i18n="peaceCourses">Free Peace Courses</h3>
-                <p data-i18n="peaceCoursesDesc">Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required.</p>
-            </a>
-            <a href="blog.html" class="feature-card">
-                <div class="icon">📝</div><h3 data-i18n="blogResearch">Blog & Research</h3>
-                <p data-i18n="blogResearchDesc">Stories from the field, research findings, and updates on peace initiatives.</p>
-            </a>
-            <a href="dashboard.html" class="feature-card">
-                <div class="icon">📊</div><h3 data-i18n="impactDashboard">Impact Dashboard</h3>
-                <p data-i18n="impactDashboardDesc">Track our global reach. See how voices translate into action worldwide.</p>
-            </a>
-            <a href="contribute.html" class="feature-card">
-                <div class="icon">🤝</div><h3 data-i18n="contributeTitle">Contribute</h3>
-                <p data-i18n="contributeDesc">Submit your voice, volunteer, partner with us, or share your expertise.</p>
-            </a>
-            <a href="support.html" class="feature-card">
-                <div class="icon">❤️</div><h3 data-i18n="supportTitle">Support</h3>
-                <p data-i18n="supportDesc">Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.</p>
-            </a>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section">
-        <div style="background:linear-gradient(135deg,rgba(34,197,94,0.10),rgba(251,191,36,0.08));border:2px solid var(--green-border);border-radius:var(--radius-lg);padding:32px 20px;text-align:center;margin:30px 0">
-            <h2 style="color:var(--gold-bright);margin-bottom:8px;font-family:var(--font-ui);font-size:1.3rem" data-i18n="joinVoices">🌍 Join 1,000+ Voices for Peace</h2>
-            <p style="color:var(--text-dim);margin-bottom:16px" data-i18n="joinVoicesSub">Whether you're in Ethiopia or the diaspora — your voice matters.</p>
-            <a href="contribute.html" class="btn btn-primary" style="font-size:1rem" data-i18n="shareYourVoice">Share Your Voice →</a>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>Explore</h4>
-                <a href="voices.html">Voice Archive</a>
-                <a href="blog.html">Blog</a>
-                <a href="dashboard.html">Impact Dashboard</a>
-                <a href="media.html">Media Coverage</a>
-            </div>
-            <div class="footer-col">
-                <h4>Learn</h4>
-                <a href="courses.html">Free Courses</a>
-                <a href="peace-techniques.html">Peace Techniques</a>
-                <a href="about.html">About Us</a>
-            </div>
-            <div class="footer-col">
-                <h4>Participate</h4>
-                <a href="contribute.html">Submit Your Voice</a>
-                <a href="support.html">Donate & Support</a>
-                <a href="thanks.html">Thank You</a>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Use</a>
-                <a href="contact.html">Contact</a>
-            </div>
-        </div>
-        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);max-width:1000px;margin:0 auto">
-            <p data-i18n="footerTagline">Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace · Built with ❤️ for Ethiopia and the World</p>
-            <p style="margin-top:6px">
-                <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · <a href="thanks.html">Thank You</a>
-            </p>
-        </div>
-    </footer>
-
-    <!-- SCRIPTS -->
-    <script src="js/supabase.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/language.js"></script>
-    <script>
-        async function loadStats() {
-            try {
-                const counts = await getLiveCounts();
-                if (counts) {
-                    document.getElementById('ethCount').textContent = counts.ethiopianVoices || '30+';
-                    document.getElementById('globalCount').textContent = counts.globalVoices || '15+';
-                    document.getElementById('regionCount').textContent = counts.regions || '12+';
-                    document.getElementById('countryCount').textContent = counts.countries || '15+';
-                    document.getElementById('mediaCount').textContent = counts.mediaFeatures || '8';
-                }
-            } catch (e) {
-                document.getElementById('ethCount').textContent = '30+';
-                document.getElementById('globalCount').textContent = '15+';
-                document.getElementById('regionCount').textContent = '12+';
-                document.getElementById('countryCount').textContent = '15+';
-                document.getElementById('mediaCount').textContent = '8';
-            }
+<script src="js/supabase.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/language.js"></script>
+<script>
+async function loadStats(){
+    try{
+        const counts=await getLiveCounts();
+        if(counts){
+            document.getElementById('ethCount').textContent=counts.ethiopianVoices||'30+';
+            document.getElementById('globalCount').textContent=counts.globalVoices||'15+';
+            document.getElementById('regionCount').textContent=counts.regions||'12+';
+            document.getElementById('countryCount').textContent=counts.countries||'15+';
+            document.getElementById('mediaCount').textContent=counts.mediaFeatures||'8';
         }
-        loadStats();
-    </script>
+    }catch(e){
+        document.getElementById('ethCount').textContent='30+';
+        document.getElementById('globalCount').textContent='15+';
+        document.getElementById('regionCount').textContent='12+';
+        document.getElementById('countryCount').textContent='15+';
+        document.getElementById('mediaCount').textContent='8';
+    }
+}
+loadStats();
+</script>
 </body>
 </html>
