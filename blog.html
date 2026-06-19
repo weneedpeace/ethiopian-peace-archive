@@ -3,78 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blog Post — Ethiopian Peace Archive">
+    <meta name="description" content="Blog — Stories, research, and updates from the Ethiopian Peace Archive.">
     <title>Blog — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .post-content { color: var(--text-dim); font-size: 1.05rem; line-height: 1.9; }
-        .post-content p { margin-bottom: 16px; }
-        .post-header { margin-bottom: 24px; }
-        .post-header .cat { display: inline-block; padding: 4px 12px; border-radius: 10px; font-size: 0.75rem; background: var(--green-dim); color: var(--green-bright); margin-bottom: 12px; font-family: var(--font-ui); }
-        .post-header h1 { color: var(--gold); font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 8px; }
-        .post-header .date { color: var(--text-muted); font-size: 0.8rem; font-family: var(--font-ui); }
-    </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="desktop-links">
-            <a href="index.html">Home</a>
-            <a href="blog.html">Blog</a>
-            <span style="display:flex;gap:2px;margin-left:6px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            </span>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-    </nav>
-
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
-        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
-        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="voices.html" data-i18n="voices">Voices</a>
+        <a href="blog.html" class="active" data-i18n="blog">Blog</a>
+        <a href="courses.html" data-i18n="courses">Courses</a>
+        <a href="dashboard.html" data-i18n="impact">Impact</a>
+        <a href="media.html" data-i18n="media">Media</a>
+        <a href="gallery.html" data-i18n="gallery">Gallery</a>
+        <a href="contribute.html" data-i18n="contribute">Contribute</a>
+        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+        <span style="display:flex;gap:2px;margin-left:6px">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+        </span>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
-    <main class="container-sm" id="postContainer">
-        <div class="loading"><span class="spinner"></span>Loading post...</div>
-    </main>
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
+    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
+    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
+    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
+    <a href="media.html"><span class="menu-icon">📰</span> <span data-i18n="media">Media</span></a>
+    <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
+    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
+    <a href="support.html" class="cta-mobile">❤️ <span data-i18n="support">Support</span></a>
+</div>
 
-    <footer>
-        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-            <p>Ethiopian Peace Archive &copy; 2026</p>
-        </div>
-    </footer>
+<main class="container">
+    <h1 class="section-title" data-i18n="blogTitle">📝 Blog & Stories</h1>
+    <p style="color:var(--text-dim);margin-bottom:20px" data-i18n="blogSub">Stories from the field, research insights, and updates on the peace movement.</p>
+    <div class="blog-grid" id="blogGrid"><div class="loading"><span class="spinner"></span> Loading posts...</div></div>
+</main>
 
-    <script src="js/supabase.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/language.js"></script>
-    <script>
-        async function loadPost() {
-            const params = new URLSearchParams(window.location.search);
-            const slug = params.get('slug');
-            const container = document.getElementById('postContainer');
-            if (!slug) { container.innerHTML = '<div class="loading">Post not found.</div>'; return; }
-            try {
-                const post = await fetchFromSupabase('blog_posts', `slug=eq.${slug}&is_published=eq.true`);
-                if (!post.length) { container.innerHTML = '<div class="loading">Post not found.</div>'; return; }
-                const p = post[0];
-                document.title = p.title + ' — Ethiopian Peace Archive';
-                container.innerHTML = `
-                    <div class="post-header">
-                        <span class="cat">${p.category || 'Story'}</span>
-                        <h1>${p.title}</h1>
-                        <div class="date">${new Date(p.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} · ${p.author || 'Ethiopian Peace Archive'}</div>
-                    </div>
-                    <div class="post-content">${p.content.split('\n').map(para => `<p>${para}</p>`).join('')}</div>
-                    <div style="margin-top:30px"><a href="blog.html" class="btn btn-outline">← Back to All Posts</a></div>
-                `;
-            } catch (e) { container.innerHTML = '<div class="loading">Error loading post.</div>'; }
-        }
-        loadPost();
-    </script>
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
+        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
+    </div>
+    <div class="footer-bottom">
+        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
+        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+    </div>
+</footer>
+
+<script src="js/supabase.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/language.js"></script>
+<script>
+async function loadBlogs(){
+    try{
+        const posts=await fetchFromSupabase('blog_posts','is_published=eq.true&order=created_at.desc');
+        const grid=document.getElementById('blogGrid');
+        if(!posts.length){grid.innerHTML='<div class="loading">No posts yet. <a href="admin.html" style="color:var(--green-bright)">Write one →</a></div>';return}
+        grid.innerHTML=posts.map(p=>`
+            <a href="blog-post.html?slug=${p.slug}" class="blog-card">
+                <span class="cat">${p.category||'Story'}</span>
+                <h3>${p.title}</h3>
+                <p>${p.excerpt||p.content.substring(0,120)+'...'}</p>
+                <div class="date">${new Date(p.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+            </a>
+        `).join('');
+    }catch(e){document.getElementById('blogGrid').innerHTML='<div class="loading">Error loading posts.</div>'}
+}
+loadBlogs();
+</script>
 </body>
 </html>
