@@ -4,228 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin — Ethiopian Peace Archive</title>
-    <style>
-        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--red:#ef4444}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-        #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
-        .login-box{background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;width:100%;max-width:380px;text-align:center}
-        .login-box h1{color:var(--gold);margin-bottom:16px;font-size:1.4rem}
-        input,textarea,select{width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--green-border);background:var(--bg);color:var(--text);font-size:0.9rem;margin-bottom:10px;font-family:inherit}
-        textarea{min-height:100px;resize:vertical}
-        .btn{display:inline-block;padding:12px 20px;border-radius:25px;font-weight:700;font-size:0.9rem;cursor:pointer;border:none;font-family:inherit;background:var(--green);color:#000;width:100%}
-        .btn:hover{background:var(--green-bright)}
-        .btn-sm{padding:6px 14px;font-size:0.75rem;width:auto;border-radius:15px}
-        .btn-red{background:var(--red);color:#fff}
-        #panel{display:none;max-width:700px;margin:0 auto;padding:16px}
-        .topbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:12px 0;border-bottom:1px solid var(--green-border);margin-bottom:16px}
-        .topbar h2{color:var(--gold);font-size:1.1rem}
-        .tab-row{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
-        .tab-btn{padding:8px 16px;border-radius:20px;border:none;cursor:pointer;font-size:0.8rem;font-family:inherit;background:var(--card);color:var(--text-dim)}
-        .tab-btn.active{background:var(--green);color:#000;font-weight:700}
-        .form-card{background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px;margin-bottom:14px}
-        .form-card h3{color:var(--gold);margin-bottom:12px;font-size:0.95rem}
-        .msg{padding:10px;border-radius:8px;margin-bottom:10px;font-size:0.85rem;display:none}
-        .msg-ok{background:rgba(34,197,94,0.12);color:var(--green-bright);border:1px solid var(--green)}
-        .msg-err{background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.3)}
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-<div id="loginScreen">
-    <div class="login-box">
-        <h1>🔐 Admin Panel</h1>
-        <form onsubmit="login(event)">
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="pass" placeholder="Password" required>
-            <button class="btn">Sign In</button>
-        </form>
-        <div id="loginMsg" class="msg msg-err" style="margin-top:10px"></div>
+    <div id="loginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px">
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;max-width:380px;width:100%;text-align:center">
+            <h1 style="color:var(--gold);margin-bottom:16px">🔐 Admin</h1>
+            <form onsubmit="login(event)">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="pass" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+            <div id="loginMsg" class="msg msg-err" style="margin-top:10px"></div>
+        </div>
     </div>
-</div>
 
-<div id="panel">
-    <div class="topbar">
-        <h2>⚙️ Admin Panel</h2>
-        <button class="btn btn-sm btn-red" onclick="logout()">Logout</button>
+    <div id="panel" style="display:none;max-width:700px;margin:0 auto;padding:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--green-border);margin-bottom:16px">
+            <h2 style="color:var(--gold)">⚙️ Admin</h2>
+            <button class="btn btn-sm btn-red" onclick="logout()">Logout</button>
+        </div>
+        <div style="display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap">
+            <button class="tab active" onclick="showTab('course')">🎓 Course</button>
+            <button class="tab" onclick="showTab('lesson')">📚 Lesson</button>
+            <button class="tab" onclick="showTab('blog')">📝 Blog</button>
+            <button class="tab" onclick="showTab('gallery')">🖼️ Gallery</button>
+        </div>
+        <div id="msgBox" class="msg"></div>
+
+        <div id="tab-course">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+                <h3 style="color:var(--gold);margin-bottom:12px">➕ New Course</h3>
+                <form onsubmit="saveCourse(event)">
+                    <input type="text" id="cTitle" placeholder="Course Title *" required>
+                    <input type="text" id="cSlug" placeholder="slug-url-name *" required>
+                    <input type="text" id="cDesc" placeholder="Short description">
+                    <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select>
+                    <input type="number" id="cModules" placeholder="Modules" value="6">
+                    <button class="btn btn-primary">💾 Save Course</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="tab-lesson" style="display:none">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+                <h3 style="color:var(--gold);margin-bottom:12px">📚 Add Lesson</h3>
+                <form onsubmit="saveLesson(event)">
+                    <select id="lCourseId" required><option value="">Select Course...</option></select>
+                    <input type="text" id="lTitle" placeholder="Lesson Title *" required>
+                    <textarea id="lContent" placeholder="Lesson content..."></textarea>
+                    <input type="number" id="lOrder" placeholder="Order" value="1">
+                    <button class="btn btn-primary">💾 Save Lesson</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="tab-blog" style="display:none">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+                <h3 style="color:var(--gold);margin-bottom:12px">📝 New Blog Post</h3>
+                <form onsubmit="saveBlog(event)">
+                    <input type="text" id="bTitle" placeholder="Blog Title *" required>
+                    <input type="text" id="bSlug" placeholder="slug-url-name *" required>
+                    <textarea id="bContent" placeholder="Blog content..."></textarea>
+                    <input type="text" id="bExcerpt" placeholder="Short excerpt">
+                    <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select>
+                    <button class="btn btn-primary">💾 Save Blog</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="tab-gallery" style="display:none">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+                <h3 style="color:var(--gold);margin-bottom:12px">🖼️ Add Photo</h3>
+                <form onsubmit="saveGallery(event)">
+                    <input type="text" id="gTitle" placeholder="Photo title">
+                    <input type="text" id="gImage" placeholder="Image URL *" required>
+                    <input type="text" id="gCategory" placeholder="Category">
+                    <button class="btn btn-primary">💾 Save Photo</button>
+                </form>
+            </div>
+        </div>
     </div>
-    
-    <div class="tab-row">
-        <button class="tab-btn active" onclick="showTab('course')">🎓 Add Course</button>
-        <button class="tab-btn" onclick="showTab('lesson')">📚 Add Lesson</button>
-        <button class="tab-btn" onclick="showTab('blog')">📝 Add Blog</button>
-        <button class="tab-btn" onclick="showTab('gallery')">🖼️ Add Photo</button>
-    </div>
-    
-    <div id="msgBox" class="msg"></div>
-    
-    <!-- COURSE -->
-    <div class="form-card" id="tab-course">
-        <h3>➕ New Course</h3>
-        <form onsubmit="saveCourse(event)">
-            <input type="text" id="cTitle" placeholder="Course Title *" required>
-            <input type="text" id="cSlug" placeholder="slug-url-name *" required>
-            <input type="text" id="cDesc" placeholder="Short description">
-            <select id="cLevel">
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Advanced">Advanced</option>
-                <option value="All Levels">All Levels</option>
-            </select>
-            <input type="number" id="cModules" placeholder="Number of modules" value="6">
-            <button class="btn">💾 Save Course</button>
-        </form>
-    </div>
-    
-    <!-- LESSON -->
-    <div class="form-card" id="tab-lesson" style="display:none">
-        <h3>📚 Add Lesson</h3>
-        <form onsubmit="saveLesson(event)">
-            <select id="lCourseId" required>
-                <option value="">Select Course...</option>
-            </select>
-            <input type="text" id="lTitle" placeholder="Lesson Title *" required>
-            <textarea id="lContent" placeholder="Lesson content..."></textarea>
-            <input type="number" id="lOrder" placeholder="Lesson order (1,2,3...)" value="1">
-            <button class="btn">💾 Save Lesson</button>
-        </form>
-    </div>
-    
-    <!-- BLOG -->
-    <div class="form-card" id="tab-blog" style="display:none">
-        <h3>📝 New Blog Post</h3>
-        <form onsubmit="saveBlog(event)">
-            <input type="text" id="bTitle" placeholder="Blog Title *" required>
-            <input type="text" id="bSlug" placeholder="slug-url-name *" required>
-            <textarea id="bContent" placeholder="Blog content..."></textarea>
-            <input type="text" id="bExcerpt" placeholder="Short excerpt">
-            <select id="bCategory">
-                <option value="Story">Story</option><option value="Research">Research</option>
-                <option value="Announcement">Announcement</option><option value="Impact">Impact</option>
-                <option value="Media">Media</option>
-            </select>
-            <button class="btn">💾 Save Blog Post</button>
-        </form>
-    </div>
-    
-    <!-- GALLERY -->
-    <div class="form-card" id="tab-gallery" style="display:none">
-        <h3>🖼️ Add Gallery Photo</h3>
-        <form onsubmit="saveGallery(event)">
-            <input type="text" id="gTitle" placeholder="Photo title">
-            <input type="text" id="gImage" placeholder="Image URL *" required>
-            <input type="text" id="gCategory" placeholder="Category (Events, Community...)">
-            <button class="btn">💾 Save Photo</button>
-        </form>
-    </div>
-</div>
 
-<script>
-const URL='https://rnafjznurgnrdonyxfgs.supabase.co';
-const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
-
-function login(e){
-    e.preventDefault();
-    if(document.getElementById('email').value==='admin@peacearchive.org' && document.getElementById('pass').value==='Peace2026!'){
-        localStorage.setItem('epa','1');
-        document.getElementById('loginScreen').style.display='none';
-        document.getElementById('panel').style.display='block';
-        loadCourses();
-    }else{
-        document.getElementById('loginMsg').textContent='Wrong email or password';
-        document.getElementById('loginMsg').style.display='block';
-    }
-}
-function logout(){localStorage.removeItem('epa');location.reload();}
-if(localStorage.getItem('epa')==='1'){
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('panel').style.display='block';
-    loadCourses();
-}
-
-function showTab(t){
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    event.target.classList.add('active');
-    ['course','lesson','blog','gallery'].forEach(id=>document.getElementById('tab-'+id).style.display='none');
-    document.getElementById('tab-'+t).style.display='block';
-    if(t==='lesson') loadCourses();
-}
-
-function ok(msg){document.getElementById('msgBox').textContent='✅ '+msg;document.getElementById('msgBox').className='msg msg-ok';document.getElementById('msgBox').style.display='block';setTimeout(()=>document.getElementById('msgBox').style.display='none',3000)}
-function err(msg){document.getElementById('msgBox').textContent='❌ '+msg;document.getElementById('msgBox').className='msg msg-err';document.getElementById('msgBox').style.display='block'}
-
-// Load courses into dropdown
-async function loadCourses(){
-    try{
-        const r=await fetch(`${URL}/rest/v1/courses?select=id,title&is_published=eq.true&order=title`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}});
-        const courses=await r.json();
-        const sel=document.getElementById('lCourseId');
-        sel.innerHTML='<option value="">Select Course...</option>';
-        courses.forEach(c=>{sel.innerHTML+=`<option value="${c.id}">${c.title} (ID: ${c.id})</option>`});
-    }catch(e){}
-}
-
-async function saveCourse(e){
-    e.preventDefault();
-    const data={
-        title:document.getElementById('cTitle').value,
-        slug:document.getElementById('cSlug').value,
-        description:document.getElementById('cDesc').value,
-        level:document.getElementById('cLevel').value,
-        module_count:parseInt(document.getElementById('cModules').value),
-        is_published:true
-    };
-    try{
-        const r=await fetch(`${URL}/rest/v1/courses`,{method:'POST',headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(data)});
-        if(r.ok){ok('Course saved! Refresh to see in lesson dropdown.');e.target.reset();}else{err('Failed. Slug must be unique.');}
-    }catch(e){err('Network error');}
-}
-
-async function saveLesson(e){
-    e.preventDefault();
-    const data={
-        course_id:parseInt(document.getElementById('lCourseId').value),
-        title:document.getElementById('lTitle').value,
-        content:document.getElementById('lContent').value,
-        lesson_order:parseInt(document.getElementById('lOrder').value),
-        is_published:true
-    };
-    if(!data.course_id){err('Please select a course');return}
-    try{
-        const r=await fetch(`${URL}/rest/v1/course_lessons`,{method:'POST',headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(data)});
-        if(r.ok){ok('Lesson saved!');e.target.reset();}else{err('Failed');}
-    }catch(e){err('Network error');}
-}
-
-async function saveBlog(e){
-    e.preventDefault();
-    const data={
-        title:document.getElementById('bTitle').value,
-        slug:document.getElementById('bSlug').value,
-        content:document.getElementById('bContent').value,
-        excerpt:document.getElementById('bExcerpt').value,
-        category:document.getElementById('bCategory').value,
-        is_published:true
-    };
-    try{
-        const r=await fetch(`${URL}/rest/v1/blog_posts`,{method:'POST',headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(data)});
-        if(r.ok){ok('Blog saved!');e.target.reset();}else{err('Failed. Slug must be unique.');}
-    }catch(e){err('Network error');}
-}
-
-async function saveGallery(e){
-    e.preventDefault();
-    const data={
-        title:document.getElementById('gTitle').value,
-        image_url:document.getElementById('gImage').value,
-        category:document.getElementById('gCategory').value||'General',
-        is_published:true
-    };
-    try{
-        const r=await fetch(`${URL}/rest/v1/gallery`,{method:'POST',headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(data)});
-        if(r.ok){ok('Photo saved!');e.target.reset();}else{err('Failed');}
-    }catch(e){err('Network error');}
-}
-</script>
+    <script src="js/supabase.js"></script>
+    <script>
+        function login(e){e.preventDefault();if(document.getElementById('email').value==='admin@peacearchive.org'&&document.getElementById('pass').value==='Peace2026!'){localStorage.setItem('epa','1');document.getElementById('loginScreen').style.display='none';document.getElementById('panel').style.display='block';loadCourses()}else{document.getElementById('loginMsg').textContent='Wrong credentials';document.getElementById('loginMsg').style.display='block'}}
+        function logout(){localStorage.removeItem('epa');location.reload()}
+        if(localStorage.getItem('epa')==='1'){document.getElementById('loginScreen').style.display='none';document.getElementById('panel').style.display='block';loadCourses()}
+        function showTab(t){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');['course','lesson','blog','gallery'].forEach(id=>document.getElementById('tab-'+id).style.display='none');document.getElementById('tab-'+t).style.display='block';if(t==='lesson')loadCourses()}
+        function ok(m){document.getElementById('msgBox').textContent='✅ '+m;document.getElementById('msgBox').className='msg msg-ok';document.getElementById('msgBox').style.display='block';setTimeout(()=>document.getElementById('msgBox').style.display='none',3000)}
+        function err(m){document.getElementById('msgBox').textContent='❌ '+m;document.getElementById('msgBox').className='msg msg-err';document.getElementById('msgBox').style.display='block'}
+        async function loadCourses(){try{const r=await fetchFromSupabase('courses','is_published=eq.true&order=title');const sel=document.getElementById('lCourseId');sel.innerHTML='<option value="">Select Course...</option>';r.forEach(c=>{sel.innerHTML+=`<option value="${c.id}">${c.title} (ID:${c.id})</option>`})}catch(e){}}
+        async function saveCourse(e){e.preventDefault();const ok2=await insertToSupabase('courses',{title:document.getElementById('cTitle').value,slug:document.getElementById('cSlug').value,description:document.getElementById('cDesc').value,level:document.getElementById('cLevel').value,module_count:parseInt(document.getElementById('cModules').value),is_published:true});if(ok2){ok('Course saved!');e.target.reset()}else{err('Failed')}}
+        async function saveLesson(e){e.preventDefault();const ok2=await insertToSupabase('course_lessons',{course_id:parseInt(document.getElementById('lCourseId').value),title:document.getElementById('lTitle').value,content:document.getElementById('lContent').value,lesson_order:parseInt(document.getElementById('lOrder').value),is_published:true});if(ok2){ok('Lesson saved!');e.target.reset()}else{err('Failed')}}
+        async function saveBlog(e){e.preventDefault();const ok2=await insertToSupabase('blog_posts',{title:document.getElementById('bTitle').value,slug:document.getElementById('bSlug').value,content:document.getElementById('bContent').value,excerpt:document.getElementById('bExcerpt').value,category:document.getElementById('bCategory').value,is_published:true});if(ok2){ok('Blog saved!');e.target.reset()}else{err('Failed')}}
+        async function saveGallery(e){e.preventDefault();const ok2=await insertToSupabase('gallery',{title:document.getElementById('gTitle').value,image_url:document.getElementById('gImage').value,category:document.getElementById('gCategory').value||'General',is_published:true});if(ok2){ok('Photo saved!');e.target.reset()}else{err('Failed')}}
+    </script>
 </body>
 </html>
