@@ -4,52 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Use — Ethiopian Peace Archive</title>
-    <style>
-        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.8}
-        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:14px 24px}
-        nav a{color:var(--text-dim);text-decoration:none;font-size:0.85rem;font-family:-apple-system,sans-serif}
-        nav .logo{font-size:1.2rem;font-weight:bold;color:var(--gold)}
-        nav .logo span{color:#4ade80}
-        .container{max-width:800px;margin:40px auto;padding:0 20px}
-        h1{color:var(--gold);margin-bottom:20px;border-left:5px solid var(--green);padding-left:16px;font-family:-apple-system,sans-serif}
-        h2{color:var(--gold);margin:24px 0 12px;font-family:-apple-system,sans-serif}
-        p{color:var(--text-dim);margin-bottom:12px}
-        footer{text-align:center;padding:30px;color:#64748b;border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.85rem}
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<nav>
-    <a href="index.html" style="text-decoration:none"><span class="logo">🕊️ Ethiopian <span>Peace</span> Archive</span></a>
-    <a href="index.html" style="float:right">← Back to Home</a>
-</nav>
-<main class="container">
-    <h1>Terms of Use</h1>
-    <p><strong>Last updated: June 2026</strong></p>
-    
-    <h2>1. Purpose</h2>
-    <p>The Ethiopian Peace Archive is a platform for peace. All content is positive and peace-focused. We do not host or amplify divisive, hateful, or violent content.</p>
-    
-    <h2>2. Content Policy</h2>
-    <p><strong>Allowed:</strong> Messages of peace, unity, coexistence, hope, and reconciliation.<br>
-    <strong>Not Allowed:</strong> Hate speech, incitement to violence, political propaganda, divisive content.</p>
-    
-    <h2>3. Attribution</h2>
-    <p>All voices are anonymized. Quotes may be shared publicly with region and year attribution only. Researchers may cite the archive with proper attribution.</p>
-    
-    <h2>4. Submissions</h2>
-    <p>By submitting a voice, you agree it may be published anonymously. You retain ownership of your words. We reserve the right to review all submissions before publication.</p>
-    
-    <h2>5. Intellectual Property</h2>
-    <p>The website design and platform code are open source. The voice content belongs to the contributors. Media coverage belongs to respective outlets.</p>
-    
-    <h2>6. Disclaimer</h2>
-    <p>This platform presents voices of individuals. Views expressed are those of the contributors and do not represent organizational positions.</p>
-    
-    <h2>7. Contact</h2>
-    <p>For questions: <a href="contact.html" style="color:#4ade80">Contact Us</a></p>
-</main>
-<footer><p>Ethiopian Peace Archive &copy; 2026 · <a href="privacy.html" style="color:var(--text-dim)">Privacy Policy</a></p></footer>
+    <nav>
+        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+        <div class="desktop-links"><a href="index.html">← Back to Home</a></div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+    <div class="slide-menu" id="slideMenu"><div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div><a href="index.html"><span class="menu-icon">🏠</span>Home</a></div>
+    <main class="container-sm">
+        <h1 class="section-title">Terms of Use</h1>
+        <p style="color:var(--text-dim);margin-bottom:8px"><strong>Last updated: June 2026</strong></p>
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius);padding:24px;line-height:1.8">
+            <h2 style="color:var(--gold);margin:16px 0 8px;font-family:var(--font-ui)">1. Purpose</h2>
+            <p style="color:var(--text-dim);margin-bottom:12px">The Ethiopian Peace Archive is a platform for peace. All content is positive and peace-focused.</p>
+            <h2 style="color:var(--gold);margin:16px 0 8px;font-family:var(--font-ui)">2. Content Policy</h2>
+            <p style="color:var(--text-dim);margin-bottom:12px"><strong>Allowed:</strong> Messages of peace, unity, coexistence, hope, and reconciliation.<br><strong>Not Allowed:</strong> Hate speech, incitement to violence, divisive content.</p>
+            <h2 style="color:var(--gold);margin:16px 0 8px;font-family:var(--font-ui)">3. Attribution</h2>
+            <p style="color:var(--text-dim);margin-bottom:12px">All voices are anonymized. Researchers may cite the archive with proper attribution.</p>
+            <h2 style="color:var(--gold);margin:16px 0 8px;font-family:var(--font-ui)">4. Contact</h2>
+            <p style="color:var(--text-dim)">Questions: <a href="contact.html" style="color:var(--green-bright)">Contact Us</a></p>
+        </div>
+    </main>
+    <footer><div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px"><p>&copy; 2026 · <a href="privacy.html">Privacy</a> · <a href="contact.html">Contact</a></p></div></footer>
+    <script src="js/navigation.js"></script>
 </body>
 </html>
