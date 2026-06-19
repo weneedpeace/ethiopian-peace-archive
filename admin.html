@@ -1,47 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-tabs { display: flex; gap: 4px; margin-bottom: 20px; flex-wrap: wrap; }
+        .admin-tab { padding: 8px 16px; border-radius: 20px; cursor: pointer; border: 1px solid var(--green-border); background: var(--card); color: var(--text-dim); font-family: var(--font-ui); font-size: 0.8rem; }
+        .admin-tab.active { background: var(--green); color: #000; font-weight: 700; }
+        .admin-panel { display: none; }
+        .admin-panel.active { display: block; }
+        .upload-area { border: 2px dashed var(--green-border); border-radius: 12px; padding: 30px; text-align: center; cursor: pointer; margin-bottom: 12px; transition: all 0.3s; }
+        .upload-area:hover { border-color: var(--green); background: var(--green-dim); }
+        .upload-area img { max-width: 200px; max-height: 200px; border-radius: 8px; margin-top: 10px; display: none; }
+        .preview-img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px; }
+    </style>
 </head>
 <body>
-<div id="loginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px">
+<div id="loginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh">
     <div style="background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;max-width:380px;width:100%;text-align:center">
-        <h1 style="color:var(--gold);margin-bottom:16px">🔐 Admin</h1>
-        <form onsubmit="login(event)"><input type="email" id="email" placeholder="Email" required><input type="password" id="pass" placeholder="Password" required><button type="submit" class="btn btn-primary">Sign In</button></form>
+        <h1 style="color:var(--gold);margin-bottom:16px">🔐 Admin Panel</h1>
+        <form onsubmit="login(event)">
+            <input type="email" id="email" placeholder="Email" required style="margin-bottom:10px">
+            <input type="password" id="pass" placeholder="Password" required style="margin-bottom:16px">
+            <button type="submit" class="btn btn-primary" style="width:100%">Sign In</button>
+        </form>
         <div id="loginMsg" class="msg msg-err" style="margin-top:10px"></div>
     </div>
 </div>
-<div id="panel" style="display:none;max-width:700px;margin:0 auto;padding:16px">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--green-border);margin-bottom:16px">
-        <h2 style="color:var(--gold)">⚙️ Admin</h2><button class="btn btn-sm btn-red" onclick="logout()">Logout</button>
+
+<div id="panel" style="display:none;max-width:800px;margin:0 auto;padding:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <h2 style="color:var(--gold)">⚙️ Admin Dashboard</h2>
+        <button class="btn btn-sm btn-red" onclick="logout()">Logout</button>
     </div>
-    <div style="display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap">
-        <button class="tab active" onclick="showTab('course')">🎓 Course</button>
-        <button class="tab" onclick="showTab('lesson')">📚 Lesson</button>
-        <button class="tab" onclick="showTab('blog')">📝 Blog</button>
-        <button class="tab" onclick="showTab('gallery')">🖼️ Gallery</button>
+
+    <div class="admin-tabs">
+        <span class="admin-tab active" onclick="switchTab('blog')">📝 Blog</span>
+        <span class="admin-tab" onclick="switchTab('gallery')">🖼️ Gallery</span>
+        <span class="admin-tab" onclick="switchTab('course')">🎓 Course</span>
+        <span class="admin-tab" onclick="switchTab('lesson')">📚 Lesson</span>
     </div>
+
     <div id="msgBox" class="msg"></div>
-    <div id="tab-course"><div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px"><h3 style="color:var(--gold);margin-bottom:12px">➕ New Course</h3><form onsubmit="saveCourse(event)"><input type="text" id="cTitle" placeholder="Course Title *" required><input type="text" id="cSlug" placeholder="slug-url-name *" required><input type="text" id="cDesc" placeholder="Short description"><select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select><input type="number" id="cModules" placeholder="Modules" value="6"><button class="btn btn-primary">💾 Save Course</button></form></div></div>
-    <div id="tab-lesson" style="display:none"><div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px"><h3 style="color:var(--gold);margin-bottom:12px">📚 Add Lesson</h3><form onsubmit="saveLesson(event)"><select id="lCourseId" required><option value="">Select Course...</option></select><input type="text" id="lTitle" placeholder="Lesson Title *" required><textarea id="lContent" placeholder="Lesson content..."></textarea><input type="number" id="lOrder" placeholder="Order" value="1"><button class="btn btn-primary">💾 Save Lesson</button></form></div></div>
-    <div id="tab-blog" style="display:none"><div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px"><h3 style="color:var(--gold);margin-bottom:12px">📝 New Blog Post</h3><form onsubmit="saveBlog(event)"><input type="text" id="bTitle" placeholder="Blog Title *" required><input type="text" id="bSlug" placeholder="slug-url-name *" required><textarea id="bContent" placeholder="Blog content..."></textarea><input type="text" id="bExcerpt" placeholder="Short excerpt"><select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select><button class="btn btn-primary">💾 Save Blog</button></form></div></div>
-    <div id="tab-gallery" style="display:none"><div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px"><h3 style="color:var(--gold);margin-bottom:12px">🖼️ Add Photo</h3><form onsubmit="saveGallery(event)"><input type="text" id="gTitle" placeholder="Photo title"><input type="text" id="gImage" placeholder="Image URL *" required><input type="text" id="gCategory" placeholder="Category"><button class="btn btn-primary">💾 Save Photo</button></form></div></div>
+
+    <!-- BLOG PANEL -->
+    <div class="admin-panel active" id="panel-blog">
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+            <h3 style="color:var(--gold);margin-bottom:12px">📝 New Blog Post</h3>
+            <form onsubmit="saveBlog(event)">
+                <input type="text" id="bTitle" placeholder="Blog Title *" required>
+                <input type="text" id="bSlug" placeholder="slug-url-name *" required>
+                <textarea id="bContent" placeholder="Blog content..." style="min-height:200px"></textarea>
+                <input type="text" id="bExcerpt" placeholder="Short excerpt">
+                <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select>
+                
+                <label style="display:block;color:var(--text-dim);margin-bottom:4px;font-family:var(--font-ui);font-size:0.85rem">Featured Image</label>
+                <div class="upload-area" id="blogUpload" onclick="document.getElementById('blogFile').click()">
+                    <p>📷 Click to upload image</p>
+                    <img id="blogPreview" class="preview-img">
+                </div>
+                <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="handleUpload(this, 'blogPreview', 'bImageUrl')">
+                <input type="hidden" id="bImageUrl">
+                
+                <button type="submit" class="btn btn-primary" style="margin-top:12px">💾 Publish Blog Post</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- GALLERY PANEL -->
+    <div class="admin-panel" id="panel-gallery">
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+            <h3 style="color:var(--gold);margin-bottom:12px">🖼️ Add Gallery Photo</h3>
+            <form onsubmit="saveGallery(event)">
+                <input type="text" id="gTitle" placeholder="Photo title">
+                <input type="text" id="gCategory" placeholder="Category (Events, Community, Workshop...)">
+                
+                <div class="upload-area" id="galleryUpload" onclick="document.getElementById('galleryFile').click()">
+                    <p>📷 Click to upload image</p>
+                    <img id="galleryPreview" class="preview-img">
+                </div>
+                <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="handleUpload(this, 'galleryPreview', 'gImageUrl')">
+                <input type="hidden" id="gImageUrl">
+                
+                <button type="submit" class="btn btn-primary" style="margin-top:12px">💾 Add to Gallery</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- COURSE PANEL -->
+    <div class="admin-panel" id="panel-course">
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+            <h3 style="color:var(--gold);margin-bottom:12px">🎓 New Course</h3>
+            <form onsubmit="saveCourse(event)">
+                <input type="text" id="cTitle" placeholder="Course Title *" required>
+                <input type="text" id="cSlug" placeholder="slug-url-name *" required>
+                <input type="text" id="cDesc" placeholder="Short description">
+                <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select>
+                <input type="number" id="cModules" placeholder="Number of modules" value="6">
+                <button type="submit" class="btn btn-primary">💾 Save Course</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- LESSON PANEL -->
+    <div class="admin-panel" id="panel-lesson">
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+            <h3 style="color:var(--gold);margin-bottom:12px">📚 Add Lesson</h3>
+            <form onsubmit="saveLesson(event)">
+                <select id="lCourseId" required><option value="">Select Course...</option></select>
+                <input type="text" id="lTitle" placeholder="Lesson Title *" required>
+                <textarea id="lContent" placeholder="Lesson content..."></textarea>
+                <input type="number" id="lOrder" placeholder="Lesson order (1,2,3...)" value="1">
+                <button type="submit" class="btn btn-primary">💾 Save Lesson</button>
+            </form>
+        </div>
+    </div>
 </div>
+
 <script src="js/supabase.js"></script>
 <script>
-function login(e){e.preventDefault();if(document.getElementById('email').value==='admin@peacearchive.org'&&document.getElementById('pass').value==='Peace2026!'){localStorage.setItem('epa','1');document.getElementById('loginScreen').style.display='none';document.getElementById('panel').style.display='block';loadCourses()}else{document.getElementById('loginMsg').textContent='Wrong credentials';document.getElementById('loginMsg').style.display='block'}}
-function logout(){localStorage.removeItem('epa');location.reload()}
-if(localStorage.getItem('epa')==='1'){document.getElementById('loginScreen').style.display='none';document.getElementById('panel').style.display='block';loadCourses()}
-function showTab(t){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');['course','lesson','blog','gallery'].forEach(id=>document.getElementById('tab-'+id).style.display='none');document.getElementById('tab-'+t).style.display='block';if(t==='lesson')loadCourses()}
-function ok(m){document.getElementById('msgBox').textContent='✅ '+m;document.getElementById('msgBox').className='msg msg-ok';document.getElementById('msgBox').style.display='block';setTimeout(()=>document.getElementById('msgBox').style.display='none',3000)}
-function err(m){document.getElementById('msgBox').textContent='❌ '+m;document.getElementById('msgBox').className='msg msg-err';document.getElementById('msgBox').style.display='block'}
-async function loadCourses(){try{const r=await fetchFromSupabase('courses','is_published=eq.true&order=title');const sel=document.getElementById('lCourseId');sel.innerHTML='<option value="">Select Course...</option>';r.forEach(c=>{sel.innerHTML+=`<option value="${c.id}">${c.title} (ID:${c.id})</option>`})}catch(e){}}
-async function saveCourse(e){e.preventDefault();const ok2=await insertToSupabase('courses',{title:document.getElementById('cTitle').value,slug:document.getElementById('cSlug').value,description:document.getElementById('cDesc').value,level:document.getElementById('cLevel').value,module_count:parseInt(document.getElementById('cModules').value),is_published:true});if(ok2){ok('Course saved!');e.target.reset()}else{err('Failed')}}
-async function saveLesson(e){e.preventDefault();const ok2=await insertToSupabase('course_lessons',{course_id:parseInt(document.getElementById('lCourseId').value),title:document.getElementById('lTitle').value,content:document.getElementById('lContent').value,lesson_order:parseInt(document.getElementById('lOrder').value),is_published:true});if(ok2){ok('Lesson saved!');e.target.reset()}else{err('Failed')}}
-async function saveBlog(e){e.preventDefault();const ok2=await insertToSupabase('blog_posts',{title:document.getElementById('bTitle').value,slug:document.getElementById('bSlug').value,content:document.getElementById('bContent').value,excerpt:document.getElementById('bExcerpt').value,category:document.getElementById('bCategory').value,is_published:true});if(ok2){ok('Blog saved!');e.target.reset()}else{err('Failed')}}
-async function saveGallery(e){e.preventDefault();const ok2=await insertToSupabase('gallery',{title:document.getElementById('gTitle').value,image_url:document.getElementById('gImage').value,category:document.getElementById('gCategory').value||'General',is_published:true});if(ok2){ok('Photo saved!');e.target.reset()}else{err('Failed')}}
+const API = 'https://peace-api.peace-01d.workers.dev/api';
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/djb3falqu/image/upload';
+const UPLOAD_PRESET = 'peace_archive';
+
+function login(e) {
+    e.preventDefault();
+    if (document.getElementById('email').value === 'admin@peacearchive.org' && document.getElementById('pass').value === 'Peace2026!') {
+        localStorage.setItem('epa_admin', '1');
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('panel').style.display = 'block';
+        loadCourses();
+    } else {
+        document.getElementById('loginMsg').textContent = 'Wrong credentials';
+        document.getElementById('loginMsg').style.display = 'block';
+    }
+}
+function logout() { localStorage.removeItem('epa_admin'); location.reload(); }
+if (localStorage.getItem('epa_admin') === '1') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('panel').style.display = 'block';
+    loadCourses();
+}
+
+function switchTab(tab) {
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    if (tab === 'lesson') loadCourses();
+}
+
+function showMsg(text, type) {
+    const box = document.getElementById('msgBox');
+    box.textContent = text;
+    box.className = 'msg msg-' + (type === 'ok' ? 'ok' : 'err');
+    box.style.display = 'block';
+    setTimeout(() => box.style.display = 'none', 4000);
+}
+
+async function handleUpload(input, previewId, hiddenId) {
+    const file = input.files[0];
+    if (!file) return;
+    
+    // Preview
+    const reader = new FileReader();
+    reader.onload = e => {
+        const img = document.getElementById(previewId);
+        img.src = e.target.result;
+        img.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+    
+    // Upload to Cloudinary
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', UPLOAD_PRESET);
+    
+    try {
+        const res = await fetch(CLOUDINARY_URL, { method: 'POST', body: formData });
+        const data = await res.json();
+        document.getElementById(hiddenId).value = data.secure_url;
+        showMsg('✅ Image uploaded!', 'ok');
+    } catch (e) {
+        showMsg('❌ Upload failed', 'err');
+    }
+}
+
+async function saveBlog(e) {
+    e.preventDefault();
+    const data = {
+        title: document.getElementById('bTitle').value,
+        slug: document.getElementById('bSlug').value,
+        content: document.getElementById('bContent').value,
+        excerpt: document.getElementById('bExcerpt').value,
+        category: document.getElementById('bCategory').value,
+        image_url: document.getElementById('bImageUrl').value
+    };
+    const res = await fetch(`${API}/blogs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (res.ok) { showMsg('✅ Blog published!', 'ok'); e.target.reset(); }
+    else showMsg('❌ Failed', 'err');
+}
+
+async function saveGallery(e) {
+    e.preventDefault();
+    const data = {
+        title: document.getElementById('gTitle').value,
+        image_url: document.getElementById('gImageUrl').value,
+        category: document.getElementById('gCategory').value || 'General'
+    };
+    if (!data.image_url) { showMsg('❌ Upload an image first', 'err'); return; }
+    const res = await fetch(`${API}/gallery`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (res.ok) { showMsg('✅ Photo added!', 'ok'); e.target.reset(); }
+    else showMsg('❌ Failed', 'err');
+}
+
+async function saveCourse(e) {
+    e.preventDefault();
+    const data = {
+        title: document.getElementById('cTitle').value,
+        slug: document.getElementById('cSlug').value,
+        description: document.getElementById('cDesc').value,
+        level: document.getElementById('cLevel').value,
+        module_count: parseInt(document.getElementById('cModules').value)
+    };
+    const res = await fetch(`${API}/courses`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (res.ok) { showMsg('✅ Course saved!', 'ok'); e.target.reset(); }
+    else showMsg('❌ Failed', 'err');
+}
+
+async function saveLesson(e) {
+    e.preventDefault();
+    const data = {
+        course_id: parseInt(document.getElementById('lCourseId').value),
+        title: document.getElementById('lTitle').value,
+        content: document.getElementById('lContent').value,
+        lesson_order: parseInt(document.getElementById('lOrder').value)
+    };
+    const res = await fetch(`${API}/courses/lessons`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (res.ok) { showMsg('✅ Lesson saved!', 'ok'); e.target.reset(); }
+    else showMsg('❌ Failed', 'err');
+}
+
+async function loadCourses() {
+    try {
+        const res = await fetch(`${API}/courses`);
+        const courses = await res.json();
+        const sel = document.getElementById('lCourseId');
+        sel.innerHTML = '<option value="">Select Course...</option>';
+        courses.forEach(c => {
+            sel.innerHTML += `<option value="${c.id}">${c.title}</option>`;
+        });
+    } catch (e) {}
+}
 </script>
 </body>
 </html>
