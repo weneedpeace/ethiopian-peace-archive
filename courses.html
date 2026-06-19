@@ -3,24 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free peace education courses. No signup required.">
-    <title>Free Courses — Ethiopian Peace Archive</title>
+    <meta name="description" content="Free peace education courses with certificate. No signup required.">
+    <title>Free Courses with Certificate — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .cert-badge { display: inline-block; padding: 3px 10px; border-radius: 10px; font-size: 0.7rem; background: rgba(251,191,36,0.15); color: #facc15; font-family: var(--font-ui); margin-left: 6px; }
+        .certificate { display: none; background: linear-gradient(135deg, rgba(34,197,94,0.10), rgba(251,191,36,0.08)); border: 3px solid var(--gold); border-radius: var(--radius-lg); padding: 40px 20px; text-align: center; margin: 30px 0; position: relative; }
+        .certificate.show { display: block; animation: fadeIn 0.5s ease; }
+        .certificate h2 { color: var(--gold); font-family: 'Georgia', serif; font-size: 1.8rem; margin-bottom: 8px; }
+        .certificate h3 { color: var(--text); font-family: var(--font-ui); font-size: 1.2rem; margin-bottom: 4px; }
+        .certificate .name { color: var(--green-bright); font-size: 1.5rem; font-family: 'Georgia', serif; margin: 12px 0; font-weight: bold; }
+        .certificate .course-name { color: var(--gold); font-size: 1.1rem; }
+        .certificate .date { color: var(--text-dim); font-size: 0.85rem; margin-top: 12px; }
+        .certificate .seal { font-size: 4rem; margin: 16px 0; }
+        .btn-cert { background: var(--gold); color: #000; font-weight: 700; margin-top: 10px; }
+        .btn-cert:hover { background: var(--gold-bright); }
+        @media print { body * { visibility: hidden; } .certificate, .certificate * { visibility: visible; } .certificate { position: absolute; top: 0; left: 0; width: 100%; } }
+    </style>
 </head>
 <body>
 
 <nav>
     <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
     <div class="desktop-links">
-        <a href="index.html" data-i18n="home">Home</a>
-        <a href="voices.html" data-i18n="voices">Voices</a>
-        <a href="blog.html" data-i18n="blog">Blog</a>
-        <a href="courses.html" class="active" data-i18n="courses">Courses</a>
-        <a href="dashboard.html" data-i18n="impact">Impact</a>
-        <a href="media.html" data-i18n="media">Media</a>
-        <a href="gallery.html" data-i18n="gallery">Gallery</a>
-        <a href="contribute.html" data-i18n="contribute">Contribute</a>
-        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+        <a href="index.html" data-i18n="home">Home</a><a href="voices.html" data-i18n="voices">Voices</a>
+        <a href="blog.html" data-i18n="blog">Blog</a><a href="courses.html" class="active" data-i18n="courses">Courses</a>
+        <a href="dashboard.html" data-i18n="impact">Impact</a><a href="media.html" data-i18n="media">Media</a>
+        <a href="gallery.html" data-i18n="gallery">Gallery</a><a href="support.html" class="cta-nav">Support</a>
         <span style="display:flex;gap:2px;margin-left:6px">
             <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
             <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
@@ -34,28 +43,39 @@
 <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
 <div class="slide-menu" id="slideMenu">
     <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
-    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
-    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
-    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
-    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
-    <a href="media.html"><span class="menu-icon">📰</span> <span data-i18n="media">Media</span></a>
-    <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
-    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
-    <a href="support.html" class="cta-mobile">❤️ <span data-i18n="support">Support</span></a>
+    <a href="index.html"><span class="menu-icon">🏠</span>Home</a><a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
+    <a href="blog.html"><span class="menu-icon">📝</span>Blog</a><a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
+    <a href="dashboard.html"><span class="menu-icon">📊</span>Impact</a><a href="support.html"><span class="menu-icon">❤️</span>Support</a>
 </div>
 
 <main class="container">
     <div id="courseList">
-        <h1 class="section-title" data-i18n="coursesTitle">🎓 Free Peace Courses</h1>
-        <p style="color:var(--text-dim);margin-bottom:20px" data-i18n="coursesSub">Open to everyone. No registration required. Learn at your own pace.</p>
-        <div class="course-grid" id="courseGrid"><div class="loading"><span class="spinner"></span> Loading courses...</div></div>
+        <h1 class="section-title">🎓 Free Peace Courses <span class="cert-badge">📜 Certificate</span></h1>
+        <p style="color:var(--text-dim);margin-bottom:20px">Open to everyone. No registration. Complete a course, get a certificate.</p>
+        <div class="course-grid" id="courseGrid"><div class="loading"><span class="spinner"></span>Loading courses...</div></div>
     </div>
+
     <div id="courseDetail" style="display:none">
-        <div style="color:var(--green-bright);cursor:pointer;margin-bottom:16px;font-family:var(--font-ui)" onclick="showList()"><span data-i18n="backToCourses">← Back to All Courses</span></div>
+        <div style="color:var(--green-bright);cursor:pointer;margin-bottom:16px;font-family:var(--font-ui)" onclick="showList()">← Back to All Courses</div>
         <h2 style="color:var(--gold);margin-bottom:8px" id="detailTitle"></h2>
-        <p style="color:var(--text-dim);margin-bottom:20px" id="detailDesc"></p>
+        <p style="color:var(--text-dim);margin-bottom:12px" id="detailDesc"></p>
         <div id="lessonList"></div>
+        <div id="completeSection" style="display:none;text-align:center;margin-top:20px">
+            <button class="btn btn-cert" onclick="generateCertificate()">📜 Get Your Certificate</button>
+            <p style="color:var(--text-muted);font-size:0.75rem;margin-top:6px">No signup required. Instant download.</p>
+        </div>
+        <div class="certificate" id="certificate">
+            <div class="seal">🕊️</div>
+            <h2>Certificate of Completion</h2>
+            <p style="color:var(--text-dim)">This certifies that</p>
+            <div class="name" id="certName">[Your Name]</div>
+            <p style="color:var(--text-dim)">has completed the course</p>
+            <div class="course-name" id="certCourse"></div>
+            <p style="color:var(--text-dim);margin-top:8px">from the Ethiopian Peace Archive</p>
+            <div class="date" id="certDate"></div>
+            <p style="color:var(--text-muted);font-size:0.7rem;margin-top:12px">Ethiopian Peace Archive — Voices for Peace, Power of Unity</p>
+            <button class="btn btn-primary" onclick="window.print()" style="margin-top:12px">🖨️ Print Certificate</button>
+        </div>
     </div>
 </main>
 
@@ -69,7 +89,6 @@
     </div>
     <div class="footer-bottom">
         <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
-        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
     </div>
 </footer>
 
@@ -77,45 +96,62 @@
 <script src="js/navigation.js"></script>
 <script src="js/language.js"></script>
 <script>
-let allCourses=[];
+let allCourses=[], currentCourse=null, allLessons=[];
 const icons=['🕊️','🇪🇹','🗣️','🌍','📚','🤝'];
 
 async function loadCourses(){
     try{
         allCourses=await fetchFromSupabase('courses','is_published=eq.true&order=created_at.desc');
         const grid=document.getElementById('courseGrid');
-        if(!allCourses.length){grid.innerHTML='<div class="loading">No courses yet. <a href="admin.html" style="color:var(--green-bright)">Add one →</a></div>';return}
+        if(!allCourses.length){grid.innerHTML='<div class="loading">No courses yet.</div>';return}
         grid.innerHTML=allCourses.map((c,i)=>`
             <div class="course-card" onclick="showDetail(${c.id})">
                 <div class="icon">${icons[i%6]}</div>
-                <h3>${c.title}</h3>
+                <h3>${c.title} <span class="cert-badge">📜</span></h3>
                 <p>${c.description||'Learn peacebuilding skills.'}</p>
                 <span class="tag">${c.level||'All Levels'}</span>
-                <span class="tag">${c.module_count||'?'} <span data-i18n="modules">Modules</span></span>
-                <span class="tag" data-i18n="free">Free</span>
-                <div style="margin-top:10px"><button class="btn btn-sm"><span data-i18n="viewCourse">View Course →</span></button></div>
+                <span class="tag">${c.module_count||'?'} Modules</span>
+                <span class="tag">Free + Certificate</span>
+                <div style="margin-top:10px"><button class="btn btn-sm">Start Course →</button></div>
             </div>
         `).join('');
-    }catch(e){document.getElementById('courseGrid').innerHTML='<div class="loading">Error loading courses.</div>'}
+    }catch(e){document.getElementById('courseGrid').innerHTML='<div class="loading">Error loading.</div>'}
 }
 
 async function showDetail(id){
-    const course=allCourses.find(c=>c.id===id);
-    if(!course)return;
+    currentCourse=allCourses.find(c=>c.id===id);
+    if(!currentCourse)return;
     document.getElementById('courseList').style.display='none';
     document.getElementById('courseDetail').style.display='block';
-    document.getElementById('detailTitle').textContent=course.title;
-    document.getElementById('detailDesc').textContent=course.description||'';
+    document.getElementById('detailTitle').textContent=currentCourse.title;
+    document.getElementById('detailDesc').textContent=currentCourse.description||'';
     try{
-        const lessons=await fetchFromSupabase('course_lessons',`course_id=eq.${id}&is_published=eq.true&order=lesson_order`);
-        document.getElementById('lessonList').innerHTML=lessons.length
-            ?lessons.map(l=>`<div class="lesson-card"><div class="num">${l.lesson_order}</div><div><h4>${l.title}</h4>${l.content?`<p style="color:var(--text-dim);font-size:0.8rem;margin-top:4px">${l.content.substring(0,200)}...</p>`:''}</div></div>`).join('')
-            :`<p style="color:var(--text-dim)" data-i18n="lessonsComing">Lessons coming soon.</p>`;
-    }catch(e){document.getElementById('lessonList').innerHTML='<p style="color:var(--text-dim)">Error loading lessons.</p>'}
+        allLessons=await fetchFromSupabase('course_lessons',`course_id=eq.${id}&is_published=eq.true&order=lesson_order`);
+        document.getElementById('lessonList').innerHTML=allLessons.length
+            ?allLessons.map((l,i)=>`<div class="lesson-card"><div class="num">${l.lesson_order}</div><div><h4>${l.title}</h4>${l.content?`<p style="color:var(--text-dim);font-size:0.8rem;margin-top:4px">${l.content.substring(0,200)}...</p>`:''}</div></div>`).join('')
+            :'<p style="color:var(--text-dim)">Lessons coming soon.</p>';
+        document.getElementById('completeSection').style.display=allLessons.length?'block':'none';
+        document.getElementById('certificate').classList.remove('show');
+    }catch(e){}
     window.scrollTo(0,0);
 }
 
-function showList(){document.getElementById('courseList').style.display='block';document.getElementById('courseDetail').style.display='none'}
+function showList(){
+    document.getElementById('courseList').style.display='block';
+    document.getElementById('courseDetail').style.display='none';
+    currentCourse=null;
+}
+
+function generateCertificate(){
+    const name=prompt('Enter your name for the certificate:','');
+    if(!name)return;
+    document.getElementById('certName').textContent=name;
+    document.getElementById('certCourse').textContent=currentCourse?.title||'Peace Course';
+    document.getElementById('certDate').textContent=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('certificate').classList.add('show');
+    document.getElementById('certificate').scrollIntoView({behavior:'smooth'});
+}
+
 loadCourses();
 </script>
 </body>
