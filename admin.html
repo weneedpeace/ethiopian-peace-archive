@@ -11,9 +11,8 @@
         .admin-tab.active { background: var(--green); color: #000; font-weight: 700; }
         .admin-panel { display: none; }
         .admin-panel.active { display: block; }
-        .upload-area { border: 2px dashed var(--green-border); border-radius: 12px; padding: 30px; text-align: center; cursor: pointer; margin-bottom: 12px; transition: all 0.3s; }
-        .upload-area:hover { border-color: var(--green); background: var(--green-dim); }
-        .preview-img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px; display: none; }
+        .upload-area { border: 2px dashed var(--green-border); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; margin-bottom: 12px; }
+        .upload-area img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -21,12 +20,12 @@
 <div id="loginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh">
     <div style="background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;max-width:380px;width:100%;text-align:center">
         <h1 style="color:var(--gold);margin-bottom:16px">🔐 Admin Panel</h1>
-        <form onsubmit="login(event)">
-            <input type="email" id="email" placeholder="Email" required style="margin-bottom:10px">
-            <input type="password" id="pass" placeholder="Password" required style="margin-bottom:16px">
+        <form onsubmit="return login()">
+            <input type="email" id="email" placeholder="Email" required><br><br>
+            <input type="password" id="pass" placeholder="Password" required><br><br>
             <button type="submit" class="btn btn-primary" style="width:100%">Sign In</button>
         </form>
-        <div id="loginMsg" class="msg msg-err" style="margin-top:10px"></div>
+        <p id="loginMsg" style="color:var(--red);margin-top:10px;display:none"></p>
     </div>
 </div>
 
@@ -43,105 +42,103 @@
         <span class="admin-tab" onclick="switchTab('lesson')">📚 Lesson</span>
     </div>
 
-    <div id="msgBox" class="msg"></div>
+    <p id="msgBox" style="display:none;padding:10px;border-radius:8px;margin-bottom:10px"></p>
 
-    <!-- BLOG PANEL -->
+    <!-- BLOG -->
     <div class="admin-panel active" id="panel-blog">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">📝 New Blog Post</h3>
-            <form onsubmit="saveBlog(event)">
-                <input type="text" id="bTitle" placeholder="Blog Title *" required>
-                <input type="text" id="bSlug" placeholder="slug-url-name *" required>
-                <textarea id="bContent" placeholder="Blog content..." style="min-height:200px"></textarea>
-                <input type="text" id="bExcerpt" placeholder="Short excerpt">
-                <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select>
-                
-                <label style="display:block;color:var(--text-dim);margin-bottom:4px;font-family:var(--font-ui);font-size:0.85rem">Featured Image</label>
+            <form onsubmit="return saveBlog()">
+                <input type="text" id="bTitle" placeholder="Blog Title" required><br><br>
+                <input type="text" id="bSlug" placeholder="slug-url-name" required><br><br>
+                <textarea id="bContent" placeholder="Blog content..." style="min-height:150px"></textarea><br><br>
+                <input type="text" id="bExcerpt" placeholder="Short excerpt"><br><br>
+                <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select><br><br>
+                <label style="color:var(--text-dim);font-size:0.85rem">Featured Image</label>
                 <div class="upload-area" onclick="document.getElementById('blogFile').click()">
-                    <p>📷 Click to upload image</p>
-                    <img id="blogPreview" class="preview-img">
+                    <p id="blogUploadText">📷 Tap to upload image</p>
+                    <img id="blogPreview" style="display:none">
                 </div>
-                <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="handleUpload(this, 'blogPreview', 'bImageUrl')">
-                <input type="hidden" id="bImageUrl">
-                
-                <button type="submit" class="btn btn-primary" style="margin-top:12px">💾 Publish Blog Post</button>
+                <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
+                <input type="hidden" id="bImageUrl"><br>
+                <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px">💾 Publish Blog Post</button>
             </form>
         </div>
     </div>
 
-    <!-- GALLERY PANEL -->
+    <!-- GALLERY -->
     <div class="admin-panel" id="panel-gallery">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">🖼️ Add Gallery Photo</h3>
-            <form onsubmit="saveGallery(event)">
-                <input type="text" id="gTitle" placeholder="Photo title">
-                <input type="text" id="gCategory" placeholder="Category (Events, Community, Workshop...)">
-                
+            <form onsubmit="return saveGallery()">
+                <input type="text" id="gTitle" placeholder="Photo title"><br><br>
+                <input type="text" id="gCategory" placeholder="Category (Events, Community...)"><br><br>
                 <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
-                    <p>📷 Click to upload image</p>
-                    <img id="galleryPreview" class="preview-img">
+                    <p id="galleryUploadText">📷 Tap to upload image</p>
+                    <img id="galleryPreview" style="display:none">
                 </div>
-                <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="handleUpload(this, 'galleryPreview', 'gImageUrl')">
-                <input type="hidden" id="gImageUrl">
-                
-                <button type="submit" class="btn btn-primary" style="margin-top:12px">💾 Add to Gallery</button>
+                <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
+                <input type="hidden" id="gImageUrl"><br>
+                <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px">💾 Add to Gallery</button>
             </form>
         </div>
     </div>
 
-    <!-- COURSE PANEL -->
+    <!-- COURSE -->
     <div class="admin-panel" id="panel-course">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">🎓 New Course</h3>
-            <form onsubmit="saveCourse(event)">
-                <input type="text" id="cTitle" placeholder="Course Title *" required>
-                <input type="text" id="cSlug" placeholder="slug-url-name *" required>
-                <input type="text" id="cDesc" placeholder="Short description">
-                <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select>
-                <input type="number" id="cModules" placeholder="Number of modules" value="6">
-                <button type="submit" class="btn btn-primary">💾 Save Course</button>
+            <form onsubmit="return saveCourse()">
+                <input type="text" id="cTitle" placeholder="Course Title" required><br><br>
+                <input type="text" id="cSlug" placeholder="slug-url-name" required><br><br>
+                <input type="text" id="cDesc" placeholder="Short description"><br><br>
+                <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select><br><br>
+                <input type="number" id="cModules" placeholder="Modules" value="6"><br><br>
+                <button type="submit" class="btn btn-primary" style="width:100%">💾 Save Course</button>
             </form>
         </div>
     </div>
 
-    <!-- LESSON PANEL -->
+    <!-- LESSON -->
     <div class="admin-panel" id="panel-lesson">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">📚 Add Lesson</h3>
-            <form onsubmit="saveLesson(event)">
-                <select id="lCourseId" required><option value="">Select Course...</option></select>
-                <input type="text" id="lTitle" placeholder="Lesson Title *" required>
-                <textarea id="lContent" placeholder="Lesson content..."></textarea>
-                <input type="number" id="lOrder" placeholder="Lesson order (1,2,3...)" value="1">
-                <button type="submit" class="btn btn-primary">💾 Save Lesson</button>
+            <form onsubmit="return saveLesson()">
+                <select id="lCourseId" required><option value="">Select Course...</option></select><br><br>
+                <input type="text" id="lTitle" placeholder="Lesson Title" required><br><br>
+                <textarea id="lContent" placeholder="Lesson content..."></textarea><br><br>
+                <input type="number" id="lOrder" placeholder="Order (1,2,3...)" value="1"><br><br>
+                <button type="submit" class="btn btn-primary" style="width:100%">💾 Save Lesson</button>
             </form>
         </div>
     </div>
 </div>
 
 <script>
-const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+const URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
-function showMsg(text, type) {
-    const box = document.getElementById('msgBox');
-    box.textContent = text;
-    box.className = 'msg msg-' + (type === 'ok' ? 'ok' : 'err');
-    box.style.display = 'block';
-    setTimeout(() => box.style.display = 'none', 4000);
+function msg(text, color) {
+    var m = document.getElementById('msgBox');
+    m.textContent = text;
+    m.style.display = 'block';
+    m.style.background = color === 'green' ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)';
+    m.style.color = color === 'green' ? '#4ade80' : '#ef4444';
+    m.style.border = '1px solid ' + (color === 'green' ? '#22c55e' : 'rgba(239,68,68,0.3)');
+    setTimeout(function(){ m.style.display = 'none'; }, 4000);
 }
 
-function login(e) {
-    e.preventDefault();
+function login() {
     if (document.getElementById('email').value === 'admin@peacearchive.org' && document.getElementById('pass').value === 'Peace2026!') {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
         loadCourses();
-    } else {
-        document.getElementById('loginMsg').textContent = 'Wrong credentials';
-        document.getElementById('loginMsg').style.display = 'block';
+        return false;
     }
+    document.getElementById('loginMsg').style.display = 'block';
+    document.getElementById('loginMsg').textContent = 'Wrong credentials';
+    return false;
 }
 
 function logout() { localStorage.removeItem('epa_admin'); location.reload(); }
@@ -153,58 +150,56 @@ if (localStorage.getItem('epa_admin') === '1') {
 }
 
 function switchTab(tab) {
-    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.admin-tab').forEach(function(t){ t.classList.remove('active'); });
     event.target.classList.add('active');
-    document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.admin-panel').forEach(function(p){ p.classList.remove('active'); });
     document.getElementById('panel-' + tab).classList.add('active');
     if (tab === 'lesson') loadCourses();
 }
 
-async function uploadToCloudinary(file) {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'peace_archive');
-    const res = await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload', { method: 'POST', body: formData });
-    const data = await res.json();
-    return data.secure_url;
-}
-
-async function handleUpload(input, previewId, hiddenId) {
-    const file = input.files[0];
+async function uploadImage(fileId, previewId, textId, hiddenId) {
+    var file = document.getElementById(fileId).files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = e => {
+    
+    var reader = new FileReader();
+    reader.onload = function(e) {
         document.getElementById(previewId).src = e.target.result;
         document.getElementById(previewId).style.display = 'block';
+        document.getElementById(textId).style.display = 'none';
     };
     reader.readAsDataURL(file);
-    showMsg('📤 Uploading to Cloudinary...', 'ok');
-    const url = await uploadToCloudinary(file);
-    if (url) {
-        document.getElementById(hiddenId).value = url;
-        showMsg('✅ Image uploaded!', 'ok');
-    } else {
-        showMsg('❌ Upload failed', 'err');
+    
+    msg('Uploading image...', 'green');
+    
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'peace_archive');
+    
+    try {
+        var res = await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload', { method: 'POST', body: formData });
+        var data = await res.json();
+        if (data.secure_url) {
+            document.getElementById(hiddenId).value = data.secure_url;
+            msg('Image uploaded!', 'green');
+        } else {
+            msg('Upload failed', 'red');
+        }
+    } catch(e) {
+        msg('Upload failed', 'red');
     }
 }
 
-async function saveToSupabase(table, data) {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+async function saveToDB(table, data) {
+    var res = await fetch(URL + '/rest/v1/' + table, {
         method: 'POST',
-        headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-        },
+        headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
         body: JSON.stringify(data)
     });
     return res.ok;
 }
 
-async function saveBlog(e) {
-    e.preventDefault();
-    const data = {
+async function saveBlog() {
+    var data = {
         title: document.getElementById('bTitle').value,
         slug: document.getElementById('bSlug').value,
         content: document.getElementById('bContent').value,
@@ -213,29 +208,29 @@ async function saveBlog(e) {
         image_url: document.getElementById('bImageUrl').value,
         is_published: true
     };
-    const ok = await saveToSupabase('blog_posts', data);
-    ok ? showMsg('✅ Blog published!', 'ok') : showMsg('❌ Failed', 'err');
-    if (ok) e.target.reset();
+    var ok = await saveToDB('blog_posts', data);
+    msg(ok ? 'Blog published!' : 'Failed to save', ok ? 'green' : 'red');
+    if (ok) { document.getElementById('bTitle').value = ''; document.getElementById('bSlug').value = ''; document.getElementById('bContent').value = ''; }
+    return false;
 }
 
-async function saveGallery(e) {
-    e.preventDefault();
-    const imageUrl = document.getElementById('gImageUrl').value;
-    if (!imageUrl) { showMsg('❌ Upload an image first', 'err'); return; }
-    const data = {
+async function saveGallery() {
+    var url = document.getElementById('gImageUrl').value;
+    if (!url) { msg('Upload an image first', 'red'); return false; }
+    var data = {
         title: document.getElementById('gTitle').value,
-        image_url: imageUrl,
+        image_url: url,
         category: document.getElementById('gCategory').value || 'General',
         is_published: true
     };
-    const ok = await saveToSupabase('gallery', data);
-    ok ? showMsg('✅ Photo added!', 'ok') : showMsg('❌ Failed', 'err');
-    if (ok) e.target.reset();
+    var ok = await saveToDB('gallery', data);
+    msg(ok ? 'Photo added to gallery!' : 'Failed to save', ok ? 'green' : 'red');
+    if (ok) { document.getElementById('gTitle').value = ''; document.getElementById('galleryPreview').style.display = 'none'; document.getElementById('galleryUploadText').style.display = 'block'; }
+    return false;
 }
 
-async function saveCourse(e) {
-    e.preventDefault();
-    const data = {
+async function saveCourse() {
+    var data = {
         title: document.getElementById('cTitle').value,
         slug: document.getElementById('cSlug').value,
         description: document.getElementById('cDesc').value,
@@ -243,35 +238,32 @@ async function saveCourse(e) {
         module_count: parseInt(document.getElementById('cModules').value),
         is_published: true
     };
-    const ok = await saveToSupabase('courses', data);
-    ok ? showMsg('✅ Course saved!', 'ok') : showMsg('❌ Failed', 'err');
-    if (ok) e.target.reset();
+    var ok = await saveToDB('courses', data);
+    msg(ok ? 'Course saved!' : 'Failed', ok ? 'green' : 'red');
+    return false;
 }
 
-async function saveLesson(e) {
-    e.preventDefault();
-    const data = {
+async function saveLesson() {
+    var data = {
         course_id: parseInt(document.getElementById('lCourseId').value),
         title: document.getElementById('lTitle').value,
         content: document.getElementById('lContent').value,
         lesson_order: parseInt(document.getElementById('lOrder').value),
         is_published: true
     };
-    const ok = await saveToSupabase('course_lessons', data);
-    ok ? showMsg('✅ Lesson saved!', 'ok') : showMsg('❌ Failed', 'err');
-    if (ok) e.target.reset();
+    var ok = await saveToDB('course_lessons', data);
+    msg(ok ? 'Lesson saved!' : 'Failed', ok ? 'green' : 'red');
+    return false;
 }
 
 async function loadCourses() {
     try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/courses?select=id,title&is_published=eq.true`, {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-        });
-        const courses = await res.json();
-        const sel = document.getElementById('lCourseId');
+        var res = await fetch(URL + '/rest/v1/courses?select=id,title&is_published=eq.true', { headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY } });
+        var courses = await res.json();
+        var sel = document.getElementById('lCourseId');
         sel.innerHTML = '<option value="">Select Course...</option>';
-        courses.forEach(c => { sel.innerHTML += `<option value="${c.id}">${c.title}</option>`; });
-    } catch (e) {}
+        courses.forEach(function(c) { sel.innerHTML += '<option value="' + c.id + '">' + c.title + '</option>'; });
+    } catch(e) {}
 }
 </script>
 </body>
