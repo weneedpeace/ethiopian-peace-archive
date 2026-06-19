@@ -3,122 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free peace education courses. No signup required.">
-    <title>Free Courses — Ethiopian Peace Archive</title>
-    <style>
-        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7;overflow-x:hidden}
-        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:12px 16px;position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between}
-        nav .logo{font-size:1rem;font-weight:bold;color:var(--gold);font-family:-apple-system,sans-serif;text-decoration:none}
-        nav .logo span{color:var(--green-bright)}
-        .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:1001;width:36px;height:36px;position:relative}
-        .hamburger span{display:block;width:24px;height:2px;background:var(--green-bright);position:absolute;left:6px;transition:all 0.3s;border-radius:2px}
-        .hamburger span:nth-child(1){top:10px}.hamburger span:nth-child(2){top:17px}.hamburger span:nth-child(3){top:24px}
-        .hamburger.open span:nth-child(1){top:17px;transform:rotate(45deg)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){top:17px;transform:rotate(-45deg)}
-        nav .desktop-links{display:flex;gap:3px;flex-wrap:wrap;align-items:center}
-        nav .desktop-links a{color:var(--text-dim);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:0.8rem;font-family:-apple-system,sans-serif}
-        nav .desktop-links a:hover{color:var(--green-bright);background:var(--green-dim)}
-        nav .desktop-links a.active{color:var(--green-bright);background:var(--green-dim);font-weight:700}
-        .slide-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:998;opacity:0;visibility:hidden;transition:all 0.4s}
-        .slide-overlay.open{opacity:1;visibility:visible}
-        .slide-menu{position:fixed;top:0;right:-320px;width:300px;height:100%;background:linear-gradient(180deg,#0a1628,#0d1b33 50%,#060f1e);border-left:2px solid var(--green-border);z-index:999;transition:right 0.4s;padding:80px 20px 30px;overflow-y:auto}
-        .slide-menu.open{right:0}
-        .slide-menu .menu-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid var(--green-border)}
-        .slide-menu .menu-header .flag{font-size:2.5rem;margin-bottom:8px}
-        .slide-menu a{display:flex;align-items:center;gap:12px;padding:14px 18px;margin-bottom:6px;border-radius:12px;color:var(--text-dim);text-decoration:none;font-family:-apple-system,sans-serif;font-size:0.9rem}
-        .slide-menu a:hover{color:var(--green-bright);background:var(--green-dim);transform:translateX(4px)}
-        .slide-menu a .menu-icon{font-size:1.2rem;width:24px;text-align:center}
-        .container{max-width:1000px;margin:30px auto;padding:0 16px}
-        h1{color:var(--gold);margin-bottom:8px;border-left:4px solid var(--green);padding-left:12px;font-family:-apple-system,sans-serif;font-size:1.5rem}
-        .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:30px}
-        .course-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:14px;padding:22px;transition:all 0.3s;cursor:pointer}
-        .course-card:hover{border-color:var(--green);transform:translateY(-3px)}
-        .course-card .icon{font-size:2.2rem;margin-bottom:10px}
-        .course-card h3{color:var(--gold);margin-bottom:6px;font-family:-apple-system,sans-serif;font-size:1.1rem}
-        .course-card p{color:var(--text-dim);font-size:0.82rem;line-height:1.5;margin-bottom:10px}
-        .course-card .tag{display:inline-block;padding:3px 10px;border-radius:10px;font-size:0.7rem;background:var(--green-dim);color:var(--green-bright);font-family:-apple-system,sans-serif;margin:2px}
-        .btn{display:inline-block;padding:10px 20px;border-radius:20px;background:var(--green);color:#000;text-decoration:none;font-weight:700;font-family:-apple-system,sans-serif;font-size:0.85rem;border:none;cursor:pointer;margin-top:8px}
-        .btn:hover{background:var(--green-bright)}
-        #courseDetail{display:none}
-        #courseDetail h2{color:var(--gold);margin-bottom:16px}
-        .lesson-card{background:var(--card);border:1px solid rgba(34,197,94,0.10);border-radius:10px;padding:14px 18px;margin-bottom:8px;display:flex;align-items:center;gap:12px}
-        .lesson-card .num{width:32px;height:32px;border-radius:50%;background:var(--green);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:-apple-system,sans-serif;font-size:0.85rem;flex-shrink:0}
-        .lesson-card h4{color:var(--text);font-family:-apple-system,sans-serif;font-size:0.9rem}
-        .loading{text-align:center;padding:40px;color:var(--text-dim)}
-        footer{text-align:center;padding:24px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.78rem}
-        @media(max-width:768px){nav .desktop-links{display:none}.hamburger{display:block}.course-grid{grid-template-columns:1fr}}
-    </style>
+    <meta name="description" content="Impact Dashboard — Live data from the Ethiopian Peace Archive.">
+    <title>Impact Dashboard — Ethiopian Peace Archive</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<nav>
-    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-    <div class="desktop-links">
-        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-        <a href="courses.html" class="active">Courses</a><a href="dashboard.html">Impact</a>
-        <a href="media.html">Media</a><a href="gallery.html">Gallery</a><a href="support.html">Support</a>
+    <nav>
+        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+        <div class="desktop-links">
+            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
+            <a href="courses.html">Courses</a><a href="dashboard.html" class="active">Impact</a>
+            <a href="media.html">Media</a><a href="gallery.html">Gallery</a>
+            <a href="thanks.html">Thanks</a><a href="contribute.html">Contribute</a>
+            <a href="support.html" class="cta-nav">Support</a>
+            <span style="display:flex;gap:2px;margin-left:6px">
+                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            </span>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
+        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
+        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
+        <a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
+        <a href="dashboard.html"><span class="menu-icon">📊</span>Impact</a>
+        <a href="media.html"><span class="menu-icon">📰</span>Media</a>
+        <a href="gallery.html"><span class="menu-icon">🖼️</span>Gallery</a>
+        <a href="thanks.html"><span class="menu-icon">🙏</span>Thanks</a>
+        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-</nav>
 
-<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-<div class="slide-menu" id="slideMenu">
-    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-    <a href="index.html" onclick="toggleMenu()"><span class="menu-icon">🏠</span>Home</a>
-    <a href="voices.html" onclick="toggleMenu()"><span class="menu-icon">🗣️</span>Voices</a>
-    <a href="blog.html" onclick="toggleMenu()"><span class="menu-icon">📝</span>Blog</a>
-    <a href="courses.html" onclick="toggleMenu()"><span class="menu-icon">🎓</span>Courses</a>
-    <a href="dashboard.html" onclick="toggleMenu()"><span class="menu-icon">📊</span>Impact</a>
-    <a href="media.html" onclick="toggleMenu()"><span class="menu-icon">📰</span>Media</a>
-    <a href="gallery.html" onclick="toggleMenu()"><span class="menu-icon">🖼️</span>Gallery</a>
-    <a href="support.html" onclick="toggleMenu()"><span class="menu-icon">❤️</span>Support</a>
-</div>
+    <main class="container">
+        <h1 class="section-title">📊 Impact Dashboard</h1>
+        <p style="color:var(--text-dim);margin-bottom:20px">Live data from the peace movement.</p>
 
-<main class="container">
-    <div id="courseList">
-        <h1>🎓 Free Peace Courses</h1>
-        <p style="color:var(--text-dim);margin-bottom:20px">Open to everyone. No registration required.</p>
-        <div class="course-grid" id="courseGrid"><div class="loading">Loading courses...</div></div>
-    </div>
-    <div id="courseDetail">
-        <div style="color:var(--green-bright);cursor:pointer;margin-bottom:16px;font-family:-apple-system,sans-serif" onclick="showList()">← Back to Courses</div>
-        <h2 id="detailTitle"></h2>
-        <p style="color:var(--text-dim);margin-bottom:16px" id="detailDesc"></p>
-        <div id="lessonList"></div>
-    </div>
-</main>
+        <div class="big-stats">
+            <div class="big-stat"><div class="num" id="totalVoices">...</div><div class="lbl">Total Voices</div></div>
+            <div class="big-stat gold"><div class="num" id="regions">...</div><div class="lbl">Regions</div></div>
+            <div class="big-stat blue"><div class="num" id="countries">...</div><div class="lbl">Countries</div></div>
+            <div class="big-stat purple"><div class="num" id="mediaN">...</div><div class="lbl">Media</div></div>
+            <div class="big-stat orange"><div class="num" id="coursesN">...</div><div class="lbl">Courses</div></div>
+            <div class="big-stat"><div class="num" id="blogsN">...</div><div class="lbl">Blog Posts</div></div>
+        </div>
 
-<footer><p>Ethiopian Peace Archive &copy; 2026</p></footer>
+        <div class="chart-card">
+            <h3>🗣️ Voices by Region</h3>
+            <div id="regionChart"><div class="loading">Loading...</div></div>
+        </div>
 
-<script>
-function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('slideMenu').classList.toggle('open');document.getElementById('slideOverlay').classList.toggle('open');document.body.style.overflow=document.body.style.overflow==='hidden'?'':'hidden'}
-const URL='https://rnafjznurgnrdonyxfgs.supabase.co';
-const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
-let allCourses=[];
-async function loadCourses(){
-    try{
-        const r=await fetch(`${URL}/rest/v1/courses?select=*&is_published=eq.true&order=created_at.desc`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}});
-        allCourses=await r.json();
-        const g=document.getElementById('courseGrid');
-        if(!allCourses.length){g.innerHTML='<div class="loading">No courses yet.</div>';return}
-        const icons=['🕊️','🇪🇹','🗣️','🌍','📚','🤝'];
-        g.innerHTML=allCourses.map((c,i)=>`<div class="course-card" onclick="showDetail(${c.id})"><div class="icon">${icons[i%6]}</div><h3>${c.title}</h3><p>${c.description||'Learn peacebuilding skills.'}</p><span class="tag">${c.level||'All Levels'}</span><span class="tag">${c.module_count||'?'} Modules</span><span class="tag">Free</span><div><button class="btn">View Course →</button></div></div>`).join('')
-    }catch(e){document.getElementById('courseGrid').innerHTML='<div class="loading">Error loading.</div>'}
-}
-async function showDetail(id){
-    const c=allCourses.find(x=>x.id===id);if(!c)return;
-    document.getElementById('courseList').style.display='none';document.getElementById('courseDetail').style.display='block';
-    document.getElementById('detailTitle').textContent=c.title;document.getElementById('detailDesc').textContent=c.description;
-    try{
-        const r=await fetch(`${URL}/rest/v1/course_lessons?select=*&course_id=eq.${id}&is_published=eq.true&order=lesson_order`,{headers:{'apikey':KEY,'Authorization':`Bearer ${KEY}`}});
-        const lessons=await r.json();
-        document.getElementById('lessonList').innerHTML=lessons.length?lessons.map(l=>`<div class="lesson-card"><div class="num">${l.lesson_order}</div><div><h4>${l.title}</h4>${l.content?`<p style="color:var(--text-dim);font-size:0.8rem;margin-top:4px">${l.content.substring(0,150)}...</p>`:''}</div></div>`).join(''):'<p style="color:var(--text-dim)">Lessons coming soon.</p>'
-    }catch(e){}
-    window.scrollTo(0,0)
-}
-function showList(){document.getElementById('courseList').style.display='block';document.getElementById('courseDetail').style.display='none'}
-loadCourses();
-</script>
+        <div class="chart-card">
+            <h3>🌍 Regions Represented</h3>
+            <div class="region-tags" id="regionTags">Loading...</div>
+        </div>
+    </main>
+
+    <footer>
+        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
+            <p>Ethiopian Peace Archive &copy; 2026</p>
+            <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+        </div>
+    </footer>
+
+    <script src="js/supabase.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/language.js"></script>
+    <script>
+        async function loadDashboard() {
+            try {
+                const [eth, global, media, courses, blogs] = await Promise.all([
+                    fetchFromSupabase('ethiopian_voices', 'is_published=eq.true'),
+                    fetchFromSupabase('global_voices', 'is_published=eq.true'),
+                    fetchFromSupabase('media_coverage', 'is_published=eq.true'),
+                    fetchFromSupabase('courses', 'is_published=eq.true'),
+                    fetchFromSupabase('blog_posts', 'is_published=eq.true')
+                ]);
+
+                document.getElementById('totalVoices').textContent = eth.length + global.length;
+                document.getElementById('regions').textContent = new Set(eth.map(v => v.region).filter(Boolean)).size;
+                document.getElementById('countries').textContent = new Set(global.map(v => v.country).filter(Boolean)).size;
+                document.getElementById('mediaN').textContent = media.length;
+                document.getElementById('coursesN').textContent = courses.length;
+                document.getElementById('blogsN').textContent = blogs.length;
+
+                const regionCount = {};
+                eth.forEach(v => { if (v.region) regionCount[v.region] = (regionCount[v.region] || 0) + 1; });
+                const sorted = Object.entries(regionCount).sort((a, b) => b[1] - a[1]);
+                const colors = ['#4ade80', '#22c55e', '#fbbf24', '#3b82f6', '#a855f7', '#f97316', '#ec4899', '#14b8a6'];
+
+                document.getElementById('regionChart').innerHTML = sorted.slice(0, 8).map(([r, c], i) => `
+                    <div class="bar-row">
+                        <div class="bar-label"><span>${r}</span><span>${c} voices</span></div>
+                        <div class="bar"><div class="bar-fill" style="width:${Math.max(c / eth.length * 100, 5)}%;background:${colors[i % 8]}">${c}</div></div>
+                    </div>
+                `).join('');
+
+                document.getElementById('regionTags').innerHTML = sorted.map(([r, c]) => `<span class="region-tag">📍 ${r} (${c})</span>`).join('');
+
+            } catch (e) {
+                console.error('Dashboard error:', e);
+            }
+        }
+        loadDashboard();
+    </script>
 </body>
 </html>
