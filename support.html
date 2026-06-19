@@ -3,83 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Support the Ethiopian Peace Archive. Donate, sponsor, advise, or provide materials to amplify voices for peace.">
+    <meta name="description" content="Support the Ethiopian Peace Archive. Donate, sponsor, or provide materials.">
     <title>Support Us — Ethiopian Peace Archive</title>
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root{--bg:#060f1e;--card:#0d1b33;--green:#22c55e;--green-bright:#4ade80;--green-dim:rgba(34,197,94,0.10);--green-border:rgba(34,197,94,0.20);--gold:#fbbf24;--text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#64748b}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Georgia',serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}
-        nav{background:rgba(6,15,30,0.97);border-bottom:1px solid rgba(34,197,94,0.15);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-        nav a{color:var(--text-dim);text-decoration:none;padding:8px 16px;border-radius:25px;font-size:0.85rem;font-family:-apple-system,sans-serif}
-        nav a:hover{color:var(--green-bright);background:var(--green-dim)}
-        nav .logo{font-size:1.2rem;font-weight:bold;color:var(--gold)}
-        nav .logo span{color:var(--green-bright)}
-        .container{max-width:900px;margin:40px auto;padding:0 20px}
-        .section-title{font-size:1.8rem;color:var(--gold);margin-bottom:16px;border-left:5px solid var(--green);padding-left:16px;font-family:-apple-system,sans-serif}
-        .card{background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:28px;margin-bottom:20px;transition:all 0.3s}
-        .card:hover{border-color:var(--green)}
-        .card h3{color:var(--gold);margin-bottom:12px;font-family:-apple-system,sans-serif}
-        .card p{color:var(--text-dim);margin-bottom:12px}
-        .btn{display:inline-block;padding:14px 28px;border-radius:30px;text-decoration:none;font-weight:700;font-size:0.95rem;font-family:-apple-system,sans-serif;transition:all 0.3s;margin:4px}
-        .btn-primary{background:var(--green);color:#000}
-        .btn-primary:hover{background:var(--green-bright)}
-        .btn-gold{background:var(--gold);color:#000}
-        .btn-gold:hover{background:#fcd34d}
-        .highlight{background:linear-gradient(135deg,rgba(34,197,94,0.15),rgba(251,191,36,0.10));border:2px solid var(--green);border-radius:16px;padding:32px;text-align:center;margin:30px 0}
-        .highlight h2{color:var(--gold);margin-bottom:12px;font-family:-apple-system,sans-serif}
-        footer{text-align:center;padding:30px;color:var(--text-muted);border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;font-family:-apple-system,sans-serif;font-size:0.85rem}
+        .highlight-box { background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(251,191,36,0.10)); border: 2px solid var(--green); border-radius: var(--radius-lg); padding: 28px; text-align: center; margin: 20px 0; }
+        .highlight-box h2 { color: var(--gold); margin-bottom: 8px; font-family: var(--font-ui); }
+        .support-card { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 22px; margin-bottom: 14px; transition: all 0.3s; }
+        .support-card:hover { border-color: var(--green); }
+        .support-card h3 { color: var(--gold); margin-bottom: 8px; font-family: var(--font-ui); }
+        .support-card p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 12px; }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.html" style="text-decoration:none"><div class="logo">🕊️ Ethiopian <span>Peace</span> Archive</div></a>
-    <div style="display:flex;gap:4px;flex-wrap:wrap">
-        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-        <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
-        <a href="contribute.html">Contribute</a>
-        <a href="support.html" style="color:var(--green-bright);background:var(--green-dim)">Support</a>
-    </div>
-</nav>
+    <nav>
+        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+        <div class="desktop-links">
+            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
+            <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
+            <a href="media.html">Media</a><a href="gallery.html">Gallery</a>
+            <a href="thanks.html">Thanks</a><a href="contribute.html">Contribute</a>
+            <a href="support.html" class="active cta-nav">Support</a>
+            <span style="display:flex;gap:2px;margin-left:6px">
+                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            </span>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
 
-<main class="container">
-    <h1 class="section-title">❤️ Support the Movement</h1>
-    <p style="color:var(--text-dim);margin-bottom:30px;font-size:1.05rem">Every contribution amplifies a voice for peace. Choose how you want to support.</p>
-
-    <div class="highlight">
-        <h2>💰 Donate</h2>
-        <p style="color:var(--text-dim);margin-bottom:20px">Your donation helps us preserve more voices, translate content, and reach communities worldwide.</p>
-        <a href="#" class="btn btn-gold" style="font-size:1.1rem">Donate Now →</a>
-        <p style="color:var(--text-muted);font-size:0.8rem;margin-top:12px">Payment options: Bank Transfer · Mobile Money · PayPal · Coming Soon</p>
-    </div>
-
-    <div class="card">
-        <h3>🤝 Sponsor the Archive</h3>
-        <p>Organizations and businesses can sponsor specific sections, translations, or outreach programs. Your brand aligned with peace.</p>
-        <a href="contact.html" class="btn btn-primary">Become a Sponsor →</a>
-    </div>
-
-    <div class="card">
-        <h3>💡 Share Ideas & Expertise</h3>
-        <p>Have ideas for peace initiatives? Expertise in research, technology, or community organizing? We welcome advisors and collaborators.</p>
-        <a href="contribute.html" class="btn btn-primary">Share Your Ideas →</a>
+    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
+        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
+        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
+        <a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
+        <a href="dashboard.html"><span class="menu-icon">📊</span>Impact</a>
+        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
     </div>
 
-    <div class="card">
-        <h3>📦 Donate Materials</h3>
-        <p>Books, recording equipment, translation services, or technology resources. In-kind donations help us grow.</p>
-        <a href="contact.html" class="btn btn-primary">Offer Materials →</a>
-    </div>
+    <main class="container-sm">
+        <h1 class="section-title">❤️ Support the Movement</h1>
+        <p style="color:var(--text-dim);margin-bottom:24px">Every contribution amplifies a voice for peace.</p>
 
-    <div class="card">
-        <h3>📣 Spread the Word</h3>
-        <p>Share the archive with your network. Follow us, repost quotes, and tell others about the voices for peace.</p>
-        <p style="color:var(--green-bright);font-weight:bold">#EthiopianPeaceArchive #VoicesForPeace</p>
-    </div>
-</main>
+        <div class="highlight-box">
+            <h2>💰 Donate</h2>
+            <p style="color:var(--text-dim);margin-bottom:16px">Help us preserve more voices, translate content, and reach communities worldwide.</p>
+            <a href="#" class="btn btn-gold" style="font-size:1rem">Donate Now →</a>
+            <p style="color:var(--text-muted);font-size:0.75rem;margin-top:10px">Bank Transfer · Mobile Money · PayPal · Coming Soon</p>
+        </div>
 
-<footer>
-    <p>Ethiopian Peace Archive &copy; 2026 · <a href="privacy.html" style="color:var(--text-dim)">Privacy</a> · <a href="terms.html" style="color:var(--text-dim)">Terms</a></p>
-</footer>
+        <div class="support-card"><h3>🤝 Sponsor the Archive</h3><p>Organizations can sponsor translations, outreach programs, or specific regions.</p><a href="contact.html" class="btn btn-sm">Become a Sponsor →</a></div>
+        <div class="support-card"><h3>💡 Share Ideas & Expertise</h3><p>Have ideas for peace? Expertise in research, tech, or organizing? We welcome advisors.</p><a href="contribute.html" class="btn btn-sm">Share Ideas →</a></div>
+        <div class="support-card"><h3>📦 Donate Materials</h3><p>Books, equipment, translation services — in-kind donations help us grow.</p><a href="contact.html" class="btn btn-sm">Offer Materials →</a></div>
+        <div class="support-card"><h3>📣 Spread the Word</h3><p>Share the archive. Follow us. Tell others about the voices for peace.</p><p style="color:var(--green-bright);font-weight:bold;font-family:var(--font-ui)">#EthiopianPeaceArchive #VoicesForPeace</p></div>
+    </main>
+
+    <footer>
+        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
+            <p>Ethiopian Peace Archive &copy; 2026</p>
+            <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/language.js"></script>
 </body>
 </html>
