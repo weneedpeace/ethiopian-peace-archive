@@ -7,88 +7,17 @@
     <title>Thank You — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .thanks-hero {
-            text-align: center;
-            padding: 60px 20px 40px;
-            border-bottom: 1px solid var(--green-border);
-        }
-        .thanks-hero .icon {
-            font-size: 4rem;
-            margin-bottom: 16px;
-        }
-        .thanks-hero h1 {
-            color: var(--gold-bright);
-            font-family: var(--font-ui);
-            font-size: clamp(1.6rem, 4vw, 2.5rem);
-            margin-bottom: 12px;
-        }
-        .thanks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            margin: 30px 0;
-        }
-        .thanks-card {
-            background: var(--card);
-            border: 1px solid var(--green-border);
-            border-radius: var(--radius);
-            padding: 24px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        .thanks-card:hover {
-            border-color: var(--green);
-            transform: translateY(-3px);
-        }
-        .thanks-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        .thanks-card h3 {
-            color: var(--gold);
-            font-family: var(--font-ui);
-            margin-bottom: 8px;
-        }
-        .thanks-card p {
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            line-height: 1.6;
-        }
-        .region-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        .region-badge {
-            padding: 8px 16px;
-            border-radius: 25px;
-            background: var(--green-dim);
-            color: var(--green-bright);
-            font-family: var(--font-ui);
-            font-size: 0.85rem;
-            border: 1px solid var(--green-border);
-        }
-        .quote-block {
-            background: linear-gradient(135deg, rgba(34,197,94,0.10), rgba(251,191,36,0.08));
-            border: 2px solid var(--green-border);
-            border-radius: var(--radius-lg);
-            padding: 30px;
-            text-align: center;
-            margin: 30px 0;
-            font-style: italic;
-            color: var(--text);
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        .thank-you-note {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-dim);
-            font-size: 1rem;
-            line-height: 1.8;
-        }
+        .thanks-hero { text-align: center; padding: 50px 20px 30px; }
+        .thanks-hero .icon { font-size: 4rem; margin-bottom: 12px; }
+        .thanks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 24px 0; }
+        .thanks-card { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 20px; text-align: center; transition: all 0.3s; }
+        .thanks-card:hover { border-color: var(--green); transform: translateY(-3px); }
+        .thanks-card .icon { font-size: 2.2rem; margin-bottom: 8px; }
+        .thanks-card h3 { color: var(--gold); font-family: var(--font-ui); margin-bottom: 6px; font-size: 1rem; }
+        .thanks-card p { color: var(--text-dim); font-size: 0.8rem; line-height: 1.5; }
+        .region-list { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 16px 0; }
+        .region-badge { padding: 6px 14px; border-radius: 20px; background: var(--green-dim); color: var(--green-bright); font-family: var(--font-ui); font-size: 0.8rem; border: 1px solid var(--green-border); }
+        .quote-block { background: linear-gradient(135deg, rgba(34,197,94,0.10), rgba(251,191,36,0.08)); border: 2px solid var(--green-border); border-radius: var(--radius-lg); padding: 28px; text-align: center; margin: 24px 0; font-style: italic; font-size: 1.1rem; line-height: 1.7; }
     </style>
 </head>
 <body>
@@ -96,118 +25,75 @@
     <nav>
         <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
         <div class="desktop-links">
-            <a href="index.html">Home</a>
-            <a href="voices.html">Voices</a>
-            <a href="blog.html">Blog</a>
-            <a href="courses.html">Courses</a>
-            <a href="dashboard.html">Impact</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="support.html">Support</a>
+            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
+            <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
+            <a href="media.html">Media</a><a href="gallery.html">Gallery</a>
+            <a href="thanks.html" class="active">Thanks</a><a href="contribute.html">Contribute</a>
+            <a href="support.html" class="cta-nav">Support</a>
+            <span style="display:flex;gap:2px;margin-left:6px">
+                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            </span>
         </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </button>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
 
     <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
     <div class="slide-menu" id="slideMenu">
-        <div class="menu-header">
-            <div class="flag">🇪🇹🕊️</div>
-            <h3>Ethiopian Peace Archive</h3>
-        </div>
-        <a href="index.html" onclick="toggleMenu()"><span class="menu-icon">🏠</span>Home</a>
-        <a href="voices.html" onclick="toggleMenu()"><span class="menu-icon">🗣️</span>Voices</a>
-        <a href="blog.html" onclick="toggleMenu()"><span class="menu-icon">📝</span>Blog</a>
-        <a href="courses.html" onclick="toggleMenu()"><span class="menu-icon">🎓</span>Courses</a>
-        <a href="dashboard.html" onclick="toggleMenu()"><span class="menu-icon">📊</span>Impact</a>
-        <a href="thanks.html" onclick="toggleMenu()"><span class="menu-icon">🙏</span>Thank You</a>
-        <a href="support.html" onclick="toggleMenu()"><span class="menu-icon">❤️</span>Support</a>
+        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
+        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
+        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
+        <a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
+        <a href="thanks.html"><span class="menu-icon">🙏</span>Thank You</a>
+        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
     </div>
 
     <main class="container">
         <div class="thanks-hero">
             <div class="icon">🙏</div>
-            <h1>Thank You</h1>
-            <p style="color: var(--text-dim); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-                This archive exists because of the generosity, trust, and courage of over 1,000 people who chose to speak for peace.
-            </p>
+            <h1 style="color:var(--gold-bright);font-family:var(--font-ui);font-size:clamp(1.6rem,4vw,2.2rem)">Thank You</h1>
+            <p style="color:var(--text-dim);font-size:1rem;max-width:600px;margin:0 auto">This archive exists because of the generosity, trust, and courage of over 1,000 people who chose to speak for peace.</p>
         </div>
 
-        <div class="quote-block">
-            "We wish good, speak good, do good" — Ethiopia, 2020
-        </div>
+        <div class="quote-block">"We wish good, speak good, do good" — Ethiopia, 2020</div>
 
-        <h2 style="color: var(--gold); text-align: center; font-family: var(--font-ui); margin-bottom: 20px;">
-            🌍 Voices From Every Region
-        </h2>
+        <h2 style="color:var(--gold);text-align:center;font-family:var(--font-ui);margin-bottom:16px">🌍 Voices From Every Region</h2>
         <div class="region-list">
-            <span class="region-badge">📍 Tigray</span>
-            <span class="region-badge">📍 Amhara</span>
-            <span class="region-badge">📍 Oromia</span>
-            <span class="region-badge">📍 Somali</span>
-            <span class="region-badge">📍 Afar</span>
-            <span class="region-badge">📍 Sidama</span>
-            <span class="region-badge">📍 SNNPR</span>
-            <span class="region-badge">📍 Gambella</span>
-            <span class="region-badge">📍 Harari</span>
-            <span class="region-badge">📍 Benishangul-Gumuz</span>
-            <span class="region-badge">📍 Addis Ababa</span>
-            <span class="region-badge">📍 Dire Dawa</span>
+            <span class="region-badge">📍 Tigray</span><span class="region-badge">📍 Amhara</span>
+            <span class="region-badge">📍 Oromia</span><span class="region-badge">📍 Somali</span>
+            <span class="region-badge">📍 Afar</span><span class="region-badge">📍 Sidama</span>
+            <span class="region-badge">📍 SNNPR</span><span class="region-badge">📍 Gambella</span>
+            <span class="region-badge">📍 Harari</span><span class="region-badge">📍 Benishangul-Gumuz</span>
+            <span class="region-badge">📍 Addis Ababa</span><span class="region-badge">📍 Dire Dawa</span>
         </div>
 
         <div class="thanks-grid">
-            <div class="thanks-card">
-                <div class="icon">🗣️</div>
-                <h3>1,000+ Contributors</h3>
-                <p>Everyday Ethiopians who shared their hopes, dreams, and messages of peace. Your words are now preserved forever.</p>
-            </div>
-            <div class="thanks-card">
-                <div class="icon">🤝</div>
-                <h3>Community Elders</h3>
-                <p>Who opened doors, built trust, and guided the collection process with wisdom and cultural sensitivity.</p>
-            </div>
-            <div class="thanks-card">
-                <div class="icon">🌍</div>
-                <h3>Global Supporters</h3>
-                <p>People from China, Germany, Russia, USA, Jamaica, India, Somalia, Nigeria, UK, France, and beyond who sent solidarity messages.</p>
-            </div>
-            <div class="thanks-card">
-                <div class="icon">📰</div>
-                <h3>Media Partners</h3>
-                <p>Radio stations, TV channels, and newspapers who amplified these voices to wider audiences.</p>
-            </div>
-            <div class="thanks-card">
-                <div class="icon">🎓</div>
-                <h3>Researchers & Translators</h3>
-                <p>Who helped categorize, translate, and analyze voices across multiple Ethiopian languages.</p>
-            </div>
-            <div class="thanks-card">
-                <div class="icon">❤️</div>
-                <h3>You — The Reader</h3>
-                <p>By visiting this archive, reading these voices, and sharing them — you are part of the peace movement.</p>
-            </div>
+            <div class="thanks-card"><div class="icon">🗣️</div><h3>1,000+ Contributors</h3><p>Everyday Ethiopians who shared their hopes and dreams. Your words are preserved forever.</p></div>
+            <div class="thanks-card"><div class="icon">🤝</div><h3>Community Elders</h3><p>Who opened doors, built trust, and guided the collection process with wisdom.</p></div>
+            <div class="thanks-card"><div class="icon">🌍</div><h3>Global Supporters</h3><p>People from China, Germany, Russia, USA, Jamaica, India, Somalia, Nigeria, UK, France, and beyond.</p></div>
+            <div class="thanks-card"><div class="icon">📰</div><h3>Media Partners</h3><p>Radio stations, TV channels, and newspapers who amplified these voices.</p></div>
+            <div class="thanks-card"><div class="icon">🎓</div><h3>Researchers & Translators</h3><p>Who helped categorize, translate, and analyze voices across multiple languages.</p></div>
+            <div class="thanks-card"><div class="icon">❤️</div><h3>You — The Reader</h3><p>By visiting, reading, and sharing — you are part of the peace movement.</p></div>
         </div>
 
-        <div class="thank-you-note">
+        <div style="text-align:center;padding:24px;color:var(--text-dim);line-height:1.8">
             <p>This project took <strong>five years</strong> to collect.</p>
             <p>It traveled across <strong>all Ethiopian regions</strong>.</p>
             <p>It was built with <strong>zero budget</strong> and <strong>infinite hope</strong>.</p>
-            <p style="margin-top: 20px; color: var(--gold); font-weight: bold;">
-                To everyone who contributed — Amaseganallo, Galatoomi, Thank You. 🙏
-            </p>
+            <p style="margin-top:16px;color:var(--gold);font-weight:bold;font-size:1.1rem">Amaseganallo · Galatoomi · Thank You 🙏</p>
         </div>
     </main>
 
     <footer>
-        <p>Ethiopian Peace Archive &copy; 2026</p>
-        <p>
-            <a href="privacy.html">Privacy</a> · 
-            <a href="terms.html">Terms</a> · 
-            <a href="contact.html">Contact</a> · 
-            <a href="thanks.html">Thank You</a>
-        </p>
+        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
+            <p>Ethiopian Peace Archive &copy; 2026</p>
+            <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+        </div>
     </footer>
 
     <script src="js/navigation.js"></script>
+    <script src="js/language.js"></script>
 </body>
 </html>
