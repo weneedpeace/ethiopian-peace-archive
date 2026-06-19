@@ -9,114 +9,114 @@
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="desktop-links">
-            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-            <a href="courses.html" class="active">Courses</a><a href="dashboard.html">Impact</a>
-            <a href="media.html">Media</a><a href="gallery.html">Gallery</a>
-            <a href="thanks.html">Thanks</a><a href="contribute.html">Contribute</a>
-            <a href="support.html" class="cta-nav">Support</a>
-            <span style="display:flex;gap:2px;margin-left:6px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            </span>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-    </nav>
-
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
-        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
-        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
-        <a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
-        <a href="dashboard.html"><span class="menu-icon">📊</span>Impact</a>
-        <a href="media.html"><span class="menu-icon">📰</span>Media</a>
-        <a href="gallery.html"><span class="menu-icon">🖼️</span>Gallery</a>
-        <a href="thanks.html"><span class="menu-icon">🙏</span>Thanks</a>
-        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="voices.html" data-i18n="voices">Voices</a>
+        <a href="blog.html" data-i18n="blog">Blog</a>
+        <a href="courses.html" class="active" data-i18n="courses">Courses</a>
+        <a href="dashboard.html" data-i18n="impact">Impact</a>
+        <a href="media.html" data-i18n="media">Media</a>
+        <a href="gallery.html" data-i18n="gallery">Gallery</a>
+        <a href="contribute.html" data-i18n="contribute">Contribute</a>
+        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+        <span style="display:flex;gap:2px;margin-left:6px">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+        </span>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
-    <main class="container">
-        <div id="courseList">
-            <h1 class="section-title">🎓 Free Peace Courses</h1>
-            <p style="color:var(--text-dim);margin-bottom:20px">Open to everyone. No registration required. Learn at your own pace.</p>
-            <div class="course-grid" id="courseGrid"><div class="loading"><span class="spinner"></span>Loading courses...</div></div>
-        </div>
-        <div id="courseDetail" style="display:none">
-            <div style="color:var(--green-bright);cursor:pointer;margin-bottom:16px;font-family:var(--font-ui)" onclick="showList()">← Back to All Courses</div>
-            <h2 style="color:var(--gold);margin-bottom:8px" id="detailTitle"></h2>
-            <p style="color:var(--text-dim);margin-bottom:20px" id="detailDesc"></p>
-            <div id="lessonList"></div>
-        </div>
-    </main>
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
+    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
+    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
+    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
+    <a href="media.html"><span class="menu-icon">📰</span> <span data-i18n="media">Media</span></a>
+    <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
+    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
+    <a href="support.html" class="cta-mobile">❤️ <span data-i18n="support">Support</span></a>
+</div>
 
-    <footer>
-        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-            <p>Ethiopian Peace Archive &copy; 2026</p>
-            <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
-        </div>
-    </footer>
+<main class="container">
+    <div id="courseList">
+        <h1 class="section-title" data-i18n="coursesTitle">🎓 Free Peace Courses</h1>
+        <p style="color:var(--text-dim);margin-bottom:20px" data-i18n="coursesSub">Open to everyone. No registration required. Learn at your own pace.</p>
+        <div class="course-grid" id="courseGrid"><div class="loading"><span class="spinner"></span> Loading courses...</div></div>
+    </div>
+    <div id="courseDetail" style="display:none">
+        <div style="color:var(--green-bright);cursor:pointer;margin-bottom:16px;font-family:var(--font-ui)" onclick="showList()"><span data-i18n="backToCourses">← Back to All Courses</span></div>
+        <h2 style="color:var(--gold);margin-bottom:8px" id="detailTitle"></h2>
+        <p style="color:var(--text-dim);margin-bottom:20px" id="detailDesc"></p>
+        <div id="lessonList"></div>
+    </div>
+</main>
 
-    <script src="js/supabase.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/language.js"></script>
-    <script>
-        let allCourses = [];
-        const icons = ['🕊️', '🇪🇹', '🗣️', '🌍', '📚', '🤝'];
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
+        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
+    </div>
+    <div class="footer-bottom">
+        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
+        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+    </div>
+</footer>
 
-        async function loadCourses() {
-            try {
-                allCourses = await fetchFromSupabase('courses', 'is_published=eq.true&order=created_at.desc');
-                const grid = document.getElementById('courseGrid');
-                if (!allCourses.length) { grid.innerHTML = '<div class="loading">No courses yet. <a href="admin.html" style="color:var(--green-bright)">Add one →</a></div>'; return; }
-                grid.innerHTML = allCourses.map((c, i) => `
-                    <div class="course-card" onclick="showDetail(${c.id})">
-                        <div class="icon">${icons[i % 6]}</div>
-                        <h3>${c.title}</h3>
-                        <p>${c.description || 'Learn peacebuilding skills.'}</p>
-                        <span class="tag">${c.level || 'All Levels'}</span>
-                        <span class="tag">${c.module_count || '?'} Modules</span>
-                        <span class="tag">Free</span>
-                        <div style="margin-top:10px"><button class="btn btn-sm">View Course →</button></div>
-                    </div>
-                `).join('');
-            } catch (e) { document.getElementById('courseGrid').innerHTML = '<div class="loading">Error loading courses.</div>'; }
-        }
+<script src="js/supabase.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/language.js"></script>
+<script>
+let allCourses=[];
+const icons=['🕊️','🇪🇹','🗣️','🌍','📚','🤝'];
 
-        async function showDetail(id) {
-            const course = allCourses.find(c => c.id === id);
-            if (!course) return;
-            document.getElementById('courseList').style.display = 'none';
-            document.getElementById('courseDetail').style.display = 'block';
-            document.getElementById('detailTitle').textContent = course.title;
-            document.getElementById('detailDesc').textContent = course.description || '';
-            try {
-                const lessons = await fetchFromSupabase('course_lessons', `course_id=eq.${id}&is_published=eq.true&order=lesson_order`);
-                document.getElementById('lessonList').innerHTML = lessons.length
-                    ? lessons.map(l => `
-                        <div class="lesson-card">
-                            <div class="num">${l.lesson_order}</div>
-                            <div>
-                                <h4>${l.title}</h4>
-                                ${l.content ? `<p style="color:var(--text-dim);font-size:0.8rem;margin-top:4px">${l.content.substring(0, 200)}...</p>` : ''}
-                            </div>
-                        </div>
-                    `).join('')
-                    : '<p style="color:var(--text-dim)">Lessons coming soon.</p>';
-            } catch (e) { document.getElementById('lessonList').innerHTML = '<p style="color:var(--text-dim)">Error loading lessons.</p>'; }
-            window.scrollTo(0, 0);
-        }
+async function loadCourses(){
+    try{
+        allCourses=await fetchFromSupabase('courses','is_published=eq.true&order=created_at.desc');
+        const grid=document.getElementById('courseGrid');
+        if(!allCourses.length){grid.innerHTML='<div class="loading">No courses yet. <a href="admin.html" style="color:var(--green-bright)">Add one →</a></div>';return}
+        grid.innerHTML=allCourses.map((c,i)=>`
+            <div class="course-card" onclick="showDetail(${c.id})">
+                <div class="icon">${icons[i%6]}</div>
+                <h3>${c.title}</h3>
+                <p>${c.description||'Learn peacebuilding skills.'}</p>
+                <span class="tag">${c.level||'All Levels'}</span>
+                <span class="tag">${c.module_count||'?'} <span data-i18n="modules">Modules</span></span>
+                <span class="tag" data-i18n="free">Free</span>
+                <div style="margin-top:10px"><button class="btn btn-sm"><span data-i18n="viewCourse">View Course →</span></button></div>
+            </div>
+        `).join('');
+    }catch(e){document.getElementById('courseGrid').innerHTML='<div class="loading">Error loading courses.</div>'}
+}
 
-        function showList() {
-            document.getElementById('courseList').style.display = 'block';
-            document.getElementById('courseDetail').style.display = 'none';
-        }
+async function showDetail(id){
+    const course=allCourses.find(c=>c.id===id);
+    if(!course)return;
+    document.getElementById('courseList').style.display='none';
+    document.getElementById('courseDetail').style.display='block';
+    document.getElementById('detailTitle').textContent=course.title;
+    document.getElementById('detailDesc').textContent=course.description||'';
+    try{
+        const lessons=await fetchFromSupabase('course_lessons',`course_id=eq.${id}&is_published=eq.true&order=lesson_order`);
+        document.getElementById('lessonList').innerHTML=lessons.length
+            ?lessons.map(l=>`<div class="lesson-card"><div class="num">${l.lesson_order}</div><div><h4>${l.title}</h4>${l.content?`<p style="color:var(--text-dim);font-size:0.8rem;margin-top:4px">${l.content.substring(0,200)}...</p>`:''}</div></div>`).join('')
+            :`<p style="color:var(--text-dim)" data-i18n="lessonsComing">Lessons coming soon.</p>`;
+    }catch(e){document.getElementById('lessonList').innerHTML='<p style="color:var(--text-dim)">Error loading lessons.</p>'}
+    window.scrollTo(0,0);
+}
 
-        loadCourses();
-    </script>
+function showList(){document.getElementById('courseList').style.display='block';document.getElementById('courseDetail').style.display='none'}
+loadCourses();
+</script>
 </body>
 </html>
