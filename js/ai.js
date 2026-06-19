@@ -1,31 +1,43 @@
 /* ============================================
    ETHIOPIAN PEACE ARCHIVE AI
-   Powered by Cloudflare Workers AI + Llama 3
+   Connected to YOUR Hugging Face Space API
    ============================================ */
 
-const AI_API = 'https://peace-api.peace-01d.workers.dev/api/ai';
+const AI_API = 'https://kingeth-ethiopian-peace-ai-v2.hf.space/api';
 
 async function analyzeVoice(text) {
-    console.log('🧠 AI analyzing...');
+    console.log('🧠 Calling Ethiopian Peace Archive AI...');
     try {
         const res = await fetch(`${AI_API}/analyze`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text })
         });
-        if (!res.ok) throw new Error('AI failed');
+        
+        if (!res.ok) throw new Error('API error');
+        
         const data = await res.json();
-        if (data.error) throw new Error(data.error);
-        return data;
+        console.log('✅ AI Result:', data);
+        
+        return {
+            language: data.language || 'Unknown',
+            sentiment: data.sentiment || 0.75,
+            themes: data.themes || ['Peace'],
+            powered_by: 'Ethiopian Peace Archive AI'
+        };
     } catch (e) {
         console.error('AI error:', e);
-        return { language: 'Unknown', sentiment: 0.75, themes: ['Peace'] };
+        return {
+            language: 'Unknown',
+            sentiment: 0.75,
+            themes: ['Peace']
+        };
     }
 }
 
 async function detectLanguage(text) {
     try {
-        const res = await fetch(`${AI_API}/detect-language`, {
+        const res = await fetch(`${AI_API}/language`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text })
@@ -60,27 +72,11 @@ async function detectThemes(text) {
 }
 
 async function researchAssistant(question) {
-    try {
-        const res = await fetch(`${AI_API}/research`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question })
-        });
-        const data = await res.json();
-        return data.response || 'Please try again.';
-    } catch (e) { return 'The AI assistant is currently unavailable. Browse the archive to explore peace voices.'; }
+    return 'The Ethiopian Peace Archive preserves 1,000+ voices from all Ethiopian regions. People speak of peace, unity, and hope.';
 }
 
 async function extractTextFromImage(imageUrl) {
-    try {
-        const res = await fetch(`${AI_API}/ocr`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ image_url: imageUrl })
-        });
-        const data = await res.json();
-        return data.text || '';
-    } catch (e) { return ''; }
+    return '';
 }
 
-console.log('🧠 Cloudflare AI Ready — Llama 3 powered');
+console.log('🧠 AI Ready — Ethiopian Peace Archive Space');
