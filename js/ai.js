@@ -7,7 +7,6 @@ const AI_API = 'https://kingeth-ethiopia-peace-ai.hf.space';
 
 async function analyzeVoice(text) {
     try {
-        // Call Gradio API
         const res = await fetch(`${AI_API}/gradio_api/call/analyze_voice`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -15,62 +14,61 @@ async function analyzeVoice(text) {
         });
         const { event_id } = await res.json();
         
-        // Wait for result
-        await new Promise(r => setTimeout(r, 3000));
-        const resultRes = await fetch(`${AI_API}/gradio_api/call/analyze_voice/${event_id}`);
-        const resultText = await resultRes.text();
-        
-        // Parse SSE response
-        const lines = resultText.split('\n');
-        for (const line of lines) {
-            if (line.startsWith('data: ')) {
-                const data = JSON.parse(line.substring(6));
-                if (Array.isArray(data) && data.length >= 3) {
-                    return {
-                        language: data[0] || 'Unknown',
-                        sentiment: data[1] || 0.75,
-                        themes: (data[2] || 'Peace, Hope').split(',').map(t => t.trim()),
-                        powered_by: 'Ethiopian Peace Archive AI (Llama 3.3 70B)'
-                    };
+        // Wait up to 15 seconds for result
+        let result = null;
+        for (let i = 0; i < 5; i++) {
+            await new Promise(r => setTimeout(r, 3000));
+            const resultRes = await fetch(`${AI_API}/gradio_api/call/analyze_voice/${event_id}`);
+            const resultText = await resultRes.text();
+            
+            const lines = resultText.split('\n');
+            for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                    try {
+                        const data = JSON.parse(line.substring(6));
+                        if (Array.isArray(data) && data.length >= 3) {
+                            return {
+                                language: data[0] || 'Unknown',
+                                sentiment: data[1] || 0.75,
+                                themes: (data[2] || 'Peace, Hope').split(',').map(t => t.trim()),
+                                powered_by: 'Ethiopian Peace Archive AI (Llama 3.3 70B)'
+                            };
+                        }
+                    } catch(e) {}
                 }
             }
         }
-        throw new Error('No data');
+        throw new Error('Timeout');
     } catch (e) {
-        console.log('AI Space unavailable, using local analysis');
+        console.log('Space unavailable, using local AI');
         return analyzeLocal(text);
     }
 }
 
 function analyzeLocal(text) {
     const lower = text.toLowerCase();
-    
     let language = 'English';
     if (/[\u1200-\u137F]/.test(text)) language = 'Amharic/Tigrinya';
     if (/[\u0600-\u06FF]/.test(text)) language = 'Arabic';
     
-    const pos = ['peace', 'ሰላም', 'nagaa', 'unity', 'አንድነት', 'love', 'hope', 'together', 'future'];
-    const neg = ['war', 'hate', 'kill', 'violence', 'destroy'];
+    const pos = ['peace','ሰላም','nagaa','unity','አንድነት','love','hope','together','future','children'];
+    const neg = ['war','hate','kill','violence','destroy'];
     let score = 0.5;
     pos.forEach(w => { if (lower.includes(w)) score += 0.06; });
     neg.forEach(w => { if (lower.includes(w)) score -= 0.1; });
-    const sentiment = Math.max(0.05, Math.min(0.98, Math.round(score * 100) / 100));
     
     const themeMap = {
-        'Peace': ['peace', 'ሰላም', 'nagaa'],
-        'Unity': ['unity', 'አንድነት', 'together'],
-        'Hope': ['hope', 'ተስፋ', 'future'],
-        'Love': ['love', 'ፍቅር', 'jaalala'],
-        'Justice': ['justice', 'freedom', 'rights']
+        'Peace':['peace','ሰላም','nagaa'],'Unity':['unity','አንድነት','together'],
+        'Hope':['hope','ተስፋ','future','children'],'Love':['love','ፍቅር','jaalala'],
+        'Coexistence':['coexist','together','share'],'Justice':['justice','freedom','rights'],
+        'Forgiveness':['forgiv','ይቅርታ','reconcil'],'Solidarity':['solidarity','support']
     };
-    const themes = Object.entries(themeMap)
-        .filter(([k, v]) => v.some(w => lower.includes(w)))
-        .map(([k]) => k);
+    const themes = Object.entries(themeMap).filter(([k,v])=>v.some(w=>lower.includes(w))).map(([k])=>k);
     
     return {
         language,
-        sentiment,
-        themes: themes.length ? themes.slice(0, 4) : ['Peace', 'Hope'],
+        sentiment: Math.max(0.05, Math.min(0.98, Math.round(score*100)/100)),
+        themes: themes.length ? themes.slice(0,4) : ['Peace','Hope'],
         powered_by: 'Ethiopian Peace Archive AI'
     };
 }
@@ -87,37 +85,43 @@ async function researchAssistant(question) {
             body: JSON.stringify({ data: [question, null] })
         });
         const { event_id } = await res.json();
-        await new Promise(r => setTimeout(r, 5000));
-        const resultRes = await fetch(`${AI_API}/gradio_api/call/research_chat/${event_id}`);
-        const text = await resultRes.text();
-        const lines = text.split('\n');
-        for (const line of lines) {
-            if (line.startsWith('data: ')) {
-                const data = JSON.parse(line.substring(6));
-                if (Array.isArray(data) && data.length > 0) {
-                    return data[0];
+        
+        for (let i = 0; i < 5; i++) {
+            await new Promise(r => setTimeout(r, 3000));
+            const resultRes = await fetch(`${AI_API}/gradio_api/call/research_chat/${event_id}`);
+            const text = await resultRes.text();
+            const lines = text.split('\n');
+            for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                    try {
+                        const data = JSON.parse(line.substring(6));
+                        if (Array.isArray(data) && data.length > 0 && data[0]) {
+                            return data[0];
+                        }
+                    } catch(e) {}
                 }
             }
         }
-        throw new Error('No data');
+        throw new Error('Timeout');
     } catch (e) {
-        const knowledge = {
-            'peace': 'Peace in Ethiopia means communities living together in harmony. Over 1,000 voices from all Ethiopian regions express this desire for unity and coexistence.',
-            'gadaa': 'Gadaa is the Oromo democratic governance system recognized by UNESCO. Power rotates peacefully every 8 years.',
-            'shimglina': 'Shimglina is elder mediation in Amhara and Tigray communities for resolving disputes and restoring relationships.',
-            'xeer': 'Xeer is Somali customary law based on collective responsibility, compensation, and elder consensus.',
-            'regions': 'Voices from: Tigray, Amhara, Oromia, Somali, Afar, Sidama, SNNPR, Gambella, Harari, Benishangul-Gumuz, Addis Ababa, Dire Dawa.'
-        };
-        const q = question.toLowerCase();
-        for (const [k, v] of Object.entries(knowledge)) {
-            if (q.includes(k)) return v;
-        }
-        return 'The Ethiopian Peace Archive preserves 1,000+ voices from all Ethiopian regions. Visit the archive to explore their messages of peace.';
+        return getLocalKnowledge(question);
     }
 }
 
+function getLocalKnowledge(question) {
+    const q = question.toLowerCase();
+    if (q.includes('mediation') || q.includes('traditional') || q.includes('shimglina')) {
+        return 'Ethiopian traditional mediation includes Shimglina (elder mediation in Amhara and Tigray communities), Gadaa (Oromo democratic governance recognized by UNESCO), Xeer (Somali customary law), Makabanto (Afar clan arbitration), and Songo (Sidama community assembly). Elders listen to all sides and deliver binding decisions focused on reconciliation.';
+    }
+    if (q.includes('gadaa')) return 'Gadaa is the Oromo democratic governance system recognized by UNESCO as an Intangible Cultural Heritage. Power rotates peacefully every 8 years through age-grade classes called Luba.';
+    if (q.includes('peace')) return 'Peace in Ethiopia means communities living together in harmony, sharing resources, and resolving disputes through dialogue. Over 1,000 voices from all Ethiopian regions express this desire.';
+    if (q.includes('region')) return 'Voices collected from: Tigray, Amhara, Oromia, Somali, Afar, Sidama, SNNPR, Gambella, Harari, Benishangul-Gumuz, Addis Ababa, Dire Dawa.';
+    if (q.includes('diaspora')) return 'Ethiopian diaspora worldwide contributes through advocacy, knowledge sharing, and amplifying peace voices.';
+    return 'The Ethiopian Peace Archive preserves 1,000+ real voices from all Ethiopian regions. Visit voices.html to explore their messages of peace, unity, and hope.';
+}
+
 function moderateContent(text) {
-    const blocked = ['kill', 'murder', 'hate', 'violence'];
+    const blocked = ['kill','murder','hate','violence'];
     const found = blocked.filter(w => text.toLowerCase().includes(w));
     return found.length ? { approved: false } : { approved: true };
 }
@@ -125,4 +129,4 @@ function moderateContent(text) {
 async function extractTextFromImage(url) { return ''; }
 async function translateText(text, lang) { return text; }
 
-console.log('🧠 AI Ready — Llama 3.3 70B');
+console.log('🧠 AI Ready — Llama 3.3 70B + Local Knowledge Base');
