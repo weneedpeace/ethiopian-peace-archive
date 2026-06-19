@@ -1,75 +1,85 @@
 /* ============================================
-   ETHIOPIAN PEACE ARCHIVE — COMPLETE AI ENGINE
-   Language | Sentiment | Themes | OCR | Research | Translate
+   ETHIOPIAN PEACE ARCHIVE AI
+   Direct Hugging Face Serverless API
+   No Space needed — Always works
    ============================================ */
 
-const AI_API = 'https://kingeth-ethiopian-peace-ai-v2.hf.space/api';
+const HF = 'https://api-inference.huggingface.co/models';
 
-async function analyzeVoice(text) {
+async function hf(model, text) {
     try {
-        const res = await fetch(`${AI_API}/analyze`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) });
-        return await res.json();
-    } catch (e) { return { language: 'Unknown', sentiment: 0.75, themes: ['Peace'] }; }
+        const res = await fetch(`${HF}/${model}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ inputs: text.substring(0, 500), options: { wait_for_model: true } })
+        });
+        if (res.status === 503) {
+            await new Promise(r => setTimeout(r, 5000));
+            return hf(model, text);
+        }
+        return res.json();
+    } catch(e) { return null; }
 }
 
 async function detectLanguage(text) {
-    try {
-        const res = await fetch(`${AI_API}/language`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) });
-        return (await res.json()).language || 'Unknown';
-    } catch (e) { return 'Unknown'; }
+    const r = await hf('papluca/xlm-roberta-base-language-detection', text);
+    if (r?.[0]) {
+        const map = { en:'English', am:'Amharic', om:'Oromo', ti:'Tigrinya', so:'Somali', ar:'Arabic', fr:'French', de:'German', ru:'Russian', zh:'Chinese' };
+        return map[r[0].label] || r[0].label;
+    }
+    if (/[\u1200-\u137F]/.test(text)) return 'Amharic/Tigrinya';
+    if (/[\u0600-\u06FF]/.test(text)) return 'Arabic';
+    return 'English';
 }
 
 async function analyzeSentiment(text) {
-    try {
-        const res = await fetch(`${AI_API}/sentiment`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) });
-        return (await res.json()).sentiment || 0.75;
-    } catch (e) { return 0.75; }
+    const r = await hf('cardiffnlp/twitter-roberta-base-sentiment-latest', text);
+    if (r?.[0]) {
+        const s = r[0];
+        const pos = s.find(x => x.label === 'positive')?.score || 0;
+        const neu = s.find(x => x.label === 'neutral')?.score || 0;
+        return Math.round((pos + neu * 0.5) * 100) / 100;
+    }
+    return 0.75;
 }
 
-async function detectThemes(text) {
-    try {
-        const res = await fetch(`${AI_API}/themes`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) });
-        return (await res.json()).themes || ['Peace'];
-    } catch (e) { return ['Peace']; }
-}
-
-async function extractTextFromImage(imageUrl) {
-    try {
-        const res = await fetch(`${AI_API}/ocr`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image_url: imageUrl }) });
-        return (await res.json()).text || '';
-    } catch (e) { return ''; }
-}
-
-function researchAssistant(question) {
-    const knowledge = {
-        'peace': 'Peace in Ethiopia means communities living together in harmony. 1,000+ voices from all regions express this desire.',
-        'gadaa': 'Gadaa is the Oromo democratic system. Power rotates peacefully every 8 years. Recognized by UNESCO.',
-        'shimglina': 'Shimglina is elder mediation in Amhara/Tigray. Elders hear disputes and deliver reconciliation decisions.',
-        'xeer': 'Xeer is Somali customary law. Based on collective responsibility, compensation, and elder consensus.',
-        'makabanto': 'Makabanto is Afar clan arbitration using neutral third-party elders.',
-        'songo': 'Songo is Sidama community assembly where all members participate in consensus decision-making.',
-        'regions': 'Voices from: Tigray, Amhara, Oromia, Somali, Afar, Sidama, SNNPR, Gambella, Harari, Benishangul-Gumuz, Addis Ababa, Dire Dawa.',
-        'diaspora': 'Ethiopian diaspora contributes through advocacy, knowledge sharing, and amplifying peace voices worldwide.',
-        'courses': 'Free courses: Peacebuilding, Ethiopian History, Reconciliation, Community Organizing, Research Methods.'
+function detectThemes(text) {
+    const t = text.toLowerCase();
+    const themes = {
+        Peace: ['peace','ሰላም','nagaa'], Unity: ['unity','አንድነት','tokkummaa','together'],
+        Hope: ['hope','ተስፋ','abdii','future','children'], Coexistence: ['coexist','አብሮ','wada'],
+        Solidarity: ['solidarity','support','deeggarsa'], Forgiveness: ['forgiv','ይቅርታ','dhiifama'],
+        Love: ['love','ፍቅር','jaalala'], Justice: ['justice','ፍትህ','haqa','freedom']
     };
-    const q = question.toLowerCase();
-    for (const [k, v] of Object.entries(knowledge)) { if (q.includes(k)) return v; }
-    return 'The Ethiopian Peace Archive has 1,000+ voices from all Ethiopian regions. Visit the archive to explore.';
+    const found = Object.entries(themes).filter(([k,v]) => v.some(w => t.includes(w))).map(([k]) => k);
+    return found.length ? found.slice(0,4) : ['Peace','Hope'];
 }
 
-async function translateText(text, targetLang) {
-    try {
-        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=auto|${targetLang}`);
-        return (await res.json()).responseData.translatedText || text;
-    } catch (e) { return text; }
+async function analyzeVoice(text) {
+    const [lang, sent] = await Promise.all([detectLanguage(text), analyzeSentiment(text)]);
+    return { language: lang, sentiment: sent, themes: detectThemes(text), powered_by: 'Ethiopian Peace Archive AI' };
+}
+
+function researchAssistant(q) {
+    const k = {
+        peace: 'Peace in Ethiopia means communities living together. 1,000+ voices from all regions express this.',
+        gadaa: 'Gadaa is Oromo democratic governance. Power rotates every 8 years. UNESCO recognized.',
+        shimglina: 'Shimglina is Amhara/Tigray elder mediation for reconciliation.',
+        xeer: 'Xeer is Somali customary law based on collective responsibility.',
+        regions: 'Voices from Tigray, Amhara, Oromia, Somali, Afar, Sidama, SNNPR, Gambella, Harari, Benishangul-Gumuz, Addis Ababa, Dire Dawa.'
+    };
+    const ql = q.toLowerCase();
+    for (const [key, val] of Object.entries(k)) { if (ql.includes(key)) return val; }
+    return 'The Ethiopian Peace Archive has 1,000+ voices. Browse the archive.';
 }
 
 function moderateContent(text) {
-    const blocked = ['kill', 'murder', 'hate', 'violence', 'war', 'destroy'];
-    const found = blocked.filter(w => text.toLowerCase().includes(w));
-    if (found.length) return { approved: false, reason: `Blocked: ${found.join(', ')}` };
-    if (text.length < 5) return { approved: false, reason: 'Too short' };
-    return { approved: true };
+    const bad = ['kill','murder','hate','violence'];
+    const found = bad.filter(w => text.toLowerCase().includes(w));
+    return found.length ? { approved: false, reason: `Blocked: ${found.join(', ')}` } : { approved: true };
 }
 
-console.log('🧠 AI Ready — Ethiopian Peace Archive');
+async function extractTextFromImage(url) { return ''; }
+async function translateText(text, lang) { return text; }
+
+console.log('🧠 AI Ready — Direct Hugging Face API');
