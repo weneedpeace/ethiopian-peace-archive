@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OCR Tool — Extract text from peace voice documents using AI.">
+    <title>OCR Tool — Ethiopian Peace Archive</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .ocr-container { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .ocr-panel { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 20px; }
+        .ocr-panel h3 { color: var(--gold); margin-bottom: 12px; font-family: var(--font-ui); }
+        .upload-area { border: 2px dashed var(--green-border); border-radius: 12px; padding: 40px 20px; text-align: center; cursor: pointer; transition: all 0.3s; margin-bottom: 14px; }
+        .upload-area:hover { border-color: var(--green); background: var(--green-dim); }
+        .upload-area .icon { font-size: 3rem; margin-bottom: 8px; }
+        .upload-area p { color: var(--text-dim); font-size: 0.85rem; }
+        .upload-area img { max-width: 100%; max-height: 300px; border-radius: 8px; margin-top: 10px; }
+        .result-box { background: var(--bg); border: 1px solid var(--green-border); border-radius: 8px; padding: 16px; min-height: 150px; color: var(--text); font-size: 0.9rem; line-height: 1.7; white-space: pre-wrap; }
+        .copy-btn { margin-top: 10px; }
+        .quick-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+        .status { display: inline-block; padding: 4px 12px; border-radius: 10px; font-size: 0.75rem; font-family: var(--font-ui); }
+        .status-ready { background: var(--green-dim); color: var(--green-bright); }
+        .status-processing { background: rgba(251,191,36,0.12); color: #facc15; }
+        .status-done { background: rgba(168,85,247,0.12); color: #c084fc; }
+        .tips-card { background: rgba(168,85,247,0.08); border: 1px solid rgba(168,85,247,0.2); border-radius: var(--radius); padding: 18px; margin-top: 20px; }
+        .tips-card h4 { color: #c084fc; font-family: var(--font-ui); margin-bottom: 8px; }
+        .tips-card ul { color: var(--text-dim); font-size: 0.8rem; padding-left: 18px; }
+        .tips-card li { margin-bottom: 4px; }
+        @media (max-width: 768px) { .ocr-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+        <div class="desktop-links">
+            <a href="index.html">Home</a><a href="voices.html">Voices</a>
+            <a href="research.html">AI Research</a><a href="ocr.html" class="active">OCR Tool</a>
+            <a href="contribute.html">Contribute</a><a href="support.html" class="cta-nav">Support</a>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </nav>
+
+    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
+        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
+        <a href="research.html"><span class="menu-icon">🧠</span>AI Research</a>
+        <a href="ocr.html"><span class="menu-icon">📷</span>OCR Tool</a>
+        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
+    </div>
+
+    <main class="container">
+        <h1 class="section-title">📷 AI Image to Text (OCR)</h1>
+        <p style="color:var(--text-dim);margin-bottom:8px">Upload your scanned peace documents and extract text automatically. <span class="ai-badge" style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:0.65rem;background:rgba(168,85,247,0.15);color:#c084fc;font-family:var(--font-ui)">🧠 AI Powered</span></p>
+        
+        <div style="margin-bottom:20px">
+            <span class="status status-ready" id="statusBadge">✅ Ready</span>
+            <span style="color:var(--text-dim);font-size:0.75rem;margin-left:8px;font-family:var(--font-ui)" id="statusText">Upload an image to begin</span>
+        </div>
+
+        <div class="ocr-container">
+            <!-- Upload Panel -->
+            <div class="ocr-panel">
+                <h3>📤 Upload Image</h3>
+                <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                    <div class="icon">🖼️</div>
+                    <p>Tap to upload scanned document</p>
+                    <p style="font-size:0.7rem;color:var(--text-muted)">JPG, PNG — Printed text works best</p>
+                    <img id="previewImg" style="display:none" alt="Preview">
+                </div>
+                <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileSelect(event)">
+                <button class="btn btn-primary" id="extractBtn" onclick="extractText()" disabled style="width:100%">
+                    🧠 Extract Text
+                </button>
+                <p style="color:var(--text-muted);font-size:0.7rem;text-align:center;margin-top:8px">
+                    Best for printed/typed text. Handwriting may need manual entry.
+                </p>
+            </div>
+
+            <!-- Result Panel -->
+            <div class="ocr-panel">
+                <h3>📝 Extracted Text</h3>
+                <div class="result-box" id="resultBox">Extracted text will appear here...</div>
+                <div class="quick-actions">
+                    <button class="btn btn-sm" onclick="copyResult()">📋 Copy</button>
+                    <button class="btn btn-sm" onclick="clearResult()">🗑️ Clear</button>
+                    <button class="btn btn-sm" id="addVoiceBtn" onclick="addToVoiceForm()" disabled>➕ Add as Voice</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Add Form -->
+        <div class="ocr-panel" id="quickAddForm" style="display:none;margin-top:16px">
+            <h3>📝 Quick Add to Archive</h3>
+            <form onsubmit="quickAddVoice(event)">
+                <input type="text" id="qaDocumentId" placeholder="Document ID (e.g., ETH-050)" required>
+                <input type="text" id="qaRegion" placeholder="Region" required>
+                <input type="text" id="qaLanguage" placeholder="Language" required>
+                <input type="number" id="qaYear" placeholder="Year" required>
+                <textarea id="qaText" placeholder="Extracted text..."></textarea>
+                <button class="btn btn-primary">💾 Save to Archive</button>
+                <button type="button" class="btn btn-sm" style="margin-top:8px;background:transparent;border:1px solid var(--green-border);color:var(--text-dim)" onclick="document.getElementById('quickAddForm').style.display='none'">Cancel</button>
+            </form>
+        </div>
+
+        <!-- Tips -->
+        <div class="tips-card">
+            <h4>💡 Tips for Best Results</h4>
+            <ul>
+                <li>Use clear, well-lit photos of printed/typed documents</li>
+                <li>Avoid shadows and blur</li>
+                <li>Crop to just the text area if possible</li>
+                <li>AI works best on printed Amharic, Oromo, and English text</li>
+                <li>For handwritten documents, type manually for accuracy</li>
+                <li>Each image takes 5-15 seconds to process</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
+            <p>Ethiopian Peace Archive &copy; 2026 · AI OCR Tool</p>
+        </div>
+    </footer>
+
+    <script src="js/supabase.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/ai.js"></script>
+    <script>
+        let selectedFile = null;
+        let extractedText = '';
+
+        function setStatus(status, text) {
+            const badge = document.getElementById('statusBadge');
+            const statusText = document.getElementById('statusText');
+            badge.className = 'status';
+            
+            if (status === 'ready') { badge.classList.add('status-ready'); badge.textContent = '✅ Ready'; }
+            else if (status === 'processing') { badge.classList.add('status-processing'); badge.textContent = '⏳ Processing'; }
+            else if (status === 'done') { badge.classList.add('status-done'); badge.textContent = '✨ Done'; }
+            else if (status === 'error') { badge.classList.add('status-processing'); badge.textContent = '⚠️ Error'; }
+            
+            statusText.textContent = text;
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            selectedFile = file;
+            
+            // Preview
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.getElementById('previewImg');
+                img.src = e.target.result;
+                img.style.display = 'block';
+                document.querySelector('#uploadArea .icon').style.display = 'none';
+                document.querySelector('#uploadArea p').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+            
+            document.getElementById('extractBtn').disabled = false;
+            setStatus('ready', 'Image loaded. Click "Extract Text"');
+        }
+
+        async function extractText() {
+            if (!selectedFile) return;
+
+            setStatus('processing', 'AI is reading your document...');
+            document.getElementById('extractBtn').disabled = true;
+            document.getElementById('extractBtn').textContent = '⏳ Processing...';
+            document.getElementById('resultBox').textContent = 'Analyzing image...';
+
+            try {
+                // Convert image to base64 URL
+                const imageUrl = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.readAsDataURL(selectedFile);
+                });
+
+                // Try Hugging Face OCR
+                let text = await extractTextFromImage(imageUrl);
+
+                // Fallback: show message
+                if (!text || text.length < 2) {
+                    text = '[AI could not read this image clearly. Please type the text manually or try a clearer photo.]';
+                    setStatus('error', 'OCR incomplete');
+                } else {
+                    setStatus('done', `Extracted ${text.length} characters`);
+                }
+
+                extractedText = text;
+                document.getElementById('resultBox').textContent = text;
+                document.getElementById('addVoiceBtn').disabled = false;
+                document.getElementById('extractBtn').textContent = '🧠 Extract Text';
+                document.getElementById('extractBtn').disabled = false;
+
+            } catch (e) {
+                console.error('OCR error:', e);
+                document.getElementById('resultBox').textContent = 'Error: ' + e.message + '\n\nTry a different image or type manually.';
+                setStatus('error', 'OCR failed. Try again.');
+                document.getElementById('extractBtn').textContent = '🔄 Retry';
+                document.getElementById('extractBtn').disabled = false;
+            }
+        }
+
+        function copyResult() {
+            const text = document.getElementById('resultBox').textContent;
+            if (text && !text.includes('will appear here')) {
+                navigator.clipboard.writeText(text).then(() => {
+                    const btn = event.target;
+                    btn.textContent = '✅ Copied!';
+                    setTimeout(() => { btn.textContent = '📋 Copy'; }, 2000);
+                });
+            }
+        }
+
+        function clearResult() {
+            document.getElementById('resultBox').textContent = 'Extracted text will appear here...';
+            document.getElementById('addVoiceBtn').disabled = true;
+            extractedText = '';
+            setStatus('ready', 'Upload an image to begin');
+        }
+
+        function addToVoiceForm() {
+            if (!extractedText) return;
+            const form = document.getElementById('quickAddForm');
+            form.style.display = 'block';
+            document.getElementById('qaText').value = extractedText;
+            document.getElementById('qaDocumentId').value = 'ETH-' + Date.now().toString().slice(-6);
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function quickAddVoice(e) {
+            e.preventDefault();
+            const data = {
+                document_id: document.getElementById('qaDocumentId').value,
+                region: document.getElementById('qaRegion').value,
+                language: document.getElementById('qaLanguage').value,
+                year: parseInt(document.getElementById('qaYear').value),
+                quote_original: document.getElementById('qaText').value,
+                quote_english: document.getElementById('qaText').value,
+                themes: ['Peace'],
+                sentiment: 0.85,
+                is_published: false
+            };
+            
+            const success = await insertToSupabase('ethiopian_voices', data);
+            if (success) {
+                alert('✅ Voice saved! It will appear after review.');
+                document.getElementById('quickAddForm').style.display = 'none';
+                clearResult();
+            } else {
+                alert('❌ Failed to save. Try again.');
+            }
+        }
+    </script>
+</body>
+</html>
