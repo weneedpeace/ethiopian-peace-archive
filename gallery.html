@@ -9,98 +9,96 @@
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="desktop-links">
-            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-            <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
-            <a href="media.html">Media</a><a href="gallery.html" class="active">Gallery</a>
-            <a href="thanks.html">Thanks</a><a href="contribute.html">Contribute</a>
-            <a href="support.html" class="cta-nav">Support</a>
-            <span style="display:flex;gap:2px;margin-left:6px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            </span>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-    </nav>
-
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
-        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
-        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
-        <a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
-        <a href="dashboard.html"><span class="menu-icon">📊</span>Impact</a>
-        <a href="media.html"><span class="menu-icon">📰</span>Media</a>
-        <a href="gallery.html"><span class="menu-icon">🖼️</span>Gallery</a>
-        <a href="thanks.html"><span class="menu-icon">🙏</span>Thanks</a>
-        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="voices.html" data-i18n="voices">Voices</a>
+        <a href="blog.html" data-i18n="blog">Blog</a>
+        <a href="courses.html" data-i18n="courses">Courses</a>
+        <a href="dashboard.html" data-i18n="impact">Impact</a>
+        <a href="media.html" data-i18n="media">Media</a>
+        <a href="gallery.html" class="active" data-i18n="gallery">Gallery</a>
+        <a href="contribute.html" data-i18n="contribute">Contribute</a>
+        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+        <span style="display:flex;gap:2px;margin-left:6px">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+        </span>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
-    <main class="container">
-        <h1 class="section-title">🖼️ Gallery</h1>
-        <p style="color:var(--text-dim);margin-bottom:20px">Moments from the peace movement — events, community, and action.</p>
-        <div class="gallery-grid" id="galleryGrid"><div class="loading"><span class="spinner"></span>Loading photos...</div></div>
-    </main>
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
+    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
+    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
+    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
+    <a href="media.html"><span class="menu-icon">📰</span> <span data-i18n="media">Media</span></a>
+    <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
+    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
+    <a href="support.html" class="cta-mobile">❤️ <span data-i18n="support">Support</span></a>
+</div>
 
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <button class="close">&times;</button>
-        <img src="" alt="" id="lbImg" class="protected-img" draggable="false">
-        <p style="color:#fff;margin-top:12px;font-family:var(--font-ui)" id="lbCaption"></p>
+<main class="container">
+    <h1 class="section-title" data-i18n="galleryTitle">🖼️ Gallery</h1>
+    <p style="color:var(--text-dim);margin-bottom:20px" data-i18n="gallerySub">Moments from the peace movement — events, community, and action.</p>
+    <div class="gallery-grid" id="galleryGrid"><div class="loading"><span class="spinner"></span> Loading photos...</div></div>
+</main>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="close">&times;</button>
+    <img src="" alt="" id="lbImg" class="protected-img" draggable="false">
+    <p style="color:#fff;margin-top:12px;font-family:var(--font-ui)" id="lbCaption"></p>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
+        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
     </div>
+    <div class="footer-bottom">
+        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
+        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+    </div>
+</footer>
 
-    <footer>
-        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-            <p>Ethiopian Peace Archive &copy; 2026</p>
-            <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
-        </div>
-    </footer>
-
-    <script src="js/supabase.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/protection.js"></script>
-    <script src="js/language.js"></script>
-    <script>
-        async function loadGallery() {
-            try {
-                const items = await fetchFromSupabase('gallery', 'is_published=eq.true&order=created_at.desc');
-                const grid = document.getElementById('galleryGrid');
-                if (!items.length) { grid.innerHTML = '<div class="loading">No photos yet.</div>'; return; }
-                grid.innerHTML = items.map(item => `
-                    <div class="gallery-item" onclick="openLightbox('${item.image_url}', '${escapeHTML(item.title || '')}', '${escapeHTML(item.category || '')}')">
-                        <img src="${item.image_url}" alt="${escapeHTML(item.title || 'Gallery photo')}" loading="lazy" class="protected-img" draggable="false" onerror="this.parentElement.style.display='none'">
-                        <div class="caption">${escapeHTML(item.title || '')}<br><small>${escapeHTML(item.category || '')}</small></div>
-                    </div>
-                `).join('');
-                protectNewImages();
-            } catch (e) {
-                document.getElementById('galleryGrid').innerHTML = '<div class="loading">Error loading gallery.</div>';
-            }
-        }
-
-        function openLightbox(url, title, category) {
-            document.getElementById('lightbox').classList.add('open');
-            document.getElementById('lbImg').src = url;
-            document.getElementById('lbCaption').textContent = (category ? category + ' — ' : '') + title;
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        function escapeHTML(str) {
-            if (!str) return '';
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        loadGallery();
-    </script>
+<script src="js/supabase.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/protection.js"></script>
+<script src="js/language.js"></script>
+<script>
+async function loadGallery(){
+    try{
+        const items=await fetchFromSupabase('gallery','is_published=eq.true&order=created_at.desc');
+        const grid=document.getElementById('galleryGrid');
+        if(!items.length){grid.innerHTML='<div class="loading" data-i18n="noPhotos">No photos yet.</div>';return}
+        grid.innerHTML=items.map(item=>`
+            <div class="gallery-item" onclick="openLightbox('${item.image_url}','${esc(item.title||'')}','${esc(item.category||'')}')">
+                <img src="${item.image_url}" alt="${esc(item.title||'Gallery photo')}" loading="lazy" class="protected-img" draggable="false" onerror="this.parentElement.style.display='none'">
+                <div class="caption">${esc(item.title||'')}${item.category?`<br><small>${esc(item.category)}</small>`:''}</div>
+            </div>
+        `).join('');
+        protectNewImages();
+    }catch(e){document.getElementById('galleryGrid').innerHTML='<div class="loading">Error loading gallery.</div>'}
+}
+function openLightbox(url,title,category){
+    document.getElementById('lightbox').classList.add('open');
+    document.getElementById('lbImg').src=url;
+    document.getElementById('lbCaption').textContent=(category?category+' — ':'')+title;
+    document.body.style.overflow='hidden';
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=''}
+function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+loadGallery();
+</script>
 </body>
 </html>
