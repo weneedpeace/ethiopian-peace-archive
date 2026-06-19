@@ -13,11 +13,11 @@
         .admin-panel.active { display: block; }
         .upload-area { border: 2px dashed var(--green-border); border-radius: 12px; padding: 30px; text-align: center; cursor: pointer; margin-bottom: 12px; transition: all 0.3s; }
         .upload-area:hover { border-color: var(--green); background: var(--green-dim); }
-        .upload-area img { max-width: 200px; max-height: 200px; border-radius: 8px; margin-top: 10px; display: none; }
-        .preview-img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px; }
+        .preview-img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px; display: none; }
     </style>
 </head>
 <body>
+
 <div id="loginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh">
     <div style="background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;max-width:380px;width:100%;text-align:center">
         <h1 style="color:var(--gold);margin-bottom:16px">🔐 Admin Panel</h1>
@@ -57,7 +57,7 @@
                 <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select>
                 
                 <label style="display:block;color:var(--text-dim);margin-bottom:4px;font-family:var(--font-ui);font-size:0.85rem">Featured Image</label>
-                <div class="upload-area" id="blogUpload" onclick="document.getElementById('blogFile').click()">
+                <div class="upload-area" onclick="document.getElementById('blogFile').click()">
                     <p>📷 Click to upload image</p>
                     <img id="blogPreview" class="preview-img">
                 </div>
@@ -77,7 +77,7 @@
                 <input type="text" id="gTitle" placeholder="Photo title">
                 <input type="text" id="gCategory" placeholder="Category (Events, Community, Workshop...)">
                 
-                <div class="upload-area" id="galleryUpload" onclick="document.getElementById('galleryFile').click()">
+                <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
                     <p>📷 Click to upload image</p>
                     <img id="galleryPreview" class="preview-img">
                 </div>
@@ -119,11 +119,17 @@
     </div>
 </div>
 
-<script src="js/supabase.js"></script>
 <script>
-const API = 'https://peace-api.peace-01d.workers.dev/api';
-const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/djb3falqu/image/upload';
-const UPLOAD_PRESET = 'peace_archive';
+const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+
+function showMsg(text, type) {
+    const box = document.getElementById('msgBox');
+    box.textContent = text;
+    box.className = 'msg msg-' + (type === 'ok' ? 'ok' : 'err');
+    box.style.display = 'block';
+    setTimeout(() => box.style.display = 'none', 4000);
+}
 
 function login(e) {
     e.preventDefault();
@@ -137,7 +143,9 @@ function login(e) {
         document.getElementById('loginMsg').style.display = 'block';
     }
 }
+
 function logout() { localStorage.removeItem('epa_admin'); location.reload(); }
+
 if (localStorage.getItem('epa_admin') === '1') {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('panel').style.display = 'block';
@@ -152,40 +160,46 @@ function switchTab(tab) {
     if (tab === 'lesson') loadCourses();
 }
 
-function showMsg(text, type) {
-    const box = document.getElementById('msgBox');
-    box.textContent = text;
-    box.className = 'msg msg-' + (type === 'ok' ? 'ok' : 'err');
-    box.style.display = 'block';
-    setTimeout(() => box.style.display = 'none', 4000);
+async function uploadToCloudinary(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'peace_archive');
+    const res = await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload', { method: 'POST', body: formData });
+    const data = await res.json();
+    return data.secure_url;
 }
 
 async function handleUpload(input, previewId, hiddenId) {
     const file = input.files[0];
     if (!file) return;
-    
-    // Preview
     const reader = new FileReader();
     reader.onload = e => {
-        const img = document.getElementById(previewId);
-        img.src = e.target.result;
-        img.style.display = 'block';
+        document.getElementById(previewId).src = e.target.result;
+        document.getElementById(previewId).style.display = 'block';
     };
     reader.readAsDataURL(file);
-    
-    // Upload to Cloudinary
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', UPLOAD_PRESET);
-    
-    try {
-        const res = await fetch(CLOUDINARY_URL, { method: 'POST', body: formData });
-        const data = await res.json();
-        document.getElementById(hiddenId).value = data.secure_url;
+    showMsg('📤 Uploading to Cloudinary...', 'ok');
+    const url = await uploadToCloudinary(file);
+    if (url) {
+        document.getElementById(hiddenId).value = url;
         showMsg('✅ Image uploaded!', 'ok');
-    } catch (e) {
+    } else {
         showMsg('❌ Upload failed', 'err');
     }
+}
+
+async function saveToSupabase(table, data) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+        method: 'POST',
+        headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(data)
+    });
+    return res.ok;
 }
 
 async function saveBlog(e) {
@@ -196,32 +210,27 @@ async function saveBlog(e) {
         content: document.getElementById('bContent').value,
         excerpt: document.getElementById('bExcerpt').value,
         category: document.getElementById('bCategory').value,
-        image_url: document.getElementById('bImageUrl').value
+        image_url: document.getElementById('bImageUrl').value,
+        is_published: true
     };
-    const res = await fetch(`${API}/blogs`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    });
-    if (res.ok) { showMsg('✅ Blog published!', 'ok'); e.target.reset(); }
-    else showMsg('❌ Failed', 'err');
+    const ok = await saveToSupabase('blog_posts', data);
+    ok ? showMsg('✅ Blog published!', 'ok') : showMsg('❌ Failed', 'err');
+    if (ok) e.target.reset();
 }
 
 async function saveGallery(e) {
     e.preventDefault();
+    const imageUrl = document.getElementById('gImageUrl').value;
+    if (!imageUrl) { showMsg('❌ Upload an image first', 'err'); return; }
     const data = {
         title: document.getElementById('gTitle').value,
-        image_url: document.getElementById('gImageUrl').value,
-        category: document.getElementById('gCategory').value || 'General'
+        image_url: imageUrl,
+        category: document.getElementById('gCategory').value || 'General',
+        is_published: true
     };
-    if (!data.image_url) { showMsg('❌ Upload an image first', 'err'); return; }
-    const res = await fetch(`${API}/gallery`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    });
-    if (res.ok) { showMsg('✅ Photo added!', 'ok'); e.target.reset(); }
-    else showMsg('❌ Failed', 'err');
+    const ok = await saveToSupabase('gallery', data);
+    ok ? showMsg('✅ Photo added!', 'ok') : showMsg('❌ Failed', 'err');
+    if (ok) e.target.reset();
 }
 
 async function saveCourse(e) {
@@ -231,15 +240,12 @@ async function saveCourse(e) {
         slug: document.getElementById('cSlug').value,
         description: document.getElementById('cDesc').value,
         level: document.getElementById('cLevel').value,
-        module_count: parseInt(document.getElementById('cModules').value)
+        module_count: parseInt(document.getElementById('cModules').value),
+        is_published: true
     };
-    const res = await fetch(`${API}/courses`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    });
-    if (res.ok) { showMsg('✅ Course saved!', 'ok'); e.target.reset(); }
-    else showMsg('❌ Failed', 'err');
+    const ok = await saveToSupabase('courses', data);
+    ok ? showMsg('✅ Course saved!', 'ok') : showMsg('❌ Failed', 'err');
+    if (ok) e.target.reset();
 }
 
 async function saveLesson(e) {
@@ -248,26 +254,23 @@ async function saveLesson(e) {
         course_id: parseInt(document.getElementById('lCourseId').value),
         title: document.getElementById('lTitle').value,
         content: document.getElementById('lContent').value,
-        lesson_order: parseInt(document.getElementById('lOrder').value)
+        lesson_order: parseInt(document.getElementById('lOrder').value),
+        is_published: true
     };
-    const res = await fetch(`${API}/courses/lessons`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    });
-    if (res.ok) { showMsg('✅ Lesson saved!', 'ok'); e.target.reset(); }
-    else showMsg('❌ Failed', 'err');
+    const ok = await saveToSupabase('course_lessons', data);
+    ok ? showMsg('✅ Lesson saved!', 'ok') : showMsg('❌ Failed', 'err');
+    if (ok) e.target.reset();
 }
 
 async function loadCourses() {
     try {
-        const res = await fetch(`${API}/courses`);
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/courses?select=id,title&is_published=eq.true`, {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+        });
         const courses = await res.json();
         const sel = document.getElementById('lCourseId');
         sel.innerHTML = '<option value="">Select Course...</option>';
-        courses.forEach(c => {
-            sel.innerHTML += `<option value="${c.id}">${c.title}</option>`;
-        });
+        courses.forEach(c => { sel.innerHTML += `<option value="${c.id}">${c.title}</option>`; });
     } catch (e) {}
 }
 </script>
