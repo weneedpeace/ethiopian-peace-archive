@@ -9,108 +9,100 @@
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="desktop-links">
-            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-            <a href="courses.html">Courses</a><a href="dashboard.html" class="active">Impact</a>
-            <a href="media.html">Media</a><a href="gallery.html">Gallery</a>
-            <a href="thanks.html">Thanks</a><a href="contribute.html">Contribute</a>
-            <a href="support.html" class="cta-nav">Support</a>
-            <span style="display:flex;gap:2px;margin-left:6px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            </span>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-    </nav>
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="voices.html" data-i18n="voices">Voices</a>
+        <a href="blog.html" data-i18n="blog">Blog</a>
+        <a href="courses.html" data-i18n="courses">Courses</a>
+        <a href="dashboard.html" class="active" data-i18n="impact">Impact</a>
+        <a href="media.html" data-i18n="media">Media</a>
+        <a href="gallery.html" data-i18n="gallery">Gallery</a>
+        <a href="contribute.html" data-i18n="contribute">Contribute</a>
+        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+        <span style="display:flex;gap:2px;margin-left:6px">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+        </span>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
-        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
-        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
-        <a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
-        <a href="dashboard.html"><span class="menu-icon">📊</span>Impact</a>
-        <a href="media.html"><span class="menu-icon">📰</span>Media</a>
-        <a href="gallery.html"><span class="menu-icon">🖼️</span>Gallery</a>
-        <a href="thanks.html"><span class="menu-icon">🙏</span>Thanks</a>
-        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
+    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
+    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
+    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
+    <a href="media.html"><span class="menu-icon">📰</span> <span data-i18n="media">Media</span></a>
+    <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
+    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
+    <a href="support.html" class="cta-mobile">❤️ <span data-i18n="support">Support</span></a>
+</div>
+
+<main class="container">
+    <h1 class="section-title" data-i18n="dashboardTitle">📊 Impact Dashboard</h1>
+    <p style="color:var(--text-dim);margin-bottom:20px" data-i18n="dashboardSub">Live data from the peace movement.</p>
+
+    <div class="big-stats">
+        <div class="big-stat"><div class="num" id="totalVoices">...</div><div class="lbl" data-i18n="totalVoices">Total Voices</div></div>
+        <div class="big-stat gold"><div class="num" id="regions">...</div><div class="lbl" data-i18n="regions">Regions</div></div>
+        <div class="big-stat blue"><div class="num" id="countries">...</div><div class="lbl" data-i18n="countries">Countries</div></div>
+        <div class="big-stat purple"><div class="num" id="mediaN">...</div><div class="lbl" data-i18n="mediaFeatures">Media</div></div>
+        <div class="big-stat orange"><div class="num" id="coursesN">...</div><div class="lbl" data-i18n="courses">Courses</div></div>
+        <div class="big-stat"><div class="num" id="blogsN">...</div><div class="lbl" data-i18n="blogPosts">Blog Posts</div></div>
     </div>
 
-    <main class="container">
-        <h1 class="section-title">📊 Impact Dashboard</h1>
-        <p style="color:var(--text-dim);margin-bottom:20px">Live data from the peace movement.</p>
+    <div class="chart-card"><h3 data-i18n="voicesByRegion">🗣️ Voices by Region</h3><div id="regionChart"><div class="loading">Loading...</div></div></div>
+    <div class="chart-card"><h3 data-i18n="regionsRepresented">🌍 Regions Represented</h3><div class="region-tags" id="regionTags">Loading...</div></div>
+</main>
 
-        <div class="big-stats">
-            <div class="big-stat"><div class="num" id="totalVoices">...</div><div class="lbl">Total Voices</div></div>
-            <div class="big-stat gold"><div class="num" id="regions">...</div><div class="lbl">Regions</div></div>
-            <div class="big-stat blue"><div class="num" id="countries">...</div><div class="lbl">Countries</div></div>
-            <div class="big-stat purple"><div class="num" id="mediaN">...</div><div class="lbl">Media</div></div>
-            <div class="big-stat orange"><div class="num" id="coursesN">...</div><div class="lbl">Courses</div></div>
-            <div class="big-stat"><div class="num" id="blogsN">...</div><div class="lbl">Blog Posts</div></div>
-        </div>
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
+        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
+    </div>
+    <div class="footer-bottom">
+        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
+        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+    </div>
+</footer>
 
-        <div class="chart-card">
-            <h3>🗣️ Voices by Region</h3>
-            <div id="regionChart"><div class="loading">Loading...</div></div>
-        </div>
-
-        <div class="chart-card">
-            <h3>🌍 Regions Represented</h3>
-            <div class="region-tags" id="regionTags">Loading...</div>
-        </div>
-    </main>
-
-    <footer>
-        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-            <p>Ethiopian Peace Archive &copy; 2026</p>
-            <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
-        </div>
-    </footer>
-
-    <script src="js/supabase.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/language.js"></script>
-    <script>
-        async function loadDashboard() {
-            try {
-                const [eth, global, media, courses, blogs] = await Promise.all([
-                    fetchFromSupabase('ethiopian_voices', 'is_published=eq.true'),
-                    fetchFromSupabase('global_voices', 'is_published=eq.true'),
-                    fetchFromSupabase('media_coverage', 'is_published=eq.true'),
-                    fetchFromSupabase('courses', 'is_published=eq.true'),
-                    fetchFromSupabase('blog_posts', 'is_published=eq.true')
-                ]);
-
-                document.getElementById('totalVoices').textContent = eth.length + global.length;
-                document.getElementById('regions').textContent = new Set(eth.map(v => v.region).filter(Boolean)).size;
-                document.getElementById('countries').textContent = new Set(global.map(v => v.country).filter(Boolean)).size;
-                document.getElementById('mediaN').textContent = media.length;
-                document.getElementById('coursesN').textContent = courses.length;
-                document.getElementById('blogsN').textContent = blogs.length;
-
-                const regionCount = {};
-                eth.forEach(v => { if (v.region) regionCount[v.region] = (regionCount[v.region] || 0) + 1; });
-                const sorted = Object.entries(regionCount).sort((a, b) => b[1] - a[1]);
-                const colors = ['#4ade80', '#22c55e', '#fbbf24', '#3b82f6', '#a855f7', '#f97316', '#ec4899', '#14b8a6'];
-
-                document.getElementById('regionChart').innerHTML = sorted.slice(0, 8).map(([r, c], i) => `
-                    <div class="bar-row">
-                        <div class="bar-label"><span>${r}</span><span>${c} voices</span></div>
-                        <div class="bar"><div class="bar-fill" style="width:${Math.max(c / eth.length * 100, 5)}%;background:${colors[i % 8]}">${c}</div></div>
-                    </div>
-                `).join('');
-
-                document.getElementById('regionTags').innerHTML = sorted.map(([r, c]) => `<span class="region-tag">📍 ${r} (${c})</span>`).join('');
-
-            } catch (e) {
-                console.error('Dashboard error:', e);
-            }
-        }
-        loadDashboard();
-    </script>
+<script src="js/supabase.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/language.js"></script>
+<script>
+async function loadDashboard(){
+    try{
+        const[eth,global,media,courses,blogs]=await Promise.all([
+            fetchFromSupabase('ethiopian_voices','is_published=eq.true'),
+            fetchFromSupabase('global_voices','is_published=eq.true'),
+            fetchFromSupabase('media_coverage','is_published=eq.true'),
+            fetchFromSupabase('courses','is_published=eq.true'),
+            fetchFromSupabase('blog_posts','is_published=eq.true')
+        ]);
+        document.getElementById('totalVoices').textContent=eth.length+global.length;
+        document.getElementById('regions').textContent=new Set(eth.map(v=>v.region).filter(Boolean)).size;
+        document.getElementById('countries').textContent=new Set(global.map(v=>v.country).filter(Boolean)).size;
+        document.getElementById('mediaN').textContent=media.length;
+        document.getElementById('coursesN').textContent=courses.length;
+        document.getElementById('blogsN').textContent=blogs.length;
+        const rc={};eth.forEach(v=>{if(v.region)rc[v.region]=(rc[v.region]||0)+1});
+        const sorted=Object.entries(rc).sort((a,b)=>b[1]-a[1]);
+        const colors=['#4ade80','#22c55e','#fbbf24','#3b82f6','#a855f7','#f97316','#ec4899','#14b8a6'];
+        document.getElementById('regionChart').innerHTML=sorted.slice(0,8).map(([r,c],i)=>`<div class="bar-row"><div class="bar-label"><span>${r}</span><span>${c}</span></div><div class="bar"><div class="bar-fill" style="width:${Math.max(c/eth.length*100,5)}%;background:${colors[i%8]}">${c}</div></div></div>`).join('');
+        document.getElementById('regionTags').innerHTML=sorted.map(([r,c])=>`<span class="region-tag">📍 ${r} (${c})</span>`).join('');
+    }catch(e){}
+}
+loadDashboard();
+</script>
 </body>
 </html>
