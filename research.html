@@ -42,18 +42,18 @@
 
     <main class="container-sm">
         <h1 class="section-title">🧠 AI Research Assistant</h1>
-        <p style="color:var(--text-dim);margin-bottom:16px">Ask questions about peace, Ethiopian voices, and conflict resolution. Powered by AI.</p>
+        <p style="color:var(--text-dim);margin-bottom:16px">Ask questions about peace, Ethiopian voices, and traditional conflict resolution. Powered by Llama 3.3 70B.</p>
 
         <div class="suggestions">
-            <button class="suggestion-btn" onclick="askSuggested('What are the main themes in Ethiopian peace voices?')">Main themes?</button>
             <button class="suggestion-btn" onclick="askSuggested('How does traditional mediation work in Ethiopia?')">Traditional mediation?</button>
+            <button class="suggestion-btn" onclick="askSuggested('What is the Gadaa system?')">Gadaa system?</button>
             <button class="suggestion-btn" onclick="askSuggested('What do Ethiopians want for peace?')">What do Ethiopians want?</button>
             <button class="suggestion-btn" onclick="askSuggested('How can diaspora support peace?')">Diaspora role?</button>
         </div>
 
         <div class="chat-container" id="chatContainer">
             <div class="chat-msg chat-ai">
-                👋 Welcome! I'm the Ethiopian Peace Archive Research Assistant. Ask me anything about peace, Ethiopian voices, traditional conflict resolution, or the archive.
+                👋 Welcome! I'm the Ethiopian Peace Archive Research Assistant powered by Llama 3.3 70B. Ask me anything about peace, Ethiopian traditions, or the archive.
             </div>
         </div>
 
@@ -69,27 +69,27 @@
         </div>
     </footer>
 
-    <script src="js/supabase.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/ai.js"></script>
     <script>
+        const chatContainer = document.getElementById('chatContainer');
+        const userInput = document.getElementById('userInput');
+
         function addMessage(text, type) {
-            const container = document.getElementById('chatContainer');
             const msg = document.createElement('div');
             msg.className = `chat-msg chat-${type}`;
             msg.textContent = text;
-            container.appendChild(msg);
-            container.scrollTop = container.scrollHeight;
+            chatContainer.appendChild(msg);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
         function addTyping() {
-            const container = document.getElementById('chatContainer');
             const typing = document.createElement('div');
             typing.className = 'typing';
             typing.id = 'typingIndicator';
             typing.textContent = '🧠 Thinking...';
-            container.appendChild(typing);
-            container.scrollTop = container.scrollHeight;
+            chatContainer.appendChild(typing);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
         function removeTyping() {
@@ -99,35 +99,25 @@
 
         async function sendMessage(e) {
             e.preventDefault();
-            const input = document.getElementById('userInput');
-            const question = input.value.trim();
+            const question = userInput.value.trim();
             if (!question) return;
 
             addMessage(question, 'user');
-            input.value = '';
+            userInput.value = '';
             addTyping();
 
             try {
-                // Try AI first
-                let answer = await researchAssistant(question);
-                
-                // Fallback: search the archive
-                if (!answer || answer.includes('cannot')) {
-                    const voices = await fetchFromSupabase('ethiopian_voices', 'is_published=eq.true&limit=5');
-                    const context = voices.map(v => v.quote_english).join('. ');
-                    answer = await researchAssistant(question, context);
-                }
-                
+                const answer = await researchAssistant(question);
                 removeTyping();
-                addMessage(answer || 'I found this interesting. Try asking another question!', 'ai');
-            } catch (e) {
+                addMessage(answer || 'Please try again.', 'ai');
+            } catch (err) {
                 removeTyping();
-                addMessage('The AI is currently resting. Please try again in a moment. 🧠💤', 'ai');
+                addMessage('AI is thinking... please try again.', 'ai');
             }
         }
 
         function askSuggested(question) {
-            document.getElementById('userInput').value = question;
+            userInput.value = question;
             sendMessage(new Event('submit'));
         }
     </script>
