@@ -14,188 +14,166 @@
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="desktop-links">
-            <a href="index.html">Home</a>
-            <a href="voices.html" class="active">Voices</a>
-            <a href="blog.html">Blog</a>
-            <a href="courses.html">Courses</a>
-            <a href="dashboard.html">Impact</a>
-            <a href="media.html">Media</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="thanks.html">Thanks</a>
-            <a href="contribute.html">Contribute</a>
-            <a href="support.html" class="cta-nav">Support</a>
-            <span style="display:flex;gap:2px;margin-left:6px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            </span>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-    </nav>
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="voices.html" class="active" data-i18n="voices">Voices</a>
+        <a href="blog.html" data-i18n="blog">Blog</a>
+        <a href="courses.html" data-i18n="courses">Courses</a>
+        <a href="dashboard.html" data-i18n="impact">Impact</a>
+        <a href="media.html" data-i18n="media">Media</a>
+        <a href="gallery.html" data-i18n="gallery">Gallery</a>
+        <a href="contribute.html" data-i18n="contribute">Contribute</a>
+        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+        <span style="display:flex;gap:2px;margin-left:6px">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+        </span>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
-        <a href="voices.html"><span class="menu-icon">🗣️</span>Voice Archive</a>
-        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
-        <a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
-        <a href="dashboard.html"><span class="menu-icon">📊</span>Impact</a>
-        <a href="media.html"><span class="menu-icon">📰</span>Media</a>
-        <a href="gallery.html"><span class="menu-icon">🖼️</span>Gallery</a>
-        <a href="thanks.html"><span class="menu-icon">🙏</span>Thanks</a>
-        <a href="contribute.html"><span class="menu-icon">🤝</span>Contribute</a>
-        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
-        <div class="menu-footer"><p style="color:var(--text-muted);font-size:0.65rem)">&copy; 2026</p></div>
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
+    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
+    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
+    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
+    <a href="media.html"><span class="menu-icon">📰</span> <span data-i18n="media">Media</span></a>
+    <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
+    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
+    <a href="contribute.html"><span class="menu-icon">🤝</span> <span data-i18n="contribute">Contribute</span></a>
+    <a href="support.html" class="cta-mobile">❤️ <span data-i18n="support">Support</span></a>
+</div>
+
+<main class="container">
+    <h1 class="section-title" data-i18n="voiceArchiveTitle">🗣️ Voice Archive</h1>
+    <p style="color:var(--text-dim);margin-bottom:16px" data-i18n="voiceArchiveSub">Share these voices for peace. Every share amplifies a message of hope.</p>
+
+    <div class="tabs">
+        <button class="tab active" id="tabEth" onclick="switchTab('ethiopian')">🇪🇹 <span data-i18n="ethiopianVoices">Ethiopian Voices</span></button>
+        <button class="tab" id="tabGlobal" onclick="switchTab('global')">🌍 <span data-i18n="globalVoices">Global Voices</span></button>
     </div>
 
-    <main class="container">
-        <h1 class="section-title">🗣️ Voice Archive</h1>
-        <p style="color:var(--text-dim);margin-bottom:16px">Share these voices for peace. Every share amplifies a message of hope.</p>
+    <div class="filters" id="ethFilters">
+        <select id="regionFilter" onchange="renderVoices()"><option value="" data-i18n="allRegions">All Regions</option></select>
+        <select id="yearFilter" onchange="renderVoices()"><option value="" data-i18n="allYears">All Years</option></select>
+        <select id="themeFilter" onchange="renderVoices()"><option value="" data-i18n="allThemes">All Themes</option></select>
+        <select id="langFilter" onchange="renderVoices()"><option value="" data-i18n="allLanguages">All Languages</option></select>
+    </div>
+    <div class="filters" id="globalFilters" style="display:none">
+        <select id="countryFilter" onchange="renderVoices()"><option value="" data-i18n="allCountries">All Countries</option></select>
+        <select id="globalYearFilter" onchange="renderVoices()"><option value="" data-i18n="allYears">All Years</option></select>
+        <select id="continentFilter" onchange="renderVoices()"><option value="" data-i18n="allContinents">All Continents</option></select>
+    </div>
 
-        <div class="tabs">
-            <button class="tab active" id="tabEth" onclick="switchTab('ethiopian')">🇪🇹 Ethiopian Voices</button>
-            <button class="tab" id="tabGlobal" onclick="switchTab('global')">🌍 Global Voices</button>
-        </div>
+    <div id="quotesContainer"><div class="loading"><span class="spinner"></span> <span data-i18n="loadingVoices">Loading voices...</span></div></div>
+</main>
 
-        <div class="filters" id="ethFilters">
-            <select id="regionFilter" onchange="renderVoices()"><option value="">All Regions</option></select>
-            <select id="yearFilter" onchange="renderVoices()"><option value="">All Years</option></select>
-            <select id="themeFilter" onchange="renderVoices()"><option value="">All Themes</option></select>
-            <select id="langFilter" onchange="renderVoices()"><option value="">All Languages</option></select>
-        </div>
-        <div class="filters" id="globalFilters" style="display:none">
-            <select id="countryFilter" onchange="renderVoices()"><option value="">All Countries</option></select>
-            <select id="globalYearFilter" onchange="renderVoices()"><option value="">All Years</option></select>
-            <select id="continentFilter" onchange="renderVoices()"><option value="">All Continents</option></select>
-        </div>
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
+        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
+    </div>
+    <div class="footer-bottom">
+        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
+        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+    </div>
+</footer>
 
-        <div id="quotesContainer"><div class="loading"><span class="spinner"></span>Loading voices...</div></div>
-    </main>
+<script src="js/supabase.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/share.js"></script>
+<script src="js/protection.js"></script>
+<script src="js/language.js"></script>
+<script>
+let allEthiopian=[],allGlobal=[],currentTab='ethiopian';
 
-    <footer>
-        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-            <p>Ethiopian Peace Archive &copy; 2026</p>
-            <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
-        </div>
-    </footer>
+async function init(){
+    try{
+        [allEthiopian,allGlobal]=await Promise.all([
+            fetchFromSupabase('ethiopian_voices','is_published=eq.true&order=year.desc'),
+            fetchFromSupabase('global_voices','is_published=eq.true&order=year.desc')
+        ]);
+        populateFilters();renderVoices();
+    }catch(e){document.getElementById('quotesContainer').innerHTML='<div class="loading">Error loading voices.</div>'}
+}
 
-    <script src="js/supabase.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/share.js"></script>
-    <script src="js/protection.js"></script>
-    <script src="js/language.js"></script>
-    <script>
-        let allEthiopian = [];
-        let allGlobal = [];
-        let currentTab = 'ethiopian';
+function populateFilters(){
+    const regions=[...new Set(allEthiopian.map(v=>v.region).filter(Boolean))].sort();
+    const years=[...new Set(allEthiopian.map(v=>v.year).filter(Boolean))].sort((a,b)=>b-a);
+    const themes=[...new Set(allEthiopian.flatMap(v=>v.themes||[]))].sort();
+    const langs=[...new Set(allEthiopian.map(v=>v.language).filter(Boolean))].sort();
+    const countries=[...new Set(allGlobal.map(v=>v.country).filter(Boolean))].sort();
+    const gYears=[...new Set(allGlobal.map(v=>v.year).filter(Boolean))].sort((a,b)=>b-a);
+    const continents=[...new Set(allGlobal.map(v=>v.continent).filter(Boolean))].sort();
+    populateSelect('regionFilter',regions);populateSelect('yearFilter',years);
+    populateSelect('themeFilter',themes);populateSelect('langFilter',langs);
+    populateSelect('countryFilter',countries);populateSelect('globalYearFilter',gYears);
+    populateSelect('continentFilter',continents);
+}
 
-        async function init() {
-            try {
-                [allEthiopian, allGlobal] = await Promise.all([
-                    fetchFromSupabase('ethiopian_voices', 'is_published=eq.true&order=year.desc'),
-                    fetchFromSupabase('global_voices', 'is_published=eq.true&order=year.desc')
-                ]);
+function populateSelect(id,options){
+    const sel=document.getElementById(id);sel.innerHTML='<option value="">All</option>';
+    options.forEach(o=>{sel.innerHTML+=`<option value="${o}">${o}</option>`});
+}
 
-                populateFilters();
-                renderVoices();
-            } catch (e) {
-                document.getElementById('quotesContainer').innerHTML = '<div class="loading">Error loading voices.</div>';
-            }
-        }
+function switchTab(tab){
+    currentTab=tab;
+    document.getElementById('tabEth').classList.toggle('active',tab==='ethiopian');
+    document.getElementById('tabGlobal').classList.toggle('active',tab==='global');
+    document.getElementById('ethFilters').style.display=tab==='ethiopian'?'flex':'none';
+    document.getElementById('globalFilters').style.display=tab==='global'?'flex':'none';
+    renderVoices();
+}
 
-        function populateFilters() {
-            const regions = [...new Set(allEthiopian.map(v => v.region).filter(Boolean))].sort();
-            const years = [...new Set(allEthiopian.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
-            const themes = [...new Set(allEthiopian.flatMap(v => v.themes || []))].sort();
-            const langs = [...new Set(allEthiopian.map(v => v.language).filter(Boolean))].sort();
-            const countries = [...new Set(allGlobal.map(v => v.country).filter(Boolean))].sort();
-            const gYears = [...new Set(allGlobal.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
-            const continents = [...new Set(allGlobal.map(v => v.continent).filter(Boolean))].sort();
-
-            populateSelect('regionFilter', regions);
-            populateSelect('yearFilter', years);
-            populateSelect('themeFilter', themes);
-            populateSelect('langFilter', langs);
-            populateSelect('countryFilter', countries);
-            populateSelect('globalYearFilter', gYears);
-            populateSelect('continentFilter', continents);
-        }
-
-        function populateSelect(id, options) {
-            const select = document.getElementById(id);
-            select.innerHTML = '<option value="">All</option>';
-            options.forEach(opt => { select.innerHTML += `<option value="${opt}">${opt}</option>`; });
-        }
-
-        function switchTab(tab) {
-            currentTab = tab;
-            document.getElementById('tabEth').classList.toggle('active', tab === 'ethiopian');
-            document.getElementById('tabGlobal').classList.toggle('active', tab === 'global');
-            document.getElementById('ethFilters').style.display = tab === 'ethiopian' ? 'flex' : 'none';
-            document.getElementById('globalFilters').style.display = tab === 'global' ? 'flex' : 'none';
-            renderVoices();
-        }
-
-        function renderVoices() {
-            let voices = currentTab === 'ethiopian' ? [...allEthiopian] : [...allGlobal];
-            const container = document.getElementById('quotesContainer');
-
-            if (currentTab === 'ethiopian') {
-                const r = document.getElementById('regionFilter').value;
-                const y = document.getElementById('yearFilter').value;
-                const t = document.getElementById('themeFilter').value;
-                const l = document.getElementById('langFilter').value;
-                if (r) voices = voices.filter(v => v.region === r);
-                if (y) voices = voices.filter(v => v.year === parseInt(y));
-                if (t) voices = voices.filter(v => (v.themes || []).includes(t));
-                if (l) voices = voices.filter(v => v.language === l);
-            } else {
-                const c = document.getElementById('countryFilter').value;
-                const y = document.getElementById('globalYearFilter').value;
-                const cont = document.getElementById('continentFilter').value;
-                if (c) voices = voices.filter(v => v.country === c);
-                if (y) voices = voices.filter(v => v.year === parseInt(y));
-                if (cont) voices = voices.filter(v => v.continent === cont);
-            }
-
-            if (!voices.length) {
-                container.innerHTML = '<div class="loading">No voices found.</div>';
-                return;
-            }
-
-            const themeColors = ['bdg-th', 'bdg-th2', 'bdg-th3', 'bdg-th'];
-
-            container.innerHTML = voices.map((v, i) => {
-                const loc = currentTab === 'ethiopian' ? v.region : v.country;
-                const sp = Math.round((v.sentiment || 0.5) * 100);
-                const quoteText = v.quote_english || v.quote_original;
-
-                return `
-                <div class="quote-card" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i * 0.03}s">
-                    <div class="loc">${currentTab === 'ethiopian' ? '📍' : '🌍'} ${loc || 'Unknown'} · ${v.language || ''} · ${v.year || ''}</div>
-                    <div class="txt">"${escapeHTML(quoteText)}"</div>
-                    <span class="badge bdg-yr">📅 ${v.year || 'N/A'}</span>
-                    ${(v.themes || []).map((t, j) => `<span class="badge ${themeColors[j % 4]}">${escapeHTML(t)}</span>`).join('')}
-                    <div class="sentiment-bar"><div class="sentiment-fill" style="width:${sp}%"></div></div>
-                    ${createShareButtons(quoteText, loc, v.year)}
-                </div>`;
-            }).join('');
-
-            protectNewImages();
-        }
-
-        function escapeHTML(str) {
-            if (!str) return '';
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        init();
-    </script>
+function renderVoices(){
+    let voices=currentTab==='ethiopian'?[...allEthiopian]:[...allGlobal];
+    const container=document.getElementById('quotesContainer');
+    if(currentTab==='ethiopian'){
+        const r=document.getElementById('regionFilter').value;
+        const y=document.getElementById('yearFilter').value;
+        const t=document.getElementById('themeFilter').value;
+        const l=document.getElementById('langFilter').value;
+        if(r)voices=voices.filter(v=>v.region===r);
+        if(y)voices=voices.filter(v=>v.year===parseInt(y));
+        if(t)voices=voices.filter(v=>(v.themes||[]).includes(t));
+        if(l)voices=voices.filter(v=>v.language===l);
+    }else{
+        const c=document.getElementById('countryFilter').value;
+        const y=document.getElementById('globalYearFilter').value;
+        const cont=document.getElementById('continentFilter').value;
+        if(c)voices=voices.filter(v=>v.country===c);
+        if(y)voices=voices.filter(v=>v.year===parseInt(y));
+        if(cont)voices=voices.filter(v=>v.continent===cont);
+    }
+    if(!voices.length){container.innerHTML=`<div class="loading"><span data-i18n="noVoices">No voices found.</span></div>`;return}
+    const tc=['bdg-th','bdg-th2','bdg-th3','bdg-th'];
+    container.innerHTML=voices.map((v,i)=>{
+        const loc=currentTab==='ethiopian'?v.region:v.country;
+        const sp=Math.round((v.sentiment||0.5)*100);
+        const qt=v.quote_english||v.quote_original;
+        return`<div class="quote-card" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i*0.03}s">
+            <div class="loc">${currentTab==='ethiopian'?'📍':'🌍'} ${loc||'Unknown'} · ${v.language||''} · ${v.year||''}</div>
+            <div class="txt">"${esc(qt)}"</div>
+            <span class="badge bdg-yr">📅 ${v.year||'N/A'}</span>
+            ${(v.themes||[]).map((t,j)=>`<span class="badge ${tc[j%4]}">${esc(t)}</span>`).join('')}
+            <div class="sentiment-bar"><div class="sentiment-fill" style="width:${sp}%"></div></div>
+            ${createShareButtons(qt,loc,v.year)}
+        </div>`;
+    }).join('');
+    protectNewImages();
+}
+function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+init();
+</script>
 </body>
 </html>
