@@ -9,68 +9,67 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ethiopian Peace Archive">
-    <meta name="twitter:description" content="1,000+ voices from Ethiopia and the world. Join the movement for peace.">
+    <meta name="twitter:description" content="1,000+ voices from Ethiopia and the world.">
     <title>Ethiopian Peace Archive — Global Movement for Peace</title>
-    
-    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- ========== NAVIGATION ========== -->
+    <!-- NAVIGATION -->
     <nav>
         <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        
         <div class="desktop-links">
-            <a href="index.html" class="active">Home</a>
-            <a href="voices.html">Voices</a>
-            <a href="blog.html">Blog</a>
-            <a href="courses.html">Courses</a>
-            <a href="dashboard.html">Impact</a>
-            <a href="media.html">Media</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="thanks.html">Thanks</a>
-            <a href="contribute.html">Contribute</a>
-            <a href="support.html" class="cta-nav">Support Us</a>
-            <div class="lang-toggle" style="display:flex;gap:2px;margin-left:8px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')" style="padding:5px 8px;border-radius:12px;border:1px solid var(--green-border);background:var(--green-dim);color:var(--green-bright);cursor:pointer;font-size:0.7rem;font-family:var(--font-ui)">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')" style="padding:5px 8px;border-radius:12px;border:1px solid var(--green-border);background:transparent;color:var(--text-dim);cursor:pointer;font-size:0.7rem;font-family:var(--font-ui)">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')" style="padding:5px 8px;border-radius:12px;border:1px solid var(--green-border);background:transparent;color:var(--text-dim);cursor:pointer;font-size:0.7rem;font-family:var(--font-ui)">Oromo</button>
-            </div>
+            <a href="index.html" class="active" data-i18n="home">Home</a>
+            <a href="voices.html" data-i18n="voices">Voices</a>
+            <a href="blog.html" data-i18n="blog">Blog</a>
+            <a href="courses.html" data-i18n="courses">Courses</a>
+            <a href="dashboard.html" data-i18n="impact">Impact</a>
+            <a href="media.html" data-i18n="media">Media</a>
+            <a href="gallery.html" data-i18n="gallery">Gallery</a>
+            <a href="thanks.html" data-i18n="thanks">Thanks</a>
+            <a href="contribute.html" data-i18n="contribute">Contribute</a>
+            <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+            <span style="display:flex;gap:2px;margin-left:6px">
+                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            </span>
         </div>
-        
         <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
             <span></span><span></span><span></span>
         </button>
     </nav>
 
-    <!-- ========== SLIDE MENU ========== -->
+    <!-- SLIDE OVERLAY -->
     <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+
+    <!-- SLIDE MENU -->
     <div class="slide-menu" id="slideMenu">
         <div class="menu-header">
             <div class="flag">🇪🇹🕊️</div>
             <h3>Ethiopian Peace Archive</h3>
             <p style="color:var(--text-muted);font-size:0.7rem;margin-top:4px">Voices for Peace · Power of Unity</p>
         </div>
-        <a href="index.html" onclick="toggleMenu()"><span class="menu-icon">🏠</span> Home</a>
-        <a href="voices.html" onclick="toggleMenu()"><span class="menu-icon">🗣️</span> Voice Archive</a>
-        <a href="blog.html" onclick="toggleMenu()"><span class="menu-icon">📝</span> Blog & Stories</a>
-        <a href="courses.html" onclick="toggleMenu()"><span class="menu-icon">🎓</span> Free Courses</a>
-        <a href="dashboard.html" onclick="toggleMenu()"><span class="menu-icon">📊</span> Impact Dashboard</a>
-        <a href="media.html" onclick="toggleMenu()"><span class="menu-icon">📰</span> Media Coverage</a>
-        <a href="gallery.html" onclick="toggleMenu()"><span class="menu-icon">🖼️</span> Gallery</a>
-        <a href="thanks.html" onclick="toggleMenu()"><span class="menu-icon">🙏</span> Thank You</a>
-        <a href="contribute.html" onclick="toggleMenu()"><span class="menu-icon">🤝</span> Contribute</a>
-        <a href="about.html" onclick="toggleMenu()"><span class="menu-icon">📖</span> About Us</a>
-        <a href="contact.html" onclick="toggleMenu()"><span class="menu-icon">📬</span> Contact</a>
-        <a href="support.html" class="cta-mobile" onclick="toggleMenu()">❤️ Support the Movement</a>
+        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
+        <a href="voices.html"><span class="menu-icon">🗣️</span>Voice Archive</a>
+        <a href="blog.html"><span class="menu-icon">📝</span>Blog & Stories</a>
+        <a href="courses.html"><span class="menu-icon">🎓</span>Free Courses</a>
+        <a href="dashboard.html"><span class="menu-icon">📊</span>Impact Dashboard</a>
+        <a href="media.html"><span class="menu-icon">📰</span>Media Coverage</a>
+        <a href="gallery.html"><span class="menu-icon">🖼️</span>Gallery</a>
+        <a href="thanks.html"><span class="menu-icon">🙏</span>Thank You</a>
+        <a href="contribute.html"><span class="menu-icon">🤝</span>Contribute</a>
+        <a href="about.html"><span class="menu-icon">📖</span>About Us</a>
+        <a href="contact.html"><span class="menu-icon">📬</span>Contact</a>
+        <a href="peace-techniques.html"><span class="menu-icon">🕊️</span>Peace Techniques</a>
+        <a href="support.html" class="cta-mobile">❤️ Support the Movement</a>
         <div class="menu-footer">
-            <div style="display:flex;gap:12px;justify-content:center;margin-bottom:8px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')" style="padding:4px 10px;border-radius:10px;border:1px solid var(--green-border);background:var(--green-dim);color:var(--green-bright);cursor:pointer;font-size:0.7rem">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')" style="padding:4px 10px;border-radius:10px;border:1px solid var(--green-border);background:transparent;color:var(--text-dim);cursor:pointer;font-size:0.7rem">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')" style="padding:4px 10px;border-radius:10px;border:1px solid var(--green-border);background:transparent;color:var(--text-dim);cursor:pointer;font-size:0.7rem">Oromo</button>
+            <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px">
+                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
             </div>
-            <p style="color:var(--text-muted);font-size:0.65rem">Ethiopian Peace Archive &copy; 2026</p>
+            <p style="color:var(--text-muted);font-size:0.65rem">&copy; 2026</p>
             <p style="margin-top:4px">
                 <a href="privacy.html" style="color:var(--text-muted);text-decoration:none;font-size:0.65rem">Privacy</a> · 
                 <a href="terms.html" style="color:var(--text-muted);text-decoration:none;font-size:0.65rem">Terms</a>
@@ -78,7 +77,7 @@
         </div>
     </div>
 
-    <!-- ========== HERO ========== -->
+    <!-- HERO -->
     <header class="hero">
         <div class="badge-top" data-i18n="tagline">🌍 Global Peace Movement</div>
         <h1 data-i18n="heroTitle">Voices of Peace.<br>Power of Unity.</h1>
@@ -90,136 +89,108 @@
         </div>
     </header>
 
-    <!-- ========== STATS ========== -->
+    <!-- STATS -->
     <div class="stats">
-        <div class="stat-card">
-            <div class="num" id="ethCount">...</div>
-            <div class="lbl" data-i18n="ethiopianVoices">Ethiopian Voices</div>
-        </div>
-        <div class="stat-card">
-            <div class="num" id="globalCount">...</div>
-            <div class="lbl" data-i18n="globalVoices">Global Voices</div>
-        </div>
-        <div class="stat-card">
-            <div class="num" id="regionCount">...</div>
-            <div class="lbl" data-i18n="regions">Regions</div>
-        </div>
-        <div class="stat-card">
-            <div class="num" id="countryCount">...</div>
-            <div class="lbl" data-i18n="countries">Countries</div>
-        </div>
-        <div class="stat-card">
-            <div class="num" id="mediaCount">...</div>
-            <div class="lbl" data-i18n="mediaFeatures">Media Features</div>
-        </div>
+        <div class="stat-card"><div class="num" id="ethCount">...</div><div class="lbl" data-i18n="ethiopianVoices">Ethiopian Voices</div></div>
+        <div class="stat-card"><div class="num" id="globalCount">...</div><div class="lbl" data-i18n="globalVoices">Global Voices</div></div>
+        <div class="stat-card"><div class="num" id="regionCount">...</div><div class="lbl" data-i18n="regions">Regions</div></div>
+        <div class="stat-card"><div class="num" id="countryCount">...</div><div class="lbl" data-i18n="countries">Countries</div></div>
+        <div class="stat-card"><div class="num" id="mediaCount">...</div><div class="lbl" data-i18n="mediaFeatures">Media Features</div></div>
     </div>
 
-    <!-- ========== WHAT WE DO ========== -->
+    <!-- WHAT WE DO -->
     <section class="section">
-        <h2 class="section-title">What We Do</h2>
-        <p class="section-subtitle">A global platform preserving voices, educating communities, and driving peace action.</p>
+        <h2 class="section-title" data-i18n="whatWeDo">What We Do</h2>
+        <p class="section-subtitle" data-i18n="whatWeDoSub">A global platform preserving voices, educating communities, and driving peace action.</p>
         <div class="cards-grid">
             <a href="voices.html" class="feature-card">
-                <div class="icon">🗣️</div>
-                <h3>Voice Archive</h3>
-                <p>Browse 1,000+ peace messages from all Ethiopian regions and global supporters.</p>
+                <div class="icon">🗣️</div><h3 data-i18n="voiceArchive">Voice Archive</h3>
+                <p data-i18n="voiceArchiveDesc">Browse 1,000+ peace messages from all Ethiopian regions and global supporters.</p>
             </a>
             <a href="courses.html" class="feature-card">
-                <div class="icon">🎓</div>
-                <h3>Free Peace Courses</h3>
-                <p>Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required.</p>
+                <div class="icon">🎓</div><h3 data-i18n="peaceCourses">Free Peace Courses</h3>
+                <p data-i18n="peaceCoursesDesc">Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required.</p>
             </a>
             <a href="blog.html" class="feature-card">
-                <div class="icon">📝</div>
-                <h3>Blog & Research</h3>
-                <p>Stories from the field, research findings, and updates on peace initiatives.</p>
+                <div class="icon">📝</div><h3 data-i18n="blogResearch">Blog & Research</h3>
+                <p data-i18n="blogResearchDesc">Stories from the field, research findings, and updates on peace initiatives.</p>
             </a>
             <a href="dashboard.html" class="feature-card">
-                <div class="icon">📊</div>
-                <h3>Impact Dashboard</h3>
-                <p>Track our global reach. See how voices translate into action worldwide.</p>
+                <div class="icon">📊</div><h3 data-i18n="impactDashboard">Impact Dashboard</h3>
+                <p data-i18n="impactDashboardDesc">Track our global reach. See how voices translate into action worldwide.</p>
             </a>
             <a href="contribute.html" class="feature-card">
-                <div class="icon">🤝</div>
-                <h3>Contribute</h3>
-                <p>Submit your voice, volunteer, partner with us, or share your expertise.</p>
+                <div class="icon">🤝</div><h3 data-i18n="contributeTitle">Contribute</h3>
+                <p data-i18n="contributeDesc">Submit your voice, volunteer, partner with us, or share your expertise.</p>
             </a>
             <a href="support.html" class="feature-card">
-                <div class="icon">❤️</div>
-                <h3>Support</h3>
-                <p>Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.</p>
+                <div class="icon">❤️</div><h3 data-i18n="supportTitle">Support</h3>
+                <p data-i18n="supportDesc">Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.</p>
             </a>
         </div>
     </section>
 
-    <!-- ========== CTA ========== -->
+    <!-- CTA -->
     <section class="section">
         <div style="background:linear-gradient(135deg,rgba(34,197,94,0.10),rgba(251,191,36,0.08));border:2px solid var(--green-border);border-radius:var(--radius-lg);padding:32px 20px;text-align:center;margin:30px 0">
-            <h2 style="color:var(--gold-bright);margin-bottom:8px;font-family:var(--font-ui);font-size:1.3rem">🌍 Join 1,000+ Voices for Peace</h2>
-            <p style="color:var(--text-dim);margin-bottom:16px">Whether you're in Ethiopia or the diaspora — your voice matters.</p>
-            <a href="contribute.html" class="btn btn-primary" style="font-size:1rem">Share Your Voice →</a>
+            <h2 style="color:var(--gold-bright);margin-bottom:8px;font-family:var(--font-ui);font-size:1.3rem" data-i18n="joinVoices">🌍 Join 1,000+ Voices for Peace</h2>
+            <p style="color:var(--text-dim);margin-bottom:16px" data-i18n="joinVoicesSub">Whether you're in Ethiopia or the diaspora — your voice matters.</p>
+            <a href="contribute.html" class="btn btn-primary" style="font-size:1rem" data-i18n="shareYourVoice">Share Your Voice →</a>
         </div>
     </section>
 
-    <!-- ========== FOOTER ========== -->
+    <!-- FOOTER -->
     <footer>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;max-width:1000px;margin:0 auto 24px;text-align:left">
-            <div>
-                <h4 style="color:var(--gold);margin-bottom:10px;font-family:var(--font-ui);font-size:0.9rem">Explore</h4>
-                <a href="voices.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Voice Archive</a>
-                <a href="blog.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Blog</a>
-                <a href="dashboard.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Impact Dashboard</a>
-                <a href="media.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Media Coverage</a>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <a href="voices.html">Voice Archive</a>
+                <a href="blog.html">Blog</a>
+                <a href="dashboard.html">Impact Dashboard</a>
+                <a href="media.html">Media Coverage</a>
             </div>
-            <div>
-                <h4 style="color:var(--gold);margin-bottom:10px;font-family:var(--font-ui);font-size:0.9rem">Learn</h4>
-                <a href="courses.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Free Courses</a>
-                <a href="peace-techniques.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Peace Techniques</a>
-                <a href="about.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">About Us</a>
+            <div class="footer-col">
+                <h4>Learn</h4>
+                <a href="courses.html">Free Courses</a>
+                <a href="peace-techniques.html">Peace Techniques</a>
+                <a href="about.html">About Us</a>
             </div>
-            <div>
-                <h4 style="color:var(--gold);margin-bottom:10px;font-family:var(--font-ui);font-size:0.9rem">Participate</h4>
-                <a href="contribute.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Submit Your Voice</a>
-                <a href="support.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Donate & Support</a>
-                <a href="thanks.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Thank You</a>
+            <div class="footer-col">
+                <h4>Participate</h4>
+                <a href="contribute.html">Submit Your Voice</a>
+                <a href="support.html">Donate & Support</a>
+                <a href="thanks.html">Thank You</a>
             </div>
-            <div>
-                <h4 style="color:var(--gold);margin-bottom:10px;font-family:var(--font-ui);font-size:0.9rem">Legal</h4>
-                <a href="privacy.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Privacy Policy</a>
-                <a href="terms.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Terms of Use</a>
-                <a href="contact.html" style="display:block;color:var(--text-dim);text-decoration:none;padding:3px 0;font-size:0.78rem">Contact</a>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+                <a href="contact.html">Contact</a>
             </div>
         </div>
         <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);max-width:1000px;margin:0 auto">
-            <p>Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace · Built with ❤️ for Ethiopia and the World</p>
+            <p data-i18n="footerTagline">Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace · Built with ❤️ for Ethiopia and the World</p>
             <p style="margin-top:6px">
-                <a href="privacy.html" style="color:var(--text-dim);text-decoration:none;margin:0 4px">Privacy</a> · 
-                <a href="terms.html" style="color:var(--text-dim);text-decoration:none;margin:0 4px">Terms</a> · 
-                <a href="contact.html" style="color:var(--text-dim);text-decoration:none;margin:0 4px">Contact</a> · 
-                <a href="thanks.html" style="color:var(--text-dim);text-decoration:none;margin:0 4px">Thank You</a>
+                <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · <a href="thanks.html">Thank You</a>
             </p>
         </div>
     </footer>
 
-    <!-- ========== SCRIPTS ========== -->
+    <!-- SCRIPTS -->
     <script src="js/supabase.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/language.js"></script>
     <script>
-        // Live Stats
         async function loadStats() {
             try {
-                const [eth, global, media] = await Promise.all([
-                    fetchFromSupabase('ethiopian_voices', 'is_published=eq.true'),
-                    fetchFromSupabase('global_voices', 'is_published=eq.true'),
-                    fetchFromSupabase('media_coverage', 'is_published=eq.true')
-                ]);
-                
-                document.getElementById('ethCount').textContent = eth.length || '30+';
-                document.getElementById('globalCount').textContent = global.length || '15+';
-                document.getElementById('regionCount').textContent = new Set(eth.map(v => v.region).filter(Boolean)).size || '12+';
-                document.getElementById('countryCount').textContent = new Set(global.map(v => v.country).filter(Boolean)).size || '15+';
-                document.getElementById('mediaCount').textContent = media.length || '8';
+                const counts = await getLiveCounts();
+                if (counts) {
+                    document.getElementById('ethCount').textContent = counts.ethiopianVoices || '30+';
+                    document.getElementById('globalCount').textContent = counts.globalVoices || '15+';
+                    document.getElementById('regionCount').textContent = counts.regions || '12+';
+                    document.getElementById('countryCount').textContent = counts.countries || '15+';
+                    document.getElementById('mediaCount').textContent = counts.mediaFeatures || '8';
+                }
             } catch (e) {
                 document.getElementById('ethCount').textContent = '30+';
                 document.getElementById('globalCount').textContent = '15+';
