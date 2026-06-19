@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Research Assistant — Ethiopian Peace Archive">
+    <title>AI Research Assistant — Ethiopian Peace Archive</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .chat-container { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 20px; min-height: 400px; max-height: 600px; overflow-y: auto; margin-bottom: 16px; }
+        .chat-msg { margin-bottom: 14px; padding: 12px 16px; border-radius: 12px; max-width: 85%; line-height: 1.6; font-size: 0.9rem; }
+        .chat-user { background: var(--green-dim); color: var(--green-bright); margin-left: auto; text-align: right; font-family: var(--font-ui); }
+        .chat-ai { background: rgba(251,191,36,0.08); color: var(--text); margin-right: auto; font-family: var(--font-body); }
+        .chat-form { display: flex; gap: 8px; }
+        .chat-form input { flex: 1; margin-bottom: 0; }
+        .typing { color: var(--text-muted); font-style: italic; font-size: 0.8rem; padding: 8px; }
+        .suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+        .suggestion-btn { padding: 6px 14px; border-radius: 15px; font-size: 0.75rem; cursor: pointer; border: 1px solid var(--green-border); background: var(--card); color: var(--text-dim); font-family: var(--font-ui); transition: all 0.2s; }
+        .suggestion-btn:hover { background: var(--green-dim); color: var(--green-bright); border-color: var(--green); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+        <div class="desktop-links">
+            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
+            <a href="courses.html">Courses</a><a href="research.html" class="active">AI Research</a>
+            <a href="support.html" class="cta-nav">Support</a>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </nav>
+
+    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
+        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
+        <a href="research.html"><span class="menu-icon">🧠</span>AI Research</a>
+        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
+    </div>
+
+    <main class="container-sm">
+        <h1 class="section-title">🧠 AI Research Assistant</h1>
+        <p style="color:var(--text-dim);margin-bottom:16px">Ask questions about peace, Ethiopian voices, and conflict resolution. Powered by AI.</p>
+
+        <div class="suggestions">
+            <button class="suggestion-btn" onclick="askSuggested('What are the main themes in Ethiopian peace voices?')">Main themes?</button>
+            <button class="suggestion-btn" onclick="askSuggested('How does traditional mediation work in Ethiopia?')">Traditional mediation?</button>
+            <button class="suggestion-btn" onclick="askSuggested('What do Ethiopians want for peace?')">What do Ethiopians want?</button>
+            <button class="suggestion-btn" onclick="askSuggested('How can diaspora support peace?')">Diaspora role?</button>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-msg chat-ai">
+                👋 Welcome! I'm the Ethiopian Peace Archive Research Assistant. Ask me anything about peace, Ethiopian voices, traditional conflict resolution, or the archive.
+            </div>
+        </div>
+
+        <form class="chat-form" onsubmit="sendMessage(event)">
+            <input type="text" id="userInput" placeholder="Ask a question about peace..." required>
+            <button type="submit" class="btn btn-primary" style="width:auto">Send →</button>
+        </form>
+    </main>
+
+    <footer>
+        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
+            <p>Ethiopian Peace Archive &copy; 2026 · AI Research Assistant</p>
+        </div>
+    </footer>
+
+    <script src="js/supabase.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/ai.js"></script>
+    <script>
+        function addMessage(text, type) {
+            const container = document.getElementById('chatContainer');
+            const msg = document.createElement('div');
+            msg.className = `chat-msg chat-${type}`;
+            msg.textContent = text;
+            container.appendChild(msg);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addTyping() {
+            const container = document.getElementById('chatContainer');
+            const typing = document.createElement('div');
+            typing.className = 'typing';
+            typing.id = 'typingIndicator';
+            typing.textContent = '🧠 Thinking...';
+            container.appendChild(typing);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function removeTyping() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+
+        async function sendMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('userInput');
+            const question = input.value.trim();
+            if (!question) return;
+
+            addMessage(question, 'user');
+            input.value = '';
+            addTyping();
+
+            try {
+                // Try AI first
+                let answer = await researchAssistant(question);
+                
+                // Fallback: search the archive
+                if (!answer || answer.includes('cannot')) {
+                    const voices = await fetchFromSupabase('ethiopian_voices', 'is_published=eq.true&limit=5');
+                    const context = voices.map(v => v.quote_english).join('. ');
+                    answer = await researchAssistant(question, context);
+                }
+                
+                removeTyping();
+                addMessage(answer || 'I found this interesting. Try asking another question!', 'ai');
+            } catch (e) {
+                removeTyping();
+                addMessage('The AI is currently resting. Please try again in a moment. 🧠💤', 'ai');
+            }
+        }
+
+        function askSuggested(question) {
+            document.getElementById('userInput').value = question;
+            sendMessage(new Event('submit'));
+        }
+    </script>
+</body>
+</html>
