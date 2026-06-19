@@ -1,4 +1,9 @@
-const AI_API = 'https://kingeth-ethiopian-peace-ai-v2.hf.space';
+/* ============================================
+   ETHIOPIAN PEACE ARCHIVE AI
+   Connected to Hugging Face Space
+   ============================================ */
+
+const AI_API = 'https://kingeth-ethiopia-peace-ai.hf.space';
 
 async function analyzeVoice(text) {
     try {
@@ -38,4 +43,4 @@ function moderateContent(text) {
 async function extractTextFromImage(url) { return ''; }
 async function translateText(text, lang) { return text; }
 
-console.log('🧠 AI Ready');
+console.log('🧠 AI Ready — Ethiopian Peace Archive');
