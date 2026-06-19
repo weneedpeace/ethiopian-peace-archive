@@ -7,163 +7,125 @@
     <title>Peace Techniques — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .technique-card { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; transition: all 0.3s; }
-        .technique-card:hover { border-color: var(--green); transform: translateY(-2px); }
-        .technique-card h2 { color: var(--gold); margin-bottom: 8px; font-family: var(--font-ui); font-size: 1.2rem; }
-        .technique-card .region { display: inline-block; padding: 3px 10px; border-radius: 10px; font-size: 0.7rem; background: var(--green-dim); color: var(--green-bright); font-family: var(--font-ui); margin-bottom: 10px; }
-        .technique-card p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.7; margin-bottom: 8px; }
-        .technique-card .steps { margin-top: 10px; padding-left: 20px; }
-        .technique-card .steps li { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 4px; }
-        .intro-card { background: linear-gradient(135deg, rgba(34,197,94,0.10), rgba(251,191,36,0.08)); border: 2px solid var(--green-border); border-radius: var(--radius-lg); padding: 28px; text-align: center; margin-bottom: 24px; }
-        .intro-card h2 { color: var(--gold); margin-bottom: 8px; font-family: var(--font-ui); }
-        .intro-card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; }
+        .technique-card{background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius);padding:24px;margin-bottom:16px;transition:all 0.3s}
+        .technique-card:hover{border-color:var(--green);transform:translateY(-2px)}
+        .technique-card h2{color:var(--gold);margin-bottom:8px;font-family:var(--font-ui);font-size:1.2rem}
+        .technique-card .region{display:inline-block;padding:3px 10px;border-radius:10px;font-size:0.7rem;background:var(--green-dim);color:var(--green-bright);font-family:var(--font-ui);margin-bottom:10px}
+        .technique-card p{color:var(--text-dim);font-size:0.9rem;line-height:1.7;margin-bottom:8px}
+        .technique-card .steps{margin-top:10px;padding-left:20px}
+        .technique-card .steps li{color:var(--text-dim);font-size:0.85rem;margin-bottom:4px}
+        .intro-card{background:linear-gradient(135deg,rgba(34,197,94,0.10),rgba(251,191,36,0.08));border:2px solid var(--green-border);border-radius:var(--radius-lg);padding:28px;text-align:center;margin-bottom:24px}
+        .intro-card h2{color:var(--gold);margin-bottom:8px;font-family:var(--font-ui)}
+        .intro-card p{color:var(--text-dim);font-size:0.95rem;line-height:1.7}
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="desktop-links">
-            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-            <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
-            <a href="media.html">Media</a><a href="gallery.html">Gallery</a>
-            <a href="thanks.html">Thanks</a><a href="contribute.html">Contribute</a>
-            <a href="support.html" class="cta-nav">Support</a>
-            <span style="display:flex;gap:2px;margin-left:6px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            </span>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-    </nav>
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="voices.html" data-i18n="voices">Voices</a>
+        <a href="blog.html" data-i18n="blog">Blog</a>
+        <a href="courses.html" data-i18n="courses">Courses</a>
+        <a href="dashboard.html" data-i18n="impact">Impact</a>
+        <a href="media.html" data-i18n="media">Media</a>
+        <a href="gallery.html" data-i18n="gallery">Gallery</a>
+        <a href="contribute.html" data-i18n="contribute">Contribute</a>
+        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+        <span style="display:flex;gap:2px;margin-left:6px">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+        </span>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
-        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
-        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
-        <a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
-        <a href="peace-techniques.html"><span class="menu-icon">🕊️</span>Peace Techniques</a>
-        <a href="thanks.html"><span class="menu-icon">🙏</span>Thank You</a>
-        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
+    <a href="peace-techniques.html"><span class="menu-icon">🕊️</span> <span data-i18n="techniques">Peace Techniques</span></a>
+    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
+    <a href="support.html"><span class="menu-icon">❤️</span> <span data-i18n="support">Support</span></a>
+</div>
+
+<main class="container-sm">
+    <h1 class="section-title" data-i18n="techniquesTitle">🕊️ Traditional Ethiopian Peace Techniques</h1>
+
+    <div class="intro-card">
+        <h2 data-i18n="techniquesIntro">Ancient Wisdom for Modern Peace</h2>
+        <p data-i18n="techniquesIntroText">Ethiopia has a rich heritage of traditional conflict resolution systems. For centuries, these indigenous methods have resolved disputes, restored relationships, and maintained harmony across diverse communities. Understanding and preserving these techniques is essential for building lasting peace today.</p>
     </div>
 
-    <main class="container-sm">
-        <h1 class="section-title">🕊️ Traditional Ethiopian Peace Techniques</h1>
+    <div class="technique-card">
+        <span class="region">📍 Gamo</span>
+        <h2>Shimagile — Council of Elders</h2>
+        <p>The Gamo people of southern Ethiopia have a sophisticated system of conflict resolution led by respected elders called <strong>Shimagile</strong>. These elders are chosen for their wisdom, integrity, and deep knowledge of community customs.</p>
+        <p><strong>How it works:</strong> When a dispute arises, both parties present their case before the council. The elders listen carefully, consult customary law (woga), and deliver a binding decision focused on restoring community harmony rather than punishing individuals.</p>
+        <ul class="steps"><li>Both parties agree to abide by the elders' decision</li><li>Elders hear all sides without interruption</li><li>Decision focuses on compensation and reconciliation</li><li>Community ceremony seals the peace agreement</li></ul>
+    </div>
 
-        <div class="intro-card">
-            <h2>Ancient Wisdom for Modern Peace</h2>
-            <p>Ethiopia has a rich heritage of traditional conflict resolution systems. For centuries, these indigenous methods have resolved disputes, restored relationships, and maintained harmony across diverse communities. Understanding and preserving these techniques is essential for building lasting peace today.</p>
-        </div>
+    <div class="technique-card">
+        <span class="region">📍 Amhara & Tigray</span>
+        <h2>Shimglina — Elder Mediation</h2>
+        <p><strong>Shimglina</strong> is one of Ethiopia's most widely practiced traditional dispute resolution mechanisms, common among Amhara and Tigrayan communities. Respected elders (shimagiles) serve as mediators in conflicts ranging from family disputes to inter-community tensions.</p>
+        <ul class="steps"><li>Elders selected by mutual agreement of both parties</li><li>Investigation and listening to witnesses</li><li>Deliberation in private among elders</li><li>Public announcement of decision with reconciliation ritual</li></ul>
+    </div>
 
-        <!-- Gamo Shimagile -->
-        <div class="technique-card">
-            <span class="region">📍 Gamo</span>
-            <h2>Shimagile — Council of Elders</h2>
-            <p>The Gamo people of southern Ethiopia have a sophisticated system of conflict resolution led by respected elders called <strong>Shimagile</strong>. These elders are chosen for their wisdom, integrity, and deep knowledge of community customs.</p>
-            <p><strong>How it works:</strong> When a dispute arises, both parties present their case before the council. The elders listen carefully, consult customary law (woga), and deliver a binding decision focused on restoring community harmony rather than punishing individuals.</p>
-            <p><strong>Key principles:</strong> Restoration over punishment, community consensus, respect for elders, and the belief that justice must heal relationships.</p>
-            <ul class="steps">
-                <li>Both parties agree to abide by the elders' decision</li>
-                <li>Elders hear all sides without interruption</li>
-                <li>Decision focuses on compensation and reconciliation</li>
-                <li>Community ceremony seals the peace agreement</li>
-            </ul>
-        </div>
+    <div class="technique-card">
+        <span class="region">📍 Oromia</span>
+        <h2>Gadaa — Democratic Governance for Peace</h2>
+        <p>The <strong>Gadaa system</strong> of the Oromo people is an indigenous democratic institution recognized by UNESCO as an Intangible Cultural Heritage of Humanity. It is an 8-year cycle of governance with sophisticated mechanisms for law-making, conflict resolution, and peaceful transfer of power.</p>
+        <ul class="steps"><li>Power rotates peacefully every 8 years between parties</li><li>Laws made through council consensus</li><li>Disputes resolved at appropriate council level</li><li>Emphasis on equality before the law</li></ul>
+    </div>
 
-        <!-- Amhara and Tigrayan Shimglina -->
-        <div class="technique-card">
-            <span class="region">📍 Amhara & Tigray</span>
-            <h2>Shimglina — Elder Mediation</h2>
-            <p><strong>Shimglina</strong> is one of Ethiopia's most widely practiced traditional dispute resolution mechanisms, common among Amhara and Tigrayan communities. Respected elders (shimagiles) serve as mediators in conflicts ranging from family disputes to inter-community tensions.</p>
-            <p><strong>How it works:</strong> Elders are invited by both parties or the community. They investigate the matter thoroughly, sometimes visiting the location of the dispute. After deliberation, they announce a decision that emphasizes reconciliation and restoring social bonds.</p>
-            <p><strong>Key principles:</strong> Impartiality, thorough investigation, restorative justice, and the understanding that peace in the community benefits everyone.</p>
-            <ul class="steps">
-                <li>Elders selected by mutual agreement of both parties</li>
-                <li>Investigation and listening to witnesses</li>
-                <li>Deliberation in private among elders</li>
-                <li>Public announcement of decision with reconciliation ritual</li>
-            </ul>
-        </div>
+    <div class="technique-card">
+        <span class="region">📍 Somali</span>
+        <h2>Xeer — Customary Law</h2>
+        <p>The Somali <strong>Xeer</strong> system is a centuries-old customary legal system that governs social relations, resolves disputes, and maintains peace among Somali communities. It is based on collective responsibility, compensation, and consensus.</p>
+        <ul class="steps"><li>Dispute brought before council of elders</li><li>Both parties' clan groups participate</li><li>Compensation amount determined by precedent</li><li>Agreement sealed with oath-taking ceremony</li></ul>
+    </div>
 
-        <!-- Oromo Gadaa -->
-        <div class="technique-card">
-            <span class="region">📍 Oromia</span>
-            <h2>Gadaa — Democratic Governance for Peace</h2>
-            <p>The <strong>Gadaa system</strong> of the Oromo people is an indigenous democratic institution recognized by UNESCO as an Intangible Cultural Heritage of Humanity. It is an 8-year cycle of governance that includes sophisticated mechanisms for law-making, conflict resolution, and peaceful transfer of power.</p>
-            <p><strong>How it works:</strong> The Gadaa system divides society into age-grade classes (luba) that rotate power every eight years. Disputes are resolved through councils at multiple levels, with the highest authority being the Abba Gadaa. Laws (seera) are created through consensus and apply equally to all.</p>
-            <p><strong>Key principles:</strong> Democratic participation, rule of law, peaceful transition of power, checks and balances, and accountability of leaders.</p>
-            <ul class="steps">
-                <li>Power rotates peacefully every 8 years between parties</li>
-                <li>Laws made through council consensus (Siiqqee and Gadaa assemblies)</li>
-                <li>Disputes resolved at appropriate council level</li>
-                <li>Emphasis on equality before the law</li>
-            </ul>
-        </div>
+    <div class="technique-card">
+        <span class="region">📍 Afar</span>
+        <h2>Makabanto — Clan Arbitration</h2>
+        <p>The Afar people's <strong>Makabanto</strong> system is a traditional arbitration mechanism used to resolve inter-clan conflicts, particularly over scarce resources like water and grazing land in the arid Afar region.</p>
+        <ul class="steps"><li>Neutral elders selected from third-party clans</li><li>Both sides present their case fully</li><li>Elders deliberate and announce binding decision</li><li>Compensation paid and relationship restored</li></ul>
+    </div>
 
-        <!-- Somali Xeer -->
-        <div class="technique-card">
-            <span class="region">📍 Somali</span>
-            <h2>Xeer — Customary Law</h2>
-            <p>The Somali <strong>Xeer</strong> system is a centuries-old customary legal system that governs social relations, resolves disputes, and maintains peace among Somali communities. It is based on collective responsibility, compensation, and consensus.</p>
-            <p><strong>How it works:</strong> When a crime or dispute occurs, it is not just the individuals but the entire clan groups (diya-paying groups) who are involved. Elders (odayaal) convene a council (shir) to hear the case. Compensation (diya/mag) is determined based on the severity of the offense, paid collectively to restore balance.</p>
-            <p><strong>Key principles:</strong> Collective responsibility, compensation over retribution, consensus decision-making, and the sacred nature of agreements once reached.</p>
-            <ul class="steps">
-                <li>Dispute brought before council of elders</li>
-                <li>Both parties' clan groups participate</li>
-                <li>Compensation amount determined by precedent</li>
-                <li>Agreement sealed with oath-taking ceremony</li>
-            </ul>
-        </div>
+    <div class="technique-card">
+        <span class="region">📍 Sidama</span>
+        <h2>Songo — Community Assembly</h2>
+        <p>The <strong>Songo</strong> system of the Sidama people is a community assembly where all adult males traditionally participate in decision-making and dispute resolution, representing direct democracy at the community level.</p>
+        <ul class="steps"><li>Community assembles at the Songo meeting place</li><li>Elders frame the issue for discussion</li><li>All members may speak and be heard</li><li>Consensus reached through discussion, not voting</li></ul>
+    </div>
 
-        <!-- Afar Makabanto -->
-        <div class="technique-card">
-            <span class="region">📍 Afar</span>
-            <h2>Makabanto — Clan Arbitration</h2>
-            <p>The Afar people's <strong>Makabanto</strong> system is a traditional arbitration mechanism used to resolve inter-clan conflicts, particularly over scarce resources like water and grazing land in the arid Afar region.</p>
-            <p><strong>How it works:</strong> Neutral elders from uninvolved clans are chosen to arbitrate. They hear both sides, assess damages, and determine compensation (usually in livestock). The decision is binding, and acceptance is ensured through strong social pressure and the threat of ostracism.</p>
-            <p><strong>Key principles:</strong> Neutrality of arbitrators, collective enforcement, compensation proportional to harm, and the goal of peaceful coexistence.</p>
-            <ul class="steps">
-                <li>Neutral elders selected from third-party clans</li>
-                <li>Both sides present their case fully</li>
-                <li>Elders deliberate and announce binding decision</li>
-                <li>Compensation paid, and relationship restored</li>
-            </ul>
-        </div>
+    <div class="intro-card" style="margin-top:24px">
+        <h2 data-i18n="techniquesWhy">Why Traditional Techniques Matter</h2>
+        <p data-i18n="techniquesWhyText">These indigenous peace systems share common values: restoration over punishment, community over individual, dialogue over violence, and the understanding that true peace heals relationships. They are living traditions that can inform and strengthen modern peacebuilding efforts in Ethiopia and beyond.</p>
+        <p style="margin-top:12px"><strong data-i18n="techniquesPreserving">Preserving these techniques is preserving the wisdom of generations.</strong></p>
+    </div>
+</main>
 
-        <!-- Sidama Songo -->
-        <div class="technique-card">
-            <span class="region">📍 Sidama</span>
-            <h2>Songo — Community Assembly</h2>
-            <p>The <strong>Songo</strong> system of the Sidama people is a community assembly where all adult males traditionally participate in decision-making and dispute resolution. It represents direct democracy at the community level.</p>
-            <p><strong>How it works:</strong> The community gathers under a sacred tree (usually a sycamore) to discuss issues affecting the community. Respected elders (cimeessas) facilitate the discussion. Everyone has the right to speak. Decisions are reached through consensus, not majority vote.</p>
-            <p><strong>Key principles:</strong> Direct participation, consensus building, transparency, equality of voice, and decisions binding on all community members.</p>
-            <ul class="steps">
-                <li>Community assembles at the Songo meeting place</li>
-                <li>Elders frame the issue for discussion</li>
-                <li>All members may speak and be heard</li>
-                <li>Consensus reached through discussion, not voting</li>
-                <li>Decision becomes community law</li>
-            </ul>
-        </div>
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
+        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
+    </div>
+    <div class="footer-bottom">
+        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
+        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+    </div>
+</footer>
 
-        <div class="intro-card" style="margin-top:24px">
-            <h2>Why Traditional Techniques Matter</h2>
-            <p>These indigenous peace systems share common values: restoration over punishment, community over individual, dialogue over violence, and the understanding that true peace heals relationships. They are living traditions that can inform and strengthen modern peacebuilding efforts in Ethiopia and beyond.</p>
-            <p style="margin-top:12px"><strong>Preserving these techniques is preserving the wisdom of generations.</strong></p>
-        </div>
-    </main>
-
-    <footer>
-        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-            <p>Ethiopian Peace Archive &copy; 2026</p>
-            <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · <a href="thanks.html">Thank You</a></p>
-        </div>
-    </footer>
-
-    <script src="js/navigation.js"></script>
-    <script src="js/language.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/language.js"></script>
 </body>
 </html>
