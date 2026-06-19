@@ -5,40 +5,16 @@
 
 const translations = {
     en: {
-        // Navigation
-        home: 'Home',
-        voices: 'Voices',
-        blog: 'Blog',
-        courses: 'Courses',
-        impact: 'Impact',
-        media: 'Media',
-        gallery: 'Gallery',
-        thanks: 'Thank You',
-        contribute: 'Contribute',
-        support: 'Support',
-        about: 'About',
-        contact: 'Contact',
-        research: 'AI Research',
-        ocr: 'OCR Tool',
-        techniques: 'Peace Techniques',
-        
-        // Hero
+        home: 'Home', voices: 'Voices', blog: 'Blog', courses: 'Courses',
+        impact: 'Impact', media: 'Media', gallery: 'Gallery', thanks: 'Thank You',
+        contribute: 'Contribute', support: 'Support', about: 'About', contact: 'Contact',
+        research: 'AI Research', ocr: 'OCR Tool', techniques: 'Peace Techniques',
         tagline: '🌍 Global Peace Movement',
         heroTitle: 'Voices of Peace. Power of Unity.',
         heroSub: '1,000+ voices from Ethiopia and the world — preserved, amplified, and driving real change for diaspora and local communities.',
-        exploreVoices: 'Explore Voices',
-        freeCourses: 'Free Courses',
-        supportUs: 'Support',
-        
-        // Stats
-        ethiopianVoices: 'Ethiopian Voices',
-        globalVoices: 'Global Voices',
-        regions: 'Regions',
-        countries: 'Countries',
-        mediaFeatures: 'Media Features',
-        totalVoices: 'Total Voices',
-        
-        // Home sections
+        exploreVoices: 'Explore Voices', freeCourses: 'Free Courses', supportUs: 'Support',
+        ethiopianVoices: 'Ethiopian Voices', globalVoices: 'Global Voices',
+        regions: 'Regions', countries: 'Countries', mediaFeatures: 'Media Features',
         whatWeDo: 'What We Do',
         whatWeDoSub: 'A global platform preserving voices, educating communities, and driving peace action.',
         voiceArchive: 'Voice Archive',
@@ -53,251 +29,154 @@ const translations = {
         contributeDesc: 'Submit your voice, volunteer, partner with us, or share your expertise.',
         supportTitle: 'Support',
         supportDesc: 'Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.',
-        joinVoices: 'Join 1,000+ Voices for Peace',
-        joinVoicesSub: 'Whether you are in Ethiopia or the diaspora — your voice matters.',
-        shareYourVoice: 'Share Your Voice',
-        footerTagline: 'A Global Movement for Peace · Built with love for Ethiopia and the World',
-        
-        // Voices page
+        joinVoices: '🌍 Join 1,000+ Voices for Peace',
+        joinVoicesSub: 'Whether you\'re in Ethiopia or the diaspora — your voice matters.',
+        shareYourVoice: 'Share Your Voice →',
+        footerTagline: 'A Global Movement for Peace · Built with ❤️ for Ethiopia and the World',
         voiceArchiveTitle: 'Voice Archive',
         voiceArchiveSub: 'Share these voices for peace. Every share amplifies a message of hope.',
-        allRegions: 'All Regions',
-        allYears: 'All Years',
-        allThemes: 'All Themes',
-        allLanguages: 'All Languages',
-        allCountries: 'All Countries',
-        allContinents: 'All Continents',
-        noVoices: 'No voices found.',
-        loadingVoices: 'Loading voices...',
-        
-        // Blog
+        allRegions: 'All Regions', allYears: 'All Years', allThemes: 'All Themes',
+        allLanguages: 'All Languages', allCountries: 'All Countries', allContinents: 'All Continents',
+        noVoices: 'No voices found.', loadingVoices: 'Loading voices...',
         blogTitle: 'Blog & Stories',
         blogSub: 'Stories from the field, research insights, and updates on the peace movement.',
-        noPosts: 'No posts yet.',
-        readMore: 'Read More',
-        backToBlog: 'Back to All Posts',
-        
-        // Courses
+        noPosts: 'No posts yet.', backToBlog: '← Back to All Posts',
         coursesTitle: 'Free Peace Courses',
         coursesSub: 'Open to everyone. No registration required. Learn at your own pace.',
-        noCourses: 'No courses yet.',
-        viewCourse: 'View Course',
-        backToCourses: 'Back to All Courses',
-        modules: 'Modules',
-        free: 'Free',
-        lessonsComing: 'Lessons coming soon.',
-        
-        // Dashboard
-        dashboardTitle: 'Impact Dashboard',
+        viewCourse: 'View Course →', backToCourses: '← Back to All Courses',
+        modules: 'Modules', free: 'Free', lessonsComing: 'Lessons coming soon.',
+        dashboardTitle: '📊 Impact Dashboard',
         dashboardSub: 'Live data from the peace movement.',
-        voicesByRegion: 'Voices by Region',
-        regionsRepresented: 'Regions Represented',
-        
-        // Gallery
-        galleryTitle: 'Gallery',
+        voicesByRegion: '🗣️ Voices by Region',
+        regionsRepresented: '🌍 Regions Represented',
+        totalVoices: 'Total Voices', blogPosts: 'Blog Posts',
+        galleryTitle: '🖼️ Gallery',
         gallerySub: 'Moments from the peace movement — events, community, and action.',
         noPhotos: 'No photos yet.',
-        
-        // Media
-        mediaTitle: 'Media Coverage',
+        mediaTitle: '📰 Media Coverage',
         mediaSub: 'Radio, TV, and newspaper coverage from Ethiopia and beyond.',
         mediaComing: 'Media coverage coming soon.',
-        
-        // Support
-        supportTitle: 'Support the Movement',
-        supportSub: 'Every contribution amplifies a voice for peace.',
-        donateNow: 'Donate Now',
+        supportPageTitle: '❤️ Support the Movement',
+        supportPageSub: 'Every contribution amplifies a voice for peace.',
+        donateNow: 'Donate Now →',
         sponsorArchive: 'Sponsor the Archive',
+        sponsorDesc: 'Organizations can sponsor translations, outreach programs, or specific regions.',
         shareIdeas: 'Share Ideas & Expertise',
+        shareIdeasDesc: 'Have ideas for peace? Expertise in research, tech, or organizing? We welcome advisors.',
         donateMaterials: 'Donate Materials',
+        donateMaterialsDesc: 'Books, equipment, translation services — in-kind donations help us grow.',
         spreadWord: 'Spread the Word',
-        
-        // Contribute
-        contributeTitle: 'Contribute to Peace',
-        contributeSub: 'Your voice. Your skills. Your passion.',
-        submitVoice: 'Submit Your Voice',
+        spreadWordDesc: 'Share the archive. Follow us. Tell others about the voices for peace.',
+        contributePageTitle: '🤝 Contribute to Peace',
+        contributePageSub: 'Your voice. Your skills. Your passion.',
+        submitVoiceTitle: '🗣️ Submit Your Voice',
         submitVoiceDesc: 'Share your message of peace. Your voice becomes part of the permanent archive.',
-        volunteer: 'Volunteer',
-        partner: 'Partner With Us',
-        yourName: 'Your Name (kept private)',
-        regionCountry: 'Region or Country',
-        language: 'Language',
-        yourMessage: 'Your Message of Peace',
-        
-        // Contact
-        contactTitle: 'Contact Us',
+        volunteerTitle: '🙋 Volunteer',
+        volunteerDesc: 'Join our team. We need translators, researchers, community organizers, and tech support.',
+        partnerTitle: '🤝 Partner With Us',
+        partnerDesc: 'Universities, NGOs, media, and community organizations — let\'s collaborate for peace.',
+        contactTitle: '📬 Contact Us',
         contactSub: 'Partnerships, media inquiries, research collaboration, and questions welcome.',
-        sendMessage: 'Send Message',
-        
-        // About
-        aboutTitle: 'About the Movement',
+        aboutTitle: '📖 About the Movement',
         ourStory: 'Our Story',
         ourMission: 'Our Mission',
-        methodology: 'Methodology',
+        methodologyTitle: 'Methodology',
         whyAnonymity: 'Why Anonymity?',
-        joinMovement: 'Join the Movement',
-        
-        // Thanks
-        thanksTitle: 'Thank You',
+        joinMovement: '🌍 Join the Movement',
+        joinMovementSub: 'Whether you\'re in Ethiopia, the diaspora, or anywhere in the world — your voice matters.',
+        thanksTitle: '🙏 Thank You',
         thanksSub: 'This archive exists because of the generosity, trust, and courage of over 1,000 people who chose to speak for peace.',
-        voicesFromEveryRegion: 'Voices From Every Region',
-        contributors: '1,000+ Contributors',
-        elders: 'Community Elders',
+        voicesFromEveryRegion: '🌍 Voices From Every Region',
+        contributors1k: '1,000+ Contributors',
+        contributors1kDesc: 'Everyday Ethiopians who shared their hopes and dreams. Your words are preserved forever.',
+        communityElders: 'Community Elders',
+        communityEldersDesc: 'Who opened doors, built trust, and guided the collection process with wisdom.',
         globalSupporters: 'Global Supporters',
+        globalSupportersDesc: 'People from China, Germany, Russia, USA, Jamaica, India, Somalia, Nigeria, UK, France, and beyond.',
         mediaPartners: 'Media Partners',
-        researchers: 'Researchers & Translators',
-        youReader: 'You — The Reader',
-        
-        // Peace Techniques
-        techniquesTitle: 'Traditional Ethiopian Peace Techniques',
+        mediaPartnersDesc: 'Radio stations, TV channels, and newspapers who amplified these voices.',
+        researchersTranslators: 'Researchers & Translators',
+        researchersTranslatorsDesc: 'Who helped categorize, translate, and analyze voices across multiple languages.',
+        youTheReader: 'You — The Reader',
+        youTheReaderDesc: 'By visiting, reading, and sharing — you are part of the peace movement.',
+        thanksClosing: 'This project took five years to collect. It traveled across all Ethiopian regions. It was built with zero budget and infinite hope.',
+        thanksBlessing: 'Amaseganallo · Galatoomi · Thank You 🙏',
+        privacy: 'Privacy', terms: 'Terms', privacyPolicy: 'Privacy Policy', termsOfUse: 'Terms of Use',
+        techniquesTitle: '🕊️ Traditional Ethiopian Peace Techniques',
         techniquesIntro: 'Ancient Wisdom for Modern Peace',
+        techniquesIntroText: 'Ethiopia has a rich heritage of traditional conflict resolution systems. For centuries, these indigenous methods have resolved disputes, restored relationships, and maintained harmony across diverse communities. Understanding and preserving these techniques is essential for building lasting peace today.',
         techniquesWhy: 'Why Traditional Techniques Matter',
-        
-        // Footer
-        privacy: 'Privacy',
-        terms: 'Terms',
+        techniquesWhyText: 'These indigenous peace systems share common values: restoration over punishment, community over individual, dialogue over violence, and the understanding that true peace heals relationships. They are living traditions that can inform and strengthen modern peacebuilding efforts in Ethiopia and beyond.',
+        techniquesPreserving: 'Preserving these techniques is preserving the wisdom of generations.',
     },
-    
     am: {
-        home: 'መነሻ',
-        voices: 'ድምጾች',
-        blog: 'ብሎግ',
-        courses: 'ኮርሶች',
-        impact: 'ተጽዕኖ',
-        media: 'ሚዲያ',
-        gallery: 'ጋለሪ',
-        thanks: 'ምስጋና',
-        contribute: 'አስተዋጽኦ',
-        support: 'ድጋፍ',
-        about: 'ስለ እኛ',
-        contact: 'አድራሻ',
-        research: 'AI ምርምር',
-        techniques: 'የሰላም ዘዴዎች',
-        
+        home: 'መነሻ', voices: 'ድምጾች', blog: 'ብሎግ', courses: 'ኮርሶች',
+        impact: 'ተጽዕኖ', media: 'ሚዲያ', gallery: 'ጋለሪ', thanks: 'ምስጋና',
+        contribute: 'አስተዋጽኦ', support: 'ድጋፍ', about: 'ስለ እኛ', contact: 'አድራሻ',
+        research: 'AI ምርምር', techniques: 'የሰላም ዘዴዎች',
         tagline: '🌍 ዓለም አቀፍ የሰላም ንቅናቄ',
         heroTitle: 'የሰላም ድምጾች። የአንድነት ኃይል።',
         heroSub: 'ከኢትዮጵያ እና ከዓለም ዙሪያ ከ1,000 በላይ ድምጾች — ተጠብቀዋል፣ ተደምጠዋል፣ እውነተኛ ለውጥ እያመጡ ነው።',
-        exploreVoices: 'ድምጾችን ያስሱ',
-        freeCourses: 'ነጻ ኮርሶች',
-        supportUs: 'ይደግፉ',
-        
-        ethiopianVoices: 'የኢትዮጵያ ድምጾች',
-        globalVoices: 'ዓለም አቀፍ ድምጾች',
-        regions: 'ክልሎች',
-        countries: 'አገራት',
-        mediaFeatures: 'ሚዲያ ሽፋን',
-        
+        exploreVoices: 'ድምጾችን ያስሱ', freeCourses: 'ነጻ ኮርሶች', supportUs: 'ይደግፉ',
+        ethiopianVoices: 'የኢትዮጵያ ድምጾች', globalVoices: 'ዓለም አቀፍ ድምጾች',
+        regions: 'ክልሎች', countries: 'አገራት', mediaFeatures: 'ሚዲያ ሽፋን',
         whatWeDo: 'ምን እናደርጋለን',
         whatWeDoSub: 'ድምጾችን የምንጠብቅ፣ ማህበረሰቦችን የምናስተምር እና የሰላም እርምጃን የምንመራ ዓለም አቀፍ መድረክ።',
         voiceArchive: 'የድምጽ ማህደር',
         voiceArchiveDesc: 'ከሁሉም የኢትዮጵያ ክልሎች እና ከዓለም ዙሪያ ከ1,000 በላይ የሰላም መልዕክቶችን ያስሱ።',
-        peaceCourses: 'ነጻ የሰላም ኮርሶች',
-        peaceCoursesDesc: 'የግጭት አፈታትን፣ የኢትዮጵያ ታሪክን እና ሰላምን መገንባት ይማሩ። ምዝገባ አያስፈልግም።',
-        shareYourVoice: 'ድምጽዎን ያጋሩ',
-        joinVoices: 'ከ1,000 በላይ የሰላም ድምጾች ይቀላቀሉ',
+        shareYourVoice: 'ድምጽዎን ያጋሩ →',
+        joinVoices: '🌍 ከ1,000 በላይ የሰላም ድምጾች ይቀላቀሉ',
         joinVoicesSub: 'በኢትዮጵያም ሆነ በዲያስፖራ — ድምጽዎ አስፈላጊ ነው።',
-        
-        noVoices: 'ምንም ድምጽ አልተገኘም።',
-        loadingVoices: 'ድምጾችን በመጫን ላይ...',
-        
         voiceArchiveTitle: 'የድምጽ ማህደር',
         voiceArchiveSub: 'እነዚህን የሰላም ድምጾች ያጋሩ። እያንዳንዱ መጋራት የተስፋ መልዕክት ያስተጋባል።',
-        
-        privacy: 'የግላዊነት',
-        terms: 'ውሎች',
+        noVoices: 'ምንም ድምጽ አልተገኘም።', loadingVoices: 'ድምጾችን በመጫን ላይ...',
+        privacy: 'የግላዊነት', terms: 'ውሎች',
     },
-    
     om: {
-        home: 'Seensa',
-        voices: 'Sagalee',
-        blog: 'Blog',
-        courses: 'Koorsii',
-        impact: 'Dhiibbaa',
-        media: 'Miidiyaa',
-        gallery: 'Gaalerii',
-        thanks: 'Galatoomi',
-        contribute: 'Gumaacha',
-        support: 'Deeggarsa',
-        about: 'Waa\'ee',
-        contact: 'Qunnamtii',
-        research: 'AI Qorannoo',
-        techniques: 'Mala Nagaa',
-        
+        home: 'Seensa', voices: 'Sagalee', blog: 'Blog', courses: 'Koorsii',
+        impact: 'Dhiibbaa', media: 'Miidiyaa', gallery: 'Gaalerii', thanks: 'Galatoomi',
+        contribute: 'Gumaacha', support: 'Deeggarsa', about: 'Waa\'ee', contact: 'Qunnamtii',
+        research: 'AI Qorannoo', techniques: 'Mala Nagaa',
         tagline: '🌍 Sochii Nagaa Addunyaa',
         heroTitle: 'Sagalee Nagaa. Humna Tokkummaa.',
         heroSub: 'Sagalee 1,000 ol Itoophiyaa fi addunyaa irraa — kunuunfamanii, ol kaafamanii, jijjiirama dhugaa fidaniiru.',
-        exploreVoices: 'Sagalee Hordofaa',
-        freeCourses: 'Koorsii Bilisaa',
-        supportUs: 'Deeggarsa',
-        
-        ethiopianVoices: 'Sagalee Itoophiyaa',
-        globalVoices: 'Sagalee Addunyaa',
-        regions: 'Naannoo',
-        countries: 'Biyyoota',
-        mediaFeatures: 'Miidiyaa',
-        
+        exploreVoices: 'Sagalee Hordofaa', freeCourses: 'Koorsii Bilisaa', supportUs: 'Deeggarsa',
+        ethiopianVoices: 'Sagalee Itoophiyaa', globalVoices: 'Sagalee Addunyaa',
+        regions: 'Naannoo', countries: 'Biyyoota', mediaFeatures: 'Miidiyaa',
         whatWeDo: 'Maal Hojjenna',
         whatWeDoSub: 'Sagalee kunuunsu, hawaasa barsiisu, fi tarkaanfii nagaa kakaasu.',
         voiceArchive: 'Kuusa Sagalee',
         voiceArchiveDesc: 'Sagalee nagaa 1,000 ol naannoo Itoophiyaa hunda fi deeggaraa addunyaa irraa hordofaa.',
-        shareYourVoice: 'Sagalee Kee Qoodi',
-        joinVoices: 'Sagalee Nagaa 1,000+ Qoodi',
+        shareYourVoice: 'Sagalee Kee Qoodi →',
+        joinVoices: '🌍 Sagalee Nagaa 1,000+ Qoodi',
         joinVoicesSub: 'Itoophiyaa keessa ykn diaspora — sagaleen kee barbaachisa.',
-        
-        noVoices: 'Sagaleen hin argamne.',
-        loadingVoices: 'Sagalee fechaa...',
-        
         voiceArchiveTitle: 'Kuusa Sagalee',
         voiceArchiveSub: 'Sagalee nagaa kana qoodi. Qoodiinsi hundi ergaa abdii ol kaasa.',
-        
-        privacy: 'Iccitii',
-        terms: 'Seera',
+        noVoices: 'Sagaleen hin argamne.', loadingVoices: 'Sagalee fechaa...',
+        privacy: 'Iccitii', terms: 'Seera',
     },
-    
     ti: {
-        home: 'መበገሲ',
-        voices: 'ድምጽታት',
-        blog: 'ብሎግ',
-        courses: 'ኮርሳት',
-        impact: 'ጽዕንዖ',
-        media: 'ሚድያ',
-        gallery: 'ጋለሪ',
-        thanks: 'ምስጋና',
-        contribute: 'ኣበርክቶ',
-        support: 'ደገፍ',
-        about: 'ብዛዕባ',
-        contact: 'መርከቢ',
+        home: 'መበገሲ', voices: 'ድምጽታት', blog: 'ብሎግ', courses: 'ኮርሳት',
+        impact: 'ጽዕንዖ', media: 'ሚድያ', gallery: 'ጋለሪ', thanks: 'ምስጋና',
+        contribute: 'ኣበርክቶ', support: 'ደገፍ', about: 'ብዛዕባ', contact: 'መርከቢ',
         techniques: 'ናይ ሰላም ቴክኒካት',
-        
         tagline: '🌍 ዓለማዊ ናይ ሰላም ምንቅስቓስ',
         heroTitle: 'ድምጽታት ሰላም። ሓይሊ ሓድነት።',
-        heroSub: 'ካብ ኢትዮጵያን ካብ ዓለምን ልዕሊ 1,000 ድምጽታት — ተዓቂበን፣ ተደምጸን፣ ናይ ቀንዲ ለውጢ ኣብ ዲያስፖራን ከባቢያዊ ማሕበረሰባትን የምጽኣ ኣለዋ።',
-        exploreVoices: 'ድምጽታት ርአ',
-        freeCourses: 'ነጻ ኮርሳት',
-        supportUs: 'ደገፍ',
-        
-        ethiopianVoices: 'ናይ ኢትዮጵያ ድምጽታት',
-        globalVoices: 'ዓለማዊ ድምጽታት',
-        regions: 'ክልላት',
-        countries: 'ሃገራት',
-        mediaFeatures: 'ሚድያ ሽፋን',
-        
+        heroSub: 'ካብ ኢትዮጵያን ካብ ዓለምን ልዕሊ 1,000 ድምጽታት — ተዓቂበን፣ ተደምጸን፣ ናይ ቀንዲ ለውጢ የምጽኣ ኣለዋ።',
+        exploreVoices: 'ድምጽታት ርአ', freeCourses: 'ነጻ ኮርሳት', supportUs: 'ደገፍ',
+        ethiopianVoices: 'ናይ ኢትዮጵያ ድምጽታት', globalVoices: 'ዓለማዊ ድምጽታት',
+        regions: 'ክልላት', countries: 'ሃገራት', mediaFeatures: 'ሚድያ ሽፋን',
         whatWeDo: 'እንታይ ንገብር',
         whatWeDoSub: 'ድምጽታት ዝዕቅብ፣ ማሕበረሰባት ዝምህርን ናይ ሰላም ስጉምቲ ዝድርኽን ዓለማዊ መድረኽ።',
         voiceArchive: 'መዝገብ ድምጽ',
         voiceArchiveDesc: 'ካብ ኩሎም ክልላት ኢትዮጵያን ካብ ዓለማዊ ደገፍትን ልዕሊ 1,000 መልእኽትታት ሰላም ርአ።',
-        shareYourVoice: 'ድምጽኻ ኣካፍል',
-        joinVoices: 'ልዕሊ 1,000 ድምጽታት ሰላም ተሳተፍ',
+        shareYourVoice: 'ድምጽኻ ኣካፍል →',
+        joinVoices: '🌍 ልዕሊ 1,000 ድምጽታት ሰላም ተሳተፍ',
         joinVoicesSub: 'ኣብ ኢትዮጵያ ወይ ኣብ ዲያስፖራ — ድምጽኻ ኣገዳሲ እዩ።',
-        
-        noVoices: 'ዝተረኽበ ድምጽ የለን።',
-        loadingVoices: 'ድምጽታት ይጽዕን ኣሎ...',
-        
         voiceArchiveTitle: 'መዝገብ ድምጽ',
         voiceArchiveSub: 'ነዚኣተን ድምጽታት ሰላም ኣካፍሎም። ነፍሲ ወከፍ ምክፋል መልእኽቲ ተስፋ የድምጽ።',
-        
-        privacy: 'ስቱርነት',
-        terms: 'ውልታት',
+        noVoices: 'ዝተረኽበ ድምጽ የለን።', loadingVoices: 'ድምጽታት ይጽዕን ኣሎ...',
+        privacy: 'ስቱርነት', terms: 'ውልታት',
     }
 };
 
@@ -306,44 +185,19 @@ let currentLanguage = 'en';
 function setLanguage(lang) {
     currentLanguage = lang;
     localStorage.setItem('epa_language', lang);
-
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-            element.textContent = translations[lang][key];
-        }
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang]?.[key]) el.textContent = translations[lang][key];
     });
-
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-        const key = element.getAttribute('data-i18n-placeholder');
-        if (translations[lang] && translations[lang][key]) {
-            element.placeholder = translations[lang][key];
-        }
-    });
-
     document.querySelectorAll('.lang-btn').forEach(btn => {
         const btnLang = btn.getAttribute('data-lang');
-        if (btnLang === lang) {
-            btn.classList.add('active');
-            btn.style.background = 'var(--green-dim)';
-            btn.style.color = 'var(--green-bright)';
-            btn.style.fontWeight = '700';
-        } else {
-            btn.classList.remove('active');
-            btn.style.background = 'transparent';
-            btn.style.color = 'var(--text-dim)';
-            btn.style.fontWeight = 'normal';
-        }
+        const active = btnLang === lang;
+        btn.classList.toggle('active', active);
+        btn.style.background = active ? 'var(--green-dim)' : 'transparent';
+        btn.style.color = active ? 'var(--green-bright)' : 'var(--text-dim)';
+        btn.style.fontWeight = active ? '700' : 'normal';
     });
-
     document.documentElement.lang = lang;
 }
-
-function t(key) {
-    return translations[currentLanguage]?.[key] || translations.en[key] || key;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const saved = localStorage.getItem('epa_language') || 'en';
-    setLanguage(saved);
-});
+function t(key) { return translations[currentLanguage]?.[key] || translations.en[key] || key; }
+document.addEventListener('DOMContentLoaded', () => setLanguage(localStorage.getItem('epa_language') || 'en'));
