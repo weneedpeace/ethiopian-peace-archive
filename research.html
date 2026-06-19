@@ -3,123 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI Research Assistant — Ethiopian Peace Archive">
-    <title>AI Research Assistant — Ethiopian Peace Archive</title>
+    <meta name="description" content="AI Content Generator — Ethiopian Peace Archive">
+    <title>AI Content Generator — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .chat-container { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 20px; min-height: 400px; max-height: 600px; overflow-y: auto; margin-bottom: 16px; }
-        .chat-msg { margin-bottom: 14px; padding: 12px 16px; border-radius: 12px; max-width: 85%; line-height: 1.6; font-size: 0.9rem; }
-        .chat-user { background: var(--green-dim); color: var(--green-bright); margin-left: auto; text-align: right; font-family: var(--font-ui); }
-        .chat-ai { background: rgba(251,191,36,0.08); color: var(--text); margin-right: auto; font-family: var(--font-body); }
-        .chat-form { display: flex; gap: 8px; }
-        .chat-form input { flex: 1; margin-bottom: 0; }
-        .typing { color: var(--text-muted); font-style: italic; font-size: 0.8rem; padding: 8px; }
-        .suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-        .suggestion-btn { padding: 6px 14px; border-radius: 15px; font-size: 0.75rem; cursor: pointer; border: 1px solid var(--green-border); background: var(--card); color: var(--text-dim); font-family: var(--font-ui); transition: all 0.2s; }
-        .suggestion-btn:hover { background: var(--green-dim); color: var(--green-bright); border-color: var(--green); }
+        .gen-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .panel { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 20px; }
+        .panel h3 { color: var(--gold); margin-bottom: 12px; font-family: var(--font-ui); font-size: 1rem; }
+        .panel label { display: block; color: var(--text-dim); font-size: 0.8rem; margin-bottom: 4px; font-family: var(--font-ui); }
+        .panel select, .panel textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--green-border); background: var(--bg); color: var(--text); font-size: 0.9rem; margin-bottom: 10px; font-family: inherit; }
+        .panel textarea { min-height: 100px; resize: vertical; }
+        .output-box { background: var(--bg); border: 1px solid var(--green-border); border-radius: 8px; padding: 20px; min-height: 350px; max-height: 650px; overflow-y: auto; line-height: 1.9; font-size: 0.95rem; color: var(--text); position: relative; }
+        .output-box h2, .output-box h3 { color: var(--gold); margin: 16px 0 8px; font-family: var(--font-ui); }
+        .output-box p { margin-bottom: 12px; color: var(--text-dim); }
+        .output-box ul, .output-box ol { margin: 8px 0 16px 20px; color: var(--text-dim); }
+        .output-box li { margin-bottom: 4px; }
+        .output-box strong { color: var(--green-bright); }
+        .output-box blockquote { border-left: 3px solid var(--green); padding-left: 16px; margin: 12px 0; color: var(--gold); font-style: italic; }
+        .actions { display: flex; gap: 8px; margin-top: 10px; }
+        .actions button { font-size: 0.75rem; }
+        .loading-bar { height: 4px; background: var(--green-border); border-radius: 2px; margin: 10px 0; overflow: hidden; display: none; }
+        .loading-bar.on { display: block; }
+        .loading-bar .fill { height: 100%; background: var(--green); border-radius: 2px; animation: load 1.5s ease-in-out infinite; width: 40%; }
+        @keyframes load { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
+        .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .type-badge { padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; cursor: pointer; border: 1px solid var(--green-border); background: var(--card); color: var(--text-dim); font-family: var(--font-ui); transition: all 0.2s; }
+        .type-badge:hover, .type-badge.on { background: var(--green-dim); color: var(--green-bright); border-color: var(--green); }
+        @media (max-width: 768px) { .gen-layout { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="desktop-links">
-            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-            <a href="courses.html">Courses</a><a href="research.html" class="active">AI Research</a>
-            <a href="support.html" class="cta-nav">Support</a>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-    </nav>
-
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
-        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
-        <a href="research.html"><span class="menu-icon">🧠</span>AI Research</a>
-        <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a><a href="research.html" class="active">AI Generator</a>
+        <a href="support.html" class="cta-nav">Support</a>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
 
-    <main class="container-sm">
-        <h1 class="section-title">🧠 AI Research Assistant</h1>
-        <p style="color:var(--text-dim);margin-bottom:16px">Ask questions about peace, Ethiopian voices, and traditional conflict resolution. Powered by Llama 3.3 70B.</p>
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
+    <a href="research.html"><span class="menu-icon">🧠</span>AI Generator</a>
+    <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
+</div>
 
-        <div class="suggestions">
-            <button class="suggestion-btn" onclick="askSuggested('How does traditional mediation work in Ethiopia?')">Traditional mediation?</button>
-            <button class="suggestion-btn" onclick="askSuggested('What is the Gadaa system?')">Gadaa system?</button>
-            <button class="suggestion-btn" onclick="askSuggested('What do Ethiopians want for peace?')">What do Ethiopians want?</button>
-            <button class="suggestion-btn" onclick="askSuggested('How can diaspora support peace?')">Diaspora role?</button>
+<main class="container">
+    <h1 class="section-title">🧠 AI Content Generator</h1>
+    <p style="color:var(--text-dim);margin-bottom:16px">Generate premium articles, lessons, essays, reports, speeches, and more. Powered by Ethiopian Peace Archive AI.</p>
+
+    <div class="gen-layout">
+        <div class="panel">
+            <h3>📝 Create Content</h3>
+            <label>Content Type</label>
+            <div class="badge-row" id="typeBadges">
+                <span class="type-badge on" data-type="article">📄 Article</span>
+                <span class="type-badge" data-type="lesson">📚 Lesson</span>
+                <span class="type-badge" data-type="essay">✍️ Essay</span>
+                <span class="type-badge" data-type="analysis">📊 Analysis</span>
+                <span class="type-badge" data-type="report">📈 Report</span>
+                <span class="type-badge" data-type="speech">🎤 Speech</span>
+                <span class="type-badge" data-type="proposal">🤝 Proposal</span>
+                <span class="type-badge" data-type="social">📱 Social</span>
+            </div>
+            <label>Topic</label>
+            <textarea id="topicInput" placeholder="e.g., The role of traditional mediation in Ethiopian peacebuilding..."></textarea>
+            <label>Tone</label>
+            <select id="toneInput">
+                <option value="academic">🎓 Academic</option>
+                <option value="professional">💼 Professional</option>
+                <option value="inspirational">✨ Inspirational</option>
+                <option value="educational">📖 Educational</option>
+                <option value="journalistic">📰 Journalistic</option>
+            </select>
+            <button class="btn btn-primary" onclick="generate()" style="width:100%">🧠 Generate Premium Content</button>
+            <div class="loading-bar" id="loadingBar"><div class="fill"></div></div>
         </div>
-
-        <div class="chat-container" id="chatContainer">
-            <div class="chat-msg chat-ai">
-                👋 Welcome! I'm the Ethiopian Peace Archive Research Assistant powered by Llama 3.3 70B. Ask me anything about peace, Ethiopian traditions, or the archive.
+        <div class="panel">
+            <h3>📄 Generated Content</h3>
+            <div class="output-box" id="outputBox">
+                <p style="color:var(--text-dim);text-align:center;padding:60px 0">Select type, enter topic, click Generate.</p>
+            </div>
+            <div class="actions">
+                <button class="btn btn-sm" id="copyBtn" onclick="copyOut()" style="display:none">📋 Copy</button>
+                <button class="btn btn-sm" id="downloadBtn" onclick="downloadOut()" style="display:none">💾 Download</button>
+                <button class="btn btn-sm" id="clearBtn" onclick="clearOut()" style="display:none">🗑️ Clear</button>
             </div>
         </div>
+    </div>
+</main>
 
-        <form class="chat-form" onsubmit="sendMessage(event)">
-            <input type="text" id="userInput" placeholder="Ask a question about peace..." required>
-            <button type="submit" class="btn btn-primary" style="width:auto">Send →</button>
-        </form>
-    </main>
+<footer>
+    <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
+        <p>Ethiopian Peace Archive &copy; 2026 · AI Content Generator</p>
+    </div>
+</footer>
 
-    <footer>
-        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-            <p>Ethiopian Peace Archive &copy; 2026 · AI Research Assistant</p>
-        </div>
-    </footer>
+<script src="js/navigation.js"></script>
+<script src="js/ai.js"></script>
+<script>
+let currentType = 'article';
+let outputText = '';
 
-    <script src="js/navigation.js"></script>
-    <script src="js/ai.js"></script>
-    <script>
-        const chatContainer = document.getElementById('chatContainer');
-        const userInput = document.getElementById('userInput');
+document.querySelectorAll('.type-badge').forEach(b => {
+    b.onclick = function() {
+        document.querySelectorAll('.type-badge').forEach(x => x.classList.remove('on'));
+        this.classList.add('on');
+        currentType = this.dataset.type;
+    };
+});
 
-        function addMessage(text, type) {
-            const msg = document.createElement('div');
-            msg.className = `chat-msg chat-${type}`;
-            msg.textContent = text;
-            chatContainer.appendChild(msg);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
+async function generate() {
+    const topic = document.getElementById('topicInput').value.trim();
+    if (!topic) return alert('Enter a topic.');
+    
+    const tone = document.getElementById('toneInput').value;
+    const out = document.getElementById('outputBox');
+    const loader = document.getElementById('loadingBar');
+    
+    out.innerHTML = '<p style="text-align:center;color:var(--text-dim)">🧠 Generating premium content...</p>';
+    loader.classList.add('on');
+    
+    let result = null;
+    if (typeof EPA !== 'undefined') {
+        const methods = { article: 'article', lesson: 'lesson', essay: 'essay', analysis: 'analysis', report: 'report', speech: 'speech', proposal: 'proposal', social: 'social' };
+        const method = methods[currentType] || 'article';
+        result = await EPA[method](topic, tone);
+    } else {
+        result = await researchAssistant(topic);
+    }
+    
+    loader.classList.remove('on');
+    
+    if (result) {
+        outputText = result;
+        out.innerHTML = formatHTML(result);
+        document.getElementById('copyBtn').style.display = 'inline-block';
+        document.getElementById('downloadBtn').style.display = 'inline-block';
+        document.getElementById('clearBtn').style.display = 'inline-block';
+    } else {
+        out.innerHTML = '<p style="color:var(--red);text-align:center">Generation failed. Try again.</p>';
+    }
+}
 
-        function addTyping() {
-            const typing = document.createElement('div');
-            typing.className = 'typing';
-            typing.id = 'typingIndicator';
-            typing.textContent = '🧠 Thinking...';
-            chatContainer.appendChild(typing);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
+function formatHTML(text) {
+    return text
+        .replace(/### (.+)/g, '<h3>$1</h3>')
+        .replace(/## (.+)/g, '<h2>$1</h2>')
+        .replace(/# (.+)/g, '<h2>$1</h2>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/^\- (.+)/gm, '<li>$1</li>')
+        .replace(/^> (.+)/gm, '<blockquote>$1</blockquote>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/^(.+)$/gm, '<p>$1</p>');
+}
 
-        function removeTyping() {
-            const typing = document.getElementById('typingIndicator');
-            if (typing) typing.remove();
-        }
+function copyOut() {
+    navigator.clipboard.writeText(outputText).then(() => {
+        const b = document.getElementById('copyBtn');
+        b.textContent = '✅ Copied!';
+        setTimeout(() => b.textContent = '📋 Copy', 2000);
+    });
+}
 
-        async function sendMessage(e) {
-            e.preventDefault();
-            const question = userInput.value.trim();
-            if (!question) return;
+function downloadOut() {
+    const blob = new Blob([outputText], {type:'text/plain'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ethiopian-peace-archive-' + currentType + '.txt';
+    a.click();
+}
 
-            addMessage(question, 'user');
-            userInput.value = '';
-            addTyping();
-
-            try {
-                const answer = await researchAssistant(question);
-                removeTyping();
-                addMessage(answer || 'Please try again.', 'ai');
-            } catch (err) {
-                removeTyping();
-                addMessage('AI is thinking... please try again.', 'ai');
-            }
-        }
-
-        function askSuggested(question) {
-            userInput.value = question;
-            sendMessage(new Event('submit'));
-        }
-    </script>
+function clearOut() {
+    document.getElementById('outputBox').innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:60px 0">Select type, enter topic, click Generate.</p>';
+    document.getElementById('copyBtn').style.display = 'none';
+    document.getElementById('downloadBtn').style.display = 'none';
+    document.getElementById('clearBtn').style.display = 'none';
+    outputText = '';
+}
+</script>
 </body>
 </html>
