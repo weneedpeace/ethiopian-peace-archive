@@ -3,82 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact the Ethiopian Peace Archive.">
+    <meta name="description" content="Contact the Ethiopian Peace Archive. Partnerships, media, research.">
     <title>Contact — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
-        .contact-card { background: var(--card); border: 1px solid var(--green-border); border-radius: 12px; padding: 18px; text-align: center; }
-        .contact-card .icon { font-size: 1.8rem; margin-bottom: 6px; }
-        .contact-card h4 { color: var(--gold); font-family: var(--font-ui); font-size: 0.9rem; margin-bottom: 4px; }
-        .contact-card p { color: var(--text-dim); font-size: 0.8rem; }
+        .contact-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
+        .contact-card{background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:18px;text-align:center}
+        .contact-card .icon{font-size:1.8rem;margin-bottom:6px}
+        .contact-card h4{color:var(--gold);font-family:var(--font-ui);font-size:0.9rem;margin-bottom:4px}
+        .contact-card p{color:var(--text-dim);font-size:0.8rem}
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="desktop-links">
-            <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-            <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
-            <a href="media.html">Media</a><a href="gallery.html">Gallery</a>
-            <a href="thanks.html">Thanks</a><a href="contribute.html">Contribute</a>
-            <a href="support.html" class="cta-nav">Support</a>
-            <span style="display:flex;gap:2px;margin-left:6px">
-                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            </span>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-    </nav>
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="voices.html" data-i18n="voices">Voices</a>
+        <a href="blog.html" data-i18n="blog">Blog</a>
+        <a href="courses.html" data-i18n="courses">Courses</a>
+        <a href="dashboard.html" data-i18n="impact">Impact</a>
+        <a href="media.html" data-i18n="media">Media</a>
+        <a href="gallery.html" data-i18n="gallery">Gallery</a>
+        <a href="contribute.html" data-i18n="contribute">Contribute</a>
+        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
+        <span style="display:flex;gap:2px;margin-left:6px">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+        </span>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-        <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
-        <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
-        <a href="blog.html"><span class="menu-icon">📝</span>Blog</a>
-        <a href="courses.html"><span class="menu-icon">🎓</span>Courses</a>
-        <a href="dashboard.html"><span class="menu-icon">📊</span>Impact</a>
-        <a href="contact.html"><span class="menu-icon">📬</span>Contact</a>
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
+    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
+    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
+    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
+    <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
+    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
+    <a href="contact.html"><span class="menu-icon">📬</span> <span data-i18n="contact">Contact</span></a>
+</div>
+
+<main class="container-sm">
+    <h1 class="section-title" data-i18n="contactTitle">📬 Contact Us</h1>
+    <p style="color:var(--text-dim);margin-bottom:20px" data-i18n="contactSub">Partnerships, media inquiries, research collaboration, and questions welcome.</p>
+
+    <div class="contact-cards">
+        <div class="contact-card"><div class="icon">📧</div><h4>Email</h4><p>peace@ethiopianarchive.org</p></div>
+        <div class="contact-card"><div class="icon">𝕏</div><h4>X (Twitter)</h4><p>@EthPeaceArchive</p></div>
+        <div class="contact-card"><div class="icon">📘</div><h4>Facebook</h4><p>/EthiopianPeaceArchive</p></div>
+        <div class="contact-card"><div class="icon">📸</div><h4>Instagram</h4><p>@ethiopianpeacearchive</p></div>
     </div>
 
-    <main class="container-sm">
-        <h1 class="section-title">📬 Contact Us</h1>
-        <p style="color:var(--text-dim);margin-bottom:20px">Partnerships, media inquiries, research collaboration, and questions welcome.</p>
+    <div style="background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius);padding:24px">
+        <h3 style="color:var(--gold);margin-bottom:12px;font-family:var(--font-ui)" data-i18n="sendMessage">Send a Message</h3>
+        <form onsubmit="alert('Thank you! We will respond soon.');return false">
+            <label data-i18n="yourName">Your Name</label><input type="text" placeholder="Your name" required>
+            <label>Email</label><input type="email" placeholder="your@email.com" required>
+            <label>Subject</label><input type="text" placeholder="Partnership, Media, Research...">
+            <label data-i18n="yourMessage">Message</label><textarea placeholder="How can we help?" required></textarea>
+            <button type="submit" class="btn btn-primary">Send Message →</button>
+        </form>
+    </div>
+</main>
 
-        <div class="contact-cards">
-            <div class="contact-card"><div class="icon">📧</div><h4>Email</h4><p>peace@ethiopianarchive.org</p></div>
-            <div class="contact-card"><div class="icon">𝕏</div><h4>X (Twitter)</h4><p>@EthPeaceArchive</p></div>
-            <div class="contact-card"><div class="icon">📘</div><h4>Facebook</h4><p>/EthiopianPeaceArchive</p></div>
-            <div class="contact-card"><div class="icon">📸</div><h4>Instagram</h4><p>@ethiopianpeacearchive</p></div>
-        </div>
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
+        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
+    </div>
+    <div class="footer-bottom">
+        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
+        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+    </div>
+</footer>
 
-        <div class="contribute-card" style="background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius);padding:24px">
-            <h3 style="color:var(--gold);margin-bottom:12px;font-family:var(--font-ui)">Send a Message</h3>
-            <form onsubmit="alert('Thank you! We will respond soon.');return false">
-                <label style="display:block;color:var(--text-dim);margin-bottom:4px;font-family:var(--font-ui);font-size:0.85rem">Your Name</label>
-                <input type="text" placeholder="Your name" required>
-                <label style="display:block;color:var(--text-dim);margin-bottom:4px;font-family:var(--font-ui);font-size:0.85rem">Your Email</label>
-                <input type="email" placeholder="your@email.com" required>
-                <label style="display:block;color:var(--text-dim);margin-bottom:4px;font-family:var(--font-ui);font-size:0.85rem">Subject</label>
-                <input type="text" placeholder="Partnership, Media, Research...">
-                <label style="display:block;color:var(--text-dim);margin-bottom:4px;font-family:var(--font-ui);font-size:0.85rem">Message</label>
-                <textarea placeholder="How can we help?" required></textarea>
-                <button type="submit" class="btn btn-primary">Send Message →</button>
-            </form>
-        </div>
-    </main>
-
-    <footer>
-        <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-            <p>Ethiopian Peace Archive &copy; 2026</p>
-            <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="thanks.html">Thank You</a></p>
-        </div>
-    </footer>
-
-    <script src="js/navigation.js"></script>
-    <script src="js/language.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/language.js"></script>
 </body>
 </html>
