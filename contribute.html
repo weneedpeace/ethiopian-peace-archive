@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contribute your voice to the Ethiopian Peace Archive. Share your message of peace, unity, and hope.">
+    <meta name="description" content="Contribute your voice to the Ethiopian Peace Archive.">
     <title>Contribute Your Voice — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -51,7 +51,8 @@
             border: none; cursor: pointer; font-family: var(--font-ui);
             transition: all 0.3s;
         }
-        .submit-btn:hover { background: #15803d; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(22,163,74,0.25); }
+        .submit-btn:hover { background: #15803d; transform: translateY(-2px); }
+        .submit-btn:disabled { background: #999; cursor: not-allowed; }
         
         .trust-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
         .trust-item { display: flex; align-items: center; gap: 6px; color: #666; font-size: 0.78rem; font-family: var(--font-ui); }
@@ -59,7 +60,6 @@
         
         .privacy-note { text-align: center; color: #999; font-size: 0.7rem; margin-top: 14px; font-family: var(--font-ui); }
 
-        /* SUCCESS NOTIFICATION */
         .success-notification {
             display: none;
             background: #f0fdf4;
@@ -67,7 +67,6 @@
             border-radius: 16px;
             padding: 30px;
             text-align: center;
-            margin-top: 20px;
             animation: slideUp 0.4s ease;
         }
         .success-notification.show { display: block; }
@@ -83,7 +82,18 @@
             background: #16a34a; color: #fff; border: none;
             font-weight: 700; font-family: var(--font-ui); cursor: pointer; font-size: 0.9rem;
         }
-        .success-notification button:hover { background: #15803d; }
+        .error-notification {
+            display: none;
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            color: #ef4444;
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+        }
+        .error-notification.show { display: block; }
 
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -122,12 +132,11 @@
         <div class="trust-item"><span>📜</span> Permanent archive</div>
     </div>
 
-    <!-- FORM -->
     <div class="form-card" id="formCard">
         <h3>✍️ Write Your Peace Message</h3>
         <p class="subtitle">Every voice adds to the global chorus for peace.</p>
         
-        <form id="submitForm" onsubmit="return submitVoice()">
+        <form id="submitForm">
             <label>Your Name</label>
             <input type="text" id="sName" placeholder="e.g., Abebe (or leave blank for anonymous)">
             
@@ -144,19 +153,22 @@
             <textarea id="sMessage" placeholder="What do you want to say about peace, unity, and hope?" oninput="updateCount()"></textarea>
             <div class="char-count"><span id="charCount">0</span> characters · <span id="wordCount">0</span> words</div>
             
-            <button type="submit" class="submit-btn">🕊️ Submit My Voice for Peace</button>
+            <button type="button" class="submit-btn" id="submitBtn" onclick="submitVoice()">🕊️ Submit My Voice for Peace</button>
             
             <p class="privacy-note">🔒 Your email is private. Only your name, region, and message are published after review.</p>
         </form>
     </div>
 
-    <!-- SUCCESS NOTIFICATION -->
     <div class="success-notification" id="successNotification">
         <div class="check-icon">✓</div>
         <h3>Thank You! Your Voice Has Been Received.</h3>
-        <p>Your message will be reviewed within 48 hours and added to the permanent archive. You will receive a confirmation email shortly.</p>
+        <p>Your message will be reviewed within 48 hours and added to the permanent archive.</p>
         <p style="color:#888;font-size:0.8rem;">📧 Check your inbox for confirmation</p>
         <button onclick="resetForm()">Share Another Voice →</button>
+    </div>
+
+    <div class="error-notification" id="errorNotification">
+        ❌ Unable to send. Please try again or email us directly.
     </div>
 </main>
 
@@ -177,35 +189,58 @@ function updateCount() {
 function resetForm() {
     document.getElementById('formCard').style.display = 'block';
     document.getElementById('successNotification').classList.remove('show');
+    document.getElementById('errorNotification').classList.remove('show');
     document.getElementById('submitForm').reset();
+    document.getElementById('submitBtn').disabled = false;
     updateCount();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 async function submitVoice() {
-    const data = new FormData();
-    data.append('name', document.getElementById('sName').value || 'Anonymous');
-    data.append('email', document.getElementById('sEmail').value);
-    data.append('region', document.getElementById('sRegion').value);
-    data.append('language', document.getElementById('sLanguage').value || 'Not specified');
-    data.append('message', document.getElementById('sMessage').value);
+    const name = document.getElementById('sName').value || 'Anonymous';
+    const email = document.getElementById('sEmail').value;
+    const region = document.getElementById('sRegion').value;
+    const language = document.getElementById('sLanguage').value || 'Not specified';
+    const message = document.getElementById('sMessage').value;
     
-    if (!document.getElementById('sMessage').value || !document.getElementById('sRegion').value || !document.getElementById('sEmail').value) {
+    if (!message || !region || !email) {
         alert('Please fill in email, region, and message.');
-        return false;
+        return;
     }
+    
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '📤 Sending...';
+    
+    var data = new FormData();
+    data.append('name', name);
+    data.append('email', email);
+    data.append('region', region);
+    data.append('language', language);
+    data.append('message', message);
     
     try {
-        const res = await fetch(FORMSPREE, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+        var res = await fetch(FORMSPREE, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+        
         if (res.ok) {
             document.getElementById('formCard').style.display = 'none';
+            document.getElementById('errorNotification').classList.remove('show');
             document.getElementById('successNotification').classList.add('show');
             window.scrollTo({ top: document.getElementById('successNotification').offsetTop - 50, behavior: 'smooth' });
+        } else {
+            document.getElementById('errorNotification').classList.add('show');
+            btn.disabled = false;
+            btn.textContent = '🕊️ Submit My Voice for Peace';
         }
     } catch (e) {
-        alert('Unable to send. Please try again.');
+        document.getElementById('errorNotification').classList.add('show');
+        btn.disabled = false;
+        btn.textContent = '🕊️ Submit My Voice for Peace';
     }
-    return false;
 }
 </script>
 </body>
