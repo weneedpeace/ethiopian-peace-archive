@@ -58,14 +58,34 @@
         .trust-item span { color: #16a34a; }
         
         .privacy-note { text-align: center; color: #999; font-size: 0.7rem; margin-top: 14px; font-family: var(--font-ui); }
-        
-        .success-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; }
-        .success-overlay.show { display: flex; }
-        .success-box { background: #fff; border-radius: 16px; padding: 40px 30px; text-align: center; max-width: 420px; width: 90%; }
-        .success-box .icon { font-size: 4rem; margin-bottom: 12px; }
-        .success-box h2 { color: #16a34a; font-family: var(--font-ui); font-size: 1.3rem; margin-bottom: 8px; }
-        .success-box p { color: #555; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6; }
-        .success-box button { padding: 10px 30px; border-radius: 25px; background: #16a34a; color: #fff; border: none; font-weight: 700; font-family: var(--font-ui); cursor: pointer; font-size: 0.95rem; }
+
+        /* SUCCESS NOTIFICATION */
+        .success-notification {
+            display: none;
+            background: #f0fdf4;
+            border: 2px solid #16a34a;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 20px;
+            animation: slideUp 0.4s ease;
+        }
+        .success-notification.show { display: block; }
+        .success-notification .check-icon {
+            width: 60px; height: 60px; background: #16a34a; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; font-size: 2rem; color: #fff;
+        }
+        .success-notification h3 { color: #16a34a; font-family: var(--font-ui); font-size: 1.2rem; margin-bottom: 6px; }
+        .success-notification p { color: #555; font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px; }
+        .success-notification button {
+            padding: 10px 24px; border-radius: 25px;
+            background: #16a34a; color: #fff; border: none;
+            font-weight: 700; font-family: var(--font-ui); cursor: pointer; font-size: 0.9rem;
+        }
+        .success-notification button:hover { background: #15803d; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -102,7 +122,8 @@
         <div class="trust-item"><span>📜</span> Permanent archive</div>
     </div>
 
-    <div class="form-card">
+    <!-- FORM -->
+    <div class="form-card" id="formCard">
         <h3>✍️ Write Your Peace Message</h3>
         <p class="subtitle">Every voice adds to the global chorus for peace.</p>
         
@@ -128,16 +149,16 @@
             <p class="privacy-note">🔒 Your email is private. Only your name, region, and message are published after review.</p>
         </form>
     </div>
-</main>
 
-<div class="success-overlay" id="successOverlay">
-    <div class="success-box">
-        <div class="icon">✅</div>
-        <h2>Thank You for Your Voice!</h2>
-        <p>Your message has been received. We'll review it and add it to the permanent archive. Check your email for confirmation.</p>
-        <button onclick="closeSuccess()">Continue →</button>
+    <!-- SUCCESS NOTIFICATION -->
+    <div class="success-notification" id="successNotification">
+        <div class="check-icon">✓</div>
+        <h3>Thank You! Your Voice Has Been Received.</h3>
+        <p>Your message will be reviewed within 48 hours and added to the permanent archive. You will receive a confirmation email shortly.</p>
+        <p style="color:#888;font-size:0.8rem;">📧 Check your inbox for confirmation</p>
+        <button onclick="resetForm()">Share Another Voice →</button>
     </div>
-</div>
+</main>
 
 <footer>
     <div class="footer-bottom"><p>🕊️ Ethiopian Peace Archive &copy; 2026 · Every voice matters.</p></div>
@@ -153,8 +174,13 @@ function updateCount() {
     document.getElementById('wordCount').textContent = text ? text.split(/\s+/).length : 0;
 }
 
-function showSuccess() { document.getElementById('successOverlay').classList.add('show'); }
-function closeSuccess() { document.getElementById('successOverlay').classList.remove('show'); }
+function resetForm() {
+    document.getElementById('formCard').style.display = 'block';
+    document.getElementById('successNotification').classList.remove('show');
+    document.getElementById('submitForm').reset();
+    updateCount();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 async function submitVoice() {
     const data = new FormData();
@@ -172,9 +198,9 @@ async function submitVoice() {
     try {
         const res = await fetch(FORMSPREE, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
         if (res.ok) {
-            document.getElementById('submitForm').reset();
-            updateCount();
-            showSuccess();
+            document.getElementById('formCard').style.display = 'none';
+            document.getElementById('successNotification').classList.add('show');
+            window.scrollTo({ top: document.getElementById('successNotification').offsetTop - 50, behavior: 'smooth' });
         }
     } catch (e) {
         alert('Unable to send. Please try again.');
