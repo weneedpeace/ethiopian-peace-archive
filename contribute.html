@@ -7,62 +7,69 @@
     <title>Contribute Your Voice — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .page-hero { text-align: center; padding: 40px 20px 20px; }
-        .page-hero .icon { font-size: 3rem; margin-bottom: 8px; }
-        .page-hero h1 { color: var(--gold-bright); font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 8px; }
-        .page-hero p { color: var(--text-dim); max-width: 550px; margin: 0 auto; font-size: 1rem; }
+        .page-hero { text-align: center; padding: 50px 20px 30px; background: #fff; border-radius: var(--radius-lg); margin-bottom: 24px; }
+        .page-hero .icon { font-size: 3.5rem; margin-bottom: 8px; }
+        .page-hero h1 { color: #1a1a1a; font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 6px; font-family: var(--font-ui); font-weight: 800; }
+        .page-hero p { color: #555; max-width: 550px; margin: 0 auto; font-size: 1rem; }
         
         .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 0 auto; }
         
-        .info-card { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 24px; }
-        .info-card h3 { color: var(--gold); margin-bottom: 8px; font-family: var(--font-ui); font-size: 1rem; }
-        .info-card p { color: var(--text-dim); font-size: 0.85rem; line-height: 1.6; }
-        .info-card .emoji { font-size: 2rem; margin-bottom: 8px; display: block; }
+        .trust-section { background: #fff; border-radius: var(--radius); padding: 16px; margin-bottom: 12px; }
+        .trust-section h4 { color: #1a1a1a; font-family: var(--font-ui); font-size: 0.8rem; margin-bottom: 4px; }
+        .trust-section p { color: #777; font-size: 0.72rem; line-height: 1.5; margin: 0; }
+        .trust-badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+        .trust-badge { display: flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 20px; background: #f0fdf4; color: #16a34a; font-family: var(--font-ui); font-size: 0.7rem; border: 1px solid #bbf7d0; }
         
-        .trust-badges { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
-        .trust-badge { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 20px; background: var(--green-dim); color: var(--green-bright); font-family: var(--font-ui); font-size: 0.75rem; }
+        .voices-preview { background: #fff; border-radius: var(--radius); padding: 16px; }
+        .voices-preview h4 { color: #1a1a1a; font-family: var(--font-ui); font-size: 0.85rem; margin-bottom: 10px; }
+        .preview-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 14px; margin-bottom: 6px; }
+        .preview-card .prev-name { color: #16a34a; font-weight: 600; font-size: 0.78rem; }
+        .preview-card .prev-loc { color: #999; font-size: 0.68rem; }
+        .preview-card .prev-msg { color: #444; font-style: italic; margin-top: 4px; font-size: 0.78rem; }
         
-        .form-card { background: var(--card); border: 2px solid var(--green); border-radius: var(--radius-lg); padding: 28px; position: relative; }
-        .form-card::before { content: ''; position: absolute; top: -2px; left: 20px; right: 20px; height: 2px; background: linear-gradient(90deg, transparent, var(--green-bright), transparent); }
-        .form-card h3 { color: var(--gold); margin-bottom: 6px; font-family: var(--font-ui); font-size: 1.1rem; text-align: center; }
-        .form-card .subtitle { color: var(--text-dim); font-size: 0.85rem; text-align: center; margin-bottom: 20px; }
+        .form-card { background: #fff; border: 2px solid #16a34a; border-radius: var(--radius-lg); padding: 28px; position: relative; }
+        .form-card::before { content: ''; position: absolute; top: -2px; left: 20px; right: 20px; height: 2px; background: linear-gradient(90deg, transparent, #16a34a, transparent); }
+        .form-card h3 { color: #1a1a1a; margin-bottom: 4px; font-family: var(--font-ui); font-size: 1.2rem; text-align: center; font-weight: 800; }
+        .form-card .subtitle { color: #777; font-size: 0.85rem; text-align: center; margin-bottom: 20px; }
         
-        .form-card label { display: block; color: var(--text-dim); font-size: 0.8rem; margin-bottom: 4px; font-family: var(--font-ui); }
+        .form-card label { display: block; color: #444; font-size: 0.8rem; margin-bottom: 4px; font-family: var(--font-ui); font-weight: 600; }
         .form-card input, .form-card textarea { 
             width: 100%; padding: 12px 16px; border-radius: 10px; 
-            border: 1px solid var(--green-border); background: var(--bg); 
-            color: var(--text); font-size: 0.9rem; font-family: inherit; 
+            border: 1px solid #d1d5db; background: #f9fafb; 
+            color: #1a1a1a; font-size: 0.9rem; font-family: inherit; 
             margin-bottom: 14px; transition: all 0.3s;
         }
         .form-card input:focus, .form-card textarea:focus { 
-            outline: none; border-color: var(--green); 
+            outline: none; border-color: #16a34a; 
             box-shadow: 0 0 0 3px rgba(34,197,94,0.1);
+            background: #fff;
         }
         .form-card textarea { min-height: 140px; resize: vertical; }
         
-        .char-count { text-align: right; color: var(--text-muted); font-size: 0.7rem; margin-top: -8px; margin-bottom: 10px; font-family: var(--font-ui); }
+        .char-count { text-align: right; color: #999; font-size: 0.7rem; margin-top: -8px; margin-bottom: 10px; font-family: var(--font-ui); }
         
         .submit-btn { 
             width: 100%; padding: 14px; border-radius: 30px; 
-            background: linear-gradient(135deg, var(--green), #16a34a);
-            color: #000; font-weight: 700; font-size: 1rem; 
+            background: #16a34a; color: #fff; font-weight: 700; font-size: 1rem; 
             border: none; cursor: pointer; font-family: var(--font-ui);
             transition: all 0.3s; letter-spacing: 0.5px;
         }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(34,197,94,0.3); }
+        .submit-btn:hover { background: #15803d; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(22,163,74,0.3); }
         .submit-btn:active { transform: scale(0.98); }
         
-        .privacy-note { text-align: center; color: var(--text-muted); font-size: 0.7rem; margin-top: 12px; font-family: var(--font-ui); }
-        .privacy-note span { color: var(--green-bright); }
+        .privacy-note { text-align: center; color: #999; font-size: 0.7rem; margin-top: 12px; font-family: var(--font-ui); }
+        .privacy-note span { color: #16a34a; font-weight: 600; }
         
-        .voices-preview { margin-top: 30px; }
-        .voices-preview h3 { color: var(--gold); margin-bottom: 16px; font-family: var(--font-ui); text-align: center; }
-        .preview-card { background: var(--card); border: 1px solid rgba(34,197,94,0.08); border-radius: 10px; padding: 14px 18px; margin-bottom: 8px; }
-        .preview-card .prev-name { color: var(--green-bright); font-weight: 600; font-size: 0.85rem; }
-        .preview-card .prev-loc { color: var(--text-dim); font-size: 0.7rem; }
-        .preview-card .prev-msg { color: var(--text); font-style: italic; margin-top: 6px; font-size: 0.85rem; }
+        /* Success notification */
+        .success-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; }
+        .success-overlay.show { display: flex; }
+        .success-box { background: #fff; border-radius: 16px; padding: 40px 30px; text-align: center; max-width: 420px; width: 90%; }
+        .success-box .icon { font-size: 4rem; margin-bottom: 12px; }
+        .success-box h2 { color: #16a34a; font-family: var(--font-ui); font-size: 1.4rem; margin-bottom: 8px; }
+        .success-box p { color: #555; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6; }
+        .success-box button { padding: 10px 30px; border-radius: 25px; background: #16a34a; color: #fff; border: none; font-weight: 700; font-family: var(--font-ui); cursor: pointer; font-size: 0.95rem; }
         
-        @media (max-width: 768px) { .layout { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .layout { grid-template-columns: 1fr; } .page-hero { padding: 30px 16px 20px; } }
     </style>
 </head>
 <body>
@@ -89,25 +96,21 @@
 <main class="container">
     <div class="page-hero">
         <div class="icon">🕊️</div>
-        <h1>Your Voice. Your Peace. Your Legacy.</h1>
-        <p>Join 1,000+ people from Ethiopia and around the world who have shared their message for peace.</p>
+        <h1>Your Voice Matters for Peace</h1>
+        <p>Share your message of hope, unity, and peace for Ethiopia and the world.</p>
     </div>
 
     <div class="layout">
-        <!-- LEFT: INFO & TRUST -->
+        <!-- LEFT: TRUST + PREVIEW -->
         <div>
-            <div class="info-card">
-                <span class="emoji">🔒</span>
-                <h3>Your Privacy is Protected</h3>
-                <p>Your email is never published. Your name is optional. We only share your message and region. You can request removal anytime.</p>
+            <div class="trust-section">
+                <h4>🔒 Your Privacy is Protected</h4>
+                <p>Your email is never published. Only your message and region are shared. Request removal anytime.</p>
             </div>
-            
-            <div class="info-card" style="margin-top:12px">
-                <span class="emoji">✅</span>
-                <h3>How It Works</h3>
-                <p>1. Write your peace message<br>2. We review it (within 48 hours)<br>3. It appears in the permanent archive<br>4. You get a confirmation email</p>
+            <div class="trust-section">
+                <h4>✅ How It Works</h4>
+                <p>Write your message → We review within 48 hours → Published in the permanent archive → Confirmation email sent.</p>
             </div>
-            
             <div class="trust-badges">
                 <span class="trust-badge">🔒 Anonymous Option</span>
                 <span class="trust-badge">✅ Human Reviewed</span>
@@ -115,10 +118,9 @@
                 <span class="trust-badge">📜 Permanent Archive</span>
             </div>
             
-            <!-- RECENT VOICES PREVIEW -->
             <div class="voices-preview">
-                <h3>🌍 Recent Community Voices</h3>
-                <div id="previewVoices"><p style="color:var(--text-dim);font-size:0.85rem;text-align:center">Loading recent voices...</p></div>
+                <h4>🌍 Recent Community Voices</h4>
+                <div id="previewVoices"><p style="color:#999;font-size:0.78rem;text-align:center">Loading recent voices...</p></div>
             </div>
         </div>
         
@@ -127,11 +129,9 @@
             <h3>✍️ Share Your Peace Message</h3>
             <p class="subtitle">Every voice adds to the global chorus for peace.</p>
             
-            <div id="submitMsg" class="msg" style="display:none"></div>
-            
             <form id="submitForm" onsubmit="return submitVoice()">
                 <label>Your Name</label>
-                <input type="text" id="sName" placeholder="e.g., Abebe (or leave as Anonymous)" required>
+                <input type="text" id="sName" placeholder="e.g., Abebe (or leave blank for anonymous)" required>
                 
                 <label>Your Email</label>
                 <input type="email" id="sEmail" placeholder="For confirmation only — never published" required>
@@ -144,15 +144,25 @@
                 
                 <label>Your Peace Message</label>
                 <textarea id="sMessage" placeholder="What do you want to say about peace, unity, and hope for Ethiopia? Your words will be preserved for future generations..." oninput="updateCount()"></textarea>
-                <div class="char-count"><span id="charCount">0</span> characters | <span id="wordCount">0</span> words</div>
+                <div class="char-count"><span id="charCount">0</span> characters · <span id="wordCount">0</span> words</div>
                 
                 <button type="submit" class="submit-btn">🕊️ Submit My Voice for Peace</button>
                 
-                <p class="privacy-note"><span>🔒</span> Your email is private. Only your message and region will be published after review.</p>
+                <p class="privacy-note"><span>🔒</span> Your email is private. Only your message and region are published after review.</p>
             </form>
         </div>
     </div>
 </main>
+
+<!-- SUCCESS NOTIFICATION -->
+<div class="success-overlay" id="successOverlay">
+    <div class="success-box">
+        <div class="icon">✅</div>
+        <h2>Thank You for Your Voice!</h2>
+        <p>Your message has been received. We'll review it within 48 hours and add it to the permanent archive. Check your email for confirmation.</p>
+        <button onclick="closeSuccess()">Continue →</button>
+    </div>
+</div>
 
 <footer>
     <div class="footer-bottom"><p>🕊️ Ethiopian Peace Archive &copy; 2026 · Every voice matters.</p></div>
@@ -170,8 +180,10 @@ function updateCount() {
     document.getElementById('wordCount').textContent = text ? text.split(/\s+/).length : 0;
 }
 
+function showSuccess() { document.getElementById('successOverlay').classList.add('show'); }
+function closeSuccess() { document.getElementById('successOverlay').classList.remove('show'); }
+
 async function submitVoice() {
-    const msg = document.getElementById('submitMsg');
     const data = new FormData();
     data.append('name', document.getElementById('sName').value);
     data.append('email', document.getElementById('sEmail').value);
@@ -180,13 +192,9 @@ async function submitVoice() {
     data.append('message', document.getElementById('sMessage').value);
     
     if (!document.getElementById('sMessage').value || !document.getElementById('sRegion').value) {
-        msg.textContent = 'Please fill in your region and message.';
-        msg.className = 'msg msg-err'; msg.style.display = 'block';
+        alert('Please fill in your region and message.');
         return false;
     }
-    
-    msg.textContent = '📤 Sending your message...';
-    msg.className = 'msg'; msg.style.display = 'block'; msg.style.color = 'var(--text-dim)';
     
     try {
         const res = await fetch(FORMSPREE, {
@@ -195,23 +203,17 @@ async function submitVoice() {
         });
         
         if (res.ok) {
-            msg.textContent = '✅ Thank you! Your voice has been received. Check your email for confirmation. It will appear in the archive after review.';
-            msg.className = 'msg msg-ok'; msg.style.display = 'block';
             document.getElementById('submitForm').reset();
             updateCount();
-        } else {
-            throw new Error('Failed');
+            showSuccess();
         }
     } catch (e) {
-        msg.textContent = '❌ Unable to send. Please try again or email us directly.';
-        msg.className = 'msg msg-err'; msg.style.display = 'block';
+        alert('Unable to send. Please try again.');
     }
     
-    setTimeout(() => msg.style.display = 'none', 8000);
     return false;
 }
 
-// Load recent voices for preview
 async function loadPreview() {
     try {
         const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=region,quote_english&is_published=eq.true&order=created_at.desc&limit=3', {
