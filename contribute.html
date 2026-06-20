@@ -3,22 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contribute your voice, volunteer, or partner with the Ethiopian Peace Archive.">
+    <meta name="description" content="Contribute your voice to the Ethiopian Peace Archive.">
     <title>Contribute — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .contribute-card{background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius);padding:24px;margin-bottom:16px}
-        .contribute-card h3{color:var(--gold);margin-bottom:8px;font-family:var(--font-ui)}
-        .contribute-card p{color:var(--text-dim);font-size:0.9rem;margin-bottom:12px}
-        .ai-badge{display:inline-block;padding:3px 10px;border-radius:10px;font-size:0.65rem;background:rgba(168,85,247,0.15);color:#c084fc;font-family:var(--font-ui);margin-left:6px}
-        .ai-result{display:none;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);border-radius:10px;padding:14px;margin-bottom:14px}
-        .ai-result.show{display:block;animation:fadeIn 0.3s ease}
-        .ai-result h4{color:#c084fc;font-family:var(--font-ui);font-size:0.85rem;margin-bottom:8px}
-        .ai-tags{display:flex;flex-wrap:wrap;gap:4px}
-        .ai-tag{padding:3px 10px;border-radius:8px;font-size:0.7rem;background:rgba(168,85,247,0.12);color:#c084fc;font-family:var(--font-ui)}
-        .analyze-btn{background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.3);padding:8px 16px;border-radius:20px;cursor:pointer;font-size:0.8rem;font-family:var(--font-ui);font-weight:600;margin-top:8px}
-        .analyze-btn:hover{background:rgba(168,85,247,0.25)}
-        .analyze-btn:disabled{opacity:0.5;cursor:not-allowed}
+        .contribute-card { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 24px; max-width: 600px; margin: 0 auto; }
+        .contribute-card h3 { color: var(--gold); margin-bottom: 12px; font-family: var(--font-ui); }
+        .contribute-card p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 16px; }
     </style>
 </head>
 <body>
@@ -26,114 +17,83 @@
 <nav>
     <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
     <div class="desktop-links">
-        <a href="index.html" data-i18n="home">Home</a>
-        <a href="voices.html" data-i18n="voices">Voices</a>
-        <a href="blog.html" data-i18n="blog">Blog</a>
-        <a href="courses.html" data-i18n="courses">Courses</a>
-        <a href="dashboard.html" data-i18n="impact">Impact</a>
-        <a href="media.html" data-i18n="media">Media</a>
-        <a href="gallery.html" data-i18n="gallery">Gallery</a>
-        <a href="contribute.html" class="active" data-i18n="contribute">Contribute</a>
-        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
-        <span style="display:flex;gap:2px;margin-left:6px">
-            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
-        </span>
+        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
+        <a href="gallery.html">Gallery</a><a href="thanks.html">Thanks</a>
+        <a href="contribute.html" class="active">Contribute</a>
+        <a href="support.html" class="cta-nav">Support</a>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
 <div class="slide-menu" id="slideMenu">
     <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
-    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
-    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
-    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
-    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
-    <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
-    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
-    <a href="contribute.html"><span class="menu-icon">🤝</span> <span data-i18n="contribute">Contribute</span></a>
-    <a href="support.html"><span class="menu-icon">❤️</span> <span data-i18n="support">Support</span></a>
+    <a href="index.html">🏠 Home</a><a href="voices.html">🗣️ Voices</a><a href="contribute.html">🤝 Contribute</a>
+    <a href="support.html">❤️ Support</a>
 </div>
 
-<main class="container-sm">
-    <h1 class="section-title" data-i18n="contributePageTitle">🤝 Contribute to Peace</h1>
-    <p style="color:var(--text-dim);margin-bottom:24px" data-i18n="contributePageSub">Your voice. Your skills. Your passion.</p>
+<main class="container">
+    <h1 class="section-title">🤝 Contribute Your Voice</h1>
+    <p style="color:var(--text-dim);margin-bottom:24px;text-align:center">Your voice matters. Submit your peace message — we'll review and publish it in the archive.</p>
 
     <div class="contribute-card">
-        <h3 data-i18n="submitVoiceTitle">🗣️ Submit Your Voice <span class="ai-badge">🧠 AI</span></h3>
-        <p data-i18n="submitVoiceDesc">Share your message of peace. Our AI helps analyze language, sentiment, and themes.</p>
-        <div id="voiceMsg" class="msg msg-ok"></div>
-        <form id="voiceForm" onsubmit="submitVoiceForm(event)">
-            <label data-i18n="yourName">Your Name (kept private)</label>
-            <input type="text" id="name" placeholder="Your name" required>
-            <label data-i18n="regionCountry">Region or Country</label>
-            <input type="text" id="location" placeholder="Tigray, Oromia, Diaspora..." required>
-            <label data-i18n="language">Language</label>
-            <input type="text" id="language" placeholder="Auto-detect">
-            <label data-i18n="yourMessage">Your Message of Peace</label>
-            <textarea id="message" placeholder="What do you want to say about peace?" required oninput="document.getElementById('analyzeBtn').disabled=this.value.trim().length<10"></textarea>
-            <button type="button" class="analyze-btn" id="analyzeBtn" onclick="runAI()" disabled>🧠 Analyze with AI</button>
-            <div class="ai-result" id="aiResult"><h4>🧠 AI Analysis</h4><div id="aiContent"></div></div>
-            <button type="submit" class="btn btn-primary" style="margin-top:12px">Submit Your Voice →</button>
+        <h3>✍️ Submit Your Peace Message</h3>
+        <p>Share your thoughts on peace, unity, and hope for Ethiopia. You'll receive a confirmation email.</p>
+        <div id="submitMsg" class="msg" style="display:none"></div>
+        <form id="submitForm" onsubmit="return submitVoice()">
+            <input type="text" id="sName" placeholder="Your Name *" required><br><br>
+            <input type="email" id="sEmail" placeholder="Your Email * (private, for confirmation)" required><br><br>
+            <input type="text" id="sRegion" placeholder="Region or Country *" required><br><br>
+            <input type="text" id="sLanguage" placeholder="Language of your message (Amharic, English, Oromo...)"><br><br>
+            <textarea id="sMessage" placeholder="Write your peace message here... ✍️" required style="min-height:150px"></textarea><br><br>
+            <button type="submit" class="btn btn-primary" style="width:100%">📤 Submit Your Voice</button>
         </form>
-    </div>
-
-    <div class="contribute-card">
-        <h3 data-i18n="volunteerTitle">🙋 Volunteer</h3>
-        <p data-i18n="volunteerDesc">Join our team. We need translators, researchers, community organizers, and tech support.</p>
-        <a href="contact.html" class="btn btn-sm">Apply →</a>
-    </div>
-    <div class="contribute-card">
-        <h3 data-i18n="partnerTitle">🤝 Partner With Us</h3>
-        <p data-i18n="partnerDesc">Universities, NGOs, media, and community organizations — let's collaborate.</p>
-        <a href="contact.html" class="btn btn-sm">Partner →</a>
     </div>
 </main>
 
 <footer>
-    <div class="footer-grid">
-        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
-        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
-        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
-        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
-        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
-    </div>
-    <div class="footer-bottom">
-        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
-        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
-    </div>
+    <div class="footer-bottom"><p>🕊️ Ethiopian Peace Archive &copy; 2026</p></div>
 </footer>
 
-<script src="js/supabase.js"></script>
 <script src="js/navigation.js"></script>
-<script src="js/ai.js"></script>
-<script src="js/language.js"></script>
 <script>
-let aiAnalysis=null;
-async function runAI(){
-    const text=document.getElementById('message').value.trim();
-    if(text.length<10)return;
-    const btn=document.getElementById('analyzeBtn');btn.textContent='🧠 Analyzing...';btn.disabled=true;
-    try{
-        aiAnalysis=await analyzeVoice(text);
-        if(!document.getElementById('language').value&&aiAnalysis.language!=='Unknown')document.getElementById('language').value=aiAnalysis.language;
-        const r=document.getElementById('aiResult');const c=document.getElementById('aiContent');
-        c.innerHTML=`<p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:8px"><strong>Language:</strong> ${aiAnalysis.language||'Unknown'}<br><strong>Sentiment:</strong> ${Math.round(aiAnalysis.sentiment*100)}% positive<br><strong>Themes:</strong></p><div class="ai-tags">${(aiAnalysis.themes||['Peace']).map(t=>`<span class="ai-tag">🏷️ ${t}</span>`).join('')}</div>`;
-        r.classList.add('show');btn.textContent='✅ Complete';
-    }catch(e){btn.textContent='⚠️ Retry'}
-    btn.disabled=false;setTimeout(()=>{if(btn.textContent==='✅ Complete'||btn.textContent==='⚠️ Retry')btn.textContent='🧠 Analyze with AI'},3000);
-}
-async function submitVoiceForm(e){
-    e.preventDefault();const msg=document.getElementById('voiceMsg');
-    const data={document_id:'SUB-'+Date.now(),region:document.getElementById('location').value,language:document.getElementById('language').value||aiAnalysis?.language||'Unknown',year:new Date().getFullYear(),quote_original:document.getElementById('message').value,quote_english:document.getElementById('message').value,themes:aiAnalysis?.themes||['Peace'],sentiment:aiAnalysis?.sentiment||0.95,is_published:false};
-    const ok=await insertToSupabase('ethiopian_voices',data);
-    if(ok){msg.textContent='✅ Thank you! Your voice has been submitted.';msg.className='msg msg-ok';msg.style.display='block';document.getElementById('voiceForm').reset();document.getElementById('aiResult').classList.remove('show');aiAnalysis=null;document.getElementById('analyzeBtn').disabled=true}
-    else{msg.textContent='❌ Please try again.';msg.className='msg msg-err';msg.style.display='block'}
-    setTimeout(()=>msg.style.display='none',5000);
+async function submitVoice() {
+    const msg = document.getElementById('submitMsg');
+    const data = new FormData();
+    data.append('name', document.getElementById('sName').value);
+    data.append('email', document.getElementById('sEmail').value);
+    data.append('region', document.getElementById('sRegion').value);
+    data.append('language', document.getElementById('sLanguage').value || 'Not specified');
+    data.append('message', document.getElementById('sMessage').value);
+    
+    if (!document.getElementById('sMessage').value || !document.getElementById('sName').value || !document.getElementById('sRegion').value) {
+        msg.textContent = 'Please fill all required fields (*).';
+        msg.className = 'msg msg-err'; msg.style.display = 'block';
+        return false;
+    }
+    
+    try {
+        const res = await fetch('https://formspree.io/f/xkoaddng', {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+        
+        if (res.ok) {
+            msg.textContent = '✅ Thank you! Your message has been submitted. We will review it and add it to the archive.';
+            msg.className = 'msg msg-ok'; msg.style.display = 'block';
+            document.getElementById('submitForm').reset();
+        } else {
+            throw new Error('Failed');
+        }
+    } catch (e) {
+        msg.textContent = '❌ Submission failed. Please try again or email us directly.';
+        msg.className = 'msg msg-err'; msg.style.display = 'block';
+    }
+    
+    setTimeout(() => msg.style.display = 'none', 6000);
+    return false;
 }
 </script>
 </body>
