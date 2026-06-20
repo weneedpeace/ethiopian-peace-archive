@@ -67,8 +67,8 @@
     </div>
 </div>
 
-<!-- HERO WITH IMAGE -->
-<header class="hero" style="background: linear-gradient(to bottom, rgba(6,15,30,0.7), rgba(6,15,30,0.9)), url('https://raw.githubusercontent.com/weneedpeace/ethiopian-peace-archive/86154c561b8117b0a2e7238631d9b2fa1d979d5f/file_00000000008c71f49afff89331bb0e78~2.png') center/cover no-repeat;">
+<!-- HERO WITH TILET BACKGROUND -->
+<header class="hero" style="background: linear-gradient(to bottom, rgba(6,15,30,0.75), rgba(6,15,30,0.92)), url('https://raw.githubusercontent.com/weneedpeace/ethiopian-peace-archive/9220c7e1b5979abb5ba528a3a660e321c211873f/3786837d-9a80-4ccc-9b6d-677aa2b28221.png') center/cover no-repeat;">
     <div class="badge-top" data-i18n="tagline">🌍 Global Peace Movement</div>
     <h1 data-i18n="heroTitle">Voices of Peace.<br>Power of Unity.</h1>
     <p class="hero-sub" data-i18n="heroSub">1,000+ voices from Ethiopia and the world — preserved, amplified, and driving real change for diaspora and local communities.</p>
@@ -114,48 +114,15 @@
 <!-- PROFESSIONAL FOOTER -->
 <footer>
     <div class="footer-grid">
-        <div class="footer-col">
-            <h4>🗣️ Explore</h4>
-            <a href="voices.html">Voice Archive</a>
-            <a href="blog.html">Blog & Stories</a>
-            <a href="dashboard.html">Impact Dashboard</a>
-            <a href="media.html">Media Coverage</a>
-            <a href="gallery.html">Gallery</a>
-        </div>
-        <div class="footer-col">
-            <h4>🎓 Learn</h4>
-            <a href="courses.html">Free Courses</a>
-            <a href="peace-techniques.html">Peace Techniques</a>
-            <a href="research.html">AI Research</a>
-            <a href="about.html">About Us</a>
-        </div>
-        <div class="footer-col">
-            <h4>🤝 Participate</h4>
-            <a href="contribute.html">Submit Your Voice</a>
-            <a href="support.html">Donate & Support</a>
-            <a href="thanks.html">Thank You</a>
-            <a href="contact.html">Volunteer</a>
-        </div>
-        <div class="footer-col">
-            <h4>📜 Legal & Contact</h4>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html">Terms of Use</a>
-            <a href="contact.html">Contact Us</a>
-            <a href="admin.html">Admin Login</a>
-        </div>
-        <div class="footer-col">
-            <h4>🌍 Connect</h4>
-            <a href="#">𝕏 (Twitter)</a>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">Telegram</a>
-        </div>
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog & Stories</a><a href="dashboard.html">Impact Dashboard</a><a href="media.html">Media Coverage</a><a href="gallery.html">Gallery</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Free Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About Us</a></div>
+        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Your Voice</a><a href="support.html">Donate & Support</a><a href="thanks.html">Thank You</a><a href="contact.html">Volunteer</a></div>
+        <div class="footer-col"><h4>📜 Legal & Contact</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Login</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 (Twitter)</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
     </div>
     <div class="footer-bottom">
         <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace · Built with ❤️ for Ethiopia and the World</p>
-        <p style="margin-top:6px;font-size:0.7rem">
-            <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · <a href="thanks.html">Thank You</a> · <a href="admin.html">Admin</a>
-        </p>
+        <p style="margin-top:6px;font-size:0.7rem"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · <a href="thanks.html">Thank You</a> · <a href="admin.html">Admin</a></p>
         <p style="margin-top:8px;color:var(--green-bright);font-weight:600">#EthiopianPeaceArchive #VoicesForPeace</p>
     </div>
 </footer>
@@ -168,14 +135,14 @@ async function loadStats(){
     try{
         const counts=await getLiveCounts();
         if(counts){
-            document.getElementById('ethCount').textContent=counts.ethiopianVoices||'30+';
+            document.getElementById('ethCount').textContent=counts.ethiopianVoices||'60+';
             document.getElementById('globalCount').textContent=counts.globalVoices||'15+';
             document.getElementById('regionCount').textContent=counts.regions||'12+';
             document.getElementById('countryCount').textContent=counts.countries||'15+';
             document.getElementById('mediaCount').textContent=counts.mediaFeatures||'8';
         }
     }catch(e){
-        document.getElementById('ethCount').textContent='30+';
+        document.getElementById('ethCount').textContent='60+';
         document.getElementById('globalCount').textContent='15+';
         document.getElementById('regionCount').textContent='12+';
         document.getElementById('countryCount').textContent='15+';
