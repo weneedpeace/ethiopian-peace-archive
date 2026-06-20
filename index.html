@@ -10,6 +10,35 @@
     <meta name="twitter:card" content="summary_large_image">
     <title>Ethiopian Peace Archive — Global Movement for Peace</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Palm leaves decoration */
+        .palm-decoration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            margin-top: -20px;
+            position: relative;
+            z-index: 10;
+            font-size: 3rem;
+            opacity: 0.9;
+        }
+        .palm-decoration span {
+            animation: sway 3s ease-in-out infinite;
+            display: inline-block;
+        }
+        .palm-decoration span:nth-child(1) { animation-delay: 0s; }
+        .palm-decoration span:nth-child(2) { animation-delay: 0.5s; }
+        .palm-decoration span:nth-child(3) { animation-delay: 1s; }
+        .palm-decoration span:nth-child(4) { animation-delay: 1.5s; }
+        .palm-decoration span:nth-child(5) { animation-delay: 2s; }
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+        }
+    </style>
 </head>
 <body>
 
@@ -63,7 +92,6 @@
             <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
         </div>
         <p style="color:var(--text-muted);font-size:0.65rem">&copy; 2026 Ethiopian Peace Archive</p>
-        <p style="margin-top:4px"><a href="privacy.html" style="color:var(--text-muted);text-decoration:none;font-size:0.65rem">Privacy</a> · <a href="terms.html" style="color:var(--text-muted);text-decoration:none;font-size:0.65rem">Terms</a> · <a href="contact.html" style="color:var(--text-muted);text-decoration:none;font-size:0.65rem">Contact</a></p>
     </div>
 </div>
 
@@ -79,13 +107,13 @@
     </div>
 </header>
 
-<!-- STATS -->
-<div class="stats">
-    <div class="stat-card"><div class="num" id="ethCount">...</div><div class="lbl" data-i18n="ethiopianVoices">Ethiopian Voices</div></div>
-    <div class="stat-card"><div class="num" id="globalCount">...</div><div class="lbl" data-i18n="globalVoices">Global Voices</div></div>
-    <div class="stat-card"><div class="num" id="regionCount">...</div><div class="lbl" data-i18n="regions">Regions</div></div>
-    <div class="stat-card"><div class="num" id="countryCount">...</div><div class="lbl" data-i18n="countries">Countries</div></div>
-    <div class="stat-card"><div class="num" id="mediaCount">...</div><div class="lbl" data-i18n="mediaFeatures">Media Features</div></div>
+<!-- PALM LEAVES DECORATION -->
+<div class="palm-decoration">
+    <span>🌿</span>
+    <span>🍃</span>
+    <span>🕊️</span>
+    <span>🍃</span>
+    <span>🌿</span>
 </div>
 
 <!-- WHAT WE DO -->
@@ -130,26 +158,5 @@
 <script src="js/supabase.js"></script>
 <script src="js/navigation.js"></script>
 <script src="js/language.js"></script>
-<script>
-async function loadStats(){
-    try{
-        const counts=await getLiveCounts();
-        if(counts){
-            document.getElementById('ethCount').textContent=counts.ethiopianVoices||'60+';
-            document.getElementById('globalCount').textContent=counts.globalVoices||'15+';
-            document.getElementById('regionCount').textContent=counts.regions||'12+';
-            document.getElementById('countryCount').textContent=counts.countries||'15+';
-            document.getElementById('mediaCount').textContent=counts.mediaFeatures||'8';
-        }
-    }catch(e){
-        document.getElementById('ethCount').textContent='60+';
-        document.getElementById('globalCount').textContent='15+';
-        document.getElementById('regionCount').textContent='12+';
-        document.getElementById('countryCount').textContent='15+';
-        document.getElementById('mediaCount').textContent='8';
-    }
-}
-loadStats();
-</script>
 </body>
 </html>
