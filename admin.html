@@ -13,6 +13,10 @@
         .admin-panel.active { display: block; }
         .upload-area { border: 2px dashed var(--green-border); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; margin-bottom: 12px; }
         .upload-area img { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
+        th { text-align: left; padding: 8px; color: var(--text-dim); border-bottom: 1px solid var(--green-border); }
+        td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-dim); }
+        .btn-sm { padding: 4px 12px; font-size: 0.7rem; border-radius: 12px; }
     </style>
 </head>
 <body>
@@ -20,16 +24,14 @@
 <div id="loginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh">
     <div style="background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;max-width:380px;width:100%;text-align:center">
         <h1 style="color:var(--gold);margin-bottom:16px">🔐 Admin Panel</h1>
-        <form onsubmit="return login()">
-            <input type="email" id="email" placeholder="Email" required><br><br>
-            <input type="password" id="pass" placeholder="Password" required><br><br>
-            <button type="submit" class="btn btn-primary" style="width:100%">Sign In</button>
-        </form>
+        <input type="email" id="email" placeholder="Email" required><br><br>
+        <input type="password" id="pass" placeholder="Password" required><br><br>
+        <button class="btn btn-primary" style="width:100%" onclick="login()">Sign In</button>
         <p id="loginMsg" style="color:var(--red);margin-top:10px;display:none"></p>
     </div>
 </div>
 
-<div id="panel" style="display:none;max-width:800px;margin:0 auto;padding:20px">
+<div id="panel" style="display:none;max-width:900px;margin:0 auto;padding:20px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
         <h2 style="color:var(--gold)">⚙️ Admin Dashboard</h2>
         <button class="btn btn-sm btn-red" onclick="logout()">Logout</button>
@@ -40,6 +42,7 @@
         <span class="admin-tab" onclick="switchTab('gallery')">🖼️ Gallery</span>
         <span class="admin-tab" onclick="switchTab('course')">🎓 Course</span>
         <span class="admin-tab" onclick="switchTab('lesson')">📚 Lesson</span>
+        <span class="admin-tab" onclick="switchTab('voice')">🗣️ Add Voice</span>
     </div>
 
     <p id="msgBox" style="display:none;padding:10px;border-radius:8px;margin-bottom:10px"></p>
@@ -48,21 +51,19 @@
     <div class="admin-panel active" id="panel-blog">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">📝 New Blog Post</h3>
-            <form onsubmit="return saveBlog()">
-                <input type="text" id="bTitle" placeholder="Blog Title" required><br><br>
-                <input type="text" id="bSlug" placeholder="slug-url-name" required><br><br>
-                <textarea id="bContent" placeholder="Blog content..." style="min-height:150px"></textarea><br><br>
-                <input type="text" id="bExcerpt" placeholder="Short excerpt"><br><br>
-                <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select><br><br>
-                <label style="color:var(--text-dim);font-size:0.85rem">Featured Image</label>
-                <div class="upload-area" onclick="document.getElementById('blogFile').click()">
-                    <p id="blogUploadText">📷 Tap to upload image</p>
-                    <img id="blogPreview" style="display:none">
-                </div>
-                <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
-                <input type="hidden" id="bImageUrl"><br>
-                <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px">💾 Publish Blog Post</button>
-            </form>
+            <input type="text" id="bTitle" placeholder="Blog Title" required><br><br>
+            <input type="text" id="bSlug" placeholder="slug-url-name" required><br><br>
+            <textarea id="bContent" placeholder="Blog content..." style="min-height:150px"></textarea><br><br>
+            <input type="text" id="bExcerpt" placeholder="Short excerpt"><br><br>
+            <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select><br><br>
+            <label style="color:var(--text-dim);font-size:0.85rem">Featured Image</label>
+            <div class="upload-area" onclick="document.getElementById('blogFile').click()">
+                <p id="blogUploadText">📷 Tap to upload image</p>
+                <img id="blogPreview" style="display:none">
+            </div>
+            <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
+            <input type="hidden" id="bImageUrl"><br>
+            <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveBlog()">💾 Publish Blog Post</button>
         </div>
     </div>
 
@@ -70,17 +71,18 @@
     <div class="admin-panel" id="panel-gallery">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">🖼️ Add Gallery Photo</h3>
-            <form onsubmit="return saveGallery()">
-                <input type="text" id="gTitle" placeholder="Photo title"><br><br>
-                <input type="text" id="gCategory" placeholder="Category (Events, Community...)"><br><br>
-                <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
-                    <p id="galleryUploadText">📷 Tap to upload image</p>
-                    <img id="galleryPreview" style="display:none">
-                </div>
-                <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
-                <input type="hidden" id="gImageUrl"><br>
-                <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px">💾 Add to Gallery</button>
-            </form>
+            <input type="text" id="gTitle" placeholder="Photo title"><br><br>
+            <input type="text" id="gCategory" placeholder="Category (Events, Community...)"><br><br>
+            <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
+                <p id="galleryUploadText">📷 Tap to upload image</p>
+                <img id="galleryPreview" style="display:none">
+            </div>
+            <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
+            <input type="hidden" id="gImageUrl"><br>
+            <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveGallery()">💾 Add to Gallery</button>
+            
+            <h4 style="color:var(--gold);margin-top:20px">📋 Recent Gallery Photos</h4>
+            <div id="galleryList" style="margin-top:10px">Loading...</div>
         </div>
     </div>
 
@@ -88,14 +90,12 @@
     <div class="admin-panel" id="panel-course">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">🎓 New Course</h3>
-            <form onsubmit="return saveCourse()">
-                <input type="text" id="cTitle" placeholder="Course Title" required><br><br>
-                <input type="text" id="cSlug" placeholder="slug-url-name" required><br><br>
-                <input type="text" id="cDesc" placeholder="Short description"><br><br>
-                <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select><br><br>
-                <input type="number" id="cModules" placeholder="Modules" value="6"><br><br>
-                <button type="submit" class="btn btn-primary" style="width:100%">💾 Save Course</button>
-            </form>
+            <input type="text" id="cTitle" placeholder="Course Title" required><br><br>
+            <input type="text" id="cSlug" placeholder="slug-url-name" required><br><br>
+            <input type="text" id="cDesc" placeholder="Short description"><br><br>
+            <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select><br><br>
+            <input type="number" id="cModules" placeholder="Modules" value="6"><br><br>
+            <button class="btn btn-primary" style="width:100%" onclick="saveCourse()">💾 Save Course</button>
         </div>
     </div>
 
@@ -103,13 +103,27 @@
     <div class="admin-panel" id="panel-lesson">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">📚 Add Lesson</h3>
-            <form onsubmit="return saveLesson()">
-                <select id="lCourseId" required><option value="">Select Course...</option></select><br><br>
-                <input type="text" id="lTitle" placeholder="Lesson Title" required><br><br>
-                <textarea id="lContent" placeholder="Lesson content..."></textarea><br><br>
-                <input type="number" id="lOrder" placeholder="Order (1,2,3...)" value="1"><br><br>
-                <button type="submit" class="btn btn-primary" style="width:100%">💾 Save Lesson</button>
-            </form>
+            <select id="lCourseId" required><option value="">Select Course...</option></select><br><br>
+            <input type="text" id="lTitle" placeholder="Lesson Title" required><br><br>
+            <textarea id="lContent" placeholder="Lesson content..."></textarea><br><br>
+            <input type="number" id="lOrder" placeholder="Order (1,2,3...)" value="1"><br><br>
+            <button class="btn btn-primary" style="width:100%" onclick="saveLesson()">💾 Save Lesson</button>
+        </div>
+    </div>
+
+    <!-- VOICE -->
+    <div class="admin-panel" id="panel-voice">
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+            <h3 style="color:var(--gold);margin-bottom:12px">🗣️ Add Voice</h3>
+            <input type="text" id="vDocId" placeholder="Document ID (ETH-001)" required><br><br>
+            <select id="vRegion"><option value="">Select Region</option><option>Tigray</option><option>Amhara</option><option>Oromia</option><option>Somali</option><option>Afar</option><option>Sidama</option><option>SNNPR</option><option>Gambella</option><option>Harari</option><option>Benishangul-Gumuz</option><option>Addis Ababa</option><option>Dire Dawa</option></select><br><br>
+            <input type="number" id="vYear" placeholder="Year (2020)" required><br><br>
+            <input type="text" id="vLanguage" placeholder="Language (Amharic, Oromo...)" required><br><br>
+            <textarea id="vOriginal" placeholder="Original quote..."></textarea><br><br>
+            <textarea id="vEnglish" placeholder="English translation..." required></textarea><br><br>
+            <input type="text" id="vThemes" placeholder="Themes (Peace, Unity, Hope)" value="Peace"><br><br>
+            <select id="vSentiment"><option value="0.95">Very Hopeful (0.95)</option><option value="0.85">Hopeful (0.85)</option><option value="0.75" selected>Positive (0.75)</option><option value="0.60">Somewhat Positive (0.60)</option><option value="0.50">Neutral (0.50)</option></select><br><br>
+            <button class="btn btn-primary" style="width:100%" onclick="saveVoice()">💾 Add Voice to Archive</button>
         </div>
     </div>
 </div>
@@ -120,8 +134,7 @@ const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZi
 
 function msg(text, color) {
     var m = document.getElementById('msgBox');
-    m.textContent = text;
-    m.style.display = 'block';
+    m.textContent = text; m.style.display = 'block';
     m.style.background = color === 'green' ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)';
     m.style.color = color === 'green' ? '#4ade80' : '#ef4444';
     m.style.border = '1px solid ' + (color === 'green' ? '#22c55e' : 'rgba(239,68,68,0.3)');
@@ -133,12 +146,11 @@ function login() {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        loadCourses();
-        return false;
+        loadCourses(); loadGalleryList();
+    } else {
+        document.getElementById('loginMsg').style.display = 'block';
+        document.getElementById('loginMsg').textContent = 'Wrong credentials';
     }
-    document.getElementById('loginMsg').style.display = 'block';
-    document.getElementById('loginMsg').textContent = 'Wrong credentials';
-    return false;
 }
 
 function logout() { localStorage.removeItem('epa_admin'); location.reload(); }
@@ -146,7 +158,7 @@ function logout() { localStorage.removeItem('epa_admin'); location.reload(); }
 if (localStorage.getItem('epa_admin') === '1') {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('panel').style.display = 'block';
-    loadCourses();
+    loadCourses(); loadGalleryList();
 }
 
 function switchTab(tab) {
@@ -155,12 +167,12 @@ function switchTab(tab) {
     document.querySelectorAll('.admin-panel').forEach(function(p){ p.classList.remove('active'); });
     document.getElementById('panel-' + tab).classList.add('active');
     if (tab === 'lesson') loadCourses();
+    if (tab === 'gallery') loadGalleryList();
 }
 
 async function uploadImage(fileId, previewId, textId, hiddenId) {
     var file = document.getElementById(fileId).files[0];
     if (!file) return;
-    
     var reader = new FileReader();
     reader.onload = function(e) {
         document.getElementById(previewId).src = e.target.result;
@@ -168,25 +180,18 @@ async function uploadImage(fileId, previewId, textId, hiddenId) {
         document.getElementById(textId).style.display = 'none';
     };
     reader.readAsDataURL(file);
-    
-    msg('Uploading image...', 'green');
-    
+    msg('Uploading...', 'green');
     var formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', 'peace_archive');
-    
     try {
         var res = await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload', { method: 'POST', body: formData });
         var data = await res.json();
         if (data.secure_url) {
             document.getElementById(hiddenId).value = data.secure_url;
-            msg('Image uploaded!', 'green');
-        } else {
-            msg('Upload failed', 'red');
-        }
-    } catch(e) {
-        msg('Upload failed', 'red');
-    }
+            msg('Image uploaded! Now click Save.', 'green');
+        } else { msg('Upload failed', 'red'); }
+    } catch(e) { msg('Upload failed', 'red'); }
 }
 
 async function saveToDB(table, data) {
@@ -208,15 +213,14 @@ async function saveBlog() {
         image_url: document.getElementById('bImageUrl').value,
         is_published: true
     };
+    if (!data.title || !data.slug || !data.content) { msg('Fill all required fields', 'red'); return; }
     var ok = await saveToDB('blog_posts', data);
-    msg(ok ? 'Blog published!' : 'Failed to save', ok ? 'green' : 'red');
-    if (ok) { document.getElementById('bTitle').value = ''; document.getElementById('bSlug').value = ''; document.getElementById('bContent').value = ''; }
-    return false;
+    msg(ok ? 'Blog published! Check blog.html' : 'Failed', ok ? 'green' : 'red');
 }
 
 async function saveGallery() {
     var url = document.getElementById('gImageUrl').value;
-    if (!url) { msg('Upload an image first', 'red'); return false; }
+    if (!url) { msg('Upload an image first', 'red'); return; }
     var data = {
         title: document.getElementById('gTitle').value,
         image_url: url,
@@ -224,9 +228,13 @@ async function saveGallery() {
         is_published: true
     };
     var ok = await saveToDB('gallery', data);
-    msg(ok ? 'Photo added to gallery!' : 'Failed to save', ok ? 'green' : 'red');
-    if (ok) { document.getElementById('gTitle').value = ''; document.getElementById('galleryPreview').style.display = 'none'; document.getElementById('galleryUploadText').style.display = 'block'; }
-    return false;
+    if (ok) {
+        msg('Photo added! Check gallery.html', 'green');
+        document.getElementById('galleryPreview').style.display = 'none';
+        document.getElementById('galleryUploadText').style.display = 'block';
+        document.getElementById('gTitle').value = '';
+        loadGalleryList();
+    } else { msg('Failed', 'red'); }
 }
 
 async function saveCourse() {
@@ -238,9 +246,9 @@ async function saveCourse() {
         module_count: parseInt(document.getElementById('cModules').value),
         is_published: true
     };
+    if (!data.title || !data.slug) { msg('Fill title and slug', 'red'); return; }
     var ok = await saveToDB('courses', data);
     msg(ok ? 'Course saved!' : 'Failed', ok ? 'green' : 'red');
-    return false;
 }
 
 async function saveLesson() {
@@ -251,9 +259,29 @@ async function saveLesson() {
         lesson_order: parseInt(document.getElementById('lOrder').value),
         is_published: true
     };
+    if (!data.course_id || !data.title) { msg('Select course and add title', 'red'); return; }
     var ok = await saveToDB('course_lessons', data);
     msg(ok ? 'Lesson saved!' : 'Failed', ok ? 'green' : 'red');
-    return false;
+}
+
+async function saveVoice() {
+    var themesStr = document.getElementById('vThemes').value;
+    var themesArray = themesStr.split(',').map(function(t){ return t.trim(); });
+    var data = {
+        document_id: document.getElementById('vDocId').value,
+        region: document.getElementById('vRegion').value,
+        year: parseInt(document.getElementById('vYear').value),
+        language: document.getElementById('vLanguage').value,
+        quote_original: document.getElementById('vOriginal').value,
+        quote_english: document.getElementById('vEnglish').value,
+        themes: themesArray,
+        sentiment: parseFloat(document.getElementById('vSentiment').value),
+        is_published: true
+    };
+    if (!data.document_id || !data.region || !data.quote_english) { msg('Fill required fields', 'red'); return; }
+    var ok = await saveToDB('ethiopian_voices', data);
+    msg(ok ? 'Voice added to archive!' : 'Failed', ok ? 'green' : 'red');
+    if (ok) { document.getElementById('vDocId').value = ''; document.getElementById('vEnglish').value = ''; }
 }
 
 async function loadCourses() {
@@ -263,6 +291,16 @@ async function loadCourses() {
         var sel = document.getElementById('lCourseId');
         sel.innerHTML = '<option value="">Select Course...</option>';
         courses.forEach(function(c) { sel.innerHTML += '<option value="' + c.id + '">' + c.title + '</option>'; });
+    } catch(e) {}
+}
+
+async function loadGalleryList() {
+    try {
+        var res = await fetch(URL + '/rest/v1/gallery?select=*&is_published=eq.true&order=created_at.desc&limit=10', { headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY } });
+        var items = await res.json();
+        var div = document.getElementById('galleryList');
+        if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No photos yet.</p>'; return; }
+        div.innerHTML = '<table><tr><th>Image</th><th>Title</th><th>Category</th></tr>' + items.map(function(i){ return '<tr><td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>' + (i.title||'') + '</td><td>' + (i.category||'') + '</td></tr>'; }).join('') + '</table>';
     } catch(e) {}
 }
 </script>
