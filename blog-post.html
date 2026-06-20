@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blog Post — Ethiopian Peace Archive">
     <title>Blog — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -14,7 +13,8 @@
         .post-header h1{color:var(--gold);font-size:clamp(1.4rem,3vw,2rem);margin-bottom:8px}
         .post-header .date{color:var(--text-muted);font-size:0.8rem;font-family:var(--font-ui)}
         .share-row{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;align-items:center}
-        .share-row span{color:var(--text-dim);font-size:0.85rem;font-family:var(--font-ui)}
+        .share-btn{padding:6px 14px;border-radius:20px;font-size:0.7rem;border:none;cursor:pointer;font-weight:600;color:#fff}
+        .share-x{background:#000}.share-fb{background:#1877f2}.share-wa{background:#25d366}.share-tg{background:#0088cc}.share-copy{background:var(--green-dim);color:var(--green-bright);border:1px solid var(--green-border)}
     </style>
 </head>
 <body>
@@ -22,25 +22,15 @@
 <nav>
     <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
     <div class="desktop-links">
-        <a href="index.html" data-i18n="home">Home</a>
-        <a href="blog.html" data-i18n="blog">Blog</a>
-        <a href="voices.html" data-i18n="voices">Voices</a>
-        <span style="display:flex;gap:2px;margin-left:6px">
-            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
-        </span>
+        <a href="index.html">Home</a><a href="blog.html">Blog</a>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
 <div class="slide-menu" id="slideMenu">
     <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
-    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
-    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
+    <a href="index.html">🏠 Home</a><a href="blog.html">📝 Blog</a>
 </div>
 
 <main class="container-sm" id="postContainer">
@@ -48,53 +38,46 @@
 </main>
 
 <footer>
-    <div class="footer-grid">
-        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
-        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
-        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
-        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
-        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
-    </div>
-    <div class="footer-bottom">
-        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
-        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+    <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
+        <p>Ethiopian Peace Archive &copy; 2026</p>
     </div>
 </footer>
 
-<script src="js/supabase.js"></script>
 <script src="js/navigation.js"></script>
-<script src="js/share.js"></script>
-<script src="js/language.js"></script>
 <script>
-async function loadPost(){
-    const params=new URLSearchParams(window.location.search);
-    const slug=params.get('slug');
-    const container=document.getElementById('postContainer');
-    if(!slug){container.innerHTML='<div class="loading">Post not found. <a href="blog.html" style="color:var(--green-bright)">Browse all posts →</a></div>';return}
-    try{
-        const posts=await fetchFromSupabase('blog_posts',`slug=eq.${encodeURIComponent(slug)}&is_published=eq.true`);
-        if(!posts||!posts.length){container.innerHTML='<div class="loading">Post not found. <a href="blog.html" style="color:var(--green-bright)">Browse all posts →</a></div>';return}
-        const p=posts[0];
-        document.title=p.title+' — Ethiopian Peace Archive';
-        const shareText=`"${p.title}" — Ethiopian Peace Archive`;
-        container.innerHTML=`
+const URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+
+async function loadPost() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
+    const container = document.getElementById('postContainer');
+    if (!slug) { container.innerHTML = '<div class="loading">Post not found.</div>'; return; }
+    try {
+        const res = await fetch(URL + '/rest/v1/blog_posts?select=*&slug=eq.' + slug + '&is_published=eq.true', {
+            headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
+        });
+        const posts = await res.json();
+        if (!posts.length) { container.innerHTML = '<div class="loading">Post not found.</div>'; return; }
+        const p = posts[0];
+        document.title = p.title + ' — Ethiopian Peace Archive';
+        container.innerHTML = `
             <article>
-                <div class="post-header"><span class="cat">${esc(p.category||'Story')}</span><h1>${esc(p.title)}</h1><div class="date">${new Date(p.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}${p.author?' · '+esc(p.author):' · Ethiopian Peace Archive'}</div></div>
-                <div class="post-content">${p.content.split('\n').filter(x=>x.trim()).map(x=>`<p>${esc(x)}</p>`).join('')}</div>
+                ${p.image_url ? `<img src="${p.image_url}" style="width:100%;max-height:400px;object-fit:cover;border-radius:12px;margin-bottom:20px" alt="">` : ''}
+                <div class="post-header"><span class="cat">${p.category||'Story'}</span><h1>${p.title}</h1><div class="date">${new Date(p.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div></div>
+                <div class="post-content">${p.content.split('\n').filter(x=>x.trim()).map(x=>`<p>${x}</p>`).join('')}</div>
                 <div class="share-row">
-                    <span>Share this post:</span>
-                    <button class="share-btn share-x" onclick="shareOnX('${escJS(shareText)}')">𝕏 Post</button>
-                    <button class="share-btn share-fb" onclick="shareOnFacebook('${escJS(shareText)}')">📘 Share</button>
-                    <button class="share-btn share-wa" onclick="shareOnWhatsApp('${escJS(shareText)}')">💬 WhatsApp</button>
-                    <button class="share-btn share-tg" onclick="shareOnTelegram('${escJS(shareText)}')">✈️ Telegram</button>
-                    <button class="share-btn share-copy" onclick="copyToClipboard(window.location.href, this)">📋 Copy Link</button>
+                    <span>Share:</span>
+                    <button class="share-btn share-x" onclick="window.open('https://x.com/intent/post?text=${encodeURIComponent(p.title)}')">𝕏 Post</button>
+                    <button class="share-btn share-fb" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href))">📘 Share</button>
+                    <button class="share-btn share-wa" onclick="window.open('https://wa.me/?text='+encodeURIComponent(p.title+' '+window.location.href))">💬 WhatsApp</button>
+                    <button class="share-btn share-tg" onclick="window.open('https://t.me/share/url?url='+encodeURIComponent(window.location.href))">✈️ Telegram</button>
+                    <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(window.location.href);this.textContent='✅ Copied!'">📋 Copy</button>
                 </div>
-                <div style="margin-top:20px"><a href="blog.html" class="btn btn-outline">← <span data-i18n="backToBlog">Back to All Posts</span></a></div>
+                <div style="margin-top:20px"><a href="blog.html" class="btn btn-outline">← Back to All Posts</a></div>
             </article>`;
-    }catch(e){container.innerHTML='<div class="loading">Error loading post.</div>'}
+    } catch (e) { container.innerHTML = '<div class="loading">Error loading post.</div>'; }
 }
-function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function escJS(s){return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"')}
 loadPost();
 </script>
 </body>
