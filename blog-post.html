@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         .post-content{color:var(--text-dim);font-size:1.05rem;line-height:1.9}
-        .post-content p{margin-bottom:16px}
         .post-header{margin-bottom:24px}
         .post-header .cat{display:inline-block;padding:4px 12px;border-radius:10px;font-size:0.75rem;background:var(--green-dim);color:var(--green-bright);margin-bottom:12px;font-family:var(--font-ui)}
         .post-header h1{color:var(--gold);font-size:clamp(1.4rem,3vw,2rem);margin-bottom:8px}
@@ -18,61 +17,42 @@
     </style>
 </head>
 <body>
-
 <nav>
     <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-    <div class="desktop-links">
-        <a href="index.html">Home</a><a href="blog.html">Blog</a>
-    </div>
+    <div class="desktop-links"><a href="index.html">Home</a><a href="blog.html">Blog</a></div>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
-
 <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-<div class="slide-menu" id="slideMenu">
-    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-    <a href="index.html">🏠 Home</a><a href="blog.html">📝 Blog</a>
-</div>
+<div class="slide-menu" id="slideMenu"><div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div><a href="index.html">🏠 Home</a><a href="blog.html">📝 Blog</a></div>
 
-<main class="container-sm" id="postContainer">
-    <div class="loading"><span class="spinner"></span> Loading post...</div>
-</main>
+<main class="container-sm" id="postContainer"><div class="loading">Loading post...</div></main>
 
-<footer>
-    <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-        <p>Ethiopian Peace Archive &copy; 2026</p>
-    </div>
-</footer>
+<footer><div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)"><p>Ethiopian Peace Archive &copy; 2026</p></div></footer>
 
 <script src="js/navigation.js"></script>
 <script>
-const URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
-const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
-
+const API = 'https://peace-api.peace-01d.workers.dev/api';
 async function loadPost() {
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
     const container = document.getElementById('postContainer');
     if (!slug) { container.innerHTML = '<div class="loading">Post not found.</div>'; return; }
     try {
-        const res = await fetch(URL + '/rest/v1/blog_posts?select=*&slug=eq.' + slug + '&is_published=eq.true', {
-            headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
-        });
-        const posts = await res.json();
-        if (!posts.length) { container.innerHTML = '<div class="loading">Post not found.</div>'; return; }
-        const p = posts[0];
+        const res = await fetch(API + '/blogs/' + slug);
+        const p = await res.json();
+        if (p.error) { container.innerHTML = '<div class="loading">Post not found.</div>'; return; }
         document.title = p.title + ' — Ethiopian Peace Archive';
         container.innerHTML = `
             <article>
                 ${p.image_url ? `<img src="${p.image_url}" style="width:100%;max-height:400px;object-fit:cover;border-radius:12px;margin-bottom:20px" alt="">` : ''}
                 <div class="post-header"><span class="cat">${p.category||'Story'}</span><h1>${p.title}</h1><div class="date">${new Date(p.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div></div>
                 <div class="post-content">${p.content.split('\n').filter(x=>x.trim()).map(x=>`<p>${x}</p>`).join('')}</div>
-                <div class="share-row">
-                    <span>Share:</span>
-                    <button class="share-btn share-x" onclick="window.open('https://x.com/intent/post?text=${encodeURIComponent(p.title)}')">𝕏 Post</button>
-                    <button class="share-btn share-fb" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href))">📘 Share</button>
-                    <button class="share-btn share-wa" onclick="window.open('https://wa.me/?text='+encodeURIComponent(p.title+' '+window.location.href))">💬 WhatsApp</button>
-                    <button class="share-btn share-tg" onclick="window.open('https://t.me/share/url?url='+encodeURIComponent(window.location.href))">✈️ Telegram</button>
-                    <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(window.location.href);this.textContent='✅ Copied!'">📋 Copy</button>
+                <div class="share-row"><span>Share:</span>
+                    <button class="share-btn share-x" onclick="window.open('https://x.com/intent/post?text=${encodeURIComponent(p.title)}')">𝕏</button>
+                    <button class="share-btn share-fb" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href))">📘</button>
+                    <button class="share-btn share-wa" onclick="window.open('https://wa.me/?text='+encodeURIComponent(p.title+' '+window.location.href))">💬</button>
+                    <button class="share-btn share-tg" onclick="window.open('https://t.me/share/url?url='+encodeURIComponent(window.location.href))">✈️</button>
+                    <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(window.location.href);this.textContent='✅ Copied!'">📋</button>
                 </div>
                 <div style="margin-top:20px"><a href="blog.html" class="btn btn-outline">← Back to All Posts</a></div>
             </article>`;
