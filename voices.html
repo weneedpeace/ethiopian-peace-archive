@@ -3,17 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore 1,000+ peace voices from Ethiopia and the world.">
+    <meta name="description" content="Explore 1,000+ peace voices from Ethiopia and the world. Filter by region, language, theme, and year.">
     <title>Voice Archive — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-        .filters select { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--green-border); background: var(--card); color: var(--text); font-size: 0.85rem; font-family: var(--font-ui); }
+        .voices-hero { text-align: center; padding: 40px 20px 30px; }
+        .voices-hero h1 { color: var(--gold-bright); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 8px; }
+        .voices-hero p { color: var(--text-dim); max-width: 600px; margin: 0 auto; }
+        .stats-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin: 20px 0; }
+        .stat-pill { background: var(--card); border: 1px solid var(--green-border); border-radius: 25px; padding: 8px 18px; font-size: 0.8rem; color: var(--text-dim); font-family: var(--font-ui); display: flex; align-items: center; gap: 6px; }
+        .stat-pill strong { color: var(--green-bright); }
+        .category-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; justify-content: center; }
+        .cat-chip { padding: 8px 18px; border-radius: 25px; cursor: pointer; border: 1px solid var(--green-border); background: var(--card); color: var(--text-dim); font-family: var(--font-ui); font-size: 0.8rem; transition: all 0.2s; white-space: nowrap; }
+        .cat-chip:hover, .cat-chip.active { background: var(--green); color: #000; font-weight: 700; border-color: var(--green); }
+        .cat-chip .count { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 2px 8px; font-size: 0.7rem; margin-left: 4px; }
+        .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .filters select { padding: 10px 16px; border-radius: 25px; border: 1px solid var(--green-border); background: var(--card); color: var(--text); font-size: 0.85rem; font-family: var(--font-ui); cursor: pointer; }
+        .voice-card { background: var(--card); border: 1px solid rgba(34,197,94,0.08); border-radius: 16px; padding: 24px; margin-bottom: 14px; transition: all 0.3s; position: relative; }
+        .voice-card:hover { border-color: var(--green-border); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+        .voice-card .voice-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .voice-card .voice-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+        .voice-card .region-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; background: var(--green-dim); color: var(--green-bright); font-family: var(--font-ui); font-weight: 600; }
+        .voice-card .lang-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; background: rgba(251,191,36,0.1); color: #facc15; font-family: var(--font-ui); }
+        .voice-card .year-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; background: rgba(59,130,246,0.1); color: #60a5fa; font-family: var(--font-ui); }
+        .voice-card .quote-text { font-size: 1.05rem; line-height: 1.8; margin: 12px 0; color: var(--text); }
+        .voice-card .quote-text::before { content: '\201C'; color: var(--green); font-size: 2rem; line-height: 0; vertical-align: -6px; margin-right: 2px; }
+        .voice-card .quote-text::after { content: '\201D'; color: var(--green); font-size: 2rem; line-height: 0; vertical-align: -6px; margin-left: 2px; }
+        .voice-card .quote-original { font-size: 0.9rem; line-height: 1.6; margin: 8px 0; color: var(--text-dim); font-style: italic; padding: 10px; background: rgba(255,255,255,0.02); border-radius: 8px; border-left: 2px solid var(--green-border); }
+        .voice-card .themes-row { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 10px; }
+        .theme-tag { padding: 3px 10px; border-radius: 12px; font-size: 0.68rem; font-family: var(--font-ui); }
+        .theme-0 { background: rgba(34,197,94,0.12); color: #4ade80; }
+        .theme-1 { background: rgba(59,130,246,0.12); color: #60a5fa; }
+        .theme-2 { background: rgba(168,85,247,0.12); color: #c084fc; }
+        .theme-3 { background: rgba(236,72,153,0.12); color: #f472b6; }
+        .theme-4 { background: rgba(251,146,60,0.12); color: #fb923c; }
+        .sentiment-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 12px; }
+        .sentiment-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #eab308, #22c55e); }
+        .voice-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px; }
         .like-btn { background: none; border: 1px solid var(--green-border); border-radius: 20px; padding: 8px 16px; cursor: pointer; color: var(--text-dim); font-family: var(--font-ui); font-size: 0.85rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
         .like-btn:hover { border-color: #ef4444; color: #ef4444; }
         .like-btn.liked { color: #ef4444; border-color: #ef4444; background: rgba(239,68,68,0.1); }
-        .like-count { font-weight: 700; }
-        @media (max-width: 768px) { .filters select { flex: 1; min-width: 0; } }
+        .voice-id { color: var(--text-muted); font-size: 0.65rem; font-family: var(--font-ui); }
+        .load-more { text-align: center; margin: 20px 0; }
+        .load-more button { padding: 10px 30px; border-radius: 25px; background: var(--green-dim); color: var(--green-bright); border: 1px solid var(--green-border); cursor: pointer; font-family: var(--font-ui); font-size: 0.9rem; }
+        .load-more button:hover { background: var(--green); color: #000; }
+        @media (max-width: 768px) {
+            .filters select { flex: 1; min-width: 0; font-size: 0.75rem; padding: 8px 12px; }
+            .cat-chip { padding: 6px 14px; font-size: 0.7rem; }
+            .voice-card { padding: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -40,21 +78,31 @@
 </div>
 
 <main class="container">
-    <h1 class="section-title">🗣️ Voice Archive</h1>
-    <p style="color:var(--text-dim);margin-bottom:16px">Real voices from Ethiopia and the world. ❤️ your favorites.</p>
+    <div class="voices-hero">
+        <h1>🗣️ Voice Archive</h1>
+        <p>Real voices from Ethiopia and across the world — preserved, translated, and amplified for peace.</p>
+        <div class="stats-row" id="statsRow"></div>
+    </div>
 
-    <div class="tabs">
-        <button class="tab active" id="tabEth" onclick="switchTab('ethiopian')">🇪🇹 All Voices</button>
+    <div class="category-bar" id="categoryBar">
+        <span class="cat-chip active" onclick="filterCategory('all')">🌍 All Voices <span class="count" id="countAll">0</span></span>
+        <span class="cat-chip" onclick="filterCategory('Ethiopia')">🇪🇹 Ethiopian <span class="count" id="countEthiopia">0</span></span>
+        <span class="cat-chip" onclick="filterCategory('Global')">🌐 Global <span class="count" id="countGlobal">0</span></span>
+        <span class="cat-chip" onclick="filterCategory('Amharic')">አማ Amharic <span class="count" id="countAmharic">0</span></span>
+        <span class="cat-chip" onclick="filterCategory('Oromo')">Oromo <span class="count" id="countOromo">0</span></span>
+        <span class="cat-chip" onclick="filterCategory('Somali')">Somali <span class="count" id="countSomali">0</span></span>
+        <span class="cat-chip" onclick="filterCategory('MostLiked')">❤️ Most Liked</span>
     </div>
 
     <div class="filters">
-        <select id="regionFilter" onchange="renderVoices()"><option value="">All Regions</option></select>
-        <select id="yearFilter" onchange="renderVoices()"><option value="">All Years</option></select>
-        <select id="themeFilter" onchange="renderVoices()"><option value="">All Themes</option></select>
-        <select id="langFilter" onchange="renderVoices()"><option value="">All Languages</option></select>
+        <select id="regionFilter" onchange="applyFilters()"><option value="">📍 All Regions</option></select>
+        <select id="yearFilter" onchange="applyFilters()"><option value="">📅 All Years</option></select>
+        <select id="themeFilter" onchange="applyFilters()"><option value="">🏷️ All Themes</option></select>
+        <select id="langFilter" onchange="applyFilters()"><option value="">🌐 All Languages</option></select>
     </div>
 
     <div id="quotesContainer"><div class="loading">Loading voices...</div></div>
+    <div class="load-more" id="loadMore" style="display:none"><button onclick="loadMore()">Load More Voices ↓</button></div>
 </main>
 
 <footer>
@@ -64,7 +112,7 @@
         <div class="footer-col"><h4>Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a></div>
         <div class="footer-col"><h4>Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></div>
     </div>
-    <div class="footer-bottom"><p>🕊️ Ethiopian Peace Archive &copy; 2026</p></div>
+    <div class="footer-bottom"><p>🕊️ Ethiopian Peace Archive &copy; 2026 · Voices for Peace, Power of Unity</p></div>
 </footer>
 
 <script src="js/navigation.js"></script>
@@ -72,17 +120,40 @@
 const URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
 const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
-let allVoices = [];
+let allVoices = [], filteredVoices = [], currentCategory = 'all', pageSize = 20, currentPage = 1;
 
 async function init() {
     try {
-        const res = await fetch(URL + '/rest/v1/ethiopian_voices?select=*&is_published=eq.true&order=year.desc', {
+        const res = await fetch(URL + '/rest/v1/ethiopian_voices?select=*&is_published=eq.true&order=created_at.desc', {
             headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
         });
         allVoices = await res.json();
+        updateStats();
         populateFilters();
-        renderVoices();
+        applyFilters();
     } catch (e) { document.getElementById('quotesContainer').innerHTML = '<div class="loading">Error loading voices.</div>'; }
+}
+
+function updateStats() {
+    const ethCount = allVoices.filter(v => v.region === 'Ethiopia').length;
+    const globalCount = allVoices.filter(v => v.region !== 'Ethiopia').length;
+    const amhCount = allVoices.filter(v => v.language === 'Amharic').length;
+    const oromoCount = allVoices.filter(v => v.language === 'Oromo').length;
+    const somCount = allVoices.filter(v => v.language === 'Somali').length;
+    
+    document.getElementById('countAll').textContent = allVoices.length;
+    document.getElementById('countEthiopia').textContent = ethCount;
+    document.getElementById('countGlobal').textContent = globalCount;
+    document.getElementById('countAmharic').textContent = amhCount;
+    document.getElementById('countOromo').textContent = oromoCount;
+    document.getElementById('countSomali').textContent = somCount;
+    
+    document.getElementById('statsRow').innerHTML = `
+        <span class="stat-pill">🗣️ <strong>${allVoices.length}</strong> Voices</span>
+        <span class="stat-pill">📍 <strong>${new Set(allVoices.map(v=>v.region)).size}</strong> Regions</span>
+        <span class="stat-pill">🌐 <strong>${new Set(allVoices.map(v=>v.language)).size}</strong> Languages</span>
+        <span class="stat-pill">🏷️ <strong>${new Set(allVoices.flatMap(v=>v.themes||[])).size}</strong> Themes</span>
+    `;
 }
 
 function populateFilters() {
@@ -102,8 +173,23 @@ function populateSelect(id, options) {
     options.forEach(o => { sel.innerHTML += `<option value="${o}">${o}</option>`; });
 }
 
-function renderVoices() {
+function filterCategory(cat) {
+    currentCategory = cat;
+    document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    currentPage = 1;
+    applyFilters();
+}
+
+function applyFilters() {
     let voices = [...allVoices];
+    
+    if (currentCategory === 'Ethiopia') voices = voices.filter(v => v.region === 'Ethiopia');
+    if (currentCategory === 'Global') voices = voices.filter(v => v.region !== 'Ethiopia');
+    if (currentCategory === 'Amharic') voices = voices.filter(v => v.language === 'Amharic');
+    if (currentCategory === 'Oromo') voices = voices.filter(v => v.language === 'Oromo');
+    if (currentCategory === 'Somali') voices = voices.filter(v => v.language === 'Somali');
+    
     const r = document.getElementById('regionFilter').value;
     const y = document.getElementById('yearFilter').value;
     const t = document.getElementById('themeFilter').value;
@@ -112,31 +198,49 @@ function renderVoices() {
     if (y) voices = voices.filter(v => v.year === parseInt(y));
     if (t) voices = voices.filter(v => (v.themes || []).includes(t));
     if (l) voices = voices.filter(v => v.language === l);
+    
+    filteredVoices = voices;
+    currentPage = 1;
+    renderVoices();
+}
 
+function renderVoices() {
     const container = document.getElementById('quotesContainer');
-    if (!voices.length) { container.innerHTML = '<div class="loading">No voices found.</div>'; return; }
-
-    const tc = ['bdg-th', 'bdg-th2', 'bdg-th3', 'bdg-th'];
-    container.innerHTML = voices.map((v, i) => {
+    const toShow = filteredVoices.slice(0, currentPage * pageSize);
+    
+    if (!toShow.length) { container.innerHTML = '<div class="loading">No voices found matching your filters.</div>'; document.getElementById('loadMore').style.display = 'none'; return; }
+    
+    const tc = ['theme-0', 'theme-1', 'theme-2', 'theme-3', 'theme-4'];
+    container.innerHTML = toShow.map((v, i) => {
         const sp = Math.round((v.sentiment || 0.5) * 100);
+        const showOriginal = v.language !== 'English' && v.quote_original && v.quote_original !== v.quote_english;
         return `
-        <div class="quote-card" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i * 0.03}s">
-            <div class="loc">📍 ${v.region || 'Unknown'} · ${v.language || ''} · ${v.year || ''}</div>
-            <div class="txt">"${esc(v.quote_english || v.quote_original)}"</div>
-            <span class="badge bdg-yr">📅 ${v.year || 'N/A'}</span>
-            ${(v.themes || []).map((t, j) => `<span class="badge ${tc[j % 4]}">${esc(t)}</span>`).join('')}
+        <div class="voice-card" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i * 0.03}s">
+            <div class="voice-header">
+                <div class="voice-meta">
+                    <span class="region-badge">📍 ${v.region || 'Unknown'}</span>
+                    <span class="lang-badge">🌐 ${v.language || 'N/A'}</span>
+                    <span class="year-badge">📅 ${v.year || 'N/A'}</span>
+                </div>
+                <span class="voice-id">#${v.document_id || ''}</span>
+            </div>
+            <div class="quote-text">${esc(v.quote_english || v.quote_original)}</div>
+            ${showOriginal ? `<div class="quote-original">📜 Original (${v.language}): ${esc(v.quote_original)}</div>` : ''}
+            <div class="themes-row">${(v.themes || []).map((t, j) => `<span class="theme-tag ${tc[j % 5]}">${esc(t)}</span>`).join('')}</div>
             <div class="sentiment-bar"><div class="sentiment-fill" style="width:${sp}%"></div></div>
-            <div style="margin-top:10px">
-                <button class="like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">
-                    ❤️ <span class="like-count" id="likeCount-${v.id}">...</span>
-                </button>
+            <div class="voice-footer">
+                <button class="like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">❤️ <span id="likeCount-${v.id}">...</span></button>
+                <span style="color:var(--text-muted);font-size:0.7rem">Sentiment: ${sp}% hopeful</span>
             </div>
         </div>`;
     }).join('');
-
-    // Load likes for each voice
-    voices.forEach(v => loadLikes(v.id));
+    
+    document.getElementById('loadMore').style.display = filteredVoices.length > currentPage * pageSize ? 'block' : 'none';
+    
+    toShow.forEach(v => loadLikes(v.id));
 }
+
+function loadMore() { currentPage++; renderVoices(); }
 
 async function loadLikes(voiceId) {
     try {
