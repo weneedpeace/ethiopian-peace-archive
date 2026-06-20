@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gallery — Photos from the Ethiopian Peace Archive movement.">
+    <meta name="description" content="Gallery — Photos from the Ethiopian Peace Archive.">
     <title>Gallery — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -34,26 +34,21 @@
 <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
 <div class="slide-menu" id="slideMenu">
     <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
-    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
-    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
-    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
-    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
-    <a href="media.html"><span class="menu-icon">📰</span> <span data-i18n="media">Media</span></a>
-    <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
-    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
-    <a href="support.html" class="cta-mobile">❤️ <span data-i18n="support">Support</span></a>
+    <a href="index.html"><span class="menu-icon">🏠</span>Home</a>
+    <a href="voices.html"><span class="menu-icon">🗣️</span>Voices</a>
+    <a href="gallery.html"><span class="menu-icon">🖼️</span>Gallery</a>
+    <a href="support.html"><span class="menu-icon">❤️</span>Support</a>
 </div>
 
 <main class="container">
     <h1 class="section-title" data-i18n="galleryTitle">🖼️ Gallery</h1>
-    <p style="color:var(--text-dim);margin-bottom:20px" data-i18n="gallerySub">Moments from the peace movement — events, community, and action.</p>
+    <p style="color:var(--text-dim);margin-bottom:20px" data-i18n="gallerySub">Moments from the peace movement.</p>
     <div class="gallery-grid" id="galleryGrid"><div class="loading"><span class="spinner"></span> Loading photos...</div></div>
 </main>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <button class="close">&times;</button>
-    <img src="" alt="" id="lbImg" class="protected-img" draggable="false">
+    <img src="" id="lbImg" class="protected-img" draggable="false">
     <p style="color:#fff;margin-top:12px;font-family:var(--font-ui)" id="lbCaption"></p>
 </div>
 
@@ -67,37 +62,42 @@
     </div>
     <div class="footer-bottom">
         <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
-        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
     </div>
 </footer>
 
-<script src="js/supabase.js"></script>
 <script src="js/navigation.js"></script>
 <script src="js/protection.js"></script>
 <script src="js/language.js"></script>
 <script>
-async function loadGallery(){
-    try{
-        const items=await fetchFromSupabase('gallery','is_published=eq.true&order=created_at.desc');
-        const grid=document.getElementById('galleryGrid');
-        if(!items.length){grid.innerHTML='<div class="loading" data-i18n="noPhotos">No photos yet.</div>';return}
-        grid.innerHTML=items.map(item=>`
-            <div class="gallery-item" onclick="openLightbox('${item.image_url}','${esc(item.title||'')}','${esc(item.category||'')}')">
-                <img src="${item.image_url}" alt="${esc(item.title||'Gallery photo')}" loading="lazy" class="protected-img" draggable="false" onerror="this.parentElement.style.display='none'">
-                <div class="caption">${esc(item.title||'')}${item.category?`<br><small>${esc(item.category)}</small>`:''}</div>
+const URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+
+async function loadGallery() {
+    try {
+        const res = await fetch(URL + '/rest/v1/gallery?select=*&is_published=eq.true&order=created_at.desc', {
+            headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
+        });
+        const items = await res.json();
+        const grid = document.getElementById('galleryGrid');
+        if (!items.length) { grid.innerHTML = '<div class="loading">No photos yet.</div>'; return; }
+        grid.innerHTML = items.map(item => `
+            <div class="gallery-item" onclick="openLightbox('${item.image_url}','${item.title||''}','${item.category||''}')">
+                <img src="${item.image_url}" alt="${item.title||'Photo'}" loading="lazy" class="protected-img" draggable="false">
+                <div class="caption">${item.title||''}${item.category?`<br><small>${item.category}</small>`:''}</div>
             </div>
         `).join('');
         protectNewImages();
-    }catch(e){document.getElementById('galleryGrid').innerHTML='<div class="loading">Error loading gallery.</div>'}
+    } catch (e) { document.getElementById('galleryGrid').innerHTML = '<div class="loading">Error loading.</div>'; }
 }
-function openLightbox(url,title,category){
+
+function openLightbox(url, title, cat) {
     document.getElementById('lightbox').classList.add('open');
-    document.getElementById('lbImg').src=url;
-    document.getElementById('lbCaption').textContent=(category?category+' — ':'')+title;
-    document.body.style.overflow='hidden';
+    document.getElementById('lbImg').src = url;
+    document.getElementById('lbCaption').textContent = (cat ? cat + ' — ' : '') + title;
+    document.body.style.overflow = 'hidden';
 }
-function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=''}
-function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
+
 loadGallery();
 </script>
 </body>
