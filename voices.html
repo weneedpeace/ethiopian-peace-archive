@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore 1,000+ peace voices from Ethiopia and the world. Filter by region, language, theme, and year.">
+    <meta name="description" content="Explore 60+ peace voices from Ethiopia and the world. Filter by region, language, theme, and year.">
     <title>Voice Archive — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -23,6 +23,7 @@
         .voice-card:hover { border-color: var(--green-border); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
         .voice-card .voice-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
         .voice-card .voice-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+        .voice-card .writer-name { color: var(--gold); font-weight: 700; font-family: var(--font-ui); font-size: 0.9rem; margin-right: 6px; }
         .voice-card .region-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; background: var(--green-dim); color: var(--green-bright); font-family: var(--font-ui); font-weight: 600; }
         .voice-card .lang-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; background: rgba(251,191,36,0.1); color: #facc15; font-family: var(--font-ui); }
         .voice-card .year-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; background: rgba(59,130,246,0.1); color: #60a5fa; font-family: var(--font-ui); }
@@ -47,11 +48,7 @@
         .load-more { text-align: center; margin: 20px 0; }
         .load-more button { padding: 10px 30px; border-radius: 25px; background: var(--green-dim); color: var(--green-bright); border: 1px solid var(--green-border); cursor: pointer; font-family: var(--font-ui); font-size: 0.9rem; }
         .load-more button:hover { background: var(--green); color: #000; }
-        @media (max-width: 768px) {
-            .filters select { flex: 1; min-width: 0; font-size: 0.75rem; padding: 8px 12px; }
-            .cat-chip { padding: 6px 14px; font-size: 0.7rem; }
-            .voice-card { padding: 16px; }
-        }
+        @media (max-width: 768px) { .filters select { flex: 1; min-width: 0; font-size: 0.75rem; padding: 8px 12px; } .cat-chip { padding: 6px 14px; font-size: 0.7rem; } .voice-card { padding: 16px; } }
     </style>
 </head>
 <body>
@@ -152,7 +149,7 @@ function updateStats() {
         <span class="stat-pill">🗣️ <strong>${allVoices.length}</strong> Voices</span>
         <span class="stat-pill">📍 <strong>${new Set(allVoices.map(v=>v.region)).size}</strong> Regions</span>
         <span class="stat-pill">🌐 <strong>${new Set(allVoices.map(v=>v.language)).size}</strong> Languages</span>
-        <span class="stat-pill">🏷️ <strong>${new Set(allVoices.flatMap(v=>v.themes||[])).size}</strong> Themes</span>
+        <span class="stat-pill">✍️ <strong>${new Set(allVoices.map(v=>v.writer_name).filter(Boolean)).size}</strong> Writers</span>
     `;
 }
 
@@ -208,7 +205,7 @@ function renderVoices() {
     const container = document.getElementById('quotesContainer');
     const toShow = filteredVoices.slice(0, currentPage * pageSize);
     
-    if (!toShow.length) { container.innerHTML = '<div class="loading">No voices found matching your filters.</div>'; document.getElementById('loadMore').style.display = 'none'; return; }
+    if (!toShow.length) { container.innerHTML = '<div class="loading">No voices found.</div>'; document.getElementById('loadMore').style.display = 'none'; return; }
     
     const tc = ['theme-0', 'theme-1', 'theme-2', 'theme-3', 'theme-4'];
     container.innerHTML = toShow.map((v, i) => {
@@ -218,6 +215,7 @@ function renderVoices() {
         <div class="voice-card" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i * 0.03}s">
             <div class="voice-header">
                 <div class="voice-meta">
+                    ${v.writer_name ? `<span class="writer-name">✍️ ${esc(v.writer_name)}</span>` : ''}
                     <span class="region-badge">📍 ${v.region || 'Unknown'}</span>
                     <span class="lang-badge">🌐 ${v.language || 'N/A'}</span>
                     <span class="year-badge">📅 ${v.year || 'N/A'}</span>
@@ -236,7 +234,6 @@ function renderVoices() {
     }).join('');
     
     document.getElementById('loadMore').style.display = filteredVoices.length > currentPage * pageSize ? 'block' : 'none';
-    
     toShow.forEach(v => loadLikes(v.id));
 }
 
