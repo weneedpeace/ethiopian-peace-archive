@@ -60,7 +60,8 @@
         <a href="blog.html">Blog</a><a href="courses.html">Courses</a>
         <a href="dashboard.html">Impact</a><a href="media.html">Media</a>
         <a href="gallery.html">Gallery</a><a href="thanks.html">Thanks</a>
-        <a href="contribute.html">Contribute</a><a href="support.html" class="cta-nav">Support</a>
+        <a href="contribute.html">Contribute</a>
+        <a href="support.html" class="cta-nav">Support</a>
     </div>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
@@ -215,7 +216,7 @@ function renderVoices() {
         <div class="voice-card" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i * 0.03}s">
             <div class="voice-header">
                 <div class="voice-meta">
-                    ${v.writer_name ? `<span class="writer-name">✍️ ${esc(v.writer_name)}</span>` : ''}
+                    ${v.writer_name ? `<span class="writer-name">✍️ Written by ${esc(v.writer_name)}</span>` : ''}
                     <span class="region-badge">📍 ${v.region || 'Unknown'}</span>
                     <span class="lang-badge">🌐 ${v.language || 'N/A'}</span>
                     <span class="year-badge">📅 ${v.year || 'N/A'}</span>
