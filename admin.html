@@ -16,6 +16,11 @@
         table{width:100%;border-collapse:collapse;margin-top:10px;font-size:0.8rem}
         th{text-align:left;padding:8px;color:var(--text-dim);border-bottom:1px solid var(--green-border)}
         td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-dim)}
+        .action-btn{padding:4px 10px;border:none;border-radius:4px;cursor:pointer;font-size:0.75rem;margin:0 2px}
+        .btn-edit{background:#ffcc00;color:#000}
+        .btn-delete{background:#ff4444;color:#fff}
+        .btn-edit:hover{background:#ffdd33}
+        .btn-delete:hover{background:#ff6666}
 
         /* CCTV Styles */
         #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0a0a0a;position:relative}
@@ -36,7 +41,7 @@
         .cctv-crosshair::before{width:2px;height:100%;left:50%;transform:translateX(-50%)}
         .cctv-crosshair::after{width:100%;height:2px;top:50%;transform:translateY(-50%)}
 
-        /* Comedy Trap with your TikTok Video */
+        /* Comedy Trap */
         #comedyTrap{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.95);z-index:99999;justify-content:center;align-items:center;flex-direction:column}
         #comedyTrap video{width:100%;max-width:550px;border-radius:12px;border:4px solid #ffcc00;box-shadow:0 0 60px rgba(255,204,0,0.4);background:#000}
         .trap-message{color:#ffcc00;font-size:28px;font-weight:bold;margin-top:20px;text-align:center;font-family:'Courier New',monospace;text-shadow:0 0 20px rgba(255,204,0,0.2)}
@@ -50,27 +55,33 @@
         #backdoorPanel input{padding:10px;background:#222;border:1px solid #444;border-radius:6px;color:#fff;font-size:16px;margin-bottom:10px;width:200px}
         #backdoorPanel button{padding:8px 20px;background:var(--gold);color:#000;border:none;border-radius:6px;font-weight:bold;cursor:pointer}
         #backdoorPanel .hint{color:#666;font-size:11px;margin-top:10px}
+
+        /* Edit Modal */
+        #editModal{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.8);z-index:99999;justify-content:center;align-items:center}
+        #editModal.active{display:flex}
+        .modal-box{background:#1a1a1a;border:1px solid var(--green-border);border-radius:12px;padding:30px;max-width:500px;width:90%;color:#fff}
+        .modal-box h3{color:var(--gold);margin-bottom:15px}
+        .modal-box input,.modal-box textarea,.modal-box select{width:100%;padding:10px;background:#222;border:1px solid #444;border-radius:6px;color:#fff;margin-bottom:10px;font-family:inherit}
+        .modal-box textarea{min-height:100px}
+        .modal-box .btn-row{display:flex;gap:10px;justify-content:flex-end}
+        .modal-box .btn-row button{padding:8px 20px;border:none;border-radius:6px;cursor:pointer;font-weight:bold}
+        .modal-box .btn-save{background:#4ade80;color:#000}
+        .modal-box .btn-cancel{background:#444;color:#fff}
     </style>
 </head>
 <body>
 
-<!-- ============================================ -->
-<!-- YOUR TIKTOK VIDEO COMEDY TRAP -->
-<!-- ============================================ -->
+<!-- Comedy Trap -->
 <div id="comedyTrap">
-    <!-- FULL SIZE VIDEO WITH AUDIO & VOICE -->
     <video id="trapVideo" controls autoplay muted>
         <source src="https://github.com/weneedpeace/ethiopian-peace-archive/blob/709c28afa19da1ad030502cbe75b0aec6f37e7e9/snaptik_7427147447681584390_v3.mp4?raw=true" type="video/mp4">
-        Your browser does not support the video tag.
     </video>
     <div class="trap-message">😂 YOU'VE BEEN TROLLED! 😂</div>
     <div class="trap-sub">Nice try! The system caught you.<br><span style="color:#ff4444;font-size:14px;">Access denied. Your face has been recorded.</span></div>
     <button class="trap-btn" onclick="closeComedyTrap()">🚪 Get Out!</button>
 </div>
 
-<!-- ============================================ -->
-<!-- SECRET BACKDOOR PANEL -->
-<!-- ============================================ -->
+<!-- Backdoor Panel -->
 <div id="backdoorPanel">
     <h2>🔑 Admin Override</h2>
     <p style="color:#888;font-size:13px;margin-bottom:10px;">Enter your secret master key</p>
@@ -80,9 +91,29 @@
     <p class="hint">Press Ctrl+Shift+B to show/hide</p>
 </div>
 
-<!-- ============================================ -->
-<!-- LOGIN SCREEN WITH CCTV -->
-<!-- ============================================ -->
+<!-- Edit Modal -->
+<div id="editModal">
+    <div class="modal-box">
+        <h3 id="modalTitle">✏️ Edit Item</h3>
+        <input type="hidden" id="editId">
+        <input type="hidden" id="editType">
+        <input type="text" id="editTitle" placeholder="Title">
+        <textarea id="editContent" placeholder="Content / Description"></textarea>
+        <input type="text" id="editCategory" placeholder="Category">
+        <div class="upload-area" onclick="document.getElementById('editFile').click()" style="padding:10px;margin-bottom:10px">
+            <p id="editUploadText">📷 Tap to change image</p>
+            <img id="editPreview" style="display:none;max-height:100px;margin-top:5px">
+        </div>
+        <input type="file" id="editFile" accept="image/*" style="display:none" onchange="editImageUpload()">
+        <input type="hidden" id="editImageUrl">
+        <div class="btn-row">
+            <button class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+            <button class="btn-save" onclick="saveEdit()">💾 Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<!-- Login Screen -->
 <div id="loginScreen">
     <div class="login-wrapper">
         <div class="cctv-box">
@@ -105,9 +136,7 @@
     </div>
 </div>
 
-<!-- ============================================ -->
-<!-- ADMIN PANEL -->
-<!-- ============================================ -->
+<!-- Admin Panel -->
 <div id="panel" style="display:none;max-width:900px;margin:0 auto;padding:20px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
         <h2 style="color:var(--gold)">⚙️ Admin Dashboard</h2>
@@ -139,6 +168,9 @@
             <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
             <input type="hidden" id="bImageUrl"><br>
             <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveBlog()">💾 Publish Blog Post</button>
+
+            <h4 style="color:var(--gold);margin-top:20px">📋 All Blog Posts</h4>
+            <div id="blogList">Loading...</div>
         </div>
     </div>
 
@@ -155,7 +187,7 @@
             <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
             <input type="hidden" id="gImageUrl"><br>
             <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveGallery()">💾 Add to Gallery</button>
-            <h4 style="color:var(--gold);margin-top:20px">📋 Recent Photos</h4>
+            <h4 style="color:var(--gold);margin-top:20px">📋 All Photos</h4>
             <div id="galleryList">Loading...</div>
         </div>
     </div>
@@ -220,24 +252,22 @@ function msg(text, color) {
 }
 
 // ============================================
-// BACKDOOR SYSTEM (4 WAYS)
+// BACKDOOR SYSTEM
 // ============================================
 
-// BACKDOOR 1: URL Parameter (?secret=peace2026)
 (function checkUrlBackdoor() {
     const params = new URLSearchParams(window.location.search);
     if (params.get('secret') === 'peace2026') {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        loadCourses(); loadGalleryList();
+        loadCourses(); loadGalleryList(); loadBlogList();
         stopSecurityCamera();
         window.history.replaceState({}, document.title, window.location.pathname);
         console.log('🔑 Backdoor: URL access granted');
     }
 })();
 
-// BACKDOOR 2: Keyboard Shortcut (Ctrl+Shift+B)
 document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.shiftKey && e.key === 'B') {
         e.preventDefault();
@@ -249,16 +279,14 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// BACKDOOR 3: Master Key Login
 function masterKeyLogin() {
     const key = document.getElementById('masterKeyInput').value;
-    const MASTER_KEY = 'peace2026'; // CHANGE THIS TO YOUR OWN KEY
-    
+    const MASTER_KEY = 'peace2026';
     if (key === MASTER_KEY) {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        loadCourses(); loadGalleryList();
+        loadCourses(); loadGalleryList(); loadBlogList();
         stopSecurityCamera();
         document.getElementById('backdoorPanel').style.display = 'none';
         document.getElementById('masterKeyInput').value = '';
@@ -269,47 +297,37 @@ function masterKeyLogin() {
     }
 }
 
-// BACKDOOR 4: Special Email (backdoor@peacearchive.org)
 function login() {
     const email = document.getElementById('email').value;
     const pass = document.getElementById('pass').value;
-    
-    // Backdoor email
     if (email === 'backdoor@peacearchive.org') {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        loadCourses(); loadGalleryList();
+        loadCourses(); loadGalleryList(); loadBlogList();
         stopSecurityCamera();
         console.log('🔑 Backdoor: Email access granted');
         return;
     }
-    
-    // Normal admin login
     if (email === 'admin@peacearchive.org' && pass === 'Peace2026!') {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        loadCourses(); loadGalleryList();
+        loadCourses(); loadGalleryList(); loadBlogList();
         stopSecurityCamera();
     } else { 
         document.getElementById('loginMsg').style.display = 'block'; 
         document.getElementById('loginMsg').textContent = 'Wrong credentials';
-        // TRIGGER COMEDY TRAP ON WRONG PASSWORD!
         triggerComedyTrap('wrong_password');
     }
 }
-
-// ============================================
-// REST OF YOUR EXISTING ADMIN FUNCTIONS
-// ============================================
 
 function logout() { localStorage.removeItem('epa_admin'); location.reload(); }
 
 if (localStorage.getItem('epa_admin') === '1') {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('panel').style.display = 'block';
-    loadCourses(); loadGalleryList();
+    loadCourses(); loadGalleryList(); loadBlogList();
     stopSecurityCamera();
 }
 
@@ -320,6 +338,7 @@ function switchTab(tab) {
     document.getElementById('panel-' + tab).classList.add('active');
     if (tab === 'lesson') loadCourses();
     if (tab === 'gallery') loadGalleryList();
+    if (tab === 'blog') loadBlogList();
 }
 
 async function uploadImage(fileId, previewId, textId, hiddenId) {
@@ -346,6 +365,10 @@ async function uploadImage(fileId, previewId, textId, hiddenId) {
     } catch(e) { msg('Upload failed', 'red'); }
 }
 
+// ============================================
+// BLOG - SAVE, LIST, EDIT, DELETE
+// ============================================
+
 async function saveBlog() {
     var data = {
         title: document.getElementById('bTitle').value,
@@ -359,9 +382,74 @@ async function saveBlog() {
     try {
         var res = await fetch(API + '/blogs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
         var result = await res.json();
-        msg(result.success ? 'Blog published! Check blog.html' : 'Failed', result.success ? 'green' : 'red');
+        msg(result.success ? 'Blog published!' : 'Failed', result.success ? 'green' : 'red');
+        if (result.success) {
+            document.getElementById('bTitle').value = '';
+            document.getElementById('bSlug').value = '';
+            document.getElementById('bContent').value = '';
+            document.getElementById('bExcerpt').value = '';
+            document.getElementById('bImageUrl').value = '';
+            document.getElementById('blogPreview').style.display = 'none';
+            document.getElementById('blogUploadText').style.display = 'block';
+            loadBlogList();
+        }
     } catch(e) { msg('Failed', 'red'); }
 }
+
+async function loadBlogList() {
+    try {
+        var res = await fetch(API + '/blogs');
+        var items = await res.json();
+        var div = document.getElementById('blogList');
+        if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No blog posts yet.</p>'; return; }
+        div.innerHTML = '<table><tr><th>Title</th><th>Category</th><th>Actions</th></tr>' + 
+            items.map(function(i){ 
+                return '<tr><td>' + (i.title||'') + '</td><td>' + (i.category||'') + 
+                '</td><td>' +
+                '<button class="action-btn btn-edit" onclick="openEditBlog(' + i.id + ')">✏️ Edit</button>' +
+                '<button class="action-btn btn-delete" onclick="deleteBlog(' + i.id + ')">🗑️ Delete</button>' +
+                '</td></tr>';
+            }).join('') + '</table>';
+    } catch(e) { 
+        document.getElementById('blogList').innerHTML = '<p style="color:var(--text-dim)">Error loading blogs</p>';
+    }
+}
+
+async function deleteBlog(id) {
+    if (!confirm('Are you sure you want to delete this blog post?')) return;
+    try {
+        var res = await fetch(API + '/blogs/' + id, { method: 'DELETE' });
+        msg(res.ok ? 'Blog deleted!' : 'Failed to delete', res.ok ? 'green' : 'red');
+        if (res.ok) loadBlogList();
+    } catch(e) { msg('Failed to delete', 'red'); }
+}
+
+async function openEditBlog(id) {
+    try {
+        var res = await fetch(API + '/blogs/' + id);
+        var item = await res.json();
+        document.getElementById('editId').value = item.id;
+        document.getElementById('editType').value = 'blog';
+        document.getElementById('editTitle').value = item.title || '';
+        document.getElementById('editContent').value = item.content || '';
+        document.getElementById('editCategory').value = item.category || '';
+        document.getElementById('editImageUrl').value = item.image_url || '';
+        if (item.image_url) {
+            document.getElementById('editPreview').src = item.image_url;
+            document.getElementById('editPreview').style.display = 'block';
+            document.getElementById('editUploadText').style.display = 'none';
+        } else {
+            document.getElementById('editPreview').style.display = 'none';
+            document.getElementById('editUploadText').style.display = 'block';
+        }
+        document.getElementById('modalTitle').textContent = '✏️ Edit Blog Post';
+        document.getElementById('editModal').classList.add('active');
+    } catch(e) { msg('Failed to load blog', 'red'); }
+}
+
+// ============================================
+// GALLERY - SAVE, LIST, EDIT, DELETE
+// ============================================
 
 async function saveGallery() {
     var url = document.getElementById('gImageUrl').value;
@@ -371,14 +459,129 @@ async function saveGallery() {
         var res = await fetch(API + '/gallery', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
         var result = await res.json();
         if (result.success) {
-            msg('Photo added! Check gallery.html', 'green');
+            msg('Photo added!', 'green');
             document.getElementById('galleryPreview').style.display = 'none';
             document.getElementById('galleryUploadText').style.display = 'block';
             document.getElementById('gTitle').value = '';
+            document.getElementById('gCategory').value = '';
+            document.getElementById('gImageUrl').value = '';
             loadGalleryList();
         } else { msg('Failed', 'red'); }
     } catch(e) { msg('Failed', 'red'); }
 }
+
+async function loadGalleryList() {
+    try {
+        var res = await fetch(API + '/gallery');
+        var items = await res.json();
+        var div = document.getElementById('galleryList');
+        if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No photos yet.</p>'; return; }
+        div.innerHTML = '<table><tr><th>Image</th><th>Title</th><th>Category</th><th>Actions</th></tr>' + 
+            items.map(function(i){ 
+                return '<tr><td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td>' +
+                '<td>' + (i.title||'') + '</td>' +
+                '<td>' + (i.category||'') + '</td>' +
+                '<td>' +
+                '<button class="action-btn btn-edit" onclick="openEditGallery(' + i.id + ')">✏️ Edit</button>' +
+                '<button class="action-btn btn-delete" onclick="deleteGallery(' + i.id + ')">🗑️ Delete</button>' +
+                '</td></tr>';
+            }).join('') + '</table>';
+    } catch(e) { 
+        document.getElementById('galleryList').innerHTML = '<p style="color:var(--text-dim)">Error loading gallery</p>';
+    }
+}
+
+async function deleteGallery(id) {
+    if (!confirm('Are you sure you want to delete this photo?')) return;
+    try {
+        var res = await fetch(API + '/gallery/' + id, { method: 'DELETE' });
+        msg(res.ok ? 'Photo deleted!' : 'Failed to delete', res.ok ? 'green' : 'red');
+        if (res.ok) loadGalleryList();
+    } catch(e) { msg('Failed to delete', 'red'); }
+}
+
+async function openEditGallery(id) {
+    try {
+        var res = await fetch(API + '/gallery/' + id);
+        var item = await res.json();
+        document.getElementById('editId').value = item.id;
+        document.getElementById('editType').value = 'gallery';
+        document.getElementById('editTitle').value = item.title || '';
+        document.getElementById('editContent').value = item.description || '';
+        document.getElementById('editCategory').value = item.category || '';
+        document.getElementById('editImageUrl').value = item.image_url || '';
+        if (item.image_url) {
+            document.getElementById('editPreview').src = item.image_url;
+            document.getElementById('editPreview').style.display = 'block';
+            document.getElementById('editUploadText').style.display = 'none';
+        } else {
+            document.getElementById('editPreview').style.display = 'none';
+            document.getElementById('editUploadText').style.display = 'block';
+        }
+        document.getElementById('modalTitle').textContent = '✏️ Edit Gallery Photo';
+        document.getElementById('editModal').classList.add('active');
+    } catch(e) { msg('Failed to load gallery item', 'red'); }
+}
+
+// ============================================
+// EDIT MODAL - SAVE CHANGES
+// ============================================
+
+async function editImageUpload() {
+    var file = document.getElementById('editFile').files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('editPreview').src = e.target.result;
+        document.getElementById('editPreview').style.display = 'block';
+        document.getElementById('editUploadText').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'peace_archive');
+    try {
+        var res = await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload', { method: 'POST', body: formData });
+        var data = await res.json();
+        if (data.secure_url) {
+            document.getElementById('editImageUrl').value = data.secure_url;
+            msg('New image uploaded!', 'green');
+        } else { msg('Upload failed', 'red'); }
+    } catch(e) { msg('Upload failed', 'red'); }
+}
+
+function closeEditModal() {
+    document.getElementById('editModal').classList.remove('active');
+    document.getElementById('editFile').value = '';
+}
+
+async function saveEdit() {
+    var id = document.getElementById('editId').value;
+    var type = document.getElementById('editType').value;
+    var data = {
+        title: document.getElementById('editTitle').value,
+        category: document.getElementById('editCategory').value,
+        image_url: document.getElementById('editImageUrl').value
+    };
+    if (type === 'blog') {
+        data.content = document.getElementById('editContent').value;
+    } else if (type === 'gallery') {
+        data.description = document.getElementById('editContent').value;
+    }
+    try {
+        var res = await fetch(API + '/' + type + 's/' + id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        msg(res.ok ? 'Saved successfully!' : 'Failed to save', res.ok ? 'green' : 'red');
+        if (res.ok) {
+            closeEditModal();
+            if (type === 'blog') loadBlogList();
+            if (type === 'gallery') loadGalleryList();
+        }
+    } catch(e) { msg('Failed to save', 'red'); }
+}
+
+// ============================================
+// COURSE, LESSON, VOICE (UNTOUCHED)
+// ============================================
 
 async function saveCourse() {
     var data = { title: document.getElementById('cTitle').value, slug: document.getElementById('cSlug').value, description: document.getElementById('cDesc').value, level: document.getElementById('cLevel').value };
@@ -415,7 +618,7 @@ async function saveVoice() {
     if (!data.document_id || !data.region || !data.quote_english) { msg('Fill required fields', 'red'); return; }
     try {
         var res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify(data) });
-        msg(res.ok ? 'Voice added to archive!' : 'Failed', res.ok ? 'green' : 'red');
+        msg(res.ok ? 'Voice added!' : 'Failed', res.ok ? 'green' : 'red');
         if (res.ok) { document.getElementById('vDocId').value = ''; document.getElementById('vEnglish').value = ''; }
     } catch(e) { msg('Failed', 'red'); }
 }
@@ -427,16 +630,6 @@ async function loadCourses() {
         var sel = document.getElementById('lCourseId');
         sel.innerHTML = '<option value="">Select Course...</option>';
         courses.forEach(function(c) { sel.innerHTML += '<option value="' + c.id + '">' + c.title + '</option>'; });
-    } catch(e) {}
-}
-
-async function loadGalleryList() {
-    try {
-        var res = await fetch(API + '/gallery');
-        var items = await res.json();
-        var div = document.getElementById('galleryList');
-        if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No photos yet.</p>'; return; }
-        div.innerHTML = '<table><tr><th>Image</th><th>Title</th></tr>' + items.map(function(i){ return '<tr><td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>' + (i.title||'') + '</td></tr>'; }).join('') + '</table>';
     } catch(e) {}
 }
 
@@ -453,7 +646,6 @@ const secVideo = document.getElementById('secVideo');
 const secTime = document.getElementById('secTimestamp');
 const trapVideo = document.getElementById('trapVideo');
 
-// Start CCTV immediately on page load
 window.addEventListener('load', function() {
     startSecurityCamera();
 });
