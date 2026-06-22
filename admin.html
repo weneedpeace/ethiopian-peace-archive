@@ -21,6 +21,7 @@
         .btn-delete{background:#ff4444;color:#fff}
         .btn-edit:hover{background:#ffdd33}
         .btn-delete:hover{background:#ff6666}
+        .btn-remove-img{background:#ff8800;color:#fff;padding:4px 10px;border:none;border-radius:4px;cursor:pointer;font-size:0.75rem;margin-top:5px}
 
         /* CCTV Styles */
         #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0a0a0a;position:relative}
@@ -100,10 +101,13 @@
         <input type="text" id="editTitle" placeholder="Title">
         <textarea id="editContent" placeholder="Content / Description"></textarea>
         <input type="text" id="editCategory" placeholder="Category">
-        <div class="upload-area" onclick="document.getElementById('editFile').click()" style="padding:10px;margin-bottom:10px">
+        
+        <div class="upload-area" onclick="document.getElementById('editFile').click()" style="padding:10px;margin-bottom:5px">
             <p id="editUploadText">📷 Tap to change image</p>
             <img id="editPreview" style="display:none;max-height:100px;margin-top:5px">
         </div>
+        <button class="btn-remove-img" onclick="removeEditImage()" style="display:none;margin-bottom:10px;">🗑️ Remove Image</button>
+        
         <input type="file" id="editFile" accept="image/*" style="display:none" onchange="editImageUpload()">
         <input type="hidden" id="editImageUrl">
         <div class="btn-row">
@@ -236,12 +240,9 @@
 
 <script>
 // ============================================
-// YOUR EXISTING CODE (UNTOUCHED)
+// CONFIG
 // ============================================
-
 const API = 'https://peace-api.peace-01d.workers.dev/api';
-const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
 function msg(text, color) {
     var m = document.getElementById('msgBox');
@@ -254,7 +255,6 @@ function msg(text, color) {
 // ============================================
 // BACKDOOR SYSTEM
 // ============================================
-
 (function checkUrlBackdoor() {
     const params = new URLSearchParams(window.location.search);
     if (params.get('secret') === 'peace2026') {
@@ -341,6 +341,9 @@ function switchTab(tab) {
     if (tab === 'blog') loadBlogList();
 }
 
+// ============================================
+// IMAGE UPLOAD (Cloudinary)
+// ============================================
 async function uploadImage(fileId, previewId, textId, hiddenId) {
     var file = document.getElementById(fileId).files[0];
     if (!file) return;
@@ -366,7 +369,7 @@ async function uploadImage(fileId, previewId, textId, hiddenId) {
 }
 
 // ============================================
-// BLOG - SAVE, LIST, EDIT, DELETE
+// BLOG - FULL CRUD
 // ============================================
 
 async function saveBlog() {
@@ -404,7 +407,8 @@ async function loadBlogList() {
         if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No blog posts yet.</p>'; return; }
         div.innerHTML = '<table><tr><th>Title</th><th>Category</th><th>Actions</th></tr>' + 
             items.map(function(i){ 
-                return '<tr><td>' + (i.title||'') + '</td><td>' + (i.category||'') + 
+                return '<tr data-id="' + i.id + '">' +
+                '<td>' + (i.title||'') + '</td><td>' + (i.category||'') + 
                 '</td><td>' +
                 '<button class="action-btn btn-edit" onclick="openEditBlog(' + i.id + ')">✏️ Edit</button>' +
                 '<button class="action-btn btn-delete" onclick="deleteBlog(' + i.id + ')">🗑️ Delete</button>' +
@@ -419,9 +423,15 @@ async function deleteBlog(id) {
     if (!confirm('Are you sure you want to delete this blog post?')) return;
     try {
         var res = await fetch(API + '/blogs/' + id, { method: 'DELETE' });
-        msg(res.ok ? 'Blog deleted!' : 'Failed to delete', res.ok ? 'green' : 'red');
-        if (res.ok) loadBlogList();
-    } catch(e) { msg('Failed to delete', 'red'); }
+        if (res.ok) {
+            msg('Blog deleted!', 'green');
+            loadBlogList();
+        } else {
+            msg('Failed to delete. Check API.', 'red');
+        }
+    } catch(e) { 
+        msg('Error: ' + e.message, 'red'); 
+    }
 }
 
 async function openEditBlog(id) {
@@ -438,9 +448,12 @@ async function openEditBlog(id) {
             document.getElementById('editPreview').src = item.image_url;
             document.getElementById('editPreview').style.display = 'block';
             document.getElementById('editUploadText').style.display = 'none';
+            document.getElementById('editImageUrl').value = item.image_url;
+            document.querySelector('.btn-remove-img').style.display = 'inline-block';
         } else {
             document.getElementById('editPreview').style.display = 'none';
             document.getElementById('editUploadText').style.display = 'block';
+            document.querySelector('.btn-remove-img').style.display = 'none';
         }
         document.getElementById('modalTitle').textContent = '✏️ Edit Blog Post';
         document.getElementById('editModal').classList.add('active');
@@ -448,7 +461,7 @@ async function openEditBlog(id) {
 }
 
 // ============================================
-// GALLERY - SAVE, LIST, EDIT, DELETE
+// GALLERY - FULL CRUD
 // ============================================
 
 async function saveGallery() {
@@ -478,7 +491,8 @@ async function loadGalleryList() {
         if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No photos yet.</p>'; return; }
         div.innerHTML = '<table><tr><th>Image</th><th>Title</th><th>Category</th><th>Actions</th></tr>' + 
             items.map(function(i){ 
-                return '<tr><td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td>' +
+                return '<tr data-id="' + i.id + '">' +
+                '<td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td>' +
                 '<td>' + (i.title||'') + '</td>' +
                 '<td>' + (i.category||'') + '</td>' +
                 '<td>' +
@@ -495,9 +509,15 @@ async function deleteGallery(id) {
     if (!confirm('Are you sure you want to delete this photo?')) return;
     try {
         var res = await fetch(API + '/gallery/' + id, { method: 'DELETE' });
-        msg(res.ok ? 'Photo deleted!' : 'Failed to delete', res.ok ? 'green' : 'red');
-        if (res.ok) loadGalleryList();
-    } catch(e) { msg('Failed to delete', 'red'); }
+        if (res.ok) {
+            msg('Photo deleted!', 'green');
+            loadGalleryList();
+        } else {
+            msg('Failed to delete. Check API.', 'red');
+        }
+    } catch(e) { 
+        msg('Error: ' + e.message, 'red'); 
+    }
 }
 
 async function openEditGallery(id) {
@@ -507,6 +527,7 @@ async function openEditGallery(id) {
         document.getElementById('editId').value = item.id;
         document.getElementById('editType').value = 'gallery';
         document.getElementById('editTitle').value = item.title || '';
+        // Worker uses 'title', but we map 'description' for the modal content
         document.getElementById('editContent').value = item.description || '';
         document.getElementById('editCategory').value = item.category || '';
         document.getElementById('editImageUrl').value = item.image_url || '';
@@ -514,9 +535,12 @@ async function openEditGallery(id) {
             document.getElementById('editPreview').src = item.image_url;
             document.getElementById('editPreview').style.display = 'block';
             document.getElementById('editUploadText').style.display = 'none';
+            document.getElementById('editImageUrl').value = item.image_url;
+            document.querySelector('.btn-remove-img').style.display = 'inline-block';
         } else {
             document.getElementById('editPreview').style.display = 'none';
             document.getElementById('editUploadText').style.display = 'block';
+            document.querySelector('.btn-remove-img').style.display = 'none';
         }
         document.getElementById('modalTitle').textContent = '✏️ Edit Gallery Photo';
         document.getElementById('editModal').classList.add('active');
@@ -524,7 +548,7 @@ async function openEditGallery(id) {
 }
 
 // ============================================
-// EDIT MODAL - SAVE CHANGES
+// EDIT MODAL - SAVE & IMAGE HANDLING
 // ============================================
 
 async function editImageUpload() {
@@ -535,8 +559,10 @@ async function editImageUpload() {
         document.getElementById('editPreview').src = e.target.result;
         document.getElementById('editPreview').style.display = 'block';
         document.getElementById('editUploadText').style.display = 'none';
+        document.querySelector('.btn-remove-img').style.display = 'inline-block';
     };
     reader.readAsDataURL(file);
+    msg('Uploading...', 'green');
     var formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', 'peace_archive');
@@ -548,6 +574,14 @@ async function editImageUpload() {
             msg('New image uploaded!', 'green');
         } else { msg('Upload failed', 'red'); }
     } catch(e) { msg('Upload failed', 'red'); }
+}
+
+function removeEditImage() {
+    document.getElementById('editImageUrl').value = '';
+    document.getElementById('editPreview').style.display = 'none';
+    document.getElementById('editUploadText').style.display = 'block';
+    document.querySelector('.btn-remove-img').style.display = 'none';
+    msg('Image removed. Save to confirm.', 'green');
 }
 
 function closeEditModal() {
@@ -563,24 +597,31 @@ async function saveEdit() {
         category: document.getElementById('editCategory').value,
         image_url: document.getElementById('editImageUrl').value
     };
+    
+    // Map fields correctly for the API
     if (type === 'blog') {
         data.content = document.getElementById('editContent').value;
+        data.slug = document.getElementById('editTitle').value.toLowerCase().replace(/[^a-z0-9]+/g, '-'); // Auto-generate slug
+        data.excerpt = document.getElementById('editContent').value.substring(0, 100) + '...';
     } else if (type === 'gallery') {
         data.description = document.getElementById('editContent').value;
     }
+    
     try {
         var res = await fetch(API + '/' + type + 's/' + id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        msg(res.ok ? 'Saved successfully!' : 'Failed to save', res.ok ? 'green' : 'red');
         if (res.ok) {
+            msg('Saved successfully!', 'green');
             closeEditModal();
             if (type === 'blog') loadBlogList();
             if (type === 'gallery') loadGalleryList();
+        } else {
+            msg('Failed to save. Check API.', 'red');
         }
     } catch(e) { msg('Failed to save', 'red'); }
 }
 
 // ============================================
-// COURSE, LESSON, VOICE (UNTOUCHED)
+// COURSES, LESSONS, VOICES (UNTOUCHED)
 // ============================================
 
 async function saveCourse() {
@@ -634,7 +675,7 @@ async function loadCourses() {
 }
 
 // ============================================
-// CCTV + COMEDY SYSTEM
+// CCTV + COMEDY
 // ============================================
 
 let secStream = null;
