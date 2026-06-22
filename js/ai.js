@@ -1,9 +1,9 @@
 /* ============================================
    ETHIOPIAN PEACE ARCHIVE — PRODUCTION AI
-   Render Backend (Permanent) — Hugging Face
+   Vercel Backend (Permanent)
    ============================================ */
 
-const BACKEND_URL = 'https://peace-audio-worker.onrender.com';
+const BACKEND_URL = 'https://peace-audio-worker.vercel.app';
 
 // ========== FETCH AVAILABLE VOICES ==========
 async function fetchVoices() {
@@ -108,4 +108,4 @@ async function uploadImage(file) {
 async function extractTextFromImage(url) { return ''; }
 async function translateText(text, lang) { return text; }
 
-console.log('🧠 Ethiopian Peace Archive AI — Connected to Render Backend (Hugging Face)');
+console.log('🧠 Ethiopian Peace Archive AI — Connected to Vercel Backend');
