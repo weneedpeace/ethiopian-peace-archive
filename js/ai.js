@@ -1,11 +1,5 @@
-/* ============================================
-   ETHIOPIAN PEACE ARCHIVE — PRODUCTION AI
-   Vercel Backend (Permanent)
-   ============================================ */
-
 const BACKEND_URL = 'https://peace-audio-worker.vercel.app';
 
-// ========== FETCH AVAILABLE VOICES ==========
 async function fetchVoices() {
   try {
     const res = await fetch(`${BACKEND_URL}/api/voices`);
@@ -18,7 +12,6 @@ async function fetchVoices() {
   }
 }
 
-// ========== GENERATE AUDIO ==========
 async function generateAudio(voiceId, text) {
   try {
     const res = await fetch(`${BACKEND_URL}/api/generate-audio`, {
@@ -35,7 +28,6 @@ async function generateAudio(voiceId, text) {
   }
 }
 
-// ========== PREMIUM CONTENT GENERATOR (Hugging Face) ==========
 const EPA = {
   async generate(type, topic, tone) {
     try {
@@ -44,12 +36,10 @@ const EPA = {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type, topic, tone })
       });
-
       if (!res.ok) {
         const errorText = await res.text();
         throw new Error(`Server replied with ${res.status}: ${errorText}`);
       }
-
       const data = await res.json();
       return data.content || 'Generation succeeded but no content was returned.';
     } catch (e) {
@@ -67,7 +57,6 @@ const EPA = {
   social: (t, o) => EPA.generate('social', t, o)
 };
 
-// ========== VOICE ANALYSIS ==========
 async function analyzeVoice(text) {
   return { language: 'Unknown', sentiment: 0.75, themes: ['Peace', 'Hope'] };
 }
@@ -76,19 +65,16 @@ async function detectLanguage(text) { return (await analyzeVoice(text)).language
 async function analyzeSentiment(text) { return (await analyzeVoice(text)).sentiment; }
 async function detectThemes(text) { return (await analyzeVoice(text)).themes; }
 
-// ========== RESEARCH ASSISTANT ==========
 async function researchAssistant(question) {
   return 'Browse the Ethiopian Peace Archive to explore 1,000+ voices.';
 }
 
-// ========== CONTENT MODERATION ==========
 function moderateContent(text) {
   const blocked = ['kill', 'murder', 'hate', 'violence', 'destroy'];
   const found = blocked.filter(w => text.toLowerCase().includes(w));
   return found.length ? { approved: false, reason: `Blocked: ${found.join(', ')}` } : { approved: true };
 }
 
-// ========== IMAGE UPLOAD TO CLOUDINARY ==========
 async function uploadImage(file) {
   try {
     const formData = new FormData();
