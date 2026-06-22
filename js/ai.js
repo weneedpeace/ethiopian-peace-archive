@@ -1,97 +1,149 @@
-const BACKEND_URL = 'https://peace-audio-worker.vercel.app';
+// ============================================
+// AI ENGINE - FRONTEND CLIENT
+// ============================================
+
+const AI_API = 'https://peace-audio-worker.vercel.app/api';
+
+// ============================================
+// 1. GENERATE TEXT
+// ============================================
+
+async function generateText(prompt) {
+    try {
+        const response = await fetch(`${AI_API}/generate-text`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt })
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to generate text');
+        }
+        
+        const data = await response.json();
+        return data.text;
+    } catch (error) {
+        console.error('Text generation error:', error);
+        throw error;
+    }
+}
+
+// ============================================
+// 2. GENERATE AUDIO
+// ============================================
+
+async function generateAudio(text, voice_id = '21m00Tcm4TlvDq8ikWAM') {
+    try {
+        const response = await fetch(`${AI_API}/generate-audio`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, voice_id })
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to generate audio');
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Audio generation error:', error);
+        throw error;
+    }
+}
+
+// ============================================
+// 3. SAVE VOICE TO ARCHIVE
+// ============================================
+
+async function saveVoice(voiceData) {
+    try {
+        const response = await fetch(`${AI_API}/save-voice`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(voiceData)
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to save voice');
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Save voice error:', error);
+        throw error;
+    }
+}
+
+// ============================================
+// 4. FETCH ALL VOICES
+// ============================================
 
 async function fetchVoices() {
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/voices`);
-    if (!res.ok) throw new Error('Failed to fetch voices');
-    const voices = await res.json();
-    return voices;
-  } catch (e) {
-    console.error('Voice fetch error:', e);
-    return [];
-  }
-}
-
-async function generateAudio(voiceId, text) {
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/generate-audio`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ voiceId, text })
-    });
-    if (!res.ok) throw new Error('Generation failed');
-    const data = await res.json();
-    return data;
-  } catch (e) {
-    console.error('Generation error:', e);
-    return { success: false, error: e.message };
-  }
-}
-
-const EPA = {
-  async generate(type, topic, tone) {
     try {
-      const res = await fetch(`${BACKEND_URL}/api/generate-text`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type, topic, tone })
-      });
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Server replied with ${res.status}: ${errorText}`);
-      }
-      const data = await res.json();
-      return data.content || 'Generation succeeded but no content was returned.';
-    } catch (e) {
-      console.error('Generation error:', e);
-      return `Generation failed: ${e.message}`;
+        const response = await fetch(`${AI_API}/voices`);
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch voices');
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Fetch voices error:', error);
+        throw error;
     }
-  },
-  article: (t, o) => EPA.generate('article', t, o),
-  lesson: (t, o) => EPA.generate('lesson', t, o),
-  essay: (t, o) => EPA.generate('essay', t, o),
-  analysis: (t, o) => EPA.generate('analysis', t, o),
-  report: (t, o) => EPA.generate('report', t, o),
-  speech: (t, o) => EPA.generate('speech', t, o),
-  proposal: (t, o) => EPA.generate('proposal', t, o),
-  social: (t, o) => EPA.generate('social', t, o)
+}
+
+// ============================================
+// 5. EXAMPLE: COMPLETE AI WORKFLOW
+// ============================================
+
+async function createAIVoice(prompt, region, year, language) {
+    try {
+        // Step 1: Generate text
+        const generatedText = await generateText(prompt);
+        console.log('Generated text:', generatedText);
+
+        // Step 2: Generate audio
+        const audioResult = await generateAudio(generatedText);
+        console.log('Audio generated:', audioResult.audio_url);
+
+        // Step 3: Save to archive
+        const voiceData = {
+            document_id: `ETH-${Date.now()}`,
+            region: region,
+            year: parseInt(year),
+            language: language,
+            quote_original: generatedText,
+            quote_english: generatedText,
+            themes: ['Peace', 'Unity'],
+            sentiment: 0.85,
+            audio_url: audioResult.audio_url
+        };
+
+        const saved = await saveVoice(voiceData);
+        console.log('Voice saved:', saved);
+
+        return { text: generatedText, audio: audioResult, saved };
+    } catch (error) {
+        console.error('AI workflow error:', error);
+        throw error;
+    }
+}
+
+// ============================================
+// 6. EXPOSE TO WINDOW FOR ADMIN PANEL
+// ============================================
+
+window.AI = {
+    generateText,
+    generateAudio,
+    saveVoice,
+    fetchVoices,
+    createAIVoice
 };
-
-async function analyzeVoice(text) {
-  return { language: 'Unknown', sentiment: 0.75, themes: ['Peace', 'Hope'] };
-}
-
-async function detectLanguage(text) { return (await analyzeVoice(text)).language; }
-async function analyzeSentiment(text) { return (await analyzeVoice(text)).sentiment; }
-async function detectThemes(text) { return (await analyzeVoice(text)).themes; }
-
-async function researchAssistant(question) {
-  return 'Browse the Ethiopian Peace Archive to explore 1,000+ voices.';
-}
-
-function moderateContent(text) {
-  const blocked = ['kill', 'murder', 'hate', 'violence', 'destroy'];
-  const found = blocked.filter(w => text.toLowerCase().includes(w));
-  return found.length ? { approved: false, reason: `Blocked: ${found.join(', ')}` } : { approved: true };
-}
-
-async function uploadImage(file) {
-  try {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'peace_archive');
-    const res = await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload', {
-      method: 'POST',
-      body: formData
-    });
-    const data = await res.json();
-    return { url: data.secure_url, public_id: data.public_id };
-  } catch (e) {
-    return null;
-  }
-}
-
-async function extractTextFromImage(url) { return ''; }
-async function translateText(text, lang) { return text; }
-
-console.log('🧠 Ethiopian Peace Archive AI — Connected to Vercel Backend');
