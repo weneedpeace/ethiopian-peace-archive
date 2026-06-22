@@ -16,6 +16,9 @@
         table{width:100%;border-collapse:collapse;margin-top:10px;font-size:0.8rem}
         th{text-align:left;padding:8px;color:var(--text-dim);border-bottom:1px solid var(--green-border)}
         td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-dim)}
+        .btn-sm{padding:4px 10px;font-size:0.7rem;border-radius:12px;margin:2px;cursor:pointer;border:none}
+        .btn-edit{background:rgba(59,130,246,0.2);color:#60a5fa;border:1px solid rgba(59,130,246,0.3)}
+        .btn-del{background:rgba(239,68,68,0.2);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
     </style>
 </head>
 <body>
@@ -49,7 +52,8 @@
     <!-- BLOG -->
     <div class="admin-panel active" id="panel-blog">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
-            <h3 style="color:var(--gold);margin-bottom:12px">📝 New Blog Post</h3>
+            <h3 style="color:var(--gold);margin-bottom:12px" id="blogFormTitle">📝 New Blog Post</h3>
+            <input type="hidden" id="bEditId">
             <input type="text" id="bTitle" placeholder="Blog Title" required><br><br>
             <input type="text" id="bSlug" placeholder="slug-url-name" required><br><br>
             <textarea id="bContent" placeholder="Blog content..." style="min-height:150px"></textarea><br><br>
@@ -63,13 +67,17 @@
             <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
             <input type="hidden" id="bImageUrl"><br>
             <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveBlog()">💾 Publish Blog Post</button>
+            <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="bCancelBtn" onclick="cancelEdit('blog')">Cancel Edit</button>
         </div>
+        <h4 style="color:var(--gold);margin-top:16px">📋 Recent Posts</h4>
+        <div id="blogList">Loading...</div>
     </div>
 
     <!-- GALLERY -->
     <div class="admin-panel" id="panel-gallery">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
-            <h3 style="color:var(--gold);margin-bottom:12px">🖼️ Add Gallery Photo</h3>
+            <h3 style="color:var(--gold);margin-bottom:12px" id="galleryFormTitle">🖼️ Add Gallery Photo</h3>
+            <input type="hidden" id="gEditId">
             <input type="text" id="gTitle" placeholder="Photo title"><br><br>
             <input type="text" id="gCategory" placeholder="Category (Events, Community...)"><br><br>
             <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
@@ -79,22 +87,27 @@
             <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
             <input type="hidden" id="gImageUrl"><br>
             <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveGallery()">💾 Add to Gallery</button>
-            <h4 style="color:var(--gold);margin-top:20px">📋 Recent Photos</h4>
-            <div id="galleryList">Loading...</div>
+            <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="gCancelBtn" onclick="cancelEdit('gallery')">Cancel Edit</button>
         </div>
+        <h4 style="color:var(--gold);margin-top:16px">📋 Recent Photos</h4>
+        <div id="galleryList">Loading...</div>
     </div>
 
     <!-- COURSE -->
     <div class="admin-panel" id="panel-course">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
-            <h3 style="color:var(--gold);margin-bottom:12px">🎓 New Course</h3>
+            <h3 style="color:var(--gold);margin-bottom:12px" id="courseFormTitle">🎓 New Course</h3>
+            <input type="hidden" id="cEditId">
             <input type="text" id="cTitle" placeholder="Course Title" required><br><br>
             <input type="text" id="cSlug" placeholder="slug-url-name" required><br><br>
             <input type="text" id="cDesc" placeholder="Short description"><br><br>
             <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select><br><br>
             <input type="number" id="cModules" placeholder="Modules" value="6"><br><br>
             <button class="btn btn-primary" style="width:100%" onclick="saveCourse()">💾 Save Course</button>
+            <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="cCancelBtn" onclick="cancelEdit('course')">Cancel Edit</button>
         </div>
+        <h4 style="color:var(--gold);margin-top:16px">📋 All Courses</h4>
+        <div id="courseList">Loading...</div>
     </div>
 
     <!-- LESSON -->
@@ -144,14 +157,14 @@ function login() {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        loadCourses(); loadGalleryList();
+        loadCourses(); loadGalleryList(); loadBlogList(); loadCourseList();
     } else { document.getElementById('loginMsg').style.display = 'block'; document.getElementById('loginMsg').textContent = 'Wrong credentials'; }
 }
 function logout() { localStorage.removeItem('epa_admin'); location.reload(); }
 if (localStorage.getItem('epa_admin') === '1') {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('panel').style.display = 'block';
-    loadCourses(); loadGalleryList();
+    loadCourses(); loadGalleryList(); loadBlogList(); loadCourseList();
 }
 function switchTab(tab) {
     document.querySelectorAll('.admin-tab').forEach(function(t){ t.classList.remove('active'); });
@@ -160,6 +173,14 @@ function switchTab(tab) {
     document.getElementById('panel-' + tab).classList.add('active');
     if (tab === 'lesson') loadCourses();
     if (tab === 'gallery') loadGalleryList();
+    if (tab === 'blog') loadBlogList();
+    if (tab === 'course') loadCourseList();
+}
+
+function cancelEdit(type) {
+    if (type === 'blog') { document.getElementById('bEditId').value = ''; document.getElementById('blogFormTitle').textContent = '📝 New Blog Post'; document.getElementById('bCancelBtn').style.display = 'none'; document.getElementById('bTitle').value = ''; document.getElementById('bSlug').value = ''; document.getElementById('bContent').value = ''; document.getElementById('bExcerpt').value = ''; document.getElementById('bImageUrl').value = ''; document.getElementById('blogPreview').style.display = 'none'; document.getElementById('blogUploadText').style.display = 'block'; }
+    if (type === 'gallery') { document.getElementById('gEditId').value = ''; document.getElementById('galleryFormTitle').textContent = '🖼️ Add Gallery Photo'; document.getElementById('gCancelBtn').style.display = 'none'; document.getElementById('gTitle').value = ''; document.getElementById('gCategory').value = ''; document.getElementById('gImageUrl').value = ''; document.getElementById('galleryPreview').style.display = 'none'; document.getElementById('galleryUploadText').style.display = 'block'; }
+    if (type === 'course') { document.getElementById('cEditId').value = ''; document.getElementById('courseFormTitle').textContent = '🎓 New Course'; document.getElementById('cCancelBtn').style.display = 'none'; document.getElementById('cTitle').value = ''; document.getElementById('cSlug').value = ''; document.getElementById('cDesc').value = ''; }
 }
 
 async function uploadImage(fileId, previewId, textId, hiddenId) {
@@ -186,7 +207,32 @@ async function uploadImage(fileId, previewId, textId, hiddenId) {
     } catch(e) { msg('Upload failed', 'red'); }
 }
 
+async function saveToSupabase(table, data, id) {
+    if (id) {
+        return await fetch(SUPABASE_URL + '/rest/v1/' + table + '?id=eq.' + id, {
+            method: 'PATCH',
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify(data)
+        });
+    } else {
+        return await fetch(SUPABASE_URL + '/rest/v1/' + table, {
+            method: 'POST',
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify({ ...data, is_published: true })
+        });
+    }
+}
+
+async function deleteFromSupabase(table, id) {
+    return await fetch(SUPABASE_URL + '/rest/v1/' + table + '?id=eq.' + id, {
+        method: 'DELETE',
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+    });
+}
+
+// ========== BLOG ==========
 async function saveBlog() {
+    var id = document.getElementById('bEditId').value;
     var data = {
         title: document.getElementById('bTitle').value,
         slug: document.getElementById('bSlug').value,
@@ -196,49 +242,113 @@ async function saveBlog() {
         image_url: document.getElementById('bImageUrl').value
     };
     if (!data.title || !data.slug || !data.content) { msg('Fill all required fields', 'red'); return; }
-    try {
-        var res = await fetch(API + '/blogs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        var result = await res.json();
-        msg(result.success ? 'Blog published! Check blog.html' : 'Failed', result.success ? 'green' : 'red');
-    } catch(e) { msg('Failed', 'red'); }
+    var res = await saveToSupabase('blog_posts', data, id);
+    if (res.ok) { msg(id ? 'Blog updated!' : 'Blog published!', 'green'); cancelEdit('blog'); loadBlogList(); } else { msg('Failed', 'red'); }
 }
 
+async function loadBlogList() {
+    try {
+        var res = await fetch(SUPABASE_URL + '/rest/v1/blog_posts?select=*&is_published=eq.true&order=created_at.desc', { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+        var posts = await res.json();
+        var div = document.getElementById('blogList');
+        if (!posts || !posts.length) { div.innerHTML = '<p style="color:var(--text-dim)">No posts yet.</p>'; return; }
+        div.innerHTML = '<table><tr><th>Title</th><th>Category</th><th>Actions</th></tr>' + posts.map(function(p) {
+            return '<tr><td>' + p.title + '</td><td>' + (p.category || '') + '</td><td><button class="btn-edit btn-sm" onclick="editBlog(\'' + p.id + '\',\'' + esc(p.title) + '\',\'' + esc(p.slug) + '\',\'' + esc(p.content || '') + '\',\'' + esc(p.excerpt || '') + '\',\'' + esc(p.category || '') + '\',\'' + esc(p.image_url || '') + '\')">✏️ Edit</button> <button class="btn-del btn-sm" onclick="deleteBlog(\'' + p.id + '\')">🗑️ Delete</button></td></tr>';
+        }).join('') + '</table>';
+    } catch (e) { div.innerHTML = '<p style="color:var(--red)">Error loading.</p>'; }
+}
+
+function editBlog(id, title, slug, content, excerpt, category, imageUrl) {
+    document.getElementById('bEditId').value = id;
+    document.getElementById('blogFormTitle').textContent = '✏️ Edit Blog Post';
+    document.getElementById('bTitle').value = title;
+    document.getElementById('bSlug').value = slug;
+    document.getElementById('bContent').value = content;
+    document.getElementById('bExcerpt').value = excerpt;
+    document.getElementById('bCategory').value = category;
+    document.getElementById('bImageUrl').value = imageUrl;
+    if (imageUrl) { document.getElementById('blogPreview').src = imageUrl; document.getElementById('blogPreview').style.display = 'block'; document.getElementById('blogUploadText').style.display = 'none'; }
+    document.getElementById('bCancelBtn').style.display = 'block';
+}
+
+async function deleteBlog(id) { if (!confirm('Delete this blog post?')) return; await deleteFromSupabase('blog_posts', id); msg('Deleted!', 'green'); loadBlogList(); }
+
+// ========== GALLERY ==========
 async function saveGallery() {
+    var id = document.getElementById('gEditId').value;
     var url = document.getElementById('gImageUrl').value;
     if (!url) { msg('Upload an image first', 'red'); return; }
     var data = { title: document.getElementById('gTitle').value, image_url: url, category: document.getElementById('gCategory').value || 'General' };
-    try {
-        var res = await fetch(API + '/gallery', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        var result = await res.json();
-        if (result.success) {
-            msg('Photo added! Check gallery.html', 'green');
-            document.getElementById('galleryPreview').style.display = 'none';
-            document.getElementById('galleryUploadText').style.display = 'block';
-            document.getElementById('gTitle').value = '';
-            loadGalleryList();
-        } else { msg('Failed', 'red'); }
-    } catch(e) { msg('Failed', 'red'); }
+    var res = await saveToSupabase('gallery', data, id);
+    if (res.ok) { msg(id ? 'Photo updated!' : 'Photo added!', 'green'); cancelEdit('gallery'); loadGalleryList(); } else { msg('Failed', 'red'); }
 }
 
+async function loadGalleryList() {
+    try {
+        var res = await fetch(SUPABASE_URL + '/rest/v1/gallery?select=*&is_published=eq.true&order=created_at.desc', { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+        var items = await res.json();
+        var div = document.getElementById('galleryList');
+        if (!items || !items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No photos yet.</p>'; return; }
+        div.innerHTML = '<table><tr><th>Image</th><th>Title</th><th>Actions</th></tr>' + items.map(function(i) {
+            return '<tr><td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>' + (i.title || '') + '</td><td><button class="btn-edit btn-sm" onclick="editGallery(\'' + i.id + '\',\'' + esc(i.title || '') + '\',\'' + esc(i.category || '') + '\',\'' + esc(i.image_url || '') + '\')">✏️ Edit</button> <button class="btn-del btn-sm" onclick="deleteGallery(\'' + i.id + '\')">🗑️ Delete</button></td></tr>';
+        }).join('') + '</table>';
+    } catch (e) { div.innerHTML = '<p style="color:var(--red)">Error loading.</p>'; }
+}
+
+function editGallery(id, title, category, imageUrl) {
+    document.getElementById('gEditId').value = id;
+    document.getElementById('galleryFormTitle').textContent = '✏️ Edit Photo';
+    document.getElementById('gTitle').value = title;
+    document.getElementById('gCategory').value = category;
+    document.getElementById('gImageUrl').value = imageUrl;
+    if (imageUrl) { document.getElementById('galleryPreview').src = imageUrl; document.getElementById('galleryPreview').style.display = 'block'; document.getElementById('galleryUploadText').style.display = 'none'; }
+    document.getElementById('gCancelBtn').style.display = 'block';
+}
+
+async function deleteGallery(id) { if (!confirm('Delete this photo?')) return; await deleteFromSupabase('gallery', id); msg('Deleted!', 'green'); loadGalleryList(); }
+
+// ========== COURSE ==========
 async function saveCourse() {
+    var id = document.getElementById('cEditId').value;
     var data = { title: document.getElementById('cTitle').value, slug: document.getElementById('cSlug').value, description: document.getElementById('cDesc').value, level: document.getElementById('cLevel').value };
     if (!data.title || !data.slug) { msg('Fill title and slug', 'red'); return; }
-    try {
-        var res = await fetch(API + '/courses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        var result = await res.json();
-        msg(result.success ? 'Course saved!' : 'Failed', result.success ? 'green' : 'red');
-    } catch(e) { msg('Failed', 'red'); }
+    var res = await saveToSupabase('courses', data, id);
+    if (res.ok) { msg(id ? 'Course updated!' : 'Course saved!', 'green'); cancelEdit('course'); loadCourseList(); loadCourses(); } else { msg('Failed', 'red'); }
 }
 
+async function loadCourseList() {
+    try {
+        var res = await fetch(SUPABASE_URL + '/rest/v1/courses?select=*&is_published=eq.true&order=created_at.desc', { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+        var courses = await res.json();
+        var div = document.getElementById('courseList');
+        if (!courses || !courses.length) { div.innerHTML = '<p style="color:var(--text-dim)">No courses yet.</p>'; return; }
+        div.innerHTML = '<table><tr><th>Title</th><th>Level</th><th>Actions</th></tr>' + courses.map(function(c) {
+            return '<tr><td>' + c.title + '</td><td>' + (c.level || '') + '</td><td><button class="btn-edit btn-sm" onclick="editCourse(\'' + c.id + '\',\'' + esc(c.title) + '\',\'' + esc(c.slug) + '\',\'' + esc(c.description || '') + '\',\'' + esc(c.level || '') + '\')">✏️ Edit</button> <button class="btn-del btn-sm" onclick="deleteCourse(\'' + c.id + '\')">🗑️ Delete</button></td></tr>';
+        }).join('') + '</table>';
+    } catch (e) { div.innerHTML = '<p style="color:var(--red)">Error loading.</p>'; }
+}
+
+function editCourse(id, title, slug, desc, level) {
+    document.getElementById('cEditId').value = id;
+    document.getElementById('courseFormTitle').textContent = '✏️ Edit Course';
+    document.getElementById('cTitle').value = title;
+    document.getElementById('cSlug').value = slug;
+    document.getElementById('cDesc').value = desc;
+    document.getElementById('cLevel').value = level;
+    document.getElementById('cCancelBtn').style.display = 'block';
+}
+
+async function deleteCourse(id) { if (!confirm('Delete course and all lessons?')) return; await deleteFromSupabase('courses', id); msg('Deleted!', 'green'); loadCourseList(); loadCourses(); }
+
+// ========== LESSON ==========
 async function saveLesson() {
     var data = { course_id: parseInt(document.getElementById('lCourseId').value), title: document.getElementById('lTitle').value, content: document.getElementById('lContent').value, lesson_order: parseInt(document.getElementById('lOrder').value) };
     if (!data.course_id || !data.title) { msg('Select course and add title', 'red'); return; }
-    try {
-        var res = await fetch(API + '/courses/lessons', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        msg(res.ok ? 'Lesson saved!' : 'Failed', res.ok ? 'green' : 'red');
-    } catch(e) { msg('Failed', 'red'); }
+    var res = await saveToSupabase('course_lessons', data);
+    msg(res.ok ? 'Lesson saved!' : 'Failed', res.ok ? 'green' : 'red');
 }
 
+// ========== VOICE ==========
 async function saveVoice() {
     var themesStr = document.getElementById('vThemes').value;
     var data = {
@@ -253,16 +363,14 @@ async function saveVoice() {
         is_published: true
     };
     if (!data.document_id || !data.region || !data.quote_english) { msg('Fill required fields', 'red'); return; }
-    try {
-        var res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify(data) });
-        msg(res.ok ? 'Voice added to archive!' : 'Failed', res.ok ? 'green' : 'red');
-        if (res.ok) { document.getElementById('vDocId').value = ''; document.getElementById('vEnglish').value = ''; }
-    } catch(e) { msg('Failed', 'red'); }
+    var res = await saveToSupabase('ethiopian_voices', data);
+    msg(res.ok ? 'Voice added to archive!' : 'Failed', res.ok ? 'green' : 'red');
+    if (res.ok) { document.getElementById('vDocId').value = ''; document.getElementById('vEnglish').value = ''; }
 }
 
 async function loadCourses() {
     try {
-        var res = await fetch(API + '/courses');
+        var res = await fetch(SUPABASE_URL + '/rest/v1/courses?select=id,title&is_published=eq.true&order=title', { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
         var courses = await res.json();
         var sel = document.getElementById('lCourseId');
         sel.innerHTML = '<option value="">Select Course...</option>';
@@ -270,15 +378,7 @@ async function loadCourses() {
     } catch(e) {}
 }
 
-async function loadGalleryList() {
-    try {
-        var res = await fetch(API + '/gallery');
-        var items = await res.json();
-        var div = document.getElementById('galleryList');
-        if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No photos yet.</p>'; return; }
-        div.innerHTML = '<table><tr><th>Image</th><th>Title</th></tr>' + items.map(function(i){ return '<tr><td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>' + (i.title||'') + '</td></tr>'; }).join('') + '</table>';
-    } catch(e) {}
-}
+function esc(s) { if (!s) return ''; return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"'); }
 </script>
 </body>
 </html>
