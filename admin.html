@@ -16,12 +16,6 @@
         table{width:100%;border-collapse:collapse;margin-top:10px;font-size:0.8rem}
         th{text-align:left;padding:8px;color:var(--text-dim);border-bottom:1px solid var(--green-border)}
         td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-dim)}
-        .btn-sm{padding:4px 10px;font-size:0.7rem;border-radius:12px;margin:2px;cursor:pointer;border:none}
-        .btn-edit{background:rgba(59,130,246,0.2);color:#60a5fa;border:1px solid rgba(59,130,246,0.3)}
-        .btn-del{background:rgba(239,68,68,0.2);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
-        .sub-tabs{display:flex;gap:4px;margin-bottom:12px}
-        .sub-tab{padding:6px 14px;border-radius:15px;cursor:pointer;border:1px solid var(--green-border);background:transparent;color:var(--text-dim);font-size:0.75rem;font-family:var(--font-ui)}
-        .sub-tab.active{background:var(--green-dim);color:var(--green-bright)}
     </style>
 </head>
 <body>
@@ -29,7 +23,6 @@
 <div id="loginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh">
     <div style="background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;max-width:380px;width:100%;text-align:center">
         <h1 style="color:var(--gold);margin-bottom:16px">🔐 Admin Panel</h1>
-        <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:16px">You know the password, bro. 😎</p>
         <input type="email" id="email" placeholder="Email" required><br><br>
         <input type="password" id="pass" placeholder="Password" required><br><br>
         <button class="btn btn-primary" style="width:100%" onclick="login()">Sign In</button>
@@ -37,7 +30,7 @@
     </div>
 </div>
 
-<div id="panel" style="display:none;max-width:950px;margin:0 auto;padding:20px">
+<div id="panel" style="display:none;max-width:900px;margin:0 auto;padding:20px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
         <h2 style="color:var(--gold)">⚙️ Admin Dashboard</h2>
         <button class="btn btn-sm btn-red" onclick="logout()">Logout</button>
@@ -48,88 +41,63 @@
         <span class="admin-tab" onclick="switchTab('gallery')">🖼️ Gallery</span>
         <span class="admin-tab" onclick="switchTab('course')">🎓 Course</span>
         <span class="admin-tab" onclick="switchTab('lesson')">📚 Lesson</span>
-        <span class="admin-tab" onclick="switchTab('voice')">🗣️ Voice</span>
+        <span class="admin-tab" onclick="switchTab('voice')">🗣️ Add Voice</span>
     </div>
 
     <p id="msgBox" style="display:none;padding:10px;border-radius:8px;margin-bottom:10px"></p>
 
-    <!-- ========== BLOG PANEL ========== -->
+    <!-- BLOG -->
     <div class="admin-panel active" id="panel-blog">
-        <div class="sub-tabs">
-            <span class="sub-tab active" onclick="showBlogForm()">➕ New Post</span>
-            <span class="sub-tab" onclick="showBlogList()">📋 Manage Posts</span>
-        </div>
-        <div id="blog-form">
-            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
-                <h3 style="color:var(--gold);margin-bottom:12px" id="blogFormTitle">📝 New Blog Post</h3>
-                <input type="hidden" id="bEditId">
-                <input type="text" id="bTitle" placeholder="Blog Title" required><br><br>
-                <input type="text" id="bSlug" placeholder="slug-url-name" required><br><br>
-                <textarea id="bContent" placeholder="Blog content..." style="min-height:150px"></textarea><br><br>
-                <input type="text" id="bExcerpt" placeholder="Short excerpt"><br><br>
-                <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select><br><br>
-                <label style="color:var(--text-dim);font-size:0.85rem">Featured Image</label>
-                <div class="upload-area" onclick="document.getElementById('blogFile').click()">
-                    <p id="blogUploadText">📷 Tap to upload image</p>
-                    <img id="blogPreview" style="display:none">
-                </div>
-                <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
-                <input type="hidden" id="bImageUrl"><br>
-                <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveBlog()">💾 Save</button>
-                <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="bCancelBtn" onclick="resetBlogForm()">Cancel Edit</button>
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+            <h3 style="color:var(--gold);margin-bottom:12px">📝 New Blog Post</h3>
+            <input type="text" id="bTitle" placeholder="Blog Title" required><br><br>
+            <input type="text" id="bSlug" placeholder="slug-url-name" required><br><br>
+            <textarea id="bContent" placeholder="Blog content..." style="min-height:150px"></textarea><br><br>
+            <input type="text" id="bExcerpt" placeholder="Short excerpt"><br><br>
+            <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select><br><br>
+            <label style="color:var(--text-dim);font-size:0.85rem">Featured Image</label>
+            <div class="upload-area" onclick="document.getElementById('blogFile').click()">
+                <p id="blogUploadText">📷 Tap to upload image</p>
+                <img id="blogPreview" style="display:none">
             </div>
+            <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
+            <input type="hidden" id="bImageUrl"><br>
+            <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveBlog()">💾 Publish Blog Post</button>
         </div>
-        <div id="blog-list" style="display:none"><p style="color:var(--text-dim);text-align:center;padding:20px">Loading...</p></div>
     </div>
 
-    <!-- ========== GALLERY PANEL ========== -->
+    <!-- GALLERY -->
     <div class="admin-panel" id="panel-gallery">
-        <div class="sub-tabs">
-            <span class="sub-tab active" onclick="showGalleryForm()">➕ Add Photo</span>
-            <span class="sub-tab" onclick="showGalleryList()">📋 Manage Photos</span>
-        </div>
-        <div id="gallery-form">
-            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
-                <h3 style="color:var(--gold);margin-bottom:12px" id="galleryFormTitle">🖼️ Add Photo</h3>
-                <input type="hidden" id="gEditId">
-                <input type="text" id="gTitle" placeholder="Photo title"><br><br>
-                <input type="text" id="gCategory" placeholder="Category"><br><br>
-                <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
-                    <p id="galleryUploadText">📷 Tap to upload image</p>
-                    <img id="galleryPreview" style="display:none">
-                </div>
-                <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
-                <input type="hidden" id="gImageUrl"><br>
-                <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveGallery()">💾 Save</button>
-                <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="gCancelBtn" onclick="resetGalleryForm()">Cancel Edit</button>
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+            <h3 style="color:var(--gold);margin-bottom:12px">🖼️ Add Gallery Photo</h3>
+            <input type="text" id="gTitle" placeholder="Photo title"><br><br>
+            <input type="text" id="gCategory" placeholder="Category (Events, Community...)"><br><br>
+            <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
+                <p id="galleryUploadText">📷 Tap to upload image</p>
+                <img id="galleryPreview" style="display:none">
             </div>
+            <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
+            <input type="hidden" id="gImageUrl"><br>
+            <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveGallery()">💾 Add to Gallery</button>
+            <h4 style="color:var(--gold);margin-top:20px">📋 Recent Photos</h4>
+            <div id="galleryList">Loading...</div>
         </div>
-        <div id="gallery-list" style="display:none"><p style="color:var(--text-dim);text-align:center;padding:20px">Loading...</p></div>
     </div>
 
-    <!-- ========== COURSE PANEL ========== -->
+    <!-- COURSE -->
     <div class="admin-panel" id="panel-course">
-        <div class="sub-tabs">
-            <span class="sub-tab active" onclick="showCourseForm()">➕ New Course</span>
-            <span class="sub-tab" onclick="showCourseList()">📋 Manage Courses</span>
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+            <h3 style="color:var(--gold);margin-bottom:12px">🎓 New Course</h3>
+            <input type="text" id="cTitle" placeholder="Course Title" required><br><br>
+            <input type="text" id="cSlug" placeholder="slug-url-name" required><br><br>
+            <input type="text" id="cDesc" placeholder="Short description"><br><br>
+            <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select><br><br>
+            <input type="number" id="cModules" placeholder="Modules" value="6"><br><br>
+            <button class="btn btn-primary" style="width:100%" onclick="saveCourse()">💾 Save Course</button>
         </div>
-        <div id="course-form">
-            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
-                <h3 style="color:var(--gold);margin-bottom:12px" id="courseFormTitle">🎓 New Course</h3>
-                <input type="hidden" id="cEditId">
-                <input type="text" id="cTitle" placeholder="Course Title" required><br><br>
-                <input type="text" id="cSlug" placeholder="slug-url-name" required><br><br>
-                <input type="text" id="cDesc" placeholder="Short description"><br><br>
-                <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select><br><br>
-                <input type="number" id="cModules" placeholder="Modules" value="6"><br><br>
-                <button class="btn btn-primary" style="width:100%" onclick="saveCourse()">💾 Save</button>
-                <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="cCancelBtn" onclick="resetCourseForm()">Cancel Edit</button>
-            </div>
-        </div>
-        <div id="course-list" style="display:none"><p style="color:var(--text-dim);text-align:center;padding:20px">Loading...</p></div>
     </div>
 
-    <!-- ========== LESSON PANEL ========== -->
+    <!-- LESSON -->
     <div class="admin-panel" id="panel-lesson">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">📚 Add Lesson</h3>
@@ -141,155 +109,176 @@
         </div>
     </div>
 
-    <!-- ========== VOICE PANEL ========== -->
+    <!-- VOICE -->
     <div class="admin-panel" id="panel-voice">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">🗣️ Add Voice</h3>
-            <input type="text" id="vDocId" placeholder="Document ID" required><br><br>
-            <input type="text" id="vWriter" placeholder="Writer Name"><br><br>
-            <select id="vRegion"><option value="">Select Region</option><option>Tigray</option><option>Amhara</option><option>Oromia</option><option>Somali</option><option>Afar</option><option>Sidama</option><option>SNNPR</option><option>Gambella</option><option>Harari</option><option>Benishangul-Gumuz</option><option>Addis Ababa</option><option>Dire Dawa</option><option>England</option><option>Switzerland</option><option>Nigeria</option><option>Japan</option><option>DR Congo</option><option>Netherlands</option><option>Malaysia</option><option>Norway</option><option>UK</option><option>Spain</option><option>Germany</option><option>Italy</option><option>Russia</option><option>Poland</option><option>France</option><option>Somalia</option><option>Tanzania</option><option>Brazil</option><option>Croatia</option></select><br><br>
-            <input type="number" id="vYear" placeholder="Year" required><br><br>
-            <input type="text" id="vLanguage" placeholder="Language" required><br><br>
+            <input type="text" id="vDocId" placeholder="Document ID (ETH-001)" required><br><br>
+            <select id="vRegion"><option value="">Select Region</option><option>Tigray</option><option>Amhara</option><option>Oromia</option><option>Somali</option><option>Afar</option><option>Sidama</option><option>SNNPR</option><option>Gambella</option><option>Harari</option><option>Benishangul-Gumuz</option><option>Addis Ababa</option><option>Dire Dawa</option></select><br><br>
+            <input type="number" id="vYear" placeholder="Year (2020)" required><br><br>
+            <input type="text" id="vLanguage" placeholder="Language (Amharic, Oromo...)" required><br><br>
             <textarea id="vOriginal" placeholder="Original quote..."></textarea><br><br>
             <textarea id="vEnglish" placeholder="English translation..." required></textarea><br><br>
             <input type="text" id="vThemes" placeholder="Themes (Peace, Unity, Hope)" value="Peace"><br><br>
-            <select id="vSentiment"><option value="0.95">Very Hopeful</option><option value="0.85">Hopeful</option><option value="0.75" selected>Positive</option><option value="0.60">Somewhat</option><option value="0.50">Neutral</option></select><br><br>
-            <button class="btn btn-primary" style="width:100%" onclick="saveVoice()">💾 Add Voice</button>
+            <select id="vSentiment"><option value="0.95">Very Hopeful (0.95)</option><option value="0.85">Hopeful (0.85)</option><option value="0.75" selected>Positive (0.75)</option><option value="0.60">Somewhat Positive (0.60)</option><option value="0.50">Neutral (0.50)</option></select><br><br>
+            <button class="btn btn-primary" style="width:100%" onclick="saveVoice()">💾 Add Voice to Archive</button>
         </div>
     </div>
 </div>
 
 <script>
+const API = 'https://peace-api.peace-01d.workers.dev/api';
 const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
-function msg(t,c){var m=document.getElementById('msgBox');m.textContent=t;m.style.display='block';m.style.background=c==='green'?'rgba(34,197,94,0.15)':'rgba(239,68,68,0.15)';m.style.color=c==='green'?'#4ade80':'#ef4444';setTimeout(function(){m.style.display='none'},4000)}
-function login(){if(document.getElementById('email').value==='admin@peacearchive.org'&&document.getElementById('pass').value==='Peace2026!'){localStorage.setItem('epa_admin','1');document.getElementById('loginScreen').style.display='none';document.getElementById('panel').style.display='block';loadCourses()}else{document.getElementById('loginMsg').style.display='block';document.getElementById('loginMsg').textContent='Wrong password, bro. 😎'}}
-function logout(){localStorage.removeItem('epa_admin');location.reload()}
-if(localStorage.getItem('epa_admin')==='1'){document.getElementById('loginScreen').style.display='none';document.getElementById('panel').style.display='block';loadCourses()}
+function msg(text, color) {
+    var m = document.getElementById('msgBox');
+    m.textContent = text; m.style.display = 'block';
+    m.style.background = color === 'green' ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)';
+    m.style.color = color === 'green' ? '#4ade80' : '#ef4444';
+    setTimeout(function(){ m.style.display = 'none'; }, 4000);
+}
 
-function switchTab(tab){
-    document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active')});
+function login() {
+    if (document.getElementById('email').value === 'admin@peacearchive.org' && document.getElementById('pass').value === 'Peace2026!') {
+        localStorage.setItem('epa_admin', '1');
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('panel').style.display = 'block';
+        loadCourses(); loadGalleryList();
+    } else { document.getElementById('loginMsg').style.display = 'block'; document.getElementById('loginMsg').textContent = 'Wrong credentials'; }
+}
+function logout() { localStorage.removeItem('epa_admin'); location.reload(); }
+if (localStorage.getItem('epa_admin') === '1') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('panel').style.display = 'block';
+    loadCourses(); loadGalleryList();
+}
+function switchTab(tab) {
+    document.querySelectorAll('.admin-tab').forEach(function(t){ t.classList.remove('active'); });
     event.target.classList.add('active');
-    document.querySelectorAll('.admin-panel').forEach(function(p){p.classList.remove('active')});
-    document.getElementById('panel-'+tab).classList.add('active');
-    if(tab==='lesson')loadCourses();
+    document.querySelectorAll('.admin-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.getElementById('panel-' + tab).classList.add('active');
+    if (tab === 'lesson') loadCourses();
+    if (tab === 'gallery') loadGalleryList();
 }
 
-// ========== FORM/LIST TOGGLES ==========
-function showBlogForm(){document.getElementById('blog-form').style.display='block';document.getElementById('blog-list').style.display='none';document.querySelectorAll('#panel-blog .sub-tab')[0].classList.add('active');document.querySelectorAll('#panel-blog .sub-tab')[1].classList.remove('active')}
-function showBlogList(){document.getElementById('blog-form').style.display='none';document.getElementById('blog-list').style.display='block';document.querySelectorAll('#panel-blog .sub-tab')[0].classList.remove('active');document.querySelectorAll('#panel-blog .sub-tab')[1].classList.add('active');loadBlogList()}
-function showGalleryForm(){document.getElementById('gallery-form').style.display='block';document.getElementById('gallery-list').style.display='none';document.querySelectorAll('#panel-gallery .sub-tab')[0].classList.add('active');document.querySelectorAll('#panel-gallery .sub-tab')[1].classList.remove('active')}
-function showGalleryList(){document.getElementById('gallery-form').style.display='none';document.getElementById('gallery-list').style.display='block';document.querySelectorAll('#panel-gallery .sub-tab')[0].classList.remove('active');document.querySelectorAll('#panel-gallery .sub-tab')[1].classList.add('active');loadGalleryList()}
-function showCourseForm(){document.getElementById('course-form').style.display='block';document.getElementById('course-list').style.display='none';document.querySelectorAll('#panel-course .sub-tab')[0].classList.add('active');document.querySelectorAll('#panel-course .sub-tab')[1].classList.remove('active')}
-function showCourseList(){document.getElementById('course-form').style.display='none';document.getElementById('course-list').style.display='block';document.querySelectorAll('#panel-course .sub-tab')[0].classList.remove('active');document.querySelectorAll('#panel-course .sub-tab')[1].classList.add('active');loadCourseList()}
-
-async function uploadImage(fileId,previewId,textId,hiddenId){
-    var file=document.getElementById(fileId).files[0];if(!file)return;
-    var reader=new FileReader();reader.onload=function(e){document.getElementById(previewId).src=e.target.result;document.getElementById(previewId).style.display='block';document.getElementById(textId).style.display='none'};reader.readAsDataURL(file);
-    msg('Uploading...','green');
-    var fd=new FormData();fd.append('file',file);fd.append('upload_preset','peace_archive');
-    try{var res=await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload',{method:'POST',body:fd});var data=await res.json();if(data.secure_url){document.getElementById(hiddenId).value=data.secure_url;msg('Image uploaded!','green')}else{msg('Upload failed','red')}}catch(e){msg('Upload failed','red')}
+async function uploadImage(fileId, previewId, textId, hiddenId) {
+    var file = document.getElementById(fileId).files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById(previewId).src = e.target.result;
+        document.getElementById(previewId).style.display = 'block';
+        document.getElementById(textId).style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+    msg('Uploading...', 'green');
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'peace_archive');
+    try {
+        var res = await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload', { method: 'POST', body: formData });
+        var data = await res.json();
+        if (data.secure_url) {
+            document.getElementById(hiddenId).value = data.secure_url;
+            msg('Image uploaded! Click Save.', 'green');
+        } else { msg('Upload failed', 'red'); }
+    } catch(e) { msg('Upload failed', 'red'); }
 }
 
-async function saveToDB(table,data,id){
-    if(id){return await fetch(SUPABASE_URL+'/rest/v1/'+table+'?id=eq.'+id,{method:'PATCH',headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(data)})}
-    else{return await fetch(SUPABASE_URL+'/rest/v1/'+table,{method:'POST',headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({...data,is_published:true})})}
-}
-async function deleteFromDB(table,id){return await fetch(SUPABASE_URL+'/rest/v1/'+table+'?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}})}
-
-// ========== BLOG ==========
-function resetBlogForm(){document.getElementById('bEditId').value='';document.getElementById('blogFormTitle').textContent='📝 New Blog Post';document.getElementById('bTitle').value='';document.getElementById('bSlug').value='';document.getElementById('bContent').value='';document.getElementById('bExcerpt').value='';document.getElementById('bImageUrl').value='';document.getElementById('blogPreview').style.display='none';document.getElementById('blogUploadText').style.display='block';document.getElementById('bCancelBtn').style.display='none'}
-async function saveBlog(){
-    var id=document.getElementById('bEditId').value;
-    var data={title:document.getElementById('bTitle').value,slug:document.getElementById('bSlug').value,content:document.getElementById('bContent').value,excerpt:document.getElementById('bExcerpt').value,category:document.getElementById('bCategory').value,image_url:document.getElementById('bImageUrl').value};
-    if(!data.title||!data.slug||!data.content){msg('Fill all required fields','red');return}
-    var res=await saveToDB('blog_posts',data,id);
-    if(res.ok){msg(id?'Blog updated!':'Blog published!','green');resetBlogForm();loadBlogList()}else{msg('Failed','red')}
-}
-async function loadBlogList(){
-    try{
-        var res=await fetch(SUPABASE_URL+'/rest/v1/blog_posts?select=*&is_published=eq.true&order=created_at.desc',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
-        var posts=await res.json();var div=document.getElementById('blog-list');
-        if(!posts||!posts.length){div.innerHTML='<p style="color:var(--text-dim);text-align:center;padding:20px">No posts yet.</p>';return}
-        div.innerHTML='<table><tr><th>Title</th><th>Category</th><th>Image</th><th>Actions</th></tr>'+posts.map(function(p){return'<tr><td>'+p.title+'</td><td>'+(p.category||'')+'</td><td>'+(p.image_url?'<img src="'+p.image_url+'" style="width:40px;height:40px;object-fit:cover;border-radius:4px">':'—')+'</td><td><button class="btn-sm btn-edit" onclick="editBlog('+p.id+',\''+esc(p.title)+'\',\''+esc(p.slug)+'\',\''+esc(p.content||'')+'\',\''+esc(p.excerpt||'')+'\',\''+esc(p.category||'')+'\',\''+esc(p.image_url||'')+'\')">✏️</button> <button class="btn-sm btn-del" onclick="deleteBlog('+p.id+')">🗑️</button></td></tr>'}).join('')+'</table>'
-    }catch(e){div.innerHTML='<p style="color:var(--red);text-align:center;padding:20px">Error loading.</p>'}
-}
-function editBlog(id,title,slug,content,excerpt,category,imageUrl){
-    showBlogForm();document.getElementById('bEditId').value=id;document.getElementById('blogFormTitle').textContent='✏️ Edit Blog Post';
-    document.getElementById('bTitle').value=title;document.getElementById('bSlug').value=slug;document.getElementById('bContent').value=content;document.getElementById('bExcerpt').value=excerpt;document.getElementById('bCategory').value=category;document.getElementById('bImageUrl').value=imageUrl;
-    if(imageUrl){document.getElementById('blogPreview').src=imageUrl;document.getElementById('blogPreview').style.display='block';document.getElementById('blogUploadText').style.display='none'}document.getElementById('bCancelBtn').style.display='block'
-}
-async function deleteBlog(id){if(!confirm('Delete this blog post?'))return;await deleteFromDB('blog_posts',id);msg('Deleted!','green');loadBlogList()}
-
-// ========== GALLERY ==========
-function resetGalleryForm(){document.getElementById('gEditId').value='';document.getElementById('galleryFormTitle').textContent='🖼️ Add Photo';document.getElementById('gTitle').value='';document.getElementById('gCategory').value='';document.getElementById('gImageUrl').value='';document.getElementById('galleryPreview').style.display='none';document.getElementById('galleryUploadText').style.display='block';document.getElementById('gCancelBtn').style.display='none'}
-async function saveGallery(){
-    var id=document.getElementById('gEditId').value;var url=document.getElementById('gImageUrl').value;if(!url){msg('Upload an image first','red');return}
-    var data={title:document.getElementById('gTitle').value,image_url:url,category:document.getElementById('gCategory').value||'General'};
-    var res=await saveToDB('gallery',data,id);
-    if(res.ok){msg(id?'Photo updated!':'Photo added!','green');resetGalleryForm();loadGalleryList()}else{msg('Failed','red')}
-}
-async function loadGalleryList(){
-    try{
-        var res=await fetch(SUPABASE_URL+'/rest/v1/gallery?select=*&is_published=eq.true&order=created_at.desc',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
-        var items=await res.json();var div=document.getElementById('gallery-list');
-        if(!items||!items.length){div.innerHTML='<p style="color:var(--text-dim);text-align:center;padding:20px">No photos yet.</p>';return}
-        div.innerHTML='<table><tr><th>Image</th><th>Title</th><th>Category</th><th>Actions</th></tr>'+items.map(function(i){return'<tr><td><img src="'+i.image_url+'" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>'+(i.title||'—')+'</td><td>'+(i.category||'—')+'</td><td><button class="btn-sm btn-edit" onclick="editGallery('+i.id+',\''+esc(i.title||'')+'\',\''+esc(i.category||'')+'\',\''+esc(i.image_url||'')+'\')">✏️</button> <button class="btn-sm btn-del" onclick="deleteGallery('+i.id+')">🗑️</button></td></tr>'}).join('')+'</table>'
-    }catch(e){div.innerHTML='<p style="color:var(--red);text-align:center;padding:20px">Error loading.</p>'}
-}
-function editGallery(id,title,category,imageUrl){
-    showGalleryForm();document.getElementById('gEditId').value=id;document.getElementById('galleryFormTitle').textContent='✏️ Edit Photo';
-    document.getElementById('gTitle').value=title;document.getElementById('gCategory').value=category;document.getElementById('gImageUrl').value=imageUrl;
-    if(imageUrl){document.getElementById('galleryPreview').src=imageUrl;document.getElementById('galleryPreview').style.display='block';document.getElementById('galleryUploadText').style.display='none'}document.getElementById('gCancelBtn').style.display='block'
-}
-async function deleteGallery(id){if(!confirm('Delete this photo?'))return;await deleteFromDB('gallery',id);msg('Deleted!','green');loadGalleryList()}
-
-// ========== COURSE ==========
-function resetCourseForm(){document.getElementById('cEditId').value='';document.getElementById('courseFormTitle').textContent='🎓 New Course';document.getElementById('cTitle').value='';document.getElementById('cSlug').value='';document.getElementById('cDesc').value='';document.getElementById('cCancelBtn').style.display='none'}
-async function saveCourse(){
-    var id=document.getElementById('cEditId').value;
-    var data={title:document.getElementById('cTitle').value,slug:document.getElementById('cSlug').value,description:document.getElementById('cDesc').value,level:document.getElementById('cLevel').value};
-    if(!data.title||!data.slug){msg('Fill title and slug','red');return}
-    var res=await saveToDB('courses',data,id);
-    if(res.ok){msg(id?'Course updated!':'Course saved!','green');resetCourseForm();loadCourseList();loadCourses()}else{msg('Failed','red')}
-}
-async function loadCourseList(){
-    try{
-        var res=await fetch(SUPABASE_URL+'/rest/v1/courses?select=*&is_published=eq.true&order=created_at.desc',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
-        var courses=await res.json();var div=document.getElementById('course-list');
-        if(!courses||!courses.length){div.innerHTML='<p style="color:var(--text-dim);text-align:center;padding:20px">No courses yet.</p>';return}
-        div.innerHTML='<table><tr><th>Title</th><th>Level</th><th>Actions</th></tr>'+courses.map(function(c){return'<tr><td>'+c.title+'</td><td>'+(c.level||'—')+'</td><td><button class="btn-sm btn-edit" onclick="editCourse('+c.id+',\''+esc(c.title)+'\',\''+esc(c.slug)+'\',\''+esc(c.description||'')+'\',\''+esc(c.level||'')+'\')">✏️</button> <button class="btn-sm btn-del" onclick="deleteCourse('+c.id+')">🗑️</button></td></tr>'}).join('')+'</table>'
-    }catch(e){div.innerHTML='<p style="color:var(--red);text-align:center;padding:20px">Error loading.</p>'}
-}
-function editCourse(id,title,slug,desc,level){
-    showCourseForm();document.getElementById('cEditId').value=id;document.getElementById('courseFormTitle').textContent='✏️ Edit Course';
-    document.getElementById('cTitle').value=title;document.getElementById('cSlug').value=slug;document.getElementById('cDesc').value=desc;document.getElementById('cLevel').value=level;document.getElementById('cCancelBtn').style.display='block'
-}
-async function deleteCourse(id){if(!confirm('Delete course and all lessons?'))return;await deleteFromDB('courses',id);msg('Deleted!','green');loadCourseList();loadCourses()}
-
-// ========== LESSON ==========
-async function saveLesson(){
-    var data={course_id:parseInt(document.getElementById('lCourseId').value),title:document.getElementById('lTitle').value,content:document.getElementById('lContent').value,lesson_order:parseInt(document.getElementById('lOrder').value)};
-    if(!data.course_id||!data.title){msg('Select course and add title','red');return}
-    var res=await saveToDB('course_lessons',data);
-    msg(res.ok?'Lesson saved!':'Failed',res.ok?'green':'red')
+async function saveBlog() {
+    var data = {
+        title: document.getElementById('bTitle').value,
+        slug: document.getElementById('bSlug').value,
+        content: document.getElementById('bContent').value,
+        excerpt: document.getElementById('bExcerpt').value,
+        category: document.getElementById('bCategory').value,
+        image_url: document.getElementById('bImageUrl').value
+    };
+    if (!data.title || !data.slug || !data.content) { msg('Fill all required fields', 'red'); return; }
+    try {
+        var res = await fetch(API + '/blogs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        var result = await res.json();
+        msg(result.success ? 'Blog published! Check blog.html' : 'Failed', result.success ? 'green' : 'red');
+    } catch(e) { msg('Failed', 'red'); }
 }
 
-// ========== VOICE ==========
-async function saveVoice(){
-    var themesStr=document.getElementById('vThemes').value;
-    var data={document_id:document.getElementById('vDocId').value,writer_name:document.getElementById('vWriter').value,region:document.getElementById('vRegion').value,year:parseInt(document.getElementById('vYear').value),language:document.getElementById('vLanguage').value,quote_original:document.getElementById('vOriginal').value,quote_english:document.getElementById('vEnglish').value,themes:themesStr.split(',').map(function(t){return t.trim()}),sentiment:parseFloat(document.getElementById('vSentiment').value)};
-    if(!data.document_id||!data.region||!data.quote_english){msg('Fill required fields','red');return}
-    var res=await saveToDB('ethiopian_voices',data);
-    msg(res.ok?'Voice added!':'Failed',res.ok?'green':'red');if(res.ok){document.getElementById('vDocId').value='';document.getElementById('vEnglish').value=''}
+async function saveGallery() {
+    var url = document.getElementById('gImageUrl').value;
+    if (!url) { msg('Upload an image first', 'red'); return; }
+    var data = { title: document.getElementById('gTitle').value, image_url: url, category: document.getElementById('gCategory').value || 'General' };
+    try {
+        var res = await fetch(API + '/gallery', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        var result = await res.json();
+        if (result.success) {
+            msg('Photo added! Check gallery.html', 'green');
+            document.getElementById('galleryPreview').style.display = 'none';
+            document.getElementById('galleryUploadText').style.display = 'block';
+            document.getElementById('gTitle').value = '';
+            loadGalleryList();
+        } else { msg('Failed', 'red'); }
+    } catch(e) { msg('Failed', 'red'); }
 }
 
-async function loadCourses(){
-    try{var res=await fetch(SUPABASE_URL+'/rest/v1/courses?select=id,title&is_published=eq.true&order=title',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});var courses=await res.json();var sel=document.getElementById('lCourseId');sel.innerHTML='<option value="">Select Course...</option>';courses.forEach(function(c){sel.innerHTML+='<option value="'+c.id+'">'+c.title+'</option>'})}catch(e){}
+async function saveCourse() {
+    var data = { title: document.getElementById('cTitle').value, slug: document.getElementById('cSlug').value, description: document.getElementById('cDesc').value, level: document.getElementById('cLevel').value };
+    if (!data.title || !data.slug) { msg('Fill title and slug', 'red'); return; }
+    try {
+        var res = await fetch(API + '/courses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        var result = await res.json();
+        msg(result.success ? 'Course saved!' : 'Failed', result.success ? 'green' : 'red');
+    } catch(e) { msg('Failed', 'red'); }
 }
 
-function esc(s){if(!s)return'';return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"')}
+async function saveLesson() {
+    var data = { course_id: parseInt(document.getElementById('lCourseId').value), title: document.getElementById('lTitle').value, content: document.getElementById('lContent').value, lesson_order: parseInt(document.getElementById('lOrder').value) };
+    if (!data.course_id || !data.title) { msg('Select course and add title', 'red'); return; }
+    try {
+        var res = await fetch(API + '/courses/lessons', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        msg(res.ok ? 'Lesson saved!' : 'Failed', res.ok ? 'green' : 'red');
+    } catch(e) { msg('Failed', 'red'); }
+}
+
+async function saveVoice() {
+    var themesStr = document.getElementById('vThemes').value;
+    var data = {
+        document_id: document.getElementById('vDocId').value,
+        region: document.getElementById('vRegion').value,
+        year: parseInt(document.getElementById('vYear').value),
+        language: document.getElementById('vLanguage').value,
+        quote_original: document.getElementById('vOriginal').value,
+        quote_english: document.getElementById('vEnglish').value,
+        themes: themesStr.split(',').map(function(t){ return t.trim(); }),
+        sentiment: parseFloat(document.getElementById('vSentiment').value),
+        is_published: true
+    };
+    if (!data.document_id || !data.region || !data.quote_english) { msg('Fill required fields', 'red'); return; }
+    try {
+        var res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify(data) });
+        msg(res.ok ? 'Voice added to archive!' : 'Failed', res.ok ? 'green' : 'red');
+        if (res.ok) { document.getElementById('vDocId').value = ''; document.getElementById('vEnglish').value = ''; }
+    } catch(e) { msg('Failed', 'red'); }
+}
+
+async function loadCourses() {
+    try {
+        var res = await fetch(API + '/courses');
+        var courses = await res.json();
+        var sel = document.getElementById('lCourseId');
+        sel.innerHTML = '<option value="">Select Course...</option>';
+        courses.forEach(function(c) { sel.innerHTML += '<option value="' + c.id + '">' + c.title + '</option>'; });
+    } catch(e) {}
+}
+
+async function loadGalleryList() {
+    try {
+        var res = await fetch(API + '/gallery');
+        var items = await res.json();
+        var div = document.getElementById('galleryList');
+        if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No photos yet.</p>'; return; }
+        div.innerHTML = '<table><tr><th>Image</th><th>Title</th></tr>' + items.map(function(i){ return '<tr><td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>' + (i.title||'') + '</td></tr>'; }).join('') + '</table>';
+    } catch(e) {}
+}
 </script>
 </body>
 </html>
