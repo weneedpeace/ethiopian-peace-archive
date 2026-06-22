@@ -3,98 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About the Ethiopian Peace Archive — Our story, mission, and methodology.">
-    <title>About — Ethiopian Peace Archive</title>
+    <title>Admin — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .about-card{background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius);padding:24px;margin-bottom:16px;line-height:1.8}
-        .about-card h2{color:var(--gold);margin-bottom:12px;font-family:var(--font-ui);font-size:1.2rem}
-        .about-card p{color:var(--text-dim);margin-bottom:12px}
-        .highlight-about{background:linear-gradient(135deg,rgba(34,197,94,0.10),rgba(251,191,36,0.08));border:2px solid var(--green-border);border-radius:var(--radius);padding:28px;text-align:center;margin:20px 0}
+        .admin-tabs{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap}
+        .admin-tab{padding:8px 16px;border-radius:20px;cursor:pointer;border:1px solid var(--green-border);background:var(--card);color:var(--text-dim);font-family:var(--font-ui);font-size:0.8rem}
+        .admin-tab.active{background:var(--green);color:#000;font-weight:700}
+        .admin-panel{display:none}
+        .admin-panel.active{display:block}
+        .upload-area{border:2px dashed var(--green-border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;margin-bottom:12px}
+        .upload-area img{max-width:100%;max-height:200px;border-radius:8px;margin-top:10px}
+        table{width:100%;border-collapse:collapse;margin-top:10px;font-size:0.8rem}
+        th{text-align:left;padding:8px;color:var(--text-dim);border-bottom:1px solid var(--green-border)}
+        td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-dim)}
+        .btn-sm{padding:4px 10px;font-size:0.7rem;border-radius:12px;margin:2px;cursor:pointer;border:none}
+        .btn-edit{background:rgba(59,130,246,0.2);color:#60a5fa;border:1px solid rgba(59,130,246,0.3)}
+        .btn-del{background:rgba(239,68,68,0.2);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+        .sub-tabs{display:flex;gap:4px;margin-bottom:12px}
+        .sub-tab{padding:6px 14px;border-radius:15px;cursor:pointer;border:1px solid var(--green-border);background:transparent;color:var(--text-dim);font-size:0.75rem;font-family:var(--font-ui)}
+        .sub-tab.active{background:var(--green-dim);color:var(--green-bright)}
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-    <div class="desktop-links">
-        <a href="index.html" data-i18n="home">Home</a>
-        <a href="voices.html" data-i18n="voices">Voices</a>
-        <a href="blog.html" data-i18n="blog">Blog</a>
-        <a href="courses.html" data-i18n="courses">Courses</a>
-        <a href="dashboard.html" data-i18n="impact">Impact</a>
-        <a href="media.html" data-i18n="media">Media</a>
-        <a href="gallery.html" data-i18n="gallery">Gallery</a>
-        <a href="contribute.html" data-i18n="contribute">Contribute</a>
-        <a href="support.html" class="cta-nav" data-i18n="support">Support</a>
-        <span style="display:flex;gap:2px;margin-left:6px">
-            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
-            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
-            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
-            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
-        </span>
+<div id="loginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh">
+    <div style="background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;max-width:380px;width:100%;text-align:center">
+        <h1 style="color:var(--gold);margin-bottom:16px">🔐 Admin Panel</h1>
+        <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:16px">You know the password, bro. 😎</p>
+        <input type="email" id="email" placeholder="Email" required><br><br>
+        <input type="password" id="pass" placeholder="Password" required><br><br>
+        <button class="btn btn-primary" style="width:100%" onclick="login()">Sign In</button>
+        <p id="loginMsg" style="color:var(--red);margin-top:10px;display:none"></p>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-
-<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-<div class="slide-menu" id="slideMenu">
-    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-    <a href="index.html"><span class="menu-icon">🏠</span> <span data-i18n="home">Home</span></a>
-    <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voices</span></a>
-    <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog</span></a>
-    <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Courses</span></a>
-    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact</span></a>
-    <a href="about.html"><span class="menu-icon">📖</span> <span data-i18n="about">About</span></a>
-    <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thanks</span></a>
 </div>
 
-<main class="container-sm">
-    <h1 class="section-title" data-i18n="aboutTitle">📖 About the Movement</h1>
-
-    <div class="about-card">
-        <h2 data-i18n="ourStory">Our Story</h2>
-        <p>The Ethiopian Peace Archive began with a simple belief: that everyday people want peace, and their voices deserve to be heard. Over five years (2017-2022), we collected over 1,000 voices from every region of Ethiopia — Tigray, Amhara, Oromia, Somali, Afar, Sidama, SNNPR, Gambella, Harari, Benishangul-Gumuz, Addis Ababa, and Dire Dawa.</p>
-        <p>We also received messages of solidarity from across the globe — China, Germany, Russia, USA, Jamaica, India, Somalia, Nigeria, UK, France, and more. These voices remind us that peace is not just an Ethiopian desire — it's a universal hope.</p>
+<div id="panel" style="display:none;max-width:950px;margin:0 auto;padding:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <h2 style="color:var(--gold)">⚙️ Admin Dashboard</h2>
+        <button class="btn btn-sm btn-red" onclick="logout()">Logout</button>
     </div>
 
-    <div class="about-card">
-        <h2 data-i18n="ourMission">Our Mission</h2>
-        <p>To preserve, share, and amplify the voices of everyday Ethiopians and global supporters who believe in peace, unity, and coexistence — creating a permanent, searchable, and accessible archive that counter-narratives conflict with hope.</p>
+    <div class="admin-tabs">
+        <span class="admin-tab active" onclick="switchTab('blog')">📝 Blog</span>
+        <span class="admin-tab" onclick="switchTab('gallery')">🖼️ Gallery</span>
+        <span class="admin-tab" onclick="switchTab('course')">🎓 Course</span>
+        <span class="admin-tab" onclick="switchTab('lesson')">📚 Lesson</span>
+        <span class="admin-tab" onclick="switchTab('voice')">🗣️ Voice</span>
     </div>
 
-    <div class="about-card">
-        <h2 data-i18n="methodologyTitle">Methodology</h2>
-        <p>Voices were collected through in-person interviews, written submissions, and community gatherings across Ethiopia. All contributors gave informed consent for their anonymized words to be shared publicly. Personal identifying information is kept strictly confidential and offline.</p>
+    <p id="msgBox" style="display:none;padding:10px;border-radius:8px;margin-bottom:10px"></p>
+
+    <!-- BLOG PANEL -->
+    <div class="admin-panel active" id="panel-blog">
+        <div class="sub-tabs">
+            <span class="sub-tab active" id="subBlogNew" onclick="switchSubTab('blog','new')">➕ New Post</span>
+            <span class="sub-tab" id="subBlogList" onclick="switchSubTab('blog','list')">📋 Manage Posts</span>
+        </div>
+        <div id="blog-new">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+                <h3 style="color:var(--gold);margin-bottom:12px" id="blogFormTitle">📝 New Blog Post</h3>
+                <input type="hidden" id="bEditId">
+                <input type="text" id="bTitle" placeholder="Blog Title" required><br><br>
+                <input type="text" id="bSlug" placeholder="slug-url-name" required><br><br>
+                <textarea id="bContent" placeholder="Blog content..." style="min-height:150px"></textarea><br><br>
+                <input type="text" id="bExcerpt" placeholder="Short excerpt"><br><br>
+                <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select><br><br>
+                <label style="color:var(--text-dim);font-size:0.85rem">Featured Image</label>
+                <div class="upload-area" onclick="document.getElementById('blogFile').click()">
+                    <p id="blogUploadText">📷 Tap to upload image</p>
+                    <img id="blogPreview" style="display:none">
+                </div>
+                <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
+                <input type="hidden" id="bImageUrl"><br>
+                <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveBlog()">💾 Save</button>
+                <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="bCancelBtn" onclick="cancelEdit('blog')">Cancel Edit</button>
+            </div>
+        </div>
+        <div id="blog-list" style="display:none"><p style="color:var(--text-dim);text-align:center;padding:20px">Loading posts...</p></div>
     </div>
 
-    <div class="about-card">
-        <h2 data-i18n="whyAnonymity">Why Anonymity?</h2>
-        <p>We protect every contributor's identity. In times of conflict, speaking for peace can be dangerous. Anonymity ensures that voices are heard without putting anyone at risk. What matters is the message, not the messenger.</p>
+    <!-- GALLERY PANEL -->
+    <div class="admin-panel" id="panel-gallery">
+        <div class="sub-tabs">
+            <span class="sub-tab active" id="subGalleryNew" onclick="switchSubTab('gallery','new')">➕ Add Photo</span>
+            <span class="sub-tab" id="subGalleryList" onclick="switchSubTab('gallery','list')">📋 Manage Photos</span>
+        </div>
+        <div id="gallery-new">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+                <h3 style="color:var(--gold);margin-bottom:12px" id="galleryFormTitle">🖼️ Add Photo</h3>
+                <input type="hidden" id="gEditId">
+                <input type="text" id="gTitle" placeholder="Photo title"><br><br>
+                <input type="text" id="gCategory" placeholder="Category"><br><br>
+                <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
+                    <p id="galleryUploadText">📷 Tap to upload image</p>
+                    <img id="galleryPreview" style="display:none">
+                </div>
+                <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
+                <input type="hidden" id="gImageUrl"><br>
+                <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveGallery()">💾 Save</button>
+                <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="gCancelBtn" onclick="cancelEdit('gallery')">Cancel Edit</button>
+            </div>
+        </div>
+        <div id="gallery-list" style="display:none"><p style="color:var(--text-dim);text-align:center;padding:20px">Loading photos...</p></div>
     </div>
 
-    <div class="highlight-about">
-        <h2 style="color:var(--gold);margin-bottom:8px;font-family:var(--font-ui)" data-i18n="joinMovement">🌍 Join the Movement</h2>
-        <p style="color:var(--text-dim);margin-bottom:16px" data-i18n="joinMovementSub">Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters.</p>
-        <a href="contribute.html" class="btn btn-primary" data-i18n="shareYourVoice">Share Your Voice →</a>
+    <!-- COURSE PANEL -->
+    <div class="admin-panel" id="panel-course">
+        <div class="sub-tabs">
+            <span class="sub-tab active" id="subCourseNew" onclick="switchSubTab('course','new')">➕ New Course</span>
+            <span class="sub-tab" id="subCourseList" onclick="switchSubTab('course','list')">📋 Manage Courses</span>
+        </div>
+        <div id="course-new">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+                <h3 style="color:var(--gold);margin-bottom:12px" id="courseFormTitle">🎓 New Course</h3>
+                <input type="hidden" id="cEditId">
+                <input type="text" id="cTitle" placeholder="Course Title" required><br><br>
+                <input type="text" id="cSlug" placeholder="slug-url-name" required><br><br>
+                <input type="text" id="cDesc" placeholder="Short description"><br><br>
+                <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select><br><br>
+                <input type="number" id="cModules" placeholder="Modules" value="6"><br><br>
+                <button class="btn btn-primary" style="width:100%" onclick="saveCourse()">💾 Save</button>
+                <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="cCancelBtn" onclick="cancelEdit('course')">Cancel Edit</button>
+            </div>
+        </div>
+        <div id="course-list" style="display:none"><p style="color:var(--text-dim);text-align:center;padding:20px">Loading courses...</p></div>
     </div>
-</main>
 
-<footer>
-    <div class="footer-grid">
-        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media</a><a href="gallery.html">Gallery</a></div>
-        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About</a></div>
-        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Voice</a><a href="support.html">Donate</a><a href="thanks.html">Thank You</a><a href="contact.html">Contact</a></div>
-        <div class="footer-col"><h4>📜 Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="admin.html">Admin</a></div>
-        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
+    <!-- LESSON PANEL -->
+    <div class="admin-panel" id="panel-lesson">
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+            <h3 style="color:var(--gold);margin-bottom:12px">📚 Add Lesson</h3>
+            <select id="lCourseId" required><option value="">Select Course...</option></select><br><br>
+            <input type="text" id="lTitle" placeholder="Lesson Title" required><br><br>
+            <textarea id="lContent" placeholder="Lesson content..."></textarea><br><br>
+            <input type="number" id="lOrder" placeholder="Order (1,2,3...)" value="1"><br><br>
+            <button class="btn btn-primary" style="width:100%" onclick="saveLesson()">💾 Save Lesson</button>
+        </div>
     </div>
-    <div class="footer-bottom">
-        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace</p>
-        <p style="margin-top:4px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
-    </div>
-</footer>
 
-<script src="js/navigation.js"></script>
-<script src="js/language.js"></script>
+    <!-- VOICE PANEL -->
+    <div class="admin-panel" id="panel-voice">
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+            <h3 style="color:var(--gold);margin-bottom:12px">🗣️ Add Voice</h3>
+            <input type="text" id="vDocId" placeholder="Document ID" required><br><br>
+            <input type="text" id="vWriter" placeholder="Writer Name"><br><br>
+            <select id="vRegion"><option value="">Select Region</option><option>Tigray</option><option>Amhara</option><option>Oromia</option><option>Somali</option><option>Afar</option><option>Sidama</option><option>SNNPR</option><option>Gambella</option><option>Harari</option><option>Benishangul-Gumuz</option><option>Addis Ababa</option><option>Dire Dawa</option><option>England</option><option>Switzerland</option><option>Nigeria</option><option>Japan</option><option>DR Congo</option><option>Netherlands</option><option>Malaysia</option><option>Norway</option><option>UK</option><option>Spain</option><option>Germany</option><option>Italy</option><option>Russia</option><option>Poland</option><option>France</option><option>Somalia</option><option>Tanzania</option><option>Brazil</option><option>Croatia</option></select><br><br>
+            <input type="number" id="vYear" placeholder="Year" required><br><br>
+            <input type="text" id="vLanguage" placeholder="Language" required><br><br>
+            <textarea id="vOriginal" placeholder="Original quote..."></textarea><br><br>
+            <textarea id="vEnglish" placeholder="English translation..." required></textarea><br><br>
+            <input type="text" id="vThemes" placeholder="Themes (Peace, Unity, Hope)" value="Peace"><br><br>
+            <select id="vSentiment"><option value="0.95">Very Hopeful</option><option value="0.85">Hopeful</option><option value="0.75" selected>Positive</option><option value="0.60">Somewhat</option><option value="0.50">Neutral</option></select><br><br>
+            <button class="btn btn-primary" style="width:100%" onclick="saveVoice()">💾 Add Voice</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+
+function msg(t,c){var m=document.getElementById('msgBox');m.textContent=t;m.style.display='block';m.style.background=c==='green'?'rgba(34,197,94,0.15)':'rgba(239,68,68,0.15)';m.style.color=c==='green'?'#4ade80':'#ef4444';setTimeout(function(){m.style.display='none'},4000)}
+function login(){if(document.getElementById('email').value==='admin@peacearchive.org'&&document.getElementById('pass').value==='Peace2026!'){localStorage.setItem('epa_admin','1');document.getElementById('loginScreen').style.display='none';document.getElementById('panel').style.display='block';loadCourses()}else{document.getElementById('loginMsg').style.display='block';document.getElementById('loginMsg').textContent='Wrong password, bro. 😎'}}
+function logout(){localStorage.removeItem('epa_admin');location.reload()}
+if(localStorage.getItem('epa_admin')==='1'){document.getElementById('loginScreen').style.display='none';document.getElementById('panel').style.display='block';loadCourses()}
+
+function switchTab(tab){
+    document.querySelectorAll('.admin-tab').forEach(function(t){t.classList.remove('active')});
+    event.target.classList.add('active');
+    document.querySelectorAll('.admin-panel').forEach(function(p){p.classList.remove('active')});
+    document.getElementById('panel-'+tab).classList.add('active');
+    if(tab==='lesson')loadCourses();
+}
+
+function switchSubTab(section,tab){
+    // Update sub-tab styles
+    document.querySelectorAll('#panel-'+section+' .sub-tab').forEach(function(t){t.classList.remove('active')});
+    document.getElementById('sub'+section.charAt(0).toUpperCase()+section.slice(1)+'New').classList.remove('active');
+    document.getElementById('sub'+section.charAt(0).toUpperCase()+section.slice(1)+'List').classList.remove('active');
+    if(tab==='new')document.getElementById('sub'+section.charAt(0).toUpperCase()+section.slice(1)+'New').classList.add('active');
+    if(tab==='list')document.getElementById('sub'+section.charAt(0).toUpperCase()+section.slice(1)+'List').classList.add('active');
+    
+    // Show/hide panels
+    document.getElementById(section+'-new').style.display=tab==='new'?'block':'none';
+    document.getElementById(section+'-list').style.display=tab==='list'?'block':'none';
+    
+    // Load lists
+    if(tab==='list'){
+        if(section==='blog')loadBlogList();
+        if(section==='gallery')loadGalleryList();
+        if(section==='course')loadCourseList();
+    }
+}
+
+async function uploadImage(fileId,previewId,textId,hiddenId){
+    var file=document.getElementById(fileId).files[0];if(!file)return;
+    var reader=new FileReader();reader.onload=function(e){document.getElementById(previewId).src=e.target.result;document.getElementById(previewId).style.display='block';document.getElementById(textId).style.display='none'};reader.readAsDataURL(file);
+    msg('Uploading...','green');
+    var fd=new FormData();fd.append('file',file);fd.append('upload_preset','peace_archive');
+    try{var res=await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload',{method:'POST',body:fd});var data=await res.json();if(data.secure_url){document.getElementById(hiddenId).value=data.secure_url;msg('Image uploaded!','green')}else{msg('Upload failed','red')}}catch(e){msg('Upload failed','red')}
+}
+
+function cancelEdit(type){
+    if(type==='blog'){document.getElementById('bEditId').value='';document.getElementById('blogFormTitle').textContent='📝 New Blog Post';document.getElementById('bCancelBtn').style.display='none'}
+    if(type==='gallery'){document.getElementById('gEditId').value='';document.getElementById('galleryFormTitle').textContent='🖼️ Add Photo';document.getElementById('gCancelBtn').style.display='none'}
+    if(type==='course'){document.getElementById('cEditId').value='';document.getElementById('courseFormTitle').textContent='🎓 New Course';document.getElementById('cCancelBtn').style.display='none'}
+}
+
+async function saveToDB(table,data,id){
+    if(id){return await fetch(SUPABASE_URL+'/rest/v1/'+table+'?id=eq.'+id,{method:'PATCH',headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(data)})}
+    else{return await fetch(SUPABASE_URL+'/rest/v1/'+table,{method:'POST',headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({...data,is_published:true})})}
+}
+async function deleteFromDB(table,id){return await fetch(SUPABASE_URL+'/rest/v1/'+table+'?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}})}
+
+// ========== BLOG ==========
+async function saveBlog(){
+    var id=document.getElementById('bEditId').value;
+    var data={title:document.getElementById('bTitle').value,slug:document.getElementById('bSlug').value,content:document.getElementById('bContent').value,excerpt:document.getElementById('bExcerpt').value,category:document.getElementById('bCategory').value,image_url:document.getElementById('bImageUrl').value};
+    if(!data.title||!data.slug||!data.content){msg('Fill all required fields','red');return}
+    var res=await saveToDB('blog_posts',data,id);
+    if(res.ok){msg(id?'Blog updated!':'Blog published!','green');if(id)cancelEdit('blog');loadBlogList()}else{msg('Failed','red')}
+}
+async function loadBlogList(){
+    try{
+        var res=await fetch(SUPABASE_URL+'/rest/v1/blog_posts?select=*&is_published=eq.true&order=created_at.desc',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
+        var posts=await res.json();var div=document.getElementById('blog-list');
+        if(!posts||!posts.length){div.innerHTML='<p style="color:var(--text-dim);text-align:center;padding:20px">No posts yet. <a href="#" onclick="switchSubTab(\'blog\',\'new\')" style="color:var(--green-bright)">Create one →</a></p>';return}
+        div.innerHTML='<table><tr><th>Title</th><th>Category</th><th>Image</th><th>Actions</th></tr>'+posts.map(function(p){return'<tr><td>'+p.title+'</td><td>'+(p.category||'')+'</td><td>'+(p.image_url?'<img src="'+p.image_url+'" style="width:40px;height:40px;object-fit:cover;border-radius:4px">':'—')+'</td><td><button class="btn-sm btn-edit" onclick="editBlog('+p.id+',\''+esc(p.title)+'\',\''+esc(p.slug)+'\',\''+esc(p.content||'')+'\',\''+esc(p.excerpt||'')+'\',\''+esc(p.category||'')+'\',\''+esc(p.image_url||'')+'\')">✏️</button> <button class="btn-sm btn-del" onclick="deleteBlog('+p.id+')">🗑️</button></td></tr>'}).join('')+'</table>'
+    }catch(e){document.getElementById('blog-list').innerHTML='<p style="color:var(--red);text-align:center;padding:20px">Error loading posts.</p>'}
+}
+function editBlog(id,title,slug,content,excerpt,category,imageUrl){
+    document.getElementById('subBlogNew').classList.add('active');document.getElementById('subBlogList').classList.remove('active');
+    document.getElementById('blog-new').style.display='block';document.getElementById('blog-list').style.display='none';
+    document.getElementById('bEditId').value=id;document.getElementById('blogFormTitle').textContent='✏️ Edit Blog Post';
+    document.getElementById('bTitle').value=title;document.getElementById('bSlug').value=slug;document.getElementById('bContent').value=content;document.getElementById('bExcerpt').value=excerpt;document.getElementById('bCategory').value=category;document.getElementById('bImageUrl').value=imageUrl;
+    if(imageUrl){document.getElementById('blogPreview').src=imageUrl;document.getElementById('blogPreview').style.display='block';document.getElementById('blogUploadText').style.display='none'}document.getElementById('bCancelBtn').style.display='block'
+}
+async function deleteBlog(id){if(!confirm('Delete this blog post?'))return;await deleteFromDB('blog_posts',id);msg('Deleted!','green');loadBlogList()}
+
+// ========== GALLERY ==========
+async function saveGallery(){
+    var id=document.getElementById('gEditId').value;var url=document.getElementById('gImageUrl').value;if(!url){msg('Upload an image first','red');return}
+    var data={title:document.getElementById('gTitle').value,image_url:url,category:document.getElementById('gCategory').value||'General'};
+    var res=await saveToDB('gallery',data,id);
+    if(res.ok){msg(id?'Photo updated!':'Photo added!','green');document.getElementById('galleryPreview').style.display='none';document.getElementById('galleryUploadText').style.display='block';document.getElementById('gTitle').value='';if(id)cancelEdit('gallery');loadGalleryList()}else{msg('Failed','red')}
+}
+async function loadGalleryList(){
+    try{
+        var res=await fetch(SUPABASE_URL+'/rest/v1/gallery?select=*&is_published=eq.true&order=created_at.desc',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
+        var items=await res.json();var div=document.getElementById('gallery-list');
+        if(!items||!items.length){div.innerHTML='<p style="color:var(--text-dim);text-align:center;padding:20px">No photos yet. <a href="#" onclick="switchSubTab(\'gallery\',\'new\')" style="color:var(--green-bright)">Add one →</a></p>';return}
+        div.innerHTML='<table><tr><th>Image</th><th>Title</th><th>Category</th><th>Actions</th></tr>'+items.map(function(i){return'<tr><td><img src="'+i.image_url+'" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>'+(i.title||'—')+'</td><td>'+(i.category||'—')+'</td><td><button class="btn-sm btn-edit" onclick="editGallery('+i.id+',\''+esc(i.title||'')+'\',\''+esc(i.category||'')+'\',\''+esc(i.image_url||'')+'\')">✏️</button> <button class="btn-sm btn-del" onclick="deleteGallery('+i.id+')">🗑️</button></td></tr>'}).join('')+'</table>'
+    }catch(e){document.getElementById('gallery-list').innerHTML='<p style="color:var(--red);text-align:center;padding:20px">Error loading photos.</p>'}
+}
+function editGallery(id,title,category,imageUrl){
+    document.getElementById('subGalleryNew').classList.add('active');document.getElementById('subGalleryList').classList.remove('active');
+    document.getElementById('gallery-new').style.display='block';document.getElementById('gallery-list').style.display='none';
+    document.getElementById('gEditId').value=id;document.getElementById('galleryFormTitle').textContent='✏️ Edit Photo';
+    document.getElementById('gTitle').value=title;document.getElementById('gCategory').value=category;document.getElementById('gImageUrl').value=imageUrl;
+    if(imageUrl){document.getElementById('galleryPreview').src=imageUrl;document.getElementById('galleryPreview').style.display='block';document.getElementById('galleryUploadText').style.display='none'}document.getElementById('gCancelBtn').style.display='block'
+}
+async function deleteGallery(id){if(!confirm('Delete this photo?'))return;await deleteFromDB('gallery',id);msg('Deleted!','green');loadGalleryList()}
+
+// ========== COURSE ==========
+async function saveCourse(){
+    var id=document.getElementById('cEditId').value;
+    var data={title:document.getElementById('cTitle').value,slug:document.getElementById('cSlug').value,description:document.getElementById('cDesc').value,level:document.getElementById('cLevel').value};
+    if(!data.title||!data.slug){msg('Fill title and slug','red');return}
+    var res=await saveToDB('courses',data,id);
+    if(res.ok){msg(id?'Course updated!':'Course saved!','green');if(id)cancelEdit('course');loadCourseList();loadCourses()}else{msg('Failed','red')}
+}
+async function loadCourseList(){
+    try{
+        var res=await fetch(SUPABASE_URL+'/rest/v1/courses?select=*&is_published=eq.true&order=created_at.desc',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
+        var courses=await res.json();var div=document.getElementById('course-list');
+        if(!courses||!courses.length){div.innerHTML='<p style="color:var(--text-dim);text-align:center;padding:20px">No courses yet. <a href="#" onclick="switchSubTab(\'course\',\'new\')" style="color:var(--green-bright)">Create one →</a></p>';return}
+        div.innerHTML='<table><tr><th>Title</th><th>Level</th><th>Actions</th></tr>'+courses.map(function(c){return'<tr><td>'+c.title+'</td><td>'+(c.level||'—')+'</td><td><button class="btn-sm btn-edit" onclick="editCourse('+c.id+',\''+esc(c.title)+'\',\''+esc(c.slug)+'\',\''+esc(c.description||'')+'\',\''+esc(c.level||'')+'\')">✏️</button> <button class="btn-sm btn-del" onclick="deleteCourse('+c.id+')">🗑️</button></td></tr>'}).join('')+'</table>'
+    }catch(e){document.getElementById('course-list').innerHTML='<p style="color:var(--red);text-align:center;padding:20px">Error loading courses.</p>'}
+}
+function editCourse(id,title,slug,desc,level){
+    document.getElementById('subCourseNew').classList.add('active');document.getElementById('subCourseList').classList.remove('active');
+    document.getElementById('course-new').style.display='block';document.getElementById('course-list').style.display='none';
+    document.getElementById('cEditId').value=id;document.getElementById('courseFormTitle').textContent='✏️ Edit Course';
+    document.getElementById('cTitle').value=title;document.getElementById('cSlug').value=slug;document.getElementById('cDesc').value=desc;document.getElementById('cLevel').value=level;document.getElementById('cCancelBtn').style.display='block'
+}
+async function deleteCourse(id){if(!confirm('Delete course and all lessons?'))return;await deleteFromDB('courses',id);msg('Deleted!','green');loadCourseList();loadCourses()}
+
+// ========== LESSON ==========
+async function saveLesson(){
+    var data={course_id:parseInt(document.getElementById('lCourseId').value),title:document.getElementById('lTitle').value,content:document.getElementById('lContent').value,lesson_order:parseInt(document.getElementById('lOrder').value)};
+    if(!data.course_id||!data.title){msg('Select course and add title','red');return}
+    var res=await saveToDB('course_lessons',data);
+    msg(res.ok?'Lesson saved!':'Failed',res.ok?'green':'red')
+}
+
+// ========== VOICE ==========
+async function saveVoice(){
+    var themesStr=document.getElementById('vThemes').value;
+    var data={document_id:document.getElementById('vDocId').value,writer_name:document.getElementById('vWriter').value,region:document.getElementById('vRegion').value,year:parseInt(document.getElementById('vYear').value),language:document.getElementById('vLanguage').value,quote_original:document.getElementById('vOriginal').value,quote_english:document.getElementById('vEnglish').value,themes:themesStr.split(',').map(function(t){return t.trim()}),sentiment:parseFloat(document.getElementById('vSentiment').value)};
+    if(!data.document_id||!data.region||!data.quote_english){msg('Fill required fields','red');return}
+    var res=await saveToDB('ethiopian_voices',data);
+    msg(res.ok?'Voice added!':'Failed',res.ok?'green':'red');if(res.ok){document.getElementById('vDocId').value='';document.getElementById('vEnglish').value=''}
+}
+
+async function loadCourses(){
+    try{var res=await fetch(SUPABASE_URL+'/rest/v1/courses?select=id,title&is_published=eq.true&order=title',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});var courses=await res.json();var sel=document.getElementById('lCourseId');sel.innerHTML='<option value="">Select Course...</option>';courses.forEach(function(c){sel.innerHTML+='<option value="'+c.id+'">'+c.title+'</option>'})}catch(e){}
+}
+
+function esc(s){if(!s)return'';return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"')}
+</script>
 </body>
 </html>
