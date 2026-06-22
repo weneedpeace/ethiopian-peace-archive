@@ -3,10 +3,8 @@
    Render Backend (Permanent)
    ============================================ */
 
-// ========== YOUR LIVE BACKEND ==========
 const BACKEND_URL = 'https://peace-audio-worker.onrender.com';
 
-// ========== FETCH AVAILABLE VOICES ==========
 async function fetchVoices() {
   try {
     const res = await fetch(`${BACKEND_URL}/api/voices`);
@@ -19,7 +17,6 @@ async function fetchVoices() {
   }
 }
 
-// ========== GENERATE AUDIO ==========
 async function generateAudio(voiceId, text) {
   try {
     const res = await fetch(`${BACKEND_URL}/api/generate-audio`, {
@@ -36,10 +33,20 @@ async function generateAudio(voiceId, text) {
   }
 }
 
-// ========== PREMIUM CONTENT GENERATOR ==========
+// ========== UPDATED PREMIUM CONTENT GENERATOR ==========
 const EPA = {
   async generate(type, topic, tone) {
-    return `📝 Premium ${type} on "${topic}"\n\nThis is a placeholder. Your Render backend is live and working — but it currently only generates audio. To generate text content, we need to connect it to an LLM like OpenRouter or Hugging Face.\n\nWould you like me to add that next?`;
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/generate-text`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type, topic, tone })
+      });
+      const data = await res.json();
+      return data.content || 'Generation failed. Please try again.';
+    } catch (e) {
+      return 'Error connecting to text generation backend.';
+    }
   },
   article: (t, o) => EPA.generate('article', t, o),
   lesson: (t, o) => EPA.generate('lesson', t, o),
@@ -60,19 +67,16 @@ async function detectLanguage(text) { return (await analyzeVoice(text)).language
 async function analyzeSentiment(text) { return (await analyzeVoice(text)).sentiment; }
 async function detectThemes(text) { return (await analyzeVoice(text)).themes; }
 
-// ========== RESEARCH ASSISTANT ==========
 async function researchAssistant(question) {
   return 'Browse the Ethiopian Peace Archive to explore 1,000+ voices.';
 }
 
-// ========== CONTENT MODERATION ==========
 function moderateContent(text) {
   const blocked = ['kill', 'murder', 'hate', 'violence', 'destroy'];
   const found = blocked.filter(w => text.toLowerCase().includes(w));
   return found.length ? { approved: false, reason: `Blocked: ${found.join(', ')}` } : { approved: true };
 }
 
-// ========== IMAGE UPLOAD TO CLOUDINARY ==========
 async function uploadImage(file) {
   try {
     const formData = new FormData();
