@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore 60+ peace voices from Ethiopia and the world. Filter by region, language, theme, and year.">
+    <meta name="description" content="Explore 60+ peace voices from Ethiopia and the world. Generate audio for any voice with one click.">
     <title>Voice Archive — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -41,14 +41,23 @@
         .sentiment-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 12px; }
         .sentiment-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #eab308, #22c55e); }
         .voice-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px; }
-        .like-btn { background: none; border: 1px solid var(--green-border); border-radius: 20px; padding: 8px 16px; cursor: pointer; color: var(--text-dim); font-family: var(--font-ui); font-size: 0.85rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+
+        /* Generate Audio Button */
+        .gen-btn { background: #9333ea; color: #fff; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font-ui); display: inline-flex; align-items: center; gap: 6px; }
+        .gen-btn:hover { background: #a855f7; transform: scale(1.02); }
+        .gen-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .gen-btn.loading { background: #eab308; color: #000; }
+        .gen-btn.done { background: #22c55e; color: #000; }
+
+        .audio-player { height: 30px; width: 200px; border-radius: 20px; }
+        .voice-id { color: var(--text-muted); font-size: 0.65rem; font-family: var(--font-ui); }
+        .like-btn { background: none; border: 1px solid var(--green-border); border-radius: 20px; padding: 6px 14px; cursor: pointer; color: var(--text-dim); font-family: var(--font-ui); font-size: 0.8rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px; }
         .like-btn:hover { border-color: #ef4444; color: #ef4444; }
         .like-btn.liked { color: #ef4444; border-color: #ef4444; background: rgba(239,68,68,0.1); }
-        .voice-id { color: var(--text-muted); font-size: 0.65rem; font-family: var(--font-ui); }
         .load-more { text-align: center; margin: 20px 0; }
         .load-more button { padding: 10px 30px; border-radius: 25px; background: var(--green-dim); color: var(--green-bright); border: 1px solid var(--green-border); cursor: pointer; font-family: var(--font-ui); font-size: 0.9rem; }
         .load-more button:hover { background: var(--green); color: #000; }
-        @media (max-width: 768px) { .filters select { flex: 1; min-width: 0; font-size: 0.75rem; padding: 8px 12px; } .cat-chip { padding: 6px 14px; font-size: 0.7rem; } .voice-card { padding: 16px; } }
+        @media (max-width: 768px) { .filters select { flex: 1; min-width: 0; font-size: 0.75rem; padding: 8px 12px; } .cat-chip { padding: 6px 14px; font-size: 0.7rem; } .voice-card { padding: 16px; } .audio-player { width: 140px; } }
     </style>
 </head>
 <body>
@@ -78,7 +87,7 @@
 <main class="container">
     <div class="voices-hero">
         <h1>🗣️ Voice Archive</h1>
-        <p>Real voices from Ethiopia and across the world — preserved, translated, and amplified for peace.</p>
+        <p>Real voices from Ethiopia and across the world — preserved, translated, and amplified for peace. Click <strong>"🔊 Generate Audio"</strong> to bring any voice to life.</p>
         <div class="stats-row" id="statsRow"></div>
     </div>
 
@@ -115,15 +124,24 @@
 
 <script src="js/navigation.js"></script>
 <script>
-const URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
-const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+// ============================================
+// CONFIGURATION
+// ============================================
+
+const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+const AUDIO_API = 'https://peace-audio-worker.vercel.app/api';
 
 let allVoices = [], filteredVoices = [], currentCategory = 'all', pageSize = 20, currentPage = 1;
 
+// ============================================
+// INITIALIZE
+// ============================================
+
 async function init() {
     try {
-        const res = await fetch(URL + '/rest/v1/ethiopian_voices?select=*&is_published=eq.true&order=created_at.desc', {
-            headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
+        const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=*&is_published=eq.true&order=created_at.desc', {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
         });
         allVoices = await res.json();
         updateStats();
@@ -131,6 +149,10 @@ async function init() {
         applyFilters();
     } catch (e) { document.getElementById('quotesContainer').innerHTML = '<div class="loading">Error loading voices.</div>'; }
 }
+
+// ============================================
+// STATS & FILTERS
+// ============================================
 
 function updateStats() {
     const ethCount = allVoices.filter(v => v.region === 'Ethiopia').length;
@@ -202,6 +224,10 @@ function applyFilters() {
     renderVoices();
 }
 
+// ============================================
+// RENDER VOICES
+// ============================================
+
 function renderVoices() {
     const container = document.getElementById('quotesContainer');
     const toShow = filteredVoices.slice(0, currentPage * pageSize);
@@ -216,7 +242,7 @@ function renderVoices() {
         <div class="voice-card" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i * 0.03}s">
             <div class="voice-header">
                 <div class="voice-meta">
-                    ${v.writer_name ? `<span class="writer-name">✍️ Written by ${esc(v.writer_name)}</span>` : ''}
+                    ${v.writer_name ? `<span class="writer-name">✍️ ${esc(v.writer_name)}</span>` : ''}
                     <span class="region-badge">📍 ${v.region || 'Unknown'}</span>
                     <span class="lang-badge">🌐 ${v.language || 'N/A'}</span>
                     <span class="year-badge">📅 ${v.year || 'N/A'}</span>
@@ -228,8 +254,17 @@ function renderVoices() {
             <div class="themes-row">${(v.themes || []).map((t, j) => `<span class="theme-tag ${tc[j % 5]}">${esc(t)}</span>`).join('')}</div>
             <div class="sentiment-bar"><div class="sentiment-fill" style="width:${sp}%"></div></div>
             <div class="voice-footer">
-                <button class="like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">❤️ <span id="likeCount-${v.id}">...</span></button>
-                <span style="color:var(--text-muted);font-size:0.7rem">Sentiment: ${sp}% hopeful</span>
+                ${v.audio_url ? `
+                    <audio controls class="audio-player">
+                        <source src="${v.audio_url}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                ` : `
+                    <button class="gen-btn" onclick="generateAudio(${v.id}, '${esc(v.quote_english || v.quote_original)}')">
+                        🔊 Generate Audio
+                    </button>
+                `}
+                <button class="like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">❤️ <span id="likeCount-${v.id}">0</span></button>
             </div>
         </div>`;
     }).join('');
@@ -240,10 +275,73 @@ function renderVoices() {
 
 function loadMore() { currentPage++; renderVoices(); }
 
+// ============================================
+// GENERATE AUDIO (Public-Facing)
+// ============================================
+
+async function generateAudio(voiceId, text) {
+    if (!text) return;
+    
+    const btn = event.target;
+    btn.textContent = '⏳ Generating...';
+    btn.className = 'gen-btn loading';
+    btn.disabled = true;
+    
+    try {
+        // 1. Call the Vercel backend
+        const res = await fetch(`${AUDIO_API}/generate-audio`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text })
+        });
+        
+        const data = await res.json();
+        
+        if (data.audio_url) {
+            // 2. Save the audio URL to Supabase
+            const updateRes = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?id=eq.${voiceId}`, {
+                method: 'PATCH',
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({ audio_url: data.audio_url })
+            });
+            
+            if (updateRes.ok) {
+                btn.textContent = '✅ Done!';
+                btn.className = 'gen-btn done';
+                setTimeout(() => {
+                    location.reload(); // Reload to show the audio player
+                }, 800);
+            } else {
+                btn.textContent = '❌ Save failed';
+                btn.className = 'gen-btn';
+                btn.disabled = false;
+            }
+        } else {
+            btn.textContent = '❌ Generation failed';
+            btn.className = 'gen-btn';
+            btn.disabled = false;
+        }
+    } catch (e) {
+        btn.textContent = '❌ Error';
+        btn.className = 'gen-btn';
+        btn.disabled = false;
+        console.error(e);
+    }
+}
+
+// ============================================
+// LIKES
+// ============================================
+
 async function loadLikes(voiceId) {
     try {
-        const res = await fetch(URL + '/rest/v1/voice_likes?select=count&voice_id=eq.' + voiceId, {
-            headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/voice_likes?select=count&voice_id=eq.${voiceId}`, {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
         });
         const data = await res.json();
         const count = data[0]?.count || 0;
@@ -254,9 +352,14 @@ async function loadLikes(voiceId) {
 
 async function likeVoice(voiceId) {
     try {
-        await fetch(URL + '/rest/v1/voice_likes', {
+        await fetch(`${SUPABASE_URL}/rest/v1/voice_likes`, {
             method: 'POST',
-            headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            },
             body: JSON.stringify({ voice_id: voiceId })
         });
         const btn = document.getElementById('likeBtn-' + voiceId);
@@ -266,7 +369,15 @@ async function likeVoice(voiceId) {
     } catch (e) {}
 }
 
+// ============================================
+// UTILITY
+// ============================================
+
 function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// ============================================
+// START
+// ============================================
 
 init();
 </script>
