@@ -16,164 +16,122 @@
         table{width:100%;border-collapse:collapse;margin-top:10px;font-size:0.8rem}
         th{text-align:left;padding:8px;color:var(--text-dim);border-bottom:1px solid var(--green-border)}
         td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-dim)}
-
-        /* CCTV Styles */
-        #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0a0a0a;position:relative}
-        .login-wrapper{display:flex;gap:30px;background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;max-width:760px;width:95%;flex-wrap:wrap;justify-content:center}
-        .login-form{flex:1;min-width:260px;text-align:center}
-        .login-form h1{color:var(--gold);margin-bottom:16px}
-        .cctv-box{flex:1;min-width:260px;background:#000;border-radius:12px;border:2px solid #333;overflow:hidden;position:relative}
-        .cctv-box video{width:100%;height:100%;min-height:200px;object-fit:cover;transform:scaleX(-1);background:#111}
-        .cctv-overlay{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
-        .cctv-rec{position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.7);padding:4px 10px;border-radius:16px;border:1px solid #ff0000}
-        .cctv-dot{width:10px;height:10px;border-radius:50%;background:#ff0000;animation:cctvPulse 1s infinite}
-        @keyframes cctvPulse{0%,100%{opacity:1}50%{opacity:0.3}}
-        .cctv-rec-text{color:#ff0000;font-size:11px;font-weight:bold;letter-spacing:1px}
-        .cctv-time{position:absolute;bottom:10px;left:10px;color:rgba(255,255,255,0.7);font-size:11px;font-family:monospace;background:rgba(0,0,0,0.5);padding:2px 6px;border-radius:3px}
-        .cctv-label{position:absolute;bottom:10px;right:10px;color:rgba(255,255,255,0.5);font-size:10px;font-family:monospace;background:rgba(0,0,0,0.5);padding:2px 6px;border-radius:3px}
-        .cctv-crosshair{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;opacity:0.2}
-        .cctv-crosshair::before,.cctv-crosshair::after{content:'';position:absolute;background:rgba(255,255,255,0.5)}
-        .cctv-crosshair::before{width:2px;height:100%;left:50%;transform:translateX(-50%)}
-        .cctv-crosshair::after{width:100%;height:2px;top:50%;transform:translateY(-50%)}
-
-        /* Comedy Trap with your TikTok Video */
-        #comedyTrap{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.95);z-index:99999;justify-content:center;align-items:center;flex-direction:column}
-        #comedyTrap video{width:100%;max-width:550px;border-radius:12px;border:4px solid #ffcc00;box-shadow:0 0 60px rgba(255,204,0,0.4);background:#000}
-        .trap-message{color:#ffcc00;font-size:28px;font-weight:bold;margin-top:20px;text-align:center;font-family:'Courier New',monospace;text-shadow:0 0 20px rgba(255,204,0,0.2)}
-        .trap-sub{color:#fff;font-size:16px;margin-top:10px;text-align:center}
-        .trap-btn{margin-top:25px;padding:12px 40px;background:#ffcc00;color:#000;border:none;border-radius:8px;font-weight:bold;font-size:18px;cursor:pointer;transition:all 0.3s}
-        .trap-btn:hover{background:#ffdd33;transform:scale(1.05);box-shadow:0 0 30px rgba(255,204,0,0.3)}
-
-        /* Backdoor Override Panel */
-        #backdoorPanel{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#111;border:2px solid var(--gold);border-radius:12px;padding:30px;z-index:99998;text-align:center;box-shadow:0 0 60px rgba(255,204,0,0.2)}
-        #backdoorPanel h2{color:var(--gold);margin-bottom:15px}
-        #backdoorPanel input{padding:10px;background:#222;border:1px solid #444;border-radius:6px;color:#fff;font-size:16px;margin-bottom:10px;width:200px}
-        #backdoorPanel button{padding:8px 20px;background:var(--gold);color:#000;border:none;border-radius:6px;font-weight:bold;cursor:pointer}
-        #backdoorPanel .hint{color:#666;font-size:11px;margin-top:10px}
+        .btn-sm{padding:4px 10px;font-size:0.7rem;border-radius:12px;margin:2px;cursor:pointer}
+        .btn-edit{background:rgba(59,130,246,0.2);color:#60a5fa;border:1px solid rgba(59,130,246,0.3)}
+        .btn-del{background:rgba(239,68,68,0.2);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+        .sub-tabs{display:flex;gap:4px;margin-bottom:12px}
+        .sub-tab{padding:6px 14px;border-radius:15px;cursor:pointer;border:1px solid var(--green-border);background:transparent;color:var(--text-dim);font-size:0.75rem;font-family:var(--font-ui)}
+        .sub-tab.active{background:var(--green-dim);color:var(--green-bright)}
+        .edit-row{display:none;margin-top:10px}
+        .edit-row.show{display:block}
     </style>
 </head>
 <body>
 
-<!-- ============================================ -->
-<!-- YOUR TIKTOK VIDEO COMEDY TRAP -->
-<!-- ============================================ -->
-<div id="comedyTrap">
-    <!-- FULL SIZE VIDEO WITH AUDIO & VOICE -->
-    <video id="trapVideo" controls autoplay muted>
-        <source src="https://github.com/weneedpeace/ethiopian-peace-archive/blob/709c28afa19da1ad030502cbe75b0aec6f37e7e9/snaptik_7427147447681584390_v3.mp4?raw=true" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <div class="trap-message">😂 YOU'VE BEEN TROLLED! 😂</div>
-    <div class="trap-sub">Nice try! The system caught you.<br><span style="color:#ff4444;font-size:14px;">Access denied. Your face has been recorded.</span></div>
-    <button class="trap-btn" onclick="closeComedyTrap()">🚪 Get Out!</button>
-</div>
-
-<!-- ============================================ -->
-<!-- SECRET BACKDOOR PANEL -->
-<!-- ============================================ -->
-<div id="backdoorPanel">
-    <h2>🔑 Admin Override</h2>
-    <p style="color:#888;font-size:13px;margin-bottom:10px;">Enter your secret master key</p>
-    <input type="password" id="masterKeyInput" placeholder="Master Key">
-    <br>
-    <button onclick="masterKeyLogin()">Unlock</button>
-    <p class="hint">Press Ctrl+Shift+B to show/hide</p>
-</div>
-
-<!-- ============================================ -->
-<!-- LOGIN SCREEN WITH CCTV -->
-<!-- ============================================ -->
-<div id="loginScreen">
-    <div class="login-wrapper">
-        <div class="cctv-box">
-            <video id="secVideo" autoplay playsinline muted></video>
-            <div class="cctv-overlay">
-                <div class="cctv-rec"><span class="cctv-dot"></span><span class="cctv-rec-text">REC</span></div>
-                <div class="cctv-time" id="secTimestamp">--:--:--</div>
-                <div class="cctv-label">CAM-01 • ADMIN</div>
-                <div class="cctv-crosshair"></div>
-            </div>
-        </div>
-        <div class="login-form">
-            <h1>🔐 Admin Panel</h1>
-            <input type="email" id="email" placeholder="Email" required><br><br>
-            <input type="password" id="pass" placeholder="Password" required><br><br>
-            <button class="btn btn-primary" style="width:100%" onclick="login()">Sign In</button>
-            <p id="loginMsg" style="color:var(--red);margin-top:10px;display:none"></p>
-            <p style="color:var(--text-dim);font-size:0.7rem;margin-top:15px;">⚠️ CCTV in operation</p>
-        </div>
+<div id="loginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh">
+    <div style="background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;max-width:380px;width:100%;text-align:center">
+        <h1 style="color:var(--gold);margin-bottom:16px">🔐 Admin Panel</h1>
+        <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:16px">You know the password, bro. 😎</p>
+        <input type="email" id="email" placeholder="Email" required><br><br>
+        <input type="password" id="pass" placeholder="Password" required><br><br>
+        <button class="btn btn-primary" style="width:100%" onclick="login()">Sign In</button>
+        <p id="loginMsg" style="color:var(--red);margin-top:10px;display:none"></p>
     </div>
 </div>
 
-<!-- ============================================ -->
-<!-- ADMIN PANEL -->
-<!-- ============================================ -->
-<div id="panel" style="display:none;max-width:900px;margin:0 auto;padding:20px">
+<div id="panel" style="display:none;max-width:950px;margin:0 auto;padding:20px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
         <h2 style="color:var(--gold)">⚙️ Admin Dashboard</h2>
         <button class="btn btn-sm btn-red" onclick="logout()">Logout</button>
     </div>
+
     <div class="admin-tabs">
         <span class="admin-tab active" onclick="switchTab('blog')">📝 Blog</span>
         <span class="admin-tab" onclick="switchTab('gallery')">🖼️ Gallery</span>
         <span class="admin-tab" onclick="switchTab('course')">🎓 Course</span>
         <span class="admin-tab" onclick="switchTab('lesson')">📚 Lesson</span>
-        <span class="admin-tab" onclick="switchTab('voice')">🗣️ Add Voice</span>
+        <span class="admin-tab" onclick="switchTab('voice')">🗣️ Voice</span>
     </div>
+
     <p id="msgBox" style="display:none;padding:10px;border-radius:8px;margin-bottom:10px"></p>
 
-    <!-- BLOG -->
+    <!-- BLOG PANEL -->
     <div class="admin-panel active" id="panel-blog">
-        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
-            <h3 style="color:var(--gold);margin-bottom:12px">📝 New Blog Post</h3>
-            <input type="text" id="bTitle" placeholder="Blog Title" required><br><br>
-            <input type="text" id="bSlug" placeholder="slug-url-name" required><br><br>
-            <textarea id="bContent" placeholder="Blog content..." style="min-height:150px"></textarea><br><br>
-            <input type="text" id="bExcerpt" placeholder="Short excerpt"><br><br>
-            <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select><br><br>
-            <label style="color:var(--text-dim);font-size:0.85rem">Featured Image</label>
-            <div class="upload-area" onclick="document.getElementById('blogFile').click()">
-                <p id="blogUploadText">📷 Tap to upload image</p>
-                <img id="blogPreview" style="display:none">
-            </div>
-            <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
-            <input type="hidden" id="bImageUrl"><br>
-            <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveBlog()">💾 Publish Blog Post</button>
+        <div class="sub-tabs">
+            <span class="sub-tab active" onclick="switchSubTab('blog','new')">➕ New Post</span>
+            <span class="sub-tab" onclick="switchSubTab('blog','list')">📋 Manage Posts</span>
         </div>
+        <div id="blog-new">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+                <h3 style="color:var(--gold);margin-bottom:12px" id="blogFormTitle">📝 New Blog Post</h3>
+                <input type="hidden" id="bEditId">
+                <input type="text" id="bTitle" placeholder="Blog Title" required><br><br>
+                <input type="text" id="bSlug" placeholder="slug-url-name" required><br><br>
+                <textarea id="bContent" placeholder="Blog content..." style="min-height:150px"></textarea><br><br>
+                <input type="text" id="bExcerpt" placeholder="Short excerpt"><br><br>
+                <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select><br><br>
+                <label style="color:var(--text-dim);font-size:0.85rem">Featured Image</label>
+                <div class="upload-area" onclick="document.getElementById('blogFile').click()">
+                    <p id="blogUploadText">📷 Tap to upload image</p>
+                    <img id="blogPreview" style="display:none">
+                </div>
+                <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
+                <input type="hidden" id="bImageUrl"><br>
+                <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveBlog()">💾 Publish Blog Post</button>
+                <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="bCancelBtn" onclick="cancelEdit('blog')">Cancel Edit</button>
+            </div>
+        </div>
+        <div id="blog-list" style="display:none"><div class="loading">Loading posts...</div></div>
     </div>
 
-    <!-- GALLERY -->
+    <!-- GALLERY PANEL -->
     <div class="admin-panel" id="panel-gallery">
-        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
-            <h3 style="color:var(--gold);margin-bottom:12px">🖼️ Add Gallery Photo</h3>
-            <input type="text" id="gTitle" placeholder="Photo title"><br><br>
-            <input type="text" id="gCategory" placeholder="Category (Events, Community...)"><br><br>
-            <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
-                <p id="galleryUploadText">📷 Tap to upload image</p>
-                <img id="galleryPreview" style="display:none">
+        <div class="sub-tabs">
+            <span class="sub-tab active" onclick="switchSubTab('gallery','new')">➕ Add Photo</span>
+            <span class="sub-tab" onclick="switchSubTab('gallery','list')">📋 Manage Photos</span>
+        </div>
+        <div id="gallery-new">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+                <h3 style="color:var(--gold);margin-bottom:12px" id="galleryFormTitle">🖼️ Add Gallery Photo</h3>
+                <input type="hidden" id="gEditId">
+                <input type="text" id="gTitle" placeholder="Photo title"><br><br>
+                <input type="text" id="gCategory" placeholder="Category (Events, Community...)"><br><br>
+                <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
+                    <p id="galleryUploadText">📷 Tap to upload image</p>
+                    <img id="galleryPreview" style="display:none">
+                </div>
+                <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
+                <input type="hidden" id="gImageUrl"><br>
+                <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveGallery()">💾 Save Photo</button>
+                <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="gCancelBtn" onclick="cancelEdit('gallery')">Cancel Edit</button>
             </div>
-            <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
-            <input type="hidden" id="gImageUrl"><br>
-            <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="saveGallery()">💾 Add to Gallery</button>
-            <h4 style="color:var(--gold);margin-top:20px">📋 Recent Photos</h4>
-            <div id="galleryList">Loading...</div>
         </div>
+        <div id="gallery-list" style="display:none"><div class="loading">Loading photos...</div></div>
     </div>
 
-    <!-- COURSE -->
+    <!-- COURSE PANEL -->
     <div class="admin-panel" id="panel-course">
-        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
-            <h3 style="color:var(--gold);margin-bottom:12px">🎓 New Course</h3>
-            <input type="text" id="cTitle" placeholder="Course Title" required><br><br>
-            <input type="text" id="cSlug" placeholder="slug-url-name" required><br><br>
-            <input type="text" id="cDesc" placeholder="Short description"><br><br>
-            <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select><br><br>
-            <input type="number" id="cModules" placeholder="Modules" value="6"><br><br>
-            <button class="btn btn-primary" style="width:100%" onclick="saveCourse()">💾 Save Course</button>
+        <div class="sub-tabs">
+            <span class="sub-tab active" onclick="switchSubTab('course','new')">➕ New Course</span>
+            <span class="sub-tab" onclick="switchSubTab('course','list')">📋 Manage Courses</span>
         </div>
+        <div id="course-new">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
+                <h3 style="color:var(--gold);margin-bottom:12px" id="courseFormTitle">🎓 New Course</h3>
+                <input type="hidden" id="cEditId">
+                <input type="text" id="cTitle" placeholder="Course Title" required><br><br>
+                <input type="text" id="cSlug" placeholder="slug-url-name" required><br><br>
+                <input type="text" id="cDesc" placeholder="Short description"><br><br>
+                <select id="cLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>All Levels</option></select><br><br>
+                <input type="number" id="cModules" placeholder="Modules" value="6"><br><br>
+                <button class="btn btn-primary" style="width:100%" onclick="saveCourse()">💾 Save Course</button>
+                <button class="btn btn-sm" style="width:100%;margin-top:6px;display:none" id="cCancelBtn" onclick="cancelEdit('course')">Cancel Edit</button>
+            </div>
+        </div>
+        <div id="course-list" style="display:none"><div class="loading">Loading courses...</div></div>
     </div>
 
-    <!-- LESSON -->
+    <!-- LESSON PANEL -->
     <div class="admin-panel" id="panel-lesson">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">📚 Add Lesson</h3>
@@ -185,7 +143,7 @@
         </div>
     </div>
 
-    <!-- VOICE -->
+    <!-- VOICE PANEL -->
     <div class="admin-panel" id="panel-voice">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">🗣️ Add Voice</h3>
@@ -203,10 +161,6 @@
 </div>
 
 <script>
-// ============================================
-// YOUR EXISTING CODE (UNTOUCHED)
-// ============================================
-
 const API = 'https://peace-api.peace-01d.workers.dev/api';
 const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
@@ -219,98 +173,19 @@ function msg(text, color) {
     setTimeout(function(){ m.style.display = 'none'; }, 4000);
 }
 
-// ============================================
-// BACKDOOR SYSTEM (4 WAYS)
-// ============================================
-
-// BACKDOOR 1: URL Parameter (?secret=peace2026)
-(function checkUrlBackdoor() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('secret') === 'peace2026') {
-        localStorage.setItem('epa_admin', '1');
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('panel').style.display = 'block';
-        loadCourses(); loadGalleryList();
-        stopSecurityCamera();
-        window.history.replaceState({}, document.title, window.location.pathname);
-        console.log('🔑 Backdoor: URL access granted');
-    }
-})();
-
-// BACKDOOR 2: Keyboard Shortcut (Ctrl+Shift+B)
-document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.shiftKey && e.key === 'B') {
-        e.preventDefault();
-        const panel = document.getElementById('backdoorPanel');
-        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-        if (panel.style.display === 'block') {
-            document.getElementById('masterKeyInput').focus();
-        }
-    }
-});
-
-// BACKDOOR 3: Master Key Login
-function masterKeyLogin() {
-    const key = document.getElementById('masterKeyInput').value;
-    const MASTER_KEY = 'peace2026'; // CHANGE THIS TO YOUR OWN KEY
-    
-    if (key === MASTER_KEY) {
-        localStorage.setItem('epa_admin', '1');
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('panel').style.display = 'block';
-        loadCourses(); loadGalleryList();
-        stopSecurityCamera();
-        document.getElementById('backdoorPanel').style.display = 'none';
-        document.getElementById('masterKeyInput').value = '';
-        console.log('🔑 Backdoor: Master key access granted');
-    } else {
-        alert('❌ Invalid master key');
-        document.getElementById('masterKeyInput').value = '';
-    }
-}
-
-// BACKDOOR 4: Special Email (backdoor@peacearchive.org)
 function login() {
-    const email = document.getElementById('email').value;
-    const pass = document.getElementById('pass').value;
-    
-    // Backdoor email
-    if (email === 'backdoor@peacearchive.org') {
+    if (document.getElementById('email').value === 'admin@peacearchive.org' && document.getElementById('pass').value === 'Peace2026!') {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        loadCourses(); loadGalleryList();
-        stopSecurityCamera();
-        console.log('🔑 Backdoor: Email access granted');
-        return;
-    }
-    
-    // Normal admin login
-    if (email === 'admin@peacearchive.org' && pass === 'Peace2026!') {
-        localStorage.setItem('epa_admin', '1');
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('panel').style.display = 'block';
-        loadCourses(); loadGalleryList();
-        stopSecurityCamera();
-    } else { 
-        document.getElementById('loginMsg').style.display = 'block'; 
-        document.getElementById('loginMsg').textContent = 'Wrong credentials';
-        // TRIGGER COMEDY TRAP ON WRONG PASSWORD!
-        triggerComedyTrap('wrong_password');
-    }
+        loadCourses();
+    } else { document.getElementById('loginMsg').style.display = 'block'; document.getElementById('loginMsg').textContent = 'Wrong password, bro. Try again. 😎'; }
 }
-
-// ============================================
-// REST OF YOUR EXISTING ADMIN FUNCTIONS
-// ============================================
-
 function logout() { localStorage.removeItem('epa_admin'); location.reload(); }
-
 if (localStorage.getItem('epa_admin') === '1') {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('panel').style.display = 'block';
-    loadCourses(); loadGalleryList();
-    stopSecurityCamera();
+    loadCourses();
 }
 
 function switchTab(tab) {
@@ -319,9 +194,21 @@ function switchTab(tab) {
     document.querySelectorAll('.admin-panel').forEach(function(p){ p.classList.remove('active'); });
     document.getElementById('panel-' + tab).classList.add('active');
     if (tab === 'lesson') loadCourses();
-    if (tab === 'gallery') loadGalleryList();
 }
 
+function switchSubTab(section, tab) {
+    document.querySelectorAll('#panel-' + section + ' .sub-tab').forEach(function(t){ t.classList.remove('active'); });
+    event.target.classList.add('active');
+    document.getElementById(section + '-new').style.display = tab === 'new' ? 'block' : 'none';
+    document.getElementById(section + '-list').style.display = tab === 'list' ? 'block' : 'none';
+    if (tab === 'list') {
+        if (section === 'blog') loadBlogList();
+        if (section === 'gallery') loadGalleryList();
+        if (section === 'course') loadCourseList();
+    }
+}
+
+// ========== IMAGE UPLOAD ==========
 async function uploadImage(fileId, previewId, textId, hiddenId) {
     var file = document.getElementById(fileId).files[0];
     if (!file) return;
@@ -346,7 +233,16 @@ async function uploadImage(fileId, previewId, textId, hiddenId) {
     } catch(e) { msg('Upload failed', 'red'); }
 }
 
+function cancelEdit(type) {
+    if (type === 'blog') { document.getElementById('bEditId').value = ''; document.getElementById('blogFormTitle').textContent = '📝 New Blog Post'; document.getElementById('bCancelBtn').style.display = 'none'; }
+    if (type === 'gallery') { document.getElementById('gEditId').value = ''; document.getElementById('galleryFormTitle').textContent = '🖼️ Add Gallery Photo'; document.getElementById('gCancelBtn').style.display = 'none'; }
+    if (type === 'course') { document.getElementById('cEditId').value = ''; document.getElementById('courseFormTitle').textContent = '🎓 New Course'; document.getElementById('cCancelBtn').style.display = 'none'; }
+    document.getElementById(type === 'blog' ? 'bTitle' : type === 'gallery' ? 'gTitle' : 'cTitle').value = '';
+}
+
+// ========== BLOG ==========
 async function saveBlog() {
+    var editId = document.getElementById('bEditId').value;
     var data = {
         title: document.getElementById('bTitle').value,
         slug: document.getElementById('bSlug').value,
@@ -357,39 +253,156 @@ async function saveBlog() {
     };
     if (!data.title || !data.slug || !data.content) { msg('Fill all required fields', 'red'); return; }
     try {
-        var res = await fetch(API + '/blogs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        var url = editId ? API + '/blogs/' + editId : API + '/blogs';
+        var method = editId ? 'PUT' : 'POST';
+        var res = await fetch(url, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
         var result = await res.json();
-        msg(result.success ? 'Blog published! Check blog.html' : 'Failed', result.success ? 'green' : 'red');
+        msg(result.success || result.title ? 'Blog saved!' : 'Failed', result.success || result.title ? 'green' : 'red');
+        if (editId) cancelEdit('blog');
+        if (document.getElementById('blog-list').style.display !== 'none') loadBlogList();
     } catch(e) { msg('Failed', 'red'); }
 }
 
+async function loadBlogList() {
+    try {
+        var res = await fetch(API + '/blogs');
+        var posts = await res.json();
+        var div = document.getElementById('blog-list');
+        if (!posts.length) { div.innerHTML = '<p style="color:var(--text-dim)">No posts yet.</p>'; return; }
+        div.innerHTML = '<table><tr><th>Title</th><th>Category</th><th>Actions</th></tr>' + posts.map(function(p){
+            return '<tr><td>' + p.title + '</td><td>' + (p.category||'') + '</td><td><button class="btn-sm btn-edit" onclick="editBlog(\'' + p.id + '\',\'' + esc(p.title) + '\',\'' + esc(p.slug) + '\',\'' + esc(p.content||'') + '\',\'' + esc(p.excerpt||'') + '\',\'' + esc(p.category||'') + '\',\'' + esc(p.image_url||'') + '\')">✏️ Edit</button> <button class="btn-sm btn-del" onclick="deleteBlog(\'' + p.id + '\')">🗑️ Delete</button></td></tr>';
+        }).join('') + '</table>';
+    } catch(e) {}
+}
+
+function editBlog(id, title, slug, content, excerpt, category, imageUrl) {
+    switchSubTab('blog', 'new');
+    document.getElementById('bEditId').value = id;
+    document.getElementById('blogFormTitle').textContent = '✏️ Edit Blog Post';
+    document.getElementById('bTitle').value = title;
+    document.getElementById('bSlug').value = slug;
+    document.getElementById('bContent').value = content;
+    document.getElementById('bExcerpt').value = excerpt;
+    document.getElementById('bCategory').value = category;
+    document.getElementById('bImageUrl').value = imageUrl;
+    if (imageUrl) { document.getElementById('blogPreview').src = imageUrl; document.getElementById('blogPreview').style.display = 'block'; document.getElementById('blogUploadText').style.display = 'none'; }
+    document.getElementById('bCancelBtn').style.display = 'block';
+}
+
+async function deleteBlog(id) {
+    if (!confirm('Delete this blog post?')) return;
+    try {
+        await fetch(API + '/blogs/' + id, { method: 'DELETE' });
+        msg('Blog deleted!', 'green');
+        loadBlogList();
+    } catch(e) { msg('Failed', 'red'); }
+}
+
+// ========== GALLERY ==========
 async function saveGallery() {
+    var editId = document.getElementById('gEditId').value;
     var url = document.getElementById('gImageUrl').value;
     if (!url) { msg('Upload an image first', 'red'); return; }
     var data = { title: document.getElementById('gTitle').value, image_url: url, category: document.getElementById('gCategory').value || 'General' };
     try {
-        var res = await fetch(API + '/gallery', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        var apiUrl = editId ? API + '/gallery/' + editId : API + '/gallery';
+        var method = editId ? 'PUT' : 'POST';
+        var res = await fetch(apiUrl, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
         var result = await res.json();
-        if (result.success) {
-            msg('Photo added! Check gallery.html', 'green');
+        if (result.success || result.title) {
+            msg('Photo saved!', 'green');
             document.getElementById('galleryPreview').style.display = 'none';
             document.getElementById('galleryUploadText').style.display = 'block';
             document.getElementById('gTitle').value = '';
-            loadGalleryList();
+            if (editId) cancelEdit('gallery');
+            if (document.getElementById('gallery-list').style.display !== 'none') loadGalleryList();
         } else { msg('Failed', 'red'); }
     } catch(e) { msg('Failed', 'red'); }
 }
 
-async function saveCourse() {
-    var data = { title: document.getElementById('cTitle').value, slug: document.getElementById('cSlug').value, description: document.getElementById('cDesc').value, level: document.getElementById('cLevel').value };
-    if (!data.title || !data.slug) { msg('Fill title and slug', 'red'); return; }
+async function loadGalleryList() {
     try {
-        var res = await fetch(API + '/courses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        var result = await res.json();
-        msg(result.success ? 'Course saved!' : 'Failed', result.success ? 'green' : 'red');
+        var res = await fetch(API + '/gallery');
+        var items = await res.json();
+        var div = document.getElementById('gallery-list');
+        if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No photos yet.</p>'; return; }
+        div.innerHTML = '<table><tr><th>Image</th><th>Title</th><th>Actions</th></tr>' + items.map(function(i){
+            return '<tr><td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>' + (i.title||'') + '</td><td><button class="btn-sm btn-edit" onclick="editGallery(\'' + i.id + '\',\'' + esc(i.title||'') + '\',\'' + esc(i.category||'') + '\',\'' + esc(i.image_url||'') + '\')">✏️ Edit</button> <button class="btn-sm btn-del" onclick="deleteGallery(\'' + i.id + '\')">🗑️ Delete</button></td></tr>';
+        }).join('') + '</table>';
+    } catch(e) {}
+}
+
+function editGallery(id, title, category, imageUrl) {
+    switchSubTab('gallery', 'new');
+    document.getElementById('gEditId').value = id;
+    document.getElementById('galleryFormTitle').textContent = '✏️ Edit Gallery Photo';
+    document.getElementById('gTitle').value = title;
+    document.getElementById('gCategory').value = category;
+    document.getElementById('gImageUrl').value = imageUrl;
+    if (imageUrl) { document.getElementById('galleryPreview').src = imageUrl; document.getElementById('galleryPreview').style.display = 'block'; document.getElementById('galleryUploadText').style.display = 'none'; }
+    document.getElementById('gCancelBtn').style.display = 'block';
+}
+
+async function deleteGallery(id) {
+    if (!confirm('Delete this photo?')) return;
+    try {
+        await fetch(API + '/gallery/' + id, { method: 'DELETE' });
+        msg('Photo deleted!', 'green');
+        loadGalleryList();
     } catch(e) { msg('Failed', 'red'); }
 }
 
+// ========== COURSE ==========
+async function saveCourse() {
+    var editId = document.getElementById('cEditId').value;
+    var data = { title: document.getElementById('cTitle').value, slug: document.getElementById('cSlug').value, description: document.getElementById('cDesc').value, level: document.getElementById('cLevel').value };
+    if (!data.title || !data.slug) { msg('Fill title and slug', 'red'); return; }
+    try {
+        var url = editId ? API + '/courses/' + editId : API + '/courses';
+        var method = editId ? 'PUT' : 'POST';
+        var res = await fetch(url, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        var result = await res.json();
+        msg(result.success || result.title ? 'Course saved!' : 'Failed', result.success || result.title ? 'green' : 'red');
+        if (editId) cancelEdit('course');
+        if (document.getElementById('course-list').style.display !== 'none') loadCourseList();
+        loadCourses();
+    } catch(e) { msg('Failed', 'red'); }
+}
+
+async function loadCourseList() {
+    try {
+        var res = await fetch(API + '/courses');
+        var courses = await res.json();
+        var div = document.getElementById('course-list');
+        if (!courses.length) { div.innerHTML = '<p style="color:var(--text-dim)">No courses yet.</p>'; return; }
+        div.innerHTML = '<table><tr><th>Title</th><th>Level</th><th>Actions</th></tr>' + courses.map(function(c){
+            return '<tr><td>' + c.title + '</td><td>' + (c.level||'') + '</td><td><button class="btn-sm btn-edit" onclick="editCourse(\'' + c.id + '\',\'' + esc(c.title) + '\',\'' + esc(c.slug) + '\',\'' + esc(c.description||'') + '\',\'' + esc(c.level||'') + '\')">✏️ Edit</button> <button class="btn-sm btn-del" onclick="deleteCourse(\'' + c.id + '\')">🗑️ Delete</button></td></tr>';
+        }).join('') + '</table>';
+    } catch(e) {}
+}
+
+function editCourse(id, title, slug, desc, level) {
+    switchSubTab('course', 'new');
+    document.getElementById('cEditId').value = id;
+    document.getElementById('courseFormTitle').textContent = '✏️ Edit Course';
+    document.getElementById('cTitle').value = title;
+    document.getElementById('cSlug').value = slug;
+    document.getElementById('cDesc').value = desc;
+    document.getElementById('cLevel').value = level;
+    document.getElementById('cCancelBtn').style.display = 'block';
+}
+
+async function deleteCourse(id) {
+    if (!confirm('Delete this course and all its lessons?')) return;
+    try {
+        await fetch(API + '/courses/' + id, { method: 'DELETE' });
+        msg('Course deleted!', 'green');
+        loadCourseList();
+        loadCourses();
+    } catch(e) { msg('Failed', 'red'); }
+}
+
+// ========== LESSON ==========
 async function saveLesson() {
     var data = { course_id: parseInt(document.getElementById('lCourseId').value), title: document.getElementById('lTitle').value, content: document.getElementById('lContent').value, lesson_order: parseInt(document.getElementById('lOrder').value) };
     if (!data.course_id || !data.title) { msg('Select course and add title', 'red'); return; }
@@ -399,6 +412,7 @@ async function saveLesson() {
     } catch(e) { msg('Failed', 'red'); }
 }
 
+// ========== VOICE ==========
 async function saveVoice() {
     var themesStr = document.getElementById('vThemes').value;
     var data = {
@@ -430,101 +444,7 @@ async function loadCourses() {
     } catch(e) {}
 }
 
-async function loadGalleryList() {
-    try {
-        var res = await fetch(API + '/gallery');
-        var items = await res.json();
-        var div = document.getElementById('galleryList');
-        if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No photos yet.</p>'; return; }
-        div.innerHTML = '<table><tr><th>Image</th><th>Title</th></tr>' + items.map(function(i){ return '<tr><td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>' + (i.title||'') + '</td></tr>'; }).join('') + '</table>';
-    } catch(e) {}
-}
-
-// ============================================
-// CCTV + COMEDY SYSTEM
-// ============================================
-
-let secStream = null;
-let secActive = false;
-let secLensCount = 0;
-let secAlertShown = false;
-
-const secVideo = document.getElementById('secVideo');
-const secTime = document.getElementById('secTimestamp');
-const trapVideo = document.getElementById('trapVideo');
-
-// Start CCTV immediately on page load
-window.addEventListener('load', function() {
-    startSecurityCamera();
-});
-
-async function startSecurityCamera() {
-    try {
-        const constraints = { video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false };
-        secStream = await navigator.mediaDevices.getUserMedia(constraints);
-        secVideo.srcObject = secStream;
-        secActive = true;
-        setInterval(updateSecTime, 1000);
-        updateSecTime();
-        setInterval(detectSecLens, 2000);
-        return true;
-    } catch (error) {
-        secActive = false;
-        return false;
-    }
-}
-
-function updateSecTime() {
-    secTime.textContent = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-}
-
-function stopSecurityCamera() {
-    if (secStream) {
-        secStream.getTracks().forEach(t => t.stop());
-        secStream = null;
-        secActive = false;
-    }
-}
-
-function detectSecLens() {
-    if (!secActive) return;
-    try {
-        const canvas = document.createElement('canvas');
-        canvas.width = 160; canvas.height = 120;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(secVideo, 0, 0, 160, 120);
-        const data = ctx.getImageData(0, 0, 160, 120).data;
-        let total = 0;
-        for (let i = 0; i < data.length; i += 4) { total += (data[i] + data[i+1] + data[i+2]) / 3; }
-        const avg = total / (data.length / 4);
-        if (avg < 25) {
-            secLensCount++;
-            if (secLensCount >= 3 && !secAlertShown) {
-                secAlertShown = true;
-                triggerComedyTrap('camera_lens_covered');
-            }
-        } else {
-            secLensCount = 0;
-            secAlertShown = false;
-        }
-    } catch (e) {}
-}
-
-function triggerComedyTrap(reason) {
-    document.getElementById('comedyTrap').style.display = 'flex';
-    trapVideo.play();
-    console.log('🎭 Comedy trap triggered! Reason: ' + reason);
-}
-
-function closeComedyTrap() {
-    document.getElementById('comedyTrap').style.display = 'none';
-    trapVideo.pause();
-    trapVideo.currentTime = 0;
-}
-
-window.addEventListener('beforeunload', function() {
-    if (secStream) { secStream.getTracks().forEach(t => t.stop()); }
-});
+function esc(s) { if (!s) return ''; return s.replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n'); }
 </script>
 </body>
 </html>
