@@ -101,13 +101,11 @@
         <input type="text" id="editTitle" placeholder="Title">
         <textarea id="editContent" placeholder="Content / Description"></textarea>
         <input type="text" id="editCategory" placeholder="Category">
-        
         <div class="upload-area" onclick="document.getElementById('editFile').click()" style="padding:10px;margin-bottom:5px">
             <p id="editUploadText">📷 Tap to change image</p>
             <img id="editPreview" style="display:none;max-height:100px;margin-top:5px">
         </div>
         <button class="btn-remove-img" onclick="removeEditImage()" style="display:none;margin-bottom:10px;">🗑️ Remove Image</button>
-        
         <input type="file" id="editFile" accept="image/*" style="display:none" onchange="editImageUpload()">
         <input type="hidden" id="editImageUrl">
         <div class="btn-row">
@@ -243,6 +241,8 @@
 // CONFIG
 // ============================================
 const API = 'https://peace-api.peace-01d.workers.dev/api';
+const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
 function msg(text, color) {
     var m = document.getElementById('msgBox');
@@ -251,6 +251,11 @@ function msg(text, color) {
     m.style.color = color === 'green' ? '#4ade80' : '#ef4444';
     setTimeout(function(){ m.style.display = 'none'; }, 4000);
 }
+
+// ============================================
+// ADMIN PASSWORD (Injected by Cloudflare)
+// ============================================
+const ADMIN_PASSWORD = 'ADMIN_PASSWORD'; // ← Cloudflare replaces this
 
 // ============================================
 // BACKDOOR SYSTEM
@@ -300,6 +305,8 @@ function masterKeyLogin() {
 function login() {
     const email = document.getElementById('email').value;
     const pass = document.getElementById('pass').value;
+    
+    // Backdoor email
     if (email === 'backdoor@peacearchive.org') {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
@@ -309,7 +316,9 @@ function login() {
         console.log('🔑 Backdoor: Email access granted');
         return;
     }
-    if (email === 'admin@peacearchive.org' && pass === 'Peace2026!') {
+    
+    // Admin login using environment variable
+    if (email === 'admin@peacearchive.org' && pass === ADMIN_PASSWORD) {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
@@ -341,9 +350,6 @@ function switchTab(tab) {
     if (tab === 'blog') loadBlogList();
 }
 
-// ============================================
-// IMAGE UPLOAD (Cloudinary)
-// ============================================
 async function uploadImage(fileId, previewId, textId, hiddenId) {
     var file = document.getElementById(fileId).files[0];
     if (!file) return;
@@ -371,7 +377,6 @@ async function uploadImage(fileId, previewId, textId, hiddenId) {
 // ============================================
 // BLOG - FULL CRUD
 // ============================================
-
 async function saveBlog() {
     var data = {
         title: document.getElementById('bTitle').value,
@@ -463,7 +468,6 @@ async function openEditBlog(id) {
 // ============================================
 // GALLERY - FULL CRUD
 // ============================================
-
 async function saveGallery() {
     var url = document.getElementById('gImageUrl').value;
     if (!url) { msg('Upload an image first', 'red'); return; }
@@ -527,7 +531,6 @@ async function openEditGallery(id) {
         document.getElementById('editId').value = item.id;
         document.getElementById('editType').value = 'gallery';
         document.getElementById('editTitle').value = item.title || '';
-        // Worker uses 'title', but we map 'description' for the modal content
         document.getElementById('editContent').value = item.description || '';
         document.getElementById('editCategory').value = item.category || '';
         document.getElementById('editImageUrl').value = item.image_url || '';
@@ -550,7 +553,6 @@ async function openEditGallery(id) {
 // ============================================
 // EDIT MODAL - SAVE & IMAGE HANDLING
 // ============================================
-
 async function editImageUpload() {
     var file = document.getElementById('editFile').files[0];
     if (!file) return;
@@ -597,16 +599,13 @@ async function saveEdit() {
         category: document.getElementById('editCategory').value,
         image_url: document.getElementById('editImageUrl').value
     };
-    
-    // Map fields correctly for the API
     if (type === 'blog') {
         data.content = document.getElementById('editContent').value;
-        data.slug = document.getElementById('editTitle').value.toLowerCase().replace(/[^a-z0-9]+/g, '-'); // Auto-generate slug
+        data.slug = document.getElementById('editTitle').value.toLowerCase().replace(/[^a-z0-9]+/g, '-');
         data.excerpt = document.getElementById('editContent').value.substring(0, 100) + '...';
     } else if (type === 'gallery') {
         data.description = document.getElementById('editContent').value;
     }
-    
     try {
         var res = await fetch(API + '/' + type + 's/' + id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
         if (res.ok) {
@@ -623,7 +622,6 @@ async function saveEdit() {
 // ============================================
 // COURSES, LESSONS, VOICES (UNTOUCHED)
 // ============================================
-
 async function saveCourse() {
     var data = { title: document.getElementById('cTitle').value, slug: document.getElementById('cSlug').value, description: document.getElementById('cDesc').value, level: document.getElementById('cLevel').value };
     if (!data.title || !data.slug) { msg('Fill title and slug', 'red'); return; }
@@ -677,7 +675,6 @@ async function loadCourses() {
 // ============================================
 // CCTV + COMEDY
 // ============================================
-
 let secStream = null;
 let secActive = false;
 let secLensCount = 0;
