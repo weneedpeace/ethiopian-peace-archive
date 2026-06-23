@@ -217,10 +217,12 @@ function checkPassword() {
 const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
-// ⚠️ FIX: Point to the correct API base URL
-const BASE_API = 'https://peace-audio-worker-git-main-addis3.vercel.app/api';
-const AUDIO_API = BASE_API + '/generate-audio';   // For generating audio
-const VOICES_API = BASE_API + '/voices';          // For fetching voices
+// ============================================
+// API ENDPOINTS (Pointing to your Vercel Backend)
+// ============================================
+const API_BASE = 'https://peace-audio-worker-git-main-addis3.vercel.app';
+const VOICES_API = API_BASE + '/api/voices';          // ✅ GET /api/voices
+const AUDIO_API = API_BASE + '/api/generate-audio';   // ✅ POST /api/generate-audio
 
 let allVoices = [], filteredVoices = [], currentCategory = 'all', pageSize = 20, currentPage = 1;
 
@@ -229,15 +231,15 @@ let allVoices = [], filteredVoices = [], currentCategory = 'all', pageSize = 20,
 // ============================================
 async function initArchive() {
     try {
-        const res = await fetch(VOICES_API, {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
+        const res = await fetch(VOICES_API); // ✅ No headers needed — backend handles Supabase
+        if (!res.ok) throw new Error('Failed to fetch voices');
         allVoices = await res.json();
         updateStats();
         populateFilters();
         applyFilters();
     } catch (e) { 
-        document.getElementById('quotesContainer').innerHTML = '<div class="loading">Error loading voices.</div>'; 
+        console.error(e);
+        document.getElementById('quotesContainer').innerHTML = '<div class="loading">Error loading voices. Please try again later.</div>'; 
     }
 }
 
