@@ -1,168 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI Content Generator — Ethiopian Peace Archive">
-    <title>AI Content Generator — Ethiopian Peace Archive</title>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        .gen-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .panel { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 20px; }
-        .panel h3 { color: var(--gold); margin-bottom: 12px; font-family: var(--font-ui); font-size: 1rem; }
-        .panel label { display: block; color: var(--text-dim); font-size: 0.8rem; margin-bottom: 4px; font-family: var(--font-ui); }
-        .panel select, .panel textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--green-border); background: var(--bg); color: var(--text); font-size: 0.9rem; margin-bottom: 10px; font-family: inherit; }
-        .panel textarea { min-height: 100px; resize: vertical; }
-        .output-box { background: var(--bg); border: 1px solid var(--green-border); border-radius: 8px; padding: 20px; min-height: 350px; max-height: 650px; overflow-y: auto; line-height: 1.9; font-size: 0.95rem; color: var(--text); }
-        .output-box h2, .output-box h3 { color: var(--gold); margin: 16px 0 8px; }
-        .output-box p { margin-bottom: 12px; color: var(--text-dim); }
-        .output-box ul, .output-box ol { margin: 8px 0 16px 20px; color: var(--text-dim); }
-        .output-box strong { color: var(--green-bright); }
-        .type-badge { padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; cursor: pointer; border: 1px solid var(--green-border); background: var(--card); color: var(--text-dim); font-family: var(--font-ui); margin: 2px; display: inline-block; }
-        .type-badge.on { background: var(--green-dim); color: var(--green-bright); border-color: var(--green); }
-        .loading-bar { height: 4px; background: var(--green-border); border-radius: 2px; margin: 10px 0; overflow: hidden; display: none; }
-        .loading-bar.on { display: block; }
-        .loading-bar .fill { height: 100%; background: var(--green); border-radius: 2px; animation: load 1.5s ease-in-out infinite; width: 40%; }
-        @keyframes load { 0% { transform: translateX(-100%); } 100% { transform: translateX(350%); } }
-        @media (max-width: 768px) { .gen-layout { grid-template-columns: 1fr; } }
-    </style>
-</head>
-<body>
+// ============================================
+// REAL AI ENGINE — Mistral 7B (Premium)
+// ============================================
 
-<nav>
-    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-    <div class="desktop-links">
-        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-        <a href="courses.html">Courses</a><a href="research.html" class="active">AI Generator</a>
-        <a href="support.html" class="cta-nav">Support</a>
-    </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-</nav>
+const HUGGINGFACE_API_KEY = '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'; // Your key
+const HF_API_URL = 'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1';
 
-<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-<div class="slide-menu" id="slideMenu">
-    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-    <a href="index.html">🏠 Home</a><a href="voices.html">🗣️ Voices</a><a href="research.html">🧠 AI Generator</a><a href="support.html">❤️ Support</a>
-</div>
+// ============================================
+// 1. Generate Content from Scratch
+// ============================================
 
-<main class="container">
-    <h1 class="section-title">🧠 AI Content Generator</h1>
-    <p style="color:var(--text-dim);margin-bottom:16px">Generate premium articles, lessons, essays, reports, speeches, and more.</p>
+async function generateContent(type, topic, tone) {
+    const prompt = buildPrompt(type, topic, tone);
+    
+    try {
+        const response = await fetch(HF_API_URL, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${HUGGINGFACE_API_KEY}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                inputs: prompt,
+                parameters: {
+                    max_new_tokens: 512,
+                    temperature: 0.7,
+                    top_p: 0.9,
+                    do_sample: true,
+                    return_full_text: false
+                }
+            })
+        });
 
-    <div class="gen-layout">
-        <div class="panel">
-            <h3>📝 Create Content</h3>
-            <label>Content Type</label>
-            <div style="margin-bottom:10px">
-                <span class="type-badge on" data-type="article">📄 Article</span>
-                <span class="type-badge" data-type="lesson">📚 Lesson</span>
-                <span class="type-badge" data-type="essay">✍️ Essay</span>
-                <span class="type-badge" data-type="analysis">📊 Analysis</span>
-                <span class="type-badge" data-type="report">📈 Report</span>
-                <span class="type-badge" data-type="speech">🎤 Speech</span>
-                <span class="type-badge" data-type="proposal">🤝 Proposal</span>
-                <span class="type-badge" data-type="social">📱 Social</span>
-            </div>
-            <label>Topic</label>
-            <textarea id="topicInput" placeholder="e.g., The role of traditional mediation in Ethiopian peacebuilding..."></textarea>
-            <label>Tone</label>
-            <select id="toneInput">
-                <option value="academic">🎓 Academic</option>
-                <option value="professional">💼 Professional</option>
-                <option value="inspirational">✨ Inspirational</option>
-                <option value="educational">📖 Educational</option>
-                <option value="journalistic">📰 Journalistic</option>
-            </select>
-            <button class="btn btn-primary" onclick="generate()" style="width:100%">🧠 Generate Premium Content</button>
-            <div class="loading-bar" id="loadingBar"><div class="fill"></div></div>
-        </div>
-        <div class="panel">
-            <h3>📄 Generated Content</h3>
-            <div class="output-box" id="outputBox">
-                <p style="color:var(--text-dim);text-align:center;padding:60px 0">Select type, enter topic, click Generate.</p>
-            </div>
-            <div style="display:flex;gap:8px;margin-top:10px">
-                <button class="btn btn-sm" id="copyBtn" onclick="copyOut()" style="display:none">📋 Copy</button>
-                <button class="btn btn-sm" id="downloadBtn" onclick="downloadOut()" style="display:none">💾 Download</button>
-                <button class="btn btn-sm" id="clearBtn" onclick="clearOut()" style="display:none">🗑️ Clear</button>
-            </div>
-        </div>
-    </div>
-</main>
+        const result = await response.json();
+        
+        // Handle Hugging Face response format
+        if (Array.isArray(result) && result.length > 0) {
+            return result[0].generated_text || result[0].summary_text || '';
+        }
+        return result.generated_text || result.summary_text || '';
+    } catch (error) {
+        console.error('AI Generation Error:', error);
+        return null;
+    }
+}
 
-<footer>
-    <div style="text-align:center;color:var(--text-muted);font-size:0.72rem;padding:16px;border-top:1px solid rgba(255,255,255,0.05)">
-        <p>Ethiopian Peace Archive &copy; 2026 · AI Content Generator</p>
-    </div>
-</footer>
+// ============================================
+// 2. Build the Prompt
+// ============================================
 
-<script src="js/navigation.js"></script>
-<script src="js/ai.js"></script>
-<script>
-let currentType = 'article';
-let outputText = '';
-
-document.querySelectorAll('.type-badge').forEach(b => {
-    b.onclick = function() {
-        document.querySelectorAll('.type-badge').forEach(x => x.classList.remove('on'));
-        this.classList.add('on');
-        currentType = this.dataset.type;
+function buildPrompt(type, topic, tone) {
+    const prompts = {
+        article: `Write a premium, ${tone} article about "${topic}". Include a compelling title, introduction, 3-5 main sections with headings, and a powerful conclusion. Use markdown ## for headings.`,
+        lesson: `Create a structured ${tone} lesson about "${topic}". Include learning objectives, key concepts, examples, and a summary. Use markdown ## for sections.`,
+        essay: `Write a thoughtful ${tone} essay about "${topic}". Include an introduction, 3-4 body paragraphs, and a conclusion. Use markdown ## for headings.`,
+        analysis: `Provide a deep ${tone} analysis of "${topic}". Include key insights, data points, implications, and future outlook. Use markdown ## for headings.`,
+        report: `Generate a professional ${tone} report on "${topic}". Include an executive summary, findings, recommendations, and conclusion. Use markdown ## for headings.`,
+        speech: `Write a powerful ${tone} speech about "${topic}". Include a strong opening, 3-5 key points, and an inspiring closing. Use markdown ## for sections.`,
+        proposal: `Draft a ${tone} proposal for "${topic}". Include an introduction, problem statement, solution, timeline, and budget overview. Use markdown ## for headings.`,
+        social: `Write a ${tone} social media post about "${topic}" for LinkedIn and Twitter. Include hashtags.`
     };
-});
-
-async function generate() {
-    const topic = document.getElementById('topicInput').value.trim();
-    if (!topic) return alert('Enter a topic.');
-    
-    const tone = document.getElementById('toneInput').value;
-    const out = document.getElementById('outputBox');
-    const loader = document.getElementById('loadingBar');
-    
-    out.innerHTML = '<p style="text-align:center;color:var(--text-dim)">🧠 Generating premium content...</p>';
-    loader.classList.add('on');
-    
-    let result = null;
-    if (typeof EPA !== 'undefined') {
-        const methods = { article: 'article', lesson: 'lesson', essay: 'essay', analysis: 'analysis', report: 'report', speech: 'speech', proposal: 'proposal', social: 'social' };
-        result = await EPA.generate(currentType, topic, tone);
-    }
-    
-    loader.classList.remove('on');
-    
-    if (result) {
-        outputText = result;
-        out.innerHTML = result.replace(/\n/g, '<br>').replace(/## (.+)/g, '<h2>$1</h2>').replace(/### (.+)/g, '<h3>$1</h3>').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/- (.+)/g, '<li>$1</li>');
-        document.getElementById('copyBtn').style.display = 'inline-block';
-        document.getElementById('downloadBtn').style.display = 'inline-block';
-        document.getElementById('clearBtn').style.display = 'inline-block';
-    } else {
-        out.innerHTML = '<p style="color:var(--red);text-align:center">Generation failed. Try again.</p>';
-    }
+    return prompts[type] || prompts.article;
 }
 
-function copyOut() {
-    navigator.clipboard.writeText(outputText).then(() => {
-        const b = document.getElementById('copyBtn');
-        b.textContent = '✅ Copied!';
-        setTimeout(() => b.textContent = '📋 Copy', 2000);
-    });
-}
+// ============================================
+// 3. Export to Window
+// ============================================
 
-function downloadOut() {
-    const blob = new Blob([outputText], { type: 'text/plain' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'ethiopian-peace-archive-' + currentType + '.txt';
-    a.click();
-}
+window.EPA = {
+    generate: generateContent,
+    buildPrompt: buildPrompt
+};
 
-function clearOut() {
-    document.getElementById('outputBox').innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:60px 0">Select type, enter topic, click Generate.</p>';
-    document.getElementById('copyBtn').style.display = 'none';
-    document.getElementById('downloadBtn').style.display = 'none';
-    document.getElementById('clearBtn').style.display = 'none';
-    outputText = '';
-}
-</script>
-</body>
-</html>
+console.log('✅ Ethiopian Peace Archive AI Engine (Mistral-7B) loaded.');
