@@ -58,9 +58,7 @@
         .load-more button { padding: 10px 30px; border-radius: 25px; background: var(--green-dim); color: var(--green-bright); border: 1px solid var(--green-border); cursor: pointer; font-family: var(--font-ui); font-size: 0.9rem; }
         .load-more button:hover { background: var(--green); color: #000; }
 
-        /* ============================================ */
-        /* PASSWORD PROTECTION STYLES */
-        /* ============================================ */
+        /* Password Protection Styles */
         #passwordScreen {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -120,9 +118,7 @@
 </head>
 <body>
 
-<!-- ============================================ -->
-<!-- PASSWORD SCREEN -->
-<!-- ============================================ -->
+<!-- Password Screen -->
 <div id="passwordScreen">
     <div class="password-box">
         <h2>🔐 Protected Archive</h2>
@@ -133,9 +129,7 @@
     </div>
 </div>
 
-<!-- ============================================ -->
-<!-- MAIN CONTENT -->
-<!-- ============================================ -->
+<!-- Main Content -->
 <nav>
     <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
     <div class="desktop-links">
@@ -199,9 +193,9 @@
 <script src="js/navigation.js"></script>
 <script>
 // ============================================
-// PASSWORD CONFIGURATION
+// PASSWORD CONFIGURATION (Injected by Cloudflare)
 // ============================================
-const ARCHIVE_PASSWORD = 'peace2026'; // ← CHANGE THIS TO YOUR PASSWORD
+const ARCHIVE_PASSWORD = 'VOICES_PASSWORD'; // ← Cloudflare replaces this
 
 function checkPassword() {
     const input = document.getElementById('passwordInput').value;
@@ -210,7 +204,6 @@ function checkPassword() {
     if (input === ARCHIVE_PASSWORD) {
         document.getElementById('passwordScreen').classList.add('hidden');
         error.style.display = 'none';
-        // Load the archive
         initArchive();
     } else {
         error.style.display = 'block';
