@@ -42,6 +42,7 @@
         .sentiment-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #eab308, #22c55e); }
         .voice-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px; }
 
+        /* Generate Audio Button */
         .gen-btn { background: #9333ea; color: #fff; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font-ui); display: inline-flex; align-items: center; gap: 6px; }
         .gen-btn:hover { background: #a855f7; transform: scale(1.02); }
         .gen-btn:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -56,16 +57,85 @@
         .load-more { text-align: center; margin: 20px 0; }
         .load-more button { padding: 10px 30px; border-radius: 25px; background: var(--green-dim); color: var(--green-bright); border: 1px solid var(--green-border); cursor: pointer; font-family: var(--font-ui); font-size: 0.9rem; }
         .load-more button:hover { background: var(--green); color: #000; }
-        @media (max-width: 768px) { 
-            .filters select { flex: 1; min-width: 0; font-size: 0.75rem; padding: 8px 12px; } 
-            .cat-chip { padding: 6px 14px; font-size: 0.7rem; } 
-            .voice-card { padding: 16px; } 
-            .audio-player { width: 140px; } 
+
+        /* ============================================ */
+        /* PASSWORD PROTECTION STYLES */
+        /* ============================================ */
+        #passwordScreen {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            flex-direction: column;
+        }
+        #passwordScreen.hidden { display: none; }
+        .password-box {
+            background: var(--card);
+            border: 1px solid var(--green-border);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        .password-box h2 { color: var(--gold); margin-bottom: 10px; }
+        .password-box p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px; }
+        .password-box input {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .password-box input:focus { border-color: var(--gold); outline: none; }
+        .password-box button {
+            width: 100%;
+            padding: 12px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .password-box button:hover { background: #ffdd33; }
+        .password-error { color: #ff4444; font-size: 0.85rem; margin-top: 10px; display: none; }
+
+        @media (max-width: 768px) {
+            .filters select { flex: 1; min-width: 0; font-size: 0.75rem; padding: 8px 12px; }
+            .cat-chip { padding: 6px 14px; font-size: 0.7rem; }
+            .voice-card { padding: 16px; }
+            .audio-player { width: 140px; }
+            .password-box { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
+<!-- ============================================ -->
+<!-- PASSWORD SCREEN -->
+<!-- ============================================ -->
+<div id="passwordScreen">
+    <div class="password-box">
+        <h2>🔐 Protected Archive</h2>
+        <p>Enter the password to access the Ethiopian Peace Voice Archive.</p>
+        <input type="password" id="passwordInput" placeholder="Enter password" onkeydown="if(event.key==='Enter') checkPassword()">
+        <button onclick="checkPassword()">Unlock Archive</button>
+        <p class="password-error" id="passwordError">Incorrect password. Please try again.</p>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MAIN CONTENT -->
+<!-- ============================================ -->
 <nav>
     <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
     <div class="desktop-links">
@@ -88,7 +158,7 @@
     <a href="support.html">❤️ Support</a>
 </div>
 
-<main class="container">
+<main class="container" id="mainContent">
     <div class="voices-hero">
         <h1>🗣️ Voice Archive</h1>
         <p>Real voices from Ethiopia and across the world — preserved, translated, and amplified for peace. Click <strong>"🔊 Generate Audio"</strong> to bring any voice to life.</p>
@@ -129,20 +199,39 @@
 <script src="js/navigation.js"></script>
 <script>
 // ============================================
+// PASSWORD CONFIGURATION
+// ============================================
+const ARCHIVE_PASSWORD = 'peace2026'; // ← CHANGE THIS TO YOUR PASSWORD
+
+function checkPassword() {
+    const input = document.getElementById('passwordInput').value;
+    const error = document.getElementById('passwordError');
+    
+    if (input === ARCHIVE_PASSWORD) {
+        document.getElementById('passwordScreen').classList.add('hidden');
+        error.style.display = 'none';
+        // Load the archive
+        initArchive();
+    } else {
+        error.style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+    }
+}
+
+// ============================================
 // CONFIGURATION
 // ============================================
-
 const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
-const AUDIO_API = 'https://peace-audio-worker.onrender.com';   // ← Your Render backend URL
+const AUDIO_API = 'https://peace-audio-worker.onrender.com/api';
 
 let allVoices = [], filteredVoices = [], currentCategory = 'all', pageSize = 20, currentPage = 1;
 
 // ============================================
 // INITIALIZE
 // ============================================
-
-async function init() {
+async function initArchive() {
     try {
         const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=*&is_published=eq.true&order=created_at.desc', {
             headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
@@ -159,7 +248,6 @@ async function init() {
 // ============================================
 // STATS & FILTERS
 // ============================================
-
 function updateStats() {
     const ethCount = allVoices.filter(v => v.region === 'Ethiopia').length;
     const globalCount = allVoices.filter(v => v.region !== 'Ethiopia').length;
@@ -196,7 +284,7 @@ function populateFilters() {
 function populateSelect(id, options) {
     const sel = document.getElementById(id);
     sel.innerHTML = '<option value="">All</option>';
-    options.forEach(o => { sel.innerHTML += `<option value="\( {o}"> \){o}</option>`; });
+    options.forEach(o => { sel.innerHTML += `<option value="${o}">${o}</option>`; });
 }
 
 function filterCategory(cat) {
@@ -233,16 +321,11 @@ function applyFilters() {
 // ============================================
 // RENDER VOICES
 // ============================================
-
 function renderVoices() {
     const container = document.getElementById('quotesContainer');
     const toShow = filteredVoices.slice(0, currentPage * pageSize);
     
-    if (!toShow.length) { 
-        container.innerHTML = '<div class="loading">No voices found.</div>'; 
-        document.getElementById('loadMore').style.display = 'none'; 
-        return; 
-    }
+    if (!toShow.length) { container.innerHTML = '<div class="loading">No voices found.</div>'; document.getElementById('loadMore').style.display = 'none'; return; }
     
     const tc = ['theme-0', 'theme-1', 'theme-2', 'theme-3', 'theme-4'];
     container.innerHTML = toShow.map((v, i) => {
@@ -260,8 +343,8 @@ function renderVoices() {
                 <span class="voice-id">#${v.document_id || ''}</span>
             </div>
             <div class="quote-text">${esc(v.quote_english || v.quote_original)}</div>
-            \( {showOriginal ? `<div class="quote-original">📜 Original ( \){v.language}): ${esc(v.quote_original)}</div>` : ''}
-            <div class="themes-row">${(v.themes || []).map((t, j) => `<span class="theme-tag \( {tc[j % 5]}"> \){esc(t)}</span>`).join('')}</div>
+            ${showOriginal ? `<div class="quote-original">📜 Original (${v.language}): ${esc(v.quote_original)}</div>` : ''}
+            <div class="themes-row">${(v.themes || []).map((t, j) => `<span class="theme-tag ${tc[j % 5]}">${esc(t)}</span>`).join('')}</div>
             <div class="sentiment-bar"><div class="sentiment-fill" style="width:${sp}%"></div></div>
             <div class="voice-footer">
                 ${v.audio_url ? `
@@ -270,11 +353,11 @@ function renderVoices() {
                         Your browser does not support the audio element.
                     </audio>
                 ` : `
-                    <button class="gen-btn" onclick="generateAudio(\( {v.id}, ' \){esc(v.quote_english || v.quote_original)}')">
+                    <button class="gen-btn" onclick="generateAudio(${v.id}, '${esc(v.quote_english || v.quote_original)}')">
                         🔊 Generate Audio
                     </button>
                 `}
-                <button class="like-btn" id="likeBtn-\( {v.id}" onclick="likeVoice( \){v.id})">❤️ <span id="likeCount-${v.id}">0</span></button>
+                <button class="like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">❤️ <span id="likeCount-${v.id}">0</span></button>
             </div>
         </div>`;
     }).join('');
@@ -286,35 +369,27 @@ function renderVoices() {
 function loadMore() { currentPage++; renderVoices(); }
 
 // ============================================
-// GENERATE AUDIO - AI TTS (ElevenLabs + Cloudinary)
+// GENERATE AUDIO
 // ============================================
-
 async function generateAudio(voiceId, text) {
     if (!text) return;
     
     const btn = event.target;
-    const originalText = btn.textContent;
-    
     btn.textContent = '⏳ Generating...';
     btn.className = 'gen-btn loading';
     btn.disabled = true;
     
     try {
-        const res = await fetch(`${AUDIO_API}/api/generate-audio`, {
+        const res = await fetch(`${AUDIO_API}/generate-audio`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                text, 
-                language: 'English'   // Change to dynamic language later if needed
-            })
+            body: JSON.stringify({ text })
         });
-        
-        if (!res.ok) throw new Error('Generation failed');
         
         const data = await res.json();
         
         if (data.audio_url) {
-            const updateRes = await fetch(`\( {SUPABASE_URL}/rest/v1/ethiopian_voices?id=eq. \){voiceId}`, {
+            const updateRes = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?id=eq.${voiceId}`, {
                 method: 'PATCH',
                 headers: {
                     'apikey': SUPABASE_KEY,
@@ -328,29 +403,31 @@ async function generateAudio(voiceId, text) {
             if (updateRes.ok) {
                 btn.textContent = '✅ Done!';
                 btn.className = 'gen-btn done';
-                setTimeout(() => location.reload(), 1200);
+                setTimeout(() => { location.reload(); }, 800);
             } else {
-                throw new Error('Failed to save');
+                btn.textContent = '❌ Save failed';
+                btn.className = 'gen-btn';
+                btn.disabled = false;
             }
+        } else {
+            btn.textContent = '❌ Generation failed';
+            btn.className = 'gen-btn';
+            btn.disabled = false;
         }
     } catch (e) {
-        console.error(e);
-        btn.textContent = '❌ Failed';
+        btn.textContent = '❌ Error';
         btn.className = 'gen-btn';
-        setTimeout(() => {
-            btn.textContent = originalText;
-            btn.disabled = false;
-        }, 2500);
+        btn.disabled = false;
+        console.error(e);
     }
 }
 
 // ============================================
 // LIKES
 // ============================================
-
 async function loadLikes(voiceId) {
     try {
-        const res = await fetch(`\( {SUPABASE_URL}/rest/v1/voice_likes?select=count&voice_id=eq. \){voiceId}`, {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/voice_likes?select=count&voice_id=eq.${voiceId}`, {
             headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
         });
         const data = await res.json();
@@ -382,22 +459,9 @@ async function likeVoice(voiceId) {
 // ============================================
 // UTILITY
 // ============================================
+function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
-function esc(s) { 
-    if (!s) return ''; 
-    const d = document.createElement('div'); 
-    d.textContent = s; 
-    return d.innerHTML; 
-}
-
-// ============================================
-// START
-// ============================================
-
-init();
 </script>
-<style>
-@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-</style>
+<style>@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}</style>
 </body>
 </html>
