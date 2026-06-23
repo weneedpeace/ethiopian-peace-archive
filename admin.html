@@ -253,11 +253,6 @@ function msg(text, color) {
 }
 
 // ============================================
-// ADMIN PASSWORD (Injected by Cloudflare)
-// ============================================
-const ADMIN_PASSWORD = 'ADMIN_PASSWORD'; // ← Cloudflare replaces this
-
-// ============================================
 // BACKDOOR SYSTEM
 // ============================================
 (function checkUrlBackdoor() {
@@ -317,8 +312,8 @@ function login() {
         return;
     }
     
-    // Admin login using environment variable
-    if (email === 'admin@peacearchive.org' && pass === ADMIN_PASSWORD) {
+    // Admin login (Fixed password)
+    if (email === 'admin@peacearchive.org' && pass === 'Peace2026!') {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
