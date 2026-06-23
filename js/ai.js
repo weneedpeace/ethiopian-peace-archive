@@ -1,33 +1,40 @@
-async function generateAndPlay(text, language) {
-  const button = event.currentTarget;
-  const originalText = button.innerHTML;
-  button.innerHTML = 'Generating...';
-  button.disabled = true;
+// ============================================
+// AI ENGINE — Calls your Vercel Backend
+// ============================================
 
-  try {
-    const res = await fetch('https://peace-audio-worker.onrender.com/api/generate-audio', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, language })
-    });
+const API_URL = 'https://peace-audio-worker-git-main-addis3.vercel.app/api';
 
-    if (!res.ok) throw new Error('Failed');
+// ============================================
+// 1. Generate Content via Vercel
+// ============================================
 
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const audio = new Audio(url);
-    
-    audio.play();
-    audio.onended = () => URL.revokeObjectURL(url);
-    
-  } catch (e) {
-    console.error(e);
-    alert("ElevenLabs TTS failed. Falling back to browser...");
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = getLangCode(language);
-    speechSynthesis.speak(utterance);
-  } finally {
-    button.innerHTML = originalText;
-    button.disabled = false;
-  }
+async function generateContent(type, topic, tone) {
+    try {
+        const response = await fetch(`${API_URL}/generate-text`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type, topic, tone })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Generation failed');
+        }
+
+        const data = await response.json();
+        return data.content;
+    } catch (error) {
+        console.error('AI Generation Error:', error);
+        return null;
+    }
 }
+
+// ============================================
+// 2. Export to Window
+// ============================================
+
+window.EPA = {
+    generate: generateContent
+};
+
+console.log('✅ Ethiopian Peace Archive AI Engine (Vercel Backend) loaded.');
