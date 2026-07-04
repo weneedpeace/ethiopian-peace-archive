@@ -7,7 +7,6 @@
     <title>Start Your Own Chapter — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* ===== CLEAN WHITE BACKGROUND ===== */
         body { 
             background: #ffffff !important;
             color: #1a1a1a !important; 
@@ -32,15 +31,15 @@
         .page-hero p { color: #666; font-size: 1rem; }
         
         .form-card { background: #ffffff; border: 2px solid #16a34a; border-radius: 16px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .form-card h3 { color: #1a1a1a; font-family: var(--font-ui); font-size: 1.1rem; text-align: center; margin-bottom: 4px; }
-        .form-card .subtitle { color: #888; font-size: 0.85rem; text-align: center; margin-bottom: 24px; }
+        .form-card h3 { color: #1a1a1a; font-family: var(--font-ui); font-size: 1.2rem; text-align: center; margin-bottom: 6px; }
+        .form-card .subtitle { color: #888; font-size: 0.9rem; text-align: center; margin-bottom: 24px; }
         
-        .form-card label { display: block; color: #444; font-size: 0.8rem; font-family: var(--font-ui); font-weight: 600; margin-bottom: 4px; }
+        .form-card label { display: block; color: #444; font-size: 0.85rem; font-family: var(--font-ui); font-weight: 600; margin-bottom: 4px; }
         .form-card input, .form-card textarea {
             width: 100%; padding: 12px 16px; border-radius: 10px;
             border: 1px solid #d1d5db; background: #ffffff;
-            color: #1a1a1a; font-size: 0.9rem; font-family: inherit;
-            margin-bottom: 14px; transition: all 0.3s;
+            color: #1a1a1a; font-size: 0.95rem; font-family: inherit;
+            margin-bottom: 16px; transition: all 0.3s;
         }
         .form-card input:focus, .form-card textarea:focus {
             outline: none; border-color: #16a34a;
@@ -50,12 +49,12 @@
         
         .file-upload {
             border: 2px dashed #d1d5db; border-radius: 10px; padding: 15px; text-align: center;
-            color: #888; font-size: 0.85rem; cursor: pointer; margin-bottom: 14px; transition: 0.3s;
+            color: #888; font-size: 0.85rem; cursor: pointer; margin-bottom: 16px; transition: 0.3s;
         }
         .file-upload:hover { border-color: #16a34a; background: #f0fdf4; }
         .avatar-preview { display: none; width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #16a34a; margin: 0 auto 12px; }
 
-        .char-count { text-align: right; color: #999; font-size: 0.7rem; margin-top: -8px; margin-bottom: 10px; font-family: var(--font-ui); }
+        .char-count { text-align: right; color: #999; font-size: 0.75rem; margin-top: -10px; margin-bottom: 12px; font-family: var(--font-ui); }
         .submit-btn {
             width: 100%; padding: 14px; border-radius: 30px;
             background: #16a34a; color: #fff; font-weight: 700; font-size: 1rem;
@@ -66,10 +65,10 @@
         .submit-btn:disabled { background: #999; cursor: not-allowed; }
         
         .trust-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
-        .trust-item { display: flex; align-items: center; gap: 6px; color: #666; font-size: 0.78rem; font-family: var(--font-ui); }
+        .trust-item { display: flex; align-items: center; gap: 6px; color: #666; font-size: 0.8rem; font-family: var(--font-ui); }
         .trust-item span { color: #16a34a; }
         
-        .privacy-note { text-align: center; color: #999; font-size: 0.7rem; margin-top: 14px; font-family: var(--font-ui); }
+        .privacy-note { text-align: center; color: #999; font-size: 0.75rem; margin-top: 14px; font-family: var(--font-ui); }
 
         .success-notification {
             display: none;
@@ -111,9 +110,7 @@
 </head>
 <body>
 
-<!-- ============================================ -->
 <!-- NAVIGATION -->
-<!-- ============================================ -->
 <nav>
     <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
     <div class="desktop-links">
@@ -133,13 +130,11 @@
     <a href="support.html">❤️ Support</a>
 </div>
 
-<!-- ============================================ -->
 <!-- MAIN CONTENT -->
-<!-- ============================================ -->
 <main class="container">
     <div class="page-hero">
         <h1>📖 Start Your Own Chapter</h1>
-        <p>Your message becomes the foundation of a family or team legacy.</p>
+        <p>Be the first voice in your family or team's legacy.</p>
     </div>
 
     <div class="trust-row">
@@ -150,8 +145,8 @@
     </div>
 
     <div class="form-card" id="formCard">
-        <h3>✍️ Write as a Team on Your Founder's Message</h3>
-        <p class="subtitle">Start a legacy chapter. Upload a profile picture, or we'll generate an avatar for you.</p>
+        <h3>✍️ Write Your Message</h3>
+        <p class="subtitle">Start a family or team chapter. Invite others to join later with your email.</p>
         
         <form id="submitForm">
             <label>Your Full Name</label>
@@ -171,8 +166,8 @@
             <img id="avatarPreview" class="avatar-preview" src="" alt="Profile Preview">
             <input type="hidden" id="avatarUrl">
             
-            <label>Your Founder's Message</label>
-            <textarea id="sMessage" placeholder="Write your wish for peace, unity, and hope... Your family/team will add theirs later." rows="5" required></textarea>
+            <label>Your Message</label>
+            <textarea id="sMessage" placeholder="Write your wish for peace, unity, and hope. Your family or team can add their own messages later." rows="5" required></textarea>
             <div class="char-count"><span id="charCount">0</span> characters</div>
             
             <button type="button" class="submit-btn" id="submitBtn" onclick="submitFounder()">🕊️ Submit & Start My Chapter</button>
@@ -183,7 +178,7 @@
     <div class="success-notification" id="successNotification">
         <div class="check-icon">✓</div>
         <h3>Thank You! Your Chapter Is Under Review.</h3>
-        <p>Once approved, your family/team can add co-writers using your email.</p>
+        <p>Once approved, your family or team can add co-writers using your email.</p>
         <button onclick="resetForm()">Start Another Chapter →</button>
     </div>
 
@@ -192,16 +187,10 @@
     </div>
 </main>
 
-<!-- ============================================ -->
-<!-- FOOTER -->
-<!-- ============================================ -->
 <footer>
     <div class="footer-bottom"><p>🕊️ Ethiopian Peace Archive &copy; 2026 · Every voice matters.</p></div>
 </footer>
 
-<!-- ============================================ -->
-<!-- SCRIPTS -->
-<!-- ============================================ -->
 <script src="js/navigation.js"></script>
 <script>
 const FORMSPREE = 'https://formspree.io/f/xkoaddng';
