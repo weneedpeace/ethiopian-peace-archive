@@ -35,7 +35,7 @@
         .voice-card .voice-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
         .voice-card .voice-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
         
-        /* ===== ENHANCED AVATAR ON EVERY WRITER ===== */
+        /* ===== ENHANCED AVATAR ===== */
         .writer-avatar {
             width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
             border: 3px solid var(--gold); background: #2a2a2a; margin-right: 12px;
@@ -79,7 +79,6 @@
         .gen-btn.loading { background: #eab308; color: #000; }
         .gen-btn.done { background: #22c55e; color: #000; }
 
-        /* JOIN CHAPTER BUTTON (On EVERY card) */
         .btn-join-chapter {
             background: var(--gold); color: #000; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer; font-family: var(--font-ui); display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
         }
@@ -205,6 +204,24 @@
         .close-popup { position: absolute; top: 12px; right: 18px; color: #888; font-size: 28px; cursor: pointer; transition: 0.2s; }
         .close-popup:hover { color: #fff; transform: rotate(90deg); }
 
+        /* ===== SKELETON LOADER ===== */
+        .skeleton-card {
+            background: var(--card); border-radius: 16px; padding: 24px; margin-bottom: 14px;
+            border: 1px solid rgba(34,197,94,0.08); position: relative; overflow: hidden;
+        }
+        .skeleton-line {
+            height: 16px; background: #333; border-radius: 8px; margin-bottom: 10px;
+            animation: shimmer 1.5s infinite;
+        }
+        .skeleton-line.short { width: 40%; }
+        .skeleton-line.medium { width: 70%; }
+        .skeleton-line.long { width: 100%; }
+        @keyframes shimmer {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
         @media (max-width: 768px) {
             .search-advanced input, .search-advanced select { flex: 1 1 100%; }
             .cat-chip { padding: 6px 14px; font-size: 0.7rem; }
@@ -262,7 +279,7 @@
 
     <!-- ADVANCED SEARCH -->
     <div class="search-advanced">
-        <input type="text" id="searchInput" placeholder="Search by name, country, or keyword..." oninput="applySearch()">
+        <input type="text" id="searchInput" placeholder="Search by name, country, or keyword..." oninput="debouncedSearch()">
         <select id="regionSearch" onchange="applySearch()">
             <option value="">🌍 All Countries</option>
             <option value="Ethiopia">🇪🇹 Ethiopia</option>
@@ -306,7 +323,12 @@
     </div>
 
     <div id="quotesContainer">
-        <div class="loading" id="loadingMessage">⏳ Loading voices...</div>
+        <!-- SKELETON LOADER -->
+        <div id="skeletonLoader">
+            <div class="skeleton-card"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div></div>
+            <div class="skeleton-card"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div></div>
+            <div class="skeleton-card"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div></div>
+        </div>
     </div>
     <div class="load-more" id="loadMore" style="display:none"><button onclick="loadMore()">Load More Voices ↓</button></div>
 </main>
@@ -352,7 +374,7 @@
         <input type="email" id="chapterFounderEmail" placeholder="Founder's Email (e.g., stephern@gmail.com)">
         <input type="text" id="chapterWriterName" placeholder="Your Full Name">
         
-        <div class="file-upload" onclick="document.getElementById('chapterProfileFile').click()">
+        <div class="file-upload" id="chapterUploadStatus" onclick="document.getElementById('chapterProfileFile').click()">
             📷 Tap to upload a profile picture (or leave empty for auto-avatar)
         </div>
         <input type="file" id="chapterProfileFile" accept="image/*" style="display:none" onchange="uploadChapterProfile(this)">
@@ -379,7 +401,7 @@
 <!-- SCRIPTS -->
 <script src="js/navigation.js"></script>
 <script>
-// ===== PASSWORD =====
+// ===== PASSWORD (Soft Gate — NOT real security) =====
 const VOICES_PASSWORD = 'peace2026';
 function checkPassword() {
     const input = document.getElementById('passwordInput').value;
@@ -404,37 +426,40 @@ const CLOUDINARY_UPLOAD = 'https://api.cloudinary.com/v1_1/djb3falqu/image/uploa
 let allVoices = [], filteredVoices = [], currentCategory = 'all', pageSize = 20, currentPage = 1;
 let pendingDocId = null, pendingChapterId = null;
 let currentUserEmail = null;
+let searchTimeout = null;
 
 // ===== INIT =====
 async function initArchive() {
-    const loading = document.getElementById('loadingMessage');
-    loading.textContent = '⏳ Connecting to archive...';
+    const skeleton = document.getElementById('skeletonLoader');
     try {
         const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=*&is_published=eq.true&order=created_at.desc', {
             headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
         });
-        if (!res.ok) {
-            throw new Error('Network response was not ok');
-        }
+        if (!res.ok) throw new Error('Network response was not ok');
         allVoices = await res.json();
-        loading.style.display = 'none';
+        skeleton.style.display = 'none';
         updateStats();
         populateFilters();
         applySearch();
         checkLogin();
     } catch (e) { 
-        loading.innerHTML = `
-            <div style="color:#ff4444; margin-top:20px;">
-                <p>⚠️ Could not load voices. Please refresh the page.</p>
-                <p style="font-size:0.8rem; color:#888;">Error: ${e.message}</p>
-                <button onclick="location.reload()" style="margin-top:10px; padding:8px 20px; border-radius:20px; background:var(--gold); color:#000; border:none; cursor:pointer;">🔄 Refresh</button>
+        skeleton.innerHTML = `
+            <div style="color:#ff4444; padding:20px; text-align:center;">
+                <p>⚠️ Could not load voices. Please refresh.</p>
+                <button onclick="location.reload()" style="padding:8px 20px; border-radius:20px; background:var(--gold); color:#000; border:none; cursor:pointer;">🔄 Refresh</button>
             </div>
         `;
         console.error('Init error:', e);
     }
 }
 
-// ===== STATS & SEARCH =====
+// ===== DEBOUNCE SEARCH =====
+function debouncedSearch() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(applySearch, 300);
+}
+
+// ===== STATS =====
 function updateStats() {
     const ethCount = allVoices.filter(v => v.region === 'Ethiopia').length;
     const globalCount = allVoices.filter(v => v.region !== 'Ethiopia').length;
@@ -461,12 +486,11 @@ function populateFilters() {
     const years = [...new Set(allVoices.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
     const sel = document.getElementById('yearSearch');
     sel.innerHTML = '<option value="">📅 All Years</option>';
-    if (!years.includes(2026)) {
-        sel.innerHTML += `<option value="2026">2026</option>`;
-    }
+    if (!years.includes(2026)) sel.innerHTML += `<option value="2026">2026</option>`;
     years.forEach(y => { sel.innerHTML += `<option value="${y}">${y}</option>`; });
 }
 
+// ===== SEARCH & FILTER =====
 function applySearch() {
     const keyword = document.getElementById('searchInput').value.toLowerCase();
     const region = document.getElementById('regionSearch').value;
@@ -482,6 +506,12 @@ function applySearch() {
     if (region) voices = voices.filter(v => v.region === region);
     if (lang) voices = voices.filter(v => v.language === lang);
     if (year) voices = voices.filter(v => v.year === parseInt(year));
+    
+    // Handle "Most Liked" sorting
+    if (currentCategory === 'MostLiked') {
+        voices.sort((a, b) => (b.like_count || 0) - (a.like_count || 0));
+    }
+    
     filteredVoices = voices;
     currentPage = 1;
     renderVoices();
@@ -500,46 +530,55 @@ async function renderVoices() {
     const container = document.getElementById('quotesContainer');
     const toShow = filteredVoices.slice(0, currentPage * pageSize);
     
-    if (!toShow.length) { container.innerHTML = '<div class="loading">No voices found matching your search.</div>'; document.getElementById('loadMore').style.display = 'none'; return; }
+    if (!toShow.length) { container.innerHTML = '<div class="loading" style="padding:20px;text-align:center;color:var(--text-dim);">No voices found matching your search.</div>'; document.getElementById('loadMore').style.display = 'none'; return; }
     
     const tc = ['theme-0', 'theme-1', 'theme-2', 'theme-3', 'theme-4'];
+    
+    // === PERFORMANCE FIX: Batch fetch all co-writers for visible chapters ===
+    const chapterIds = [...new Set(toShow.map(v => v.chapter_id).filter(id => id))];
+    let allCoWriters = {};
+    if (chapterIds.length > 0) {
+        try {
+            const ids = chapterIds.map(id => `chapter_id=eq.${id}`).join(',');
+            const res = await fetch(SUPABASE_URL + `/rest/v1/ethiopian_voices?select=writer_name,quote_english,created_at,avatar_url,chapter_id&is_founder=eq.false&${ids}&order=created_at.desc`, {
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+            });
+            const data = await res.json();
+            data.forEach(cw => {
+                if (!allCoWriters[cw.chapter_id]) allCoWriters[cw.chapter_id] = [];
+                allCoWriters[cw.chapter_id].push(cw);
+            });
+        } catch (e) { /* silently fail, co-writers just won't show */ }
+    }
+    
     let html = '';
     for (let i = 0; i < toShow.length; i++) {
         const v = toShow[i];
         const sp = Math.round((v.sentiment || 0.5) * 100);
         const showOriginal = v.language !== 'English' && v.quote_original && v.quote_original !== v.quote_english;
         
-        // ===== ENHANCED AVATAR LOGIC =====
-        // If avatar_url exists, show the image. If not, show a polished 👤 symbol inside a circle.
         const avatarContent = v.avatar_url 
-            ? `<img src="${v.avatar_url}" class="writer-avatar" alt="${esc(v.writer_name || 'Writer')}">`
+            ? `<img src="${v.avatar_url}" class="writer-avatar" alt="${esc(v.writer_name || 'Writer')}" loading="lazy">`
             : `<div class="writer-avatar">👤</div>`;
         
         let coWritersHtml = '';
-        if (v.chapter_id) {
-            try {
-                const res = await fetch(SUPABASE_URL + `/rest/v1/ethiopian_voices?select=writer_name,quote_english,created_at,avatar_url&chapter_id=eq.${v.chapter_id}&is_founder=eq.false&order=created_at.desc`, {
-                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-                });
-                const coWriters = await res.json();
-                if (coWriters.length > 0) {
-                    coWritersHtml = `<div class="chapter-co-writers"><p style="color:var(--gold);font-weight:600;margin-bottom:8px;">✍️ Co-Writers of this Chapter:</p>`;
-                    coWriters.forEach(cw => {
-                        const cwAvatar = cw.avatar_url 
-                            ? `<img src="${cw.avatar_url}" class="co-writer-avatar" alt="${esc(cw.writer_name || 'Co-Writer')}">`
-                            : `<div class="co-writer-avatar">👤</div>`;
-                        coWritersHtml += `<div class="co-writer-card">
-                            ${cwAvatar}
-                            <div>
-                                <div class="writer-name">👤 ${esc(cw.writer_name)}</div>
-                                <div class="quote-text">${esc(cw.quote_english)}</div>
-                                <div style="font-size:0.7rem;color:var(--text-dim);">📅 ${new Date(cw.created_at).toLocaleDateString()}</div>
-                            </div>
-                        </div>`;
-                    });
-                    coWritersHtml += `</div>`;
-                }
-            } catch (e) { coWritersHtml = ''; }
+        const chapterCoWriters = allCoWriters[v.chapter_id] || [];
+        if (chapterCoWriters.length > 0) {
+            coWritersHtml = `<div class="chapter-co-writers"><p style="color:var(--gold);font-weight:600;margin-bottom:8px;">✍️ Co-Writers of this Chapter:</p>`;
+            chapterCoWriters.forEach(cw => {
+                const cwAvatar = cw.avatar_url 
+                    ? `<img src="${cw.avatar_url}" class="co-writer-avatar" alt="${esc(cw.writer_name || 'Co-Writer')}" loading="lazy">`
+                    : `<div class="co-writer-avatar">👤</div>`;
+                coWritersHtml += `<div class="co-writer-card">
+                    ${cwAvatar}
+                    <div>
+                        <div class="writer-name">👤 ${esc(cw.writer_name)}</div>
+                        <div class="quote-text">${esc(cw.quote_english)}</div>
+                        <div style="font-size:0.7rem;color:var(--text-dim);">📅 ${new Date(cw.created_at).toLocaleDateString()}</div>
+                    </div>
+                </div>`;
+            });
+            coWritersHtml += `</div>`;
         }
         
         html += `
@@ -577,7 +616,7 @@ async function renderVoices() {
                     </button>
                 `}
                 <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                    <button class="like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">❤️ <span id="likeCount-${v.id}">0</span></button>
+                    <button class="like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">❤️ <span id="likeCount-${v.id}">${v.like_count || 0}</span></button>
                     <button class="coin-btn">🪙 <span id="coinCount-${v.id}">${v.starting_likes || 50}</span></button>
                     <span style="position:relative;">
                         <button class="share-btn" onclick="toggleShareMenu(${v.id})">📤 Share <span id="shareCount-${v.id}">${v.starting_shares || 20}</span></button>
@@ -588,7 +627,6 @@ async function renderVoices() {
                             <a href="#" onclick="shareVoice(${v.id}, 'copy')">📋 Copy Link</a>
                         </div>
                     </span>
-                    <!-- BUTTON ON EVERY CARD -->
                     <button class="btn-join-chapter" onclick="openChapterPopup('${v.chapter_id || 'new'}')">✍️ Join This Chapter</button>
                     ${v.cloudinary_url ? `<button class="btn-join-chapter" style="background:var(--green);color:#000;" onclick="openEmailPopup('${v.id}')">👁️ See Original Image</button>` : ''}
                 </div>
@@ -603,7 +641,7 @@ async function renderVoices() {
 
 function loadMore() { currentPage++; renderVoices(); }
 
-// ===== LIKES / SHARES / COINS =====
+// ===== LIKES (Fixed: localStorage + spam protection) =====
 async function loadLikes(voiceId) {
     try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/voice_likes?select=count&voice_id=eq.${voiceId}`, {
@@ -613,10 +651,27 @@ async function loadLikes(voiceId) {
         const count = data[0]?.count || 0;
         const el = document.getElementById('likeCount-' + voiceId);
         if (el) el.textContent = count;
+        // Update the voice's like_count in memory for sorting
+        const voice = allVoices.find(v => v.id === voiceId);
+        if (voice) voice.like_count = count;
     } catch (e) {}
 }
 
 async function likeVoice(voiceId) {
+    const btn = document.getElementById('likeBtn-' + voiceId);
+    const countEl = document.getElementById('likeCount-' + voiceId);
+    
+    // Spam protection: Check localStorage
+    const likedKey = 'liked_' + voiceId;
+    if (localStorage.getItem(likedKey)) {
+        alert('You already liked this voice!');
+        return;
+    }
+    
+    // Disable button temporarily to prevent rapid spam clicks
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '0.6';
+    
     try {
         await fetch(`${SUPABASE_URL}/rest/v1/voice_likes`, {
             method: 'POST',
@@ -628,12 +683,18 @@ async function likeVoice(voiceId) {
             },
             body: JSON.stringify({ voice_id: voiceId })
         });
-        const btn = document.getElementById('likeBtn-' + voiceId);
-        const countEl = document.getElementById('likeCount-' + voiceId);
         countEl.textContent = (parseInt(countEl.textContent) || 0) + 1;
         btn.classList.add('liked');
+        // Store in localStorage to prevent re-liking
+        localStorage.setItem(likedKey, 'true');
         updateCoins(voiceId, 1);
     } catch (e) {}
+    
+    // Re-enable button after 1 second
+    setTimeout(() => {
+        btn.style.pointerEvents = 'auto';
+        btn.style.opacity = '1';
+    }, 1000);
 }
 
 function toggleShareMenu(id) {
@@ -716,6 +777,8 @@ function openChapterPopup(chapterId) {
     document.getElementById('chapterMessage').value = '';
     document.getElementById('chapterAvatarUrl').value = '';
     document.getElementById('chapterAvatarPreview').style.display = 'none';
+    document.getElementById('chapterUploadStatus').textContent = '📷 Tap to upload a profile picture (or leave empty for auto-avatar)';
+    document.getElementById('chapterUploadStatus').style.color = 'var(--text-dim)';
 }
 function closeChapterPopup() {
     document.getElementById('chapterPopup').classList.remove('active');
@@ -724,9 +787,14 @@ function closeChapterPopup() {
 async function uploadChapterProfile(input) {
     const file = input.files[0];
     if (!file) return;
+    const status = document.getElementById('chapterUploadStatus');
+    status.textContent = '⏳ Uploading...';
+    status.style.color = '#eab308';
+    
     const preview = document.getElementById('chapterAvatarPreview');
     preview.src = URL.createObjectURL(file);
     preview.style.display = 'block';
+    
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', 'peace_archive');
@@ -735,8 +803,16 @@ async function uploadChapterProfile(input) {
         const data = await res.json();
         if (data.secure_url) {
             document.getElementById('chapterAvatarUrl').value = data.secure_url;
+            status.textContent = '✅ Uploaded!';
+            status.style.color = '#4ade80';
+        } else {
+            status.textContent = '❌ Upload failed. You can still submit with an avatar.';
+            status.style.color = '#ef4444';
         }
-    } catch (e) {}
+    } catch (e) {
+        status.textContent = '❌ Upload failed. You can still submit with an avatar.';
+        status.style.color = '#ef4444';
+    }
 }
 async function submitChapterMessage() {
     const founderEmail = document.getElementById('chapterFounderEmail').value.trim();
@@ -804,7 +880,7 @@ function redirectToContribute() {
     window.location.href = 'contribute.html';
 }
 
-// ===== WALLET =====
+// ===== WALLET (Real calculation, not random) =====
 function openWallet() {
     if (!currentUserEmail) {
         const email = prompt("Enter your email to access your Wallet:");
@@ -815,7 +891,16 @@ function openWallet() {
         }
         return;
     }
-    document.getElementById('walletBalance').textContent = Math.floor(Math.random() * 500) + 100;
+    // Calculate real coins based on all voices
+    let totalCoins = 0;
+    allVoices.forEach(v => {
+        // Each like = 1 coin, each share = 2 coins
+        const likes = parseInt(document.getElementById('likeCount-' + v.id)?.textContent) || 0;
+        const shares = parseInt(document.getElementById('shareCount-' + v.id)?.textContent) || 0;
+        const starting = (v.starting_likes || 50) + (v.starting_shares || 20);
+        totalCoins += likes + (shares * 2) + starting;
+    });
+    document.getElementById('walletBalance').textContent = totalCoins;
     document.getElementById('walletPopup').classList.add('active');
 }
 function closeWallet() {
@@ -890,14 +975,11 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// ===== SCROLL TO TOP LOGIC =====
+// ===== SCROLL TO TOP =====
 window.addEventListener('scroll', function() {
     const btn = document.getElementById('scrollToTop');
-    if (window.scrollY > 400) {
-        btn.classList.add('show');
-    } else {
-        btn.classList.remove('show');
-    }
+    if (window.scrollY > 400) btn.classList.add('show');
+    else btn.classList.remove('show');
 });
 </script>
 <style>@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}</style>
