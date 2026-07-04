@@ -35,13 +35,14 @@
         .voice-card .voice-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
         .voice-card .voice-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
         
-        /* ===== AVATAR ON EVERY WRITER ===== */
+        /* ===== ENHANCED AVATAR ON EVERY WRITER ===== */
         .writer-avatar {
-            width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--gold); background: #222; margin-right: 10px;
+            width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
+            border: 3px solid var(--gold); background: #2a2a2a; margin-right: 12px;
             flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; color: #fff; background: #333;
+            font-size: 1.6rem; color: #fff;
+            box-shadow: 0 4px 12px rgba(255, 204, 0, 0.15);
         }
         .writer-info { display: flex; flex-direction: column; }
         .writer-name { color: var(--gold); font-weight: 700; font-family: var(--font-ui); font-size: 0.9rem; }
@@ -69,7 +70,7 @@
         .co-writer-card { padding: 12px 16px; margin-top: 10px; background: rgba(255,255,255,0.02); border-radius: 8px; border-left: 3px solid var(--gold); display: flex; align-items: center; gap: 12px; }
         .co-writer-card .writer-name { color: var(--gold); font-weight: 600; font-size: 0.85rem; }
         .co-writer-card .quote-text { font-size: 0.95rem; margin: 6px 0; }
-        .co-writer-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1rem; color: #fff; background: #333; flex-shrink: 0; }
+        .co-writer-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff; background: #2a2a2a; flex-shrink: 0; }
 
         /* BUTTONS */
         .gen-btn { background: #9333ea; color: #fff; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font-ui); display: inline-flex; align-items: center; gap: 6px; }
@@ -304,7 +305,9 @@
         <span class="cat-chip" onclick="filterCategory('MostLiked')">❤️ Most Liked</span>
     </div>
 
-    <div id="quotesContainer"><div class="loading">Loading voices...</div></div>
+    <div id="quotesContainer">
+        <div class="loading" id="loadingMessage">⏳ Loading voices...</div>
+    </div>
     <div class="load-more" id="loadMore" style="display:none"><button onclick="loadMore()">Load More Voices ↓</button></div>
 </main>
 
@@ -404,17 +407,30 @@ let currentUserEmail = null;
 
 // ===== INIT =====
 async function initArchive() {
+    const loading = document.getElementById('loadingMessage');
+    loading.textContent = '⏳ Connecting to archive...';
     try {
         const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=*&is_published=eq.true&order=created_at.desc', {
             headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
         });
+        if (!res.ok) {
+            throw new Error('Network response was not ok');
+        }
         allVoices = await res.json();
+        loading.style.display = 'none';
         updateStats();
         populateFilters();
         applySearch();
         checkLogin();
     } catch (e) { 
-        document.getElementById('quotesContainer').innerHTML = '<div class="loading">Error loading voices.</div>'; 
+        loading.innerHTML = `
+            <div style="color:#ff4444; margin-top:20px;">
+                <p>⚠️ Could not load voices. Please refresh the page.</p>
+                <p style="font-size:0.8rem; color:#888;">Error: ${e.message}</p>
+                <button onclick="location.reload()" style="margin-top:10px; padding:8px 20px; border-radius:20px; background:var(--gold); color:#000; border:none; cursor:pointer;">🔄 Refresh</button>
+            </div>
+        `;
+        console.error('Init error:', e);
     }
 }
 
@@ -445,7 +461,6 @@ function populateFilters() {
     const years = [...new Set(allVoices.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
     const sel = document.getElementById('yearSearch');
     sel.innerHTML = '<option value="">📅 All Years</option>';
-    // Pre-populate with 2026 if it exists, otherwise just add it
     if (!years.includes(2026)) {
         sel.innerHTML += `<option value="2026">2026</option>`;
     }
@@ -485,7 +500,7 @@ async function renderVoices() {
     const container = document.getElementById('quotesContainer');
     const toShow = filteredVoices.slice(0, currentPage * pageSize);
     
-    if (!toShow.length) { container.innerHTML = '<div class="loading">No voices found.</div>'; document.getElementById('loadMore').style.display = 'none'; return; }
+    if (!toShow.length) { container.innerHTML = '<div class="loading">No voices found matching your search.</div>'; document.getElementById('loadMore').style.display = 'none'; return; }
     
     const tc = ['theme-0', 'theme-1', 'theme-2', 'theme-3', 'theme-4'];
     let html = '';
@@ -493,8 +508,12 @@ async function renderVoices() {
         const v = toShow[i];
         const sp = Math.round((v.sentiment || 0.5) * 100);
         const showOriginal = v.language !== 'English' && v.quote_original && v.quote_original !== v.quote_english;
-        // Every writer gets an avatar: uploaded photo if present, otherwise an auto-generated initials avatar
-        const avatarContent = `<img src="${getAvatarUrl(v.writer_name, v.avatar_url)}" class="writer-avatar" alt="${esc(v.writer_name || 'Writer')}" onerror="this.onerror=null;this.src=getAvatarUrl(v.writer_name);">`;
+        
+        // ===== ENHANCED AVATAR LOGIC =====
+        // If avatar_url exists, show the image. If not, show a polished 👤 symbol inside a circle.
+        const avatarContent = v.avatar_url 
+            ? `<img src="${v.avatar_url}" class="writer-avatar" alt="${esc(v.writer_name || 'Writer')}">`
+            : `<div class="writer-avatar">👤</div>`;
         
         let coWritersHtml = '';
         if (v.chapter_id) {
@@ -506,7 +525,9 @@ async function renderVoices() {
                 if (coWriters.length > 0) {
                     coWritersHtml = `<div class="chapter-co-writers"><p style="color:var(--gold);font-weight:600;margin-bottom:8px;">✍️ Co-Writers of this Chapter:</p>`;
                     coWriters.forEach(cw => {
-                        const cwAvatar = `<img src="${getAvatarUrl(cw.writer_name, cw.avatar_url)}" class="co-writer-avatar" alt="${esc(cw.writer_name || 'Co-Writer')}" onerror="this.onerror=null;this.src=getAvatarUrl(cw.writer_name);">`;
+                        const cwAvatar = cw.avatar_url 
+                            ? `<img src="${cw.avatar_url}" class="co-writer-avatar" alt="${esc(cw.writer_name || 'Co-Writer')}">`
+                            : `<div class="co-writer-avatar">👤</div>`;
                         coWritersHtml += `<div class="co-writer-card">
                             ${cwAvatar}
                             <div>
@@ -863,15 +884,6 @@ async function generateAudio(voiceId, text) {
 
 // ===== UTILITY =====
 function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-
-// Every writer/co-writer gets an avatar: uses their uploaded photo if one exists,
-// otherwise auto-generates a consistent, colorful initials avatar from their name.
-function getAvatarUrl(name, uploadedUrl) {
-    if (uploadedUrl) return uploadedUrl;
-    const safeName = encodeURIComponent((name && name.trim()) ? name.trim() : 'Anonymous Writer');
-    return `https://ui-avatars.com/api/?name=${safeName}&background=random&color=fff&bold=true&size=128&length=2&rounded=true`;
-}
-
 document.addEventListener('click', function(e) {
     if (!e.target.closest('.share-btn')) {
         document.querySelectorAll('.share-menu').forEach(m => m.classList.remove('active'));
