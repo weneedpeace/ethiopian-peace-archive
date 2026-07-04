@@ -38,10 +38,10 @@
         /* ===== AVATAR ON EVERY WRITER ===== */
         .writer-avatar {
             width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--gold); background: #333; margin-right: 10px;
+            border: 2px solid var(--gold); background: #222; margin-right: 10px;
             flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem; color: #fff;
+            font-size: 1.2rem; color: #fff; background: #333;
         }
         .writer-info { display: flex; flex-direction: column; }
         .writer-name { color: var(--gold); font-weight: 700; font-family: var(--font-ui); font-size: 0.9rem; }
@@ -445,6 +445,7 @@ function populateFilters() {
     const years = [...new Set(allVoices.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
     const sel = document.getElementById('yearSearch');
     sel.innerHTML = '<option value="">📅 All Years</option>';
+    // Pre-populate with 2026 if it exists, otherwise just add it
     if (!years.includes(2026)) {
         sel.innerHTML += `<option value="2026">2026</option>`;
     }
@@ -492,12 +493,8 @@ async function renderVoices() {
         const v = toShow[i];
         const sp = Math.round((v.sentiment || 0.5) * 100);
         const showOriginal = v.language !== 'English' && v.quote_original && v.quote_original !== v.quote_english;
-        
-        // ===== FIXED AVATAR LOGIC =====
-        // If avatar_url exists, show the image. If not, show the 👤 symbol inside a circle.
-        const avatarContent = v.avatar_url 
-            ? `<img src="${v.avatar_url}" class="writer-avatar" alt="${esc(v.writer_name || 'Writer')}">`
-            : `<div class="writer-avatar">👤</div>`;
+        // Every writer gets an avatar: uploaded photo if present, otherwise an auto-generated initials avatar
+        const avatarContent = `<img src="${getAvatarUrl(v.writer_name, v.avatar_url)}" class="writer-avatar" alt="${esc(v.writer_name || 'Writer')}" onerror="this.onerror=null;this.src=getAvatarUrl(v.writer_name);">`;
         
         let coWritersHtml = '';
         if (v.chapter_id) {
@@ -509,10 +506,7 @@ async function renderVoices() {
                 if (coWriters.length > 0) {
                     coWritersHtml = `<div class="chapter-co-writers"><p style="color:var(--gold);font-weight:600;margin-bottom:8px;">✍️ Co-Writers of this Chapter:</p>`;
                     coWriters.forEach(cw => {
-                        // Same logic for co-writers: image if exists, otherwise 👤 symbol
-                        const cwAvatar = cw.avatar_url 
-                            ? `<img src="${cw.avatar_url}" class="co-writer-avatar" alt="${esc(cw.writer_name || 'Co-Writer')}">`
-                            : `<div class="co-writer-avatar">👤</div>`;
+                        const cwAvatar = `<img src="${getAvatarUrl(cw.writer_name, cw.avatar_url)}" class="co-writer-avatar" alt="${esc(cw.writer_name || 'Co-Writer')}" onerror="this.onerror=null;this.src=getAvatarUrl(cw.writer_name);">`;
                         coWritersHtml += `<div class="co-writer-card">
                             ${cwAvatar}
                             <div>
@@ -869,6 +863,15 @@ async function generateAudio(voiceId, text) {
 
 // ===== UTILITY =====
 function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// Every writer/co-writer gets an avatar: uses their uploaded photo if one exists,
+// otherwise auto-generates a consistent, colorful initials avatar from their name.
+function getAvatarUrl(name, uploadedUrl) {
+    if (uploadedUrl) return uploadedUrl;
+    const safeName = encodeURIComponent((name && name.trim()) ? name.trim() : 'Anonymous Writer');
+    return `https://ui-avatars.com/api/?name=${safeName}&background=random&color=fff&bold=true&size=128&length=2&rounded=true`;
+}
+
 document.addEventListener('click', function(e) {
     if (!e.target.closest('.share-btn')) {
         document.querySelectorAll('.share-menu').forEach(m => m.classList.remove('active'));
