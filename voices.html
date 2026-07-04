@@ -38,8 +38,10 @@
         /* ===== AVATAR ON EVERY WRITER ===== */
         .writer-avatar {
             width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--gold); background: #222; margin-right: 10px;
+            border: 2px solid var(--gold); background: #333; margin-right: 10px;
             flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; color: #fff;
         }
         .writer-info { display: flex; flex-direction: column; }
         .writer-name { color: var(--gold); font-weight: 700; font-family: var(--font-ui); font-size: 0.9rem; }
@@ -67,6 +69,7 @@
         .co-writer-card { padding: 12px 16px; margin-top: 10px; background: rgba(255,255,255,0.02); border-radius: 8px; border-left: 3px solid var(--gold); display: flex; align-items: center; gap: 12px; }
         .co-writer-card .writer-name { color: var(--gold); font-weight: 600; font-size: 0.85rem; }
         .co-writer-card .quote-text { font-size: 0.95rem; margin: 6px 0; }
+        .co-writer-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1rem; color: #fff; background: #333; flex-shrink: 0; }
 
         /* BUTTONS */
         .gen-btn { background: #9333ea; color: #fff; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font-ui); display: inline-flex; align-items: center; gap: 6px; }
@@ -442,7 +445,6 @@ function populateFilters() {
     const years = [...new Set(allVoices.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
     const sel = document.getElementById('yearSearch');
     sel.innerHTML = '<option value="">📅 All Years</option>';
-    // Pre-populate with 2026 if it exists, otherwise just add it
     if (!years.includes(2026)) {
         sel.innerHTML += `<option value="2026">2026</option>`;
     }
@@ -490,7 +492,12 @@ async function renderVoices() {
         const v = toShow[i];
         const sp = Math.round((v.sentiment || 0.5) * 100);
         const showOriginal = v.language !== 'English' && v.quote_original && v.quote_original !== v.quote_english;
-        const avatarUrl = v.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(v.writer_name || 'Unknown')}&background=random&color=fff`;
+        
+        // ===== FIXED AVATAR LOGIC =====
+        // If avatar_url exists, show the image. If not, show the 👤 symbol inside a circle.
+        const avatarContent = v.avatar_url 
+            ? `<img src="${v.avatar_url}" class="writer-avatar" alt="${esc(v.writer_name || 'Writer')}">`
+            : `<div class="writer-avatar">👤</div>`;
         
         let coWritersHtml = '';
         if (v.chapter_id) {
@@ -502,9 +509,12 @@ async function renderVoices() {
                 if (coWriters.length > 0) {
                     coWritersHtml = `<div class="chapter-co-writers"><p style="color:var(--gold);font-weight:600;margin-bottom:8px;">✍️ Co-Writers of this Chapter:</p>`;
                     coWriters.forEach(cw => {
-                        const cwAvatar = cw.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(cw.writer_name || 'Co-Writer')}&background=random&color=fff`;
+                        // Same logic for co-writers: image if exists, otherwise 👤 symbol
+                        const cwAvatar = cw.avatar_url 
+                            ? `<img src="${cw.avatar_url}" class="co-writer-avatar" alt="${esc(cw.writer_name || 'Co-Writer')}">`
+                            : `<div class="co-writer-avatar">👤</div>`;
                         coWritersHtml += `<div class="co-writer-card">
-                            <img src="${cwAvatar}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);">
+                            ${cwAvatar}
                             <div>
                                 <div class="writer-name">👤 ${esc(cw.writer_name)}</div>
                                 <div class="quote-text">${esc(cw.quote_english)}</div>
@@ -521,7 +531,7 @@ async function renderVoices() {
         <div class="voice-card" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i * 0.03}s">
             <div class="voice-header">
                 <div class="voice-meta" style="display:flex;align-items:center;gap:10px;">
-                    <img src="${avatarUrl}" class="writer-avatar" alt="${esc(v.writer_name || 'Writer')}">
+                    ${avatarContent}
                     <div class="writer-info">
                         ${v.writer_name ? `<div class="writer-name">✍️ ${esc(v.writer_name)}</div>` : ''}
                         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;">
