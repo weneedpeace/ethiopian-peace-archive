@@ -3,146 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contribute your voice to the Ethiopian Peace Archive. Share your message of peace, unity, and hope.">
     <title>Contribute Your Voice — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Keep all your existing styles, and ADD this for the image upload */
+        body { 
+            background: #fff url('https://raw.githubusercontent.com/weneedpeace/ethiopian-peace-archive/9220c7e1b5979abb5ba528a3a660e321c211873f/3786837d-9a80-4ccc-9b6d-677aa2b28221.png') center/cover no-repeat !important;
+            background-attachment: fixed !important;
+            color: #1a1a1a !important; 
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.85);
+            z-index: -1;
+        }
+        nav { background: rgba(255,255,255,0.95) !important; border-bottom: 1px solid #e5e7eb !important; }
+        nav .logo { color: #1a1a1a !important; }
+        nav .logo span { color: #16a34a !important; }
+        nav .desktop-links a { color: #666 !important; }
+        nav .desktop-links a:hover { color: #16a34a !important; background: #f0fdf4 !important; }
+        nav .desktop-links a.active { color: #16a34a !important; background: #f0fdf4 !important; }
+        nav .desktop-links a.cta-nav { background: #16a34a !important; color: #fff !important; }
+        .hamburger span { background: #1a1a1a !important; }
+        .slide-menu { background: #fff !important; border-left: 1px solid #e5e7eb !important; }
+        .slide-menu a { color: #1a1a1a !important; }
+        .slide-menu a:hover { background: #f0fdf4 !important; color: #16a34a !important; }
+        footer { background: rgba(255,255,255,0.95) !important; border-top: 1px solid #e5e7eb !important; color: #999 !important; }
+        
+        .container { max-width: 700px; margin: 40px auto; padding: 0 20px; position: relative; z-index: 1; }
+        .page-hero { text-align: center; padding: 30px 0 20px; }
+        .page-hero h1 { color: #1a1a1a; font-size: 1.8rem; font-family: var(--font-ui); font-weight: 800; margin-bottom: 6px; }
+        .page-hero p { color: #666; font-size: 1rem; }
+        
+        .form-card { background: rgba(255,255,255,0.95); border: 2px solid #16a34a; border-radius: 16px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .form-card h3 { color: #1a1a1a; font-family: var(--font-ui); font-size: 1.1rem; text-align: center; margin-bottom: 4px; }
+        .form-card .subtitle { color: #888; font-size: 0.85rem; text-align: center; margin-bottom: 24px; }
+        
+        .form-card label { display: block; color: #444; font-size: 0.8rem; font-family: var(--font-ui); font-weight: 600; margin-bottom: 4px; }
+        .form-card input, .form-card textarea {
+            width: 100%; padding: 12px 16px; border-radius: 10px;
+            border: 1px solid #d1d5db; background: #fff;
+            color: #1a1a1a; font-size: 0.9rem; font-family: inherit;
+            margin-bottom: 14px; transition: all 0.3s;
+        }
+        .form-card input:focus, .form-card textarea:focus {
+            outline: none; border-color: #16a34a;
+            box-shadow: 0 0 0 3px rgba(22,163,74,0.1);
+        }
+        .form-card textarea { min-height: 140px; resize: vertical; }
+        
+        /* Profile image upload styling */
         .file-upload {
             border: 2px dashed #d1d5db; border-radius: 10px; padding: 15px; text-align: center;
             color: #888; font-size: 0.85rem; cursor: pointer; margin-bottom: 14px; transition: 0.3s;
         }
         .file-upload:hover { border-color: #16a34a; background: #f0fdf4; }
         .avatar-preview { display: none; width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #16a34a; margin: 0 auto 12px; }
-        .success-notification { display: none; background: rgba(240,253,244,0.98); border: 2px solid #16a34a; border-radius: 16px; padding: 30px; text-align: center; }
+
+        .char-count { text-align: right; color: #999; font-size: 0.7rem; margin-top: -8px; margin-bottom: 10px; font-family: var(--font-ui); }
+        
+        .submit-btn {
+            width: 100%; padding: 14px; border-radius: 30px;
+            background: #16a34a; color: #fff; font-weight: 700; font-size: 1rem;
+            border: none; cursor: pointer; font-family: var(--font-ui);
+            transition: all 0.3s;
+        }
+        .submit-btn:hover { background: #15803d; transform: translateY(-2px); }
+        .submit-btn:disabled { background: #999; cursor: not-allowed; }
+        
+        .trust-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+        .trust-item { display: flex; align-items: center; gap: 6px; color: #666; font-size: 0.78rem; font-family: var(--font-ui); }
+        .trust-item span { color: #16a34a; }
+        
+        .privacy-note { text-align: center; color: #999; font-size: 0.7rem; margin-top: 14px; font-family: var(--font-ui); }
+
+        .success-notification {
+            display: none;
+            background: rgba(240,253,244,0.98);
+            border: 2px solid #16a34a;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
         .success-notification.show { display: block; }
-        .error-notification { display: none; background: rgba(254,242,242,0.98); border: 2px solid #ef4444; border-radius: 16px; padding: 20px; text-align: center; color: #ef4444; }
+        .success-notification .check-icon {
+            width: 60px; height: 60px; background: #16a34a; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; font-size: 2rem; color: #fff;
+        }
+        .success-notification h3 { color: #16a34a; font-family: var(--font-ui); font-size: 1.2rem; margin-bottom: 6px; }
+        .success-notification p { color: #555; font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px; }
+        .success-notification button {
+            padding: 10px 24px; border-radius: 25px;
+            background: #16a34a; color: #fff; border: none;
+            font-weight: 700; font-family: var(--font-ui); cursor: pointer; font-size: 0.9rem;
+        }
+        .error-notification {
+            display: none;
+            background: rgba(254,242,242,0.98);
+            border: 2px solid #ef4444;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            color: #ef4444;
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+        }
         .error-notification.show { display: block; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <!-- Keep your existing navigation and hero -->
-    <!-- ... -->
 
-    <main class="container">
-        <div class="page-hero">
-            <h1>📖 Start Your Own Chapter</h1>
-            <p>Your message becomes the foundation of a family or team legacy.</p>
-        </div>
+<!-- ============================================ -->
+<!-- NAVIGATION (EXACTLY AS YOU HAVE IT) -->
+<!-- ============================================ -->
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
+        <a href="gallery.html">Gallery</a><a href="thanks.html">Thanks</a>
+        <a href="contribute.html" class="active">Contribute</a>
+        <a href="support.html" class="cta-nav">Support</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
 
-        <div class="form-card" id="formCard">
-            <h3>✍️ Write Your Founder's Message</h3>
-            <p class="subtitle">Upload a profile picture, or we'll generate an avatar for you.</p>
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3 style="color:#1a1a1a">Ethiopian Peace Archive</h3></div>
+    <a href="index.html">🏠 Home</a><a href="voices.html">🗣️ Voices</a><a href="contribute.html">🤝 Contribute</a>
+    <a href="support.html">❤️ Support</a>
+</div>
+
+<!-- ============================================ -->
+<!-- MAIN CONTENT -->
+<!-- ============================================ -->
+<main class="container">
+    <div class="page-hero">
+        <h1>📖 Start Your Own Chapter</h1>
+        <p>Your message becomes the foundation of a family or team legacy.</p>
+    </div>
+
+    <div class="trust-row">
+        <div class="trust-item"><span>🔒</span> Email private</div>
+        <div class="trust-item"><span>✅</span> Human reviewed</div>
+        <div class="trust-item"><span>🌍</span> 15+ countries</div>
+        <div class="trust-item"><span>📜</span> Permanent archive</div>
+    </div>
+
+    <div class="form-card" id="formCard">
+        <h3>✍️ Write Your Founder's Message</h3>
+        <p class="subtitle">Upload a profile picture, or we'll generate an avatar for you.</p>
+        
+        <form id="submitForm">
+            <label>Your Full Name</label>
+            <input type="text" id="sName" placeholder="e.g., Stephern Johnson" required>
             
-            <form id="submitForm">
-                <label>Your Full Name</label>
-                <input type="text" id="sName" placeholder="e.g., Stephern Johnson" required>
-                
-                <label>Your Email</label>
-                <input type="email" id="sEmail" placeholder="For verification &amp; sharing with family" required>
-                
-                <label>Your Region or Country</label>
-                <input type="text" id="sRegion" placeholder="e.g., Addis Ababa, Ethiopia" required>
-                
-                <label>Your Profile Picture</label>
-                <div class="file-upload" onclick="document.getElementById('profileFile').click()">
-                    📷 Tap to upload a photo (optional)
-                </div>
-                <input type="file" id="profileFile" accept="image/*" style="display:none" onchange="uploadProfile(this)">
-                <img id="avatarPreview" class="avatar-preview" src="" alt="Profile Preview">
-                <input type="hidden" id="avatarUrl">
-                
-                <label>Your Founder's Message</label>
-                <textarea id="sMessage" placeholder="Write your wish for peace, unity, and hope..." rows="5" required></textarea>
-                
-                <button type="button" class="submit-btn" id="submitBtn" onclick="submitFounder()">🕊️ Submit My Founder's Message</button>
-                <p class="privacy-note">🔒 Your email is private. Only your name, region, and message are published after review.</p>
-            </form>
-        </div>
-
-        <div class="success-notification" id="successNotification">
-            <div class="check-icon">✓</div>
-            <h3>Thank You! Your Chapter Is Under Review.</h3>
-            <p>Once approved, your family/team can add co-writers using your email.</p>
-            <button onclick="resetForm()">Start Another Chapter →</button>
-        </div>
-
-        <div class="error-notification" id="errorNotification">
-            ❌ Unable to send. Please try again or email us directly.
-        </div>
-    </main>
-
-    <script src="js/navigation.js"></script>
-    <script>
-        const FORMSPREE = 'https://formspree.io/f/xkoaddng';
-
-        // Upload to Cloudinary
-        async function uploadProfile(input) {
-            const file = input.files[0];
-            if (!file) return;
-            const preview = document.getElementById('avatarPreview');
-            preview.src = URL.createObjectURL(file);
-            preview.style.display = 'block';
+            <label>Your Email</label>
+            <input type="email" id="sEmail" placeholder="For verification &amp; sharing with family" required>
             
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('upload_preset', 'peace_archive');
-            try {
-                const res = await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload', { method: 'POST', body: formData });
-                const data = await res.json();
-                if (data.secure_url) document.getElementById('avatarUrl').value = data.secure_url;
-            } catch (e) { /* silent fail */ }
+            <label>Your Region or Country</label>
+            <input type="text" id="sRegion" placeholder="e.g., Addis Ababa, Ethiopia" required>
+            
+            <label>Your Profile Picture</label>
+            <div class="file-upload" onclick="document.getElementById('profileFile').click()">
+                📷 Tap to upload a photo (optional)
+            </div>
+            <input type="file" id="profileFile" accept="image/*" style="display:none" onchange="uploadProfile(this)">
+            <img id="avatarPreview" class="avatar-preview" src="" alt="Profile Preview">
+            <input type="hidden" id="avatarUrl">
+            
+            <label>Your Founder's Message</label>
+            <textarea id="sMessage" placeholder="Write your wish for peace, unity, and hope..." rows="5" required></textarea>
+            <div class="char-count"><span id="charCount">0</span> characters</div>
+            
+            <button type="button" class="submit-btn" id="submitBtn" onclick="submitFounder()">🕊️ Submit My Founder's Message</button>
+            <p class="privacy-note">🔒 Your email is private. Only your name, region, and message are published after review.</p>
+        </form>
+    </div>
+
+    <div class="success-notification" id="successNotification">
+        <div class="check-icon">✓</div>
+        <h3>Thank You! Your Chapter Is Under Review.</h3>
+        <p>Once approved, your family/team can add co-writers using your email.</p>
+        <button onclick="resetForm()">Start Another Chapter →</button>
+    </div>
+
+    <div class="error-notification" id="errorNotification">
+        ❌ Unable to send. Please try again or email us directly.
+    </div>
+</main>
+
+<!-- ============================================ -->
+<!-- FOOTER -->
+<!-- ============================================ -->
+<footer>
+    <div class="footer-bottom"><p>🕊️ Ethiopian Peace Archive &copy; 2026 · Every voice matters.</p></div>
+</footer>
+
+<!-- ============================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================ -->
+<script src="js/navigation.js"></script>
+<script>
+const FORMSPREE = 'https://formspree.io/f/xkoaddng';
+const CLOUDINARY_UPLOAD = 'https://api.cloudinary.com/v1_1/djb3falqu/image/upload';
+
+// ============================================
+// CHAR COUNT
+// ============================================
+document.getElementById('sMessage').addEventListener('input', function() {
+    document.getElementById('charCount').textContent = this.value.length;
+});
+
+// ============================================
+// UPLOAD PROFILE IMAGE TO CLOUDINARY
+// ============================================
+async function uploadProfile(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const preview = document.getElementById('avatarPreview');
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = 'block';
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'peace_archive'); // Keep your Cloudinary preset
+    try {
+        const res = await fetch(CLOUDINARY_UPLOAD, { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.secure_url) {
+            document.getElementById('avatarUrl').value = data.secure_url;
         }
+    } catch (e) { /* silent fail, user can submit without image */ }
+}
 
-        // Submit to Formspree (with avatar URL included)
-        async function submitFounder() {
-            const name = document.getElementById('sName').value;
-            const email = document.getElementById('sEmail').value;
-            const region = document.getElementById('sRegion').value;
-            const message = document.getElementById('sMessage').value;
-            const avatarUrl = document.getElementById('avatarUrl').value;
+// ============================================
+// SUBMIT FOUNDER TO FORMSPREE
+// ============================================
+async function submitFounder() {
+    const name = document.getElementById('sName').value.trim();
+    const email = document.getElementById('sEmail').value.trim();
+    const region = document.getElementById('sRegion').value.trim();
+    const message = document.getElementById('sMessage').value.trim();
+    const avatarUrl = document.getElementById('avatarUrl').value.trim();
 
-            if (!name || !email || !region || !message) {
-                alert('Please fill in all required fields.');
-                return;
-            }
+    if (!name || !email || !region || !message) {
+        alert('Please fill in all required fields.');
+        return;
+    }
 
-            var btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.textContent = '📤 Sending...';
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '📤 Sending...';
 
-            var data = new FormData();
-            data.append('name', name);
-            data.append('email', email);
-            data.append('region', region);
-            data.append('message', message);
-            data.append('avatar_url', avatarUrl || 'auto-avatar');
+    var data = new FormData();
+    data.append('name', name);
+    data.append('email', email);
+    data.append('region', region);
+    data.append('message', message);
+    data.append('avatar_url', avatarUrl || 'auto-avatar');
 
-            try {
-                var res = await fetch(FORMSPREE, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-                if (res.ok) {
-                    document.getElementById('formCard').style.display = 'none';
-                    document.getElementById('errorNotification').classList.remove('show');
-                    document.getElementById('successNotification').classList.add('show');
-                } else {
-                    document.getElementById('errorNotification').classList.add('show');
-                    btn.disabled = false; btn.textContent = '🕊️ Submit My Founder\'s Message';
-                }
-            } catch (e) {
-                document.getElementById('errorNotification').classList.add('show');
-                btn.disabled = false; btn.textContent = '🕊️ Submit My Founder\'s Message';
-            }
-        }
-
-        function resetForm() {
-            document.getElementById('formCard').style.display = 'block';
-            document.getElementById('successNotification').classList.remove('show');
+    try {
+        var res = await fetch(FORMSPREE, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+        
+        if (res.ok) {
+            document.getElementById('formCard').style.display = 'none';
             document.getElementById('errorNotification').classList.remove('show');
-            document.getElementById('submitForm').reset();
-            document.getElementById('avatarPreview').style.display = 'none';
-            document.getElementById('submitBtn').disabled = false;
-            document.getElementById('submitBtn').textContent = '🕊️ Submit My Founder\'s Message';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('successNotification').classList.add('show');
+            window.scrollTo({ top: document.getElementById('successNotification').offsetTop - 50, behavior: 'smooth' });
+        } else {
+            document.getElementById('errorNotification').classList.add('show');
+            btn.disabled = false;
+            btn.textContent = '🕊️ Submit My Founder\'s Message';
         }
-    </script>
+    } catch (e) {
+        document.getElementById('errorNotification').classList.add('show');
+        btn.disabled = false;
+        btn.textContent = '🕊️ Submit My Founder\'s Message';
+    }
+}
+
+// ============================================
+// RESET FORM
+// ============================================
+function resetForm() {
+    document.getElementById('formCard').style.display = 'block';
+    document.getElementById('successNotification').classList.remove('show');
+    document.getElementById('errorNotification').classList.remove('show');
+    document.getElementById('submitForm').reset();
+    document.getElementById('avatarPreview').style.display = 'none';
+    document.getElementById('avatarUrl').value = '';
+    document.getElementById('charCount').textContent = '0';
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('submitBtn').textContent = '🕊️ Submit My Founder\'s Message';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
 </body>
 </html>
