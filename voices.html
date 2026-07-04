@@ -286,6 +286,7 @@
         </select>
         <select id="yearSearch" onchange="applySearch()">
             <option value="">📅 All Years</option>
+            <option value="2026">2026</option>
         </select>
         <button onclick="applySearch()">🔍 Search</button>
     </div>
@@ -441,6 +442,10 @@ function populateFilters() {
     const years = [...new Set(allVoices.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
     const sel = document.getElementById('yearSearch');
     sel.innerHTML = '<option value="">📅 All Years</option>';
+    // Pre-populate with 2026 if it exists, otherwise just add it
+    if (!years.includes(2026)) {
+        sel.innerHTML += `<option value="2026">2026</option>`;
+    }
     years.forEach(y => { sel.innerHTML += `<option value="${y}">${y}</option>`; });
 }
 
