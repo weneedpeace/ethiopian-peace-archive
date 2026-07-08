@@ -11,6 +11,58 @@
     <title>Ethiopian Peace Archive — Global Movement for Peace</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* Hero without image */
+        .hero-plain {
+            padding: 80px 20px 50px;
+            text-align: center;
+            border-bottom: 1px solid var(--green-border);
+            position: relative;
+            overflow: hidden;
+            background: var(--bg);
+        }
+        .hero-plain::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.08) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 70%, rgba(251, 191, 36, 0.06) 0%, transparent 60%);
+            animation: heroPulse 10s ease-in-out infinite;
+        }
+        @keyframes heroPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        .hero-plain > * { position: relative; z-index: 1; }
+        
+        .hero-plain .badge-top {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--green-bright);
+            padding: 7px 18px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: var(--font-ui);
+            font-weight: 600;
+            margin-bottom: 16px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .hero-plain h1 {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            color: var(--gold-bright);
+            margin-bottom: 16px;
+            line-height: 1.2;
+            font-weight: bold;
+        }
+        .hero-plain .hero-sub {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--text-dim);
+            max-width: 650px;
+            margin: 0 auto 28px;
+            font-style: italic;
+        }
+
         /* Palm leaves decoration */
         .palm-decoration {
             display: flex;
@@ -38,6 +90,32 @@
             25% { transform: rotate(3deg); }
             75% { transform: rotate(-3deg); }
         }
+        
+        /* CTA Banner */
+        .cta-banner {
+            background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(251,191,36,0.1));
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            text-align: center;
+        }
+        .cta-banner h2 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-family: var(--font-ui);
+        }
+        .cta-banner p {
+            color: var(--text-dim);
+            margin-bottom: 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -50,7 +128,7 @@
         <a href="voices.html" data-i18n="voices">Voices</a>
         <a href="blog.html" data-i18n="blog">Blog</a>
         <a href="courses.html" data-i18n="courses">Courses</a>
-        <a href="dashboard.html" data-i18n="impact">Impact</a>
+        <a href="dashboard.html" data-i18n="impact">Dashboard</a>
         <a href="media.html" data-i18n="media">Media</a>
         <a href="gallery.html" data-i18n="gallery">Gallery</a>
         <a href="thanks.html" data-i18n="thanks">Thanks</a>
@@ -74,7 +152,7 @@
     <a href="voices.html"><span class="menu-icon">🗣️</span> <span data-i18n="voices">Voice Archive</span></a>
     <a href="blog.html"><span class="menu-icon">📝</span> <span data-i18n="blog">Blog & Stories</span></a>
     <a href="courses.html"><span class="menu-icon">🎓</span> <span data-i18n="courses">Free Courses</span></a>
-    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Impact Dashboard</span></a>
+    <a href="dashboard.html"><span class="menu-icon">📊</span> <span data-i18n="impact">Dashboard</span></a>
     <a href="media.html"><span class="menu-icon">📰</span> <span data-i18n="media">Media Coverage</span></a>
     <a href="gallery.html"><span class="menu-icon">🖼️</span> <span data-i18n="gallery">Gallery</span></a>
     <a href="thanks.html"><span class="menu-icon">🙏</span> <span data-i18n="thanks">Thank You</span></a>
@@ -95,8 +173,8 @@
     </div>
 </div>
 
-<!-- HERO WITH TILET BACKGROUND -->
-<header class="hero" style="background: linear-gradient(to bottom, rgba(6,15,30,0.75), rgba(6,15,30,0.92)), url('https://raw.githubusercontent.com/weneedpeace/ethiopian-peace-archive/9220c7e1b5979abb5ba528a3a660e321c211873f/3786837d-9a80-4ccc-9b6d-677aa2b28221.png') center/cover no-repeat;">
+<!-- HERO - NO BACKGROUND IMAGE -->
+<header class="hero-plain">
     <div class="badge-top" data-i18n="tagline">🌍 Global Peace Movement</div>
     <h1 data-i18n="heroTitle">Voices of Peace.<br>Power of Unity.</h1>
     <p class="hero-sub" data-i18n="heroSub">1,000+ voices from Ethiopia and the world — preserved, amplified, and driving real change for diaspora and local communities.</p>
@@ -124,7 +202,7 @@
         <a href="voices.html" class="feature-card"><div class="icon">🗣️</div><h3 data-i18n="voiceArchive">Voice Archive</h3><p data-i18n="voiceArchiveDesc">Browse 1,000+ peace messages from all Ethiopian regions and global supporters.</p></a>
         <a href="courses.html" class="feature-card"><div class="icon">🎓</div><h3 data-i18n="peaceCourses">Free Peace Courses</h3><p data-i18n="peaceCoursesDesc">Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required.</p></a>
         <a href="blog.html" class="feature-card"><div class="icon">📝</div><h3 data-i18n="blogResearch">Blog & Research</h3><p data-i18n="blogResearchDesc">Stories from the field, research findings, and updates on peace initiatives.</p></a>
-        <a href="dashboard.html" class="feature-card"><div class="icon">📊</div><h3 data-i18n="impactDashboard">Impact Dashboard</h3><p data-i18n="impactDashboardDesc">Track our global reach. See how voices translate into action worldwide.</p></a>
+        <a href="dashboard.html" class="feature-card"><div class="icon">📊</div><h3 data-i18n="impactDashboard">Your Dashboard</h3><p data-i18n="impactDashboardDesc">Track your activity, manage chapters, and connect with the community.</p></a>
         <a href="contribute.html" class="feature-card"><div class="icon">🤝</div><h3 data-i18n="contributeTitle">Contribute</h3><p data-i18n="contributeDesc">Submit your voice, volunteer, partner with us, or share your expertise.</p></a>
         <a href="support.html" class="feature-card"><div class="icon">❤️</div><h3 data-i18n="supportTitle">Support</h3><p data-i18n="supportDesc">Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.</p></a>
     </div>
@@ -142,15 +220,15 @@
 <!-- PROFESSIONAL FOOTER -->
 <footer>
     <div class="footer-grid">
-        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog & Stories</a><a href="dashboard.html">Impact Dashboard</a><a href="media.html">Media Coverage</a><a href="gallery.html">Gallery</a></div>
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog & Stories</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media Coverage</a><a href="gallery.html">Gallery</a></div>
         <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Free Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About Us</a></div>
         <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Your Voice</a><a href="support.html">Donate & Support</a><a href="thanks.html">Thank You</a><a href="contact.html">Volunteer</a></div>
-        <div class="footer-col"><h4>📜 Legal & Contact</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a><a href="contact.html">Contact Us</a><a href="admin.html">Admin Login</a></div>
+        <div class="footer-col"><h4>📜 Legal & Contact</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a><a href="contact.html">Contact Us</a></div>
         <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 (Twitter)</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
     </div>
     <div class="footer-bottom">
         <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace · Built with ❤️ for Ethiopia and the World</p>
-        <p style="margin-top:6px;font-size:0.7rem"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · <a href="thanks.html">Thank You</a> · <a href="admin.html">Admin</a></p>
+        <p style="margin-top:6px;font-size:0.7rem"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · <a href="thanks.html">Thank You</a></p>
         <p style="margin-top:8px;color:var(--green-bright);font-weight:600">#EthiopianPeaceArchive #VoicesForPeace</p>
     </div>
 </footer>
