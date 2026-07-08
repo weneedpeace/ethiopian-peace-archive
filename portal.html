@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="User Dashboard - Ethiopian Peace Archive">
+    <title>Dashboard — Ethiopian Peace Archive</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Dashboard-specific styles */
+        .dashboard-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 16px;
+        }
+        .dashboard-header {
+            background: var(--card);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .dashboard-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #000;
+            flex-shrink: 0;
+        }
+        .dashboard-info h2 {
+            color: var(--gold);
+            font-family: var(--font-ui);
+            margin-bottom: 4px;
+        }
+        .dashboard-info p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        .dashboard-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .stat-box {
+            background: var(--card);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .stat-box:hover {
+            transform: translateY(-3px);
+            border-color: var(--green);
+        }
+        .stat-box .stat-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        .stat-box .stat-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--green-bright);
+            font-family: var(--font-ui);
+        }
+        .stat-box .stat-label {
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            font-family: var(--font-ui);
+            margin-top: 4px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .section-header h3 {
+            color: var(--gold);
+            font-family: var(--font-ui);
+            font-size: 1.2rem;
+        }
+        
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .chapter-item {
+            background: var(--card);
+            border: 1px solid rgba(34,197,94,0.1);
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+        .chapter-item:hover {
+            border-color: var(--green);
+        }
+        .chapter-info h4 {
+            color: var(--text);
+            font-family: var(--font-ui);
+            font-size: 1rem;
+        }
+        .chapter-info .chapter-meta {
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            font-family: var(--font-ui);
+            margin-top: 4px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .chapter-actions {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .activity-item {
+            background: var(--card);
+            border-radius: 10px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            font-family: var(--font-ui);
+        }
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .activity-icon.like { background: rgba(239,68,68,0.15); }
+        .activity-icon.share { background: rgba(59,130,246,0.15); }
+        .activity-icon.chapter { background: rgba(34,197,94,0.15); }
+        .activity-icon.message { background: rgba(168,85,247,0.15); }
+        .activity-text { color: var(--text); flex: 1; }
+        .activity-time { color: var(--text-muted); font-size: 0.7rem; }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-dim);
+            background: var(--card);
+            border-radius: var(--radius);
+            border: 1px dashed var(--green-border);
+        }
+        .empty-state .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            margin-top: 24px;
+        }
+        .quick-action-btn {
+            background: var(--card);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+        }
+        .quick-action-btn:hover {
+            border-color: var(--gold);
+            background: var(--card-hover);
+            transform: translateY(-2px);
+        }
+        .quick-action-btn .qa-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .dashboard-actions {
+                margin-left: 0;
+                justify-content: center;
+            }
+            .chapter-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .chapter-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="desktop-links">
+        <a href="index.html">Home</a>
+        <a href="voices.html">Voices</a>
+        <a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a>
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="media.html">Media</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="thanks.html">Thanks</a>
+        <a href="contribute.html">Contribute</a>
+        <a href="support.html" class="cta-nav">Support</a>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+        <button id="userBtn" onclick="handleLogout()" class="btn btn-sm btn-gold" style="font-size:0.8rem;">👤 Sign Out</button>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
+    <a href="index.html">🏠 Home</a><a href="voices.html">🗣️ Voices</a><a href="blog.html">📝 Blog</a>
+    <a href="courses.html">🎓 Courses</a><a href="dashboard.html">📊 Dashboard</a>
+    <a href="gallery.html">🖼️ Gallery</a><a href="thanks.html">🙏 Thanks</a>
+    <a href="support.html">❤️ Support</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="dashboard-container">
+    
+    <!-- HEADER -->
+    <div class="dashboard-header" id="dashboardHeader">
+        <div class="dashboard-avatar" id="userAvatar">👤</div>
+        <div class="dashboard-info">
+            <h2 id="userName">Welcome!</h2>
+            <p id="userEmail">Please sign in to view your dashboard</p>
+            <p style="color:var(--green-bright);font-size:0.8rem;margin-top:4px;" id="userTitle"></p>
+        </div>
+        <div class="dashboard-actions">
+            <a href="voices.html" class="btn btn-outline btn-sm">🗣️ Browse Voices</a>
+            <button class="btn btn-primary btn-sm" onclick="createNewChapter()">✍️ New Chapter</button>
+        </div>
+    </div>
+    
+    <!-- STATS -->
+    <div class="stats-grid">
+        <div class="stat-box">
+            <div class="stat-icon">📝</div>
+            <div class="stat-num" id="statChapters">0</div>
+            <div class="stat-label">My Chapters</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-icon">❤️</div>
+            <div class="stat-num" id="statLikes">0</div>
+            <div class="stat-label">Total Likes</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-icon">💬</div>
+            <div class="stat-num" id="statMessages">0</div>
+            <div class="stat-label">Messages</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-icon">🪙</div>
+            <div class="stat-num" id="statCoins">0</div>
+            <div class="stat-label">Coins Earned</div>
+        </div>
+    </div>
+    
+    <!-- MY CHAPTERS -->
+    <div class="section-header">
+        <h3>📚 My Chapters</h3>
+        <a href="voices.html" class="btn btn-sm btn-outline">View All</a>
+    </div>
+    <div class="chapter-list" id="chapterList">
+        <div class="empty-state">
+            <div class="empty-icon">📝</div>
+            <p>No chapters yet. <a href="voices.html" style="color:var(--green-bright);">Join a chapter</a> or create your own!</p>
+        </div>
+    </div>
+    
+    <!-- RECENT ACTIVITY -->
+    <div class="section-header" style="margin-top:24px;">
+        <h3>🕐 Recent Activity</h3>
+    </div>
+    <div class="activity-list" id="activityList">
+        <div class="empty-state">
+            <div class="empty-icon">📊</div>
+            <p>No activity yet. Start by liking or sharing voices!</p>
+        </div>
+    </div>
+    
+    <!-- QUICK ACTIONS -->
+    <h3 style="color:var(--gold);font-family:var(--font-ui);margin-top:24px;margin-bottom:12px;">🛍️ Quick Actions</h3>
+    <div class="quick-actions">
+        <a href="voices.html" class="quick-action-btn">
+            <span class="qa-icon">🗣️</span> Browse Voices
+        </a>
+        <a href="contribute.html" class="quick-action-btn">
+            <span class="qa-icon">✍️</span> Contribute
+        </a>
+        <button class="quick-action-btn" onclick="openWallet()">
+            <span class="qa-icon">🪙</span> My Wallet
+        </button>
+        <button class="quick-action-btn" onclick="exportMyData()">
+            <span class="qa-icon">📥</span> Export Data
+        </button>
+        <button class="quick-action-btn" onclick="editProfile()">
+            <span class="qa-icon">👤</span> Edit Profile
+        </button>
+        <a href="support.html" class="quick-action-btn">
+            <span class="qa-icon">❤️</span> Support
+        </a>
+    </div>
+    
+</main>
+
+<!-- FOOTER -->
+<footer style="margin-top:40px;">
+    <p>© 2024 Ethiopian Peace Archive | <a href="index.html">Home</a> | <a href="voices.html">Voices</a> | <a href="support.html">Support</a></p>
+</footer>
+
+<!-- WALLET POPUP -->
+<div id="walletPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9998;justify-content:center;align-items:center;">
+    <div style="background:#1a1a1a;border:1px solid var(--gold);border-radius:12px;padding:30px;max-width:500px;width:90%;text-align:center;">
+        <h3 style="color:var(--gold);">🪙 Your Coin Wallet</h3>
+        <div style="font-size:2rem;color:#facc15;margin:15px 0;font-family:var(--font-ui);" id="walletBalance">0</div>
+        <p style="color:var(--text-dim);font-size:0.85rem;">Earn coins by getting Likes, Shares, and inviting Co-Writers.</p>
+        <button onclick="closeWallet()" style="margin-top:15px;padding:8px 20px;background:#555;border:none;border-radius:6px;color:#fff;cursor:pointer;">Close</button>
+    </div>
+</div>
+
+<script src="js/navigation.js"></script>
+<script>
+// ============================================
+// CONFIG
+// ============================================
+const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+
+let currentUser = null;
+
+// ============================================
+// INIT
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    checkAuth();
+});
+
+function checkAuth() {
+    const saved = localStorage.getItem('peace_user');
+    if (saved) {
+        try {
+            currentUser = JSON.parse(saved);
+            loadDashboard();
+        } catch(e) {
+            redirectToLogin();
+        }
+    } else {
+        redirectToLogin();
+    }
+}
+
+function redirectToLogin() {
+    window.location.href = 'voices.html';
+}
+
+// ============================================
+// LOAD DASHBOARD
+// ============================================
+async function loadDashboard() {
+    const displayName = currentUser.user_metadata?.display_name || currentUser.email;
+    const initials = getInitials(displayName);
+    
+    document.getElementById('userAvatar').textContent = initials;
+    document.getElementById('userName').textContent = 'Welcome, ' + displayName + '!';
+    document.getElementById('userEmail').textContent = currentUser.email;
+    
+    // Load stats
+    await loadStats();
+    await loadChapters();
+    await loadActivity();
+}
+
+async function loadStats() {
+    try {
+        // Get user's voices (chapters they created)
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?select=id,like_count,starting_likes,starting_shares&or=(email.eq.${currentUser.email},writer_name.eq.${currentUser.user_metadata?.display_name})`, {
+            headers: { 'apikey': SUPABASE_KEY }
+        });
+        const voices = await res.json();
+        
+        const chapterCount = voices.length;
+        const totalLikes = voices.reduce((sum, v) => sum + (v.like_count || 0), 0);
+        const totalCoins = voices.reduce((sum, v) => sum + (v.starting_likes || 50) + (v.starting_shares || 20), 0);
+        
+        document.getElementById('statChapters').textContent = chapterCount;
+        document.getElementById('statLikes').textContent = totalLikes || '0';
+        document.getElementById('statCoins').textContent = totalCoins || '0';
+        
+        // Get message count
+        const msgRes = await fetch(`${SUPABASE_URL}/rest/v1/chat_messages?select=count&user_email=eq.${currentUser.email}`, {
+            headers: { 'apikey': SUPABASE_KEY }
+        });
+        const msgData = await msgRes.json();
+        document.getElementById('statMessages').textContent = msgData[0]?.count || 0;
+        
+    } catch(e) {
+        console.error('Stats error:', e);
+    }
+}
+
+async function loadChapters() {
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?select=*&or=(email.eq.${currentUser.email},writer_name.eq.${currentUser.user_metadata?.display_name})&is_founder=eq.true&limit=10`, {
+            headers: { 'apikey': SUPABASE_KEY }
+        });
+        const chapters = await res.json();
+        
+        const container = document.getElementById('chapterList');
+        
+        if (!chapters.length) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <p>No chapters yet. <a href="voices.html" style="color:var(--green-bright);">Browse voices</a> or create your own!</p>
+                </div>`;
+            return;
+        }
+        
+        container.innerHTML = chapters.map(ch => `
+            <div class="chapter-item">
+                <div class="chapter-info">
+                    <h4>📖 ${escHtml(ch.quote_english?.substring(0, 60) || 'Untitled Chapter')}...</h4>
+                    <div class="chapter-meta">
+                        <span>📍 ${escHtml(ch.region)}</span>
+                        <span>🌐 ${escHtml(ch.language)}</span>
+                        <span>📅 ${ch.year || 'N/A'}</span>
+                        <span>❤️ ${ch.like_count || 0} likes</span>
+                    </div>
+                </div>
+                <div class="chapter-actions">
+                    <button class="btn btn-sm btn-outline" onclick="viewChapter('${ch.chapter_id || ch.id}')">👁️ View</button>
+                    <button class="btn btn-sm btn-gold" onclick="openChat('${ch.chapter_id || ch.id}')">💬 Chat</button>
+                </div>
+            </div>
+        `).join('');
+    } catch(e) {
+        console.error('Chapters error:', e);
+    }
+}
+
+async function loadActivity() {
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/user_activity?select=*&user_email=eq.${currentUser.email}&order=created_at.desc&limit=10`, {
+            headers: { 'apikey': SUPABASE_KEY }
+        });
+        const activities = await res.json();
+        
+        const container = document.getElementById('activityList');
+        
+        if (!activities.length) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">📊</div>
+                    <p>No activity yet. Start by liking or sharing voices!</p>
+                </div>`;
+            return;
+        }
+        
+        const icons = {
+            'like': { icon: '❤️', cls: 'like', text: 'Liked a voice' },
+            'share': { icon: '📤', cls: 'share', text: 'Shared a voice' },
+            'chapter_join': { icon: '✍️', cls: 'chapter', text: 'Joined a chapter' },
+            'chapter_create': { icon: '📝', cls: 'chapter', text: 'Created a chapter' },
+            'message': { icon: '💬', cls: 'message', text: 'Sent a message' }
+        };
+        
+        container.innerHTML = activities.map(a => {
+            const act = icons[a.activity_type] || { icon: '📌', cls: 'chapter', text: 'Action' };
+            const time = new Date(a.created_at).toLocaleDateString();
+            return `
+                <div class="activity-item">
+                    <div class="activity-icon ${act.cls}">${act.icon}</div>
+                    <div class="activity-text">${act.text}</div>
+                    <div class="activity-time">${time}</div>
+                </div>`;
+        }).join('');
+    } catch(e) {
+        console.error('Activity error:', e);
+    }
+}
+
+// ============================================
+// ACTIONS
+// ============================================
+function createNewChapter() {
+    window.location.href = 'contribute.html';
+}
+
+function viewChapter(id) {
+    window.location.href = 'voices.html?chapter=' + id;
+}
+
+function openChat(id) {
+    window.location.href = 'voices.html?chat=' + id;
+}
+
+function editProfile() {
+    alert('Profile editor coming soon! You can update your name, avatar, and bio.');
+}
+
+function exportMyData() {
+    alert('Data export coming soon! You can download your chapters, messages, and activity.');
+}
+
+function handleLogout() {
+    localStorage.removeItem('peace_user');
+    window.location.href = 'voices.html';
+}
+
+function openWallet() {
+    const total = parseInt(document.getElementById('statCoins').textContent) || 0;
+    document.getElementById('walletBalance').textContent = total;
+    document.getElementById('walletPopup').style.display = 'flex';
+}
+
+function closeWallet() {
+    document.getElementById('walletPopup').style.display = 'none';
+}
+
+// ============================================
+// HELPERS
+// ============================================
+function escHtml(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function getInitials(name) { if (!name) return '👤'; const p = name.split(' '); return p.length >= 2 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : name.substring(0,2).toUpperCase(); }
+</script>
+
+</body>
+</html>
