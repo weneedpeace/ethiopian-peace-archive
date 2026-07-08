@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="User Dashboard - Ethiopian Peace Archive">
-    <title>Dashboard — Ethiopian Peace Archive</title>
+    <title>My Portal — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Dashboard-specific styles */
-        .dashboard-container {
+        .portal-container {
             max-width: 1000px;
             margin: 30px auto;
             padding: 0 16px;
         }
-        .dashboard-header {
+        .portal-header {
             background: var(--card);
             border: 1px solid var(--green-border);
             border-radius: var(--radius-lg);
@@ -24,7 +22,7 @@
             gap: 20px;
             flex-wrap: wrap;
         }
-        .dashboard-avatar {
+        .portal-avatar {
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -37,16 +35,16 @@
             color: #000;
             flex-shrink: 0;
         }
-        .dashboard-info h2 {
+        .portal-info h2 {
             color: var(--gold);
             font-family: var(--font-ui);
             margin-bottom: 4px;
         }
-        .dashboard-info p {
+        .portal-info p {
             color: var(--text-dim);
             font-size: 0.9rem;
         }
-        .dashboard-actions {
+        .portal-actions {
             margin-left: auto;
             display: flex;
             gap: 8px;
@@ -217,11 +215,11 @@
         }
         
         @media (max-width: 768px) {
-            .dashboard-header {
+            .portal-header {
                 flex-direction: column;
                 text-align: center;
             }
-            .dashboard-actions {
+            .portal-actions {
                 margin-left: 0;
                 justify-content: center;
             }
@@ -245,7 +243,7 @@
         <a href="voices.html">Voices</a>
         <a href="blog.html">Blog</a>
         <a href="courses.html">Courses</a>
-        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="portal.html" class="active">Portal</a>
         <a href="media.html">Media</a>
         <a href="gallery.html">Gallery</a>
         <a href="thanks.html">Thanks</a>
@@ -262,25 +260,25 @@
 <div class="slide-menu" id="slideMenu">
     <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
     <a href="index.html">🏠 Home</a><a href="voices.html">🗣️ Voices</a><a href="blog.html">📝 Blog</a>
-    <a href="courses.html">🎓 Courses</a><a href="dashboard.html">📊 Dashboard</a>
+    <a href="courses.html">🎓 Courses</a><a href="portal.html">📊 Portal</a>
     <a href="gallery.html">🖼️ Gallery</a><a href="thanks.html">🙏 Thanks</a>
     <a href="support.html">❤️ Support</a>
 </div>
 
 <!-- MAIN CONTENT -->
-<main class="dashboard-container">
+<main class="portal-container">
     
     <!-- HEADER -->
-    <div class="dashboard-header" id="dashboardHeader">
-        <div class="dashboard-avatar" id="userAvatar">👤</div>
-        <div class="dashboard-info">
+    <div class="portal-header" id="portalHeader">
+        <div class="portal-avatar" id="userAvatar">👤</div>
+        <div class="portal-info">
             <h2 id="userName">Welcome!</h2>
-            <p id="userEmail">Please sign in to view your dashboard</p>
+            <p id="userEmail">Sign in to view your portal</p>
             <p style="color:var(--green-bright);font-size:0.8rem;margin-top:4px;" id="userTitle"></p>
         </div>
-        <div class="dashboard-actions">
+        <div class="portal-actions">
             <a href="voices.html" class="btn btn-outline btn-sm">🗣️ Browse Voices</a>
-            <button class="btn btn-primary btn-sm" onclick="createNewChapter()">✍️ New Chapter</button>
+            <button class="btn btn-primary btn-sm" onclick="window.location.href='contribute.html'">✍️ New Chapter</button>
         </div>
     </div>
     
@@ -288,22 +286,22 @@
     <div class="stats-grid">
         <div class="stat-box">
             <div class="stat-icon">📝</div>
-            <div class="stat-num" id="statChapters">0</div>
+            <div class="stat-num" id="statChapters">-</div>
             <div class="stat-label">My Chapters</div>
         </div>
         <div class="stat-box">
             <div class="stat-icon">❤️</div>
-            <div class="stat-num" id="statLikes">0</div>
+            <div class="stat-num" id="statLikes">-</div>
             <div class="stat-label">Total Likes</div>
         </div>
         <div class="stat-box">
             <div class="stat-icon">💬</div>
-            <div class="stat-num" id="statMessages">0</div>
+            <div class="stat-num" id="statMessages">-</div>
             <div class="stat-label">Messages</div>
         </div>
         <div class="stat-box">
             <div class="stat-icon">🪙</div>
-            <div class="stat-num" id="statCoins">0</div>
+            <div class="stat-num" id="statCoins">-</div>
             <div class="stat-label">Coins Earned</div>
         </div>
     </div>
@@ -316,7 +314,7 @@
     <div class="chapter-list" id="chapterList">
         <div class="empty-state">
             <div class="empty-icon">📝</div>
-            <p>No chapters yet. <a href="voices.html" style="color:var(--green-bright);">Join a chapter</a> or create your own!</p>
+            <p>Sign in to see your chapters. <a href="voices.html" style="color:var(--green-bright);">Go to Voices →</a></p>
         </div>
     </div>
     
@@ -343,10 +341,10 @@
         <button class="quick-action-btn" onclick="openWallet()">
             <span class="qa-icon">🪙</span> My Wallet
         </button>
-        <button class="quick-action-btn" onclick="exportMyData()">
+        <button class="quick-action-btn" onclick="alert('Coming soon!')">
             <span class="qa-icon">📥</span> Export Data
         </button>
-        <button class="quick-action-btn" onclick="editProfile()">
+        <button class="quick-action-btn" onclick="alert('Coming soon!')">
             <span class="qa-icon">👤</span> Edit Profile
         </button>
         <a href="support.html" class="quick-action-btn">
@@ -358,7 +356,7 @@
 
 <!-- FOOTER -->
 <footer style="margin-top:40px;">
-    <p>© 2024 Ethiopian Peace Archive | <a href="index.html">Home</a> | <a href="voices.html">Voices</a> | <a href="support.html">Support</a></p>
+    <p>© 2026 Ethiopian Peace Archive | <a href="index.html">Home</a> | <a href="voices.html">Voices</a> | <a href="support.html">Support</a></p>
 </footer>
 
 <!-- WALLET POPUP -->
@@ -393,23 +391,35 @@ function checkAuth() {
     if (saved) {
         try {
             currentUser = JSON.parse(saved);
-            loadDashboard();
+            loadPortal();
         } catch(e) {
-            redirectToLogin();
+            showLoginPrompt();
         }
     } else {
-        redirectToLogin();
+        showLoginPrompt();
     }
 }
 
-function redirectToLogin() {
-    window.location.href = 'voices.html';
+function showLoginPrompt() {
+    // Stays on portal page, shows sign-in prompt
+    document.getElementById('userName').textContent = 'Welcome!';
+    document.getElementById('userEmail').textContent = 'Please sign in to view your portal';
+    document.getElementById('statChapters').textContent = '-';
+    document.getElementById('statLikes').textContent = '-';
+    document.getElementById('statMessages').textContent = '-';
+    document.getElementById('statCoins').textContent = '-';
+    document.getElementById('chapterList').innerHTML = `
+        <div class="empty-state">
+            <div class="empty-icon">🔐</div>
+            <p>Please <a href="voices.html" style="color:var(--green-bright);">sign in on the Voices page</a> to view your portal.</p>
+        </div>`;
+    document.getElementById('activityList').innerHTML = '';
 }
 
 // ============================================
-// LOAD DASHBOARD
+// LOAD PORTAL
 // ============================================
-async function loadDashboard() {
+async function loadPortal() {
     const displayName = currentUser.user_metadata?.display_name || currentUser.email;
     const initials = getInitials(displayName);
     
@@ -417,16 +427,13 @@ async function loadDashboard() {
     document.getElementById('userName').textContent = 'Welcome, ' + displayName + '!';
     document.getElementById('userEmail').textContent = currentUser.email;
     
-    // Load stats
     await loadStats();
     await loadChapters();
-    await loadActivity();
 }
 
 async function loadStats() {
     try {
-        // Get user's voices (chapters they created)
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?select=id,like_count,starting_likes,starting_shares&or=(email.eq.${currentUser.email},writer_name.eq.${currentUser.user_metadata?.display_name})`, {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?select=id,like_count,starting_likes,starting_shares&or=(email.eq.${currentUser.email},writer_name.eq.${encodeURIComponent(currentUser.user_metadata?.display_name || '')})`, {
             headers: { 'apikey': SUPABASE_KEY }
         });
         const voices = await res.json();
@@ -435,16 +442,15 @@ async function loadStats() {
         const totalLikes = voices.reduce((sum, v) => sum + (v.like_count || 0), 0);
         const totalCoins = voices.reduce((sum, v) => sum + (v.starting_likes || 50) + (v.starting_shares || 20), 0);
         
-        document.getElementById('statChapters').textContent = chapterCount;
+        document.getElementById('statChapters').textContent = chapterCount || '0';
         document.getElementById('statLikes').textContent = totalLikes || '0';
         document.getElementById('statCoins').textContent = totalCoins || '0';
         
-        // Get message count
         const msgRes = await fetch(`${SUPABASE_URL}/rest/v1/chat_messages?select=count&user_email=eq.${currentUser.email}`, {
             headers: { 'apikey': SUPABASE_KEY }
         });
         const msgData = await msgRes.json();
-        document.getElementById('statMessages').textContent = msgData[0]?.count || 0;
+        document.getElementById('statMessages').textContent = msgData[0]?.count || '0';
         
     } catch(e) {
         console.error('Stats error:', e);
@@ -453,7 +459,7 @@ async function loadStats() {
 
 async function loadChapters() {
     try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?select=*&or=(email.eq.${currentUser.email},writer_name.eq.${currentUser.user_metadata?.display_name})&is_founder=eq.true&limit=10`, {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?select=*&or=(email.eq.${currentUser.email},writer_name.eq.${encodeURIComponent(currentUser.user_metadata?.display_name || '')})&is_founder=eq.true&limit=10`, {
             headers: { 'apikey': SUPABASE_KEY }
         });
         const chapters = await res.json();
@@ -481,8 +487,8 @@ async function loadChapters() {
                     </div>
                 </div>
                 <div class="chapter-actions">
-                    <button class="btn btn-sm btn-outline" onclick="viewChapter('${ch.chapter_id || ch.id}')">👁️ View</button>
-                    <button class="btn btn-sm btn-gold" onclick="openChat('${ch.chapter_id || ch.id}')">💬 Chat</button>
+                    <button class="btn btn-sm btn-outline" onclick="window.location.href='voices.html?chapter=${ch.chapter_id || ch.id}'">👁️ View</button>
+                    <button class="btn btn-sm btn-gold" onclick="window.location.href='voices.html?chat=${ch.chapter_id || ch.id}'">💬 Chat</button>
                 </div>
             </div>
         `).join('');
@@ -491,73 +497,12 @@ async function loadChapters() {
     }
 }
 
-async function loadActivity() {
-    try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/user_activity?select=*&user_email=eq.${currentUser.email}&order=created_at.desc&limit=10`, {
-            headers: { 'apikey': SUPABASE_KEY }
-        });
-        const activities = await res.json();
-        
-        const container = document.getElementById('activityList');
-        
-        if (!activities.length) {
-            container.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-icon">📊</div>
-                    <p>No activity yet. Start by liking or sharing voices!</p>
-                </div>`;
-            return;
-        }
-        
-        const icons = {
-            'like': { icon: '❤️', cls: 'like', text: 'Liked a voice' },
-            'share': { icon: '📤', cls: 'share', text: 'Shared a voice' },
-            'chapter_join': { icon: '✍️', cls: 'chapter', text: 'Joined a chapter' },
-            'chapter_create': { icon: '📝', cls: 'chapter', text: 'Created a chapter' },
-            'message': { icon: '💬', cls: 'message', text: 'Sent a message' }
-        };
-        
-        container.innerHTML = activities.map(a => {
-            const act = icons[a.activity_type] || { icon: '📌', cls: 'chapter', text: 'Action' };
-            const time = new Date(a.created_at).toLocaleDateString();
-            return `
-                <div class="activity-item">
-                    <div class="activity-icon ${act.cls}">${act.icon}</div>
-                    <div class="activity-text">${act.text}</div>
-                    <div class="activity-time">${time}</div>
-                </div>`;
-        }).join('');
-    } catch(e) {
-        console.error('Activity error:', e);
-    }
-}
-
 // ============================================
 // ACTIONS
 // ============================================
-function createNewChapter() {
-    window.location.href = 'contribute.html';
-}
-
-function viewChapter(id) {
-    window.location.href = 'voices.html?chapter=' + id;
-}
-
-function openChat(id) {
-    window.location.href = 'voices.html?chat=' + id;
-}
-
-function editProfile() {
-    alert('Profile editor coming soon! You can update your name, avatar, and bio.');
-}
-
-function exportMyData() {
-    alert('Data export coming soon! You can download your chapters, messages, and activity.');
-}
-
 function handleLogout() {
     localStorage.removeItem('peace_user');
-    window.location.href = 'voices.html';
+    window.location.href = 'index.html';
 }
 
 function openWallet() {
