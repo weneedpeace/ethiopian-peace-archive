@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore 60+ peace voices from Ethiopia and the world.">
+    <meta name="description" content="Explore 100+ peace voices from Ethiopia and the world.">
     <title>Voice Archive — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -37,7 +37,7 @@
     </div>
     <div style="display:flex;gap:10px;align-items:center;">
         <button id="userBtn" onclick="openAuthModal()" class="btn btn-sm btn-gold" style="font-size:0.8rem;">👤 Sign In</button>
-        <button id="chatBtn" onclick="openChatModal()" style="display:none;font-size:0.8rem;" class="btn btn-sm" class="btn btn-sm">💬 Chat</button>
+        <button id="chatBtn" onclick="openChatModal()" style="display:none;font-size:0.8rem;" class="btn btn-sm">💬 Chat</button>
     </div>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
@@ -256,6 +256,13 @@ let currentChapterChat = null;
 let chatPollingInterval = null;
 
 // ============================================
+// HELPERS
+// ============================================
+function escHtml(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function getInitials(name) { if (!name) return '👤'; const p = name.split(' '); return p.length >= 2 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : name.substring(0,2).toUpperCase(); }
+function getRandomLikes(id) { const nums = [48,52,55,47,53,50,49,54,51,46,57,44,58,45,56,43,59,42,60,41]; return nums[id % nums.length]; }
+
+// ============================================
 // PASSWORD CHECK
 // ============================================
 function checkPassword() {
@@ -382,6 +389,7 @@ async function renderVoices() {
         'Japan':'🇯🇵','Malaysia':'🇲🇾','Brazil':'🇧🇷','Nigeria':'🇳🇬','Somalia':'🇸🇴','Tanzania':'🇹🇿',
         'DR Congo':'🇨🇩','Croatia':'🇭🇷','Global':'🌐','Africa':'🌍','Unknown':'🌍'
     };
+    const avatarColors = ['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#2980b9','#c0392b','#16a085','#8e44ad','#d35400','#27ae60','#f1c40f','#e91e63','#00bcd4'];
     
     let html = '';
     for (let i = 0; i < toShow.length; i++) {
@@ -389,9 +397,12 @@ async function renderVoices() {
         const flag = countryFlags[v.region] || '🌍';
         const name = v.full_name || v.writer_name || 'Anonymous';
         const initials = getInitials(name);
+        const avatarBg = avatarColors[(v.id || i) % avatarColors.length];
+        const startLikes = v.starting_likes || getRandomLikes(v.id || i);
+        
         const avatarContent = v.avatar_url 
-            ? `<img src="${v.avatar_url}" class="writer-avatar" alt="${escHtml(name)}" loading="lazy">`
-            : `<div class="writer-avatar">${initials}</div>`;
+            ? `<img src="${v.avatar_url}" class="writer-avatar" alt="${escHtml(name)}" loading="lazy" style="background:${avatarBg};">`
+            : `<div class="writer-avatar" style="background:${avatarBg};color:#fff;font-weight:700;font-size:1.2rem;text-shadow:0 1px 2px rgba(0,0,0,0.3);">${initials}</div>`;
         
         const showOriginal = v.language !== 'English' && v.quote_original && v.quote_original !== v.quote_english;
         const sp = Math.round((v.sentiment || 0.5) * 100);
@@ -429,19 +440,24 @@ async function renderVoices() {
             <div class="voice-footer-enhanced" style="margin-top:12px;">
                 <div class="action-buttons">
                     ${v.audio_url ? `<audio controls class="audio-player-mini"><source src="${v.audio_url}" type="audio/mpeg"></audio>` : ''}
-                    <button class="action-btn like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">❤️ <span id="likeCount-${v.id}">${v.like_count || 0}</span></button>
+                    <button class="action-btn like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">
+                        ❤️ <span id="likeCount-${v.id}">${startLikes}</span>
+                    </button>
                     <span style="position:relative;">
-                        <button class="action-btn share-btn" onclick="toggleShareMenu(${v.id})">📤 <span id="shareCount-${v.id}">${v.starting_shares || 20}</span></button>
+                        <button class="action-btn share-btn" onclick="toggleShareMenu(${v.id})">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+                            Share <span id="shareCount-${v.id}">${v.starting_shares || 20}</span>
+                        </button>
                         <div class="share-menu" id="shareMenu-${v.id}">
-                            <a href="#" onclick="shareVoice(${v.id},'whatsapp')">📱 WhatsApp</a>
-                            <a href="#" onclick="shareVoice(${v.id},'facebook')">📘 Facebook</a>
-                            <a href="#" onclick="shareVoice(${v.id},'twitter')">🐦 Twitter/X</a>
-                            <a href="#" onclick="shareVoice(${v.id},'copy')">📋 Copy Link</a>
+                            <a href="#" onclick="shareVoice(${v.id},'whatsapp')" style="color:#25D366;">📱 WhatsApp</a>
+                            <a href="#" onclick="shareVoice(${v.id},'facebook')" style="color:#1877F2;">📘 Facebook</a>
+                            <a href="#" onclick="shareVoice(${v.id},'twitter')" style="color:#1DA1F2;">𝕏 Twitter/X</a>
+                            <a href="#" onclick="shareVoice(${v.id},'telegram')" style="color:#0088cc;">✈️ Telegram</a>
+                            <a href="#" onclick="shareVoice(${v.id},'copy')" style="color:#888;">📋 Copy Link</a>
                         </div>
                     </span>
-                    <button class="action-btn join-btn" onclick="openChapterPopup('${v.chapter_id || 'new'}')">✍️ Join Chapter</button>
+                    <button class="action-btn join-btn" onclick="openChapterPopup('${v.chapter_id || 'new'}')">✍️ Join</button>
                     <button class="action-btn chat-btn" onclick="openChatModal('${v.chapter_id || v.id}')">💬 Chat</button>
-                    <button class="action-btn pdf-btn" onclick="generateChapterPDF('${v.chapter_id || v.id}')">📄 PDF</button>
                 </div>
                 ${v.cloudinary_url ? `<button class="view-original-btn" onclick="openEmailPopup('${v.id}')">👁️ View Original Document</button>` : ''}
             </div>
@@ -465,7 +481,7 @@ async function loadLikes(voiceId) {
         });
         const data = await res.json();
         const el = document.getElementById('likeCount-' + voiceId);
-        if (el) el.textContent = data[0]?.count || 0;
+        if (el && data[0]?.count > 0) el.textContent = data[0].count;
     } catch (e) {}
 }
 
@@ -505,6 +521,7 @@ function shareVoice(id, platform) {
     else if (platform === 'whatsapp') window.open('https://wa.me/?text=' + encodeURIComponent('Peace voice: ' + url), '_blank');
     else if (platform === 'facebook') window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank');
     else if (platform === 'twitter') window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(url), '_blank');
+    else if (platform === 'telegram') window.open('https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent('Peace voice from Ethiopian Peace Archive'), '_blank');
     const el = document.getElementById('shareCount-' + id);
     if (el) el.textContent = (parseInt(el.textContent) || 0) + 1;
 }
@@ -573,32 +590,16 @@ async function submitChapterMessage() {
         region: 'Co-Writer', year: new Date().getFullYear(), language: 'English',
         is_published: true, themes: ['Legacy','Family','Peace'], sentiment: 0.75
     };
-    if (!body.writer_name || !body.quote_english) { msgEl.textContent = 'Fill all fields.'; return; }
+    if (!body.writer_name || !body.quote_english) { msgEl.textContent = 'Fill all fields.'; msgEl.style.color='#ef4444'; return; }
     try {
         const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', {
             method: 'POST',
             headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
             body: JSON.stringify(body)
         });
-        if (res.ok) { msgEl.textContent = '✅ Added!'; setTimeout(() => { closeChapterPopup(); location.reload(); }, 1500); }
-        else { msgEl.textContent = '❌ Error.'; }
-    } catch (e) { msgEl.textContent = '❌ Error.'; }
-}
-
-// ============================================
-// PDF GENERATION
-// ============================================
-function generateChapterPDF(chapterId) {
-    const voices = allVoices.filter(v => v.chapter_id === chapterId || v.id === chapterId);
-    if (!voices.length) { alert('No voices in this chapter.'); return; }
-    let h = `<html><head><meta charset="UTF-8"><style>body{font-family:Arial;padding:40px;color:#333;}h1{border-bottom:3px solid gold;}.voice{margin:20px 0;padding:15px;border-left:4px solid #22c55e;}.writer{color:#666;font-size:14px;font-weight:bold;}.quote{font-size:16px;line-height:1.6;}.original{color:#555;font-style:italic;font-size:14px;}.footer{margin-top:40px;text-align:center;color:#999;font-size:12px;}</style></head><body><h1>🕊️ Peace Voices - Chapter ${chapterId}</h1>`;
-    voices.forEach(v => {
-        h += `<div class="voice"><div class="writer">✍️ ${escHtml(v.full_name||v.writer_name||'Anonymous')} | 📍 ${escHtml(v.region)} | 🌐 ${escHtml(v.language)}</div><div class="quote">${escHtml(v.quote_english||v.quote_original)}</div>${v.language!=='English'&&v.quote_original?`<div class="original">📜 Original: ${escHtml(v.quote_original)}</div>`:''}</div>`;
-    });
-    h += `<div class="footer"><p>Ethiopian Peace Archive</p><p>© ${new Date().getFullYear()}</p></div></body></html>`;
-    const w = window.open('','_blank','width=800,height=600');
-    w.document.write(h); w.document.close(); w.focus();
-    setTimeout(() => w.print(), 500);
+        if (res.ok) { msgEl.textContent = '✅ Added!'; msgEl.style.color='#4ade80'; setTimeout(() => { closeChapterPopup(); location.reload(); }, 1500); }
+        else { msgEl.textContent = '❌ Error.'; msgEl.style.color='#ef4444'; }
+    } catch (e) { msgEl.textContent = '❌ Error.'; msgEl.style.color='#ef4444'; }
 }
 
 // ============================================
@@ -732,12 +733,6 @@ function redeemCoin(item) {
     if (balance >= costs[item]) { alert(`✅ Redeemed ${item}!`); document.getElementById('walletBalance').textContent = balance - costs[item]; }
     else { alert(`❌ Need ${costs[item]} coins.`); }
 }
-
-// ============================================
-// HELPERS
-// ============================================
-function escHtml(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-function getInitials(name) { if (!name) return '👤'; const p = name.split(' '); return p.length >= 2 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : name.substring(0,2).toUpperCase(); }
 
 // ============================================
 // SCROLL TO TOP
