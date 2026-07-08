@@ -20,11 +20,11 @@
         .btn-edit{background:#ffcc00;color:#000}
         .btn-delete{background:#ff4444;color:#fff}
         .btn-view{background:#3b82f6;color:#fff}
+        .btn-approve{background:#4ade80;color:#000;font-weight:bold}
+        .btn-reject{background:#f97316;color:#fff}
         .btn-edit:hover{background:#ffdd33}
         .btn-delete:hover{background:#ff6666}
         .btn-remove-img{background:#ff8800;color:#fff;padding:4px 10px;border:none;border-radius:4px;cursor:pointer;font-size:0.75rem;margin-top:5px}
-        
-        /* Stats Row */
         .admin-stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px}
         .admin-stat-box{background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:16px;text-align:center}
         .admin-stat-box .stat-num{font-size:1.8rem;font-weight:800;color:var(--gold);font-family:var(--font-ui)}
@@ -32,22 +32,17 @@
         .admin-stat-box.green .stat-num{color:var(--green-bright)}
         .admin-stat-box.red .stat-num{color:#ef4444}
         .admin-stat-box.blue .stat-num{color:#60a5fa}
-        
         .search-input{width:100%;padding:10px 16px;background:#222;border:1px solid #444;border-radius:25px;color:#fff;font-size:0.9rem;margin-bottom:12px;font-family:var(--font-ui)}
         .search-input:focus{border-color:var(--gold);outline:none}
-        
         .import-area{border:2px dashed var(--gold);border-radius:12px;padding:30px;text-align:center;cursor:pointer;margin-bottom:12px;background:rgba(251,191,36,0.03)}
         .import-area:hover{border-color:#ffdd33;background:rgba(251,191,36,0.06)}
-        
         .btn-export{background:#3b82f6;color:#fff;padding:8px 16px;border:none;border-radius:20px;cursor:pointer;font-size:0.8rem;font-weight:600;margin:4px}
         .btn-export:hover{background:#2563eb}
-
         .badge-status{padding:3px 10px;border-radius:10px;font-size:0.65rem;font-weight:600}
         .badge-active{background:rgba(34,197,94,0.15);color:#4ade80}
         .badge-blocked{background:rgba(239,68,68,0.15);color:#ef4444}
         .badge-draft{background:rgba(251,191,36,0.15);color:#facc15}
-
-        /* CCTV */
+        .badge-pending{background:rgba(251,191,36,0.15);color:#facc15}
         #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0a0a0a;position:relative}
         .login-wrapper{display:flex;gap:30px;background:var(--card);border:1px solid var(--green-border);border-radius:16px;padding:30px;max-width:760px;width:95%;flex-wrap:wrap;justify-content:center}
         .login-form{flex:1;min-width:260px;text-align:center}
@@ -65,23 +60,17 @@
         .cctv-crosshair::before,.cctv-crosshair::after{content:'';position:absolute;background:rgba(255,255,255,0.5)}
         .cctv-crosshair::before{width:2px;height:100%;left:50%;transform:translateX(-50%)}
         .cctv-crosshair::after{width:100%;height:2px;top:50%;transform:translateY(-50%)}
-
-        /* Comedy Trap */
         #comedyTrap{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.95);z-index:99999;justify-content:center;align-items:center;flex-direction:column}
         #comedyTrap video{width:100%;max-width:550px;border-radius:12px;border:4px solid #ffcc00;box-shadow:0 0 60px rgba(255,204,0,0.4);background:#000}
         .trap-message{color:#ffcc00;font-size:28px;font-weight:bold;margin-top:20px;text-align:center;font-family:'Courier New',monospace;text-shadow:0 0 20px rgba(255,204,0,0.2)}
         .trap-sub{color:#fff;font-size:16px;margin-top:10px;text-align:center}
         .trap-btn{margin-top:25px;padding:12px 40px;background:#ffcc00;color:#000;border:none;border-radius:8px;font-weight:bold;font-size:18px;cursor:pointer;transition:all 0.3s}
         .trap-btn:hover{background:#ffdd33;transform:scale(1.05);box-shadow:0 0 30px rgba(255,204,0,0.3)}
-
-        /* Backdoor */
         #backdoorPanel{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#111;border:2px solid var(--gold);border-radius:12px;padding:30px;z-index:99998;text-align:center;box-shadow:0 0 60px rgba(255,204,0,0.2)}
         #backdoorPanel h2{color:var(--gold);margin-bottom:15px}
         #backdoorPanel input{padding:10px;background:#222;border:1px solid #444;border-radius:6px;color:#fff;font-size:16px;margin-bottom:10px;width:200px}
         #backdoorPanel button{padding:8px 20px;background:var(--gold);color:#000;border:none;border-radius:6px;font-weight:bold;cursor:pointer}
         #backdoorPanel .hint{color:#666;font-size:11px;margin-top:10px}
-
-        /* Edit Modal */
         #editModal{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.8);z-index:99999;justify-content:center;align-items:center}
         #editModal.active{display:flex}
         .modal-box{background:#1a1a1a;border:1px solid var(--green-border);border-radius:12px;padding:30px;max-width:550px;width:90%;color:#fff;max-height:90vh;overflow-y:auto}
@@ -96,7 +85,6 @@
 </head>
 <body>
 
-<!-- Comedy Trap -->
 <div id="comedyTrap">
     <video id="trapVideo" controls autoplay muted>
         <source src="https://github.com/weneedpeace/ethiopian-peace-archive/blob/709c28afa19da1ad030502cbe75b0aec6f37e7e9/snaptik_7427147447681584390_v3.mp4?raw=true" type="video/mp4">
@@ -106,22 +94,18 @@
     <button class="trap-btn" onclick="closeComedyTrap()">🚪 Get Out!</button>
 </div>
 
-<!-- Backdoor Panel -->
 <div id="backdoorPanel">
     <h2>🔑 Admin Override</h2>
     <p style="color:#888;font-size:13px;margin-bottom:10px;">Enter your secret master key</p>
-    <input type="password" id="masterKeyInput" placeholder="Master Key">
-    <br>
+    <input type="password" id="masterKeyInput" placeholder="Master Key"><br>
     <button onclick="masterKeyLogin()">Unlock</button>
     <p class="hint">Press Ctrl+Shift+B to show/hide</p>
 </div>
 
-<!-- Edit Modal -->
 <div id="editModal">
     <div class="modal-box">
         <h3 id="modalTitle">✏️ Edit Item</h3>
-        <input type="hidden" id="editId">
-        <input type="hidden" id="editType">
+        <input type="hidden" id="editId"><input type="hidden" id="editType">
         <label style="color:var(--text-dim);font-size:0.8rem;">Name / Title</label>
         <input type="text" id="editTitle" placeholder="Name or Title">
         <label style="color:var(--text-dim);font-size:0.8rem;">Content / Description</label>
@@ -142,7 +126,6 @@
     </div>
 </div>
 
-<!-- Login Screen -->
 <div id="loginScreen">
     <div class="login-wrapper">
         <div class="cctv-box">
@@ -165,19 +148,18 @@
     </div>
 </div>
 
-<!-- Admin Panel -->
 <div id="panel" style="display:none;max-width:1100px;margin:0 auto;padding:20px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
         <h2 style="color:var(--gold)">⚙️ Admin Dashboard</h2>
         <button class="btn btn-sm btn-red" onclick="logout()">Logout</button>
     </div>
     
-    <!-- STATS ROW -->
     <div class="admin-stats-row" id="adminStats">
         <div class="admin-stat-box"><div class="stat-num" id="statVoices">-</div><div class="stat-lbl">Total Voices</div></div>
         <div class="admin-stat-box green"><div class="stat-num" id="statBlogs">-</div><div class="stat-lbl">Blog Posts</div></div>
         <div class="admin-stat-box blue"><div class="stat-num" id="statGallery">-</div><div class="stat-lbl">Gallery Items</div></div>
         <div class="admin-stat-box"><div class="stat-num" id="statUsers">-</div><div class="stat-lbl">Users</div></div>
+        <div class="admin-stat-box red"><div class="stat-num" id="statPending">-</div><div class="stat-lbl">Pending Approval</div></div>
         <div class="admin-stat-box green"><div class="stat-num" id="statMessages">-</div><div class="stat-lbl">Chat Messages</div></div>
     </div>
     
@@ -194,16 +176,16 @@
     </div>
     <p id="msgBox" style="display:none;padding:10px;border-radius:8px;margin-bottom:10px"></p>
 
-    <!-- MANAGE VOICES -->
+    <!-- VOICES PANEL -->
     <div class="admin-panel active" id="panel-voices">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">🗣️ Voice Management</h3>
-            <input type="text" class="search-input" id="voiceSearch" placeholder="🔍 Search voices by name, document ID, or region..." oninput="loadVoiceList(this.value)">
+            <input type="text" class="search-input" id="voiceSearch" placeholder="🔍 Search voices..." oninput="loadVoiceList(this.value)">
             <div id="voiceList" style="max-height:500px;overflow-y:auto">Loading...</div>
         </div>
     </div>
 
-    <!-- ADD VOICE -->
+    <!-- ADD VOICE PANEL -->
     <div class="admin-panel" id="panel-addvoice">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">➕ Add New Voice</h3>
@@ -214,14 +196,10 @@
                 <div><input type="text" id="vTitle" placeholder="Title/Position"></div>
                 <div><input type="email" id="vEmail" placeholder="Email"></div>
                 <div><input type="text" id="vPhone" placeholder="Phone"></div>
-                <div>
-                    <select id="vRegion"><option value="">Region</option><option>Ethiopia</option><option>Tigray</option><option>Amhara</option><option>Oromia</option><option>Somali</option><option>Afar</option><option>Sidama</option><option>SNNPR</option><option>Gambella</option><option>Harari</option><option>Benishangul-Gumuz</option><option>Addis Ababa</option><option>Dire Dawa</option><option>England</option><option>UK</option><option>Netherlands</option><option>Germany</option><option>France</option><option>Italy</option><option>Spain</option><option>Russia</option><option>Japan</option><option>Nigeria</option><option>Somalia</option><option>Global</option></select>
-                </div>
-                <div><input type="number" id="vYear" placeholder="Year (2024)"></div>
+                <div><select id="vRegion"><option value="">Region</option><option>Ethiopia</option><option>Tigray</option><option>Amhara</option><option>Oromia</option><option>Somali</option><option>Afar</option><option>Global</option></select></div>
+                <div><input type="number" id="vYear" placeholder="Year"></div>
                 <div><input type="text" id="vLanguage" placeholder="Language"></div>
-                <div>
-                    <select id="vSentiment"><option value="0.95">Very Hopeful (0.95)</option><option value="0.85">Hopeful (0.85)</option><option value="0.75" selected>Positive (0.75)</option><option value="0.60">Somewhat Positive (0.60)</option><option value="0.50">Neutral (0.50)</option></select>
-                </div>
+                <div><select id="vSentiment"><option value="0.95">Very Hopeful</option><option value="0.85">Hopeful</option><option value="0.75" selected>Positive</option><option value="0.60">Somewhat Positive</option><option value="0.50">Neutral</option></select></div>
             </div>
             <textarea id="vOriginal" placeholder="Original quote..." style="margin-top:10px"></textarea>
             <textarea id="vEnglish" placeholder="English translation..." required style="margin-top:10px"></textarea>
@@ -230,7 +208,7 @@
         </div>
     </div>
 
-    <!-- BLOG -->
+    <!-- BLOG PANEL -->
     <div class="admin-panel" id="panel-blog">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">📝 Blog Management</h3>
@@ -242,10 +220,7 @@
                     <textarea id="bContent" placeholder="Blog content..." style="min-height:150px"></textarea><br><br>
                     <input type="text" id="bExcerpt" placeholder="Short excerpt"><br><br>
                     <select id="bCategory"><option>Story</option><option>Research</option><option>Announcement</option><option>Impact</option><option>Media</option></select><br><br>
-                    <div class="upload-area" onclick="document.getElementById('blogFile').click()">
-                        <p id="blogUploadText">📷 Tap to upload image</p>
-                        <img id="blogPreview" style="display:none">
-                    </div>
+                    <div class="upload-area" onclick="document.getElementById('blogFile').click()"><p id="blogUploadText">📷 Tap to upload image</p><img id="blogPreview" style="display:none"></div>
                     <input type="file" id="blogFile" accept="image/*" style="display:none" onchange="uploadImage('blogFile','blogPreview','blogUploadText','bImageUrl')">
                     <input type="hidden" id="bImageUrl"><br>
                     <button class="btn btn-primary" style="width:100%" onclick="saveBlog()">💾 Publish</button>
@@ -256,7 +231,7 @@
         </div>
     </div>
 
-    <!-- GALLERY -->
+    <!-- GALLERY PANEL -->
     <div class="admin-panel" id="panel-gallery">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">🖼️ Gallery Management</h3>
@@ -265,10 +240,7 @@
                 <div style="margin-top:10px">
                     <input type="text" id="gTitle" placeholder="Photo title"><br><br>
                     <input type="text" id="gCategory" placeholder="Category"><br><br>
-                    <div class="upload-area" onclick="document.getElementById('galleryFile').click()">
-                        <p id="galleryUploadText">📷 Tap to upload image</p>
-                        <img id="galleryPreview" style="display:none">
-                    </div>
+                    <div class="upload-area" onclick="document.getElementById('galleryFile').click()"><p id="galleryUploadText">📷 Tap to upload image</p><img id="galleryPreview" style="display:none"></div>
                     <input type="file" id="galleryFile" accept="image/*" style="display:none" onchange="uploadImage('galleryFile','galleryPreview','galleryUploadText','gImageUrl')">
                     <input type="hidden" id="gImageUrl"><br>
                     <button class="btn btn-primary" style="width:100%" onclick="saveGallery()">💾 Add</button>
@@ -279,7 +251,7 @@
         </div>
     </div>
 
-    <!-- COURSES -->
+    <!-- COURSES PANEL -->
     <div class="admin-panel" id="panel-course">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">🎓 Course Management</h3>
@@ -297,15 +269,21 @@
         </div>
     </div>
 
-    <!-- USERS -->
+    <!-- USERS PANEL WITH APPROVAL -->
     <div class="admin-panel" id="panel-users">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">👥 User Management</h3>
+            <div id="pendingUsers" style="margin-bottom:20px;">
+                <h4 style="color:#facc15;margin-bottom:8px;">⏳ Pending Approval</h4>
+                <div id="pendingList">Loading...</div>
+            </div>
+            <h4 style="color:var(--gold);margin-bottom:8px;">📋 All Users</h4>
+            <input type="text" class="search-input" id="userSearch" placeholder="🔍 Search users..." oninput="loadUserList(this.value)">
             <div id="userList">Loading...</div>
         </div>
     </div>
 
-    <!-- CHAT MONITOR -->
+    <!-- CHAT PANEL -->
     <div class="admin-panel" id="panel-chat">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">💬 Chat Monitor</h3>
@@ -314,7 +292,7 @@
         </div>
     </div>
 
-    <!-- IMPORT -->
+    <!-- IMPORT PANEL -->
     <div class="admin-panel" id="panel-import">
         <div style="background:var(--card);border:1px solid var(--gold);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">📥 Bulk Import Voices</h3>
@@ -325,50 +303,28 @@
             </div>
             <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(this)">
             <div id="importResult" style="margin-top:10px;"></div>
-            <details style="margin-top:10px;">
-                <summary style="color:var(--text-dim);cursor:pointer;font-size:0.85rem;">📋 Sample JSON Format</summary>
-                <pre style="background:#111;padding:10px;border-radius:8px;color:#4ade80;font-size:0.7rem;overflow-x:auto;margin-top:8px;">[
-  {
-    "document_id": "EPA-101",
-    "region": "Ethiopia",
-    "year": 2024,
-    "language": "Amharic",
-    "full_name": "Abebe Kebede",
-    "title": "Teacher",
-    "quote_english": "Peace is our foundation.",
-    "quote_original": "ሰላም መሰረታችን ነው።",
-    "themes": ["Peace", "Unity"],
-    "sentiment": 0.85,
-    "is_published": true
-  }
-]</pre>
-            </details>
         </div>
     </div>
 
-    <!-- EXPORT -->
+    <!-- EXPORT PANEL -->
     <div class="admin-panel" id="panel-export">
         <div style="background:var(--card);border:1px solid var(--green-border);border-radius:12px;padding:20px">
             <h3 style="color:var(--gold);margin-bottom:12px">📤 Export Data</h3>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
                 <div style="background:rgba(255,255,255,0.02);padding:16px;border-radius:8px;text-align:center">
-                    <p style="font-size:2rem;">🗣️</p>
-                    <p style="color:var(--text);font-weight:600;">Voices</p>
+                    <p style="font-size:2rem;">🗣️</p><p style="color:var(--text);font-weight:600;">Voices</p>
                     <button class="btn-export" onclick="exportData('voices')">📥 Download CSV</button>
                 </div>
                 <div style="background:rgba(255,255,255,0.02);padding:16px;border-radius:8px;text-align:center">
-                    <p style="font-size:2rem;">👥</p>
-                    <p style="color:var(--text);font-weight:600;">Users</p>
+                    <p style="font-size:2rem;">👥</p><p style="color:var(--text);font-weight:600;">Users</p>
                     <button class="btn-export" onclick="exportData('users')">📥 Download CSV</button>
                 </div>
                 <div style="background:rgba(255,255,255,0.02);padding:16px;border-radius:8px;text-align:center">
-                    <p style="font-size:2rem;">💬</p>
-                    <p style="color:var(--text);font-weight:600;">Chat Messages</p>
+                    <p style="font-size:2rem;">💬</p><p style="color:var(--text);font-weight:600;">Chat Messages</p>
                     <button class="btn-export" onclick="exportData('chat')">📥 Download CSV</button>
                 </div>
                 <div style="background:rgba(255,255,255,0.02);padding:16px;border-radius:8px;text-align:center">
-                    <p style="font-size:2rem;">📝</p>
-                    <p style="color:var(--text);font-weight:600;">Blog Posts</p>
+                    <p style="font-size:2rem;">📝</p><p style="color:var(--text);font-weight:600;">Blog Posts</p>
                     <button class="btn-export" onclick="exportData('blogs')">📥 Download CSV</button>
                 </div>
             </div>
@@ -377,12 +333,9 @@
 </div>
 
 <script>
-// ============================================
-// CONFIG
-// ============================================
-const API = 'https://peace-api.peace-01d.workers.dev/api';
-const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+var API = 'https://peace-api.peace-01d.workers.dev/api';
+var SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
 function msg(text, color) {
     var m = document.getElementById('msgBox');
@@ -392,17 +345,14 @@ function msg(text, color) {
     setTimeout(function(){ m.style.display = 'none'; }, 4000);
 }
 
-// ============================================
 // BACKDOOR
-// ============================================
 (function checkUrlBackdoor() {
-    const params = new URLSearchParams(window.location.search);
+    var params = new URLSearchParams(window.location.search);
     if (params.get('secret') === 'peace2026') {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        loadAllData();
-        stopSecurityCamera();
+        loadAllData(); stopSecurityCamera();
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 })();
@@ -410,7 +360,7 @@ function msg(text, color) {
 document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.shiftKey && e.key === 'B') {
         e.preventDefault();
-        const panel = document.getElementById('backdoorPanel');
+        var panel = document.getElementById('backdoorPanel');
         panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
         if (panel.style.display === 'block') document.getElementById('masterKeyInput').focus();
     }
@@ -421,25 +371,23 @@ function masterKeyLogin() {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        loadAllData();
-        stopSecurityCamera();
+        loadAllData(); stopSecurityCamera();
         document.getElementById('backdoorPanel').style.display = 'none';
-    } else { alert('❌ Invalid master key'); }
+    } else { alert('Invalid master key'); }
 }
 
 function login() {
-    const email = document.getElementById('email').value;
-    const pass = document.getElementById('pass').value;
+    var email = document.getElementById('email').value;
+    var pass = document.getElementById('pass').value;
     if (email === 'backdoor@peacearchive.org' || (email === 'admin@peacearchive.org' && pass === 'Peace2026!')) {
         localStorage.setItem('epa_admin', '1');
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        loadAllData();
-        stopSecurityCamera();
+        loadAllData(); stopSecurityCamera();
     } else { 
         document.getElementById('loginMsg').style.display = 'block'; 
         document.getElementById('loginMsg').textContent = 'Wrong credentials';
-        triggerComedyTrap('wrong_password');
+        triggerComedyTrap();
     }
 }
 
@@ -448,97 +396,70 @@ function logout() { localStorage.removeItem('epa_admin'); location.reload(); }
 if (localStorage.getItem('epa_admin') === '1') {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('panel').style.display = 'block';
-    loadAllData();
-    stopSecurityCamera();
+    loadAllData(); stopSecurityCamera();
 }
 
-// ============================================
-// LOAD ALL
-// ============================================
 function loadAllData() {
-    loadDashboardStats();
-    loadVoiceList();
-    loadBlogList();
-    loadGalleryList();
-    loadCourses();
-    loadUserList();
-    loadChatMonitor();
+    loadDashboardStats(); loadVoiceList(); loadBlogList(); loadGalleryList();
+    loadCourses(); loadPendingUsers(); loadUserList(); loadChatMonitor();
 }
 
 function switchTab(tab) {
-    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.admin-tab').forEach(function(t){ t.classList.remove('active'); });
     event.target.classList.add('active');
-    document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.admin-panel').forEach(function(p){ p.classList.remove('active'); });
     document.getElementById('panel-' + tab).classList.add('active');
     if (tab === 'voices') loadVoiceList();
     if (tab === 'blog') loadBlogList();
     if (tab === 'gallery') loadGalleryList();
     if (tab === 'course') loadCourses();
-    if (tab === 'users') loadUserList();
+    if (tab === 'users') { loadPendingUsers(); loadUserList(); }
     if (tab === 'chat') loadChatMonitor();
 }
 
-// ============================================
 // DASHBOARD STATS
-// ============================================
 async function loadDashboardStats() {
     try {
-        const [vRes, bRes, gRes, uRes, cRes] = await Promise.all([
-            fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=count', { headers: { 'apikey': SUPABASE_KEY } }),
-            fetch(API + '/blogs'),
-            fetch(API + '/gallery'),
-            fetch(SUPABASE_URL + '/rest/v1/profiles?select=count', { headers: { 'apikey': SUPABASE_KEY } }),
-            fetch(SUPABASE_URL + '/rest/v1/chat_messages?select=count', { headers: { 'apikey': SUPABASE_KEY } })
-        ]);
+        var vRes = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=count', { headers: { 'apikey': SUPABASE_KEY } });
+        var bRes = await fetch(API + '/blogs');
+        var gRes = await fetch(API + '/gallery');
+        var uRes = await fetch(SUPABASE_URL + '/rest/v1/profiles?select=count', { headers: { 'apikey': SUPABASE_KEY } });
+        var pRes = await fetch(SUPABASE_URL + '/rest/v1/profiles?select=count&status=eq.pending', { headers: { 'apikey': SUPABASE_KEY } });
+        var cRes = await fetch(SUPABASE_URL + '/rest/v1/chat_messages?select=count', { headers: { 'apikey': SUPABASE_KEY } });
+        
         document.getElementById('statVoices').textContent = (await vRes.json())[0]?.count || 0;
-        document.getElementById('statBlogs').textContent = Array.isArray(await bRes.json()) ? (await bRes.clone().json()).length : (await fetch(API+'/blogs').then(r=>r.json())).length;
-        document.getElementById('statGallery').textContent = Array.isArray(await gRes.json()) ? (await gRes.clone().json()).length : (await fetch(API+'/gallery').then(r=>r.json())).length;
+        document.getElementById('statBlogs').textContent = Array.isArray(await bRes.json()) ? (await fetch(API+'/blogs').then(function(r){return r.json()})).length : 0;
+        document.getElementById('statGallery').textContent = Array.isArray(await gRes.json()) ? (await fetch(API+'/gallery').then(function(r){return r.json()})).length : 0;
         document.getElementById('statUsers').textContent = (await uRes.json())[0]?.count || 0;
+        document.getElementById('statPending').textContent = (await pRes.json())[0]?.count || 0;
         document.getElementById('statMessages').textContent = (await cRes.json())[0]?.count || 0;
     } catch(e) { console.error('Stats error:', e); }
 }
 
-// ============================================
 // VOICE MANAGEMENT
-// ============================================
 async function loadVoiceList(search) {
     try {
-        let query = 'select=*&order=created_at.desc&limit=200';
-        if (search) query += '&or=(full_name.ilike.*' + encodeURIComponent(search) + '*,writer_name.ilike.*' + encodeURIComponent(search) + '*,document_id.ilike.*' + encodeURIComponent(search) + '*,region.ilike.*' + encodeURIComponent(search) + '*)';
-        const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?' + query, {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        const voices = await res.json();
-        const div = document.getElementById('voiceList');
+        var query = 'select=*&order=created_at.desc&limit=200';
+        if (search) query += '&or=(full_name.ilike.*' + encodeURIComponent(search) + '*,writer_name.ilike.*' + encodeURIComponent(search) + '*,document_id.ilike.*' + encodeURIComponent(search) + '*)';
+        var res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?' + query, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+        var voices = await res.json();
+        var div = document.getElementById('voiceList');
         if (!voices.length) { div.innerHTML = '<p style="color:var(--text-dim);padding:20px;">No voices found.</p>'; return; }
-        div.innerHTML = '<table><tr><th>ID</th><th>Name</th><th>Region</th><th>Lang</th><th>Year</th><th>Status</th><th>Actions</th></tr>' + 
-            voices.map(v => '<tr>' +
-                '<td>' + (v.document_id||'') + '</td>' +
-                '<td>' + (v.full_name||v.writer_name||'N/A') + '</td>' +
-                '<td>' + (v.region||'') + '</td>' +
-                '<td>' + (v.language||'') + '</td>' +
-                '<td>' + (v.year||'') + '</td>' +
-                '<td><span class="badge-status ' + (v.is_published?'badge-active':'badge-draft') + '">' + (v.is_published?'Published':'Draft') + '</span></td>' +
-                '<td>' +
-                '<button class="action-btn btn-view" onclick="viewVoice(' + v.id + ')">👁️</button>' +
-                '<button class="action-btn btn-edit" onclick="editVoice(' + v.id + ')">✏️</button>' +
-                '<button class="action-btn btn-delete" onclick="deleteVoice(' + v.id + ')">🗑️</button>' +
-                '</td></tr>'
-            ).join('') + '</table>';
+        var html = '<table><tr><th>ID</th><th>Name</th><th>Region</th><th>Lang</th><th>Year</th><th>Status</th><th>Actions</th></tr>';
+        for (var i = 0; i < voices.length; i++) {
+            var v = voices[i];
+            html += '<tr><td>' + (v.document_id||'') + '</td><td>' + (v.full_name||v.writer_name||'N/A') + '</td><td>' + (v.region||'') + '</td><td>' + (v.language||'') + '</td><td>' + (v.year||'') + '</td><td><span class="badge-status ' + (v.is_published?'badge-active':'badge-draft') + '">' + (v.is_published?'Published':'Draft') + '</span></td><td><button class="action-btn btn-view" onclick="viewVoice(' + v.id + ')">👁️</button><button class="action-btn btn-edit" onclick="editVoice(' + v.id + ')">✏️</button><button class="action-btn btn-delete" onclick="deleteVoice(' + v.id + ')">🗑️</button></td></tr>';
+        }
+        div.innerHTML = html + '</table>';
     } catch(e) { document.getElementById('voiceList').innerHTML = '<p style="color:#ef4444;">Error loading voices</p>'; }
 }
 
-function viewVoice(id) {
-    window.open('voices.html?voice=' + id, '_blank');
-}
+function viewVoice(id) { window.open('voices.html?voice=' + id, '_blank'); }
 
 async function editVoice(id) {
     try {
-        const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?id=eq.' + id, {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        const data = await res.json();
-        const v = data[0];
+        var res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?id=eq.' + id, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+        var data = await res.json(); var v = data[0];
         document.getElementById('editId').value = v.id;
         document.getElementById('editType').value = 'voice';
         document.getElementById('editTitle').value = v.full_name || v.writer_name || '';
@@ -552,13 +473,8 @@ async function editVoice(id) {
 async function deleteVoice(id) {
     if (!confirm('Delete this voice permanently?')) return;
     try {
-        await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?id=eq.' + id, {
-            method: 'DELETE',
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        msg('Voice deleted!', 'green');
-        loadVoiceList();
-        loadDashboardStats();
+        await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?id=eq.' + id, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+        msg('Voice deleted!', 'green'); loadVoiceList(); loadDashboardStats();
     } catch(e) { msg('Error', 'red'); }
 }
 
@@ -575,197 +491,113 @@ async function saveVoice() {
         phone: document.getElementById('vPhone').value,
         quote_original: document.getElementById('vOriginal').value,
         quote_english: document.getElementById('vEnglish').value,
-        themes: document.getElementById('vThemes').value.split(',').map(t => t.trim()),
+        themes: document.getElementById('vThemes').value.split(',').map(function(t){ return t.trim(); }),
         sentiment: parseFloat(document.getElementById('vSentiment').value),
         is_published: true
     };
-    if (!data.document_id || !data.region || !data.quote_english) { msg('Fill document_id, region, and english translation', 'red'); return; }
+    if (!data.document_id || !data.region || !data.quote_english) { msg('Fill required fields', 'red'); return; }
     try {
-        var res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', { 
-            method: 'POST', 
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, 
-            body: JSON.stringify(data) 
-        });
-        if (res.ok) {
-            msg('Voice added!', 'green');
-            document.getElementById('vDocId').value = ''; 
-            document.getElementById('vEnglish').value = '';
-            document.getElementById('vFullName').value = '';
-            loadDashboardStats();
-        } else { msg('Failed', 'red'); }
+        var res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify(data) });
+        if (res.ok) { msg('Voice added!', 'green'); document.getElementById('vDocId').value = ''; document.getElementById('vEnglish').value = ''; loadDashboardStats(); }
+        else { msg('Failed', 'red'); }
     } catch(e) { msg('Failed', 'red'); }
 }
 
-// ============================================
 // IMAGE UPLOAD
-// ============================================
 async function uploadImage(fileId, previewId, textId, hiddenId) {
-    var file = document.getElementById(fileId).files[0];
-    if (!file) return;
+    var file = document.getElementById(fileId).files[0]; if (!file) return;
     var reader = new FileReader();
-    reader.onload = function(e) {
-        document.getElementById(previewId).src = e.target.result;
-        document.getElementById(previewId).style.display = 'block';
-        document.getElementById(textId).style.display = 'none';
-    };
+    reader.onload = function(e) { document.getElementById(previewId).src = e.target.result; document.getElementById(previewId).style.display = 'block'; document.getElementById(textId).style.display = 'none'; };
     reader.readAsDataURL(file);
     msg('Uploading...', 'green');
-    var formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'peace_archive');
+    var formData = new FormData(); formData.append('file', file); formData.append('upload_preset', 'peace_archive');
     try {
         var res = await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload', { method: 'POST', body: formData });
         var data = await res.json();
-        if (data.secure_url) {
-            document.getElementById(hiddenId).value = data.secure_url;
-            msg('Image uploaded!', 'green');
-        } else { msg('Upload failed', 'red'); }
+        if (data.secure_url) { document.getElementById(hiddenId).value = data.secure_url; msg('Uploaded!', 'green'); }
+        else { msg('Upload failed', 'red'); }
     } catch(e) { msg('Upload failed', 'red'); }
 }
 
-// ============================================
 // BLOG
-// ============================================
 async function saveBlog() {
-    var data = {
-        title: document.getElementById('bTitle').value,
-        slug: document.getElementById('bSlug').value,
-        content: document.getElementById('bContent').value,
-        excerpt: document.getElementById('bExcerpt').value,
-        category: document.getElementById('bCategory').value,
-        image_url: document.getElementById('bImageUrl').value
-    };
+    var data = { title: document.getElementById('bTitle').value, slug: document.getElementById('bSlug').value, content: document.getElementById('bContent').value, excerpt: document.getElementById('bExcerpt').value, category: document.getElementById('bCategory').value, image_url: document.getElementById('bImageUrl').value };
     if (!data.title || !data.slug || !data.content) { msg('Fill all fields', 'red'); return; }
     try {
         var res = await fetch(API + '/blogs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        if (res.ok) {
-            msg('Blog published!', 'green');
-            document.getElementById('bTitle').value = ''; document.getElementById('bSlug').value = '';
-            document.getElementById('bContent').value = ''; document.getElementById('bImageUrl').value = '';
-            document.getElementById('blogPreview').style.display = 'none';
-            document.getElementById('blogUploadText').style.display = 'block';
-            loadBlogList(); loadDashboardStats();
-        } else { msg('Failed', 'red'); }
+        if (res.ok) { msg('Blog published!', 'green'); document.getElementById('bTitle').value = ''; document.getElementById('bSlug').value = ''; document.getElementById('bContent').value = ''; document.getElementById('blogPreview').style.display = 'none'; document.getElementById('blogUploadText').style.display = 'block'; loadBlogList(); loadDashboardStats(); }
     } catch(e) { msg('Failed', 'red'); }
 }
 
 async function loadBlogList() {
     try {
-        var res = await fetch(API + '/blogs');
-        var items = await res.json();
+        var res = await fetch(API + '/blogs'); var items = await res.json();
         var div = document.getElementById('blogList');
         if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No blog posts.</p>'; return; }
-        div.innerHTML = '<table><tr><th>Title</th><th>Category</th><th>Actions</th></tr>' + 
-            items.map(i => '<tr><td>' + (i.title||'') + '</td><td>' + (i.category||'') + '</td><td>' +
-                '<button class="action-btn btn-edit" onclick="openEditBlog(' + i.id + ')">✏️</button>' +
-                '<button class="action-btn btn-delete" onclick="deleteBlog(' + i.id + ')">🗑️</button></td></tr>'
-            ).join('') + '</table>';
+        var html = '<table><tr><th>Title</th><th>Category</th><th>Actions</th></tr>';
+        for (var i = 0; i < items.length; i++) {
+            html += '<tr><td>' + (items[i].title||'') + '</td><td>' + (items[i].category||'') + '</td><td><button class="action-btn btn-edit" onclick="openEditBlog(' + items[i].id + ')">✏️</button><button class="action-btn btn-delete" onclick="deleteBlog(' + items[i].id + ')">🗑️</button></td></tr>';
+        }
+        div.innerHTML = html + '</table>';
     } catch(e) { document.getElementById('blogList').innerHTML = '<p style="color:var(--text-dim)">Error</p>'; }
 }
 
-async function deleteBlog(id) {
-    if (!confirm('Delete?')) return;
-    try { await fetch(API + '/blogs/' + id, { method: 'DELETE' }); msg('Deleted!', 'green'); loadBlogList(); loadDashboardStats(); }
-    catch(e) { msg('Error', 'red'); }
-}
+async function deleteBlog(id) { if (!confirm('Delete?')) return; try { await fetch(API + '/blogs/' + id, { method: 'DELETE' }); msg('Deleted!', 'green'); loadBlogList(); loadDashboardStats(); } catch(e) { msg('Error', 'red'); } }
 
 async function openEditBlog(id) {
     try {
-        var res = await fetch(API + '/blogs/' + id);
-        var item = await res.json();
-        document.getElementById('editId').value = item.id;
-        document.getElementById('editType').value = 'blog';
-        document.getElementById('editTitle').value = item.title || '';
-        document.getElementById('editContent').value = item.content || '';
-        document.getElementById('editCategory').value = item.category || '';
-        document.getElementById('editImageUrl').value = item.image_url || '';
-        if (item.image_url) {
-            document.getElementById('editPreview').src = item.image_url;
-            document.getElementById('editPreview').style.display = 'block';
-            document.getElementById('editUploadText').style.display = 'none';
-            document.querySelector('.btn-remove-img').style.display = 'inline-block';
-        }
-        document.getElementById('modalTitle').textContent = '✏️ Edit Blog';
-        document.getElementById('editModal').classList.add('active');
+        var res = await fetch(API + '/blogs/' + id); var item = await res.json();
+        document.getElementById('editId').value = item.id; document.getElementById('editType').value = 'blog';
+        document.getElementById('editTitle').value = item.title || ''; document.getElementById('editContent').value = item.content || '';
+        document.getElementById('editCategory').value = item.category || ''; document.getElementById('editImageUrl').value = item.image_url || '';
+        if (item.image_url) { document.getElementById('editPreview').src = item.image_url; document.getElementById('editPreview').style.display = 'block'; document.getElementById('editUploadText').style.display = 'none'; document.querySelector('.btn-remove-img').style.display = 'inline-block'; }
+        document.getElementById('modalTitle').textContent = '✏️ Edit Blog'; document.getElementById('editModal').classList.add('active');
     } catch(e) { msg('Error', 'red'); }
 }
 
-// ============================================
 // GALLERY
-// ============================================
 async function saveGallery() {
-    var url = document.getElementById('gImageUrl').value;
-    if (!url) { msg('Upload image first', 'red'); return; }
+    var url = document.getElementById('gImageUrl').value; if (!url) { msg('Upload image first', 'red'); return; }
     var data = { title: document.getElementById('gTitle').value, image_url: url, category: document.getElementById('gCategory').value || 'General' };
     try {
         var res = await fetch(API + '/gallery', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        if (res.ok) {
-            msg('Added!', 'green');
-            document.getElementById('gTitle').value = ''; document.getElementById('gImageUrl').value = '';
-            document.getElementById('galleryPreview').style.display = 'none';
-            document.getElementById('galleryUploadText').style.display = 'block';
-            loadGalleryList(); loadDashboardStats();
-        }
+        if (res.ok) { msg('Added!', 'green'); document.getElementById('gTitle').value = ''; document.getElementById('gImageUrl').value = ''; document.getElementById('galleryPreview').style.display = 'none'; document.getElementById('galleryUploadText').style.display = 'block'; loadGalleryList(); loadDashboardStats(); }
     } catch(e) { msg('Failed', 'red'); }
 }
 
 async function loadGalleryList() {
     try {
-        var res = await fetch(API + '/gallery');
-        var items = await res.json();
+        var res = await fetch(API + '/gallery'); var items = await res.json();
         var div = document.getElementById('galleryList');
         if (!items.length) { div.innerHTML = '<p style="color:var(--text-dim)">No photos.</p>'; return; }
-        div.innerHTML = '<table><tr><th>Image</th><th>Title</th><th>Category</th><th>Actions</th></tr>' + 
-            items.map(i => '<tr><td><img src="' + i.image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>' + (i.title||'') + '</td><td>' + (i.category||'') + '</td><td>' +
-                '<button class="action-btn btn-edit" onclick="openEditGallery(' + i.id + ')">✏️</button>' +
-                '<button class="action-btn btn-delete" onclick="deleteGallery(' + i.id + ')">🗑️</button></td></tr>'
-            ).join('') + '</table>';
+        var html = '<table><tr><th>Image</th><th>Title</th><th>Category</th><th>Actions</th></tr>';
+        for (var i = 0; i < items.length; i++) {
+            html += '<tr><td><img src="' + items[i].image_url + '" style="width:50px;height:50px;object-fit:cover;border-radius:4px"></td><td>' + (items[i].title||'') + '</td><td>' + (items[i].category||'') + '</td><td><button class="action-btn btn-edit" onclick="openEditGallery(' + items[i].id + ')">✏️</button><button class="action-btn btn-delete" onclick="deleteGallery(' + items[i].id + ')">🗑️</button></td></tr>';
+        }
+        div.innerHTML = html + '</table>';
     } catch(e) { document.getElementById('galleryList').innerHTML = '<p style="color:var(--text-dim)">Error</p>'; }
 }
 
-async function deleteGallery(id) {
-    if (!confirm('Delete?')) return;
-    try { await fetch(API + '/gallery/' + id, { method: 'DELETE' }); msg('Deleted!', 'green'); loadGalleryList(); loadDashboardStats(); }
-    catch(e) { msg('Error', 'red'); }
-}
+async function deleteGallery(id) { if (!confirm('Delete?')) return; try { await fetch(API + '/gallery/' + id, { method: 'DELETE' }); msg('Deleted!', 'green'); loadGalleryList(); loadDashboardStats(); } catch(e) { msg('Error', 'red'); } }
 
 async function openEditGallery(id) {
     try {
-        var res = await fetch(API + '/gallery/' + id);
-        var item = await res.json();
-        document.getElementById('editId').value = item.id;
-        document.getElementById('editType').value = 'gallery';
-        document.getElementById('editTitle').value = item.title || '';
-        document.getElementById('editCategory').value = item.category || '';
+        var res = await fetch(API + '/gallery/' + id); var item = await res.json();
+        document.getElementById('editId').value = item.id; document.getElementById('editType').value = 'gallery';
+        document.getElementById('editTitle').value = item.title || ''; document.getElementById('editCategory').value = item.category || '';
         document.getElementById('editImageUrl').value = item.image_url || '';
-        if (item.image_url) {
-            document.getElementById('editPreview').src = item.image_url;
-            document.getElementById('editPreview').style.display = 'block';
-            document.getElementById('editUploadText').style.display = 'none';
-            document.querySelector('.btn-remove-img').style.display = 'inline-block';
-        }
-        document.getElementById('modalTitle').textContent = '✏️ Edit Photo';
-        document.getElementById('editModal').classList.add('active');
+        if (item.image_url) { document.getElementById('editPreview').src = item.image_url; document.getElementById('editPreview').style.display = 'block'; document.getElementById('editUploadText').style.display = 'none'; document.querySelector('.btn-remove-img').style.display = 'inline-block'; }
+        document.getElementById('modalTitle').textContent = '✏️ Edit Photo'; document.getElementById('editModal').classList.add('active');
     } catch(e) { msg('Error', 'red'); }
 }
 
-// ============================================
-// EDIT MODAL SAVE
-// ============================================
+// EDIT MODAL
 async function editImageUpload() {
-    var file = document.getElementById('editFile').files[0];
-    if (!file) return;
+    var file = document.getElementById('editFile').files[0]; if (!file) return;
     var reader = new FileReader();
-    reader.onload = function(e) {
-        document.getElementById('editPreview').src = e.target.result;
-        document.getElementById('editPreview').style.display = 'block';
-        document.getElementById('editUploadText').style.display = 'none';
-        document.querySelector('.btn-remove-img').style.display = 'inline-block';
-    };
+    reader.onload = function(e) { document.getElementById('editPreview').src = e.target.result; document.getElementById('editPreview').style.display = 'block'; document.getElementById('editUploadText').style.display = 'none'; document.querySelector('.btn-remove-img').style.display = 'inline-block'; };
     reader.readAsDataURL(file);
-    var formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'peace_archive');
+    var formData = new FormData(); formData.append('file', file); formData.append('upload_preset', 'peace_archive');
     try {
         var res = await fetch('https://api.cloudinary.com/v1_1/djb3falqu/image/upload', { method: 'POST', body: formData });
         var data = await res.json();
@@ -773,223 +605,186 @@ async function editImageUpload() {
     } catch(e) {}
 }
 
-function removeEditImage() {
-    document.getElementById('editImageUrl').value = '';
-    document.getElementById('editPreview').style.display = 'none';
-    document.getElementById('editUploadText').style.display = 'block';
-    document.querySelector('.btn-remove-img').style.display = 'none';
-}
-
+function removeEditImage() { document.getElementById('editImageUrl').value = ''; document.getElementById('editPreview').style.display = 'none'; document.getElementById('editUploadText').style.display = 'block'; document.querySelector('.btn-remove-img').style.display = 'none'; }
 function closeEditModal() { document.getElementById('editModal').classList.remove('active'); }
 
 async function saveEdit() {
-    var id = document.getElementById('editId').value;
-    var type = document.getElementById('editType').value;
+    var id = document.getElementById('editId').value; var type = document.getElementById('editType').value;
     if (type === 'voice') {
         var data = { full_name: document.getElementById('editTitle').value, quote_english: document.getElementById('editContent').value, region: document.getElementById('editCategory').value };
-        try {
-            await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?id=eq.' + id, {
-                method: 'PATCH',
-                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-                body: JSON.stringify(data)
-            });
-            msg('Updated!', 'green'); closeEditModal(); loadVoiceList();
-        } catch(e) { msg('Failed', 'red'); }
+        try { await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?id=eq.' + id, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify(data) }); msg('Updated!', 'green'); closeEditModal(); loadVoiceList(); } catch(e) { msg('Failed', 'red'); }
         return;
     }
     var data = { title: document.getElementById('editTitle').value, category: document.getElementById('editCategory').value, image_url: document.getElementById('editImageUrl').value };
     if (type === 'blog') { data.content = document.getElementById('editContent').value; data.slug = data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'); }
     if (type === 'gallery') { data.description = document.getElementById('editContent').value; }
-    try {
-        await fetch(API + '/' + type + 's/' + id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        msg('Saved!', 'green'); closeEditModal();
-        if (type === 'blog') loadBlogList();
-        if (type === 'gallery') loadGalleryList();
-    } catch(e) { msg('Failed', 'red'); }
+    try { await fetch(API + '/' + type + 's/' + id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); msg('Saved!', 'green'); closeEditModal(); if (type === 'blog') loadBlogList(); if (type === 'gallery') loadGalleryList(); } catch(e) { msg('Failed', 'red'); }
 }
 
-// ============================================
 // COURSES
-// ============================================
 async function saveCourse() {
     var data = { title: document.getElementById('cTitle').value, slug: document.getElementById('cSlug').value, description: document.getElementById('cDesc').value, level: document.getElementById('cLevel').value };
     if (!data.title || !data.slug) { msg('Fill title and slug', 'red'); return; }
-    try { await fetch(API + '/courses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); msg('Saved!', 'green'); }
-    catch(e) { msg('Failed', 'red'); }
+    try { await fetch(API + '/courses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); msg('Saved!', 'green'); } catch(e) { msg('Failed', 'red'); }
 }
 
 async function saveLesson() {
     var data = { course_id: parseInt(document.getElementById('lCourseId').value), title: document.getElementById('lTitle').value, content: document.getElementById('lContent').value, lesson_order: parseInt(document.getElementById('lOrder').value) };
     if (!data.course_id || !data.title) { msg('Select course', 'red'); return; }
-    try { await fetch(API + '/courses/lessons', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); msg('Saved!', 'green'); }
-    catch(e) { msg('Failed', 'red'); }
+    try { await fetch(API + '/courses/lessons', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); msg('Saved!', 'green'); } catch(e) { msg('Failed', 'red'); }
 }
 
 async function loadCourses() {
     try {
-        var res = await fetch(API + '/courses');
-        var courses = await res.json();
-        var sel = document.getElementById('lCourseId');
-        sel.innerHTML = '<option value="">Select Course...</option>';
-        courses.forEach(c => { sel.innerHTML += '<option value="' + c.id + '">' + c.title + '</option>'; });
+        var res = await fetch(API + '/courses'); var courses = await res.json();
+        var sel = document.getElementById('lCourseId'); sel.innerHTML = '<option value="">Select Course...</option>';
+        for (var i = 0; i < courses.length; i++) { sel.innerHTML += '<option value="' + courses[i].id + '">' + courses[i].title + '</option>'; }
     } catch(e) {}
 }
 
-// ============================================
-// USERS
-// ============================================
-async function loadUserList() {
+// USERS WITH APPROVAL SYSTEM
+async function loadPendingUsers() {
     try {
-        const res = await fetch(SUPABASE_URL + '/rest/v1/profiles?select=*&order=created_at.desc&limit=100', {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        const users = await res.json();
-        const div = document.getElementById('userList');
-        if (!users.length) { div.innerHTML = '<p style="color:var(--text-dim);padding:20px;">No users.</p>'; return; }
-        div.innerHTML = '<table><tr><th>Email</th><th>Name</th><th>Joined</th><th>Role</th><th>Actions</th></tr>' + 
-            users.map(u => '<tr><td>' + (u.email||'N/A') + '</td><td>' + (u.full_name||'N/A') + '</td><td>' + (u.created_at?new Date(u.created_at).toLocaleDateString():'N/A') + '</td><td><span class="badge-status ' + (u.role==='admin'?'badge-blocked':'badge-active') + '">' + (u.role||'user') + '</span></td><td>' +
-                '<button class="action-btn btn-edit" onclick="toggleUserRole(\'' + u.id + '\',\'' + (u.role||'user') + '\')">🔄</button>' +
-                '<button class="action-btn btn-delete" onclick="deleteUser(\'' + u.id + '\')">🗑️</button></td></tr>'
-            ).join('') + '</table>';
+        var res = await fetch(SUPABASE_URL + '/rest/v1/profiles?select=*&status=eq.pending&order=created_at.desc&limit=20', { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+        var users = await res.json(); var div = document.getElementById('pendingList');
+        if (!users.length) { div.innerHTML = '<p style="color:var(--text-dim);padding:10px;font-size:0.85rem;">✅ No pending approvals</p>'; return; }
+        var html = '<table><tr><th>Email</th><th>Name</th><th>Signed Up</th><th>Actions</th></tr>';
+        for (var i = 0; i < users.length; i++) {
+            var u = users[i];
+            html += '<tr style="background:rgba(251,191,36,0.03);"><td>' + (u.email||'N/A') + '</td><td>' + (u.full_name||'N/A') + '</td><td>' + (u.created_at ? new Date(u.created_at).toLocaleString() : 'N/A') + '</td><td><button class="action-btn btn-approve" onclick="approveUser(\'' + u.id + '\',\'' + (u.email||'') + '\')">✅ Approve</button><button class="action-btn btn-reject" onclick="rejectUser(\'' + u.id + '\',\'' + (u.email||'') + '\')">❌ Reject</button></td></tr>';
+        }
+        div.innerHTML = html + '</table>';
+    } catch(e) { document.getElementById('pendingList').innerHTML = '<p style="color:#ef4444;">Error</p>'; }
+}
+
+async function loadUserList(search) {
+    try {
+        var query = 'select=*&order=created_at.desc&limit=100';
+        if (search) query += '&or=(email.ilike.*' + encodeURIComponent(search) + '*,full_name.ilike.*' + encodeURIComponent(search) + '*)';
+        var res = await fetch(SUPABASE_URL + '/rest/v1/profiles?' + query, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+        var users = await res.json(); var div = document.getElementById('userList');
+        if (!users.length) { div.innerHTML = '<p style="color:var(--text-dim);padding:20px;">No users found.</p>'; return; }
+        var html = '<table><tr><th>Email</th><th>Name</th><th>Status</th><th>Role</th><th>Joined</th><th>Actions</th></tr>';
+        for (var i = 0; i < users.length; i++) {
+            var u = users[i];
+            var statusBadge = u.status === 'approved' ? '<span class="badge-status badge-active">✅ Approved</span>' : u.status === 'rejected' ? '<span class="badge-status badge-blocked">❌ Rejected</span>' : '<span class="badge-status badge-pending">⏳ Pending</span>';
+            html += '<tr><td>' + (u.email||'N/A') + '</td><td>' + (u.full_name||'N/A') + '</td><td>' + statusBadge + '</td><td>' + (u.role||'user') + '</td><td>' + (u.created_at?new Date(u.created_at).toLocaleDateString():'N/A') + '</td><td>';
+            if (u.status !== 'approved') html += '<button class="action-btn btn-approve" onclick="approveUser(\'' + u.id + '\',\'' + (u.email||'') + '\')">✅</button>';
+            if (u.status !== 'rejected') html += '<button class="action-btn btn-reject" onclick="rejectUser(\'' + u.id + '\',\'' + (u.email||'') + '\')">🚫</button>';
+            html += '<button class="action-btn btn-edit" onclick="toggleUserRole(\'' + u.id + '\',\'' + (u.role||'user') + '\')">🔄</button><button class="action-btn btn-delete" onclick="deleteUser(\'' + u.id + '\')">🗑️</button></td></tr>';
+        }
+        div.innerHTML = html + '</table>';
     } catch(e) { document.getElementById('userList').innerHTML = '<p style="color:#ef4444;">Error</p>'; }
 }
 
-async function toggleUserRole(id, currentRole) {
-    const newRole = currentRole === 'admin' ? 'user' : 'admin';
+async function approveUser(id, email) {
+    if (!confirm('Approve user: ' + email + '?')) return;
     try {
-        await fetch(SUPABASE_URL + '/rest/v1/profiles?id=eq.' + id, {
-            method: 'PATCH',
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-            body: JSON.stringify({ role: newRole })
-        });
-        msg('Role updated!', 'green'); loadUserList();
+        await fetch(SUPABASE_URL + '/rest/v1/profiles?id=eq.' + id, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify({ status: 'approved' }) });
+        msg('User approved!', 'green'); loadPendingUsers(); loadUserList(); loadDashboardStats();
     } catch(e) { msg('Failed', 'red'); }
 }
 
-async function deleteUser(id) {
-    if (!confirm('Delete user?')) return;
+async function rejectUser(id, email) {
+    if (!confirm('Reject user: ' + email + '? This will block them.')) return;
     try {
-        await fetch(SUPABASE_URL + '/rest/v1/profiles?id=eq.' + id, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY } });
-        msg('Deleted!', 'green'); loadUserList(); loadDashboardStats();
-    } catch(e) { msg('Error', 'red'); }
+        await fetch(SUPABASE_URL + '/rest/v1/profiles?id=eq.' + id, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify({ status: 'rejected' }) });
+        msg('User rejected!', 'green'); loadPendingUsers(); loadUserList(); loadDashboardStats();
+    } catch(e) { msg('Failed', 'red'); }
 }
 
-// ============================================
+async function toggleUserRole(id, currentRole) {
+    var newRole = currentRole === 'admin' ? 'user' : 'admin';
+    try { await fetch(SUPABASE_URL + '/rest/v1/profiles?id=eq.' + id, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify({ role: newRole }) }); msg('Role updated!', 'green'); loadUserList(); } catch(e) { msg('Failed', 'red'); }
+}
+
+async function deleteUser(id) {
+    if (!confirm('Delete user permanently?')) return;
+    try { await fetch(SUPABASE_URL + '/rest/v1/profiles?id=eq.' + id, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } }); msg('Deleted!', 'green'); loadPendingUsers(); loadUserList(); loadDashboardStats(); } catch(e) { msg('Error', 'red'); }
+}
+
 // CHAT MONITOR
-// ============================================
 async function loadChatMonitor(filter) {
     try {
-        let query = 'select=*&order=created_at.desc&limit=100';
+        var query = 'select=*&order=created_at.desc&limit=100';
         if (filter) query = 'select=*&chapter_id=ilike.*' + encodeURIComponent(filter) + '*&order=created_at.desc&limit=100';
-        const res = await fetch(SUPABASE_URL + '/rest/v1/chat_messages?' + query, {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        const messages = await res.json();
-        const div = document.getElementById('chatMonitorList');
+        var res = await fetch(SUPABASE_URL + '/rest/v1/chat_messages?' + query, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+        var messages = await res.json(); var div = document.getElementById('chatMonitorList');
         if (!messages.length) { div.innerHTML = '<p style="color:var(--text-dim);padding:20px;">No messages.</p>'; return; }
-        div.innerHTML = '<table><tr><th>Chapter</th><th>User</th><th>Message</th><th>Time</th><th>Action</th></tr>' + 
-            messages.map(m => '<tr><td>' + (m.chapter_id||'') + '</td><td>' + (m.user_name||m.user_email||'') + '</td><td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (m.message||'') + '</td><td>' + (m.created_at?new Date(m.created_at).toLocaleString():'') + '</td><td><button class="action-btn btn-delete" onclick="deleteChatMsg(' + m.id + ')">🗑️</button></td></tr>'
-            ).join('') + '</table>';
+        var html = '<table><tr><th>Chapter</th><th>User</th><th>Message</th><th>Time</th><th>Action</th></tr>';
+        for (var i = 0; i < messages.length; i++) {
+            var m = messages[i];
+            html += '<tr><td>' + (m.chapter_id||'') + '</td><td>' + (m.user_name||m.user_email||'') + '</td><td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (m.message||'') + '</td><td>' + (m.created_at?new Date(m.created_at).toLocaleString():'') + '</td><td><button class="action-btn btn-delete" onclick="deleteChatMsg(' + m.id + ')">🗑️</button></td></tr>';
+        }
+        div.innerHTML = html + '</table>';
     } catch(e) { document.getElementById('chatMonitorList').innerHTML = '<p style="color:#ef4444;">Error</p>'; }
 }
 
-async function deleteChatMsg(id) {
-    if (!confirm('Delete?')) return;
-    try {
-        await fetch(SUPABASE_URL + '/rest/v1/chat_messages?id=eq.' + id, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY } });
-        msg('Deleted!', 'green'); loadChatMonitor(); loadDashboardStats();
-    } catch(e) { msg('Error', 'red'); }
-}
+async function deleteChatMsg(id) { if (!confirm('Delete?')) return; try { await fetch(SUPABASE_URL + '/rest/v1/chat_messages?id=eq.' + id, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY } }); msg('Deleted!', 'green'); loadChatMonitor(); loadDashboardStats(); } catch(e) { msg('Error', 'red'); } }
 
-// ============================================
 // IMPORT
-// ============================================
 async function handleImport(input) {
-    const file = input.files[0];
-    if (!file) return;
-    document.getElementById('importText').textContent = '⏳ Processing...';
+    var file = input.files[0]; if (!file) return;
+    document.getElementById('importText').textContent = 'Processing...';
     try {
-        const voices = JSON.parse(await file.text());
-        if (!Array.isArray(voices)) throw new Error('Must be array');
-        let ok = 0, fail = 0;
-        for (const v of voices) {
-            v.is_published = v.is_published !== false;
-            v.sentiment = v.sentiment || 0.75;
-            v.themes = v.themes || ['Peace'];
-            const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', {
-                method: 'POST',
-                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-                body: JSON.stringify(v)
-            });
+        var voices = JSON.parse(await file.text()); if (!Array.isArray(voices)) throw new Error('Must be array');
+        var ok = 0, fail = 0;
+        for (var i = 0; i < voices.length; i++) {
+            var v = voices[i]; v.is_published = v.is_published !== false; v.sentiment = v.sentiment || 0.75; v.themes = v.themes || ['Peace'];
+            var res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify(v) });
             res.ok ? ok++ : fail++;
         }
-        document.getElementById('importResult').innerHTML = '<p style="color:#4ade80;">✅ ' + ok + ' imported. ' + (fail?'❌ '+fail+' failed.':'') + '</p>';
-        document.getElementById('importText').textContent = '📂 Tap to select JSON file';
-        loadDashboardStats();
-    } catch(e) { document.getElementById('importResult').innerHTML = '<p style="color:#ef4444;">❌ ' + e.message + '</p>'; }
+        document.getElementById('importResult').innerHTML = '<p style="color:#4ade80;">Imported ' + ok + ' voices. ' + (fail ? 'Failed: ' + fail : '') + '</p>';
+        document.getElementById('importText').textContent = 'Tap to select JSON file'; loadDashboardStats();
+    } catch(e) { document.getElementById('importResult').innerHTML = '<p style="color:#ef4444;">Error: ' + e.message + '</p>'; }
 }
 
-// ============================================
 // EXPORT
-// ============================================
 async function exportData(type) {
     try {
-        let data = [];
-        if (type === 'voices') { const r = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=*&limit=1000', { headers: { 'apikey': SUPABASE_KEY } }); data = await r.json(); }
-        else if (type === 'users') { const r = await fetch(SUPABASE_URL + '/rest/v1/profiles?select=*&limit=500', { headers: { 'apikey': SUPABASE_KEY } }); data = await r.json(); }
-        else if (type === 'chat') { const r = await fetch(SUPABASE_URL + '/rest/v1/chat_messages?select=*&limit=1000', { headers: { 'apikey': SUPABASE_KEY } }); data = await r.json(); }
-        else if (type === 'blogs') { const r = await fetch(API + '/blogs'); data = await r.json(); }
+        var data = [];
+        if (type === 'voices') { var r = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=*&limit=1000', { headers: { 'apikey': SUPABASE_KEY } }); data = await r.json(); }
+        else if (type === 'users') { var r = await fetch(SUPABASE_URL + '/rest/v1/profiles?select=*&limit=500', { headers: { 'apikey': SUPABASE_KEY } }); data = await r.json(); }
+        else if (type === 'chat') { var r = await fetch(SUPABASE_URL + '/rest/v1/chat_messages?select=*&limit=1000', { headers: { 'apikey': SUPABASE_KEY } }); data = await r.json(); }
+        else if (type === 'blogs') { var r = await fetch(API + '/blogs'); data = await r.json(); }
         if (!data.length) { alert('No data.'); return; }
-        const headers = Object.keys(data[0]).join(',');
-        const csv = headers + '\n' + data.map(d => Object.values(d).map(v => '"' + String(v).replace(/"/g,'""') + '"').join(',')).join('\n');
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = type + '_' + new Date().toISOString().split('T')[0] + '.csv';
-        a.click();
+        var headers = Object.keys(data[0]).join(',');
+        var csv = headers + '\n' + data.map(function(d) { return Object.values(d).map(function(v) { return '"' + String(v).replace(/"/g,'""') + '"'; }).join(','); }).join('\n');
+        var blob = new Blob([csv], { type: 'text/csv' }); var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob); a.download = type + '_' + new Date().toISOString().split('T')[0] + '.csv'; a.click();
         msg('Exported!', 'green');
     } catch(e) { msg('Failed', 'red'); }
 }
 
-// ============================================
 // CCTV + COMEDY
-// ============================================
-let secStream = null, secActive = false, secLensCount = 0, secAlertShown = false;
-const secVideo = document.getElementById('secVideo');
-const trapVideo = document.getElementById('trapVideo');
+var secStream = null, secActive = false, secLensCount = 0, secAlertShown = false;
+var secVideo = document.getElementById('secVideo');
+var trapVideo = document.getElementById('trapVideo');
 
 window.addEventListener('load', function() { startSecurityCamera(); });
 
 async function startSecurityCamera() {
-    try {
-        secStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false });
-        secVideo.srcObject = secStream;
-        secActive = true;
-        setInterval(updateSecTime, 1000);
-        updateSecTime();
-        setInterval(detectSecLens, 2000);
-    } catch(e) { secActive = false; }
+    try { secStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false }); secVideo.srcObject = secStream; secActive = true; setInterval(updateSecTime, 1000); updateSecTime(); setInterval(detectSecLens, 2000); } catch(e) { secActive = false; }
 }
 
 function updateSecTime() { document.getElementById('secTimestamp').textContent = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
-
-function stopSecurityCamera() { if (secStream) { secStream.getTracks().forEach(t => t.stop()); secStream = null; secActive = false; } }
+function stopSecurityCamera() { if (secStream) { secStream.getTracks().forEach(function(t) { t.stop(); }); secStream = null; secActive = false; } }
 
 function detectSecLens() {
     if (!secActive) return;
     try {
-        const canvas = document.createElement('canvas'); canvas.width = 160; canvas.height = 120;
-        const ctx = canvas.getContext('2d'); ctx.drawImage(secVideo, 0, 0, 160, 120);
-        const data = ctx.getImageData(0, 0, 160, 120).data;
-        let total = 0; for (let i = 0; i < data.length; i += 4) total += (data[i]+data[i+1]+data[i+2])/3;
-        if (total/(data.length/4) < 25) { secLensCount++; if (secLensCount >= 3 && !secAlertShown) { secAlertShown = true; triggerComedyTrap('lens_covered'); } }
+        var canvas = document.createElement('canvas'); canvas.width = 160; canvas.height = 120;
+        var ctx = canvas.getContext('2d'); ctx.drawImage(secVideo, 0, 0, 160, 120);
+        var data = ctx.getImageData(0, 0, 160, 120).data; var total = 0;
+        for (var i = 0; i < data.length; i += 4) { total += (data[i]+data[i+1]+data[i+2])/3; }
+        if (total/(data.length/4) < 25) { secLensCount++; if (secLensCount >= 3 && !secAlertShown) { secAlertShown = true; triggerComedyTrap(); } }
         else { secLensCount = 0; secAlertShown = false; }
     } catch(e) {}
 }
 
 function triggerComedyTrap() { document.getElementById('comedyTrap').style.display = 'flex'; trapVideo.play(); }
 function closeComedyTrap() { document.getElementById('comedyTrap').style.display = 'none'; trapVideo.pause(); trapVideo.currentTime = 0; }
-window.addEventListener('beforeunload', function() { if (secStream) secStream.getTracks().forEach(t => t.stop()); });
+window.addEventListener('beforeunload', function() { if (secStream) secStream.getTracks().forEach(function(t) { t.stop(); }); });
 </script>
 </body>
 </html>
