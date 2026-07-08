@@ -28,7 +28,7 @@
         <a href="voices.html" class="active">Voices</a>
         <a href="blog.html">Blog</a>
         <a href="courses.html">Courses</a>
-        <a href="dashboard.html">Impact</a>
+        <a href="portal.html">Portal</a>
         <a href="media.html">Media</a>
         <a href="gallery.html">Gallery</a>
         <a href="thanks.html">Thanks</a>
@@ -46,7 +46,7 @@
 <div class="slide-menu" id="slideMenu">
     <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
     <a href="index.html">🏠 Home</a><a href="voices.html">🗣️ Voices</a><a href="blog.html">📝 Blog</a>
-    <a href="courses.html">🎓 Courses</a><a href="dashboard.html">📊 Impact</a>
+    <a href="courses.html">🎓 Courses</a><a href="portal.html">📊 Portal</a>
     <a href="gallery.html">🖼️ Gallery</a><a href="thanks.html">🙏 Thanks</a>
     <a href="support.html">❤️ Support</a>
 </div>
@@ -239,6 +239,7 @@
 
 <!-- SCRIPTS -->
 <script src="js/navigation.js"></script>
+<script src="js/notifications.js"></script>
 <script>
 // ============================================
 // CONFIGURATION
@@ -259,8 +260,19 @@ let chatPollingInterval = null;
 // HELPERS
 // ============================================
 function escHtml(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-function getInitials(name) { if (!name) return '👤'; const p = name.split(' '); return p.length >= 2 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : name.substring(0,2).toUpperCase(); }
 function getRandomLikes(id) { const nums = [48,52,55,47,53,50,49,54,51,46,57,44,58,45,56,43,59,42,60,41]; return nums[id % nums.length]; }
+
+// Human profile SVG icons
+const humanIcons = [
+    '<svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="white" width="28" height="28"><circle cx="12" cy="8" r="4"/><path d="M12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 10c2.7 0 5.8 1.29 6 2H6c.23-.72 3.31-2 6-2zm0-12C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 10c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>'
+];
+
+function getHumanIcon(id) {
+    return humanIcons[id % humanIcons.length];
+}
 
 // ============================================
 // PASSWORD CHECK
@@ -396,13 +408,13 @@ async function renderVoices() {
         const v = toShow[i];
         const flag = countryFlags[v.region] || '🌍';
         const name = v.full_name || v.writer_name || 'Anonymous';
-        const initials = getInitials(name);
         const avatarBg = avatarColors[(v.id || i) % avatarColors.length];
         const startLikes = v.starting_likes || getRandomLikes(v.id || i);
+        const humanIcon = getHumanIcon(v.id || i);
         
         const avatarContent = v.avatar_url 
             ? `<img src="${v.avatar_url}" class="writer-avatar" alt="${escHtml(name)}" loading="lazy" style="background:${avatarBg};">`
-            : `<div class="writer-avatar" style="background:${avatarBg};color:#fff;font-weight:700;font-size:1.2rem;text-shadow:0 1px 2px rgba(0,0,0,0.3);">${initials}</div>`;
+            : `<div class="writer-avatar" style="background:${avatarBg};display:flex;align-items:center;justify-content:center;">${humanIcon}</div>`;
         
         const showOriginal = v.language !== 'English' && v.quote_original && v.quote_original !== v.quote_english;
         const sp = Math.round((v.sentiment || 0.5) * 100);
@@ -501,6 +513,12 @@ async function likeVoice(voiceId) {
         if (el) el.textContent = (parseInt(el.textContent) || 0) + 1;
         btn.classList.add('liked');
         localStorage.setItem(likedKey, 'true');
+        
+        // Send notification
+        const voice = allVoices.find(v => v.id === voiceId);
+        if (voice && voice.email && currentUser) {
+            notifyLike(voice.email, currentUser.user_metadata?.display_name || 'Someone', voiceId);
+        }
     } catch (e) {}
     setTimeout(() => { btn.style.pointerEvents = 'auto'; }, 1000);
 }
@@ -524,6 +542,12 @@ function shareVoice(id, platform) {
     else if (platform === 'telegram') window.open('https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent('Peace voice from Ethiopian Peace Archive'), '_blank');
     const el = document.getElementById('shareCount-' + id);
     if (el) el.textContent = (parseInt(el.textContent) || 0) + 1;
+    
+    // Send notification
+    const voice = allVoices.find(v => v.id === id);
+    if (voice && voice.email && currentUser) {
+        notifyShare(voice.email, currentUser.user_metadata?.display_name || 'Someone', id);
+    }
 }
 
 // ============================================
@@ -580,11 +604,13 @@ async function uploadChapterProfile(input) {
 
 async function submitChapterMessage() {
     const msgEl = document.getElementById('chapterMsg');
+    const founderEmail = document.getElementById('chapterFounderEmail').value.trim();
+    const writerName = document.getElementById('chapterWriterName').value.trim();
     const body = {
         chapter_id: pendingChapterId,
         is_founder: false,
-        writer_name: document.getElementById('chapterWriterName').value.trim(),
-        full_name: document.getElementById('chapterWriterName').value.trim(),
+        writer_name: writerName,
+        full_name: writerName,
         quote_english: document.getElementById('chapterMessage').value.trim(),
         avatar_url: document.getElementById('chapterAvatarUrl').value || null,
         region: 'Co-Writer', year: new Date().getFullYear(), language: 'English',
@@ -597,7 +623,12 @@ async function submitChapterMessage() {
             headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
             body: JSON.stringify(body)
         });
-        if (res.ok) { msgEl.textContent = '✅ Added!'; msgEl.style.color='#4ade80'; setTimeout(() => { closeChapterPopup(); location.reload(); }, 1500); }
+        if (res.ok) {
+            msgEl.textContent = '✅ Added!'; msgEl.style.color='#4ade80';
+            // Send notification to founder
+            if (founderEmail) notifyChapterJoin(founderEmail, writerName, pendingChapterId);
+            setTimeout(() => { closeChapterPopup(); location.reload(); }, 1500);
+        }
         else { msgEl.textContent = '❌ Error.'; msgEl.style.color='#ef4444'; }
     } catch (e) { msgEl.textContent = '❌ Error.'; msgEl.style.color='#ef4444'; }
 }
@@ -621,7 +652,11 @@ async function handleSignUp() {
             method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, data: { display_name: name } })
         });
-        if (res.ok) { msg.textContent = '✅ Account created! Check email.'; msg.style.color='#4ade80'; setTimeout(() => { showLogin(); document.getElementById('loginEmail').value = email; }, 2000); }
+        if (res.ok) {
+            msg.textContent = '✅ Account created! Check email.'; msg.style.color='#4ade80';
+            notifyWelcome(email, name);
+            setTimeout(() => { showLogin(); document.getElementById('loginEmail').value = email; }, 2000);
+        }
         else { const e = await res.json(); msg.textContent = '❌ ' + (e.msg || 'Failed'); msg.style.color='#ef4444'; }
     } catch (e) { msg.textContent = '❌ Connection error.'; msg.style.color='#ef4444'; }
 }
@@ -660,6 +695,7 @@ function updateUIForLoggedInUser() {
         if (confirm('Sign out?')) { currentUser = null; localStorage.removeItem('peace_user'); userBtn.textContent = '👤 Sign In'; userBtn.onclick = openAuthModal; chatBtn.style.display = 'none'; closeChatModal(); }
     };
     chatBtn.style.display = 'inline-block';
+    initNotifications();
 }
 
 // ============================================
@@ -710,6 +746,20 @@ async function sendChatMessage() {
             body: JSON.stringify({ chapter_id: currentChapterChat, user_email: currentUser.email, user_name: currentUser.user_metadata?.display_name || 'User', message })
         });
         input.value = ''; loadChatMessages(currentChapterChat);
+        
+        // Notify chapter members
+        try {
+            const res = await fetch(SUPABASE_URL + '/rest/v1/chat_messages?select=user_email&chapter_id=eq.' + currentChapterChat, {
+                headers: { 'apikey': SUPABASE_KEY }
+            });
+            const msgs = await res.json();
+            const members = [...new Set(msgs.map(m => m.user_email))];
+            members.forEach(email => {
+                if (email !== currentUser.email) {
+                    notifyChatMessage(email, currentUser.user_metadata?.display_name || 'Someone', currentChapterChat);
+                }
+            });
+        } catch(e) {}
     } catch (e) { alert('Failed to send.'); }
     btn.disabled = false; btn.textContent = 'Send';
 }
