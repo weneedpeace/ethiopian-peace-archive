@@ -36,8 +36,8 @@
         <a href="support.html" class="cta-nav">Support</a>
     </div>
     <div style="display:flex;gap:10px;align-items:center;">
-        <button id="userBtn" onclick="openAuthModal()" style="padding:8px 16px;background:var(--gold);color:#000;border:none;border-radius:20px;cursor:pointer;font-weight:bold;font-size:0.85rem;font-family:var(--font-ui);">👤 Sign In</button>
-        <button id="chatBtn" onclick="openChatModal()" style="display:none;padding:8px 16px;background:var(--green);color:#000;border:none;border-radius:20px;cursor:pointer;font-weight:bold;font-size:0.85rem;font-family:var(--font-ui);">💬 Chat</button>
+        <button id="userBtn" onclick="openAuthModal()" class="btn btn-sm btn-gold" style="font-size:0.8rem;">👤 Sign In</button>
+        <button id="chatBtn" onclick="openChatModal()" style="display:none;font-size:0.8rem;" class="btn btn-sm" class="btn btn-sm">💬 Chat</button>
     </div>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
@@ -59,25 +59,33 @@
         <div class="stats-row" id="statsRow"></div>
     </div>
 
-    <!-- ADVANCED SEARCH -->
+    <!-- SEARCH -->
     <div class="search-advanced">
         <input type="text" id="searchInput" placeholder="Search by name, country, or keyword..." oninput="debouncedSearch()">
         <select id="regionSearch" onchange="applySearch()">
             <option value="">🌍 All Countries</option>
             <option value="Ethiopia">🇪🇹 Ethiopia</option>
             <option value="Global">🌐 Global</option>
-            <option value="Tigray">Tigray</option>
-            <option value="Amhara">Amhara</option>
-            <option value="Oromia">Oromia</option>
-            <option value="Somali">Somali</option>
-            <option value="Afar">Afar</option>
-            <option value="Sidama">Sidama</option>
-            <option value="SNNPR">SNNPR</option>
-            <option value="Gambella">Gambella</option>
-            <option value="Harari">Harari</option>
-            <option value="Benishangul-Gumuz">Benishangul-Gumuz</option>
-            <option value="Addis Ababa">Addis Ababa</option>
-            <option value="Dire Dawa">Dire Dawa</option>
+            <option value="England">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</option>
+            <option value="Netherlands">🇳🇱 Netherlands</option>
+            <option value="Germany">🇩🇪 Germany</option>
+            <option value="France">🇫🇷 France</option>
+            <option value="Italy">🇮🇹 Italy</option>
+            <option value="Spain">🇪🇸 Spain</option>
+            <option value="Russia">🇷🇺 Russia</option>
+            <option value="Poland">🇵🇱 Poland</option>
+            <option value="Norway">🇳🇴 Norway</option>
+            <option value="Switzerland">🇨🇭 Switzerland</option>
+            <option value="Japan">🇯🇵 Japan</option>
+            <option value="Malaysia">🇲🇾 Malaysia</option>
+            <option value="Brazil">🇧🇷 Brazil</option>
+            <option value="Nigeria">🇳🇬 Nigeria</option>
+            <option value="Somalia">🇸🇴 Somalia</option>
+            <option value="Tanzania">🇹🇿 Tanzania</option>
+            <option value="DR Congo">🇨🇩 DR Congo</option>
+            <option value="Croatia">🇭🇷 Croatia</option>
+            <option value="UK">🇬🇧 UK</option>
+            <option value="Africa">🌍 Africa</option>
         </select>
         <select id="languageSearch" onchange="applySearch()">
             <option value="">🌐 All Languages</option>
@@ -86,6 +94,22 @@
             <option value="Somali">Somali</option>
             <option value="Tigrinya">Tigrinya</option>
             <option value="English">English</option>
+            <option value="German">German</option>
+            <option value="French">French</option>
+            <option value="Dutch">Dutch</option>
+            <option value="Italian">Italian</option>
+            <option value="Spanish">Spanish</option>
+            <option value="Russian">Russian</option>
+            <option value="Polish">Polish</option>
+            <option value="Norwegian">Norwegian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Malay">Malay</option>
+            <option value="Portuguese">Portuguese</option>
+            <option value="Swahili">Swahili</option>
+            <option value="Croatian">Croatian</option>
+            <option value="Catalan">Catalan</option>
+            <option value="Yoruba">Yoruba</option>
+            <option value="Lingala">Lingala</option>
         </select>
         <select id="yearSearch" onchange="applySearch()">
             <option value="">📅 All Years</option>
@@ -179,10 +203,10 @@
         <input type="email" id="chapterFounderEmail" placeholder="Founder's Email">
         <input type="text" id="chapterWriterName" placeholder="Your Full Name">
         <div class="file-upload" id="chapterUploadStatus" onclick="document.getElementById('chapterProfileFile').click()">
-            📷 Tap to upload a profile picture (or leave empty for auto-avatar)
+            📷 Tap to upload a profile picture
         </div>
         <input type="file" id="chapterProfileFile" accept="image/*" style="display:none" onchange="uploadChapterProfile(this)">
-        <img id="chapterAvatarPreview" class="avatar-preview" src="" alt="Profile Preview">
+        <img id="chapterAvatarPreview" class="avatar-preview" src="" alt="Preview">
         <input type="hidden" id="chapterAvatarUrl">
         <textarea id="chapterMessage" placeholder="Write your message/wish here..." rows="4"></textarea>
         <button class="btn-verify" onclick="submitChapterMessage()">📤 Submit to Chapter</button>
@@ -215,9 +239,528 @@
 
 <!-- SCRIPTS -->
 <script src="js/navigation.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/chat.js"></script>
-<script src="js/main.js"></script>
+<script>
+// ============================================
+// CONFIGURATION
+// ============================================
+const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+const CLOUDINARY_UPLOAD = 'https://api.cloudinary.com/v1_1/djb3falqu/image/upload';
+const VOICES_PASSWORD = 'peace2026';
+
+let allVoices = [], filteredVoices = [], currentCategory = 'all', pageSize = 20, currentPage = 1;
+let pendingDocId = null, pendingChapterId = null;
+let searchTimeout = null;
+let currentUser = null;
+let currentChapterChat = null;
+let chatPollingInterval = null;
+
+// ============================================
+// PASSWORD CHECK
+// ============================================
+function checkPassword() {
+    const input = document.getElementById('passwordInput').value;
+    const error = document.getElementById('passwordError');
+    if (input === VOICES_PASSWORD) {
+        document.getElementById('passwordScreen').classList.add('hidden');
+        error.style.display = 'none';
+        initArchive();
+    } else {
+        error.style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+    }
+}
+
+// ============================================
+// INIT ARCHIVE
+// ============================================
+async function initArchive() {
+    const skeleton = document.getElementById('skeletonLoader');
+    try {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=*&is_published=eq.true&order=created_at.desc', {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+        });
+        if (!res.ok) throw new Error('Network error');
+        allVoices = await res.json();
+        skeleton.style.display = 'none';
+        updateStats();
+        populateFilters();
+        applySearch();
+        checkLogin();
+    } catch (e) {
+        skeleton.innerHTML = '<div style="color:#ff4444;padding:20px;text-align:center;"><p>⚠️ Could not load voices.</p><button onclick="location.reload()" class="btn btn-gold btn-sm" style="margin-top:10px;">🔄 Refresh</button></div>';
+        console.error('Init error:', e);
+    }
+}
+
+// ============================================
+// DEBOUNCE SEARCH
+// ============================================
+function debouncedSearch() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(applySearch, 300);
+}
+
+// ============================================
+// UPDATE STATS
+// ============================================
+function updateStats() {
+    document.getElementById('countAll').textContent = allVoices.length;
+    document.getElementById('countEthiopia').textContent = allVoices.filter(v => v.region === 'Ethiopia').length;
+    document.getElementById('countGlobal').textContent = allVoices.filter(v => v.region !== 'Ethiopia').length;
+    document.getElementById('countAmharic').textContent = allVoices.filter(v => v.language === 'Amharic').length;
+    document.getElementById('countOromo').textContent = allVoices.filter(v => v.language === 'Oromo').length;
+    document.getElementById('countSomali').textContent = allVoices.filter(v => v.language === 'Somali').length;
+    
+    document.getElementById('statsRow').innerHTML = `
+        <span class="stat-pill">🗣️ <strong>${allVoices.length}</strong> Voices</span>
+        <span class="stat-pill">📍 <strong>${new Set(allVoices.map(v=>v.region)).size}</strong> Regions</span>
+        <span class="stat-pill">🌐 <strong>${new Set(allVoices.map(v=>v.language)).size}</strong> Languages</span>
+        <span class="stat-pill">✍️ <strong>${new Set(allVoices.map(v=>v.writer_name).filter(Boolean)).size}</strong> Writers</span>
+    `;
+}
+
+function populateFilters() {
+    const years = [...new Set(allVoices.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
+    const sel = document.getElementById('yearSearch');
+    sel.innerHTML = '<option value="">📅 All Years</option>';
+    years.forEach(y => { sel.innerHTML += `<option value="${y}">${y}</option>`; });
+}
+
+// ============================================
+// SEARCH & FILTER
+// ============================================
+function applySearch() {
+    const keyword = document.getElementById('searchInput').value.toLowerCase();
+    const region = document.getElementById('regionSearch').value;
+    const lang = document.getElementById('languageSearch').value;
+    const year = document.getElementById('yearSearch').value;
+    
+    let voices = [...allVoices];
+    if (keyword) voices = voices.filter(v => 
+        (v.writer_name && v.writer_name.toLowerCase().includes(keyword)) ||
+        (v.full_name && v.full_name.toLowerCase().includes(keyword)) ||
+        (v.quote_english && v.quote_english.toLowerCase().includes(keyword)) ||
+        (v.region && v.region.toLowerCase().includes(keyword))
+    );
+    if (region) voices = voices.filter(v => v.region === region);
+    if (lang) voices = voices.filter(v => v.language === lang);
+    if (year) voices = voices.filter(v => v.year === parseInt(year));
+    if (currentCategory === 'MostLiked') voices.sort((a, b) => (b.like_count || 0) - (a.like_count || 0));
+    
+    filteredVoices = voices;
+    currentPage = 1;
+    renderVoices();
+}
+
+function filterCategory(cat) {
+    currentCategory = cat;
+    document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    currentPage = 1;
+    applySearch();
+}
+
+// ============================================
+// RENDER VOICES
+// ============================================
+async function renderVoices() {
+    const container = document.getElementById('quotesContainer');
+    const toShow = filteredVoices.slice(0, currentPage * pageSize);
+    
+    if (!toShow.length) {
+        container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-dim);">No voices found.</div>';
+        document.getElementById('loadMore').style.display = 'none';
+        return;
+    }
+    
+    const tc = ['theme-0', 'theme-1', 'theme-2', 'theme-3', 'theme-4'];
+    const countryFlags = {
+        'Ethiopia':'🇪🇹','England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','UK':'🇬🇧','Netherlands':'🇳🇱','Germany':'🇩🇪','France':'🇫🇷',
+        'Italy':'🇮🇹','Spain':'🇪🇸','Russia':'🇷🇺','Poland':'🇵🇱','Norway':'🇳🇴','Switzerland':'🇨🇭',
+        'Japan':'🇯🇵','Malaysia':'🇲🇾','Brazil':'🇧🇷','Nigeria':'🇳🇬','Somalia':'🇸🇴','Tanzania':'🇹🇿',
+        'DR Congo':'🇨🇩','Croatia':'🇭🇷','Global':'🌐','Africa':'🌍','Unknown':'🌍'
+    };
+    
+    let html = '';
+    for (let i = 0; i < toShow.length; i++) {
+        const v = toShow[i];
+        const flag = countryFlags[v.region] || '🌍';
+        const name = v.full_name || v.writer_name || 'Anonymous';
+        const initials = getInitials(name);
+        const avatarContent = v.avatar_url 
+            ? `<img src="${v.avatar_url}" class="writer-avatar" alt="${escHtml(name)}" loading="lazy">`
+            : `<div class="writer-avatar">${initials}</div>`;
+        
+        const showOriginal = v.language !== 'English' && v.quote_original && v.quote_original !== v.quote_english;
+        const sp = Math.round((v.sentiment || 0.5) * 100);
+        
+        html += `
+        <div class="voice-card enhanced" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i * 0.03}s">
+            <div class="voice-header-enhanced">
+                <div class="profile-section">
+                    ${avatarContent}
+                    <div class="profile-details">
+                        <div class="name-row">
+                            <span class="full-name">${flag} ${escHtml(name)}</span>
+                            ${v.is_verified ? '<span class="verified-badge">✅</span>' : ''}
+                        </div>
+                        ${v.title ? `<div class="user-title">💼 ${escHtml(v.title)}</div>` : ''}
+                        <div class="location-row">
+                            <span class="region-badge">📍 ${escHtml(v.region || 'Unknown')}</span>
+                            <span class="lang-badge">🌐 ${escHtml(v.language || 'N/A')}</span>
+                            <span class="year-badge">📅 ${v.year || 'N/A'}</span>
+                        </div>
+                    </div>
+                </div>
+                <span class="voice-id">#${v.document_id || ''}</span>
+            </div>
+            
+            <div class="quote-section">
+                <div class="quote-label">💬 Message of Peace</div>
+                <div class="quote-text">${escHtml(v.quote_english || v.quote_original)}</div>
+                ${showOriginal ? `<div class="quote-original"><div class="original-label">📜 Original (${v.language})</div>${escHtml(v.quote_original)}</div>` : ''}
+            </div>
+            
+            <div class="themes-row">${(v.themes || []).map((t, j) => `<span class="theme-tag ${tc[j % 5]}">${escHtml(t)}</span>`).join('')}</div>
+            <div class="sentiment-bar"><div class="sentiment-fill" style="width:${sp}%"></div></div>
+            
+            <div class="voice-footer-enhanced" style="margin-top:12px;">
+                <div class="action-buttons">
+                    ${v.audio_url ? `<audio controls class="audio-player-mini"><source src="${v.audio_url}" type="audio/mpeg"></audio>` : ''}
+                    <button class="action-btn like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">❤️ <span id="likeCount-${v.id}">${v.like_count || 0}</span></button>
+                    <span style="position:relative;">
+                        <button class="action-btn share-btn" onclick="toggleShareMenu(${v.id})">📤 <span id="shareCount-${v.id}">${v.starting_shares || 20}</span></button>
+                        <div class="share-menu" id="shareMenu-${v.id}">
+                            <a href="#" onclick="shareVoice(${v.id},'whatsapp')">📱 WhatsApp</a>
+                            <a href="#" onclick="shareVoice(${v.id},'facebook')">📘 Facebook</a>
+                            <a href="#" onclick="shareVoice(${v.id},'twitter')">🐦 Twitter/X</a>
+                            <a href="#" onclick="shareVoice(${v.id},'copy')">📋 Copy Link</a>
+                        </div>
+                    </span>
+                    <button class="action-btn join-btn" onclick="openChapterPopup('${v.chapter_id || 'new'}')">✍️ Join Chapter</button>
+                    <button class="action-btn chat-btn" onclick="openChatModal('${v.chapter_id || v.id}')">💬 Chat</button>
+                    <button class="action-btn pdf-btn" onclick="generateChapterPDF('${v.chapter_id || v.id}')">📄 PDF</button>
+                </div>
+                ${v.cloudinary_url ? `<button class="view-original-btn" onclick="openEmailPopup('${v.id}')">👁️ View Original Document</button>` : ''}
+            </div>
+        </div>`;
+    }
+    
+    container.innerHTML = html;
+    document.getElementById('loadMore').style.display = filteredVoices.length > currentPage * pageSize ? 'block' : 'none';
+    toShow.forEach(v => loadLikes(v.id));
+}
+
+function loadMore() { currentPage++; renderVoices(); }
+
+// ============================================
+// LIKES
+// ============================================
+async function loadLikes(voiceId) {
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/voice_likes?select=count&voice_id=eq.${voiceId}`, {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+        });
+        const data = await res.json();
+        const el = document.getElementById('likeCount-' + voiceId);
+        if (el) el.textContent = data[0]?.count || 0;
+    } catch (e) {}
+}
+
+async function likeVoice(voiceId) {
+    const btn = document.getElementById('likeBtn-' + voiceId);
+    const likedKey = 'liked_' + voiceId;
+    if (localStorage.getItem(likedKey)) { alert('Already liked!'); return; }
+    
+    btn.style.pointerEvents = 'none';
+    try {
+        await fetch(`${SUPABASE_URL}/rest/v1/voice_likes`, {
+            method: 'POST',
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify({ voice_id: voiceId })
+        });
+        const el = document.getElementById('likeCount-' + voiceId);
+        if (el) el.textContent = (parseInt(el.textContent) || 0) + 1;
+        btn.classList.add('liked');
+        localStorage.setItem(likedKey, 'true');
+    } catch (e) {}
+    setTimeout(() => { btn.style.pointerEvents = 'auto'; }, 1000);
+}
+
+// ============================================
+// SHARE
+// ============================================
+function toggleShareMenu(id) {
+    const menu = document.getElementById('shareMenu-' + id);
+    menu.classList.toggle('active');
+    document.querySelectorAll('.share-menu').forEach(m => { if (m.id !== 'shareMenu-' + id) m.classList.remove('active'); });
+}
+
+function shareVoice(id, platform) {
+    document.getElementById('shareMenu-' + id).classList.remove('active');
+    const url = window.location.href.split('?')[0] + '?voice=' + id;
+    if (platform === 'copy') navigator.clipboard.writeText(url).then(() => alert('Link copied!'));
+    else if (platform === 'whatsapp') window.open('https://wa.me/?text=' + encodeURIComponent('Peace voice: ' + url), '_blank');
+    else if (platform === 'facebook') window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank');
+    else if (platform === 'twitter') window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(url), '_blank');
+    const el = document.getElementById('shareCount-' + id);
+    if (el) el.textContent = (parseInt(el.textContent) || 0) + 1;
+}
+
+// ============================================
+// EMAIL VERIFICATION
+// ============================================
+function openEmailPopup(id) { pendingDocId = id; document.getElementById('emailPopup').classList.add('active'); }
+function closeEmailPopup() { document.getElementById('emailPopup').classList.remove('active'); }
+async function verifyEmailAndShowImage() {
+    const email = document.getElementById('verifyEmail').value.trim();
+    const msg = document.getElementById('verifyMsg');
+    if (!email) { msg.textContent = 'Enter email.'; return; }
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?select=extracted_data,cloudinary_url&id=eq.${pendingDocId}`, {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+        });
+        const data = await res.json();
+        const doc = data[0];
+        if (email.toLowerCase() === (doc?.extracted_data?.email || '').toLowerCase()) {
+            closeEmailPopup();
+            document.getElementById('lightboxImage').src = doc.cloudinary_url;
+            document.getElementById('imageLightbox').classList.add('active');
+        } else { msg.textContent = '❌ Email does not match.'; }
+    } catch (e) { msg.textContent = 'Error.'; }
+}
+function closeLightbox() { document.getElementById('imageLightbox').classList.remove('active'); }
+
+// ============================================
+// CHAPTER JOIN
+// ============================================
+function openChapterPopup(id) { pendingChapterId = id; document.getElementById('chapterPopup').classList.add('active'); }
+function closeChapterPopup() { document.getElementById('chapterPopup').classList.remove('active'); }
+function redirectToContribute() { closeChapterPopup(); window.location.href = 'contribute.html'; }
+
+async function uploadChapterProfile(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const status = document.getElementById('chapterUploadStatus');
+    status.textContent = '⏳ Uploading...';
+    const preview = document.getElementById('chapterAvatarPreview');
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = 'block';
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'peace_archive');
+    try {
+        const res = await fetch(CLOUDINARY_UPLOAD, { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.secure_url) {
+            document.getElementById('chapterAvatarUrl').value = data.secure_url;
+            status.textContent = '✅ Uploaded!';
+        }
+    } catch (e) { status.textContent = '❌ Failed.'; }
+}
+
+async function submitChapterMessage() {
+    const msgEl = document.getElementById('chapterMsg');
+    const body = {
+        chapter_id: pendingChapterId,
+        is_founder: false,
+        writer_name: document.getElementById('chapterWriterName').value.trim(),
+        full_name: document.getElementById('chapterWriterName').value.trim(),
+        quote_english: document.getElementById('chapterMessage').value.trim(),
+        avatar_url: document.getElementById('chapterAvatarUrl').value || null,
+        region: 'Co-Writer', year: new Date().getFullYear(), language: 'English',
+        is_published: true, themes: ['Legacy','Family','Peace'], sentiment: 0.75
+    };
+    if (!body.writer_name || !body.quote_english) { msgEl.textContent = 'Fill all fields.'; return; }
+    try {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', {
+            method: 'POST',
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify(body)
+        });
+        if (res.ok) { msgEl.textContent = '✅ Added!'; setTimeout(() => { closeChapterPopup(); location.reload(); }, 1500); }
+        else { msgEl.textContent = '❌ Error.'; }
+    } catch (e) { msgEl.textContent = '❌ Error.'; }
+}
+
+// ============================================
+// PDF GENERATION
+// ============================================
+function generateChapterPDF(chapterId) {
+    const voices = allVoices.filter(v => v.chapter_id === chapterId || v.id === chapterId);
+    if (!voices.length) { alert('No voices in this chapter.'); return; }
+    let h = `<html><head><meta charset="UTF-8"><style>body{font-family:Arial;padding:40px;color:#333;}h1{border-bottom:3px solid gold;}.voice{margin:20px 0;padding:15px;border-left:4px solid #22c55e;}.writer{color:#666;font-size:14px;font-weight:bold;}.quote{font-size:16px;line-height:1.6;}.original{color:#555;font-style:italic;font-size:14px;}.footer{margin-top:40px;text-align:center;color:#999;font-size:12px;}</style></head><body><h1>🕊️ Peace Voices - Chapter ${chapterId}</h1>`;
+    voices.forEach(v => {
+        h += `<div class="voice"><div class="writer">✍️ ${escHtml(v.full_name||v.writer_name||'Anonymous')} | 📍 ${escHtml(v.region)} | 🌐 ${escHtml(v.language)}</div><div class="quote">${escHtml(v.quote_english||v.quote_original)}</div>${v.language!=='English'&&v.quote_original?`<div class="original">📜 Original: ${escHtml(v.quote_original)}</div>`:''}</div>`;
+    });
+    h += `<div class="footer"><p>Ethiopian Peace Archive</p><p>© ${new Date().getFullYear()}</p></div></body></html>`;
+    const w = window.open('','_blank','width=800,height=600');
+    w.document.write(h); w.document.close(); w.focus();
+    setTimeout(() => w.print(), 500);
+}
+
+// ============================================
+// AUTH FUNCTIONS
+// ============================================
+function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
+function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
+function showSignUp() { document.getElementById('loginForm').style.display='none'; document.getElementById('signUpForm').style.display='block'; }
+function showLogin() { document.getElementById('signUpForm').style.display='none'; document.getElementById('loginForm').style.display='block'; }
+
+async function handleSignUp() {
+    const name = document.getElementById('signUpName').value.trim();
+    const email = document.getElementById('signUpEmail').value.trim();
+    const password = document.getElementById('signUpPassword').value;
+    const msg = document.getElementById('signUpMsg');
+    if (!name || !email || !password || password.length < 6) { msg.textContent = '❌ Fill all fields (password 6+ chars).'; msg.style.color='#ef4444'; return; }
+    try {
+        const res = await fetch(SUPABASE_URL + '/auth/v1/signup', {
+            method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, data: { display_name: name } })
+        });
+        if (res.ok) { msg.textContent = '✅ Account created! Check email.'; msg.style.color='#4ade80'; setTimeout(() => { showLogin(); document.getElementById('loginEmail').value = email; }, 2000); }
+        else { const e = await res.json(); msg.textContent = '❌ ' + (e.msg || 'Failed'); msg.style.color='#ef4444'; }
+    } catch (e) { msg.textContent = '❌ Connection error.'; msg.style.color='#ef4444'; }
+}
+
+async function handleLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const msg = document.getElementById('loginMsg');
+    if (!email || !password) { msg.textContent = '❌ Enter email and password.'; return; }
+    try {
+        const res = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+            method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        if (res.ok) {
+            const data = await res.json();
+            currentUser = data.user;
+            localStorage.setItem('peace_user', JSON.stringify(currentUser));
+            closeAuthModal();
+            updateUIForLoggedInUser();
+        } else { msg.textContent = '❌ Invalid email or password.'; }
+    } catch (e) { msg.textContent = '❌ Connection error.'; }
+}
+
+function checkLogin() {
+    const saved = localStorage.getItem('peace_user');
+    if (saved) { try { currentUser = JSON.parse(saved); updateUIForLoggedInUser(); } catch(e) { localStorage.removeItem('peace_user'); } }
+}
+
+function updateUIForLoggedInUser() {
+    if (!currentUser) return;
+    const userBtn = document.getElementById('userBtn');
+    const chatBtn = document.getElementById('chatBtn');
+    userBtn.textContent = '👤 ' + (currentUser.user_metadata?.display_name || currentUser.email);
+    userBtn.onclick = () => {
+        if (confirm('Sign out?')) { currentUser = null; localStorage.removeItem('peace_user'); userBtn.textContent = '👤 Sign In'; userBtn.onclick = openAuthModal; chatBtn.style.display = 'none'; closeChatModal(); }
+    };
+    chatBtn.style.display = 'inline-block';
+}
+
+// ============================================
+// CHAT FUNCTIONS
+// ============================================
+function openChatModal(chapterId) {
+    if (!currentUser) { alert('Please sign in first.'); openAuthModal(); return; }
+    if (!chapterId) { chapterId = prompt('Enter Chapter ID:'); if (!chapterId) return; }
+    currentChapterChat = chapterId;
+    document.getElementById('chatModal').classList.add('active');
+    document.getElementById('chatChapterTitle').textContent = '💬 Chat: ' + chapterId;
+    document.getElementById('chatMessages').innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:20px;">Loading...</p>';
+    loadChatMessages(chapterId);
+    startChatPolling(chapterId);
+}
+
+function closeChatModal() { document.getElementById('chatModal').classList.remove('active'); stopChatPolling(); }
+
+async function loadChatMessages(chapterId) {
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/chat_messages?chapter_id=eq.${chapterId}&order=created_at.asc&limit=100`, {
+            headers: { 'apikey': SUPABASE_KEY }
+        });
+        const messages = await res.json();
+        const container = document.getElementById('chatMessages');
+        if (!messages.length) { container.innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:20px;">No messages yet.</p>'; return; }
+        container.innerHTML = '';
+        messages.forEach(msg => {
+            const isMine = currentUser && msg.user_email === currentUser.email;
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble ' + (isMine ? 'mine' : 'other');
+            const time = new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            bubble.innerHTML = isMine ? `${escHtml(msg.message)}<span class="chat-time">${time}</span>` : `<div class="chat-sender">${escHtml(msg.user_name||'User')}</div>${escHtml(msg.message)}<span class="chat-time">${time}</span>`;
+            container.appendChild(bubble);
+        });
+        container.scrollTop = container.scrollHeight;
+    } catch (e) { console.error('Chat error:', e); }
+}
+
+async function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (!message || !currentUser || !currentChapterChat) return;
+    const btn = document.getElementById('chatSendBtn'); btn.disabled = true; btn.textContent = '...';
+    try {
+        await fetch(SUPABASE_URL + '/rest/v1/chat_messages', {
+            method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify({ chapter_id: currentChapterChat, user_email: currentUser.email, user_name: currentUser.user_metadata?.display_name || 'User', message })
+        });
+        input.value = ''; loadChatMessages(currentChapterChat);
+    } catch (e) { alert('Failed to send.'); }
+    btn.disabled = false; btn.textContent = 'Send';
+}
+
+function startChatPolling(chapterId) { stopChatPolling(); chatPollingInterval = setInterval(() => loadChatMessages(chapterId), 3000); }
+function stopChatPolling() { if (chatPollingInterval) { clearInterval(chatPollingInterval); chatPollingInterval = null; } }
+
+// ============================================
+// WALLET
+// ============================================
+function openWallet() {
+    let total = 0;
+    allVoices.forEach(v => { total += (v.starting_likes||50) + (v.starting_shares||20); });
+    document.getElementById('walletBalance').textContent = total;
+    document.getElementById('walletPopup').classList.add('active');
+}
+function closeWallet() { document.getElementById('walletPopup').classList.remove('active'); }
+function redeemCoin(item) {
+    const balance = parseInt(document.getElementById('walletBalance').textContent);
+    const costs = { postcard: 50, booklet: 200, course: 500 };
+    if (balance >= costs[item]) { alert(`✅ Redeemed ${item}!`); document.getElementById('walletBalance').textContent = balance - costs[item]; }
+    else { alert(`❌ Need ${costs[item]} coins.`); }
+}
+
+// ============================================
+// HELPERS
+// ============================================
+function escHtml(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function getInitials(name) { if (!name) return '👤'; const p = name.split(' '); return p.length >= 2 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : name.substring(0,2).toUpperCase(); }
+
+// ============================================
+// SCROLL TO TOP
+// ============================================
+window.addEventListener('scroll', function() {
+    const btn = document.getElementById('scrollToTop');
+    btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+});
+
+// ============================================
+// CLICK OUTSIDE SHARE MENU
+// ============================================
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.share-btn')) document.querySelectorAll('.share-menu').forEach(m => m.classList.remove('active'));
+});
+
+// ============================================
+// ENTER KEY FOR CHAT
+// ============================================
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && document.activeElement.id === 'chatInput') { e.preventDefault(); sendChatMessage(); }
+});
+</script>
 
 </body>
 </html>
