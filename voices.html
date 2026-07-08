@@ -3,235 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore 60+ peace voices from Ethiopia and the world. Generate audio for any voice with one click.">
+    <meta name="description" content="Explore 60+ peace voices from Ethiopia and the world.">
     <title>Voice Archive — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .voices-hero { text-align: center; padding: 40px 20px 30px; }
-        .voices-hero h1 { color: var(--gold-bright); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 8px; }
-        .voices-hero p { color: var(--text-dim); max-width: 600px; margin: 0 auto; }
-        .stats-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin: 20px 0; }
-        .stat-pill { background: var(--card); border: 1px solid var(--green-border); border-radius: 25px; padding: 8px 18px; font-size: 0.8rem; color: var(--text-dim); font-family: var(--font-ui); display: flex; align-items: center; gap: 6px; }
-        .stat-pill strong { color: var(--green-bright); }
-        
-        .search-advanced {
-            display: flex; flex-wrap: wrap; gap: 10px; max-width: 800px; margin: 20px auto;
-            background: var(--card); border: 1px solid var(--green-border); border-radius: 16px; padding: 16px;
-        }
-        .search-advanced input { flex: 2; min-width: 180px; padding: 12px 16px; background: #222; border: 1px solid #444; border-radius: 25px; color: #fff; font-size: 0.95rem; font-family: var(--font-ui); }
-        .search-advanced input:focus { border-color: var(--gold); outline: none; }
-        .search-advanced select { flex: 1; min-width: 120px; padding: 10px 14px; background: #222; border: 1px solid #444; border-radius: 25px; color: #fff; font-size: 0.85rem; font-family: var(--font-ui); cursor: pointer; }
-        .search-advanced select:focus { border-color: var(--gold); outline: none; }
-        .search-advanced button { padding: 10px 24px; background: var(--gold); color: #000; border: none; border-radius: 25px; font-weight: 700; cursor: pointer; font-family: var(--font-ui); }
-        .search-advanced button:hover { background: #ffdd33; }
-        
-        .category-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; justify-content: center; }
-        .cat-chip { padding: 8px 18px; border-radius: 25px; cursor: pointer; border: 1px solid var(--green-border); background: var(--card); color: var(--text-dim); font-family: var(--font-ui); font-size: 0.8rem; transition: all 0.2s; white-space: nowrap; }
-        .cat-chip:hover, .cat-chip.active { background: var(--green); color: #000; font-weight: 700; border-color: var(--green); }
-        .cat-chip .count { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 2px 8px; font-size: 0.7rem; margin-left: 4px; }
-        
-        .voice-card { background: var(--card); border: 1px solid rgba(34,197,94,0.08); border-radius: 16px; padding: 24px; margin-bottom: 14px; transition: all 0.3s; position: relative; }
-        .voice-card:hover { border-color: var(--green-border); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-        .voice-card .voice-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-        .voice-card .voice-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-        
-        /* ===== ENHANCED AVATAR ===== */
-        .writer-avatar {
-            width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
-            border: 3px solid var(--gold); background: #2a2a2a; margin-right: 12px;
-            flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; color: #fff;
-            box-shadow: 0 4px 12px rgba(255, 204, 0, 0.15);
-        }
-        .writer-info { display: flex; flex-direction: column; }
-        .writer-name { color: var(--gold); font-weight: 700; font-family: var(--font-ui); font-size: 0.9rem; }
-        
-        .voice-card .region-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; background: var(--green-dim); color: var(--green-bright); font-family: var(--font-ui); font-weight: 600; }
-        .voice-card .lang-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; background: rgba(251,191,36,0.1); color: #facc15; font-family: var(--font-ui); }
-        .voice-card .year-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 15px; font-size: 0.7rem; background: rgba(59,130,246,0.1); color: #60a5fa; font-family: var(--font-ui); }
-        .voice-card .quote-text { font-size: 1.05rem; line-height: 1.8; margin: 12px 0; color: var(--text); }
-        .voice-card .quote-text::before { content: '\201C'; color: var(--green); font-size: 2rem; line-height: 0; vertical-align: -6px; margin-right: 2px; }
-        .voice-card .quote-text::after { content: '\201D'; color: var(--green); font-size: 2rem; line-height: 0; vertical-align: -6px; margin-left: 2px; }
-        .voice-card .quote-original { font-size: 0.9rem; line-height: 1.6; margin: 8px 0; color: var(--text-dim); font-style: italic; padding: 10px; background: rgba(255,255,255,0.02); border-radius: 8px; border-left: 2px solid var(--green-border); }
-        .voice-card .themes-row { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 10px; }
-        .theme-tag { padding: 3px 10px; border-radius: 12px; font-size: 0.68rem; font-family: var(--font-ui); }
-        .theme-0 { background: rgba(34,197,94,0.12); color: #4ade80; }
-        .theme-1 { background: rgba(59,130,246,0.12); color: #60a5fa; }
-        .theme-2 { background: rgba(168,85,247,0.12); color: #c084fc; }
-        .theme-3 { background: rgba(236,72,153,0.12); color: #f472b6; }
-        .theme-4 { background: rgba(251,146,60,0.12); color: #fb923c; }
-        .sentiment-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 12px; }
-        .sentiment-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #eab308, #22c55e); }
-        .voice-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px; }
-
-        /* Co-Writer section */
-        .chapter-co-writers { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); }
-        .co-writer-card { padding: 12px 16px; margin-top: 10px; background: rgba(255,255,255,0.02); border-radius: 8px; border-left: 3px solid var(--gold); display: flex; align-items: center; gap: 12px; }
-        .co-writer-card .writer-name { color: var(--gold); font-weight: 600; font-size: 0.85rem; }
-        .co-writer-card .quote-text { font-size: 0.95rem; margin: 6px 0; }
-        .co-writer-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff; background: #2a2a2a; flex-shrink: 0; }
-
-        /* BUTTONS */
-        .gen-btn { background: #9333ea; color: #fff; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font-ui); display: inline-flex; align-items: center; gap: 6px; }
-        .gen-btn:hover { background: #a855f7; transform: scale(1.02); }
-        .gen-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .gen-btn.loading { background: #eab308; color: #000; }
-        .gen-btn.done { background: #22c55e; color: #000; }
-
-        .btn-join-chapter {
-            background: var(--gold); color: #000; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer; font-family: var(--font-ui); display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
-        }
-        .btn-join-chapter:hover { background: #ffdd33; transform: scale(1.02); }
-
-        .audio-player { height: 30px; width: 200px; border-radius: 20px; }
-        .voice-id { color: var(--text-muted); font-size: 0.65rem; font-family: var(--font-ui); }
-        .like-btn { background: none; border: 1px solid var(--green-border); border-radius: 20px; padding: 6px 14px; cursor: pointer; color: var(--text-dim); font-family: var(--font-ui); font-size: 0.8rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px; }
-        .like-btn:hover { border-color: #ef4444; color: #ef4444; }
-        .like-btn.liked { color: #ef4444; border-color: #ef4444; background: rgba(239,68,68,0.1); }
-        .coin-btn { background: none; border: 1px solid var(--gold); border-radius: 20px; padding: 6px 14px; cursor: pointer; color: var(--gold); font-family: var(--font-ui); font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px; }
-        .share-btn { background: none; border: 1px solid #3b82f6; border-radius: 20px; padding: 6px 14px; cursor: pointer; color: #3b82f6; font-family: var(--font-ui); font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px; }
-        .share-menu { display: none; position: absolute; bottom: 40px; left: 0; background: var(--card); border: 1px solid var(--green-border); border-radius: 12px; padding: 12px; z-index: 10; min-width: 160px; }
-        .share-menu.active { display: block; }
-        .share-menu a { display: block; padding: 6px 10px; color: var(--text); text-decoration: none; font-size: 0.85rem; }
-        .share-menu a:hover { background: rgba(255,255,255,0.05); border-radius: 4px; }
-
-        .load-more { text-align: center; margin: 20px 0; }
-        .load-more button { padding: 10px 30px; border-radius: 25px; background: var(--green-dim); color: var(--green-bright); border: 1px solid var(--green-border); cursor: pointer; font-family: var(--font-ui); font-size: 0.9rem; }
-        .load-more button:hover { background: var(--green); color: #000; }
-
-        /* SCROLL TO TOP */
-        #scrollToTop {
-            display: none; position: fixed; bottom: 30px; right: 30px;
-            width: 50px; height: 50px; background: var(--gold); color: #000;
-            border: none; border-radius: 50%; font-size: 1.8rem; font-weight: bold;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            transition: all 0.3s ease; z-index: 999;
-            align-items: center; justify-content: center; line-height: 1;
-        }
-        #scrollToTop:hover { background: #ffdd33; transform: scale(1.1) translateY(-3px); }
-        #scrollToTop.show { display: flex; }
-
-        /* PASSWORD */
-        #passwordScreen {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: #0a0a0a; display: flex; align-items: center; justify-content: center;
-            z-index: 9999; flex-direction: column;
-        }
-        #passwordScreen.hidden { display: none; }
-        .password-box { background: var(--card); border: 1px solid var(--green-border); border-radius: 16px; padding: 40px; max-width: 400px; width: 90%; text-align: center; }
-        .password-box h2 { color: var(--gold); margin-bottom: 10px; }
-        .password-box p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px; }
-        .password-box input { width: 100%; padding: 12px; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 1rem; margin-bottom: 15px; text-align: center; }
-        .password-box input:focus { border-color: var(--gold); outline: none; }
-        .password-box button { width: 100%; padding: 12px; background: var(--gold); color: #000; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; }
-        .password-box button:hover { background: #ffdd33; }
-        .password-error { color: #ff4444; font-size: 0.85rem; margin-top: 10px; display: none; }
-
-        /* POPUPS */
-        #emailPopup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 9998; }
-        #emailPopup.active { display: flex; }
-        .popup-box { background: #1a1a1a; border: 1px solid var(--green-border); border-radius: 12px; padding: 30px; max-width: 400px; width: 90%; text-align: center; }
-        .popup-box input { width: 100%; padding: 10px; background: #222; border: 1px solid #444; border-radius: 6px; color: #fff; margin: 10px 0; }
-        .popup-box button { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-        .popup-box .btn-verify { background: #4ade80; color: #000; }
-        .popup-box .btn-cancel { background: #555; color: #fff; }
-        #imageLightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 9997; }
-        #imageLightbox.active { display: flex; }
-        #imageLightbox img { max-width: 90%; max-height: 90%; border-radius: 8px; }
-        .close-lightbox { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
-
-        #walletPopup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 9998; }
-        #walletPopup.active { display: flex; }
-        .wallet-box { background: #1a1a1a; border: 1px solid var(--gold); border-radius: 12px; padding: 30px; max-width: 500px; width: 90%; text-align: center; }
-        .wallet-box h3 { color: var(--gold); }
-        .wallet-box .coin-balance { font-size: 2rem; color: #facc15; margin: 15px 0; }
-        .wallet-box .shop-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .wallet-box .shop-item button { background: var(--gold); color: #000; border: none; padding: 4px 12px; border-radius: 12px; cursor: pointer; }
-
-        /* BIG JOIN CHAPTER POPUP */
-        #chapterPopup {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(6px);
-            z-index: 99999;
-            justify-content: center;
-            align-items: center;
-        }
-        #chapterPopup.active { display: flex; }
-        .popup-box-big {
-            background: #1a1a1a;
-            border: 2px solid var(--gold);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 550px;
-            width: 95%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-            position: relative;
-        }
-        .popup-box-big h3 { color: var(--gold); text-align: center; font-size: 1.3rem; margin-bottom: 6px; }
-        .popup-box-big .subtitle { color: var(--text-dim); text-align: center; font-size: 0.85rem; margin-bottom: 18px; }
-        .popup-box-big input, .popup-box-big textarea {
-            width: 100%; padding: 12px 16px; border-radius: 10px;
-            border: 1px solid #444; background: #222;
-            color: #fff; font-size: 0.9rem; font-family: inherit;
-            margin-bottom: 12px; transition: all 0.3s;
-        }
-        .popup-box-big input:focus, .popup-box-big textarea:focus {
-            outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(255,204,0,0.15);
-        }
-        .popup-box-big textarea { min-height: 100px; resize: vertical; }
-        .popup-box-big .file-upload {
-            border: 2px dashed #444; border-radius: 10px; padding: 15px; text-align: center;
-            color: var(--text-dim); font-size: 0.85rem; cursor: pointer; margin-bottom: 12px;
-        }
-        .popup-box-big .file-upload:hover { border-color: var(--gold); }
-        .popup-box-big .avatar-preview { display: none; width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); margin: 0 auto 12px; }
-        .popup-box-big .btn-verify { width: 100%; padding: 14px; background: var(--gold); color: #000; border: none; border-radius: 30px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
-        .popup-box-big .btn-verify:hover { background: #ffdd33; transform: translateY(-2px); }
-        .popup-box-big .btn-cancel { width: 100%; padding: 12px; background: #555; color: #fff; border: none; border-radius: 30px; font-weight: 600; margin-top: 8px; cursor: pointer; }
-        .popup-box-big .btn-cancel:hover { background: #777; }
-        .popup-box-big .separator { border-top: 1px solid #333; margin: 18px 0; text-align: center; position: relative; }
-        .popup-box-big .separator span { background: #1a1a1a; padding: 0 12px; color: #666; font-size: 0.8rem; position: relative; top: -10px; }
-        .popup-box-big .start-new { text-align: center; margin-top: 6px; }
-        .popup-box-big .start-new a { color: var(--green-bright); text-decoration: underline; cursor: pointer; font-weight: 600; }
-        .popup-box-big .start-new a:hover { color: #4ade80; }
-        #chapterMsg { text-align: center; font-size: 0.9rem; margin-top: 10px; }
-        .close-popup { position: absolute; top: 12px; right: 18px; color: #888; font-size: 28px; cursor: pointer; transition: 0.2s; }
-        .close-popup:hover { color: #fff; transform: rotate(90deg); }
-
-        /* ===== SKELETON LOADER ===== */
-        .skeleton-card {
-            background: var(--card); border-radius: 16px; padding: 24px; margin-bottom: 14px;
-            border: 1px solid rgba(34,197,94,0.08); position: relative; overflow: hidden;
-        }
-        .skeleton-line {
-            height: 16px; background: #333; border-radius: 8px; margin-bottom: 10px;
-            animation: shimmer 1.5s infinite;
-        }
-        .skeleton-line.short { width: 40%; }
-        .skeleton-line.medium { width: 70%; }
-        .skeleton-line.long { width: 100%; }
-        @keyframes shimmer {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
-        }
-
-        @media (max-width: 768px) {
-            .search-advanced input, .search-advanced select { flex: 1 1 100%; }
-            .cat-chip { padding: 6px 14px; font-size: 0.7rem; }
-            .voice-card { padding: 16px; }
-            .audio-player { width: 140px; }
-            .password-box { padding: 25px; }
-            .popup-box-big { padding: 20px; }
-            #scrollToTop { bottom: 20px; right: 20px; width: 44px; height: 44px; font-size: 1.5rem; }
-        }
-    </style>
 </head>
 <body>
 
@@ -250,12 +24,20 @@
 <nav>
     <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
     <div class="desktop-links">
-        <a href="index.html">Home</a><a href="voices.html" class="active">Voices</a>
-        <a href="blog.html">Blog</a><a href="courses.html">Courses</a>
-        <a href="dashboard.html">Impact</a><a href="media.html">Media</a>
-        <a href="gallery.html">Gallery</a><a href="thanks.html">Thanks</a>
+        <a href="index.html">Home</a>
+        <a href="voices.html" class="active">Voices</a>
+        <a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a>
+        <a href="dashboard.html">Impact</a>
+        <a href="media.html">Media</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="thanks.html">Thanks</a>
         <a href="contribute.html">Contribute</a>
         <a href="support.html" class="cta-nav">Support</a>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+        <button id="userBtn" onclick="openAuthModal()" style="padding:8px 16px;background:var(--gold);color:#000;border:none;border-radius:20px;cursor:pointer;font-weight:bold;font-size:0.85rem;font-family:var(--font-ui);">👤 Sign In</button>
+        <button id="chatBtn" onclick="openChatModal()" style="display:none;padding:8px 16px;background:var(--green);color:#000;border:none;border-radius:20px;cursor:pointer;font-weight:bold;font-size:0.85rem;font-family:var(--font-ui);">💬 Chat</button>
     </div>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
@@ -307,7 +89,6 @@
         </select>
         <select id="yearSearch" onchange="applySearch()">
             <option value="">📅 All Years</option>
-            <option value="2026">2026</option>
         </select>
         <button onclick="applySearch()">🔍 Search</button>
     </div>
@@ -323,7 +104,6 @@
     </div>
 
     <div id="quotesContainer">
-        <!-- SKELETON LOADER -->
         <div id="skeletonLoader">
             <div class="skeleton-card"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div></div>
             <div class="skeleton-card"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line medium"></div></div>
@@ -333,7 +113,52 @@
     <div class="load-more" id="loadMore" style="display:none"><button onclick="loadMore()">Load More Voices ↓</button></div>
 </main>
 
-<!-- MODALS -->
+<!-- AUTH MODAL -->
+<div id="authModal">
+    <div class="auth-box">
+        <span onclick="closeAuthModal()" class="close-modal">&times;</span>
+        <div id="loginForm">
+            <h3>🔐 Sign In</h3>
+            <p class="auth-subtitle">Access your chapters & chat</p>
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button class="btn-auth btn-signin" onclick="handleLogin()">Sign In</button>
+            <p class="auth-switch">New user? <a onclick="showSignUp()">Create Account</a></p>
+            <p id="loginMsg" class="auth-msg"></p>
+        </div>
+        <div id="signUpForm" style="display:none;">
+            <h3>✨ Create Account</h3>
+            <p class="auth-subtitle">Join the peace archive community</p>
+            <input type="text" id="signUpName" placeholder="Full Name">
+            <input type="email" id="signUpEmail" placeholder="Email">
+            <input type="password" id="signUpPassword" placeholder="Password (min 6 characters)">
+            <button class="btn-auth btn-signup" onclick="handleSignUp()">Create Account</button>
+            <p class="auth-switch">Already have account? <a onclick="showLogin()">Sign In</a></p>
+            <p id="signUpMsg" class="auth-msg"></p>
+        </div>
+    </div>
+</div>
+
+<!-- CHAT MODAL -->
+<div id="chatModal">
+    <div class="chat-header-mini">
+        <span id="chatChapterTitle">💬 Chapter Chat</span>
+        <span onclick="closeChatModal()" style="cursor:pointer;">✕</span>
+    </div>
+    <div class="chat-messages-mini" id="chatMessages"></div>
+    <div class="chat-input-mini">
+        <input type="text" id="chatInput" placeholder="Type a message...">
+        <button id="chatSendBtn" onclick="sendChatMessage()">Send</button>
+    </div>
+</div>
+
+<!-- IMAGE LIGHTBOX -->
+<div id="imageLightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <img id="lightboxImage" src="" alt="Document">
+</div>
+
+<!-- EMAIL VERIFY POPUP -->
 <div id="emailPopup">
     <div class="popup-box">
         <h3>🔒 Verify Ownership</h3>
@@ -345,11 +170,32 @@
     </div>
 </div>
 
-<div id="imageLightbox">
-    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-    <img id="lightboxImage" src="" alt="Document">
+<!-- CHAPTER JOIN POPUP -->
+<div id="chapterPopup">
+    <div class="popup-box-big">
+        <span class="close-popup" onclick="closeChapterPopup()">&times;</span>
+        <h3>✍️ Join This Chapter</h3>
+        <p class="subtitle">Join a family or team chapter by entering the Founder's email.</p>
+        <input type="email" id="chapterFounderEmail" placeholder="Founder's Email">
+        <input type="text" id="chapterWriterName" placeholder="Your Full Name">
+        <div class="file-upload" id="chapterUploadStatus" onclick="document.getElementById('chapterProfileFile').click()">
+            📷 Tap to upload a profile picture (or leave empty for auto-avatar)
+        </div>
+        <input type="file" id="chapterProfileFile" accept="image/*" style="display:none" onchange="uploadChapterProfile(this)">
+        <img id="chapterAvatarPreview" class="avatar-preview" src="" alt="Profile Preview">
+        <input type="hidden" id="chapterAvatarUrl">
+        <textarea id="chapterMessage" placeholder="Write your message/wish here..." rows="4"></textarea>
+        <button class="btn-verify" onclick="submitChapterMessage()">📤 Submit to Chapter</button>
+        <button class="btn-cancel" onclick="closeChapterPopup()">Cancel</button>
+        <p id="chapterMsg" style="color:#4ade80;"></p>
+        <div class="separator"><span>or</span></div>
+        <div class="start-new">
+            ✨ Don't have a Founder's email? <a onclick="redirectToContribute()">Start Your Own Chapter →</a>
+        </div>
+    </div>
 </div>
 
+<!-- WALLET POPUP -->
 <div id="walletPopup">
     <div class="wallet-box">
         <h3>🪙 Your Coin Wallet</h3>
@@ -364,624 +210,14 @@
     </div>
 </div>
 
-<!-- BIG JOIN CHAPTER POPUP -->
-<div id="chapterPopup">
-    <div class="popup-box-big">
-        <span class="close-popup" onclick="closeChapterPopup()">&times;</span>
-        <h3>✍️ Join This Chapter</h3>
-        <p class="subtitle">Join a family or team chapter by entering the Founder's email.</p>
-        
-        <input type="email" id="chapterFounderEmail" placeholder="Founder's Email (e.g., stephern@gmail.com)">
-        <input type="text" id="chapterWriterName" placeholder="Your Full Name">
-        
-        <div class="file-upload" id="chapterUploadStatus" onclick="document.getElementById('chapterProfileFile').click()">
-            📷 Tap to upload a profile picture (or leave empty for auto-avatar)
-        </div>
-        <input type="file" id="chapterProfileFile" accept="image/*" style="display:none" onchange="uploadChapterProfile(this)">
-        <img id="chapterAvatarPreview" class="avatar-preview" src="" alt="Profile Preview">
-        <input type="hidden" id="chapterAvatarUrl">
-        
-        <textarea id="chapterMessage" placeholder="Write your message/wish here..." rows="4"></textarea>
-        
-        <button class="btn-verify" onclick="submitChapterMessage()">📤 Submit to Chapter</button>
-        <button class="btn-cancel" onclick="closeChapterPopup()">Cancel</button>
-        
-        <p id="chapterMsg" style="color:#4ade80;"></p>
-        
-        <div class="separator"><span>or</span></div>
-        <div class="start-new">
-            ✨ Don't have a Founder's email? <a onclick="redirectToContribute()">Start Your Own Chapter →</a>
-        </div>
-    </div>
-</div>
-
-<!-- SCROLL TO TOP ARROW -->
+<!-- SCROLL TO TOP -->
 <button id="scrollToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
 
 <!-- SCRIPTS -->
 <script src="js/navigation.js"></script>
-<script>
-// ===== PASSWORD (Soft Gate — NOT real security) =====
-const VOICES_PASSWORD = 'peace2026';
-function checkPassword() {
-    const input = document.getElementById('passwordInput').value;
-    const error = document.getElementById('passwordError');
-    if (input === VOICES_PASSWORD) {
-        document.getElementById('passwordScreen').classList.add('hidden');
-        error.style.display = 'none';
-        initArchive();
-    } else {
-        error.style.display = 'block';
-        document.getElementById('passwordInput').value = '';
-        document.getElementById('passwordInput').focus();
-    }
-}
+<script src="js/auth.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/main.js"></script>
 
-// ===== CONFIG =====
-const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
-const AUDIO_API = 'https://peace-audio-worker-git-main-addis3.vercel.app/api';
-const CLOUDINARY_UPLOAD = 'https://api.cloudinary.com/v1_1/djb3falqu/image/upload';
-
-let allVoices = [], filteredVoices = [], currentCategory = 'all', pageSize = 20, currentPage = 1;
-let pendingDocId = null, pendingChapterId = null;
-let currentUserEmail = null;
-let searchTimeout = null;
-
-// ===== INIT =====
-async function initArchive() {
-    const skeleton = document.getElementById('skeletonLoader');
-    try {
-        const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices?select=*&is_published=eq.true&order=created_at.desc', {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        if (!res.ok) throw new Error('Network response was not ok');
-        allVoices = await res.json();
-        skeleton.style.display = 'none';
-        updateStats();
-        populateFilters();
-        applySearch();
-        checkLogin();
-    } catch (e) { 
-        skeleton.innerHTML = `
-            <div style="color:#ff4444; padding:20px; text-align:center;">
-                <p>⚠️ Could not load voices. Please refresh.</p>
-                <button onclick="location.reload()" style="padding:8px 20px; border-radius:20px; background:var(--gold); color:#000; border:none; cursor:pointer;">🔄 Refresh</button>
-            </div>
-        `;
-        console.error('Init error:', e);
-    }
-}
-
-// ===== DEBOUNCE SEARCH =====
-function debouncedSearch() {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(applySearch, 300);
-}
-
-// ===== STATS =====
-function updateStats() {
-    const ethCount = allVoices.filter(v => v.region === 'Ethiopia').length;
-    const globalCount = allVoices.filter(v => v.region !== 'Ethiopia').length;
-    const amhCount = allVoices.filter(v => v.language === 'Amharic').length;
-    const oromoCount = allVoices.filter(v => v.language === 'Oromo').length;
-    const somCount = allVoices.filter(v => v.language === 'Somali').length;
-    
-    document.getElementById('countAll').textContent = allVoices.length;
-    document.getElementById('countEthiopia').textContent = ethCount;
-    document.getElementById('countGlobal').textContent = globalCount;
-    document.getElementById('countAmharic').textContent = amhCount;
-    document.getElementById('countOromo').textContent = oromoCount;
-    document.getElementById('countSomali').textContent = somCount;
-    
-    document.getElementById('statsRow').innerHTML = `
-        <span class="stat-pill">🗣️ <strong>${allVoices.length}</strong> Voices</span>
-        <span class="stat-pill">📍 <strong>${new Set(allVoices.map(v=>v.region)).size}</strong> Regions</span>
-        <span class="stat-pill">🌐 <strong>${new Set(allVoices.map(v=>v.language)).size}</strong> Languages</span>
-        <span class="stat-pill">✍️ <strong>${new Set(allVoices.map(v=>v.writer_name).filter(Boolean)).size}</strong> Writers</span>
-    `;
-}
-
-function populateFilters() {
-    const years = [...new Set(allVoices.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
-    const sel = document.getElementById('yearSearch');
-    sel.innerHTML = '<option value="">📅 All Years</option>';
-    if (!years.includes(2026)) sel.innerHTML += `<option value="2026">2026</option>`;
-    years.forEach(y => { sel.innerHTML += `<option value="${y}">${y}</option>`; });
-}
-
-// ===== SEARCH & FILTER =====
-function applySearch() {
-    const keyword = document.getElementById('searchInput').value.toLowerCase();
-    const region = document.getElementById('regionSearch').value;
-    const lang = document.getElementById('languageSearch').value;
-    const year = document.getElementById('yearSearch').value;
-    
-    let voices = [...allVoices];
-    if (keyword) voices = voices.filter(v => 
-        (v.writer_name && v.writer_name.toLowerCase().includes(keyword)) ||
-        (v.quote_english && v.quote_english.toLowerCase().includes(keyword)) ||
-        (v.region && v.region.toLowerCase().includes(keyword))
-    );
-    if (region) voices = voices.filter(v => v.region === region);
-    if (lang) voices = voices.filter(v => v.language === lang);
-    if (year) voices = voices.filter(v => v.year === parseInt(year));
-    
-    // Handle "Most Liked" sorting
-    if (currentCategory === 'MostLiked') {
-        voices.sort((a, b) => (b.like_count || 0) - (a.like_count || 0));
-    }
-    
-    filteredVoices = voices;
-    currentPage = 1;
-    renderVoices();
-}
-
-function filterCategory(cat) {
-    currentCategory = cat;
-    document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
-    event.target.classList.add('active');
-    currentPage = 1;
-    applySearch();
-}
-
-// ===== RENDER =====
-async function renderVoices() {
-    const container = document.getElementById('quotesContainer');
-    const toShow = filteredVoices.slice(0, currentPage * pageSize);
-    
-    if (!toShow.length) { container.innerHTML = '<div class="loading" style="padding:20px;text-align:center;color:var(--text-dim);">No voices found matching your search.</div>'; document.getElementById('loadMore').style.display = 'none'; return; }
-    
-    const tc = ['theme-0', 'theme-1', 'theme-2', 'theme-3', 'theme-4'];
-    
-    // === PERFORMANCE FIX: Batch fetch all co-writers for visible chapters ===
-    const chapterIds = [...new Set(toShow.map(v => v.chapter_id).filter(id => id))];
-    let allCoWriters = {};
-    if (chapterIds.length > 0) {
-        try {
-            const ids = chapterIds.map(id => `chapter_id=eq.${id}`).join(',');
-            const res = await fetch(SUPABASE_URL + `/rest/v1/ethiopian_voices?select=writer_name,quote_english,created_at,avatar_url,chapter_id&is_founder=eq.false&${ids}&order=created_at.desc`, {
-                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-            });
-            const data = await res.json();
-            data.forEach(cw => {
-                if (!allCoWriters[cw.chapter_id]) allCoWriters[cw.chapter_id] = [];
-                allCoWriters[cw.chapter_id].push(cw);
-            });
-        } catch (e) { /* silently fail, co-writers just won't show */ }
-    }
-    
-    let html = '';
-    for (let i = 0; i < toShow.length; i++) {
-        const v = toShow[i];
-        const sp = Math.round((v.sentiment || 0.5) * 100);
-        const showOriginal = v.language !== 'English' && v.quote_original && v.quote_original !== v.quote_english;
-        
-        const avatarContent = v.avatar_url 
-            ? `<img src="${v.avatar_url}" class="writer-avatar" alt="${esc(v.writer_name || 'Writer')}" loading="lazy">`
-            : `<div class="writer-avatar">👤</div>`;
-        
-        let coWritersHtml = '';
-        const chapterCoWriters = allCoWriters[v.chapter_id] || [];
-        if (chapterCoWriters.length > 0) {
-            coWritersHtml = `<div class="chapter-co-writers"><p style="color:var(--gold);font-weight:600;margin-bottom:8px;">✍️ Co-Writers of this Chapter:</p>`;
-            chapterCoWriters.forEach(cw => {
-                const cwAvatar = cw.avatar_url 
-                    ? `<img src="${cw.avatar_url}" class="co-writer-avatar" alt="${esc(cw.writer_name || 'Co-Writer')}" loading="lazy">`
-                    : `<div class="co-writer-avatar">👤</div>`;
-                coWritersHtml += `<div class="co-writer-card">
-                    ${cwAvatar}
-                    <div>
-                        <div class="writer-name">👤 ${esc(cw.writer_name)}</div>
-                        <div class="quote-text">${esc(cw.quote_english)}</div>
-                        <div style="font-size:0.7rem;color:var(--text-dim);">📅 ${new Date(cw.created_at).toLocaleDateString()}</div>
-                    </div>
-                </div>`;
-            });
-            coWritersHtml += `</div>`;
-        }
-        
-        html += `
-        <div class="voice-card" style="animation:fadeIn 0.4s ease forwards;animation-delay:${i * 0.03}s">
-            <div class="voice-header">
-                <div class="voice-meta" style="display:flex;align-items:center;gap:10px;">
-                    ${avatarContent}
-                    <div class="writer-info">
-                        ${v.writer_name ? `<div class="writer-name">✍️ ${esc(v.writer_name)}</div>` : ''}
-                        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;">
-                            <span class="region-badge">📍 ${v.region || 'Unknown'}</span>
-                            <span class="lang-badge">🌐 ${v.language || 'N/A'}</span>
-                            <span class="year-badge">📅 ${v.year || 'N/A'}</span>
-                        </div>
-                    </div>
-                </div>
-                <span class="voice-id">#${v.document_id || ''}</span>
-            </div>
-            <div class="quote-text">${esc(v.quote_english || v.quote_original)}</div>
-            ${showOriginal ? `<div class="quote-original">📜 Original (${v.language}): ${esc(v.quote_original)}</div>` : ''}
-            <div class="themes-row">${(v.themes || []).map((t, j) => `<span class="theme-tag ${tc[j % 5]}">${esc(t)}</span>`).join('')}</div>
-            <div class="sentiment-bar"><div class="sentiment-fill" style="width:${sp}%"></div></div>
-            
-            ${coWritersHtml}
-            
-            <div class="voice-footer">
-                ${v.audio_url ? `
-                    <audio controls class="audio-player">
-                        <source src="${v.audio_url}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                ` : `
-                    <button class="gen-btn" onclick="generateAudio(${v.id}, '${esc(v.quote_english || v.quote_original)}')">
-                        🔊 Generate Audio
-                    </button>
-                `}
-                <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                    <button class="like-btn" id="likeBtn-${v.id}" onclick="likeVoice(${v.id})">❤️ <span id="likeCount-${v.id}">${v.like_count || 0}</span></button>
-                    <button class="coin-btn">🪙 <span id="coinCount-${v.id}">${v.starting_likes || 50}</span></button>
-                    <span style="position:relative;">
-                        <button class="share-btn" onclick="toggleShareMenu(${v.id})">📤 Share <span id="shareCount-${v.id}">${v.starting_shares || 20}</span></button>
-                        <div class="share-menu" id="shareMenu-${v.id}">
-                            <a href="#" onclick="shareVoice(${v.id}, 'whatsapp')">📱 WhatsApp</a>
-                            <a href="#" onclick="shareVoice(${v.id}, 'facebook')">📘 Facebook</a>
-                            <a href="#" onclick="shareVoice(${v.id}, 'twitter')">🐦 Twitter/X</a>
-                            <a href="#" onclick="shareVoice(${v.id}, 'copy')">📋 Copy Link</a>
-                        </div>
-                    </span>
-                    <button class="btn-join-chapter" onclick="openChapterPopup('${v.chapter_id || 'new'}')">✍️ Join This Chapter</button>
-                    ${v.cloudinary_url ? `<button class="btn-join-chapter" style="background:var(--green);color:#000;" onclick="openEmailPopup('${v.id}')">👁️ See Original Image</button>` : ''}
-                </div>
-            </div>
-        </div>`;
-    }
-    
-    container.innerHTML = html;
-    document.getElementById('loadMore').style.display = filteredVoices.length > currentPage * pageSize ? 'block' : 'none';
-    toShow.forEach(v => loadLikes(v.id));
-}
-
-function loadMore() { currentPage++; renderVoices(); }
-
-// ===== LIKES (Fixed: localStorage + spam protection) =====
-async function loadLikes(voiceId) {
-    try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/voice_likes?select=count&voice_id=eq.${voiceId}`, {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        const data = await res.json();
-        const count = data[0]?.count || 0;
-        const el = document.getElementById('likeCount-' + voiceId);
-        if (el) el.textContent = count;
-        // Update the voice's like_count in memory for sorting
-        const voice = allVoices.find(v => v.id === voiceId);
-        if (voice) voice.like_count = count;
-    } catch (e) {}
-}
-
-async function likeVoice(voiceId) {
-    const btn = document.getElementById('likeBtn-' + voiceId);
-    const countEl = document.getElementById('likeCount-' + voiceId);
-    
-    // Spam protection: Check localStorage
-    const likedKey = 'liked_' + voiceId;
-    if (localStorage.getItem(likedKey)) {
-        alert('You already liked this voice!');
-        return;
-    }
-    
-    // Disable button temporarily to prevent rapid spam clicks
-    btn.style.pointerEvents = 'none';
-    btn.style.opacity = '0.6';
-    
-    try {
-        await fetch(`${SUPABASE_URL}/rest/v1/voice_likes`, {
-            method: 'POST',
-            headers: {
-                'apikey': SUPABASE_KEY,
-                'Authorization': `Bearer ${SUPABASE_KEY}`,
-                'Content-Type': 'application/json',
-                'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify({ voice_id: voiceId })
-        });
-        countEl.textContent = (parseInt(countEl.textContent) || 0) + 1;
-        btn.classList.add('liked');
-        // Store in localStorage to prevent re-liking
-        localStorage.setItem(likedKey, 'true');
-        updateCoins(voiceId, 1);
-    } catch (e) {}
-    
-    // Re-enable button after 1 second
-    setTimeout(() => {
-        btn.style.pointerEvents = 'auto';
-        btn.style.opacity = '1';
-    }, 1000);
-}
-
-function toggleShareMenu(id) {
-    const menu = document.getElementById('shareMenu-' + id);
-    menu.classList.toggle('active');
-    document.querySelectorAll('.share-menu').forEach(m => {
-        if (m.id !== 'shareMenu-' + id) m.classList.remove('active');
-    });
-}
-
-async function shareVoice(id, platform) {
-    const menu = document.getElementById('shareMenu-' + id);
-    menu.classList.remove('active');
-    const url = window.location.href.split('?')[0] + '?voice=' + id;
-    if (platform === 'copy') {
-        navigator.clipboard.writeText(url).then(() => alert('Link copied!'));
-    } else if (platform === 'whatsapp') {
-        window.open('https://wa.me/?text=' + encodeURIComponent('Check out this peace voice: ' + url), '_blank');
-    } else if (platform === 'facebook') {
-        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank');
-    } else if (platform === 'twitter') {
-        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('Peace voice: ') + '&url=' + encodeURIComponent(url), '_blank');
-    }
-    const countEl = document.getElementById('shareCount-' + id);
-    countEl.textContent = (parseInt(countEl.textContent) || 0) + 1;
-    updateCoins(id, 2);
-}
-
-async function updateCoins(voiceId, amount) {
-    const el = document.getElementById('coinCount-' + voiceId);
-    const current = parseInt(el.textContent) || 0;
-    el.textContent = current + amount;
-}
-
-// ===== EMAIL VERIFICATION =====
-function openEmailPopup(id) {
-    pendingDocId = id;
-    document.getElementById('verifyEmail').value = '';
-    document.getElementById('verifyMsg').textContent = '';
-    document.getElementById('emailPopup').classList.add('active');
-}
-function closeEmailPopup() {
-    document.getElementById('emailPopup').classList.remove('active');
-    pendingDocId = null;
-}
-async function verifyEmailAndShowImage() {
-    const email = document.getElementById('verifyEmail').value.trim();
-    const msg = document.getElementById('verifyMsg');
-    if (!email) { msg.textContent = 'Please enter your email.'; return; }
-    try {
-        const res = await fetch(SUPABASE_URL + `/rest/v1/ethiopian_voices?select=extracted_data,cloudinary_url&id=eq.${pendingDocId}`, {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        const data = await res.json();
-        const doc = data[0];
-        const ownerEmail = doc?.extracted_data?.email || '';
-        if (email.toLowerCase() === ownerEmail.toLowerCase()) {
-            closeEmailPopup();
-            const rawUrl = doc.cloudinary_url;
-            const enhancedUrl = rawUrl.replace('/upload/', '/upload/e_improve:outdoor,e_sharpen,e_contrast,f_auto,q_auto/');
-            document.getElementById('lightboxImage').src = enhancedUrl;
-            document.getElementById('imageLightbox').classList.add('active');
-        } else {
-            msg.textContent = '❌ Email does not match the document owner.';
-        }
-    } catch (e) { msg.textContent = 'Error verifying email.'; }
-}
-function closeLightbox() {
-    document.getElementById('imageLightbox').classList.remove('active');
-    document.getElementById('lightboxImage').src = '';
-}
-
-// ===== JOIN CHAPTER =====
-function openChapterPopup(chapterId) {
-    pendingChapterId = chapterId;
-    document.getElementById('chapterPopup').classList.add('active');
-    document.getElementById('chapterMsg').textContent = '';
-    document.getElementById('chapterFounderEmail').value = '';
-    document.getElementById('chapterWriterName').value = '';
-    document.getElementById('chapterMessage').value = '';
-    document.getElementById('chapterAvatarUrl').value = '';
-    document.getElementById('chapterAvatarPreview').style.display = 'none';
-    document.getElementById('chapterUploadStatus').textContent = '📷 Tap to upload a profile picture (or leave empty for auto-avatar)';
-    document.getElementById('chapterUploadStatus').style.color = 'var(--text-dim)';
-}
-function closeChapterPopup() {
-    document.getElementById('chapterPopup').classList.remove('active');
-    pendingChapterId = null;
-}
-async function uploadChapterProfile(input) {
-    const file = input.files[0];
-    if (!file) return;
-    const status = document.getElementById('chapterUploadStatus');
-    status.textContent = '⏳ Uploading...';
-    status.style.color = '#eab308';
-    
-    const preview = document.getElementById('chapterAvatarPreview');
-    preview.src = URL.createObjectURL(file);
-    preview.style.display = 'block';
-    
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'peace_archive');
-    try {
-        const res = await fetch(CLOUDINARY_UPLOAD, { method: 'POST', body: formData });
-        const data = await res.json();
-        if (data.secure_url) {
-            document.getElementById('chapterAvatarUrl').value = data.secure_url;
-            status.textContent = '✅ Uploaded!';
-            status.style.color = '#4ade80';
-        } else {
-            status.textContent = '❌ Upload failed. You can still submit with an avatar.';
-            status.style.color = '#ef4444';
-        }
-    } catch (e) {
-        status.textContent = '❌ Upload failed. You can still submit with an avatar.';
-        status.style.color = '#ef4444';
-    }
-}
-async function submitChapterMessage() {
-    const founderEmail = document.getElementById('chapterFounderEmail').value.trim();
-    const writerName = document.getElementById('chapterWriterName').value.trim();
-    const message = document.getElementById('chapterMessage').value.trim();
-    const avatarUrl = document.getElementById('chapterAvatarUrl').value.trim();
-    const msgEl = document.getElementById('chapterMsg');
-    if (!founderEmail || !writerName || !message) {
-        msgEl.textContent = 'Please fill in all required fields.';
-        msgEl.style.color = '#ef4444';
-        return;
-    }
-    try {
-        const res = await fetch(SUPABASE_URL + `/rest/v1/ethiopian_voices?select=id,extracted_data&chapter_id=eq.${pendingChapterId}&is_founder=eq.true`, {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        const founder = await res.json();
-        const founderData = founder[0];
-        const realFounderEmail = founderData?.extracted_data?.email || '';
-        if (founderEmail.toLowerCase() !== realFounderEmail.toLowerCase()) {
-            msgEl.textContent = '❌ Founder email does not match.';
-            msgEl.style.color = '#ef4444';
-            return;
-        }
-        const newVoice = {
-            chapter_id: pendingChapterId,
-            is_founder: false,
-            writer_name: writerName,
-            quote_english: message,
-            avatar_url: avatarUrl || null,
-            region: 'Co-Writer',
-            year: new Date().getFullYear(),
-            language: 'English',
-            is_published: true,
-            starting_likes: 50,
-            starting_shares: 20,
-            themes: ['Legacy', 'Family', 'Peace'],
-            sentiment: 0.75
-        };
-        const insertRes = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', {
-            method: 'POST',
-            headers: {
-                'apikey': SUPABASE_KEY,
-                'Authorization': 'Bearer ' + SUPABASE_KEY,
-                'Content-Type': 'application/json',
-                'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify(newVoice)
-        });
-        if (insertRes.ok) {
-            msgEl.textContent = '✅ Added to chapter!';
-            msgEl.style.color = '#4ade80';
-            setTimeout(() => { closeChapterPopup(); location.reload(); }, 1800);
-        } else {
-            msgEl.textContent = '❌ Error.';
-            msgEl.style.color = '#ef4444';
-        }
-    } catch (e) {
-        msgEl.textContent = '❌ Error verifying founder.';
-        msgEl.style.color = '#ef4444';
-    }
-}
-function redirectToContribute() {
-    closeChapterPopup();
-    window.location.href = 'contribute.html';
-}
-
-// ===== WALLET (Real calculation, not random) =====
-function openWallet() {
-    if (!currentUserEmail) {
-        const email = prompt("Enter your email to access your Wallet:");
-        if (email && email.includes('@')) {
-            currentUserEmail = email;
-            localStorage.setItem('peace_user_email', email);
-            location.reload();
-        }
-        return;
-    }
-    // Calculate real coins based on all voices
-    let totalCoins = 0;
-    allVoices.forEach(v => {
-        // Each like = 1 coin, each share = 2 coins
-        const likes = parseInt(document.getElementById('likeCount-' + v.id)?.textContent) || 0;
-        const shares = parseInt(document.getElementById('shareCount-' + v.id)?.textContent) || 0;
-        const starting = (v.starting_likes || 50) + (v.starting_shares || 20);
-        totalCoins += likes + (shares * 2) + starting;
-    });
-    document.getElementById('walletBalance').textContent = totalCoins;
-    document.getElementById('walletPopup').classList.add('active');
-}
-function closeWallet() {
-    document.getElementById('walletPopup').classList.remove('active');
-}
-function redeemCoin(item) {
-    const balance = parseInt(document.getElementById('walletBalance').textContent);
-    let cost = 0;
-    if (item === 'postcard') cost = 50;
-    else if (item === 'booklet') cost = 200;
-    else if (item === 'course') cost = 500;
-    if (balance >= cost) {
-        alert(`✅ Redeemed ${item}! (${cost} coins)`);
-        document.getElementById('walletBalance').textContent = balance - cost;
-    } else {
-        alert(`❌ Need ${cost} coins. You have ${balance}.`);
-    }
-}
-
-// ===== AUDIO =====
-async function generateAudio(voiceId, text) {
-    if (!text) return;
-    const btn = event.target;
-    btn.textContent = '⏳ Generating...';
-    btn.className = 'gen-btn loading';
-    btn.disabled = true;
-    try {
-        const res = await fetch(`${AUDIO_API}/generate-audio`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text })
-        });
-        const data = await res.json();
-        if (data.audio_url) {
-            const updateRes = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?id=eq.${voiceId}`, {
-                method: 'PATCH',
-                headers: {
-                    'apikey': SUPABASE_KEY,
-                    'Authorization': `Bearer ${SUPABASE_KEY}`,
-                    'Content-Type': 'application/json',
-                    'Prefer': 'return=minimal'
-                },
-                body: JSON.stringify({ audio_url: data.audio_url })
-            });
-            if (updateRes.ok) {
-                btn.textContent = '✅ Done!';
-                btn.className = 'gen-btn done';
-                setTimeout(() => { location.reload(); }, 800);
-            } else {
-                btn.textContent = '❌ Save failed';
-                btn.className = 'gen-btn';
-                btn.disabled = false;
-            }
-        } else {
-            btn.textContent = '❌ Generation failed';
-            btn.className = 'gen-btn';
-            btn.disabled = false;
-        }
-    } catch (e) {
-        btn.textContent = '❌ Error';
-        btn.className = 'gen-btn';
-        btn.disabled = false;
-        console.error(e);
-    }
-}
-
-// ===== UTILITY =====
-function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.share-btn')) {
-        document.querySelectorAll('.share-menu').forEach(m => m.classList.remove('active'));
-    }
-});
-
-// ===== SCROLL TO TOP =====
-window.addEventListener('scroll', function() {
-    const btn = document.getElementById('scrollToTop');
-    if (window.scrollY > 400) btn.classList.add('show');
-    else btn.classList.remove('show');
-});
-</script>
-<style>@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}</style>
 </body>
 </html>
