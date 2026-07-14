@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Share your voice for peace. Simple form — name, email, country, message. Join 1,000+ voices from 57+ countries.">
+    <meta property="og:title" content="Share Your Voice — We Need Peace">
+    <meta property="og:description" content="Simple form. No registration. Just your voice for peace, love, and unity.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://weneedpeace.pages.dev/contribute">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
+    <title>Share Your Voice — We Need Peace</title>
+    <style>
+        :root {
+            --bg: #0b0f0e; --surface: #141a18; --green-border: rgba(34,197,94,0.25);
+            --green-bright: #22c55e; --green-soft: rgba(34,197,94,0.12);
+            --gold: #fbbf24; --gold-bright: #fcd34d; --gold-soft: rgba(251,191,36,0.1);
+            --text: #e2e8f0; --text-dim: #94a3b8; --text-muted: #64748b;
+            --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --radius: 16px; --radius-lg: 20px; --transition: 0.25s ease;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:var(--bg); color:var(--text); font-family:var(--font-ui); line-height:1.6; -webkit-font-smoothing:antialiased; background-image:radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%), radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%); }
+        a { text-decoration:none; color:inherit; }
+
+        nav { display:flex; align-items:center; justify-content:space-between; padding:0.9rem 5%; background:rgba(10,15,12,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--green-border); position:sticky; top:0; z-index:100; }
+        .logo { font-weight:700; font-size:1.25rem; color:#f0f2e9; display:flex; align-items:center; gap:6px; }
+        .logo span { color:var(--green-bright); }
+        .desktop-links { display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; }
+        .desktop-links a { font-size:0.78rem; font-weight:600; color:var(--text-dim); padding:6px 10px; border-radius:18px; transition:var(--transition); text-transform:uppercase; letter-spacing:0.4px; white-space:nowrap; }
+        .desktop-links a:hover, .desktop-links a.active { color:var(--gold-bright); background:var(--gold-soft); }
+        .hamburger { display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; }
+        .hamburger span { width:22px; height:2px; background:var(--text-dim); }
+
+        .container { max-width:650px; margin:0 auto; padding:40px 20px; }
+
+        .hero { text-align:center; padding:40px 20px 20px; }
+        .hero .badge { display:inline-block; background:var(--green-soft); color:var(--green-bright); padding:6px 16px; border-radius:30px; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; font-weight:600; margin-bottom:14px; border:1px solid rgba(34,197,94,0.3); }
+        .hero h1 { font-size:clamp(1.8rem,4vw,2.5rem); color:var(--gold-bright); font-weight:800; margin-bottom:8px; }
+        .hero .tagline { margin:10px 0; font-size:0.9rem; font-weight:600; }
+        .hero .tagline .sep { color:var(--text-muted); }
+        .hero p { color:var(--text-dim); font-size:0.9rem; }
+
+        .form-box { background:var(--surface); border:2px solid var(--gold); border-radius:var(--radius-lg); padding:30px; margin-top:20px; }
+        .form-box h2 { color:var(--gold); text-align:center; margin-bottom:4px; font-size:1.3rem; }
+        .form-box .subtitle { text-align:center; color:var(--text-dim); font-size:0.85rem; margin-bottom:20px; }
+        .form-box label { display:block; color:var(--text-dim); font-size:0.8rem; font-weight:600; margin-bottom:4px; margin-top:14px; }
+        .form-box input, .form-box textarea, .form-box select {
+            width:100%; padding:12px 16px; background:#1b241f; border:1px solid #3a4f40;
+            border-radius:10px; color:#e2e8e4; font-family:var(--font-ui); font-size:0.9rem;
+        }
+        .form-box input:focus, .form-box textarea:focus, .form-box select:focus { outline:none; border-color:var(--gold); }
+        .form-box textarea { min-height:130px; resize:vertical; }
+        .form-box .required { color:#ef4444; }
+        .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; width:100%; padding:14px; margin-top:16px; border-radius:40px; font-weight:700; font-size:1rem; cursor:pointer; border:none; font-family:var(--font-ui); transition:var(--transition); }
+        .btn-gold { background:var(--gold); color:#000; }
+        .btn-gold:hover { background:var(--gold-bright); transform:translateY(-2px); box-shadow:0 8px 25px rgba(251,191,36,0.3); }
+        .btn:disabled { opacity:0.5; cursor:not-allowed; }
+        .msg { text-align:center; font-size:0.85rem; margin-top:10px; min-height:20px; padding:10px; border-radius:8px; }
+
+        .info-box { background:var(--green-soft); border:1px solid rgba(34,197,94,0.3); border-radius:var(--radius); padding:16px; margin-top:20px; text-align:center; }
+        .info-box p { color:var(--green-bright); font-size:0.85rem; }
+
+        footer { text-align:center; padding:25px; color:var(--text-muted); font-size:0.78rem; border-top:1px solid var(--green-border); margin-top:40px; }
+        footer a { color:var(--text-dim); transition:var(--transition); }
+        footer a:hover { color:var(--green-bright); }
+
+        @media(max-width:768px) { .desktop-links { display:none; } .hamburger { display:flex; } .form-box { padding:20px; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">🕊️ We Need <span>Peace</span></a>
+    <div class="desktop-links">
+        <a href="index.html">Home</a>
+        <a href="voices.html">Voices</a>
+        <a href="collaborate.html">✍️ Participate</a>
+        <a href="courses.html">Courses</a>
+        <a href="contribute.html" class="active">📝 Share Voice</a>
+        <a href="support.html">Support</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="container">
+    <div class="hero">
+        <div class="badge">📝 Share Your Voice</div>
+        <h1>Contribute to Peace</h1>
+        <div class="tagline">
+            <span>🕊️ Peace is the goal.</span>
+            <span class="sep">·</span>
+            <span>❤️ Love is the way.</span>
+            <span class="sep">·</span>
+            <span>🤝 Unity is the strength.</span>
+        </div>
+        <p>Simple form. <strong style="color:var(--gold-bright);">No registration required.</strong> Your voice will be reviewed and published.</p>
+    </div>
+
+    <div class="form-box">
+        <h2>✍️ Write Your Message</h2>
+        <p class="subtitle">Fields marked with <span class="required">*</span> are required.</p>
+        
+        <label>Your Full Name <span class="required">*</span></label>
+        <input type="text" id="name" placeholder="e.g., Bethlehem Tadesse" required>
+
+        <label>Your Email <span class="required">*</span> <span style="font-weight:400;color:var(--text-muted);">(private, for verification)</span></label>
+        <input type="email" id="email" placeholder="your@email.com" required>
+
+        <label>Your Country</label>
+        <select id="country">
+            <option value="">Select country</option>
+            <option value="Ethiopia">🇪🇹 Ethiopia</option>
+            <option value="Kenya">🇰🇪 Kenya</option>
+            <option value="Nigeria">🇳🇬 Nigeria</option>
+            <option value="Ghana">🇬🇭 Ghana</option>
+            <option value="Rwanda">🇷🇼 Rwanda</option>
+            <option value="South Africa">🇿🇦 South Africa</option>
+            <option value="United States">🇺🇸 United States</option>
+            <option value="United Kingdom">🇬🇧 United Kingdom</option>
+            <option value="Canada">🇨🇦 Canada</option>
+            <option value="Germany">🇩🇪 Germany</option>
+            <option value="France">🇫🇷 France</option>
+            <option value="Japan">🇯🇵 Japan</option>
+            <option value="India">🇮🇳 India</option>
+            <option value="Brazil">🇧🇷 Brazil</option>
+            <option value="Other">🌍 Other</option>
+        </select>
+
+        <label>Language of Your Message</label>
+        <select id="language">
+            <option value="English">English</option>
+            <option value="Amharic">አማርኛ Amharic</option>
+            <option value="Oromo">Afaan Oromo</option>
+            <option value="Somali">Soomaali Somali</option>
+            <option value="Tigrinya">ትግርኛ Tigrinya</option>
+            <option value="Arabic">العربية Arabic</option>
+            <option value="French">Français</option>
+            <option value="Spanish">Español</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>How do you want to participate?</label>
+        <select id="type">
+            <option value="voice">🗣️ Share a Peace Voice</option>
+            <option value="story">📖 Add to Story Chain</option>
+            <option value="wisdom">🦉 Add to Wisdom Chain</option>
+            <option value="chapter">👨‍👩‍👧‍👦 Start a Family Chapter</option>
+        </select>
+
+        <label>Your Message <span class="required">*</span></label>
+        <textarea id="message" placeholder="What does peace, love, or unity mean to you? Write from your heart...&#10;&#10;If joining Story Chain: Continue the story from where the last writer left off.&#10;If joining Wisdom Chain: Add your layer of insight and leave an edge for the next person." required></textarea>
+
+        <button class="btn btn-gold" id="submitBtn" onclick="submitVoice()">🕊️ Submit My Voice</button>
+        <div class="msg" id="msg"></div>
+    </div>
+
+    <div class="info-box">
+        <p>📋 <strong>What happens next?</strong> Your submission is reviewed within 24 hours. Once approved, your voice becomes part of the permanent global archive. You'll receive a confirmation link.</p>
+    </div>
+</main>
+
+<footer>
+    <p style="font-size:1rem;margin-bottom:4px;">🕊️ Peace is the goal. ❤️ Love is the way. 🤝 Unity is the strength.</p>
+    <p>We Need Peace &copy; 2026 · The Global Voice Archive</p>
+    <p style="margin-top:4px;font-size:0.7rem;">
+        <a href="index.html">Home</a> · <a href="voices.html">Voices</a> · <a href="collaborate.html">Participate</a> · <a href="courses.html">Courses</a>
+    </p>
+</footer>
+
+<script>
+    const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+
+    async function submitVoice() {
+        const btn = document.getElementById('submitBtn');
+        const msg = document.getElementById('msg');
+        
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const country = document.getElementById('country').value;
+        const language = document.getElementById('language').value;
+        const type = document.getElementById('type').value;
+        const message = document.getElementById('message').value.trim();
+
+        // Validation
+        if (!name || !email || !message) {
+            msg.textContent = '❌ Please fill in all required fields (Name, Email, Message).';
+            msg.style.color = '#ef4444';
+            msg.style.background = 'rgba(239,68,68,0.1)';
+            return;
+        }
+
+        if (!email.includes('@') || !email.includes('.')) {
+            msg.textContent = '❌ Please enter a valid email address.';
+            msg.style.color = '#ef4444';
+            msg.style.background = 'rgba(239,68,68,0.1)';
+            return;
+        }
+
+        // Disable button
+        btn.disabled = true;
+        btn.textContent = '⏳ Submitting...';
+        msg.textContent = '';
+        msg.style.background = 'transparent';
+
+        try {
+            const payload = {
+                writer_name: name,
+                full_name: name,
+                quote_english: message,
+                quote_original: message,
+                region: country || 'Unknown',
+                language: language || 'English',
+                year: new Date().getFullYear(),
+                is_published: false,
+                is_founder: type === 'chapter',
+                chapter_id: type === 'story' ? 'story-chain' : type === 'wisdom' ? 'wisdom-chain' : type === 'chapter' ? 'chapter-' + Date.now() : 'voice',
+                themes: type === 'story' ? ['Story Chain', 'Collaborative', 'Peace'] :
+                        type === 'wisdom' ? ['Wisdom Chain', 'Insight', 'Peace'] :
+                        type === 'chapter' ? ['Family', 'Legacy', 'Peace'] :
+                        ['Peace', 'Love', 'Unity'],
+                sentiment: 0.75,
+                starting_likes: 50,
+                starting_shares: 20,
+                extracted_data: { email: email },
+                created_at: new Date().toISOString()
+            };
+
+            const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', {
+                method: 'POST',
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_KEY,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (res.ok) {
+                msg.textContent = '✅ Thank you, ' + name + '! Your voice has been submitted for review. You will be notified at ' + email + ' when it is published.';
+                msg.style.color = '#4ade80';
+                msg.style.background = 'rgba(34,197,94,0.1)';
+                
+                // Clear form
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('message').value = '';
+                document.getElementById('country').value = '';
+                document.getElementById('type').value = 'voice';
+            } else {
+                const err = await res.json();
+                msg.textContent = '❌ Error: ' + (err.message || 'Something went wrong. Please try again.');
+                msg.style.color = '#ef4444';
+                msg.style.background = 'rgba(239,68,68,0.1)';
+            }
+        } catch (e) {
+            msg.textContent = '❌ Connection error. Please check your internet and try again.';
+            msg.style.color = '#ef4444';
+            msg.style.background = 'rgba(239,68,68,0.1)';
+            console.error('Submit error:', e);
+        }
+
+        // Re-enable button
+        btn.disabled = false;
+        btn.textContent = '🕊️ Submit My Voice';
+    }
+
+    function toggleMenu() {
+        alert('Mobile menu — integrate with your navigation.js');
+    }
+
+    // Allow Enter key in textarea but submit only on button click
+    document.getElementById('message').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && e.ctrlKey) {
+            submitVoice();
+        }
+    });
+</script>
+</body>
+</html>
