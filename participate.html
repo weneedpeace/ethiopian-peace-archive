@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="We Need Peace — Participate. Join writers from 57+ countries. Co-create stories, deepen wisdom, and publish peace literature together.">
-    <meta property="og:title" content="Participate — We Need Peace | Co-Create Stories & Wisdom">
-    <meta property="og:description" content="Join writers from 57+ countries. Co-create stories, deepen wisdom, and publish peace literature together.">
+    <meta name="description" content="We Need Peace — Participate. Wear Love. Speak Peace. Live Unity. Join writers from 57+ countries. Co-create stories, deepen wisdom, and publish peace literature together.">
+    <meta property="og:title" content="Participate — We Need Peace | Story & Wisdom Chain">
+    <meta property="og:description" content="Wear Love. Speak Peace. Live Unity. Join writers from 57+ countries. Co-create stories, deepen wisdom, and publish peace literature together.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Participate · Story & Wisdom Chain · We Need Peace">
+    <meta name="twitter:description" content="Wear Love. Speak Peace. Live Unity. Join writers from 57+ countries.">
+    <link rel="canonical" href="https://weneedpeace.pages.dev/collaborate.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
     <title>Participate · Story & Wisdom Chain · We Need Peace</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -16,74 +20,214 @@
             --green-border: rgba(34,197,94,0.25); --green-bright: #22c55e;
             --green-soft: rgba(34,197,94,0.12); --gold: #fbbf24;
             --gold-bright: #fcd34d; --gold-soft: rgba(251,191,36,0.1);
+            --love: #ef4444; --love-soft: rgba(239,68,68,0.12);
             --text: #e2e8f0; --text-dim: #94a3b8; --text-muted: #64748b;
             --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
             --radius: 14px; --radius-lg: 20px; --transition: 0.25s ease;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { background:var(--bg); color:var(--text); font-family:var(--font-ui); line-height:1.6; -webkit-font-smoothing:antialiased; background-image:radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%), radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%); }
+        html { scroll-behavior: smooth; }
+        body { 
+            background:var(--bg); color:var(--text); font-family:var(--font-ui); 
+            line-height:1.6; -webkit-font-smoothing:antialiased; 
+            background-image: radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%), 
+                              radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%),
+                              radial-gradient(ellipse at 50% 40%, rgba(239,68,68,0.02) 0%, transparent 50%); 
+        }
         a { text-decoration:none; color:inherit; }
 
-        nav { display:flex; align-items:center; justify-content:space-between; padding:0.9rem 5%; background:rgba(10,15,12,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--green-border); position:sticky; top:0; z-index:100; }
+        /* Navigation */
+        nav { 
+            display:flex; align-items:center; justify-content:space-between; 
+            padding:0.9rem 5%; background:rgba(10,15,12,0.92); 
+            backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+            border-bottom:1px solid var(--green-border); 
+            position:sticky; top:0; z-index:100; flex-wrap:wrap; 
+        }
         .logo { font-weight:700; font-size:1.25rem; color:#f0f2e9; display:flex; align-items:center; gap:6px; }
         .logo span { color:var(--green-bright); }
         .desktop-links { display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; }
-        .desktop-links a { font-size:0.78rem; font-weight:600; color:var(--text-dim); padding:6px 9px; border-radius:18px; transition:var(--transition); text-transform:uppercase; letter-spacing:0.4px; white-space:nowrap; }
+        .desktop-links a { 
+            font-size:0.78rem; font-weight:600; color:var(--text-dim); 
+            padding:6px 9px; border-radius:18px; transition:var(--transition); 
+            text-transform:uppercase; letter-spacing:0.4px; white-space:nowrap; 
+        }
         .desktop-links a:hover, .desktop-links a.active { color:var(--gold-bright); background:var(--gold-soft); }
-        .hamburger { display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; }
-        .hamburger span { width:22px; height:2px; background:var(--text-dim); }
+        .cta-nav { background:var(--green-bright); color:#0b0f0e !important; padding:7px 14px !important; border-radius:24px; font-weight:700; }
+        .cta-nav:hover { background:#16a34a !important; }
+        
+        .lang-toggle {
+            display: flex; gap: 3px; margin-left: 8px; 
+            border-left: 1px solid var(--green-border); padding-left: 8px;
+        }
+        .lang-btn {
+            padding: 5px 8px; border-radius: 12px; border: 1px solid var(--green-border);
+            background: transparent; color: var(--text-dim); cursor: pointer;
+            font-size: 0.65rem; font-family: var(--font-ui); font-weight: 600;
+            transition: var(--transition);
+        }
+        .lang-btn.active { background: var(--green-soft); color: var(--green-bright); border-color: var(--green-bright); }
+        .lang-btn:hover { background: var(--green-soft); color: var(--green-bright); }
+
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; z-index:1001; }
+        .hamburger span { width:24px; height:2px; background:var(--text-dim); transition:0.3s ease; border-radius:2px; }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* Slide Menu */
+        .slide-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:998; opacity:0; visibility:hidden; transition:0.4s; }
+        .slide-overlay.open { opacity:1; visibility:visible; }
+        .slide-menu {
+            position:fixed; top:0; right:-300px; width:280px; height:100%;
+            background:linear-gradient(180deg, #0a1628 0%, #0d1b33 50%, #060f1e 100%);
+            border-left:2px solid var(--green-border); z-index:999;
+            transition:right 0.4s cubic-bezier(0.25,0.8,0.25,1.2);
+            padding:80px 18px 30px; overflow-y:auto;
+        }
+        .slide-menu.open { right:0; }
+        .slide-menu .menu-header { text-align:center; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--green-border); }
+        .slide-menu .menu-header .flag { font-size:2rem; margin-bottom:6px; }
+        .slide-menu .menu-header h3 { color:var(--gold); font-size:1rem; }
+        .slide-menu a {
+            display:flex; align-items:center; gap:10px; padding:13px 16px;
+            margin-bottom:4px; border-radius:12px; color:var(--text-dim);
+            font-size:0.85rem; font-weight:500; transition:0.2s;
+        }
+        .slide-menu a:hover { color:var(--green-bright); background:var(--green-soft); transform:translateX(4px); }
+        .slide-menu .menu-footer { text-align:center; margin-top:16px; padding-top:12px; border-top:1px solid var(--green-border); }
+        .slide-menu .lang-toggle-mobile { display:flex; gap:4px; justify-content:center; margin:12px 0; }
 
         .container { max-width:900px; margin:0 auto; padding:30px 20px 50px; }
 
         /* Hero */
-        .participate-hero { text-align:center; padding:55px 20px 40px; border-bottom:1px solid var(--green-border); position:relative; overflow:hidden; }
-        .participate-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 30% 30%, rgba(34,197,94,0.06) 0%, transparent 60%), radial-gradient(circle at 70% 70%, rgba(251,191,36,0.04) 0%, transparent 60%); animation:heroPulse 10s ease-in-out infinite; }
+        .participate-hero { 
+            text-align:center; padding:55px 20px 40px; 
+            border-bottom:1px solid var(--green-border); position:relative; overflow:hidden; 
+        }
+        .participate-hero::before { 
+            content:''; position:absolute; inset:0; 
+            background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.06) 0%, transparent 60%), 
+                        radial-gradient(circle at 70% 70%, rgba(251,191,36,0.04) 0%, transparent 60%),
+                        radial-gradient(circle at 50% 50%, rgba(239,68,68,0.03) 0%, transparent 60%); 
+            animation:heroPulse 10s ease-in-out infinite; 
+        }
         @keyframes heroPulse { 0%,100%{opacity:0.8} 50%{opacity:1} }
         .participate-hero>*{position:relative;z-index:1;}
-        .participate-hero .badge { display:inline-block; background:var(--gold-soft); border:1px solid rgba(251,191,36,0.35); color:var(--gold); padding:6px 20px; border-radius:30px; font-size:0.7rem; text-transform:uppercase; font-weight:700; letter-spacing:1.5px; margin-bottom:14px; }
-        .participate-hero h1 { font-size:clamp(2rem,5vw,3rem); color:var(--gold-bright); font-weight:800; letter-spacing:-0.5px; line-height:1.15; margin-bottom:10px; }
-        .pillar-tagline { display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; margin:12px 0 16px; font-size:0.95rem; font-weight:600; color:var(--text); }
-        .pillar-tagline .divider { color:var(--text-muted); font-weight:300; }
-        .participate-hero .hero-sub { font-size:1.05rem; color:var(--text-dim); max-width:620px; margin:0 auto 22px; font-style:italic; line-height:1.6; }
+        .participate-hero .badge { 
+            display:inline-block; background:var(--gold-soft); 
+            border:1px solid rgba(251,191,36,0.35); color:var(--gold); 
+            padding:6px 20px; border-radius:30px; font-size:0.7rem; 
+            text-transform:uppercase; font-weight:700; letter-spacing:1.5px; margin-bottom:14px; 
+        }
+        .participate-hero h1 { 
+            font-size:clamp(2rem,5vw,3rem); color:var(--gold-bright); 
+            font-weight:800; letter-spacing:-0.5px; line-height:1.15; margin-bottom:10px; 
+        }
+        .hero-slogan { 
+            display:flex; justify-content:center; align-items:center; 
+            gap:10px; flex-wrap:wrap; margin:12px 0 16px; 
+            font-size:1rem; font-weight:700; color:var(--text); 
+        }
+        .hero-slogan .love { color:#ef4444; }
+        .hero-slogan .peace { color:var(--green-bright); }
+        .hero-slogan .unity { color:var(--gold-bright); }
+        .hero-slogan .divider { color:var(--text-muted); font-weight:300; }
+        .participate-hero .hero-sub { 
+            font-size:1.05rem; color:var(--text-dim); max-width:620px; 
+            margin:0 auto 22px; font-style:italic; line-height:1.6; 
+        }
 
-        .btn { display:inline-flex; align-items:center; gap:6px; padding:11px 22px; border-radius:40px; font-weight:600; font-size:0.9rem; transition:var(--transition); cursor:pointer; border:1px solid var(--green-border); background:var(--surface); color:var(--text); text-decoration:none; font-family:var(--font-ui); }
+        .btn { 
+            display:inline-flex; align-items:center; gap:6px; padding:11px 22px; 
+            border-radius:40px; font-weight:600; font-size:0.9rem; transition:var(--transition); 
+            cursor:pointer; border:1px solid var(--green-border); background:var(--surface); 
+            color:var(--text); text-decoration:none; font-family:var(--font-ui); 
+        }
         .btn-primary { background:var(--green-bright); border-color:var(--green-bright); color:#0a120c; font-weight:700; }
         .btn-primary:hover { background:#16a34a; transform:translateY(-2px); box-shadow:0 8px 25px rgba(34,197,94,0.3); }
         .btn-outline { border:2px solid var(--green-bright); color:var(--green-bright); background:transparent; }
         .btn-outline:hover { background:var(--green-soft); transform:translateY(-2px); }
         .btn-gold { background:var(--gold); color:#000; border-color:var(--gold); font-weight:700; }
-        .btn-gold:hover { background:var(--gold-bright); transform:translateY(-2px); }
+        .btn-gold:hover { background:var(--gold-bright); transform:translateY(-2px); box-shadow:0 8px 25px rgba(251,191,36,0.3); }
+        .btn-love { background:var(--love); color:#fff; border-color:var(--love); }
+        .btn-love:hover { background:#dc2626; transform:translateY(-2px); box-shadow:0 8px 25px rgba(239,68,68,0.3); }
         .btn-block { display:block; width:100%; text-align:center; }
 
-        .section-title { font-size:1.6rem; font-weight:700; color:#f0f2e9; margin-bottom:6px; display:flex; align-items:center; gap:10px; }
+        .section-title { 
+            font-size:1.6rem; font-weight:700; color:#f0f2e9; margin-bottom:6px; 
+            display:flex; align-items:center; gap:10px; 
+        }
         .section-subtitle { color:var(--text-dim); margin-bottom:20px; font-size:0.9rem; line-height:1.5; }
 
         /* SIGN-UP BOX */
-        .signup-box { background:var(--surface); border:2px solid var(--gold); border-radius:var(--radius-lg); padding:28px; margin:30px 0; text-align:center; }
+        .signup-box { 
+            background:var(--surface); border:2px solid var(--gold); 
+            border-radius:var(--radius-lg); padding:28px; margin:30px 0; text-align:center; 
+        }
         .signup-box h2 { color:var(--gold); margin-bottom:4px; font-size:1.3rem; }
         .signup-box .subtitle { color:var(--text-dim); font-size:0.85rem; margin-bottom:20px; }
         .signup-form { display:flex; flex-direction:column; gap:10px; max-width:450px; margin:0 auto; }
-        .signup-form input, .signup-form textarea, .signup-form select { width:100%; padding:12px 16px; background:#1b241f; border:1px solid #3a4f40; border-radius:10px; color:#e2e8e4; font-family:var(--font-ui); font-size:0.9rem; }
-        .signup-form input:focus, .signup-form textarea:focus, .signup-form select:focus { outline:none; border-color:var(--gold); }
+        .signup-form input, .signup-form textarea, .signup-form select { 
+            width:100%; padding:12px 16px; background:#1b241f; 
+            border:1px solid #3a4f40; border-radius:10px; color:#e2e8e4; 
+            font-family:var(--font-ui); font-size:0.9rem; transition:border-color 0.2s;
+        }
+        .signup-form input:focus, .signup-form textarea:focus, .signup-form select:focus { 
+            outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(251,191,36,0.1);
+        }
         .signup-form textarea { min-height:100px; resize:vertical; }
-        .signup-form .msg { text-align:center; font-size:0.85rem; min-height:20px; margin-top:4px; }
+        .signup-form .msg { text-align:center; font-size:0.85rem; min-height:24px; margin-top:4px; font-weight:500; }
+        .signup-form .msg.success { color:#4ade80; }
+        .signup-form .msg.error { color:#ef4444; }
+        .signup-form .msg.loading { color:#eab308; }
 
         /* HOW TO JOIN */
         .steps-row { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin:20px 0 30px; }
-        .step { background:var(--surface); border:1px solid var(--green-border); border-radius:var(--radius); padding:18px 16px; text-align:center; flex:1; min-width:140px; max-width:200px; transition:var(--transition); }
-        .step:hover { border-color:var(--gold); transform:translateY(-3px); }
-        .step-num { width:36px; height:36px; background:var(--green-bright); color:#000; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; margin:0 auto 10px; }
+        .step { 
+            background:var(--surface); border:1px solid var(--green-border); 
+            border-radius:var(--radius); padding:18px 16px; text-align:center; 
+            flex:1; min-width:140px; max-width:200px; transition:var(--transition); 
+        }
+        .step:hover { border-color:var(--gold); transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.4); }
+        .step-num { 
+            width:36px; height:36px; background:var(--green-bright); color:#000; 
+            border-radius:50%; display:flex; align-items:center; justify-content:center; 
+            font-weight:800; font-size:1.1rem; margin:0 auto 10px; 
+        }
         .step h4 { color:var(--gold); font-size:0.9rem; margin-bottom:4px; }
         .step p { color:var(--text-dim); font-size:0.75rem; line-height:1.4; }
 
         /* WRITERS GRID */
-        .writers-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:18px; margin-top:20px; }
-        .writer-card { background:var(--surface); border:1px solid var(--green-border); border-radius:var(--radius-lg); overflow:hidden; transition:var(--transition); position:relative; }
-        .writer-card:hover { border-color:var(--gold); transform:translateY(-3px); box-shadow:0 14px 30px -10px rgba(0,0,0,0.5); }
-        .card-top { position:relative; padding:24px 20px 14px; text-align:center; background:linear-gradient(180deg, rgba(34,197,94,0.05) 0%, transparent 100%); }
-        .card-avatar-svg { width:65px; height:65px; border-radius:50%; border:3px solid var(--gold); margin:0 auto 10px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(251,191,36,0.18); }
+        .writers-grid { 
+            display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); 
+            gap:18px; margin-top:20px; 
+        }
+        .writer-card { 
+            background:var(--surface); border:1px solid var(--green-border); 
+            border-radius:var(--radius-lg); overflow:hidden; transition:var(--transition); 
+            position:relative; 
+        }
+        .writer-card:hover { 
+            border-color:var(--gold); transform:translateY(-3px); 
+            box-shadow:0 14px 30px -10px rgba(0,0,0,0.5); 
+        }
+        .card-top { 
+            position:relative; padding:24px 20px 14px; text-align:center; 
+            background:linear-gradient(180deg, rgba(34,197,94,0.05) 0%, transparent 100%); 
+        }
+        .card-avatar-svg { 
+            width:65px; height:65px; border-radius:50%; border:3px solid var(--gold); 
+            margin:0 auto 10px; display:flex; align-items:center; justify-content:center; 
+            box-shadow:0 4px 16px rgba(251,191,36,0.18); 
+        }
         .card-avatar-svg svg { width:36px; height:36px; }
-        .online-dot { position:absolute; top:18px; right:18px; width:10px; height:10px; border-radius:50%; background:var(--green-bright); border:2px solid var(--surface); box-shadow:0 0 8px rgba(34,197,94,0.5); }
+        .online-dot { 
+            position:absolute; top:18px; right:18px; width:10px; height:10px; 
+            border-radius:50%; background:var(--green-bright); border:2px solid var(--surface); 
+            box-shadow:0 0 8px rgba(34,197,94,0.5); animation:pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot { 0%,100%{box-shadow:0 0 8px rgba(34,197,94,0.5)} 50%{box-shadow:0 0 16px rgba(34,197,94,0.8)} }
         .card-name { font-size:1.05rem; font-weight:700; color:var(--gold-bright); margin-bottom:2px; }
         .card-position { font-size:0.78rem; color:var(--text-dim); font-style:italic; margin-bottom:6px; }
         .card-meta { display:flex; justify-content:center; gap:6px; flex-wrap:wrap; margin-bottom:4px; }
@@ -91,12 +235,22 @@
         .meta-country { background:var(--green-soft); color:var(--green-bright); }
         .meta-lang { background:rgba(59,130,246,0.12); color:#60a5fa; }
         .card-body { padding:0 20px 6px; }
-        .card-bio { font-size:0.8rem; color:var(--text-dim); line-height:1.5; margin-bottom:6px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+        .card-bio { 
+            font-size:0.8rem; color:var(--text-dim); line-height:1.5; margin-bottom:6px; 
+            display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; 
+        }
         .card-bio.expanded { -webkit-line-clamp:unset; display:block; }
-        .read-more { font-size:0.72rem; color:var(--gold); cursor:pointer; font-weight:600; display:inline-block; margin-bottom:8px; }
+        .read-more { 
+            font-size:0.72rem; color:var(--gold); cursor:pointer; font-weight:600; 
+            display:inline-block; margin-bottom:8px; transition:color 0.2s;
+        }
         .read-more:hover { color:var(--gold-bright); }
         .card-footer { display:flex; gap:5px; padding:10px 20px 18px; flex-wrap:wrap; }
-        .btn-sm { padding:6px 12px; border-radius:16px; font-size:0.7rem; font-weight:600; cursor:pointer; border:none; transition:var(--transition); font-family:var(--font-ui); display:inline-flex; align-items:center; gap:3px; }
+        .btn-sm { 
+            padding:6px 12px; border-radius:16px; font-size:0.7rem; font-weight:600; 
+            cursor:pointer; border:none; transition:var(--transition); font-family:var(--font-ui); 
+            display:inline-flex; align-items:center; gap:3px; 
+        }
         .btn-sm-view { background:var(--green-bright); color:#000; }
         .btn-sm-view:hover { background:#16a34a; }
         .btn-sm-join { background:var(--gold); color:#000; }
@@ -105,46 +259,95 @@
         .btn-sm-share:hover { background:rgba(59,130,246,0.1); }
 
         /* Chain Entry */
-        .chain-entry { background:var(--surface); border:1px solid var(--green-border); border-radius:var(--radius); padding:22px 24px; margin-bottom:12px; transition:var(--transition); }
+        .chain-entry { 
+            background:var(--surface); border:1px solid var(--green-border); 
+            border-radius:var(--radius); padding:22px 24px; margin-bottom:12px; 
+            transition:var(--transition); 
+        }
         .chain-entry:hover { border-color:var(--green-bright); }
         .chain-entry .entry-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
         .chain-entry .flag { font-size:1.4rem; }
         .chain-entry .author { font-weight:700; color:var(--gold-bright); font-size:0.95rem; }
         .chain-entry .meta { color:var(--text-muted); font-size:0.75rem; }
         .chain-entry .entry-body { color:var(--text); font-style:italic; line-height:1.8; margin-bottom:10px; font-size:0.95rem; }
-        .chain-entry .thread { display:inline-block; background:var(--gold-soft); color:var(--gold); padding:5px 14px; border-radius:20px; font-size:0.75rem; font-weight:500; }
+        .chain-entry .thread { 
+            display:inline-block; background:var(--gold-soft); color:var(--gold); 
+            padding:5px 14px; border-radius:20px; font-size:0.75rem; font-weight:500; 
+        }
         .connector { text-align:center; color:var(--green-bright); font-size:1.3rem; margin:4px 0 8px; opacity:0.7; }
 
-        .wisdom-entry { background:var(--surface); border-left:4px solid var(--gold); border-radius:0 var(--radius) var(--radius) 0; padding:20px 24px; margin-bottom:12px; transition:var(--transition); }
+        .wisdom-entry { 
+            background:var(--surface); border-left:4px solid var(--gold); 
+            border-radius:0 var(--radius) var(--radius) 0; padding:20px 24px; 
+            margin-bottom:12px; transition:var(--transition); 
+        }
         .wisdom-entry:hover { border-left-color:var(--gold-bright); background:var(--surface-light); }
         .wisdom-entry .wisdom-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
         .wisdom-entry .wisdom-author { font-weight:700; color:var(--gold-bright); font-size:0.95rem; }
         .wisdom-entry .wisdom-role { color:var(--text-muted); font-size:0.75rem; }
         .wisdom-entry .wisdom-body { color:var(--text); line-height:1.8; margin-bottom:10px; font-size:0.95rem; }
-        .wisdom-entry .edge { color:var(--green-bright); font-style:italic; font-weight:500; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.05); font-size:0.85rem; }
-        .depth-badge { display:inline-block; background:var(--gold); color:#000; padding:2px 10px; border-radius:12px; font-size:0.7rem; font-weight:700; }
+        .wisdom-entry .edge { 
+            color:var(--green-bright); font-style:italic; font-weight:500; 
+            margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.05); 
+            font-size:0.85rem; 
+        }
+        .depth-badge { 
+            display:inline-block; background:var(--gold); color:#000; 
+            padding:2px 10px; border-radius:12px; font-size:0.7rem; font-weight:700; 
+        }
 
-        .rule-box { background:var(--surface-light); border-radius:10px; padding:16px 20px; margin-bottom:24px; border:1px solid rgba(255,255,255,0.05); }
+        .rule-box { 
+            background:var(--surface-light); border-radius:10px; padding:16px 20px; 
+            margin-bottom:24px; border:1px solid rgba(255,255,255,0.05); 
+        }
         .rule-box h4 { color:var(--green-bright); margin-bottom:6px; font-size:0.9rem; }
         .rule-box ul { color:var(--text-dim); font-size:0.8rem; padding-left:20px; }
         .rule-box li { margin-bottom:5px; }
 
-        .cta-banner { text-align:center; margin:40px 0 20px; background:linear-gradient(135deg, rgba(34,197,94,0.08), rgba(251,191,36,0.08)); border-radius:40px; padding:35px 20px; border:1px solid var(--green-border); }
+        .cta-banner { 
+            text-align:center; margin:40px 0 20px; 
+            background:linear-gradient(135deg, rgba(34,197,94,0.08), rgba(251,191,36,0.08), rgba(239,68,68,0.05)); 
+            border-radius:40px; padding:35px 20px; border:1px solid var(--green-border); 
+        }
         .cta-banner h2 { color:var(--gold-bright); font-size:1.5rem; margin-bottom:6px; }
         .cta-banner p { color:var(--text-dim); max-width:500px; margin:8px auto 18px; }
 
-        footer { background:#0a0f0c; border-top:1px solid var(--green-border); padding:30px 20px; text-align:center; color:var(--text-muted); font-size:0.8rem; }
-        .footer-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:20px; max-width:900px; margin:0 auto 20px; text-align:left; }
+        footer { 
+            background:#0a0f0c; border-top:1px solid var(--green-border); 
+            padding:30px 20px; text-align:center; color:var(--text-muted); font-size:0.8rem; 
+        }
+        .footer-grid { 
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); 
+            gap:20px; max-width:900px; margin:0 auto 20px; text-align:left; 
+        }
         .footer-col h4 { color:var(--gold); margin-bottom:10px; font-size:0.9rem; }
         .footer-col a { display:block; color:var(--text-dim); padding:3px 0; font-size:0.78rem; transition:var(--transition); }
         .footer-col a:hover { color:var(--green-bright); }
+        .footer-slogan { font-size:1rem; margin-bottom:8px; font-weight:600; }
+        .footer-slogan .love { color:#ef4444; }
+        .footer-slogan .peace { color:var(--green-bright); }
+        .footer-slogan .unity { color:var(--gold-bright); }
+        .footer-bottom { text-align:center; padding-top:16px; border-top:1px solid rgba(255,255,255,0.05); margin-top:16px; }
 
-        @media(max-width:768px) { .desktop-links{display:none} .hamburger{display:flex} .container{padding:20px 14px 40px} .participate-hero{padding:40px 16px 30px} .participate-hero h1{font-size:1.6rem} .writers-grid{grid-template-columns:1fr} .footer-grid{grid-template-columns:repeat(2,1fr)} }
-        @media(max-width:480px) { .footer-grid{grid-template-columns:1fr} }
+        @media(max-width:768px) { 
+            .desktop-links{display:none} .lang-toggle{display:none}
+            .hamburger{display:flex} .container{padding:20px 14px 40px} 
+            .participate-hero{padding:40px 16px 30px} 
+            .participate-hero h1{font-size:1.6rem} 
+            .hero-slogan{font-size:0.85rem;gap:6px}
+            .writers-grid{grid-template-columns:1fr} 
+            .footer-grid{grid-template-columns:repeat(2,1fr)} 
+        }
+        @media(max-width:480px) { 
+            .footer-grid{grid-template-columns:1fr} 
+            .steps-row{flex-direction:column;align-items:center}
+            .step{max-width:100%}
+        }
     </style>
 </head>
 <body>
 
+<!-- NAVIGATION -->
 <nav>
     <a href="index.html" class="logo">🕊️ We Need <span>Peace</span></a>
     <div class="desktop-links">
@@ -152,26 +355,71 @@
         <a href="voices.html">Voices</a>
         <a href="blog.html">Blog</a>
         <a href="courses.html">Courses</a>
+        <a href="dashboard.html">Dashboard</a>
         <a href="collaborate.html" class="active">✍️ Participate</a>
+        <a href="media.html">Media</a>
+        <a href="gallery.html">Gallery</a>
         <a href="contribute.html">📝 Share Voice</a>
-        <a href="support.html">Support</a>
+        <a href="support.html" class="cta-nav">Support</a>
+        <span class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('en')" data-lang="en">EN</button>
+            <button class="lang-btn" onclick="setLang('am')" data-lang="am">አማ</button>
+            <button class="lang-btn" onclick="setLang('om')" data-lang="om">Oromo</button>
+            <button class="lang-btn" onclick="setLang('ti')" data-lang="ti">ትግ</button>
+        </span>
     </div>
-    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
 
+<!-- SLIDE MENU -->
+<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-header">
+        <div class="flag">🕊️❤️🤝</div>
+        <h3>We Need Peace</h3>
+        <p style="color:var(--text-muted);font-size:0.7rem">Wear Love. Speak Peace. Live Unity.</p>
+    </div>
+    <a href="index.html">🏠 Home</a>
+    <a href="voices.html">🗣️ Voice Archive</a>
+    <a href="blog.html">📝 Blog & Stories</a>
+    <a href="courses.html">🎓 Free Courses</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="collaborate.html" style="background:var(--gold-soft);color:var(--gold-bright);font-weight:700;">✍️ Participate</a>
+    <a href="media.html">📰 Media Coverage</a>
+    <a href="gallery.html">🖼️ Gallery</a>
+    <a href="contribute.html">📝 Share Your Voice</a>
+    <a href="about.html">📖 About Us</a>
+    <a href="support.html" style="background:var(--green-soft);color:var(--green-bright);font-weight:700;">❤️ Support</a>
+    <div class="lang-toggle-mobile">
+        <button class="lang-btn active" onclick="setLang('en')" data-lang="en">English</button>
+        <button class="lang-btn" onclick="setLang('am')" data-lang="am">አማርኛ</button>
+        <button class="lang-btn" onclick="setLang('om')" data-lang="om">Oromo</button>
+        <button class="lang-btn" onclick="setLang('ti')" data-lang="ti">ትግርኛ</button>
+    </div>
+    <div class="menu-footer">
+        <p style="color:var(--text-muted);font-size:0.65rem">&copy; 2026 We Need Peace</p>
+    </div>
+</div>
+
+<!-- HERO -->
 <header class="participate-hero">
     <div class="badge">✍️ Collaborative Writing Hub</div>
     <h1>Participate</h1>
-    <div class="pillar-tagline">
-        <span>🕊️ Peace is the goal.</span><span class="divider">·</span>
-        <span>❤️ Love is the way.</span><span class="divider">·</span>
-        <span>🤝 Unity is the strength.</span>
+    <div class="hero-slogan">
+        <span class="love">❤️ Wear Love.</span>
+        <span class="divider">·</span>
+        <span class="peace">🕊️ Speak Peace.</span>
+        <span class="divider">·</span>
+        <span class="unity">🤝 Live Unity.</span>
     </div>
     <p class="hero-sub">Join writers from <strong style="color:var(--gold-bright);">57+ countries</strong>. Co-create stories, deepen wisdom, and publish peace literature together.</p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <a href="#signup" class="btn btn-primary">📝 Sign Up to Write</a>
         <a href="#story-chain" class="btn btn-outline">📖 Story Chain</a>
         <a href="#wisdom-chain" class="btn btn-outline">🦉 Wisdom Chain</a>
+        <a href="index.html" class="btn btn-love">❤️ Home</a>
     </div>
 </header>
 
@@ -219,7 +467,7 @@
             <button class="btn btn-gold btn-block" onclick="submitEntry()">🕊️ Submit & Join</button>
             <div class="msg" id="signupMsg"></div>
         </div>
-        <p style="font-size:0.72rem;color:var(--text-muted);margin-top:12px;">By submitting, you agree to our community guidelines. Your email is private.</p>
+        <p style="font-size:0.72rem;color:var(--text-muted);margin-top:12px;">By submitting, you agree to our community guidelines. Your email is private. <a href="index.html" style="color:var(--gold);">← Back to Home</a></p>
     </div>
 
     <!-- FEATURED WRITERS -->
@@ -254,22 +502,31 @@
     <!-- CTA -->
     <div class="cta-banner">
         <h2>🤝 Your words build bridges</h2>
-        <p>All languages, all experience levels, all countries welcome.</p>
-        <a href="#signup" class="btn btn-gold" style="font-size:1rem;">✍️ Participate Now</a>
+        <p>All languages, all experience levels, all countries welcome. <strong>Wear Love. Speak Peace. Live Unity.</strong></p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+            <a href="#signup" class="btn btn-gold" style="font-size:1rem;">✍️ Participate Now</a>
+            <a href="index.html" class="btn btn-outline">🏠 Back to Home</a>
+        </div>
     </div>
 
 </main>
 
 <footer>
     <div class="footer-grid">
-        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="collaborate.html">Participate</a></div>
-        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Free Courses</a><a href="about.html">About Us</a></div>
-        <div class="footer-col"><h4>🤝 Join</h4><a href="contribute.html">Share Voice</a><a href="support.html">Support</a></div>
-        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a></div>
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog</a><a href="collaborate.html">Participate</a><a href="dashboard.html">Dashboard</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Free Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About Us</a></div>
+        <div class="footer-col"><h4>🤝 Join</h4><a href="contribute.html">Share Voice</a><a href="support.html">Support</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 Twitter</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
     </div>
-    <div style="text-align:center;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);margin-top:16px;">
-        <p style="font-size:1rem;margin-bottom:4px;">🕊️ Peace is the goal. ❤️ Love is the way. 🤝 Unity is the strength.</p>
-        <p>We Need Peace &copy; 2026 · Story & Wisdom Chain</p>
+    <div class="footer-bottom">
+        <p class="footer-slogan">
+            <span class="love">❤️ Wear Love.</span> 
+            <span class="peace">🕊️ Speak Peace.</span> 
+            <span class="unity">🤝 Live Unity.</span>
+        </p>
+        <p>We Need Peace &copy; 2026 · Story & Wisdom Chain · <a href="index.html">Home</a></p>
+        <p style="margin-top:6px;font-size:0.7rem"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
+        <p style="margin-top:8px;color:var(--green-bright);font-weight:600">#WeNeedPeace #WearLoveSpeakPeaceLiveUnity #StoryChain</p>
     </div>
 </footer>
 
@@ -277,7 +534,6 @@
     const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
-    // ===== HUMAN AVATAR SVG ICONS =====
     const avatarColors = ['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#2980b9'];
     const humanSVGs = [
         '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>',
@@ -297,6 +553,7 @@
 
     function renderWriters() {
         const grid = document.getElementById('writersGrid');
+        if (!grid) return;
         let html = '';
         writers.forEach((w, i) => {
             const avatarBg = avatarColors[w.color];
@@ -331,6 +588,7 @@
     function toggleBio(bioId, btnId) {
         const bio = document.getElementById(bioId);
         const btn = document.getElementById(btnId);
+        if (!bio || !btn) return;
         if (bio.classList.contains('expanded')) {
             bio.classList.remove('expanded');
             btn.textContent = 'Read more →';
@@ -342,16 +600,17 @@
 
     function viewWriter(id) {
         const w = writers.find(wr => wr.id === id);
-        alert(`🖋️ ${w.name}\n\n💼 ${w.position}\n📍 ${w.country}\n🌐 ${w.language}\n\n📝 ${w.bio}`);
+        if (w) alert(`🖋️ ${w.name}\n\n💼 ${w.position}\n📍 ${w.country}\n🌐 ${w.language}\n\n📝 ${w.bio}`);
     }
 
     function shareWriter(id) {
         const w = writers.find(wr => wr.id === id);
+        if (!w) return;
         const url = window.location.href.split('?')[0] + '?writer=' + id;
         if (navigator.share) {
-            navigator.share({ title: `${w.name} — We Need Peace`, text: w.bio.substring(0, 100) + '...', url: url });
+            navigator.share({ title: `${w.name} — We Need Peace`, text: w.bio.substring(0, 100) + '...', url: url }).catch(() => {});
         } else {
-            navigator.clipboard.writeText(url).then(() => alert('🔗 Link copied!'));
+            navigator.clipboard.writeText(url).then(() => alert('🔗 Link copied!')).catch(() => alert('🔗 ' + url));
         }
     }
 
@@ -364,25 +623,28 @@
         const chainType = document.getElementById('chainType').value;
         const message = document.getElementById('writerMessage').value.trim();
 
+        // Reset message classes
+        msg.className = 'msg';
+
         if (!name || !email || !message) {
             msg.textContent = '❌ Please fill Name, Email, and Message.';
-            msg.style.color = '#ef4444';
+            msg.classList.add('error');
             return;
         }
-        if (!email.includes('@')) {
-            msg.textContent = '❌ Please enter a valid email.';
-            msg.style.color = '#ef4444';
+        if (!email.includes('@') || !email.includes('.')) {
+            msg.textContent = '❌ Please enter a valid email address.';
+            msg.classList.add('error');
             return;
         }
 
-        msg.textContent = '⏳ Submitting...';
-        msg.style.color = '#eab308';
+        msg.textContent = '⏳ Submitting your entry...';
+        msg.classList.add('loading');
 
         try {
             const payload = {
                 writer_name: name,
                 full_name: name,
-                region: country || 'Unknown',
+                region: country || 'Global',
                 language: 'English',
                 quote_english: message,
                 is_published: false,
@@ -393,7 +655,7 @@
                 sentiment: 0.75,
                 starting_likes: 50,
                 starting_shares: 20,
-                extracted_data: { email: email },
+                extracted_data: { email: email, chain_type: chainType },
                 created_at: new Date().toISOString()
             };
 
@@ -409,27 +671,56 @@
             });
 
             if (res.ok) {
-                msg.textContent = '✅ Welcome, ' + name + '! Your entry is under review and will be published within 24 hours.';
-                msg.style.color = '#4ade80';
+                msg.textContent = '✅ Welcome, ' + name + '! Your entry is under review and will be published within 24 hours. 🕊️';
+                msg.classList.add('success');
                 document.getElementById('writerName').value = '';
                 document.getElementById('writerEmail').value = '';
                 document.getElementById('writerMessage').value = '';
             } else {
-                const err = await res.json();
-                msg.textContent = '❌ Error: ' + (err.message || 'Try again.');
-                msg.style.color = '#ef4444';
+                const err = await res.text();
+                console.error('Supabase error:', err);
+                msg.textContent = '❌ Submission error. Please try again or contact us.';
+                msg.classList.add('error');
             }
         } catch (e) {
-            msg.textContent = '❌ Connection error. Check your internet.';
-            msg.style.color = '#ef4444';
+            console.error('Network error:', e);
+            msg.textContent = '❌ Connection error. Please check your internet and try again.';
+            msg.classList.add('error');
         }
     }
 
+    // ===== MOBILE MENU =====
     function toggleMenu() {
-        alert('Mobile menu — integrate with your navigation.js');
+        const menu = document.getElementById('slideMenu');
+        const overlay = document.getElementById('slideOverlay');
+        const hamburger = document.getElementById('hamburger');
+        if (!menu || !overlay || !hamburger) return;
+        menu.classList.toggle('open');
+        overlay.classList.toggle('open');
+        hamburger.classList.toggle('open');
+        document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
     }
 
-    document.addEventListener('DOMContentLoaded', renderWriters);
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const menu = document.getElementById('slideMenu');
+            if (menu && menu.classList.contains('open')) toggleMenu();
+        }
+    });
+
+    // ===== LANGUAGE (basic) =====
+    function setLang(lang) {
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll(`.lang-btn[data-lang="${lang}"]`).forEach(b => b.classList.add('active'));
+        localStorage.setItem('peace_lang', lang);
+        console.log('Language set to:', lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderWriters();
+        const savedLang = localStorage.getItem('peace_lang') || 'en';
+        setLang(savedLang);
+    });
 </script>
 <script src="js/supabase.js"></script>
 <script src="js/navigation.js"></script>
