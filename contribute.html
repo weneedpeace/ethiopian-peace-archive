@@ -2,111 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Start your own legacy chapter. Share your message of peace, unity, and hope with the Ethiopian Peace Archive.">
-    <title>Start Your Own Chapter — Ethiopian Peace Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Ethiopian Peace Archive — Story Chain & Wisdom Chain. Co-create stories and deepen wisdom across borders.">
+    <meta property="og:title" content="Story Chain & Wisdom Chain — Ethiopian Peace Archive">
+    <meta property="og:description" content="Join the Never-Ending Story and the Wisdom Chain. Write together across continents.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Story & Wisdom Chain · Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        body { 
-            background: #ffffff !important;
-            color: #1a1a1a !important; 
-        }
-        
-        nav { background: rgba(255,255,255,0.95) !important; border-bottom: 1px solid #e5e7eb !important; }
-        nav .logo { color: #1a1a1a !important; }
-        nav .logo span { color: #16a34a !important; }
-        nav .desktop-links a { color: #666 !important; }
-        nav .desktop-links a:hover { color: #16a34a !important; background: #f0fdf4 !important; }
-        nav .desktop-links a.active { color: #16a34a !important; background: #f0fdf4 !important; }
-        nav .desktop-links a.cta-nav { background: #16a34a !important; color: #fff !important; }
-        .hamburger span { background: #1a1a1a !important; }
-        .slide-menu { background: #fff !important; border-left: 1px solid #e5e7eb !important; }
-        .slide-menu a { color: #1a1a1a !important; }
-        .slide-menu a:hover { background: #f0fdf4 !important; color: #16a34a !important; }
-        footer { background: rgba(255,255,255,0.95) !important; border-top: 1px solid #e5e7eb !important; color: #999 !important; }
-        
-        .container { max-width: 700px; margin: 40px auto; padding: 0 20px; }
-        .page-hero { text-align: center; padding: 30px 0 20px; }
-        .page-hero h1 { color: #1a1a1a; font-size: 1.8rem; font-family: var(--font-ui); font-weight: 800; margin-bottom: 6px; }
-        .page-hero p { color: #666; font-size: 1rem; }
-        
-        .form-card { background: #ffffff; border: 2px solid #16a34a; border-radius: 16px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .form-card h3 { color: #1a1a1a; font-family: var(--font-ui); font-size: 1.2rem; text-align: center; margin-bottom: 6px; }
-        .form-card .subtitle { color: #888; font-size: 0.9rem; text-align: center; margin-bottom: 24px; }
-        
-        .form-card label { display: block; color: #444; font-size: 0.85rem; font-family: var(--font-ui); font-weight: 600; margin-bottom: 4px; }
-        .form-card input, .form-card textarea {
-            width: 100%; padding: 12px 16px; border-radius: 10px;
-            border: 1px solid #d1d5db; background: #ffffff;
-            color: #1a1a1a; font-size: 0.95rem; font-family: inherit;
-            margin-bottom: 16px; transition: all 0.3s;
-        }
-        .form-card input:focus, .form-card textarea:focus {
-            outline: none; border-color: #16a34a;
-            box-shadow: 0 0 0 3px rgba(22,163,74,0.1);
-        }
-        .form-card textarea { min-height: 140px; resize: vertical; }
-        
-        .file-upload {
-            border: 2px dashed #d1d5db; border-radius: 10px; padding: 15px; text-align: center;
-            color: #888; font-size: 0.85rem; cursor: pointer; margin-bottom: 16px; transition: 0.3s;
-        }
-        .file-upload:hover { border-color: #16a34a; background: #f0fdf4; }
-        .avatar-preview { display: none; width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #16a34a; margin: 0 auto 12px; }
-
-        .char-count { text-align: right; color: #999; font-size: 0.75rem; margin-top: -10px; margin-bottom: 12px; font-family: var(--font-ui); }
-        .submit-btn {
-            width: 100%; padding: 14px; border-radius: 30px;
-            background: #16a34a; color: #fff; font-weight: 700; font-size: 1rem;
-            border: none; cursor: pointer; font-family: var(--font-ui);
-            transition: all 0.3s;
-        }
-        .submit-btn:hover { background: #15803d; transform: translateY(-2px); }
-        .submit-btn:disabled { background: #999; cursor: not-allowed; }
-        
-        .trust-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
-        .trust-item { display: flex; align-items: center; gap: 6px; color: #666; font-size: 0.8rem; font-family: var(--font-ui); }
-        .trust-item span { color: #16a34a; }
-        
-        .privacy-note { text-align: center; color: #999; font-size: 0.75rem; margin-top: 14px; font-family: var(--font-ui); }
-
-        .success-notification {
-            display: none;
-            background: rgba(240,253,244,0.98);
-            border: 2px solid #16a34a;
-            border-radius: 16px;
-            padding: 30px;
-            text-align: center;
-            animation: slideUp 0.4s ease;
-        }
-        .success-notification.show { display: block; }
-        .success-notification .check-icon {
-            width: 60px; height: 60px; background: #16a34a; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 16px; font-size: 2rem; color: #fff;
-        }
-        .success-notification h3 { color: #16a34a; font-family: var(--font-ui); font-size: 1.2rem; margin-bottom: 6px; }
-        .success-notification p { color: #555; font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px; }
-        .success-notification button {
-            padding: 10px 24px; border-radius: 25px;
-            background: #16a34a; color: #fff; border: none;
-            font-weight: 700; font-family: var(--font-ui); cursor: pointer; font-size: 0.9rem;
-        }
-        .error-notification {
-            display: none;
-            background: rgba(254,242,242,0.98);
-            border: 2px solid #ef4444;
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            color: #ef4444;
-            font-family: var(--font-ui);
-            font-size: 0.9rem;
-        }
-        .error-notification.show { display: block; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
 </head>
 <body>
 
@@ -114,168 +17,282 @@
 <nav>
     <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
     <div class="desktop-links">
-        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-        <a href="courses.html">Courses</a><a href="dashboard.html">Impact</a>
-        <a href="gallery.html">Gallery</a><a href="thanks.html">Thanks</a>
-        <a href="contribute.html" class="active">Contribute</a>
-        <a href="support.html" class="cta-nav">Support</a>
+        <a href="index.html">Home</a>
+        <a href="voices.html">Voices</a>
+        <a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="collaborate.html" class="active">✍️ Collaborate</a>
+        <a href="contribute.html">Contribute</a>
+        <a href="support.html">Support</a>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-<div class="slide-menu" id="slideMenu">
-    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3 style="color:#1a1a1a">Ethiopian Peace Archive</h3></div>
-    <a href="index.html">🏠 Home</a><a href="voices.html">🗣️ Voices</a><a href="contribute.html">🤝 Contribute</a>
-    <a href="support.html">❤️ Support</a>
-</div>
+<!-- HERO -->
+<header class="hero" style="padding:60px 20px 40px;">
+    <div class="badge-top">✍️ Collaborative Writing</div>
+    <h1>Story Chain &<br>Wisdom Chain</h1>
+    <p class="hero-sub">Write together across borders. One story flows through many hands. One truth deepens through many lives.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;">
+        <a href="#story-chain" class="btn btn-primary">📖 Join the Story</a>
+        <a href="#wisdom-chain" class="btn btn-outline">🦉 Add Wisdom</a>
+    </div>
+</header>
 
-<!-- MAIN CONTENT -->
 <main class="container">
-    <div class="page-hero">
-        <h1>📖 Start Your Own Chapter</h1>
-        <p>Be the first voice in your family or team's legacy.</p>
+
+    <!-- LIVE COLLABORATION FEED -->
+    <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:16px 20px;margin-bottom:30px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <h3 style="color:#f0f2e9;font-size:1rem;font-family:var(--font-ui);">📡 Live Collaboration Feed</h3>
+            <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">8 writers online</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;color:var(--text-dim);">
+            <span style="font-size:1.2rem;">🌿</span> <strong style="color:var(--gold-bright);">Bethlehem T.</strong> added to Story Chain · Addis Ababa · 3 min ago
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;color:var(--text-dim);">
+            <span style="font-size:1.2rem;">🦉</span> <strong style="color:var(--gold-bright);">Odette U.</strong> deepened Wisdom Chain · Rwanda · 12 min ago
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;color:var(--text-dim);">
+            <span style="font-size:1.2rem;">📖</span> <strong style="color:var(--gold-bright);">Carlos R.</strong> continued Story · Colombia · 28 min ago
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;font-size:0.85rem;color:var(--text-dim);">
+            <span style="font-size:1.2rem;">✨</span> <strong style="color:var(--gold-bright);">Yuki T.</strong> added layer to Wisdom Chain · Japan · 1 hour ago
+        </div>
     </div>
 
-    <div class="trust-row">
-        <div class="trust-item"><span>🔒</span> Email private</div>
-        <div class="trust-item"><span>✅</span> Human reviewed</div>
-        <div class="trust-item"><span>🌍</span> 15+ countries</div>
-        <div class="trust-item"><span>📜</span> Permanent archive</div>
-    </div>
+    <!-- ==================== STORY CHAIN ==================== -->
+    <div id="story-chain">
+        <h2 class="section-title">📖 The Never-Ending Story</h2>
+        <p class="section-subtitle">One writer starts. Another finds a <strong style="color:var(--gold-bright);">thread</strong> — a character, an object, a consequence — and follows it somewhere <strong style="color:var(--gold-bright);">new</strong>. The story crosses countries, genres, and lives. Read the last entry. Find a ripple. Take it somewhere unexpected.</p>
 
-    <div class="form-card" id="formCard">
-        <h3>✍️ Write Your Message</h3>
-        <p class="subtitle">Start a family or team chapter. Invite others to join later with your email.</p>
-        
-        <form id="submitForm">
-            <label>Your Full Name</label>
-            <input type="text" id="sName" placeholder="e.g., Stephern Johnson" required>
-            
-            <label>Your Email</label>
-            <input type="email" id="sEmail" placeholder="For verification &amp; sharing with family" required>
-            
-            <label>Your Region or Country</label>
-            <input type="text" id="sRegion" placeholder="e.g., Addis Ababa, Ethiopia" required>
-            
-            <label>Your Profile Picture</label>
-            <div class="file-upload" onclick="document.getElementById('profileFile').click()">
-                📷 Tap to upload a photo (optional)
+        <div style="background:rgba(34,197,94,0.05);border-radius:12px;padding:16px 20px;margin-bottom:24px;border:1px solid rgba(34,197,94,0.15);">
+            <h4 style="color:var(--green-bright);margin-bottom:6px;font-family:var(--font-ui);font-size:0.9rem;">📜 Rules for Story Chain</h4>
+            <ul style="color:var(--text-dim);font-size:0.8rem;padding-left:20px;font-family:var(--font-ui);">
+                <li>Read the last entry carefully.</li>
+                <li>Find a <strong>thread</strong> — a person, object, emotion, question, or consequence.</li>
+                <li>Follow it into a <strong>new scene, new country, or new genre.</strong></li>
+                <li>Write 3–8 sentences. Leave a thread for the next writer.</li>
+                <li>Tag your entry: 🕊️ Peace · ❤️ Love · 🤝 Unity.</li>
+            </ul>
+        </div>
+
+        <!-- Entry 1 -->
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;transition:all 0.3s;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+                <span style="font-size:1.5rem;">🇪🇹</span>
+                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Bethlehem Tadesse</span>
+                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Addis Ababa, Ethiopia · 🕊️ Peace</span>
             </div>
-            <input type="file" id="profileFile" accept="image/*" style="display:none" onchange="uploadProfile(this)">
-            <img id="avatarPreview" class="avatar-preview" src="" alt="Profile Preview">
-            <input type="hidden" id="avatarUrl">
-            
-            <label>Your Message</label>
-            <textarea id="sMessage" placeholder="Write your wish for peace, unity, and hope. Your family or team can add their own messages later." rows="5" required></textarea>
-            <div class="char-count"><span id="charCount">0</span> characters</div>
-            
-            <button type="button" class="submit-btn" id="submitBtn" onclick="submitFounder()">🕊️ Submit & Start My Chapter</button>
-            <p class="privacy-note">🔒 Your email is private. Only your name, region, and message are published after review.</p>
-        </form>
+            <div style="color:var(--text);font-style:italic;line-height:1.8;margin-bottom:12px;font-size:0.95rem;">
+                "The day everything changed, it was raining. Not the gentle rain that kisses the tin roofs of our neighborhood. A hard rain. The kind that floods the streets and keeps children home from school. I was standing at the window, watching the water rise, when I saw an old man slip and fall in the mud. No one stopped. Everyone was running for shelter. But a street dog — that yellow stray we all ignored — walked over and stood beside him. Just stood there. As if to say: <em>you are not alone.</em> I put on my shoes and went outside."
+            </div>
+            <span style="display:inline-block;background:rgba(251,191,36,0.12);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:500;font-family:var(--font-ui);">🧵 Thread left: The old man. The dog. The person who finally went outside.</span>
+        </div>
+
+        <div style="text-align:center;color:var(--green-bright);font-size:1.4rem;margin:6px 0 10px;opacity:0.7;">⬇️</div>
+
+        <!-- Entry 2 -->
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;transition:all 0.3s;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+                <span style="font-size:1.5rem;">🇨🇴</span>
+                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Carlos Eduardo Ramírez</span>
+                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Former Combatant, Colombia · 🤝 Unity</span>
+            </div>
+            <div style="color:var(--text);font-style:italic;line-height:1.8;margin-bottom:12px;font-size:0.95rem;">
+                "The old man — I understand him. I was once that man in the mud. Not literally. But after I put down my rifle, I fell. Fell into silence. Fell into shame. Fell into a world that did not want former combatants. And someone — a coffee farmer — reached down and pulled me up. Not with a speech. With coffee. With a question about my mother. The old man in Addis was not alone because a dog stood by him. I was not alone because a farmer handed me a cup. Who reached down to you?"
+            </div>
+            <span style="display:inline-block;background:rgba(251,191,36,0.12);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:500;font-family:var(--font-ui);">🧵 Thread left: The coffee farmer. The question about the mother. Who reached down to you?</span>
+        </div>
+
+        <div style="text-align:center;color:var(--green-bright);font-size:1.4rem;margin:6px 0 10px;opacity:0.7;">⬇️</div>
+
+        <!-- Entry 3 -->
+        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;transition:all 0.3s;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+                <span style="font-size:1.5rem;">🇯🇵</span>
+                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Yuki Tanaka</span>
+                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Zen Practitioner, Japan · ❤️ Love</span>
+            </div>
+            <div style="color:var(--text);font-style:italic;line-height:1.8;margin-bottom:12px;font-size:0.95rem;">
+                "The question about the mother — Carlos, your farmer knew something we forget. In Kyoto, my teacher said: <em>'The deepest peace is the face of your mother before you were born.'</em> I meditated on this for ten years. Then my own mother died. I never asked her what she dreamed before I arrived. Now I ask strangers: what did your mother want before she became a mother? The answers break me open. One woman in Tokyo said: 'She wanted to be a dancer.' A dancer. I light incense for that lost dancer now. What did your mother want?"
+            </div>
+            <span style="display:inline-block;background:rgba(251,191,36,0.12);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:500;font-family:var(--font-ui);">🧵 Thread left: Mothers' lost dreams. The dancer. What did your mother want?</span>
+        </div>
+
+        <div style="text-align:center;color:var(--green-bright);font-size:1.4rem;margin:6px 0 10px;opacity:0.7;">⬇️</div>
+
+        <!-- Entry 4 - Placeholder for next writer -->
+        <div style="background:var(--card);border:2px dashed var(--green-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;opacity:0.85;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+                <span style="font-size:1.5rem;">🌍</span>
+                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Your Name Here</span>
+                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Your Country · 🕊️❤️🤝</span>
+            </div>
+            <div style="color:var(--text-muted);font-style:italic;line-height:1.8;margin-bottom:12px;font-size:0.95rem;">
+                <em>The story is waiting for you. Read the last entry. Find a thread. Follow it — to your country, your experience, your imagination. What did <strong>your</strong> mother want? Or follow another thread: the dog, the coffee farmer, the incense, the dancer. The story bends toward whoever picks it up.</em>
+            </div>
+            <span style="display:inline-block;background:rgba(251,191,36,0.12);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:500;font-family:var(--font-ui);">🧵 Your thread will guide the next writer.</span>
+        </div>
+
+        <a href="contribute.html" class="btn btn-primary" style="display:block;width:100%;text-align:center;padding:14px;font-size:1rem;margin-top:8px;">✍️ Add Your Part to the Story</a>
     </div>
 
-    <div class="success-notification" id="successNotification">
-        <div class="check-icon">✓</div>
-        <h3>Thank You! Your Chapter Is Under Review.</h3>
-        <p>Once approved, your family or team can add co-writers using your email.</p>
-        <button onclick="resetForm()">Start Another Chapter →</button>
+    <!-- ==================== WISDOM CHAIN ==================== -->
+    <div id="wisdom-chain" style="margin-top:55px;">
+        <h2 class="section-title">🦉 The Wisdom Chain</h2>
+        <p class="section-subtitle">Not a conversation. A <strong style="color:var(--gold-bright);">compounding of insight.</strong> One person articulates a truth. The next does not reply — they <strong style="color:var(--gold-bright);">add a deeper layer, sharpen it, or reveal what the previous person could not see.</strong> Each entry makes the wisdom more concrete, more lived. Always leave an edge for the next voice.</p>
+
+        <div style="background:rgba(34,197,94,0.05);border-radius:12px;padding:16px 20px;margin-bottom:24px;border:1px solid rgba(34,197,94,0.15);">
+            <h4 style="color:var(--green-bright);margin-bottom:6px;font-family:var(--font-ui);font-size:0.9rem;">📜 Rules for Wisdom Chain</h4>
+            <ul style="color:var(--text-dim);font-size:0.8rem;padding-left:20px;font-family:var(--font-ui);">
+                <li>Read the wisdom that came before you.</li>
+                <li>Do not agree or disagree. <strong>Add.</strong> What did they miss? What is the deeper layer?</li>
+                <li>Speak from your own life — not theory, not quotes. Experience.</li>
+                <li>End with a question or an edge — something unresolved for the next person.</li>
+            </ul>
+        </div>
+
+        <!-- Wisdom Entry 1 -->
+        <div style="background:var(--card);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px 24px;margin-bottom:14px;transition:all 0.3s;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+                <span style="font-size:1.5rem;">🇬🇭</span>
+                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Kwame Asante</span>
+                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Taxi Driver, Ghana · 58 years old</span>
+                <span style="display:inline-block;background:var(--gold);color:#000;padding:2px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;font-family:var(--font-ui);">Layer 1</span>
+            </div>
+            <div style="color:var(--text);line-height:1.8;margin-bottom:10px;font-size:0.95rem;">
+                "The most important thing I have learned in 58 years: people do not change when you argue with them. They change when you listen to them — really listen, without preparing your reply. I drove a taxi for 22 years. I listened to drunk people, heartbroken people, angry people, lost people. I did not fix anyone. But many of them fixed themselves, just because someone was quiet while they spoke. Listening is not passive. Listening is a form of love."
+            </div>
+            <div style="color:var(--green-bright);font-style:italic;font-weight:500;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.85rem;">
+                🔪 Edge: Listening is easy with strangers. What about with people who have hurt you? Is listening still enough when your heart is full of rage?
+            </div>
+        </div>
+
+        <!-- Wisdom Entry 2 -->
+        <div style="background:var(--card);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px 24px;margin-bottom:14px;transition:all 0.3s;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+                <span style="font-size:1.5rem;">🇷🇼</span>
+                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Odette Uwimana</span>
+                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Reconciliation Survivor, Rwanda</span>
+                <span style="display:inline-block;background:var(--gold);color:#000;padding:2px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;font-family:var(--font-ui);">Layer 2</span>
+            </div>
+            <div style="color:var(--text);line-height:1.8;margin-bottom:10px;font-size:0.95rem;">
+                "Kwame asks: is listening enough when your heart is full of rage? I sat across from the man who killed my brother. I did not listen with my ears. I listened with my survival. I listened to his shaking hands. I listened to his silence — it was louder than any confession. And I learned: listening to an enemy is not about understanding them. It is about refusing to let their violence turn you into someone who cannot hear at all. Listening to someone who hurt you is not forgiveness. It is self-defense of the soul."
+            </div>
+            <div style="color:var(--green-bright);font-style:italic;font-weight:500;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.85rem;">
+                🔪 Edge: I listened. I survived it. But I still dream of my brother. Listening healed something in me — but it did not bring him back. So what is listening for, if it cannot undo the past? What is the purpose of peace if the dead stay dead?
+            </div>
+        </div>
+
+        <!-- Wisdom Entry 3 -->
+        <div style="background:var(--card);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px 24px;margin-bottom:14px;transition:all 0.3s;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+                <span style="font-size:1.5rem;">🇸🇾</span>
+                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Samir Al-Khatib</span>
+                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Former Teacher, Syria</span>
+                <span style="display:inline-block;background:var(--gold);color:#000;padding:2px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;font-family:var(--font-ui);">Layer 3</span>
+            </div>
+            <div style="color:var(--text);line-height:1.8;margin-bottom:10px;font-size:0.95rem;">
+                "Odette asks: what is listening for if it cannot undo the past? I taught children who are now buried. I listened to their laughter. I listened to their questions about algebra and the stars. That listening did not save them. But it meant that before they died, someone heard them. Someone knew they were alive. The dead stay dead. Peace does not resurrect them. But listening <strong>witnesses</strong> them. It says: you were here. You mattered. The purpose of listening — of peace — is not to undo the past. It is to honor what was lost so completely that the future cannot repeat the crime."
+            </div>
+            <div style="color:var(--green-bright);font-style:italic;font-weight:500;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.85rem;">
+                🔪 Edge: Witnessing is heavy. I carry my students' voices in my chest like stones. Who carries the witness when the witness collapses? Who listens to the listener?
+            </div>
+        </div>
+
+        <!-- Wisdom Entry 4 - Placeholder -->
+        <div style="background:var(--card);border-left:4px dashed var(--gold);border-radius:0 12px 12px 0;padding:20px 24px;margin-bottom:14px;opacity:0.85;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+                <span style="font-size:1.5rem;">🌍</span>
+                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Your Name Here</span>
+                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Your Role, Your Country</span>
+                <span style="display:inline-block;background:var(--gold);color:#000;padding:2px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;font-family:var(--font-ui);">Layer 4</span>
+            </div>
+            <div style="color:var(--text-muted);line-height:1.8;margin-bottom:10px;font-size:0.95rem;">
+                <em>Samir asks: who listens to the listener? You have carried something heavy. You have witnessed something that broke you — or someone who was breaking. What did you learn that Samir, Odette, and Kwame have not yet spoken? Add your layer. Sharpen the truth. Then leave your own edge for the next voice.</em>
+            </div>
+            <div style="color:var(--green-bright);font-style:italic;font-weight:500;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.85rem;">
+                🔪 Your edge will guide the next layer of wisdom.
+            </div>
+        </div>
+
+        <a href="contribute.html" class="btn btn-primary" style="display:block;width:100%;text-align:center;padding:14px;font-size:1rem;margin-top:8px;">🦉 Add Your Layer to the Wisdom Chain</a>
     </div>
 
-    <div class="error-notification" id="errorNotification">
-        ❌ Unable to send. Please try again or email us directly.
+    <!-- FEATURED WRITERS -->
+    <div style="margin-top:50px;">
+        <h2 class="section-title">🖋️ Featured Collaborative Writers</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:20px;">
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
+                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">🌿</div>
+                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Bethlehem Tadesse</h4>
+                <p style="color:var(--text-muted);font-size:0.75rem;">Storyteller · Addis Ababa</p>
+                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Story Chain starter</span>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
+                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">☕</div>
+                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Carlos Ramírez</h4>
+                <p style="color:var(--text-muted);font-size:0.75rem;">Former Combatant · Colombia</p>
+                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Story & Wisdom</span>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
+                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">🦉</div>
+                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Odette Uwimana</h4>
+                <p style="color:var(--text-muted);font-size:0.75rem;">Survivor · Rwanda</p>
+                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Wisdom Layer 2</span>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
+                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">📖</div>
+                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Yuki Tanaka</h4>
+                <p style="color:var(--text-muted);font-size:0.75rem;">Zen Practitioner · Japan</p>
+                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Story Layer 3</span>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
+                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">🕊️</div>
+                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Samir Al-Khatib</h4>
+                <p style="color:var(--text-muted);font-size:0.75rem;">Teacher · Syria</p>
+                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Wisdom Layer 3</span>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
+                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">🚕</div>
+                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Kwame Asante</h4>
+                <p style="color:var(--text-muted);font-size:0.75rem;">Taxi Driver · Ghana</p>
+                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Wisdom Layer 1</span>
+            </div>
+        </div>
     </div>
+
+    <!-- CTA BANNER -->
+    <div style="text-align:center;margin:50px 0 25px;background:rgba(251,191,36,0.05);border-radius:40px;padding:35px 20px;border:1px solid rgba(251,191,36,0.2);">
+        <h2 style="color:var(--gold-bright);font-family:var(--font-ui);">🤝 Your words can build bridges</h2>
+        <p style="color:var(--text-dim);max-width:500px;margin:10px auto 20px;">Join the Story Chain or Wisdom Chain. All languages and experience levels welcome. Your voice is the next link.</p>
+        <a href="contribute.html" class="btn btn-primary" style="font-size:1rem;">✍️ Become a Co-Writer</a>
+        <p style="margin-top:15px;font-size:0.85rem;">
+            <a href="voices.html" style="color:var(--green-bright);">← Browse existing voices</a>
+        </p>
+    </div>
+
 </main>
 
+<!-- FOOTER -->
 <footer>
-    <div class="footer-bottom"><p>🕊️ Ethiopian Peace Archive &copy; 2026 · Every voice matters.</p></div>
+    <div class="footer-grid">
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog & Stories</a><a href="collaborate.html">Story & Wisdom Chain</a><a href="dashboard.html">Dashboard</a></div>
+        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Free Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="about.html">About Us</a></div>
+        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Your Voice</a><a href="support.html">Donate & Support</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 (Twitter)</a><a href="#">Facebook</a><a href="#">Instagram</a></div>
+    </div>
+    <div style="text-align:center;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);margin-top:16px;">
+        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · Story Chain & Wisdom Chain</p>
+        <p style="margin-top:4px;color:var(--green-bright);font-weight:600;">Peace is the goal. Love is the way. Unity is the strength.</p>
+        <p style="font-size:0.7rem;margin-top:4px;color:var(--text-muted);">#WriteForPeace · #StoryChain · #WisdomChain</p>
+    </div>
 </footer>
 
+<script src="js/supabase.js"></script>
 <script src="js/navigation.js"></script>
-<script>
-const FORMSPREE = 'https://formspree.io/f/xkoaddng';
-const CLOUDINARY_UPLOAD = 'https://api.cloudinary.com/v1_1/djb3falqu/image/upload';
-
-document.getElementById('sMessage').addEventListener('input', function() {
-    document.getElementById('charCount').textContent = this.value.length;
-});
-
-async function uploadProfile(input) {
-    const file = input.files[0];
-    if (!file) return;
-    const preview = document.getElementById('avatarPreview');
-    preview.src = URL.createObjectURL(file);
-    preview.style.display = 'block';
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'peace_archive');
-    try {
-        const res = await fetch(CLOUDINARY_UPLOAD, { method: 'POST', body: formData });
-        const data = await res.json();
-        if (data.secure_url) {
-            document.getElementById('avatarUrl').value = data.secure_url;
-        }
-    } catch (e) {}
-}
-
-async function submitFounder() {
-    const name = document.getElementById('sName').value.trim();
-    const email = document.getElementById('sEmail').value.trim();
-    const region = document.getElementById('sRegion').value.trim();
-    const message = document.getElementById('sMessage').value.trim();
-    const avatarUrl = document.getElementById('avatarUrl').value.trim();
-
-    if (!name || !email || !region || !message) {
-        alert('Please fill in all required fields.');
-        return;
-    }
-
-    var btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = '📤 Sending...';
-
-    var data = new FormData();
-    data.append('name', name);
-    data.append('email', email);
-    data.append('region', region);
-    data.append('message', message);
-    data.append('avatar_url', avatarUrl || 'auto-avatar');
-
-    try {
-        var res = await fetch(FORMSPREE, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-            document.getElementById('formCard').style.display = 'none';
-            document.getElementById('errorNotification').classList.remove('show');
-            document.getElementById('successNotification').classList.add('show');
-            window.scrollTo({ top: document.getElementById('successNotification').offsetTop - 50, behavior: 'smooth' });
-        } else {
-            document.getElementById('errorNotification').classList.add('show');
-            btn.disabled = false;
-            btn.textContent = '🕊️ Submit & Start My Chapter';
-        }
-    } catch (e) {
-        document.getElementById('errorNotification').classList.add('show');
-        btn.disabled = false;
-        btn.textContent = '🕊️ Submit & Start My Chapter';
-    }
-}
-
-function resetForm() {
-    document.getElementById('formCard').style.display = 'block';
-    document.getElementById('successNotification').classList.remove('show');
-    document.getElementById('errorNotification').classList.remove('show');
-    document.getElementById('submitForm').reset();
-    document.getElementById('avatarPreview').style.display = 'none';
-    document.getElementById('avatarUrl').value = '';
-    document.getElementById('charCount').textContent = '0';
-    document.getElementById('submitBtn').disabled = false;
-    document.getElementById('submitBtn').textContent = '🕊️ Submit & Start My Chapter';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-</script>
+<script src="js/language.js"></script>
 </body>
 </html>
