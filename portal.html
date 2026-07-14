@@ -2,140 +2,738 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Your Ethiopian Peace Archive Portal — Manage chapters, track impact, connect with writers, earn coins, and grow your peace legacy.">
+    <meta property="og:title" content="My Portal — Ethiopian Peace Archive">
+    <meta property="og:description" content="Track your peace impact, manage chapters, and connect with the global community.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://ethiopianpeacearchive.org/portal">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
     <title>My Portal — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .portal-container { max-width: 1000px; margin: 30px auto; padding: 0 16px; }
-        .portal-header { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius-lg); padding: 30px; margin-bottom: 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .portal-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #000; flex-shrink: 0; }
-        .portal-info h2 { color: var(--gold); font-family: var(--font-ui); margin-bottom: 4px; }
-        .portal-info p { color: var(--text-dim); font-size: 0.9rem; }
-        .portal-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
-        .stat-box { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 20px; text-align: center; transition: all 0.3s; }
-        .stat-box:hover { transform: translateY(-3px); border-color: var(--green); }
-        .stat-box .stat-icon { font-size: 1.8rem; margin-bottom: 8px; }
-        .stat-box .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--green-bright); font-family: var(--font-ui); }
-        .stat-box .stat-label { color: var(--text-dim); font-size: 0.75rem; font-family: var(--font-ui); margin-top: 4px; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .section-header h3 { color: var(--gold); font-family: var(--font-ui); font-size: 1.2rem; }
-        .chapter-list { display: flex; flex-direction: column; gap: 12px; }
-        .chapter-item { background: var(--card); border: 1px solid rgba(34,197,94,0.1); border-radius: var(--radius); padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        .chapter-item:hover { border-color: var(--green); }
-        .chapter-info h4 { color: var(--text); font-family: var(--font-ui); font-size: 1rem; }
-        .chapter-meta { color: var(--text-dim); font-size: 0.75rem; font-family: var(--font-ui); margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap; }
-        .chapter-actions { display: flex; gap: 6px; }
-        .empty-state { text-align: center; padding: 40px; color: var(--text-dim); background: var(--card); border-radius: var(--radius); border: 1px dashed var(--green-border); }
-        .empty-state .empty-icon { font-size: 3rem; margin-bottom: 12px; }
-        .quick-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-top: 24px; }
-        .quick-action-btn { background: var(--card); border: 1px solid var(--green-border); border-radius: var(--radius); padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s; font-family: var(--font-ui); font-size: 0.9rem; font-weight: 600; color: var(--text); text-decoration: none; display: block; }
-        .quick-action-btn:hover { border-color: var(--gold); background: var(--card-hover); transform: translateY(-2px); }
-        .quick-action-btn .qa-icon { font-size: 1.5rem; display: block; margin-bottom: 6px; }
-        @media (max-width: 768px) { .portal-header { flex-direction: column; text-align: center; } .portal-actions { margin-left: 0; justify-content: center; } .chapter-item { flex-direction: column; text-align: center; } .chapter-actions { justify-content: center; } }
+        :root {
+            --bg: #060f1e; --card: #0d1b33; --card-hover: #111f3a;
+            --green: #22c55e; --green-bright: #4ade80; --green-dim: rgba(34,197,94,0.10);
+            --green-border: rgba(34,197,94,0.20); --gold: #fbbf24; --gold-bright: #fcd34d;
+            --gold-soft: rgba(251,191,36,0.1); --text: #e2e8f0; --text-dim: #94a3b8; --text-muted: #64748b;
+            --red: #ef4444; --blue: #3b82f6; --purple: #a855f7; --orange: #f97316;
+            --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --radius: 14px; --radius-lg: 20px; --transition: 0.25s ease;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+            --shadow-md: 0 8px 25px rgba(0,0,0,0.4);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            background:var(--bg); color:var(--text); font-family:var(--font-ui);
+            line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh;
+            background-image: radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%),
+                              radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%);
+        }
+        a { text-decoration:none; color:inherit; }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            display:flex; align-items:center; justify-content:space-between;
+            padding:0.9rem 5%; background:rgba(6,15,30,0.97); backdrop-filter:blur(14px);
+            border-bottom:1px solid var(--green-border); position:sticky; top:0; z-index:100; flex-wrap:wrap; gap:10px;
+        }
+        .nav-logo { font-weight:700; font-size:1.15rem; color:#f0f2e9; display:flex; align-items:center; gap:6px; }
+        .nav-logo span { color:var(--green-bright); }
+        .nav-links { display:flex; gap:4px; flex-wrap:wrap; align-items:center; }
+        .nav-links a {
+            font-size:0.78rem; font-weight:600; color:var(--text-dim); padding:7px 12px;
+            border-radius:20px; transition:var(--transition); white-space:nowrap;
+        }
+        .nav-links a:hover, .nav-links a.active { color:var(--gold-bright); background:var(--gold-soft); }
+        .nav-cta { background:var(--green)!important; color:#000!important; font-weight:700!important; padding:7px 16px!important; border-radius:24px!important; }
+        .nav-user { display:flex; align-items:center; gap:10px; }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; z-index:101; }
+        .hamburger span { width:24px; height:2px; background:var(--text-dim); border-radius:2px; transition:0.3s; }
+
+        /* ========== SLIDE MENU ========== */
+        .slide-overlay {
+            position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.7); z-index:98; opacity:0; visibility:hidden; transition:0.4s;
+        }
+        .slide-overlay.open { opacity:1; visibility:visible; }
+        .slide-menu {
+            position:fixed; top:0; right:-300px; width:280px; height:100%;
+            background:linear-gradient(180deg, #0a1628 0%, #0d1b33 50%, #060f1e 100%);
+            border-left:2px solid var(--green-border); z-index:99;
+            transition:right 0.4s cubic-bezier(0.25,0.8,0.25,1.2);
+            padding:80px 18px 30px; overflow-y:auto;
+        }
+        .slide-menu.open { right:0; }
+        .slide-menu .menu-header { text-align:center; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--green-border); }
+        .slide-menu .flag { font-size:2rem; margin-bottom:6px; }
+        .slide-menu h3 { color:var(--gold); font-size:1rem; }
+        .slide-menu a {
+            display:flex; align-items:center; gap:10px; padding:13px 16px;
+            margin-bottom:4px; border-radius:12px; color:var(--text-dim);
+            font-size:0.85rem; font-weight:500; transition:0.2s;
+        }
+        .slide-menu a:hover { color:var(--green-bright); background:var(--green-dim); transform:translateX(4px); }
+
+        /* ========== MAIN CONTAINER ========== */
+        .portal-container { max-width:1000px; margin:0 auto; padding:30px 20px 50px; }
+
+        /* ========== PORTAL HEADER ========== */
+        .portal-header {
+            background:var(--card); border:1px solid var(--green-border);
+            border-radius:var(--radius-lg); padding:30px; margin-bottom:24px;
+            display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+            transition:var(--transition);
+        }
+        .portal-header:hover { border-color:var(--gold); box-shadow:var(--shadow-md); }
+        .portal-avatar {
+            width:80px; height:80px; border-radius:50%; background:var(--gold);
+            display:flex; align-items:center; justify-content:center;
+            font-size:2rem; font-weight:800; color:#000; flex-shrink:0;
+            border:3px solid var(--gold-bright); box-shadow:0 4px 16px rgba(251,191,36,0.2);
+            transition:var(--transition);
+        }
+        .portal-avatar:hover { transform:scale(1.05); }
+        .portal-info { flex:1; min-width:200px; }
+        .portal-info h2 { color:var(--gold); font-size:1.4rem; margin-bottom:4px; font-weight:700; }
+        .portal-info .user-email { color:var(--text-dim); font-size:0.9rem; }
+        .portal-info .user-title {
+            color:var(--green-bright); font-size:0.8rem; margin-top:4px;
+            background:var(--green-dim); display:inline-block; padding:3px 12px; border-radius:12px;
+        }
+        .portal-actions { margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; }
+        .portal-actions-mobile { display:none; width:100%; justify-content:center; gap:8px; margin-top:12px; }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display:inline-flex; align-items:center; gap:6px; padding:10px 20px;
+            border-radius:25px; font-weight:600; font-size:0.85rem; cursor:pointer;
+            border:none; font-family:var(--font-ui); transition:var(--transition); text-decoration:none;
+        }
+        .btn-primary { background:var(--green); color:#000; }
+        .btn-primary:hover { background:var(--green-bright); transform:translateY(-2px); box-shadow:0 8px 25px rgba(34,197,94,0.3); }
+        .btn-outline { border:2px solid var(--green); color:var(--green-bright); background:transparent; }
+        .btn-outline:hover { background:var(--green-dim); transform:translateY(-2px); }
+        .btn-gold { background:var(--gold); color:#000; font-weight:700; }
+        .btn-gold:hover { background:var(--gold-bright); transform:translateY(-2px); box-shadow:0 8px 25px rgba(251,191,36,0.3); }
+        .btn-red { background:var(--red); color:#fff; }
+        .btn-red:hover { background:#dc2626; transform:translateY(-2px); }
+        .btn-sm { padding:6px 14px; font-size:0.75rem; border-radius:15px; }
+
+        /* ========== WELCOME BANNER (for new users) ========== */
+        .welcome-banner {
+            background:linear-gradient(135deg, rgba(34,197,94,0.1), rgba(251,191,36,0.1));
+            border:1px solid var(--green-border); border-radius:var(--radius-lg);
+            padding:24px; margin-bottom:24px; text-align:center; animation:fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+        .welcome-banner h3 { color:var(--gold-bright); font-size:1.2rem; margin-bottom:6px; }
+        .welcome-banner p { color:var(--text-dim); font-size:0.9rem; margin-bottom:14px; }
+        .welcome-banner .actions { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+
+        /* ========== STATS GRID ========== */
+        .stats-grid {
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
+            gap:12px; margin-bottom:24px;
+        }
+        .stat-card {
+            background:var(--card); border:1px solid var(--green-border);
+            border-radius:var(--radius); padding:22px 18px; text-align:center;
+            transition:var(--transition); cursor:default;
+        }
+        .stat-card:hover { transform:translateY(-3px); border-color:var(--green); box-shadow:var(--shadow-md); }
+        .stat-icon { font-size:2rem; margin-bottom:8px; }
+        .stat-num {
+            font-size:2rem; font-weight:800; color:var(--green-bright);
+            font-family:var(--font-ui); line-height:1;
+        }
+        .stat-label { color:var(--text-dim); font-size:0.75rem; margin-top:6px; text-transform:uppercase; letter-spacing:0.5px; }
+        .stat-card.gold .stat-num { color:var(--gold-bright); }
+        .stat-card.blue .stat-num { color:var(--blue); }
+        .stat-card.purple .stat-num { color:var(--purple); }
+        .stat-card.orange .stat-num { color:var(--orange); }
+
+        /* ========== SECTION HEADER ========== */
+        .section-header {
+            display:flex; justify-content:space-between; align-items:center;
+            margin-bottom:16px; flex-wrap:wrap; gap:10px;
+        }
+        .section-header h3 { color:var(--gold); font-size:1.2rem; font-weight:700; }
+
+        /* ========== CHAPTER LIST ========== */
+        .chapter-list { display:flex; flex-direction:column; gap:10px; margin-bottom:24px; }
+        .chapter-item {
+            background:var(--card); border:1px solid rgba(34,197,94,0.1);
+            border-radius:var(--radius); padding:18px 20px;
+            display:flex; justify-content:space-between; align-items:center;
+            flex-wrap:wrap; gap:12px; transition:var(--transition);
+        }
+        .chapter-item:hover { border-color:var(--green); background:var(--card-hover); }
+        .chapter-info { flex:1; min-width:200px; }
+        .chapter-info h4 { color:var(--text); font-size:0.95rem; font-weight:600; margin-bottom:4px; }
+        .chapter-meta {
+            color:var(--text-dim); font-size:0.72rem;
+            display:flex; gap:12px; flex-wrap:wrap;
+        }
+        .chapter-actions { display:flex; gap:6px; }
+        .chapter-status {
+            display:inline-block; padding:3px 10px; border-radius:10px;
+            font-size:0.68rem; font-weight:600;
+        }
+        .status-published { background:rgba(34,197,94,0.15); color:var(--green-bright); }
+        .status-pending { background:rgba(251,191,36,0.15); color:var(--gold-bright); }
+
+        /* ========== EMPTY STATE ========== */
+        .empty-state {
+            text-align:center; padding:50px 20px; color:var(--text-dim);
+            background:var(--card); border-radius:var(--radius);
+            border:2px dashed var(--green-border);
+        }
+        .empty-icon { font-size:3.5rem; margin-bottom:14px; display:block; }
+        .empty-state h3 { color:var(--gold); margin-bottom:6px; font-size:1.1rem; }
+        .empty-state p { margin-bottom:16px; font-size:0.85rem; }
+        .empty-state .btn { display:inline-flex; }
+
+        /* ========== QUICK ACTIONS ========== */
+        .quick-actions {
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
+            gap:10px; margin-top:24px;
+        }
+        .quick-action {
+            background:var(--card); border:1px solid var(--green-border);
+            border-radius:var(--radius); padding:18px 14px; text-align:center;
+            cursor:pointer; transition:var(--transition); font-family:var(--font-ui);
+            font-size:0.85rem; font-weight:600; color:var(--text);
+            text-decoration:none; display:block; border:none;
+        }
+        .quick-action:hover {
+            border-color:var(--gold); background:var(--card-hover);
+            transform:translateY(-2px); box-shadow:var(--shadow-md);
+        }
+        .quick-action .qa-icon { font-size:1.6rem; display:block; margin-bottom:8px; }
+
+        /* ========== WALLET POPUP ========== */
+        .wallet-overlay {
+            display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.85); z-index:9998;
+            justify-content:center; align-items:center;
+        }
+        .wallet-overlay.active { display:flex; }
+        .wallet-box {
+            background:var(--card); border:2px solid var(--gold);
+            border-radius:var(--radius-lg); padding:30px;
+            max-width:450px; width:90%; text-align:center;
+            animation:scaleIn 0.3s ease;
+        }
+        @keyframes scaleIn { from{opacity:0;transform:scale(0.9)} to{opacity:1;transform:scale(1)} }
+        .wallet-box h3 { color:var(--gold); font-size:1.3rem; margin-bottom:6px; }
+        .wallet-balance { font-size:2.5rem; color:var(--gold-bright); margin:15px 0; font-weight:800; }
+        .wallet-box p { color:var(--text-dim); font-size:0.85rem; margin-bottom:16px; }
+        .wallet-actions { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+
+        /* ========== TOAST NOTIFICATION ========== */
+        .toast {
+            position:fixed; bottom:30px; right:30px; z-index:9999;
+            background:var(--card); border:1px solid var(--green);
+            border-radius:var(--radius); padding:14px 20px;
+            color:var(--text); font-size:0.85rem; font-family:var(--font-ui);
+            box-shadow:var(--shadow-lg); animation:slideIn 0.3s ease;
+            max-width:350px;
+        }
+        @keyframes slideIn { from{opacity:0;transform:translateX(100px)} to{opacity:1;transform:translateX(0)} }
+
+        /* ========== FOOTER ========== */
+        footer {
+            text-align:center; padding:25px; color:var(--text-muted); font-size:0.78rem;
+            border-top:1px solid rgba(34,197,94,0.10); margin-top:40px;
+        }
+        footer a { color:var(--text-dim); transition:var(--transition); }
+        footer a:hover { color:var(--green-bright); }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .nav-links { display:none; }
+            .hamburger { display:flex; }
+            .portal-container { padding:20px 14px 40px; }
+            .portal-header { flex-direction:column; text-align:center; padding:24px 18px; }
+            .portal-avatar { width:70px; height:70px; font-size:1.6rem; }
+            .portal-info h2 { font-size:1.2rem; }
+            .portal-actions { display:none; }
+            .portal-actions-mobile { display:flex; }
+            .chapter-item { flex-direction:column; text-align:center; }
+            .chapter-actions { justify-content:center; width:100%; }
+            .stats-grid { grid-template-columns:repeat(2, 1fr); }
+            .quick-actions { grid-template-columns:repeat(2, 1fr); }
+            .wallet-box { padding:20px; }
+            .toast { left:20px; right:20px; bottom:20px; max-width:none; }
+        }
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns:1fr 1fr; }
+            .quick-actions { grid-template-columns:1fr; }
+        }
     </style>
 </head>
 <body>
-<nav>
-    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-    <div class="desktop-links">
-        <a href="index.html">Home</a><a href="voices.html">Voices</a><a href="blog.html">Blog</a>
-        <a href="courses.html">Courses</a><a href="portal.html" class="active">Portal</a>
-        <a href="media.html">Media</a><a href="gallery.html">Gallery</a><a href="thanks.html">Thanks</a>
-        <a href="contribute.html">Contribute</a><a href="support.html" class="cta-nav">Support</a>
+
+<!-- ========== NAVIGATION ========== -->
+<nav role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="nav-links" role="menubar">
+        <a href="index.html" role="menuitem">Home</a>
+        <a href="voices.html" role="menuitem">Voices</a>
+        <a href="blog.html" role="menuitem">Blog</a>
+        <a href="courses.html" role="menuitem">Courses</a>
+        <a href="portal.html" class="active" role="menuitem" aria-current="page">Portal</a>
+        <a href="participate.html" role="menuitem">✍️ Participate</a>
+        <a href="contribute.html" role="menuitem">📝 Share Voice</a>
+        <a href="media.html" role="menuitem">Media</a>
+        <a href="gallery.html" role="menuitem">Gallery</a>
+        <a href="support.html" class="nav-cta" role="menuitem">❤️ Support</a>
     </div>
-    <div style="display:flex;gap:10px;align-items:center;">
-        <button id="userBtn" onclick="handleLogout()" class="btn btn-sm btn-gold" style="font-size:0.8rem;">👤 Sign Out</button>
+    <div class="nav-user">
+        <button class="btn btn-gold btn-sm" id="userBtn" onclick="handleLogout()">👤 Sign Out</button>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
+
+<!-- ========== SLIDE MENU ========== -->
 <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
 <div class="slide-menu" id="slideMenu">
-    <div class="menu-header"><div class="flag">🇪🇹🕊️</div><h3>Ethiopian Peace Archive</h3></div>
-    <a href="index.html">🏠 Home</a><a href="voices.html">🗣️ Voices</a><a href="blog.html">📝 Blog</a>
-    <a href="courses.html">🎓 Courses</a><a href="portal.html">📊 Portal</a>
-    <a href="gallery.html">🖼️ Gallery</a><a href="thanks.html">🙏 Thanks</a><a href="support.html">❤️ Support</a>
+    <div class="menu-header">
+        <div class="flag">🇪🇹🕊️</div>
+        <h3>Ethiopian Peace Archive</h3>
+        <p style="color:var(--text-muted);font-size:0.7rem">Your Peace Portal</p>
+    </div>
+    <a href="index.html">🏠 Home</a>
+    <a href="voices.html">🗣️ Voices</a>
+    <a href="blog.html">📝 Blog</a>
+    <a href="courses.html">🎓 Courses</a>
+    <a href="portal.html" style="background:var(--gold-soft);color:var(--gold-bright);font-weight:700;">📊 My Portal</a>
+    <a href="participate.html">✍️ Participate</a>
+    <a href="contribute.html">📝 Share Voice</a>
+    <a href="gallery.html">🖼️ Gallery</a>
+    <a href="media.html">📰 Media</a>
+    <a href="support.html" style="background:var(--green-dim);color:var(--green-bright);font-weight:700;">❤️ Support</a>
 </div>
 
+<!-- ========== MAIN CONTENT ========== -->
 <main class="portal-container">
+
+    <!-- ========== PORTAL HEADER ========== -->
     <div class="portal-header" id="portalHeader">
         <div class="portal-avatar" id="userAvatar">👤</div>
-        <div class="portal-info"><h2 id="userName">Welcome!</h2><p id="userEmail">Sign in to view your portal</p><p style="color:var(--green-bright);font-size:0.8rem;margin-top:4px;" id="userTitle"></p></div>
-        <div class="portal-actions"><a href="voices.html" class="btn btn-outline btn-sm">🗣️ Browse Voices</a><button class="btn btn-primary btn-sm" onclick="window.location.href='contribute.html'">✍️ New Chapter</button></div>
+        <div class="portal-info">
+            <h2 id="userName">Welcome!</h2>
+            <p class="user-email" id="userEmail">Sign in to view your portal</p>
+            <span class="user-title" id="userTitle" style="display:none;">🌍 Peace Contributor</span>
+        </div>
+        <div class="portal-actions" id="portalActionsDesktop">
+            <a href="voices.html" class="btn btn-outline">🗣️ Browse Voices</a>
+            <a href="contribute.html" class="btn btn-primary">✍️ New Chapter</a>
+        </div>
+        <div class="portal-actions-mobile" id="portalActionsMobile">
+            <a href="voices.html" class="btn btn-outline btn-sm">🗣️ Browse</a>
+            <a href="contribute.html" class="btn btn-primary btn-sm">✍️ New Chapter</a>
+        </div>
     </div>
-    <div class="stats-grid">
-        <div class="stat-box"><div class="stat-icon">📝</div><div class="stat-num" id="statChapters">-</div><div class="stat-label">My Chapters</div></div>
-        <div class="stat-box"><div class="stat-icon">❤️</div><div class="stat-num" id="statLikes">-</div><div class="stat-label">Total Likes</div></div>
-        <div class="stat-box"><div class="stat-icon">💬</div><div class="stat-num" id="statMessages">-</div><div class="stat-label">Messages</div></div>
-        <div class="stat-box"><div class="stat-icon">🪙</div><div class="stat-num" id="statCoins">-</div><div class="stat-label">Coins Earned</div></div>
-    </div>
-    <div class="section-header"><h3>📚 My Chapters</h3><a href="voices.html" class="btn btn-sm btn-outline">View All</a></div>
-    <div class="chapter-list" id="chapterList"><div class="empty-state"><div class="empty-icon">📝</div><p>Sign in to see your chapters. <a href="voices.html" style="color:var(--green-bright);">Go to Voices →</a></p></div></div>
-    <h3 style="color:var(--gold);font-family:var(--font-ui);margin-top:24px;margin-bottom:12px;">🛍️ Quick Actions</h3>
-    <div class="quick-actions">
-        <a href="voices.html" class="quick-action-btn"><span class="qa-icon">🗣️</span> Browse Voices</a>
-        <a href="contribute.html" class="quick-action-btn"><span class="qa-icon">✍️</span> Contribute</a>
-        <button class="quick-action-btn" onclick="openWallet()"><span class="qa-icon">🪙</span> My Wallet</button>
-        <button class="quick-action-btn" onclick="alert('Coming soon!')"><span class="qa-icon">📥</span> Export Data</button>
-        <button class="quick-action-btn" onclick="alert('Coming soon!')"><span class="qa-icon">👤</span> Edit Profile</button>
-        <a href="support.html" class="quick-action-btn"><span class="qa-icon">❤️</span> Support</a>
-    </div>
-</main>
-<footer style="margin-top:40px;"><p>© 2026 Ethiopian Peace Archive | <a href="index.html">Home</a> | <a href="voices.html">Voices</a> | <a href="support.html">Support</a></p></footer>
-<div id="walletPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9998;justify-content:center;align-items:center;"><div style="background:#1a1a1a;border:1px solid var(--gold);border-radius:12px;padding:30px;max-width:500px;width:90%;text-align:center;"><h3 style="color:var(--gold);">🪙 Your Coin Wallet</h3><div style="font-size:2rem;color:#facc15;margin:15px 0;font-family:var(--font-ui);" id="walletBalance">0</div><p style="color:var(--text-dim);font-size:0.85rem;">Earn coins by getting Likes, Shares, and inviting Co-Writers.</p><button onclick="closeWallet()" style="margin-top:15px;padding:8px 20px;background:#555;border:none;border-radius:6px;color:#fff;cursor:pointer;">Close</button></div></div>
 
+    <!-- ========== WELCOME BANNER (NEW USERS) ========== -->
+    <div class="welcome-banner" id="welcomeBanner" style="display:none;">
+        <h3>🎉 Welcome to Your Peace Portal!</h3>
+        <p>This is your personal dashboard. Track your impact, manage chapters, and connect with the global community.</p>
+        <div class="actions">
+            <a href="contribute.html" class="btn btn-primary">📝 Share Your First Voice</a>
+            <a href="participate.html" class="btn btn-outline">✍️ Join Story Chain</a>
+        </div>
+    </div>
+
+    <!-- ========== STATS GRID ========== -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">📝</div>
+            <div class="stat-num" id="statChapters">0</div>
+            <div class="stat-label">My Chapters</div>
+        </div>
+        <div class="stat-card gold">
+            <div class="stat-icon">❤️</div>
+            <div class="stat-num" id="statLikes">0</div>
+            <div class="stat-label">Total Likes</div>
+        </div>
+        <div class="stat-card blue">
+            <div class="stat-icon">💬</div>
+            <div class="stat-num" id="statMessages">0</div>
+            <div class="stat-label">Messages</div>
+        </div>
+        <div class="stat-card purple">
+            <div class="stat-icon">🪙</div>
+            <div class="stat-num" id="statCoins">0</div>
+            <div class="stat-label">Coins Earned</div>
+        </div>
+    </div>
+
+    <!-- ========== CHAPTERS SECTION ========== -->
+    <div class="section-header">
+        <h3>📚 My Chapters</h3>
+        <a href="voices.html" class="btn btn-outline btn-sm">View All Voices →</a>
+    </div>
+    <div class="chapter-list" id="chapterList">
+        <div class="empty-state" id="emptyChapters">
+            <span class="empty-icon">📝</span>
+            <h3>No chapters yet</h3>
+            <p>Start your peace journey by sharing your voice or joining the Story Chain.</p>
+            <a href="contribute.html" class="btn btn-primary">✍️ Create Your First Chapter</a>
+        </div>
+    </div>
+
+    <!-- ========== QUICK ACTIONS ========== -->
+    <h3 style="color:var(--gold);font-size:1.2rem;margin-top:30px;margin-bottom:14px;">🛍️ Quick Actions</h3>
+    <div class="quick-actions">
+        <a href="voices.html" class="quick-action">
+            <span class="qa-icon">🗣️</span> Browse Voices
+        </a>
+        <a href="contribute.html" class="quick-action">
+            <span class="qa-icon">✍️</span> Contribute
+        </a>
+        <button class="quick-action" onclick="openWallet()">
+            <span class="qa-icon">🪙</span> My Wallet
+        </button>
+        <button class="quick-action" onclick="showToast('📥 Export feature coming soon!')">
+            <span class="qa-icon">📥</span> Export Data
+        </button>
+        <button class="quick-action" onclick="showToast('👤 Edit profile coming soon!')">
+            <span class="qa-icon">👤</span> Edit Profile
+        </button>
+        <a href="support.html" class="quick-action">
+            <span class="qa-icon">❤️</span> Support
+        </a>
+    </div>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer role="contentinfo">
+    <p>🕊️ Ethiopian Peace Archive &copy; 2026 · <a href="index.html">Home</a> · <a href="voices.html">Voices</a> · <a href="support.html">Support</a></p>
+    <p style="margin-top:6px;color:var(--green-bright);font-weight:600">#EthiopianPeaceArchive #VoicesForPeace</p>
+</footer>
+
+<!-- ========== WALLET POPUP ========== -->
+<div class="wallet-overlay" id="walletPopup">
+    <div class="wallet-box">
+        <h3>🪙 Your Coin Wallet</h3>
+        <div class="wallet-balance" id="walletBalance">0</div>
+        <p>Earn coins by getting Likes, Shares, and inviting Co-Writers. Redeem for exclusive content and features.</p>
+        <div class="wallet-actions">
+            <button class="btn btn-gold btn-sm" onclick="showToast('🎁 Rewards coming soon!')">🎁 Redeem</button>
+            <button class="btn btn-outline btn-sm" onclick="closeWallet()">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================
+     JAVASCRIPT — ENHANCED PORTAL LOGIC
+     ============================================ -->
+<script>
+    const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+    let currentUser = null;
+
+    // ========== INITIALIZE ==========
+    document.addEventListener('DOMContentLoaded', function() {
+        checkAuth();
+    });
+
+    // ========== CHECK AUTH ==========
+    function checkAuth() {
+        const saved = localStorage.getItem('peace_user');
+        if (saved) {
+            try {
+                currentUser = JSON.parse(saved);
+                loadPortal();
+            } catch(e) {
+                console.error('Error parsing user data:', e);
+                showLoginPrompt();
+            }
+        } else {
+            showLoginPrompt();
+        }
+    }
+
+    // ========== SHOW LOGIN PROMPT ==========
+    function showLoginPrompt() {
+        document.getElementById('userName').textContent = 'Welcome!';
+        document.getElementById('userEmail').textContent = 'Please sign in to view your portal';
+        document.getElementById('userAvatar').textContent = '👤';
+        document.getElementById('userTitle').style.display = 'none';
+        document.getElementById('statChapters').textContent = '0';
+        document.getElementById('statLikes').textContent = '0';
+        document.getElementById('statMessages').textContent = '0';
+        document.getElementById('statCoins').textContent = '0';
+        document.getElementById('chapterList').innerHTML = `
+            <div class="empty-state">
+                <span class="empty-icon">🔐</span>
+                <h3>Sign In Required</h3>
+                <p>Please sign in to access your personal portal and track your peace impact.</p>
+                <a href="signin.html" class="btn btn-primary">🔐 Sign In</a>
+            </div>
+        `;
+        document.getElementById('welcomeBanner').style.display = 'none';
+    }
+
+    // ========== LOAD PORTAL ==========
+    async function loadPortal() {
+        const displayName = currentUser.display_name || currentUser.email?.split('@')[0] || 'Friend';
+        const email = currentUser.email || '';
+
+        // Update header
+        document.getElementById('userAvatar').textContent = displayName.substring(0, 2).toUpperCase();
+        document.getElementById('userName').textContent = 'Welcome, ' + displayName + '!';
+        document.getElementById('userEmail').textContent = email;
+        document.getElementById('userTitle').style.display = 'inline-block';
+
+        // Show welcome banner for new users (signed up in last 5 minutes)
+        const signedUpAt = currentUser.signed_up_at || currentUser.signed_in_at;
+        if (signedUpAt) {
+            const signupTime = new Date(signedUpAt).getTime();
+            const fiveMinutesAgo = Date.now() - 5 * 60 * 1000;
+            if (signupTime > fiveMinutesAgo) {
+                document.getElementById('welcomeBanner').style.display = 'block';
+                // Auto-hide after 30 seconds
+                setTimeout(() => {
+                    document.getElementById('welcomeBanner').style.display = 'none';
+                }, 30000);
+            }
+        }
+
+        // Load data
+        await loadStats();
+        await loadChapters();
+
+        // Init notifications if available
+        if (typeof initNotifications === 'function') {
+            initNotifications();
+        }
+    }
+
+    // ========== LOAD STATS ==========
+    async function loadStats() {
+        try {
+            const email = currentUser.email;
+            const displayName = currentUser.display_name || '';
+
+            // Fetch user's voices
+            const voiceRes = await fetch(
+                `${SUPABASE_URL}/rest/v1/ethiopian_voices?select=id,like_count,starting_likes,starting_shares&or=(extracted_data->>email.eq.${email},writer_name.eq.${encodeURIComponent(displayName)})`,
+                { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } }
+            );
+            const voices = await voiceRes.json();
+
+            // Update stats
+            const chapterCount = voices.length || 0;
+            const totalLikes = voices.reduce((sum, v) => sum + (v.like_count || 0), 0);
+            const totalCoins = voices.reduce((sum, v) => sum + (v.starting_likes || 50) + (v.starting_shares || 20), 0);
+
+            document.getElementById('statChapters').textContent = chapterCount;
+            document.getElementById('statLikes').textContent = totalLikes;
+            document.getElementById('statCoins').textContent = totalCoins;
+
+            // Messages count
+            try {
+                const msgRes = await fetch(
+                    `${SUPABASE_URL}/rest/v1/chat_messages?select=count&user_email=eq.${email}`,
+                    { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } }
+                );
+                const msgData = await msgRes.json();
+                document.getElementById('statMessages').textContent = msgData[0]?.count || '0';
+            } catch(e) {
+                document.getElementById('statMessages').textContent = '0';
+            }
+
+            // Animate numbers
+            animateNumbers();
+
+        } catch(e) {
+            console.error('Error loading stats:', e);
+        }
+    }
+
+    // ========== LOAD CHAPTERS ==========
+    async function loadChapters() {
+        try {
+            const email = currentUser.email;
+            const displayName = currentUser.display_name || '';
+
+            const res = await fetch(
+                `${SUPABASE_URL}/rest/v1/ethiopian_voices?select=*&or=(extracted_data->>email.eq.${email},writer_name.eq.${encodeURIComponent(displayName)})&order=created_at.desc&limit=10`,
+                { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } }
+            );
+            const chapters = await res.json();
+            const container = document.getElementById('chapterList');
+
+            if (!chapters || chapters.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" id="emptyChapters">
+                        <span class="empty-icon">📝</span>
+                        <h3>No chapters yet</h3>
+                        <p>Start your peace journey by sharing your voice or joining the Story Chain.</p>
+                        <a href="contribute.html" class="btn btn-primary">✍️ Create Your First Chapter</a>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = chapters.map(ch => {
+                const title = ch.quote_english?.substring(0, 60) || 'Untitled';
+                const isPublished = ch.is_published;
+                const statusClass = isPublished ? 'status-published' : 'status-pending';
+                const statusText = isPublished ? '✓ Published' : '⏳ Pending';
+
+                return `
+                <div class="chapter-item">
+                    <div class="chapter-info">
+                        <h4>📖 ${escHtml(title)}${title.length >= 60 ? '...' : ''}</h4>
+                        <div class="chapter-meta">
+                            <span>📍 ${escHtml(ch.region || 'Unknown')}</span>
+                            <span>🌐 ${escHtml(ch.language || 'English')}</span>
+                            <span>📅 ${ch.year || 'N/A'}</span>
+                            <span>❤️ ${ch.like_count || 0} likes</span>
+                            <span class="chapter-status ${statusClass}">${statusText}</span>
+                        </div>
+                    </div>
+                    <div class="chapter-actions">
+                        <button class="btn btn-outline btn-sm" onclick="window.location.href='voices.html?chapter=${ch.chapter_id || ch.id}'">👁️ View</button>
+                        <button class="btn btn-gold btn-sm" onclick="showToast('💬 Chat coming soon!')">💬 Chat</button>
+                    </div>
+                </div>`;
+            }).join('');
+
+        } catch(e) {
+            console.error('Error loading chapters:', e);
+        }
+    }
+
+    // ========== ANIMATE NUMBERS ==========
+    function animateNumbers() {
+        const nums = document.querySelectorAll('.stat-num');
+        nums.forEach(num => {
+            const target = parseInt(num.textContent) || 0;
+            if (target === 0) return;
+            let current = 0;
+            const increment = Math.ceil(target / 30);
+            const interval = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(interval);
+                }
+                num.textContent = current;
+            }, 30);
+        });
+    }
+
+    // ========== LOGOUT ==========
+    function handleLogout() {
+        if (confirm('Are you sure you want to sign out?')) {
+            localStorage.removeItem('peace_user');
+            showToast('👋 Signed out successfully. Redirecting...');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }
+    }
+
+    // ========== WALLET ==========
+    function openWallet() {
+        const balance = document.getElementById('statCoins').textContent || '0';
+        document.getElementById('walletBalance').textContent = balance;
+        document.getElementById('walletPopup').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeWallet() {
+        document.getElementById('walletPopup').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close wallet on overlay click
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'walletPopup') {
+            closeWallet();
+        }
+    });
+
+    // Close wallet on Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const wallet = document.getElementById('walletPopup');
+            if (wallet && wallet.classList.contains('active')) {
+                closeWallet();
+            }
+            const menu = document.getElementById('slideMenu');
+            if (menu && menu.classList.contains('open')) {
+                toggleMenu();
+            }
+        }
+    });
+
+    // ========== TOAST NOTIFICATION ==========
+    function showToast(message) {
+        // Remove existing toasts
+        const existing = document.querySelectorAll('.toast');
+        existing.forEach(t => t.remove());
+
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(100px)';
+            toast.style.transition = '0.3s ease';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // ========== MOBILE MENU ==========
+    function toggleMenu() {
+        const menu = document.getElementById('slideMenu');
+        const overlay = document.getElementById('slideOverlay');
+        const hamburger = document.getElementById('hamburger');
+        
+        if (!menu || !overlay || !hamburger) return;
+        
+        const isOpen = menu.classList.contains('open');
+        
+        if (isOpen) {
+            menu.classList.remove('open');
+            overlay.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        } else {
+            menu.classList.add('open');
+            overlay.classList.add('open');
+            hamburger.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // ========== HELPER ==========
+    function escHtml(s) {
+        if (!s) return '';
+        const d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+    }
+</script>
+
+<script src="js/supabase.js"></script>
 <script src="js/navigation.js"></script>
 <script src="js/notifications.js"></script>
-<script>
-const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
-let currentUser = null;
-
-document.addEventListener('DOMContentLoaded', function() { checkAuth(); });
-
-function checkAuth() { const saved = localStorage.getItem('peace_user'); if (saved) { try { currentUser = JSON.parse(saved); loadPortal(); } catch(e) { showLoginPrompt(); } } else { showLoginPrompt(); } }
-
-function showLoginPrompt() {
-    document.getElementById('userName').textContent = 'Welcome!';
-    document.getElementById('userEmail').textContent = 'Please sign in to view your portal';
-    document.getElementById('statChapters').textContent = '-'; document.getElementById('statLikes').textContent = '-';
-    document.getElementById('statMessages').textContent = '-'; document.getElementById('statCoins').textContent = '-';
-    document.getElementById('chapterList').innerHTML = '<div class="empty-state"><div class="empty-icon">🔐</div><p>Please <a href="voices.html" style="color:var(--green-bright);">sign in on the Voices page</a> to view your portal.</p></div>';
-}
-
-async function loadPortal() {
-    const displayName = currentUser.user_metadata?.display_name || currentUser.email;
-    document.getElementById('userAvatar').textContent = displayName.substring(0,2).toUpperCase();
-    document.getElementById('userName').textContent = 'Welcome, ' + displayName + '!';
-    document.getElementById('userEmail').textContent = currentUser.email;
-    await loadStats(); await loadChapters(); initNotifications();
-}
-
-async function loadStats() {
-    try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?select=id,like_count,starting_likes,starting_shares&or=(email.eq.${currentUser.email},writer_name.eq.${encodeURIComponent(currentUser.user_metadata?.display_name || '')})`, { headers: { 'apikey': SUPABASE_KEY } });
-        const voices = await res.json();
-        document.getElementById('statChapters').textContent = voices.length || '0';
-        document.getElementById('statLikes').textContent = voices.reduce((s, v) => s + (v.like_count || 0), 0) || '0';
-        document.getElementById('statCoins').textContent = voices.reduce((s, v) => s + (v.starting_likes || 50) + (v.starting_shares || 20), 0) || '0';
-        const msgRes = await fetch(`${SUPABASE_URL}/rest/v1/chat_messages?select=count&user_email=eq.${currentUser.email}`, { headers: { 'apikey': SUPABASE_KEY } });
-        document.getElementById('statMessages').textContent = (await msgRes.json())[0]?.count || '0';
-    } catch(e) {}
-}
-
-async function loadChapters() {
-    try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices?select=*&or=(email.eq.${currentUser.email},writer_name.eq.${encodeURIComponent(currentUser.user_metadata?.display_name || '')})&is_founder=eq.true&limit=10`, { headers: { 'apikey': SUPABASE_KEY } });
-        const chapters = await res.json(), container = document.getElementById('chapterList');
-        if (!chapters.length) { container.innerHTML = '<div class="empty-state"><div class="empty-icon">📝</div><p>No chapters yet. <a href="voices.html" style="color:var(--green-bright);">Browse voices</a> or create your own!</p></div>'; return; }
-        container.innerHTML = chapters.map(ch => `<div class="chapter-item"><div class="chapter-info"><h4>📖 ${escHtml(ch.quote_english?.substring(0, 60) || 'Untitled')}...</h4><div class="chapter-meta"><span>📍 ${escHtml(ch.region)}</span><span>🌐 ${escHtml(ch.language)}</span><span>📅 ${ch.year||'N/A'}</span><span>❤️ ${ch.like_count||0} likes</span></div></div><div class="chapter-actions"><button class="btn btn-sm btn-outline" onclick="window.location.href='voices.html?chapter=${ch.chapter_id||ch.id}'">👁️ View</button><button class="btn btn-sm btn-gold" onclick="window.location.href='voices.html?chat=${ch.chapter_id||ch.id}'">💬 Chat</button></div></div>`).join('');
-    } catch(e) {}
-}
-
-function handleLogout() { localStorage.removeItem('peace_user'); window.location.href = 'index.html'; }
-function openWallet() { document.getElementById('walletBalance').textContent = parseInt(document.getElementById('statCoins').textContent) || 0; document.getElementById('walletPopup').style.display = 'flex'; }
-function closeWallet() { document.getElementById('walletPopup').style.display = 'none'; }
-function escHtml(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-</script>
 </body>
 </html>
