@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Sign in or create your Ethiopian Peace Archive account. Access your dashboard, manage chapters, and connect with peace voices worldwide.">
+    <meta name="description" content="Sign in or create your Ethiopian Peace Archive account. Access your portal, manage chapters, and connect with peace voices worldwide.">
     <meta property="og:title" content="Sign In — Ethiopian Peace Archive">
-    <meta property="og:description" content="Access your dashboard, manage chapters, and connect with peace voices worldwide.">
+    <meta property="og:description" content="Access your portal, manage chapters, and connect with peace voices worldwide.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://ethiopianpeacearchive.org/signin">
@@ -24,11 +24,11 @@
         * { margin:0; padding:0; box-sizing:border-box; }
 
         body {
-            background: var(--bg); color: var(--text); font-family: var(--font-ui);
-            line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh;
-            display: flex; align-items: center; justify-content: center; padding: 20px;
-            background-image: radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%),
-                              radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%);
+            background:var(--bg); color:var(--text); font-family:var(--font-ui);
+            line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh;
+            display:flex; align-items:center; justify-content:center; padding:20px;
+            background-image: radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.04) 0%, transparent 50%),
+                              radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.03) 0%, transparent 50%);
         }
         a { text-decoration:none; color:inherit; }
 
@@ -37,15 +37,15 @@
 
         /* ========== AUTH CARD ========== */
         .auth-card {
-            background: var(--card); border: 2px solid var(--gold);
-            border-radius: var(--radius-lg); padding: 36px 30px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.5); transition: var(--transition);
+            background:var(--card); border:2px solid var(--gold);
+            border-radius:var(--radius-lg); padding:36px 30px;
+            box-shadow:0 8px 40px rgba(0,0,0,0.5); transition:var(--transition);
         }
-        .auth-card:hover { box-shadow: 0 8px 45px rgba(251,191,36,0.08); }
+        .auth-card:hover { box-shadow:0 8px 45px rgba(251,191,36,0.08); }
 
         /* ========== HEADER ========== */
         .auth-header { text-align:center; margin-bottom:28px; }
-        .auth-logo { font-size:2.8rem; margin-bottom:10px; display:block; }
+        .auth-logo { font-size:3rem; margin-bottom:10px; display:block; }
         .auth-header h1 { color:var(--gold-bright); font-size:1.5rem; font-weight:800; margin-bottom:4px; }
         .auth-header p { color:var(--text-dim); font-size:0.85rem; }
 
@@ -69,6 +69,7 @@
 
         .form-group { margin-bottom:16px; }
         .form-group label { display:block; color:var(--text-dim); font-size:0.82rem; font-weight:600; margin-bottom:5px; }
+        .form-group .hint { font-weight:400; color:var(--text-muted); font-size:0.7rem; }
         .form-group input {
             width:100%; padding:13px 16px; background:#1b241f; border:1px solid #3a4f40;
             border-radius:10px; color:#e2e8e4; font-family:var(--font-ui); font-size:0.92rem;
@@ -79,6 +80,16 @@
             box-shadow:0 0 0 3px rgba(251,191,36,0.08); background:#1d2b23;
         }
         .form-group input::placeholder { color:var(--text-muted); opacity:0.6; }
+
+        /* ========== PASSWORD FIELD WITH TOGGLE ========== */
+        .password-wrapper { position:relative; }
+        .password-wrapper input { padding-right:45px; }
+        .password-toggle {
+            position:absolute; right:12px; top:50%; transform:translateY(-50%);
+            background:none; border:none; color:var(--text-muted); cursor:pointer;
+            font-size:0.85rem; padding:4px 8px; transition:0.2s;
+        }
+        .password-toggle:hover { color:var(--text); }
 
         /* ========== BUTTONS ========== */
         .btn {
@@ -109,6 +120,7 @@
         .msg-success { background:rgba(34,197,94,0.1); color:#4ade80; border:1px solid rgba(34,197,94,0.25); display:block; }
         .msg-error { background:rgba(239,68,68,0.1); color:#f87171; border:1px solid rgba(239,68,68,0.25); display:block; }
         .msg-loading { background:rgba(251,191,36,0.1); color:var(--gold-bright); border:1px solid rgba(251,191,36,0.25); display:block; }
+        .msg-info { background:rgba(59,130,246,0.1); color:#60a5fa; border:1px solid rgba(59,130,246,0.25); display:block; }
 
         /* ========== DIVIDER ========== */
         .divider {
@@ -137,13 +149,15 @@
         .auth-footer a:hover { text-decoration:underline; }
 
         /* ========== BACK LINK ========== */
-        .back-link {
-            text-align:center; margin-top:16px;
-        }
-        .back-link a {
-            color:var(--text-muted); font-size:0.78rem; transition:0.2s;
-        }
+        .back-link { text-align:center; margin-top:16px; }
+        .back-link a { color:var(--text-muted); font-size:0.78rem; transition:0.2s; }
         .back-link a:hover { color:var(--text-dim); }
+
+        /* ========== ALREADY SIGNED IN ========== */
+        .already-signed { text-align:center; }
+        .already-signed .icon { font-size:3rem; display:block; margin-bottom:10px; }
+        .already-signed h2 { color:var(--gold-bright); font-size:1.3rem; margin-bottom:6px; }
+        .already-signed p { color:var(--text-dim); font-size:0.85rem; margin-bottom:16px; }
 
         /* ========== RESPONSIVE ========== */
         @media(max-width:480px) {
@@ -158,16 +172,25 @@
     <div class="auth-card">
         
         <!-- ========== HEADER ========== -->
-        <div class="auth-header">
+        <div class="auth-header" id="authHeader">
             <span class="auth-logo">🕊️</span>
             <h1 id="authTitle">Welcome Back</h1>
-            <p id="authSubtitle">Sign in to your Ethiopian Peace Archive account</p>
+            <p id="authSubtitle">Sign in to access your peace portal</p>
         </div>
 
-        <!-- ========== TABS ========== -->
-        <div class="auth-tabs">
+        <!-- ========== TABS (hidden when already signed in) ========== -->
+        <div class="auth-tabs" id="authTabs">
             <button class="auth-tab active" id="tabSignin" onclick="switchTab('signin')">Sign In</button>
             <button class="auth-tab" id="tabSignup" onclick="switchTab('signup')">Create Account</button>
+        </div>
+
+        <!-- ========== ALREADY SIGNED IN (hidden by default) ========== -->
+        <div class="already-signed hidden" id="alreadySigned">
+            <span class="icon">✅</span>
+            <h2>You're Already Signed In!</h2>
+            <p id="signedInAs"></p>
+            <button class="btn btn-gold" onclick="window.location.href='portal.html'">📊 Go to My Portal</button>
+            <button class="btn btn-green" onclick="handleLogout()" style="margin-top:8px;">👋 Sign Out</button>
         </div>
 
         <!-- ========== SIGN IN FORM ========== -->
@@ -178,7 +201,10 @@
             </div>
             <div class="form-group">
                 <label for="signinPassword">Password</label>
-                <input type="password" id="signinPassword" placeholder="Enter your password" required autocomplete="current-password" minlength="6">
+                <div class="password-wrapper">
+                    <input type="password" id="signinPassword" placeholder="Enter your password" required autocomplete="current-password" minlength="6">
+                    <button type="button" class="password-toggle" onclick="togglePassword('signinPassword', this)">👁️</button>
+                </div>
             </div>
             <button type="button" class="btn btn-gold" id="signinBtn" onclick="handleSignIn()">
                 <span class="spinner" id="signinSpinner"></span>
@@ -198,8 +224,11 @@
                 <input type="email" id="signupEmail" placeholder="your@email.com" required autocomplete="email">
             </div>
             <div class="form-group">
-                <label for="signupPassword">Password</label>
-                <input type="password" id="signupPassword" placeholder="Min 6 characters" required minlength="6" autocomplete="new-password">
+                <label for="signupPassword">Password <span class="hint">(min 6 characters)</span></label>
+                <div class="password-wrapper">
+                    <input type="password" id="signupPassword" placeholder="Create a password" required minlength="6" autocomplete="new-password">
+                    <button type="button" class="password-toggle" onclick="togglePassword('signupPassword', this)">👁️</button>
+                </div>
             </div>
             <button type="button" class="btn btn-green" id="signupBtn" onclick="handleSignUp()">
                 <span class="spinner" id="signupSpinner"></span>
@@ -209,10 +238,10 @@
         </form>
 
         <!-- ========== DIVIDER ========== -->
-        <div class="divider">or continue with</div>
+        <div class="divider" id="authDivider">or continue with</div>
 
         <!-- ========== SOCIAL BUTTONS ========== -->
-        <div class="social-btns">
+        <div class="social-btns" id="socialBtns">
             <button class="social-btn" onclick="socialSignIn('google')">🔵 Google</button>
             <button class="social-btn" onclick="socialSignIn('magic')">📧 Magic Link</button>
         </div>
@@ -231,14 +260,44 @@
 </div>
 
 <!-- ============================================
-     SMOOTH WORKING JAVASCRIPT
+     WORKING JAVASCRIPT
      ============================================ -->
 <script>
     // ========== CONFIGURATION ==========
     const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
-    // ========== SWITCH BETWEEN SIGN IN / SIGN UP ==========
+    let isSubmitting = false;
+
+    // ========== CHECK IF ALREADY SIGNED IN ==========
+    document.addEventListener('DOMContentLoaded', function() {
+        const saved = localStorage.getItem('peace_user');
+        if (saved) {
+            try {
+                const user = JSON.parse(saved);
+                const displayName = user.display_name || user.email?.split('@')[0] || 'Friend';
+                
+                // Show "already signed in" state
+                document.getElementById('authHeader').style.display = 'none';
+                document.getElementById('authTabs').style.display = 'none';
+                document.getElementById('signinForm').classList.add('hidden');
+                document.getElementById('signupForm').classList.add('hidden');
+                document.getElementById('authDivider').style.display = 'none';
+                document.getElementById('socialBtns').style.display = 'none';
+                document.getElementById('authFooter').style.display = 'none';
+                
+                const alreadySigned = document.getElementById('alreadySigned');
+                alreadySigned.classList.remove('hidden');
+                document.getElementById('signedInAs').textContent = 'Signed in as ' + displayName + ' (' + user.email + ')';
+                
+            } catch(e) {
+                console.error('Error parsing user data:', e);
+            }
+        }
+        console.log('✅ Sign-in page ready');
+    });
+
+    // ========== SWITCH TABS ==========
     function switchTab(tab) {
         const signinForm = document.getElementById('signinForm');
         const signupForm = document.getElementById('signupForm');
@@ -249,10 +308,7 @@
         const authFooter = document.getElementById('authFooter');
         
         // Clear all messages
-        document.getElementById('signinMsg').className = 'msg-box';
-        document.getElementById('signinMsg').textContent = '';
-        document.getElementById('signupMsg').className = 'msg-box';
-        document.getElementById('signupMsg').textContent = '';
+        clearMessages();
 
         if (tab === 'signin') {
             signinForm.classList.remove('hidden');
@@ -260,7 +316,7 @@
             tabSignin.classList.add('active');
             tabSignup.classList.remove('active');
             authTitle.textContent = 'Welcome Back';
-            authSubtitle.textContent = 'Sign in to your Ethiopian Peace Archive account';
+            authSubtitle.textContent = 'Sign in to access your peace portal';
             authFooter.innerHTML = 'Don\'t have an account? <a onclick="switchTab(\'signup\')">Create one here</a>';
         } else {
             signinForm.classList.add('hidden');
@@ -273,8 +329,34 @@
         }
     }
 
+    // ========== CLEAR MESSAGES ==========
+    function clearMessages() {
+        ['signinMsg', 'signupMsg'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.className = 'msg-box';
+                el.textContent = '';
+            }
+        });
+    }
+
+    // ========== TOGGLE PASSWORD VISIBILITY ==========
+    function togglePassword(inputId, btn) {
+        const input = document.getElementById(inputId);
+        if (!input) return;
+        if (input.type === 'password') {
+            input.type = 'text';
+            btn.textContent = '🙈';
+        } else {
+            input.type = 'password';
+            btn.textContent = '👁️';
+        }
+    }
+
     // ========== HANDLE SIGN IN ==========
     async function handleSignIn() {
+        if (isSubmitting) return;
+
         const btn = document.getElementById('signinBtn');
         const spinner = document.getElementById('signinSpinner');
         const btnText = document.getElementById('signinBtnText');
@@ -287,47 +369,66 @@
         msg.textContent = '';
 
         // Validate
-        if (!email) { showMsg(msg, 'error', '❌ Please enter your email.'); return; }
-        if (!email.includes('@') || !email.includes('.')) { showMsg(msg, 'error', '❌ Please enter a valid email.'); return; }
-        if (!password || password.length < 6) { showMsg(msg, 'error', '❌ Password must be at least 6 characters.'); return; }
+        if (!email) {
+            showMessage(msg, 'error', '❌ Please enter your email address.');
+            document.getElementById('signinEmail').focus();
+            return;
+        }
+        if (!email.includes('@') || !email.includes('.')) {
+            showMessage(msg, 'error', '❌ Please enter a valid email address.');
+            document.getElementById('signinEmail').focus();
+            return;
+        }
+        if (!password) {
+            showMessage(msg, 'error', '❌ Please enter your password.');
+            document.getElementById('signinPassword').focus();
+            return;
+        }
+        if (password.length < 6) {
+            showMessage(msg, 'error', '❌ Password must be at least 6 characters.');
+            document.getElementById('signinPassword').focus();
+            return;
+        }
 
-        // Loading
+        // Loading state
+        isSubmitting = true;
         setLoading(btn, spinner, btnText, true, 'Signing in...');
-        showMsg(msg, 'loading', '⏳ Signing you in...');
+        showMessage(msg, 'loading', '⏳ Signing you in...');
 
         try {
             // Try Supabase auth
             if (typeof supabase !== 'undefined' && supabase.auth) {
                 const { data, error } = await supabase.auth.signInWithPassword({ email, password });
                 if (error) throw error;
+                
                 const user = data.user;
-                localStorage.setItem('peace_user', JSON.stringify({
-                    email: user.email,
-                    display_name: user.user_metadata?.display_name || email.split('@')[0],
-                    id: user.id,
-                    signed_in_at: new Date().toISOString()
-                }));
+                saveUserSession(user);
+                
             } else {
-                // Local fallback
-                localStorage.setItem('peace_user', JSON.stringify({
-                    email,
-                    display_name: email.split('@')[0],
-                    signed_in_at: new Date().toISOString()
-                }));
+                // Local fallback for development
+                saveLocalUser(email, email.split('@')[0]);
             }
             
-            showMsg(msg, 'success', '✅ Signed in successfully! Redirecting...');
-            setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+            showMessage(msg, 'success', '✅ Signed in successfully! Redirecting to your portal...');
+            
+            // 🔥 REDIRECT TO PORTAL
+            setTimeout(() => {
+                window.location.href = 'portal.html';
+            }, 1000);
+            
         } catch (err) {
             console.error('Sign in error:', err);
-            showMsg(msg, 'error', '❌ ' + (err.message || 'Sign in failed. Check your credentials.'));
+            showMessage(msg, 'error', '❌ ' + (err.message || 'Invalid email or password. Please try again.'));
         } finally {
+            isSubmitting = false;
             setLoading(btn, spinner, btnText, false, '🔐 Sign In');
         }
     }
 
     // ========== HANDLE SIGN UP ==========
     async function handleSignUp() {
+        if (isSubmitting) return;
+
         const btn = document.getElementById('signupBtn');
         const spinner = document.getElementById('signupSpinner');
         const btnText = document.getElementById('signupBtnText');
@@ -341,14 +442,41 @@
         msg.textContent = '';
 
         // Validate
-        if (!name) { showMsg(msg, 'error', '❌ Please enter your full name.'); return; }
-        if (!email) { showMsg(msg, 'error', '❌ Please enter your email.'); return; }
-        if (!email.includes('@') || !email.includes('.')) { showMsg(msg, 'error', '❌ Please enter a valid email.'); return; }
-        if (!password || password.length < 6) { showMsg(msg, 'error', '❌ Password must be at least 6 characters.'); return; }
+        if (!name) {
+            showMessage(msg, 'error', '❌ Please enter your full name.');
+            document.getElementById('signupName').focus();
+            return;
+        }
+        if (name.length < 2) {
+            showMessage(msg, 'error', '❌ Name must be at least 2 characters.');
+            document.getElementById('signupName').focus();
+            return;
+        }
+        if (!email) {
+            showMessage(msg, 'error', '❌ Please enter your email address.');
+            document.getElementById('signupEmail').focus();
+            return;
+        }
+        if (!email.includes('@') || !email.includes('.')) {
+            showMessage(msg, 'error', '❌ Please enter a valid email address.');
+            document.getElementById('signupEmail').focus();
+            return;
+        }
+        if (!password) {
+            showMessage(msg, 'error', '❌ Please create a password.');
+            document.getElementById('signupPassword').focus();
+            return;
+        }
+        if (password.length < 6) {
+            showMessage(msg, 'error', '❌ Password must be at least 6 characters.');
+            document.getElementById('signupPassword').focus();
+            return;
+        }
 
-        // Loading
+        // Loading state
+        isSubmitting = true;
         setLoading(btn, spinner, btnText, true, 'Creating account...');
-        showMsg(msg, 'loading', '⏳ Creating your account...');
+        showMessage(msg, 'loading', '⏳ Creating your account...');
 
         try {
             // Try Supabase auth
@@ -359,54 +487,98 @@
                     options: { data: { display_name: name } }
                 });
                 if (error) throw error;
+                
                 const user = data.user;
-                localStorage.setItem('peace_user', JSON.stringify({
-                    email: user.email,
-                    display_name: name,
-                    id: user.id,
-                    signed_up_at: new Date().toISOString()
-                }));
-                showMsg(msg, 'success', '✅ Account created! Check your email to confirm, then sign in.');
-                setTimeout(() => { switchTab('signin'); }, 2000);
+                saveUserSession(user, name);
+                
+                showMessage(msg, 'success', '✅ Account created! Check your email to confirm, then sign in.');
+                
+                // 🔥 REDIRECT TO PORTAL AFTER SIGNUP
+                setTimeout(() => {
+                    window.location.href = 'portal.html';
+                }, 1500);
+                
             } else {
-                // Local fallback
-                localStorage.setItem('peace_user', JSON.stringify({
-                    email,
-                    display_name: name,
-                    signed_up_at: new Date().toISOString()
-                }));
-                showMsg(msg, 'success', '✅ Account created! Redirecting...');
-                setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+                // Local fallback for development
+                saveLocalUser(email, name);
+                
+                showMessage(msg, 'success', '✅ Account created! Redirecting to your portal...');
+                
+                // 🔥 REDIRECT TO PORTAL
+                setTimeout(() => {
+                    window.location.href = 'portal.html';
+                }, 1000);
             }
+            
         } catch (err) {
             console.error('Sign up error:', err);
-            showMsg(msg, 'error', '❌ ' + (err.message || 'Sign up failed. Try again.'));
+            showMessage(msg, 'error', '❌ ' + (err.message || 'Sign up failed. Please try again.'));
         } finally {
+            isSubmitting = false;
             setLoading(btn, spinner, btnText, false, '✨ Create Account');
         }
+    }
+
+    // ========== SAVE USER SESSION ==========
+    function saveUserSession(user, displayName) {
+        const userData = {
+            email: user.email,
+            display_name: displayName || user.user_metadata?.display_name || user.email?.split('@')[0],
+            id: user.id,
+            signed_in_at: new Date().toISOString(),
+            signed_up_at: new Date().toISOString()
+        };
+        localStorage.setItem('peace_user', JSON.stringify(userData));
+        console.log('✅ User session saved:', userData.email);
+    }
+
+    function saveLocalUser(email, displayName) {
+        const userData = {
+            email: email,
+            display_name: displayName || email.split('@')[0],
+            id: 'local-' + Date.now(),
+            signed_in_at: new Date().toISOString(),
+            signed_up_at: new Date().toISOString()
+        };
+        localStorage.setItem('peace_user', JSON.stringify(userData));
+        console.log('✅ Local user saved:', userData.email);
     }
 
     // ========== SOCIAL SIGN IN ==========
     function socialSignIn(provider) {
         if (provider === 'google') {
             if (typeof supabase !== 'undefined' && supabase.auth) {
-                supabase.auth.signInWithOAuth({ provider: 'google' });
+                supabase.auth.signInWithOAuth({ 
+                    provider: 'google',
+                    options: { redirectTo: window.location.origin + '/portal.html' }
+                });
             } else {
-                alert('🔵 Google Sign-In coming soon! Please use email/password for now.');
+                const msg = document.getElementById('signinMsg');
+                showMessage(msg, 'info', '🔵 Google Sign-In is coming soon! Please use email/password for now.');
             }
         } else if (provider === 'magic') {
-            const email = prompt('📧 Enter your email for a magic link:');
+            const email = document.getElementById('signinEmail')?.value || prompt('📧 Enter your email for a magic link:');
             if (email && email.includes('@')) {
                 if (typeof supabase !== 'undefined' && supabase.auth) {
                     supabase.auth.signInWithOtp({ email });
+                    const msg = document.getElementById('signinMsg');
+                    showMessage(msg, 'success', '✅ Magic link sent! Check your email.');
+                } else {
+                    const msg = document.getElementById('signinMsg');
+                    showMessage(msg, 'info', '📧 Magic link feature is coming soon!');
                 }
-                alert('✅ If that email is registered, a magic link has been sent!');
             }
         }
     }
 
+    // ========== HANDLE LOGOUT ==========
+    function handleLogout() {
+        localStorage.removeItem('peace_user');
+        window.location.reload();
+    }
+
     // ========== HELPER FUNCTIONS ==========
-    function showMsg(element, type, text) {
+    function showMessage(element, type, text) {
         element.className = 'msg-box msg-' + type;
         element.textContent = text;
     }
@@ -431,25 +603,6 @@
                 handleSignUp();
             }
         }
-    });
-
-    // ========== CHECK IF ALREADY SIGNED IN ==========
-    document.addEventListener('DOMContentLoaded', function() {
-        const saved = localStorage.getItem('peace_user');
-        if (saved) {
-            try {
-                const user = JSON.parse(saved);
-                document.getElementById('authTitle').textContent = 'Welcome Back!';
-                document.getElementById('authSubtitle').textContent = 'You are already signed in as ' + (user.display_name || user.email);
-                document.getElementById('signinForm').classList.add('hidden');
-                document.getElementById('signupForm').classList.add('hidden');
-                document.getElementById('authFooter').innerHTML = '<a href="dashboard.html" style="color:var(--green-bright);font-weight:700;">Go to Dashboard →</a>';
-                document.querySelector('.auth-tabs').style.display = 'none';
-                document.querySelector('.divider').style.display = 'none';
-                document.querySelector('.social-btns').style.display = 'none';
-            } catch(e) {}
-        }
-        console.log('✅ Auth page ready');
     });
 </script>
 
