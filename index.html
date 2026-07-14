@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <meta name="description" content="We Need Peace — The Global Voice Archive preserving human voices across 40 languages, 30 regions, and 57+ countries. Wear Love. Speak Peace. Live Unity. Share your voice.">
-    <meta name="keywords" content="peace, love, unity, voice archive, global peace, Ethiopian peace, collaborative writing, peace courses, wisdom chain, story chain">
+    <meta name="keywords" content="peace, love, unity, voice archive, global peace, Ethiopian peace, collaborative writing, peace courses, wisdom chain, story chain, participate">
     <meta name="author" content="We Need Peace">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="We Need Peace — The Global Voice Archive">
-    <meta property="og:description" content="Preserving human voices across 40 languages, 30 regions, and 57+ countries. Wear Love. Speak Peace. Live Unity.">
+    <meta property="og:title" content="We Need Peace — Wear Love. Speak Peace. Live Unity.">
+    <meta property="og:description" content="Preserving human voices across 40 languages, 30 regions, and 57+ countries. Join the Story & Wisdom Chain. Share your voice for peace, love, and unity.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://weneedpeace.pages.dev">
     <meta property="og:site_name" content="We Need Peace">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="We Need Peace — The Global Voice Archive">
-    <meta name="twitter:description" content="Preserving human voices across 40 languages, 30 regions, and 57+ countries.">
+    <meta name="twitter:title" content="We Need Peace — Wear Love. Speak Peace. Live Unity.">
+    <meta name="twitter:description" content="Preserving human voices across 40 languages, 30 regions, and 57+ countries. Participate in the Story & Wisdom Chain.">
     <link rel="canonical" href="https://weneedpeace.pages.dev">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
     <title>We Need Peace — Wear Love. Speak Peace. Live Unity.</title>
@@ -355,7 +355,7 @@
     <a href="blog.html">📝 Blog & Stories</a>
     <a href="courses.html">🎓 Free Courses</a>
     <a href="dashboard.html">📊 Dashboard</a>
-    <a href="collaborate.html">✍️ Story & Wisdom Chain</a>
+    <a href="collaborate.html" style="background:var(--gold-soft);color:var(--gold-bright);font-weight:700;">✍️ Participate</a>
     <a href="media.html">📰 Media Coverage</a>
     <a href="gallery.html">🖼️ Gallery</a>
     <a href="contribute.html">📝 Share Your Voice</a>
@@ -372,7 +372,7 @@
     </div>
 </div>
 
-<!-- HERO WITH NEW SLOGAN -->
+<!-- HERO WITH SLOGAN -->
 <header class="hero-plain">
     <div class="badge-top" data-i18n="badge">🌍 The Global Voice Archive</div>
     <h1 data-i18n="title">We Need Peace</h1>
@@ -459,6 +459,7 @@
         <p data-i18n="joinVoicesSub">Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters. Wear Love. Speak Peace. Live Unity.</p>
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
             <a href="contribute.html" class="btn btn-primary">🕊️ <span data-i18n="shareVoiceBtn">Share Your Voice →</span></a>
+            <a href="collaborate.html" class="btn btn-gold">✍️ Participate in Story Chain</a>
             <a href="support.html" class="btn btn-love">❤️ Support the Movement</a>
         </div>
     </div>
@@ -630,20 +631,15 @@
     };
 
     function setLang(lang) {
-        // Update active buttons
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.lang === lang) btn.classList.add('active');
         });
-
-        // Translate all elements with data-i18n attribute
         const t = translations[lang];
         if (!t) return;
-        
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.dataset.i18n;
             if (t[key]) {
-                // For subtitle which contains HTML
                 if (key === 'subtitle') {
                     el.innerHTML = t[key];
                 } else {
@@ -651,12 +647,9 @@
                 }
             }
         });
-
-        // Save preference
         localStorage.setItem('peace_lang', lang);
     }
 
-    // Load saved language on page load
     document.addEventListener('DOMContentLoaded', () => {
         const saved = localStorage.getItem('peace_lang') || 'en';
         setLang(saved);
@@ -667,22 +660,17 @@
         const menu = document.getElementById('slideMenu');
         const overlay = document.getElementById('slideOverlay');
         const hamburger = document.getElementById('hamburger');
-        
         if (!menu || !overlay || !hamburger) return;
-        
         menu.classList.toggle('open');
         overlay.classList.toggle('open');
         hamburger.classList.toggle('open');
         document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
     }
-    
-    // Close menu on Escape key
+
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             const menu = document.getElementById('slideMenu');
-            if (menu && menu.classList.contains('open')) {
-                toggleMenu();
-            }
+            if (menu && menu.classList.contains('open')) toggleMenu();
         }
     });
 </script>
