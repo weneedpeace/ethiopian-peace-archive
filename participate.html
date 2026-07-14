@@ -3,949 +3,589 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Join the Story & Wisdom Chain. Co-create stories and deepen wisdom with writers from 57+ countries in the Ethiopian Peace Archive.">
-    <meta property="og:title" content="Participate — Story & Wisdom Chain — Ethiopian Peace Archive">
-    <meta property="og:description" content="Join writers from 57+ countries. Co-create stories and deepen wisdom together.">
+    <meta name="description" content="Join the Story & Wisdom Chain. Co-create stories and deepen wisdom with writers from 57+ countries.">
+    <meta property="og:title" content="Participate — Ethiopian Peace Archive">
+    <meta property="og:description" content="Join writers from 57+ countries. Co-create stories and deepen wisdom.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ethiopianpeacearchive.org/participate">
-    <meta property="og:site_name" content="Ethiopian Peace Archive">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Participate — Story & Wisdom Chain">
-    <meta name="twitter:description" content="Join writers from 57+ countries. Co-create stories and deepen wisdom.">
     <link rel="canonical" href="https://ethiopianpeacearchive.org/participate">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
-    <title>Participate — Story & Wisdom Chain — Ethiopian Peace Archive</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
+    <title>Participate — Ethiopian Peace Archive</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* ============================================
-           PARTICIPATE PAGE — PREMIUM STYLES
-           Ethiopian Peace Archive Design System
-           ============================================ */
-
         :root {
-            --bg: #060f1e;
-            --card: #0d1b33;
-            --card-hover: #111f3a;
-            --green: #22c55e;
-            --green-bright: #4ade80;
-            --green-dim: rgba(34, 197, 94, 0.10);
-            --green-border: rgba(34, 197, 94, 0.20);
-            --gold: #fbbf24;
-            --gold-bright: #fcd34d;
-            --gold-soft: rgba(251, 191, 36, 0.1);
-            --text: #e2e8f0;
-            --text-dim: #94a3b8;
-            --text-muted: #64748b;
-            --red: #ef4444;
-            --red-soft: rgba(239, 68, 68, 0.12);
-            --blue: #3b82f6;
-            --purple: #a855f7;
-            --orange: #f97316;
-            --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            --radius: 14px;
-            --radius-lg: 20px;
-            --radius-xl: 30px;
-            --transition: 0.25s ease;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-            --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
-            --shadow-gold: 0 8px 25px rgba(251, 191, 36, 0.3);
+            --bg: #060f1e; --card: #0d1b33; --card-hover: #111f3a;
+            --green: #22c55e; --green-bright: #4ade80; --green-dim: rgba(34,197,94,0.10);
+            --green-border: rgba(34,197,94,0.20); --gold: #fbbf24; --gold-bright: #fcd34d;
+            --gold-soft: rgba(251,191,36,0.1); --text: #e2e8f0; --text-dim: #94a3b8; --text-muted: #64748b;
+            --red: #ef4444; --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --radius: 14px; --radius-lg: 20px; --transition: 0.25s ease;
         }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{
+            background:var(--bg);color:var(--text);font-family:var(--font-ui);line-height:1.6;
+            -webkit-font-smoothing:antialiased;
+            background-image:radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%),
+                             radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%);
+        }
+        a{text-decoration:none;color:inherit}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: var(--font-ui);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            background-image: 
-                radial-gradient(ellipse at 20% 20%, rgba(34, 197, 94, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 60%, rgba(251, 191, 36, 0.02) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 40%, rgba(239, 68, 68, 0.02) 0%, transparent 50%);
+        nav{
+            display:flex;align-items:center;justify-content:space-between;padding:0.9rem 5%;
+            background:rgba(6,15,30,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--green-border);
+            position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;
         }
-        a { text-decoration: none; color: inherit; }
+        .nav-logo{font-weight:700;font-size:1.15rem;color:#f0f2e9;display:flex;align-items:center;gap:6px}
+        .nav-logo span{color:var(--green-bright)}
+        .nav-links{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+        .nav-links a{
+            font-size:0.78rem;font-weight:600;color:var(--text-dim);padding:7px 12px;
+            border-radius:20px;transition:var(--transition);white-space:nowrap;
+        }
+        .nav-links a:hover,.nav-links a.active{color:var(--gold-bright);background:var(--gold-soft)}
+        .nav-links a.active{color:var(--gold-bright)!important;background:var(--gold-soft)!important}
+        .nav-cta{background:var(--green)!important;color:#000!important;font-weight:700!important;padding:7px 16px!important;border-radius:24px!important}
+        .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+        .hamburger span{width:24px;height:2px;background:var(--text-dim);border-radius:2px}
 
-        /* ========== NAVIGATION ========== */
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.9rem 5%;
-            background: rgba(6, 15, 30, 0.97);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--green-border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .nav__logo {
-            font-weight: 700;
-            font-size: 1.15rem;
-            color: #f0f2e9;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-        }
-        .nav__logo:hover { opacity: 0.85; }
-        .nav__logo span { color: var(--green-bright); }
-        .nav__links {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .nav__link {
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--text-dim);
-            padding: 7px 12px;
-            border-radius: 20px;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            white-space: nowrap;
-            position: relative;
-        }
-        .nav__link:hover {
-            color: var(--gold-bright);
-            background: var(--gold-soft);
-        }
-        .nav__link--active {
-            color: var(--gold-bright) !important;
-            background: var(--gold-soft) !important;
-        }
-        .nav__link--active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 18px;
-            height: 2px;
-            background: var(--gold);
-            border-radius: 2px;
-        }
-        .nav__cta {
-            background: var(--green) !important;
-            color: #000 !important;
-            font-weight: 700 !important;
-            padding: 7px 16px !important;
-            border-radius: 24px !important;
-        }
-        .nav__cta:hover {
-            background: var(--green-bright) !important;
-            color: #000 !important;
-        }
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-            z-index: 101;
-        }
-        .hamburger__line {
-            width: 24px;
-            height: 2px;
-            background: var(--text-dim);
-            border-radius: 2px;
-            transition: var(--transition);
-        }
+        .container{max-width:1000px;margin:0 auto;padding:30px 20px 50px}
 
-        /* ========== SLIDE MENU ========== */
-        .slide-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); z-index: 98;
-            opacity: 0; visibility: hidden; transition: 0.4s ease;
+        .hero{text-align:center;padding:55px 20px 35px;border-bottom:1px solid var(--green-border);position:relative;overflow:hidden}
+        .hero::before{
+            content:'';position:absolute;inset:0;
+            background:radial-gradient(circle at 30% 30%, rgba(34,197,94,0.06) 0%, transparent 60%),
+                       radial-gradient(circle at 70% 70%, rgba(251,191,36,0.04) 0%, transparent 60%);
+            animation:pulse 10s ease-in-out infinite;z-index:0;
         }
-        .slide-overlay--open { opacity: 1; visibility: visible; }
-        .slide-menu {
-            position: fixed; top: 0; right: -300px; width: 280px; height: 100%;
-            background: linear-gradient(180deg, #0a1628 0%, #0d1b33 50%, #060f1e 100%);
-            border-left: 2px solid var(--green-border); z-index: 99;
-            transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-            padding: 80px 18px 30px; overflow-y: auto;
+        @keyframes pulse{0%,100%{opacity:0.8}50%{opacity:1}}
+        .hero>*{position:relative;z-index:1}
+        .hero-badge{
+            display:inline-block;background:var(--gold-soft);border:1px solid rgba(251,191,36,0.35);
+            color:var(--gold);padding:6px 20px;border-radius:30px;font-size:0.7rem;
+            text-transform:uppercase;font-weight:700;letter-spacing:1.5px;margin-bottom:14px;
         }
-        .slide-menu--open { right: 0; }
-        .slide-menu__header {
-            text-align: center; margin-bottom: 24px; padding-bottom: 16px;
-            border-bottom: 1px solid var(--green-border);
-        }
-        .slide-menu__flag { font-size: 2rem; margin-bottom: 6px; }
-        .slide-menu__title { color: var(--gold); font-size: 1rem; font-weight: 700; }
-        .slide-menu__link {
-            display: flex; align-items: center; gap: 10px; padding: 13px 16px;
-            margin-bottom: 4px; border-radius: 12px; color: var(--text-dim);
-            font-size: 0.85rem; font-weight: 500; transition: 0.2s;
-        }
-        .slide-menu__link:hover {
-            color: var(--green-bright); background: var(--green-dim);
-            transform: translateX(4px);
-        }
-        .slide-menu__footer {
-            text-align: center; margin-top: 16px; padding-top: 12px;
-            border-top: 1px solid var(--green-border);
-        }
+        .hero h1{font-size:clamp(1.8rem,5vw,2.8rem);color:var(--gold-bright);font-weight:800;margin-bottom:8px}
+        .hero-slogan{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 14px;font-size:0.95rem;font-weight:700}
+        .hero-slogan .love{color:#ef4444}.hero-slogan .peace{color:var(--green-bright)}.hero-slogan .unity{color:var(--gold-bright)}
+        .hero p{color:var(--text-dim);font-size:0.95rem;max-width:550px;margin:0 auto 20px}
 
-        /* ========== CONTAINER ========== */
-        .container { max-width: 1000px; margin: 0 auto; padding: 30px 20px 50px; }
+        .btn{
+            display:inline-flex;align-items:center;gap:6px;padding:11px 22px;border-radius:40px;
+            font-weight:600;font-size:0.9rem;cursor:pointer;border:1px solid var(--green-border);
+            background:var(--card);color:var(--text);text-decoration:none;font-family:var(--font-ui);transition:0.25s;
+        }
+        .btn-primary{background:var(--green-bright);border-color:var(--green-bright);color:#0a120c;font-weight:700}
+        .btn-primary:hover{background:#16a34a;transform:translateY(-2px);box-shadow:0 8px 25px rgba(34,197,94,0.3)}
+        .btn-outline{border:2px solid var(--green-bright);color:var(--green-bright);background:transparent}
+        .btn-outline:hover{background:var(--green-dim);transform:translateY(-2px)}
+        .btn-gold{background:var(--gold);color:#000;border-color:var(--gold);font-weight:700}
+        .btn-gold:hover{background:var(--gold-bright);transform:translateY(-2px);box-shadow:0 8px 25px rgba(251,191,36,0.3)}
+        .btn-block{display:block;width:100%;text-align:center;justify-content:center}
+        .btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none}
 
-        /* ========== HERO ========== */
-        .hero {
-            text-align: center; padding: 55px 20px 35px;
-            border-bottom: 1px solid var(--green-border); position: relative; overflow: hidden;
+        .steps{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:20px 0 30px}
+        .step{
+            background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius);
+            padding:20px 16px;text-align:center;flex:1;min-width:140px;max-width:200px;transition:0.3s;
         }
-        .hero::before {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.06) 0%, transparent 60%),
-                        radial-gradient(circle at 70% 70%, rgba(251,191,36,0.04) 0%, transparent 60%);
-            animation: heroPulse 10s ease-in-out infinite; z-index: 0;
+        .step:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,0.4)}
+        .step-num{
+            width:38px;height:38px;background:var(--green);color:#000;border-radius:50%;
+            display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 10px;
         }
-        @keyframes heroPulse { 0%,100%{opacity:0.8} 50%{opacity:1} }
-        .hero>*{position:relative;z-index:1;}
-        .hero__badge {
-            display: inline-block; background: var(--gold-soft);
-            border: 1px solid rgba(251,191,36,0.35); color: var(--gold);
-            padding: 6px 20px; border-radius: 30px; font-size: 0.7rem;
-            text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 14px;
-            animation: fadeInDown 0.6s ease;
-        }
-        .hero__title {
-            font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--gold-bright);
-            font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 10px;
-            animation: fadeInUp 0.6s ease 0.1s both;
-        }
-        .hero__slogan {
-            display: flex; justify-content: center; align-items: center; gap: 10px;
-            flex-wrap: wrap; margin: 12px 0 16px; font-size: 1rem;
-            font-weight: 700; color: var(--text); animation: fadeInUp 0.6s ease 0.15s both;
-        }
-        .hero__slogan .love{color:#ef4444} .hero__slogan .peace{color:var(--green-bright)} .hero__slogan .unity{color:var(--gold-bright)}
-        .hero__slogan .divider{color:var(--text-muted);font-weight:300}
-        .hero__subtitle {
-            font-size: 1.05rem; color: var(--text-dim); max-width: 620px;
-            margin: 0 auto 22px; font-style: italic; line-height: 1.6;
-            animation: fadeInUp 0.6s ease 0.2s both;
-        }
-        .hero__actions {
-            display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
-            animation: fadeInUp 0.6s ease 0.25s both;
-        }
+        .step h4{color:var(--gold);font-size:0.9rem;margin-bottom:4px}
+        .step p{color:var(--text-dim);font-size:0.75rem}
 
-        /* ========== BUTTONS ========== */
-        .btn {
-            display: inline-flex; align-items: center; gap: 6px; padding: 11px 22px;
-            border-radius: 40px; font-weight: 600; font-size: 0.9rem; transition: var(--transition);
-            cursor: pointer; border: 1px solid var(--green-border);
-            background: var(--card); color: var(--text); text-decoration: none; font-family: var(--font-ui);
+        .section-title{
+            font-size:1.5rem;color:var(--gold-bright);margin-bottom:6px;
+            border-left:4px solid var(--green);padding-left:14px;font-weight:700;
         }
-        .btn--primary { background: var(--green-bright); border-color: var(--green-bright); color: #0a120c; font-weight: 700; }
-        .btn--primary:hover { background: #16a34a; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(34,197,94,0.3); }
-        .btn--outline { border: 2px solid var(--green-bright); color: var(--green-bright); background: transparent; }
-        .btn--outline:hover { background: var(--green-dim); transform: translateY(-2px); }
-        .btn--gold { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
-        .btn--gold:hover { background: var(--gold-bright); transform: translateY(-2px); box-shadow: var(--shadow-gold); }
-        .btn--block { display: block; width: 100%; text-align: center; justify-content: center; }
+        .section-subtitle{color:var(--text-dim);margin-bottom:20px;font-size:0.9rem}
 
-        /* ========== STEPS ========== */
-        .steps { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin: 20px 0 30px; }
-        .step {
-            background: var(--card); border: 1px solid var(--green-border);
-            border-radius: var(--radius); padding: 20px 16px; text-align: center;
-            flex: 1; min-width: 140px; max-width: 200px; transition: var(--transition);
+        /* ========== SIGNUP FORM ========== */
+        .signup-box{
+            background:var(--card);border:2px solid var(--gold);border-radius:var(--radius-lg);
+            padding:30px;margin:30px 0;text-align:center;
         }
-        .step:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: var(--shadow-md); }
-        .step__num {
-            width: 38px; height: 38px; background: var(--green); color: #000;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: 800; font-size: 1.1rem; margin: 0 auto 10px;
+        .signup-box h2{color:var(--gold);margin-bottom:4px;font-size:1.3rem}
+        .signup-box .subtitle{color:var(--text-dim);font-size:0.85rem;margin-bottom:20px}
+        .signup-form{display:flex;flex-direction:column;gap:10px;max-width:450px;margin:0 auto}
+        .signup-form input,.signup-form textarea,.signup-form select{
+            width:100%;padding:12px 16px;background:#1b241f;border:1px solid #3a4f40;
+            border-radius:10px;color:#e2e8e4;font-family:var(--font-ui);font-size:0.9rem;transition:0.2s;
         }
-        .step__title { color: var(--gold); font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
-        .step__text { color: var(--text-dim); font-size: 0.75rem; line-height: 1.4; }
+        .signup-form input:focus,.signup-form textarea:focus,.signup-form select:focus{
+            outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(251,191,36,0.08);
+        }
+        .signup-form textarea{min-height:100px;resize:vertical}
+        .spinner{display:none;width:18px;height:18px;border:2.5px solid rgba(0,0,0,0.3);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .msg-box{text-align:center;font-size:0.85rem;min-height:24px;padding:10px;border-radius:8px;display:none;margin-top:10px}
+        .msg-success{background:rgba(34,197,94,0.1);color:#4ade80;border:1px solid rgba(34,197,94,0.25);display:block}
+        .msg-error{background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.25);display:block}
+        .msg-loading{background:rgba(251,191,36,0.1);color:var(--gold-bright);border:1px solid rgba(251,191,36,0.25);display:block}
 
-        /* ========== SECTION TITLES ========== */
-        .section-title {
-            font-size: 1.5rem; font-weight: 700; color: #f0f2e9; margin-bottom: 6px;
-            display: flex; align-items: center; gap: 10px;
-            border-left: 4px solid var(--green); padding-left: 14px;
+        /* ========== WRITERS GRID ========== */
+        .writers-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px,1fr));gap:18px;margin-top:16px}
+        .writer-card{
+            background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius-lg);
+            overflow:hidden;transition:0.3s;position:relative;
         }
-        .section-subtitle { color: var(--text-dim); margin-bottom: 20px; font-size: 0.9rem; line-height: 1.5; }
-
-        /* ========== SIGNUP BOX ========== */
-        .signup-box {
-            background: var(--card); border: 2px solid var(--gold);
-            border-radius: var(--radius-lg); padding: 30px; margin: 30px 0;
-            text-align: center; box-shadow: var(--shadow-md); transition: var(--transition);
+        .writer-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.5)}
+        .card-top{
+            position:relative;padding:28px 20px 14px;text-align:center;
+            background:linear-gradient(180deg, rgba(34,197,94,0.05) 0%, transparent 100%);
         }
-        .signup-box:hover { box-shadow: 0 8px 40px rgba(251,191,36,0.06); border-color: var(--gold-bright); }
-        .signup-box__title { color: var(--gold); margin-bottom: 4px; font-size: 1.3rem; font-weight: 700; }
-        .signup-box__subtitle { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 20px; }
-        .signup-form { display: flex; flex-direction: column; gap: 10px; max-width: 450px; margin: 0 auto; }
-        .signup-form input, .signup-form textarea, .signup-form select {
-            width: 100%; padding: 12px 16px; background: #1b241f;
-            border: 1px solid #3a4f40; border-radius: 10px; color: #e2e8e4;
-            font-family: var(--font-ui); font-size: 0.9rem; transition: border-color 0.2s;
+        .online-dot{
+            position:absolute;top:18px;right:18px;width:10px;height:10px;border-radius:50%;
+            background:var(--green-bright);border:2px solid var(--card);
+            box-shadow:0 0 8px rgba(34,197,94,0.5);animation:pulse-dot 2s infinite;
         }
-        .signup-form input:focus, .signup-form textarea:focus, .signup-form select:focus {
-            outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(251,191,36,0.08);
+        @keyframes pulse-dot{0%,100%{box-shadow:0 0 8px rgba(34,197,94,0.5)}50%{box-shadow:0 0 16px rgba(34,197,94,0.8)}}
+        .card-avatar{
+            width:80px;height:80px;border-radius:50%;margin:0 auto 12px;
+            border:3px solid var(--gold);box-shadow:0 4px 16px rgba(251,191,36,0.2);
+            overflow:hidden;transition:0.3s;
         }
-        .signup-form textarea { min-height: 100px; resize: vertical; }
-        .msg-box { text-align: center; font-size: 0.85rem; min-height: 24px; padding: 10px; border-radius: 8px; display: none; }
-        .msg-box--success { background: rgba(34,197,94,0.1); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); display: block; }
-        .msg-box--error { background: rgba(239,68,68,0.1); color: #f87171; border: 1px solid rgba(239,68,68,0.25); display: block; }
-        .msg-box--loading { background: rgba(251,191,36,0.1); color: var(--gold-bright); border: 1px solid rgba(251,191,36,0.25); display: block; }
-
-        /* ============================================
-           WRITERS GRID — WITH REAL HUMAN IMAGES
-           ============================================ */
-        .writers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-            gap: 18px;
-            margin-top: 16px;
+        .writer-card:hover .card-avatar{transform:scale(1.05);border-color:var(--gold-bright)}
+        .card-avatar img{width:100%;height:100%;object-fit:cover}
+        .card-name{font-size:1.05rem;font-weight:700;color:var(--gold-bright);margin-bottom:2px}
+        .card-pos{font-size:0.78rem;color:var(--text-dim);font-style:italic;margin-bottom:6px}
+        .card-meta{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-bottom:4px}
+        .meta-tag{padding:3px 10px;border-radius:12px;font-size:0.65rem;font-weight:600}
+        .meta-country{background:var(--green-dim);color:var(--green-bright)}
+        .meta-lang{background:rgba(59,130,246,0.12);color:#60a5fa}
+        .card-body{padding:0 20px 6px}
+        .card-bio{
+            font-size:0.8rem;color:var(--text-dim);line-height:1.5;margin-bottom:6px;
+            display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
         }
-
-        .writer-card {
-            background: var(--card);
-            border: 1px solid var(--green-border);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
+        .card-bio.expanded{-webkit-line-clamp:unset;display:block}
+        .read-more{font-size:0.72rem;color:var(--gold);cursor:pointer;font-weight:600;display:inline-block;margin-bottom:8px}
+        .card-footer{display:flex;gap:5px;padding:10px 20px 18px;flex-wrap:wrap}
+        .btn-sm{
+            padding:6px 12px;border-radius:16px;font-size:0.7rem;font-weight:600;cursor:pointer;
+            border:none;transition:0.2s;font-family:var(--font-ui);display:inline-flex;align-items:center;gap:3px;
         }
-        .writer-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .writer-card__top {
-            position: relative;
-            padding: 28px 20px 14px;
-            text-align: center;
-            background: linear-gradient(180deg, rgba(34,197,94,0.05) 0%, transparent 100%);
-        }
-
-        .writer-card__online {
-            position: absolute; top: 18px; right: 18px;
-            width: 10px; height: 10px; border-radius: 50%;
-            background: var(--green-bright); border: 2px solid var(--card);
-            box-shadow: 0 0 8px rgba(34,197,94,0.5); animation: pulse-dot 2s infinite;
-        }
-        @keyframes pulse-dot { 0%,100%{box-shadow:0 0 8px rgba(34,197,94,0.5)} 50%{box-shadow:0 0 16px rgba(34,197,94,0.8)} }
-
-        /* ---- REAL HUMAN IMAGE AVATAR ---- */
-        .writer-card__avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid var(--gold);
-            box-shadow: 0 4px 16px rgba(251,191,36,0.2);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            background: #1a1a2e;
-        }
-        .writer-card:hover .writer-card__avatar {
-            transform: scale(1.05);
-            border-color: var(--gold-bright);
-            box-shadow: 0 6px 24px rgba(251,191,36,0.35);
-        }
-
-        .writer-card__avatar-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .writer-card__name {
-            font-size: 1.05rem; font-weight: 700; color: var(--gold-bright); margin-bottom: 2px;
-        }
-        .writer-card__position {
-            font-size: 0.78rem; color: var(--text-dim); font-style: italic; margin-bottom: 6px;
-        }
-        .writer-card__meta {
-            display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-bottom: 4px;
-        }
-        .writer-card__tag {
-            padding: 3px 10px; border-radius: 12px; font-size: 0.65rem; font-weight: 600;
-        }
-        .writer-card__tag--country { background: var(--green-dim); color: var(--green-bright); }
-        .writer-card__tag--lang { background: rgba(59,130,246,0.12); color: #60a5fa; }
-
-        .writer-card__body { padding: 0 20px 6px; }
-        .writer-card__bio {
-            font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 6px;
-            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
-        }
-        .writer-card__bio--expanded { -webkit-line-clamp: unset; display: block; }
-        .writer-card__readmore {
-            font-size: 0.72rem; color: var(--gold); cursor: pointer; font-weight: 600;
-            display: inline-block; margin-bottom: 8px; transition: color 0.2s;
-        }
-        .writer-card__readmore:hover { color: var(--gold-bright); }
-
-        .writer-card__footer { display: flex; gap: 5px; padding: 10px 20px 18px; flex-wrap: wrap; }
-        .btn-sm {
-            padding: 6px 12px; border-radius: 16px; font-size: 0.7rem; font-weight: 600;
-            cursor: pointer; border: none; transition: var(--transition);
-            font-family: var(--font-ui); display: inline-flex; align-items: center; gap: 3px;
-        }
-        .btn-sm--view { background: var(--green-bright); color: #000; }
-        .btn-sm--view:hover { background: #16a34a; }
-        .btn-sm--share { background: transparent; border: 1px solid #3b82f6; color: #3b82f6; }
-        .btn-sm--share:hover { background: rgba(59,130,246,0.1); }
-        .btn-sm--join { background: var(--gold); color: #000; }
-        .btn-sm--join:hover { background: var(--gold-bright); }
+        .btn-sm-view{background:var(--green-bright);color:#000}
+        .btn-sm-share{background:transparent;border:1px solid #3b82f6;color:#3b82f6}
+        .btn-sm-join{background:var(--gold);color:#000}
 
         /* ========== CHAIN ENTRIES ========== */
-        .chain-entry {
-            background: var(--card); border: 1px solid var(--green-border);
-            border-radius: var(--radius); padding: 22px 24px; margin-bottom: 10px; transition: var(--transition);
+        .chain-entry{
+            background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius);
+            padding:22px 24px;margin-bottom:10px;transition:0.3s;
         }
-        .chain-entry:hover { border-color: var(--green-bright); }
-        .chain-entry__header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
-        .chain-entry__flag { font-size: 1.3rem; }
-        .chain-entry__author { font-weight: 700; color: var(--gold-bright); font-size: 0.9rem; }
-        .chain-entry__meta { color: var(--text-muted); font-size: 0.72rem; }
-        .chain-entry__body { color: var(--text); font-style: italic; line-height: 1.8; margin-bottom: 10px; font-size: 0.92rem; }
-        .chain-entry__thread {
-            display: inline-block; background: var(--gold-soft); color: var(--gold);
-            padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 500;
-        }
-        .connector { text-align: center; color: var(--green-bright); font-size: 1.2rem; margin: 4px 0 8px; opacity: 0.7; }
-        .chain-entry--empty { border: 2px dashed var(--green-border); opacity: 0.85; }
+        .chain-entry:hover{border-color:var(--green-bright)}
+        .chain-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+        .chain-author{font-weight:700;color:var(--gold-bright);font-size:0.9rem}
+        .chain-meta{color:var(--text-muted);font-size:0.72rem}
+        .chain-body{color:var(--text);font-style:italic;line-height:1.8;margin-bottom:10px;font-size:0.92rem}
+        .chain-thread{display:inline-block;background:var(--gold-soft);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:0.75rem}
+        .connector{text-align:center;color:var(--green-bright);font-size:1.2rem;margin:4px 0 8px;opacity:0.7}
+        .chain-empty{border:2px dashed var(--green-border);opacity:0.85}
 
         /* ========== WISDOM ENTRIES ========== */
-        .wisdom-entry {
-            background: var(--card); border-left: 4px solid var(--gold);
-            border-radius: 0 var(--radius) var(--radius) 0; padding: 22px 24px;
-            margin-bottom: 10px; transition: var(--transition);
+        .wisdom-entry{
+            background:var(--card);border-left:4px solid var(--gold);
+            border-radius:0 var(--radius) var(--radius) 0;padding:22px 24px;margin-bottom:10px;transition:0.3s;
         }
-        .wisdom-entry:hover { border-left-color: var(--gold-bright); background: var(--card-hover); }
-        .wisdom-entry__header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
-        .wisdom-entry__author { font-weight: 700; color: var(--gold-bright); font-size: 0.9rem; }
-        .wisdom-entry__role { color: var(--text-muted); font-size: 0.72rem; }
-        .wisdom-entry__depth {
-            display: inline-block; background: var(--gold); color: #000;
-            padding: 2px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 700;
+        .wisdom-entry:hover{border-left-color:var(--gold-bright);background:var(--card-hover)}
+        .wisdom-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+        .wisdom-author{font-weight:700;color:var(--gold-bright);font-size:0.9rem}
+        .wisdom-role{color:var(--text-muted);font-size:0.72rem}
+        .depth-badge{display:inline-block;background:var(--gold);color:#000;padding:2px 10px;border-radius:12px;font-size:0.7rem;font-weight:700}
+        .wisdom-body{color:var(--text);line-height:1.8;margin-bottom:10px;font-size:0.92rem}
+        .wisdom-edge{
+            color:var(--green-bright);font-style:italic;font-weight:500;
+            margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.82rem;
         }
-        .wisdom-entry__body { color: var(--text); line-height: 1.8; margin-bottom: 10px; font-size: 0.92rem; }
-        .wisdom-entry__edge {
-            color: var(--green-bright); font-style: italic; font-weight: 500;
-            margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.82rem;
-        }
-        .wisdom-entry--empty { border-left: 4px dashed var(--gold); opacity: 0.85; }
+        .wisdom-empty{border-left:4px dashed var(--gold);opacity:0.85}
 
         /* ========== CTA BANNER ========== */
-        .cta-banner {
-            text-align: center; margin: 40px 0 20px;
-            background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(251,191,36,0.08), rgba(239,68,68,0.05));
-            border-radius: 40px; padding: 40px 20px; border: 1px solid var(--green-border); transition: var(--transition);
+        .cta-banner{
+            text-align:center;margin:40px 0 20px;
+            background:linear-gradient(135deg, rgba(34,197,94,0.08), rgba(251,191,36,0.08));
+            border-radius:40px;padding:35px 20px;border:1px solid var(--green-border);
         }
-        .cta-banner:hover { border-color: rgba(251,191,36,0.4); box-shadow: 0 8px 40px rgba(251,191,36,0.05); }
-        .cta-banner__title { color: var(--gold-bright); font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; }
-        .cta-banner__text { color: var(--text-dim); max-width: 500px; margin: 8px auto 18px; }
+        .cta-banner h2{color:var(--gold-bright);font-size:1.4rem;margin-bottom:6px}
+        .cta-banner p{color:var(--text-dim);margin-bottom:16px}
 
-        /* ========== FOOTER ========== */
-        .footer {
-            background: #0a0f0c; border-top: 1px solid var(--green-border);
-            padding: 40px 20px 30px; color: var(--text-muted); font-size: 0.78rem; margin-top: 50px;
+        footer{
+            text-align:center;padding:25px;color:var(--text-muted);font-size:0.78rem;
+            border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;
         }
-        .footer__grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 24px; max-width: 1000px; margin: 0 auto 24px; text-align: left;
-        }
-        .footer__col-title { color: var(--gold); margin-bottom: 10px; font-size: 0.9rem; font-weight: 700; }
-        .footer__link { display: block; color: var(--text-dim); padding: 3px 0; font-size: 0.78rem; transition: var(--transition); }
-        .footer__link:hover { color: var(--green-bright); }
-        .footer__bottom {
-            text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);
-            margin-top: 20px; max-width: 1000px; margin-left: auto; margin-right: auto;
-        }
-        .footer__slogan { font-size: 1rem; margin-bottom: 8px; font-weight: 600; color: var(--text-dim); }
-        .footer__slogan .love{color:#ef4444} .footer__slogan .peace{color:var(--green-bright)} .footer__slogan .unity{color:var(--gold-bright)}
-        .footer__hashtag { color: var(--green-bright); font-weight: 600; margin-top: 8px; }
+        footer a{color:var(--text-dim)}footer a:hover{color:var(--green-bright)}
 
-        /* ========== ANIMATIONS ========== */
-        @keyframes fadeInDown { from{opacity:0;transform:translateY(-15px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 768px) {
-            .nav__links { display: none; }
-            .hamburger { display: flex; }
-            .container { padding: 20px 14px 40px; }
-            .hero { padding: 40px 16px 30px; }
-            .hero__title { font-size: 1.6rem; }
-            .hero__slogan { font-size: 0.85rem; gap: 6px; }
-            .writers-grid { grid-template-columns: 1fr; }
-            .signup-box { padding: 20px 16px; }
-            .cta-banner { padding: 30px 16px; }
-            .cta-banner__title { font-size: 1.2rem; }
-            .footer__grid { grid-template-columns: repeat(2, 1fr); }
-            .section-title { font-size: 1.3rem; }
-            .writer-card__avatar { width: 65px; height: 65px; }
+        @media(max-width:768px){
+            .nav-links{display:none}.hamburger{display:flex}
+            .hero{padding:40px 16px 30px}.hero h1{font-size:1.6rem}
+            .writers-grid{grid-template-columns:1fr}.signup-box{padding:20px 16px}
+            .cta-banner{padding:30px 16px}
         }
-        @media (max-width: 480px) {
-            .steps { flex-direction: column; align-items: center; }
-            .step { max-width: 100%; }
-            .footer__grid { grid-template-columns: 1fr; }
-            .hero__actions { flex-direction: column; align-items: center; }
-            .hero__actions .btn { width: 100%; max-width: 300px; justify-content: center; }
+        @media(max-width:480px){
+            .steps{flex-direction:column;align-items:center}.step{max-width:100%}
         }
     </style>
 </head>
 <body>
 
-    <!-- ========== NAVIGATION ========== -->
-    <nav class="nav" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="nav__logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        <div class="nav__links" role="menubar">
-            <a href="index.html" class="nav__link" role="menuitem">Home</a>
-            <a href="voices.html" class="nav__link" role="menuitem">Voices</a>
-            <a href="blog.html" class="nav__link" role="menuitem">Blog</a>
-            <a href="courses.html" class="nav__link" role="menuitem">Courses</a>
-            <a href="dashboard.html" class="nav__link" role="menuitem">Dashboard</a>
-            <a href="participate.html" class="nav__link nav__link--active" role="menuitem" aria-current="page">✍️ Participate</a>
-            <a href="media.html" class="nav__link" role="menuitem">Media</a>
-            <a href="gallery.html" class="nav__link" role="menuitem">Gallery</a>
-            <a href="contribute.html" class="nav__link" role="menuitem">📝 Share Voice</a>
-            <a href="support.html" class="nav__link nav__cta" role="menuitem">❤️ Support</a>
-        </div>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
-            <span class="hamburger__line"></span><span class="hamburger__line"></span><span class="hamburger__line"></span>
-        </button>
-    </nav>
+<!-- ========== NAVIGATION ========== -->
+<nav>
+    <a href="index.html" class="nav-logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="voices.html">Voices</a>
+        <a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="participate.html" class="active">✍️ Participate</a>
+        <a href="contribute.html">📝 Share Voice</a>
+        <a href="media.html">Media</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="support.html" class="nav-cta">❤️ Support</a>
+    </div>
+    <button class="hamburger" onclick="alert('Mobile menu')"><span></span><span></span><span></span></button>
+</nav>
 
-    <!-- ========== SLIDE MENU ========== -->
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu" role="dialog" aria-label="Mobile menu">
-        <div class="slide-menu__header">
-            <div class="slide-menu__flag">🇪🇹🕊️</div>
-            <h3 class="slide-menu__title">Ethiopian Peace Archive</h3>
-            <p style="color:var(--text-muted);font-size:0.7rem">Voices for Peace · Power of Unity</p>
+<!-- ========== MAIN CONTENT ========== -->
+<main class="container">
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-badge">✍️ Collaborative Writing Hub</div>
+        <h1>Participate</h1>
+        <div class="hero-slogan">
+            <span>❤️ <span class="love">Wear Love.</span></span> ·
+            <span>🕊️ <span class="peace">Speak Peace.</span></span> ·
+            <span>🤝 <span class="unity">Live Unity.</span></span>
         </div>
-        <a href="index.html" class="slide-menu__link">🏠 Home</a>
-        <a href="voices.html" class="slide-menu__link">🗣️ Voice Archive</a>
-        <a href="blog.html" class="slide-menu__link">📝 Blog & Stories</a>
-        <a href="courses.html" class="slide-menu__link">🎓 Free Courses</a>
-        <a href="dashboard.html" class="slide-menu__link">📊 Dashboard</a>
-        <a href="participate.html" class="slide-menu__link" style="background:var(--gold-soft);color:var(--gold-bright);font-weight:700;">✍️ Participate</a>
-        <a href="media.html" class="slide-menu__link">📰 Media Coverage</a>
-        <a href="gallery.html" class="slide-menu__link">🖼️ Gallery</a>
-        <a href="contribute.html" class="slide-menu__link">📝 Share Your Voice</a>
-        <a href="about.html" class="slide-menu__link">📖 About Us</a>
-        <a href="contact.html" class="slide-menu__link">📬 Contact</a>
-        <a href="support.html" class="slide-menu__link" style="background:var(--green-dim);color:var(--green-bright);font-weight:700;">❤️ Support</a>
-        <div class="slide-menu__footer">
-            <p style="color:var(--text-muted);font-size:0.65rem">&copy; 2026 Ethiopian Peace Archive</p>
+        <p>Join writers from <strong style="color:var(--gold-bright);">57+ countries</strong>. Co-create stories, deepen wisdom, and publish peace literature together.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+            <a href="#signup" class="btn btn-primary">📝 Sign Up to Write</a>
+            <a href="#story-chain" class="btn btn-outline">📖 Story Chain</a>
+            <a href="#wisdom-chain" class="btn btn-outline">🦉 Wisdom Chain</a>
+        </div>
+    </header>
+
+    <!-- Steps -->
+    <div class="steps">
+        <div class="step"><div class="step-num">1</div><h4>Fill Quick Form</h4><p>Name, email, and your message. No password needed.</p></div>
+        <div class="step"><div class="step-num">2</div><h4>Choose Chain</h4><p>Story Chain or Wisdom Chain — or both!</p></div>
+        <div class="step"><div class="step-num">3</div><h4>Get Published</h4><p>Reviewed and published within 24 hours.</p></div>
+    </div>
+
+    <!-- ========== SIGNUP FORM (THE ONE THAT NEEDED FIXING) ========== -->
+    <div class="signup-box" id="signup">
+        <h2>📝 Join the Chain — It's Free</h2>
+        <p class="subtitle">No registration. No password. Just your voice.</p>
+        <div class="signup-form">
+            <input type="text" id="writerName" placeholder="Your Full Name *" required>
+            <input type="email" id="writerEmail" placeholder="Your Email * (private)" required>
+            <select id="writerCountry">
+                <option value="">Your Country</option>
+                <option>Ethiopia</option><option>Kenya</option><option>Nigeria</option><option>Ghana</option>
+                <option>Rwanda</option><option>South Africa</option><option>United States</option><option>United Kingdom</option>
+                <option>Canada</option><option>Germany</option><option>France</option><option>Japan</option>
+                <option>India</option><option>Brazil</option><option>Other</option>
+            </select>
+            <select id="writerType">
+                <option value="story">📖 Story Chain — Add to the Never-Ending Story</option>
+                <option value="wisdom">🦉 Wisdom Chain — Add Your Layer of Insight</option>
+                <option value="voice">🗣️ Share a Peace Voice</option>
+            </select>
+            <textarea id="writerMessage" placeholder="Your message or story contribution... *" required></textarea>
+            
+            <!-- THIS BUTTON NOW WORKS -->
+            <button class="btn btn-gold btn-block" id="submitBtn" onclick="submitForm()">
+                <span class="spinner" id="spinner"></span>
+                <span id="btnText">🕊️ Submit & Join</span>
+            </button>
+            
+            <div class="msg-box" id="formMsg"></div>
         </div>
     </div>
 
-    <!-- ========== MAIN CONTENT ========== -->
-    <main class="container">
+    <!-- Writers Grid -->
+    <h2 class="section-title" style="margin-top:10px;">🖋️ Writers Currently in the Chain</h2>
+    <p class="section-subtitle">Meet the voices co-creating stories and wisdom across borders.</p>
+    <div class="writers-grid" id="writersGrid"></div>
 
-        <!-- Hero -->
-        <header class="hero">
-            <div class="hero__badge">✍️ Collaborative Writing Hub</div>
-            <h1 class="hero__title">Participate</h1>
-            <div class="hero__slogan">
-                <span class="love">❤️ Wear Love.</span><span class="divider">·</span>
-                <span class="peace">🕊️ Speak Peace.</span><span class="divider">·</span>
-                <span class="unity">🤝 Live Unity.</span>
-            </div>
-            <p class="hero__subtitle">Join writers from <strong style="color:var(--gold-bright);">57+ countries</strong>. Co-create stories, deepen wisdom, and publish peace literature together.</p>
-            <div class="hero__actions">
-                <a href="#signup" class="btn btn--primary">📝 Sign Up to Write</a>
-                <a href="#story-chain" class="btn btn--outline">📖 Story Chain</a>
-                <a href="#wisdom-chain" class="btn btn--outline">🦉 Wisdom Chain</a>
-                <a href="index.html" class="btn btn--outline">🏠 Home</a>
-            </div>
-        </header>
-
-        <!-- Steps -->
-        <div class="steps">
-            <div class="step"><div class="step__num">1</div><h4 class="step__title">Fill Quick Form</h4><p class="step__text">Name, email, and your message. No password needed.</p></div>
-            <div class="step"><div class="step__num">2</div><h4 class="step__title">Choose Chain</h4><p class="step__text">Story Chain or Wisdom Chain — or both!</p></div>
-            <div class="step"><div class="step__num">3</div><h4 class="step__title">Get Published</h4><p class="step__text">Reviewed and published within 24 hours.</p></div>
+    <!-- Story Chain -->
+    <div id="story-chain" style="margin-top:50px;">
+        <h2 class="section-title">📖 The Never-Ending Story</h2>
+        <p class="section-subtitle">One writer starts. Another finds a thread and follows it somewhere new.</p>
+        <div class="chain-entry">
+            <div class="chain-header">🇪🇹 <span class="chain-author">Bethlehem Tadesse</span><span class="chain-meta">· Addis Ababa, Ethiopia</span></div>
+            <div class="chain-body">"The day everything changed, it was raining. I saw an old man fall in the mud. No one stopped. But a street dog walked over and stood beside him. As if to say: <em>you are not alone.</em> I put on my shoes and went outside."</div>
+            <span class="chain-thread">🧵 Thread: The old man. The dog.</span>
         </div>
-
-        <!-- Signup Form -->
-        <div class="signup-box" id="signup">
-            <h2 class="signup-box__title">📝 Join the Chain — It's Free</h2>
-            <p class="signup-box__subtitle">Fill in the fields below. No registration. No password. Just your voice.</p>
-            <div class="signup-form">
-                <input type="text" id="wName" placeholder="Your Full Name *" required>
-                <input type="email" id="wEmail" placeholder="Your Email * (private)" required>
-                <select id="wCountry">
-                    <option value="">Your Country</option>
-                    <option>Ethiopia</option><option>Kenya</option><option>Nigeria</option><option>Ghana</option>
-                    <option>Rwanda</option><option>South Africa</option><option>United States</option><option>United Kingdom</option>
-                    <option>Canada</option><option>Germany</option><option>France</option><option>Japan</option>
-                    <option>India</option><option>Brazil</option><option>Other</option>
-                </select>
-                <select id="wType">
-                    <option value="story">📖 Story Chain — Add to the Never-Ending Story</option>
-                    <option value="wisdom">🦉 Wisdom Chain — Add Your Layer of Insight</option>
-                    <option value="voice">🗣️ Share a Peace Voice</option>
-                </select>
-                <textarea id="wMessage" placeholder="Your message or story contribution... *" required></textarea>
-                <button class="btn btn--gold btn--block" onclick="submitEntry()">🕊️ Submit & Join</button>
-                <div class="msg-box" id="signupMsg"></div>
-            </div>
+        <div class="connector">⬇️</div>
+        <div class="chain-entry">
+            <div class="chain-header">🇨🇴 <span class="chain-author">Carlos Ramírez</span><span class="chain-meta">· Former Combatant, Colombia</span></div>
+            <div class="chain-body">"After I put down my rifle, I fell into silence. A coffee farmer reached down and pulled me up. With coffee. With a question about my mother. Who reached down to you?"</div>
+            <span class="chain-thread">🧵 Thread: The coffee farmer. The mother.</span>
         </div>
-
-        <!-- ============================================
-             WRITERS SECTION — WITH REAL HUMAN IMAGES
-             ============================================ -->
-        <h2 class="section-title" style="margin-top:10px;">🖋️ Writers Currently in the Chain</h2>
-        <p class="section-subtitle">Meet the voices co-creating stories and wisdom across borders.</p>
-        <div class="writers-grid" id="writersGrid">
-            <!-- Writers rendered by JavaScript with real images -->
+        <div class="connector">⬇️</div>
+        <div class="chain-entry chain-empty">
+            <div class="chain-header">🌍 <span class="chain-author">Your Name Here</span><span class="chain-meta">· Your Country</span></div>
+            <div class="chain-body" style="color:var(--text-muted);"><em>The story waits for you. What happens next?</em></div>
+            <span class="chain-thread">🧵 Your thread guides the next writer.</span>
         </div>
+        <a href="#signup" class="btn btn-primary btn-block" style="margin-top:8px;">✍️ Add Your Part</a>
+    </div>
 
-        <!-- Story Chain -->
-        <div id="story-chain" style="margin-top:50px;">
-            <h2 class="section-title">📖 The Never-Ending Story</h2>
-            <p class="section-subtitle">One writer starts. Another finds a <strong style="color:var(--gold-bright);">thread</strong> and follows it somewhere <strong style="color:var(--gold-bright);">new</strong>.</p>
-            <div class="chain-entry">
-                <div class="chain-entry__header"><span class="chain-entry__flag">🇪🇹</span><span class="chain-entry__author">Bethlehem Tadesse</span><span class="chain-entry__meta">· Addis Ababa, Ethiopia</span></div>
-                <div class="chain-entry__body">"The day everything changed, it was raining. I saw an old man fall in the mud. No one stopped. But a street dog walked over and stood beside him. As if to say: <em>you are not alone.</em> I put on my shoes and went outside."</div>
-                <span class="chain-entry__thread">🧵 Thread: The old man. The dog.</span>
-            </div>
-            <div class="connector">⬇️</div>
-            <div class="chain-entry">
-                <div class="chain-entry__header"><span class="chain-entry__flag">🇨🇴</span><span class="chain-entry__author">Carlos Ramírez</span><span class="chain-entry__meta">· Former Combatant, Colombia</span></div>
-                <div class="chain-entry__body">"After I put down my rifle, I fell into silence. A coffee farmer reached down and pulled me up. With coffee. With a question about my mother. Who reached down to you?"</div>
-                <span class="chain-entry__thread">🧵 Thread: The coffee farmer. The mother.</span>
-            </div>
-            <div class="connector">⬇️</div>
-            <div class="chain-entry chain-entry--empty">
-                <div class="chain-entry__header"><span class="chain-entry__flag">🌍</span><span class="chain-entry__author">Your Name Here</span><span class="chain-entry__meta">· Your Country</span></div>
-                <div class="chain-entry__body" style="color:var(--text-muted);"><em>The story waits for you. What happens next?</em></div>
-                <span class="chain-entry__thread">🧵 Your thread guides the next writer.</span>
-            </div>
-            <a href="#signup" class="btn btn--primary btn--block" style="margin-top:8px;">✍️ Add Your Part to the Story</a>
+    <!-- Wisdom Chain -->
+    <div id="wisdom-chain" style="margin-top:55px;">
+        <h2 class="section-title">🦉 The Wisdom Chain</h2>
+        <p class="section-subtitle">Not a conversation. A compounding of insight. Each voice deepens the one before.</p>
+        <div class="wisdom-entry">
+            <div class="wisdom-header">🇬🇭 <span class="wisdom-author">Kwame Asante</span><span class="wisdom-role">· Taxi Driver, Ghana</span><span class="depth-badge">Layer 1</span></div>
+            <div class="wisdom-body">"People change when you listen — really listen. I drove a taxi for 22 years. I never fixed anyone. But many fixed themselves because someone was quiet while they spoke."</div>
+            <div class="wisdom-edge">🔪 Edge: What about people who have hurt you?</div>
         </div>
-
-        <!-- Wisdom Chain -->
-        <div id="wisdom-chain" style="margin-top:55px;">
-            <h2 class="section-title">🦉 The Wisdom Chain</h2>
-            <p class="section-subtitle">Not a conversation. A <strong style="color:var(--gold-bright);">compounding of insight.</strong> Each voice deepens the one before.</p>
-            <div class="wisdom-entry">
-                <div class="wisdom-entry__header"><span>🇬🇭</span><span class="wisdom-entry__author">Kwame Asante</span><span class="wisdom-entry__role">· Taxi Driver, Ghana</span><span class="wisdom-entry__depth">Layer 1</span></div>
-                <div class="wisdom-entry__body">"People change when you listen — really listen. I drove a taxi for 22 years. I never fixed anyone. But many fixed themselves because someone was quiet while they spoke."</div>
-                <div class="wisdom-entry__edge">🔪 Edge: What about people who have hurt you?</div>
-            </div>
-            <div class="wisdom-entry">
-                <div class="wisdom-entry__header"><span>🇷🇼</span><span class="wisdom-entry__author">Odette Uwimana</span><span class="wisdom-entry__role">· Reconciliation Survivor, Rwanda</span><span class="wisdom-entry__depth">Layer 2</span></div>
-                <div class="wisdom-entry__body">"I sat across from the man who killed my brother. I listened to his shaking hands. Listening to an enemy is self-defense of the soul."</div>
-                <div class="wisdom-entry__edge">🔪 Edge: What is listening for if it cannot undo the past?</div>
-            </div>
-            <div class="wisdom-entry wisdom-entry--empty">
-                <div class="wisdom-entry__header"><span>🌍</span><span class="wisdom-entry__author">Your Name Here</span><span class="wisdom-entry__role">· Your Role, Your Country</span><span class="wisdom-entry__depth">Layer 3</span></div>
-                <div class="wisdom-entry__body" style="color:var(--text-muted);"><em>Add your layer. Sharpen the truth. Leave your edge.</em></div>
-                <div class="wisdom-entry__edge">🔪 Your edge guides the next layer.</div>
-            </div>
-            <a href="#signup" class="btn btn--primary btn--block" style="margin-top:8px;">🦉 Add Your Layer to the Wisdom Chain</a>
+        <div class="wisdom-entry">
+            <div class="wisdom-header">🇷🇼 <span class="wisdom-author">Odette Uwimana</span><span class="wisdom-role">· Reconciliation Survivor, Rwanda</span><span class="depth-badge">Layer 2</span></div>
+            <div class="wisdom-body">"I sat across from the man who killed my brother. I listened to his shaking hands. Listening to an enemy is self-defense of the soul."</div>
+            <div class="wisdom-edge">🔪 Edge: What is listening for if it cannot undo the past?</div>
         </div>
-
-        <!-- CTA Banner -->
-        <div class="cta-banner">
-            <h2 class="cta-banner__title">🤝 Your words build bridges</h2>
-            <p class="cta-banner__text">All languages, all experience levels, all countries welcome. <strong>Wear Love. Speak Peace. Live Unity.</strong></p>
-            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-                <a href="#signup" class="btn btn--gold" style="font-size:1rem;">✍️ Participate Now</a>
-                <a href="index.html" class="btn btn--outline">🏠 Back to Home</a>
-            </div>
+        <div class="wisdom-entry wisdom-empty">
+            <div class="wisdom-header">🌍 <span class="wisdom-author">Your Name Here</span><span class="wisdom-role">· Your Role, Your Country</span><span class="depth-badge">Layer 3</span></div>
+            <div class="wisdom-body" style="color:var(--text-muted);"><em>Add your layer. Sharpen the truth. Leave your edge.</em></div>
+            <div class="wisdom-edge">🔪 Your edge guides the next layer.</div>
         </div>
+        <a href="#signup" class="btn btn-primary btn-block" style="margin-top:8px;">🦉 Add Your Layer</a>
+    </div>
 
-    </main>
+    <!-- CTA -->
+    <div class="cta-banner">
+        <h2>🤝 Your words build bridges</h2>
+        <p>All languages, all experience levels, all countries welcome. <strong>Wear Love. Speak Peace. Live Unity.</strong></p>
+        <a href="#signup" class="btn btn-gold" style="font-size:1rem;">✍️ Participate Now</a>
+    </div>
+</main>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer" role="contentinfo">
-        <div class="footer__grid">
-            <div><h4 class="footer__col-title">🗣️ Explore</h4><a href="voices.html" class="footer__link">Voice Archive</a><a href="blog.html" class="footer__link">Blog</a><a href="participate.html" class="footer__link">Participate</a><a href="dashboard.html" class="footer__link">Dashboard</a></div>
-            <div><h4 class="footer__col-title">🎓 Learn</h4><a href="courses.html" class="footer__link">Free Courses</a><a href="peace-techniques.html" class="footer__link">Peace Techniques</a><a href="research.html" class="footer__link">AI Research</a><a href="about.html" class="footer__link">About Us</a></div>
-            <div><h4 class="footer__col-title">🤝 Join</h4><a href="contribute.html" class="footer__link">Share Voice</a><a href="support.html" class="footer__link">Support</a><a href="contact.html" class="footer__link">Contact</a></div>
-            <div><h4 class="footer__col-title">🌍 Connect</h4><a href="#" class="footer__link">𝕏 Twitter</a><a href="#" class="footer__link">Facebook</a><a href="#" class="footer__link">Instagram</a><a href="#" class="footer__link">Telegram</a></div>
-        </div>
-        <div class="footer__bottom">
-            <p class="footer__slogan"><span class="love">❤️ Wear Love.</span> · <span class="peace">🕊️ Speak Peace.</span> · <span class="unity">🤝 Live Unity.</span></p>
-            <p>Ethiopian Peace Archive &copy; 2026 · Story & Wisdom Chain · <a href="index.html" class="footer__link" style="display:inline;">Home</a></p>
-            <p class="footer__hashtag">#EthiopianPeaceArchive #WearLoveSpeakPeaceLiveUnity #StoryChain</p>
-        </div>
-    </footer>
+<footer>
+    <p style="font-size:1rem;margin-bottom:4px;">🕊️ Peace is the goal. ❤️ Love is the way. 🤝 Unity is the strength.</p>
+    <p>Ethiopian Peace Archive &copy; 2026 · <a href="index.html">Home</a> · <a href="voices.html">Voices</a> · <a href="contribute.html">Share Voice</a></p>
+    <p style="margin-top:6px;color:var(--green-bright);font-weight:600">#EthiopianPeaceArchive #VoicesForPeace #StoryChain</p>
+</footer>
 
-    <!-- ============================================
-         JAVASCRIPT — WITH REAL HUMAN IMAGES
-         ============================================ -->
-    <script>
-        const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+<!-- ============================================
+     WORKING JAVASCRIPT — FORM NOW SUBMITS
+     ============================================ -->
+<script>
+    const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
-        // ============================================
-        // REAL HUMAN IMAGE URLS
-        // Using picsum.photos for random real faces
-        // Each writer gets a unique, consistent face
-        // ============================================
-        const writers = [
-            {
-                id: 1,
-                name: "Bethlehem Tadesse",
-                position: "Storyteller & Poet",
-                country: "Ethiopia",
-                language: "Amharic, English",
-                bio: "Started the Story Chain with a tale about rain, an old man, and a street dog. Believes every stranger carries a story worth preserving.",
-                online: true,
-                // Ethiopian woman portrait — consistent seed for same image
-                imageUrl: "https://images.unsplash.com/photo-1531384440684-b8e0c3e5c7a2?w=200&h=200&fit=crop&crop=face"
-            },
-            {
-                id: 2,
-                name: "Carlos Ramírez",
-                position: "Former Combatant · Coffee Farmer",
-                country: "Colombia",
-                language: "Spanish",
-                bio: "Put down his rifle after 14 years. Now plants coffee and writes about reconciliation. 'A farmer reached down and pulled me up.'",
-                online: true,
-                // Colombian man portrait
-                imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
-            },
-            {
-                id: 3,
-                name: "Yuki Tanaka",
-                position: "Zen Practitioner",
-                country: "Japan",
-                language: "Japanese, English",
-                bio: "Meditates on the question: 'What did your mother want before she became a mother?' Lights incense for lost dreams.",
-                online: false,
-                // Japanese woman portrait
-                imageUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face"
-            },
-            {
-                id: 4,
-                name: "Kwame Asante",
-                position: "Taxi Driver",
-                country: "Ghana",
-                language: "Twi, English",
-                bio: "Drove a taxi for 22 years. Listened to thousands. Says listening is a form of love. Started the Wisdom Chain.",
-                online: true,
-                // Ghanaian man portrait
-                imageUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face"
-            },
-            {
-                id: 5,
-                name: "Odette Uwimana",
-                position: "Reconciliation Survivor",
-                country: "Rwanda",
-                language: "Kinyarwanda, French",
-                bio: "Sat across from the man who killed her brother. Gave him water. Says listening to an enemy is self-defense of the soul.",
-                online: false,
-                // Rwandan woman portrait
-                imageUrl: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&crop=face"
-            },
-            {
-                id: 6,
-                name: "Samir Al-Khatib",
-                position: "Former Teacher",
-                country: "Syria",
-                language: "Arabic",
-                bio: "Taught mathematics for 22 years. His school became rubble. Now teaches in a tent. A child's laughter is the bravest sound.",
-                online: true,
-                // Syrian man portrait
-                imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face"
-            }
-        ];
+    let isSubmitting = false;
 
-        // ============================================
-        // RENDER WRITERS WITH REAL IMAGES
-        // ============================================
-        function renderWriters() {
-            const grid = document.getElementById('writersGrid');
-            if (!grid) return;
+    // ========== WRITERS DATA WITH REAL IMAGES ==========
+    const writers = [
+        { id:1, name:"Bethlehem Tadesse", pos:"Storyteller & Poet", country:"Ethiopia", lang:"Amharic, English", bio:"Started the Story Chain with a tale about rain, an old man, and a street dog. Believes every stranger carries a story worth preserving.", online:true, img:"https://images.unsplash.com/photo-1531384440684-b8e0c3e5c7a2?w=200&h=200&fit=crop&crop=face" },
+        { id:2, name:"Carlos Ramírez", pos:"Former Combatant · Coffee Farmer", country:"Colombia", lang:"Spanish", bio:"Put down his rifle after 14 years. Now plants coffee and writes about reconciliation. 'A farmer reached down and pulled me up.'", online:true, img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" },
+        { id:3, name:"Yuki Tanaka", pos:"Zen Practitioner", country:"Japan", lang:"Japanese, English", bio:"Meditates on the question: 'What did your mother want before she became a mother?' Lights incense for lost dreams.", online:false, img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face" },
+        { id:4, name:"Kwame Asante", pos:"Taxi Driver", country:"Ghana", lang:"Twi, English", bio:"Drove a taxi for 22 years. Listened to thousands. Says listening is a form of love. Started the Wisdom Chain.", online:true, img:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face" },
+        { id:5, name:"Odette Uwimana", pos:"Reconciliation Survivor", country:"Rwanda", lang:"Kinyarwanda, French", bio:"Sat across from the man who killed her brother. Gave him water. Says listening to an enemy is self-defense of the soul.", online:false, img:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&crop=face" },
+        { id:6, name:"Samir Al-Khatib", pos:"Former Teacher", country:"Syria", lang:"Arabic", bio:"Taught mathematics for 22 years. His school became rubble. Now teaches in a tent. A child's laughter is the bravest sound.", online:true, img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face" }
+    ];
 
-            let html = '';
-            writers.forEach((writer, index) => {
-                const onlineDot = writer.online 
-                    ? '<div class="writer-card__online" title="Online now"></div>' 
-                    : '';
-
-                html += `
-                <div class="writer-card">
-                    <div class="writer-card__top">
-                        ${onlineDot}
-                        <!-- REAL HUMAN IMAGE AVATAR -->
-                        <div class="writer-card__avatar" title="${writer.name}">
-                            <img 
-                                src="${writer.imageUrl}" 
-                                alt="${writer.name} — ${writer.position} from ${writer.country}"
-                                class="writer-card__avatar-img"
-                                loading="lazy"
-                                onerror="this.parentElement.innerHTML='<span style=font-size:2rem;color:#fff;font-weight:700>${writer.name.charAt(0)}</span>'"
-                            >
-                        </div>
-                        <div class="writer-card__name">${writer.name}</div>
-                        <div class="writer-card__position">💼 ${writer.position}</div>
-                        <div class="writer-card__meta">
-                            <span class="writer-card__tag writer-card__tag--country">📍 ${writer.country}</span>
-                            <span class="writer-card__tag writer-card__tag--lang">🌐 ${writer.language}</span>
-                        </div>
+    // ========== RENDER WRITERS ==========
+    function renderWriters() {
+        const grid = document.getElementById('writersGrid');
+        if (!grid) return;
+        grid.innerHTML = writers.map((w, i) => `
+            <div class="writer-card">
+                <div class="card-top">
+                    ${w.online ? '<div class="online-dot" title="Online now"></div>' : ''}
+                    <div class="card-avatar">
+                        <img src="${w.img}" alt="${w.name}" loading="lazy" onerror="this.parentElement.innerHTML='<span style=font-size:2rem;color:#fff;font-weight:700>${w.name.charAt(0)}</span>'">
                     </div>
-                    <div class="writer-card__body">
-                        <div class="writer-card__bio" id="bio-${index}">${writer.bio}</div>
-                        <span class="writer-card__readmore" id="btn-${index}" onclick="toggleBio('bio-${index}','btn-${index}')">Read more →</span>
+                    <div class="card-name">${w.name}</div>
+                    <div class="card-pos">💼 ${w.pos}</div>
+                    <div class="card-meta">
+                        <span class="meta-tag meta-country">📍 ${w.country}</span>
+                        <span class="meta-tag meta-lang">🌐 ${w.lang}</span>
                     </div>
-                    <div class="writer-card__footer">
-                        <button class="btn-sm btn-sm--view" onclick="viewWriter(${writer.id})">👁️ View</button>
-                        <button class="btn-sm btn-sm--share" onclick="shareWriter(${writer.id})">📤 Share</button>
-                        <button class="btn-sm btn-sm--join" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">✍️ Join</button>
-                    </div>
-                </div>`;
+                </div>
+                <div class="card-body">
+                    <div class="card-bio" id="bio-${i}">${w.bio}</div>
+                    <span class="read-more" onclick="toggleBio('bio-${i}', this)">Read more →</span>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-sm btn-sm-view" onclick="viewWriter(${w.id})">👁️ View</button>
+                    <button class="btn-sm btn-sm-share" onclick="shareWriter(${w.id})">📤 Share</button>
+                    <button class="btn-sm btn-sm-join" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">✍️ Join</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ========== TOGGLE BIO ==========
+    function toggleBio(bioId, btn) {
+        const bio = document.getElementById(bioId);
+        if (!bio) return;
+        if (bio.classList.contains('expanded')) {
+            bio.classList.remove('expanded');
+            btn.textContent = 'Read more →';
+        } else {
+            bio.classList.add('expanded');
+            btn.textContent = 'Show less ←';
+        }
+    }
+
+    // ========== VIEW / SHARE WRITER ==========
+    function viewWriter(id) {
+        const w = writers.find(wr => wr.id === id);
+        if (w) alert(`🖋️ ${w.name}\n\n💼 ${w.pos}\n📍 ${w.country}\n🌐 ${w.lang}\n\n📝 ${w.bio}`);
+    }
+    function shareWriter(id) {
+        const w = writers.find(wr => wr.id === id);
+        if (!w) return;
+        const url = window.location.href.split('?')[0] + '?writer=' + id;
+        if (navigator.share) {
+            navigator.share({ title: `${w.name} — Ethiopian Peace Archive`, text: w.bio.substring(0, 100) + '...', url }).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(url).then(() => alert('🔗 Link copied!')).catch(() => alert('🔗 ' + url));
+        }
+    }
+
+    // ============================================
+    // 🔥 FORM SUBMISSION — THIS IS WHAT WAS FIXED
+    // ============================================
+    async function submitForm() {
+        console.log('🟢 submitForm() called');
+        
+        if (isSubmitting) {
+            console.log('⚠️ Already submitting');
+            return;
+        }
+
+        const btn = document.getElementById('submitBtn');
+        const spinner = document.getElementById('spinner');
+        const btnText = document.getElementById('btnText');
+        const msg = document.getElementById('formMsg');
+        
+        const name = document.getElementById('writerName').value.trim();
+        const email = document.getElementById('writerEmail').value.trim();
+        const country = document.getElementById('writerCountry').value;
+        const type = document.getElementById('writerType').value;
+        const message = document.getElementById('writerMessage').value.trim();
+
+        // Reset
+        msg.className = 'msg-box';
+        msg.textContent = '';
+
+        // Validate
+        if (!name) {
+            msg.className = 'msg-box msg-error';
+            msg.textContent = '❌ Please enter your full name.';
+            document.getElementById('writerName').focus();
+            return;
+        }
+        if (!email || !email.includes('@') || !email.includes('.')) {
+            msg.className = 'msg-box msg-error';
+            msg.textContent = '❌ Please enter a valid email address.';
+            document.getElementById('writerEmail').focus();
+            return;
+        }
+        if (!message || message.length < 10) {
+            msg.className = 'msg-box msg-error';
+            msg.textContent = '❌ Your message must be at least 10 characters.';
+            document.getElementById('writerMessage').focus();
+            return;
+        }
+
+        // Loading
+        isSubmitting = true;
+        btn.disabled = true;
+        spinner.style.display = 'inline-block';
+        btnText.textContent = 'Submitting...';
+        msg.className = 'msg-box msg-loading';
+        msg.textContent = '⏳ Sending your entry to the global archive...';
+
+        console.log('📝 Submitting:', { name, email, country, type, messageLength: message.length });
+
+        try {
+            const payload = {
+                writer_name: name,
+                full_name: name,
+                quote_english: message,
+                region: country || 'Global',
+                language: 'English',
+                is_published: false,
+                is_founder: true,
+                chapter_id: type === 'story' ? 'story-chain' : type === 'wisdom' ? 'wisdom-chain' : 'voice-' + Date.now(),
+                year: new Date().getFullYear(),
+                themes: type === 'story' ? ['Story Chain','Collaborative','Peace'] : type === 'wisdom' ? ['Wisdom Chain','Insight','Peace'] : ['Peace','Love','Unity'],
+                sentiment: 0.75,
+                starting_likes: 50,
+                starting_shares: 20,
+                extracted_data: { email, chain_type: type },
+                created_at: new Date().toISOString()
+            };
+
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices`, {
+                method: 'POST',
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_KEY,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(payload)
             });
-            grid.innerHTML = html;
-        }
 
-        // ============================================
-        // TOGGLE BIO
-        // ============================================
-        function toggleBio(bioId, btnId) {
-            const bio = document.getElementById(bioId);
-            const btn = document.getElementById(btnId);
-            if (!bio || !btn) return;
-            if (bio.classList.contains('writer-card__bio--expanded')) {
-                bio.classList.remove('writer-card__bio--expanded');
-                btn.textContent = 'Read more →';
+            console.log('📡 Response:', res.status);
+
+            if (res.ok) {
+                msg.className = 'msg-box msg-success';
+                msg.textContent = `✅ Welcome, ${name}! Your entry will be published within 24 hours. 🕊️`;
+                
+                // Clear form
+                document.getElementById('writerName').value = '';
+                document.getElementById('writerEmail').value = '';
+                document.getElementById('writerMessage').value = '';
+                
+                msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
-                bio.classList.add('writer-card__bio--expanded');
-                btn.textContent = 'Show less ←';
+                const err = await res.json().catch(() => ({}));
+                console.error('❌ Error:', err);
+                msg.className = 'msg-box msg-error';
+                msg.textContent = '❌ Error: ' + (err.message || 'Something went wrong. Try again.');
             }
+        } catch (e) {
+            console.error('❌ Network error:', e);
+            msg.className = 'msg-box msg-error';
+            msg.textContent = '❌ Connection error. Check your internet and try again.';
+        } finally {
+            isSubmitting = false;
+            btn.disabled = false;
+            spinner.style.display = 'none';
+            btnText.textContent = '🕊️ Submit & Join';
         }
+    }
 
-        // ============================================
-        // VIEW WRITER
-        // ============================================
-        function viewWriter(id) {
-            const writer = writers.find(w => w.id === id);
-            if (writer) {
-                alert(`🖋️ ${writer.name}\n\n💼 ${writer.position}\n📍 ${writer.country}\n🌐 ${writer.language}\n\n📝 ${writer.bio}`);
-            }
-        }
-
-        // ============================================
-        // SHARE WRITER
-        // ============================================
-        function shareWriter(id) {
-            const writer = writers.find(w => w.id === id);
-            if (!writer) return;
-            const url = window.location.href.split('?')[0] + '?writer=' + id;
-            if (navigator.share) {
-                navigator.share({ title: `${writer.name} — Ethiopian Peace Archive`, text: writer.bio.substring(0, 100) + '...', url }).catch(() => {});
-            } else {
-                navigator.clipboard.writeText(url).then(() => alert('🔗 Link copied!')).catch(() => alert('🔗 ' + url));
-            }
-        }
-
-        // ============================================
-        // SUBMIT ENTRY
-        // ============================================
-        async function submitEntry() {
-            const msg = document.getElementById('signupMsg');
-            const name = document.getElementById('wName').value.trim();
-            const email = document.getElementById('wEmail').value.trim();
-            const country = document.getElementById('wCountry').value;
-            const type = document.getElementById('wType').value;
-            const message = document.getElementById('wMessage').value.trim();
-
-            msg.className = 'msg-box';
-            if (!name) { msg.className = 'msg-box msg-box--error'; msg.textContent = '❌ Please enter your full name.'; return; }
-            if (!email || !email.includes('@') || !email.includes('.')) { msg.className = 'msg-box msg-box--error'; msg.textContent = '❌ Please enter a valid email.'; return; }
-            if (!message || message.length < 10) { msg.className = 'msg-box msg-box--error'; msg.textContent = '❌ Message must be at least 10 characters.'; return; }
-
-            msg.className = 'msg-box msg-box--loading'; msg.textContent = '⏳ Submitting...';
-            try {
-                const payload = {
-                    writer_name: name, full_name: name, quote_english: message,
-                    region: country || 'Global', language: 'English', is_published: false, is_founder: true,
-                    chapter_id: type === 'story' ? 'story-chain' : type === 'wisdom' ? 'wisdom-chain' : 'voice-' + Date.now(),
-                    year: new Date().getFullYear(),
-                    themes: type === 'story' ? ['Story Chain','Collaborative','Peace'] : type === 'wisdom' ? ['Wisdom Chain','Insight','Peace'] : ['Peace','Love','Unity'],
-                    sentiment: 0.75, starting_likes: 50, starting_shares: 20,
-                    extracted_data: { email, chain_type: type }, created_at: new Date().toISOString()
-                };
-                const res = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices`, {
-                    method: 'POST',
-                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-                    body: JSON.stringify(payload)
-                });
-                if (res.ok) {
-                    msg.className = 'msg-box msg-box--success'; msg.textContent = `✅ Welcome, ${name}! Published within 24 hours. 🕊️`;
-                    document.getElementById('wName').value = ''; document.getElementById('wEmail').value = ''; document.getElementById('wMessage').value = '';
-                } else {
-                    const err = await res.json().catch(()=>({}));
-                    msg.className = 'msg-box msg-box--error'; msg.textContent = '❌ Error: ' + (err.message || 'Try again.');
+    // ========== KEYBOARD SHORTCUT ==========
+    document.addEventListener('DOMContentLoaded', () => {
+        renderWriters();
+        
+        const textarea = document.getElementById('writerMessage');
+        if (textarea) {
+            textarea.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    e.preventDefault();
+                    submitForm();
                 }
-            } catch(e) {
-                msg.className = 'msg-box msg-box--error'; msg.textContent = '❌ Connection error.';
-            }
+            });
         }
+        
+        console.log('✅ Participate page ready — form is connected');
+    });
+</script>
 
-        // ============================================
-        // MOBILE MENU
-        // ============================================
-        function toggleMenu() {
-            const menu = document.getElementById('slideMenu');
-            const overlay = document.getElementById('slideOverlay');
-            const hamburger = document.getElementById('hamburger');
-            if (!menu || !overlay || !hamburger) return;
-            const isOpen = menu.classList.contains('slide-menu--open');
-            if (isOpen) {
-                menu.classList.remove('slide-menu--open');
-                overlay.classList.remove('slide-overlay--open');
-                hamburger.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            } else {
-                menu.classList.add('slide-menu--open');
-                overlay.classList.add('slide-overlay--open');
-                hamburger.setAttribute('aria-expanded', 'true');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const menu = document.getElementById('slideMenu');
-                if (menu && menu.classList.contains('slide-menu--open')) toggleMenu();
-            }
-        });
-
-        // ============================================
-        // INITIALIZE
-        // ============================================
-        document.addEventListener('DOMContentLoaded', () => {
-            renderWriters();
-            console.log('✅ Writers loaded with real human images:', writers.length);
-        });
-
-        document.getElementById('wMessage').addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); submitEntry(); }
-        });
-    </script>
-
-    <script src="js/supabase.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/language.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/navigation.js"></script>
 </body>
 </html>
