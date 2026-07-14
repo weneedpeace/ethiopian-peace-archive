@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="description" content="We Need Peace — Collaborative Story Chain and Wisdom Chain. Co-create stories and deepen wisdom across borders.">
+    <meta property="og:title" content="Story Chain & Wisdom Chain — We Need Peace">
+    <meta property="og:description" content="Join the Never-Ending Story and the Wisdom Chain. Your voice deepens the truth. Write together across continents.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Story Chain & Wisdom Chain · Collaborative Writing · We Need Peace</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --bg: #0b0f0e;
+            --surface: #141a17;
+            --surface-light: #1a2420;
+            --green-border: #2e4a3a;
+            --green-bright: #22c55e;
+            --green-soft: rgba(34, 197, 94, 0.15);
+            --gold: #fbbf24;
+            --gold-bright: #fcd34d;
+            --gold-soft: rgba(251, 191, 36, 0.12);
+            --text: #e2e8e4;
+            --text-dim: #b0bfb5;
+            --text-muted: #7b8c80;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --transition: 0.2s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-ui);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* ── Navigation ── */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 5%;
+            background: rgba(10, 15, 12, 0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--green-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #f0f2e9;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .logo span { color: var(--green-bright); }
+        .desktop-links {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+        .desktop-links a {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .desktop-links a:hover,
+        .desktop-links a.active { color: var(--gold-bright); }
+        .cta-nav {
+            background: var(--green-bright);
+            color: #0b0f0e !important;
+            padding: 6px 16px;
+            border-radius: 24px;
+            font-weight: 700;
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--green-border);
+            color: var(--text-dim);
+            padding: 4px 9px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .lang-btn.active {
+            background: var(--green-bright);
+            border-color: var(--green-bright);
+            color: #0b0f0e;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 22px;
+            height: 2px;
+            background: var(--text-dim);
+            transition: 0.2s;
+        }
+
+        /* ── Container ── */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 30px 20px 50px;
+        }
+
+        /* ── Hero ── */
+        .collab-hero {
+            text-align: center;
+            padding: 55px 20px 35px;
+            background: linear-gradient(180deg, rgba(34,197,94,0.05) 0%, transparent 70%);
+            border-bottom: 1px solid var(--green-border);
+            margin-bottom: 10px;
+        }
+        .collab-hero .badge {
+            display: inline-block;
+            background: var(--gold-soft);
+            border: 1px solid rgba(251,191,36,0.35);
+            color: var(--gold);
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+        }
+        .collab-hero h1 {
+            font-size: clamp(2rem, 5.5vw, 3.2rem);
+            color: var(--gold-bright);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+        }
+        .collab-hero .subtitle {
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            max-width: 620px;
+            margin: 12px auto 24px;
+            font-style: italic;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 11px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--green-border);
+            background: var(--surface);
+            color: var(--text);
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: var(--green-bright);
+            border-color: var(--green-bright);
+            color: #0a120c;
+            font-weight: 700;
+        }
+        .btn-primary:hover { background: #16a34a; }
+        .btn-outline {
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+        }
+        .btn-outline:hover { background: var(--gold-soft); }
+
+        /* ── Section Titles ── */
+        .section-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #f0f2e9;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-desc {
+            color: var(--text-dim);
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .section-desc strong {
+            color: var(--gold-bright);
+            font-weight: 600;
+        }
+
+        /* ── Rule Box ── */
+        .rule-box {
+            background: var(--surface-light);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .rule-box h4 {
+            color: var(--green-bright);
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+        .rule-box ul {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            padding-left: 20px;
+        }
+        .rule-box li { margin-bottom: 5px; }
+
+        /* ── Live Feed ── */
+        .feed {
+            background: #0e1511;
+            border-radius: var(--radius-lg);
+            padding: 18px 20px;
+            border: 1px solid var(--green-border);
+            margin-bottom: 35px;
+        }
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .feed-header h3 { color: #f0f2e9; font-size: 1rem; }
+        .feed-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        .feed-item:last-child { border-bottom: none; }
+        .feed-item strong { color: var(--gold-bright); }
+        .avatar {
+            width: 34px;
+            height: 34px;
+            background: #2f4f3a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .tag {
+            background: var(--green-soft);
+            color: var(--green-bright);
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* ── Chain Entry (Story) ── */
+        .chain-entry {
+            background: var(--surface);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-lg);
+            padding: 22px 24px;
+            margin-bottom: 14px;
+            position: relative;
+            transition: var(--transition);
+        }
+        .chain-entry:hover { border-color: var(--green-bright); }
+        .chain-entry .entry-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .chain-entry .flag { font-size: 1.5rem; }
+        .chain-entry .author { font-weight: 700; color: var(--gold-bright); font-size: 0.95rem; }
+        .chain-entry .meta { color: var(--text-muted); font-size: 0.75rem; }
+        .chain-entry .entry-body {
+            color: var(--text);
+            font-style: italic;
+            line-height: 1.75;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        .chain-entry .thread {
+            display: inline-block;
+            background: var(--gold-soft);
+            color: var(--gold);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+        .connector {
+            text-align: center;
+            color: var(--green-bright);
+            font-size: 1.4rem;
+            margin: 4px 0 10px;
+            opacity: 0.7;
+        }
+        .add-entry-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--surface-light);
+            border: 2px dashed var(--green-border);
+            border-radius: var(--radius-lg);
+            color: var(--green-bright);
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+            margin-top: 8px;
+            font-weight: 600;
+            font-family: inherit;
+        }
+        .add-entry-btn:hover {
+            border-color: var(--green-bright);
+            background: rgba(34,197,94,0.04);
+        }
+
+        /* ── Wisdom Entry ── */
+        .wisdom-entry {
+            background: var(--surface);
+            border-left: 4px solid var(--gold);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 20px 24px;
+            margin-bottom: 14px;
+            transition: var(--transition);
+        }
+        .wisdom-entry:hover {
+            border-left-color: var(--gold-bright);
+            background: var(--surface-light);
+        }
+        .wisdom-entry .wisdom-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .wisdom-entry .wisdom-author { font-weight: 700; color: var(--gold-bright); font-size: 0.95rem; }
+        .wisdom-entry .wisdom-role { color: var(--text-muted); font-size: 0.75rem; }
+        .wisdom-entry .wisdom-body {
+            color: var(--text);
+            line-height: 1.75;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        .wisdom-entry .edge {
+            color: var(--green-bright);
+            font-style: italic;
+            font-weight: 500;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.85rem;
+        }
+        .depth-indicator {
+            display: inline-block;
+            background: var(--gold);
+            color: #0b0f0e;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 4px;
+        }
+
+        /* ── Writers Grid ── */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .writer-card {
+            background: var(--surface);
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-lg);
+            padding: 22px;
+            text-align: center;
+            transition: 0.25s;
+        }
+        .writer-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 28px -10px rgba(0,0,0,0.5);
+        }
+        .writer-card .writer-avatar {
+            width: 52px;
+            height: 52px;
+            background: #2f4f3a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.4rem;
+        }
+        .writer-card h3 { color: var(--gold); font-size: 1.1rem; margin-bottom: 4px; }
+        .writer-card .writer-location { color: var(--text-muted); font-size: 0.75rem; margin-bottom: 8px; }
+
+        /* ── CTA Banner ── */
+        .cta-banner {
+            text-align: center;
+            margin: 40px 0 20px;
+            background: var(--gold-soft);
+            border-radius: 40px;
+            padding: 35px 20px;
+            border: 1px solid rgba(251,191,36,0.2);
+        }
+        .cta-banner h2 { color: var(--gold-bright); font-size: 1.5rem; margin-bottom: 6px; }
+        .cta-banner p { color: var(--text-dim); max-width: 500px; margin: 8px auto 18px; }
+
+        /* ── Footer ── */
+        footer {
+            background: #0a0f0c;
+            border-top: 1px solid var(--green-border);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 22px;
+            margin-bottom: 12px;
+        }
+        .footer-links a { color: var(--text-dim); transition: var(--transition); }
+        .footer-links a:hover { color: var(--green-bright); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .desktop-links { display: none; }
+            .hamburger { display: flex; }
+            .container { padding: 20px 14px 40px; }
+            .chain-entry, .wisdom-entry { padding: 16px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<nav>
+    <a href="index.html" class="logo">🕊️ We Need <span>Peace</span></a>
+    <div class="desktop-links">
+        <a href="index.html">Home</a>
+        <a href="voices.html">Voices</a>
+        <a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="collaborate.html" class="active" style="color:#fbbf24;">✍️ Collaborate</a>
+        <a href="contribute.html">Contribute</a>
+        <a href="support.html" class="cta-nav">Support</a>
+        <span style="display:flex;gap:3px;margin-left:4px;">
+            <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+            <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+            <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+        </span>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="collab-hero">
+    <div class="badge">✍️ Collaborative Writing Circle</div>
+    <h1>Story Chain<br>&amp; Wisdom Chain</h1>
+    <p class="subtitle">Write together across borders. One story flows through many hands. One truth deepens through many lives.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="#story-chain" class="btn btn-primary">📖 Join the Story</a>
+        <a href="#wisdom-chain" class="btn btn-outline">🦉 Add Wisdom</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- ═══════════ LIVE COLLABORATION FEED ═══════════ -->
+    <div class="feed">
+        <div class="feed-header">
+            <h3>📡 Live Collaboration Feed</h3>
+            <span class="tag">8 writers online</span>
+        </div>
+        <div class="feed-item">
+            <div class="avatar">🌿</div>
+            <div><strong>Bethlehem T.</strong> added to <em>Story Chain</em> · Addis Ababa · 3 min ago</div>
+        </div>
+        <div class="feed-item">
+            <div class="avatar">🦉</div>
+            <div><strong>Odette U.</strong> deepened <em>Wisdom Chain</em> · Rwanda · 12 min ago</div>
+        </div>
+        <div class="feed-item">
+            <div class="avatar">📖</div>
+            <div><strong>Carlos R.</strong> continued <em>Never-Ending Story</em> · Colombia · 28 min ago</div>
+        </div>
+        <div class="feed-item">
+            <div class="avatar">✨</div>
+            <div><strong>Yuki T.</strong> added layer to <em>Wisdom Chain</em> · Japan · 1 hour ago</div>
+        </div>
+    </div>
+
+    <!-- ═══════════ STORY CHAIN ═══════════ -->
+    <div id="story-chain">
+        <div class="section-title">📖 The Never-Ending Story</div>
+        <p class="section-desc">
+            One writer starts. Another finds a <strong>thread</strong> — a character, an object, a consequence — and follows it somewhere <strong>new</strong>. 
+            The story crosses countries, genres, and lives. Read the last entry. Find a ripple. Take it somewhere unexpected.
+        </p>
+
+        <div class="rule-box">
+            <h4>📜 Rules for Story Chain</h4>
+            <ul>
+                <li>Read the last entry carefully.</li>
+                <li>Find a <strong>thread</strong> — a person, object, emotion, question, or consequence.</li>
+                <li>Follow it into a <strong>new scene, new country, or new genre.</strong></li>
+                <li>Write 3–8 sentences. Leave a thread for the next writer.</li>
+                <li>Tag your entry: 🕊️ Peace · ❤️ Love · 🤝 Unity.</li>
+            </ul>
+        </div>
+
+        <!-- Entry 1 -->
+        <div class="chain-entry">
+            <div class="entry-header">
+                <span class="flag">🇪🇹</span>
+                <span class="author">Bethlehem Tadesse</span>
+                <span class="meta">· Addis Ababa, Ethiopia · 🕊️ Peace</span>
+            </div>
+            <div class="entry-body">
+                "The day everything changed, it was raining. Not the gentle rain that kisses the tin roofs of our neighborhood. A hard rain. The kind that floods the streets and keeps children home from school. I was standing at the window, watching the water rise, when I saw an old man slip and fall in the mud. No one stopped. Everyone was running for shelter. But a street dog — that yellow stray we all ignored — walked over and stood beside him. Just stood there. As if to say: <em>you are not alone.</em> I put on my shoes and went outside."
+            </div>
+            <div class="thread">🧵 Thread left: The old man. The dog. The person who finally went outside.</div>
+        </div>
+
+        <div class="connector">⬇️</div>
+
+        <!-- Entry 2 -->
+        <div class="chain-entry">
+            <div class="entry-header">
+                <span class="flag">🇨🇴</span>
+                <span class="author">Carlos Eduardo Ramírez</span>
+                <span class="meta">· Former Combatant, Colombia · 🤝 Unity</span>
+            </div>
+            <div class="entry-body">
+                "The old man — I understand him. I was once that man in the mud. Not literally. But after I put down my rifle, I fell. Fell into silence. Fell into shame. Fell into a world that did not want former combatants. And someone — a coffee farmer — reached down and pulled me up. Not with a speech. With coffee. With a question about my mother. The old man in Addis was not alone because a dog stood by him. I was not alone because a farmer handed me a cup. Who reached down to you?"
+            </div>
+            <div class="thread">🧵 Thread left: The coffee farmer. The question about the mother. Who reached down to you?</div>
+        </div>
+
+        <div class="connector">⬇️</div>
+
+        <!-- Entry 3 -->
+        <div class="chain-entry">
+            <div class="entry-header">
+                <span class="flag">🇯🇵</span>
+                <span class="author">Yuki Tanaka</span>
+                <span class="meta">· Zen Practitioner, Japan · ❤️ Love</span>
+            </div>
+            <div class="entry-body">
+                "The question about the mother — Carlos, your farmer knew something we forget. In Kyoto, my teacher said: <em>'The deepest peace is the face of your mother before you were born.'</em> I meditated on this for ten years. Then my own mother died. I never asked her what she dreamed before I arrived. Now I ask strangers: what did your mother want before she became a mother? The answers break me open. One woman in Tokyo said: 'She wanted to be a dancer.' A dancer. I light incense for that lost dancer now. What did your mother want?"
+            </div>
+            <div class="thread">🧵 Thread left: Mothers' lost dreams. The dancer. What did your mother want?</div>
+        </div>
+
+        <div class="connector">⬇️</div>
+
+        <!-- Entry 4 — Placeholder -->
+        <div class="chain-entry" style="border-style: dashed; opacity: 0.85;">
+            <div class="entry-header">
+                <span class="flag">🌍</span>
+                <span class="author">Your Name Here</span>
+                <span class="meta">· Your Country · 🕊️❤️🤝</span>
+            </div>
+            <div class="entry-body" style="color: var(--text-muted);">
+                <em>The story is waiting for you. Read the last entry. Find a thread. Follow it — to your country, your experience, your imagination. What did <strong>your</strong> mother want? Or follow another thread: the dog, the coffee farmer, the incense, the dancer. The story bends toward whoever picks it up.</em>
+            </div>
+            <div class="thread">🧵 Your thread will guide the next writer.</div>
+        </div>
+
+        <button class="add-entry-btn" onclick="alert('Submit your story entry at contribute.html — tag it #StoryChain')">✍️ Add Your Part to the Story</button>
+    </div>
+
+    <!-- ═══════════ WISDOM CHAIN ═══════════ -->
+    <div id="wisdom-chain" style="margin-top: 55px;">
+        <div class="section-title">🦉 The Wisdom Chain</div>
+        <p class="section-desc">
+            Not a conversation. A <strong>compounding of insight.</strong> One person articulates a truth. The next does not reply — they 
+            <strong>add a deeper layer, sharpen it, or reveal what the previous person could not see.</strong> 
+            Each entry makes the wisdom more concrete, more lived. Always leave an edge for the next voice.
+        </p>
+
+        <div class="rule-box">
+            <h4>📜 Rules for Wisdom Chain</h4>
+            <ul>
+                <li>Read the wisdom that came before you.</li>
+                <li>Do not agree or disagree. <strong>Add.</strong> What did they miss? What is the deeper layer?</li>
+                <li>Speak from your own life — not theory, not quotes. Experience.</li>
+                <li>End with a question or an edge — something unresolved for the next person.</li>
+            </ul>
+        </div>
+
+        <!-- Wisdom 1 -->
+        <div class="wisdom-entry">
+            <div class="wisdom-header">
+                <span class="flag">🇬🇭</span>
+                <span class="wisdom-author">Kwame Asante</span>
+                <span class="wisdom-role">· Taxi Driver, Ghana · 58 years old</span>
+                <span class="depth-indicator">Layer 1</span>
+            </div>
+            <div class="wisdom-body">
+                "The most important thing I have learned in 58 years: people do not change when you argue with them. They change when you listen to them — really listen, without preparing your reply. I drove a taxi for 22 years. I listened to drunk people, heartbroken people, angry people, lost people. I did not fix anyone. But many of them fixed themselves, just because someone was quiet while they spoke. Listening is not passive. Listening is a form of love."
+            </div>
+            <div class="edge">🔪 Edge: Listening is easy with strangers. What about with people who have hurt you? Is listening still enough when your heart is full of rage?</div>
+        </div>
+
+        <!-- Wisdom 2 -->
+        <div class="wisdom-entry">
+            <div class="wisdom-header">
+                <span class="flag">🇷🇼</span>
+                <span class="wisdom-author">Odette Uwimana</span>
+                <span class="wisdom-role">· Reconciliation Survivor, Rwanda</span>
+                <span class="depth-indicator">Layer 2</span>
+            </div>
+            <div class="wisdom-body">
+                "Kwame asks: is listening enough when your heart is full of rage? I sat across from the man who killed my brother. I did not listen with my ears. I listened with my survival. I listened to his shaking hands. I listened to his silence — it was louder than any confession. And I learned: listening to an enemy is not about understanding them. It is about refusing to let their violence turn you into someone who cannot hear at all. Listening to someone who hurt you is not forgiveness. It is self-defense of the soul."
+            </div>
+            <div class="edge">🔪 Edge: I listened. I survived it. But I still dream of my brother. Listening healed something in me — but it did not bring him back. So what is listening for, if it cannot undo the past? What is the purpose of peace if the dead stay dead?</div>
+        </div>
+
+        <!-- Wisdom 3 -->
+        <div class="wisdom-entry">
+            <div class="wisdom-header">
+                <span class="flag">🇸🇾</span>
+                <span class="wisdom-author">Samir Al-Khatib</span>
+                <span class="wisdom-role">· Former Teacher, Syria</span>
+                <span class="depth-indicator">Layer 3</span>
+            </div>
+            <div class="wisdom-body">
+                "Odette asks: what is listening for if it cannot undo the past? I taught children who are now buried. I listened to their laughter. I listened to their questions about algebra and the stars. That listening did not save them. But it meant that before they died, someone heard them. Someone knew they were alive. The dead stay dead. Peace does not resurrect them. But listening <strong>witnesses</strong> them. It says: you were here. You mattered. The purpose of listening — of peace — is not to undo the past. It is to honor what was lost so completely that the future cannot repeat the crime."
+            </div>
+            <div class="edge">🔪 Edge: Witnessing is heavy. I carry my students' voices in my chest like stones. Who carries the witness when the witness collapses? Who listens to the listener?</div>
+        </div>
+
+        <!-- Wisdom 4 — Placeholder -->
+        <div class="wisdom-entry" style="border-left: 4px dashed var(--gold); opacity: 0.85;">
+            <div class="wisdom-header">
+                <span class="flag">🌍</span>
+                <span class="wisdom-author">Your Name Here</span>
+                <span class="wisdom-role">· Your Role, Your Country</span>
+                <span class="depth-indicator">Layer 4</span>
+            </div>
+            <div class="wisdom-body" style="color: var(--text-muted);">
+                <em>Samir asks: who listens to the listener? You have carried something heavy. You have witnessed something that broke you — or someone who was breaking. What did you learn that Samir, Odette, and Kwame have not yet spoken? Add your layer. Sharpen the truth. Then leave your own edge for the next voice.</em>
+            </div>
+            <div class="edge">🔪 Your edge will guide the next layer of wisdom.</div>
+        </div>
+
+        <button class="add-entry-btn" onclick="alert('Submit your wisdom entry at contribute.html — tag it #WisdomChain')">🦉 Add Your Layer to the Wisdom Chain</button>
+    </div>
+
+    <!-- ═══════════ FEATURED COLLABORATIVE WRITERS ═══════════ -->
+    <div style="margin-top: 50px;">
+        <h2 class="section-title"><span>🖋️</span> Featured Collaborative Writers</h2>
+        <div class="grid-2col">
+            <div class="writer-card">
+                <div class="writer-avatar">🌿</div>
+                <h3>Bethlehem Tadesse</h3>
+                <p class="writer-location">Storyteller · Addis Ababa, Ethiopia</p>
+                <span class="tag">Story Chain starter</span>
+            </div>
+            <div class="writer-card">
+                <div class="writer-avatar">☕</div>
+                <h3>Carlos Eduardo Ramírez</h3>
+                <p class="writer-location">Former Combatant · Colombia</p>
+                <span class="tag">Story &amp; Wisdom contributor</span>
+            </div>
+            <div class="writer-card">
+                <div class="writer-avatar">🦉</div>
+                <h3>Odette Uwimana</h3>
+                <p class="writer-location">Reconciliation Survivor · Rwanda</p>
+                <span class="tag">Wisdom Chain layer 2</span>
+            </div>
+            <div class="writer-card">
+                <div class="writer-avatar">📖</div>
+                <h3>Yuki Tanaka</h3>
+                <p class="writer-location">Zen Practitioner · Japan</p>
+                <span class="tag">Story Chain layer 3</span>
+            </div>
+            <div class="writer-card">
+                <div class="writer-avatar">🕊️</div>
+                <h3>Samir Al-Khatib</h3>
+                <p class="writer-location">Former Teacher · Syria</p>
+                <span class="tag">Wisdom Chain layer 3</span>
+            </div>
+            <div class="writer-card">
+                <div class="writer-avatar">🚕</div>
+                <h3>Kwame Asante</h3>
+                <p class="writer-location">Taxi Driver · Ghana</p>
+                <span class="tag">Wisdom Chain layer 1</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════ CTA ═══════════ -->
+    <div class="cta-banner">
+        <h2>🤝 Your words can build bridges</h2>
+        <p>Join the Story Chain or Wisdom Chain. All languages and experience levels welcome. Your voice is the next link.</p>
+        <a href="contribute.html" class="btn btn-primary" style="font-size:1rem;">✍️ Become a Co-Writer</a>
+        <p style="margin-top: 14px; font-size:0.8rem;">
+            <a href="voices.html" style="color: var(--green-bright);">← Browse existing voices</a>
+        </p>
+    </div>
+
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="voices.html">Voices</a>
+        <a href="blog.html">Blog</a>
+        <a href="collaborate.html">Collaborate</a>
+        <a href="courses.html">Courses</a>
+        <a href="support.html">Support</a>
+    </div>
+    <p>🕊️ We Need Peace &copy; 2026 · Story Chain &amp; Wisdom Chain</p>
+    <p style="margin-top: 6px; font-size: 0.75rem; color: var(--green-bright); font-weight: 600;">Peace is the goal. Love is the way. Unity is the strength.</p>
+    <p style="font-size:0.7rem; margin-top: 8px; color: var(--text-muted);">#WriteForPeace · #StoryChain · #WisdomChain</p>
+</footer>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+    function toggleMenu() {
+        // Integrate with your existing slide menu from navigation.js
+        // This is a placeholder — your full navigation.js handles the mobile menu.
+        alert('Mobile menu: integrate with your existing slide menu component from navigation.js');
+    }
+    function setLanguage(lang) {
+        console.log('Language set to: ' + lang);
+        // Your language.js handles actual translation
+    }
+</script>
+<script src="js/supabase.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/language.js"></script>
+</body>
+</html>
