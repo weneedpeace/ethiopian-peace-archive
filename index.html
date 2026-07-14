@@ -3,616 +3,623 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="We Need Peace — The Global Voice Archive preserving human voices across 40 languages, 30 regions, and 57+ countries. Wear Love. Speak Peace. Live Unity. Join the Story & Wisdom Chain.">
-    <meta name="keywords" content="peace, love, unity, voice archive, global peace, Ethiopian peace, collaborative writing, story chain, wisdom chain, participate">
-    <meta name="author" content="We Need Peace">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="We Need Peace — Wear Love. Speak Peace. Live Unity.">
-    <meta property="og:description" content="Preserving human voices across 40 languages, 30 regions, and 57+ countries. Join the Story & Wisdom Chain. Share your voice for peace, love, and unity.">
+    <meta name="description" content="Ethiopian Peace Archive — A global movement preserving 1,000+ voices for peace. Free courses, research, and community action.">
+    <meta property="og:title" content="Ethiopian Peace Archive — Global Peace Movement">
+    <meta property="og:description" content="1,000+ voices from Ethiopia and the world. Join the movement for peace.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://weneedpeace.pages.dev">
-    <meta property="og:site_name" content="We Need Peace">
+    <meta property="og:url" content="https://ethiopianpeacearchive.org">
+    <meta property="og:site_name" content="Ethiopian Peace Archive">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="We Need Peace — Wear Love. Speak Peace. Live Unity.">
-    <meta name="twitter:description" content="Preserving human voices across 40 languages, 30 regions, and 57+ countries. Participate in the Story & Wisdom Chain.">
-    <link rel="canonical" href="https://weneedpeace.pages.dev">
+    <meta name="twitter:title" content="Ethiopian Peace Archive — Global Peace Movement">
+    <meta name="twitter:description" content="1,000+ voices from Ethiopia and the world. Join the movement for peace.">
+    <link rel="canonical" href="https://ethiopianpeacearchive.org">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
-    <title>We Need Peace — Wear Love. Speak Peace. Live Unity.</title>
+    <title>Ethiopian Peace Archive — Global Movement for Peace</title>
+    
+    <!-- ========== MAIN STYLESHEET ========== -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- ========== PAGE-SPECIFIC STYLES ========== -->
     <style>
-        :root {
-            --bg: #0b0f0e; --surface: #141a18; --surface-light: #1a2420;
-            --green-border: rgba(34, 197, 94, 0.25); --green-bright: #22c55e;
-            --green-soft: rgba(34, 197, 94, 0.12); --gold: #fbbf24;
-            --gold-bright: #fcd34d; --gold-soft: rgba(251, 191, 36, 0.1);
-            --love: #ef4444; --love-soft: rgba(239, 68, 68, 0.12);
-            --text: #e2e8f0; --text-dim: #94a3b8; --text-muted: #64748b;
-            --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            --radius: 14px; --radius-lg: 20px; --transition: 0.25s ease;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            background: var(--bg); color: var(--text); font-family: var(--font-ui);
-            line-height: 1.6; -webkit-font-smoothing: antialiased;
-            background-image: 
-                radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 40%, rgba(239,68,68,0.02) 0%, transparent 50%);
-        }
-        a { text-decoration: none; color: inherit; }
+        /* ============================================
+           HOMEPAGE ENHANCEMENTS
+           Based on Ethiopian Peace Archive design system
+           ============================================ */
 
-        /* Navigation */
-        nav {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0.9rem 5%; background: rgba(10,15,12,0.92);
-            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+        /* ---- Hero Section ---- */
+        .hero-home {
+            padding: 80px 20px 50px;
+            text-align: center;
             border-bottom: 1px solid var(--green-border);
-            position: sticky; top: 0; z-index: 100; flex-wrap: wrap;
-        }
-        .logo { 
-            font-weight: 700; font-size: 1.25rem; color: #f0f2e9; 
-            display: flex; align-items: center; gap: 6px; 
-        }
-        .logo span { color: var(--green-bright); }
-        .desktop-links { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-        .desktop-links a {
-            font-size: 0.78rem; font-weight: 600; color: var(--text-dim);
-            transition: var(--transition); text-transform: uppercase;
-            letter-spacing: 0.4px; padding: 6px 9px; border-radius: 18px; white-space: nowrap;
-        }
-        .desktop-links a:hover, .desktop-links a.active { 
-            color: var(--gold-bright); background: var(--gold-soft); 
-        }
-        .cta-nav { 
-            background: var(--green-bright); color: #0b0f0e !important; 
-            padding: 7px 14px !important; border-radius: 24px; font-weight: 700; 
-        }
-        .cta-nav:hover { background: #16a34a !important; }
-
-        /* Language Toggle */
-        .lang-toggle {
-            display: flex; gap: 3px; margin-left: 8px; 
-            border-left: 1px solid var(--green-border); padding-left: 8px;
-        }
-        .lang-btn {
-            padding: 5px 8px; border-radius: 12px; border: 1px solid var(--green-border);
-            background: transparent; color: var(--text-dim); cursor: pointer;
-            font-size: 0.65rem; font-family: var(--font-ui); font-weight: 600;
-            transition: var(--transition);
-        }
-        .lang-btn.active { 
-            background: var(--green-soft); color: var(--green-bright); 
-            border-color: var(--green-bright); 
-        }
-        .lang-btn:hover { background: var(--green-soft); color: var(--green-bright); }
-
-        .hamburger { 
-            display: none; flex-direction: column; gap: 5px; background: none; 
-            border: none; cursor: pointer; padding: 8px; z-index: 1001; 
-        }
-        .hamburger span { 
-            width: 24px; height: 2px; background: var(--text-dim); 
-            transition: 0.3s ease; border-radius: 2px; 
-        }
-        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-        /* Slide Menu */
-        .slide-overlay { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.7); z-index: 998; 
-            opacity: 0; visibility: hidden; transition: 0.4s; 
-        }
-        .slide-overlay.open { opacity: 1; visibility: visible; }
-        .slide-menu {
-            position: fixed; top: 0; right: -300px; width: 280px; height: 100%;
-            background: linear-gradient(180deg, #0a1628 0%, #0d1b33 50%, #060f1e 100%);
-            border-left: 2px solid var(--green-border); z-index: 999;
-            transition: right 0.4s cubic-bezier(0.25,0.8,0.25,1.2);
-            padding: 80px 18px 30px; overflow-y: auto;
-        }
-        .slide-menu.open { right: 0; }
-        .slide-menu .menu-header { 
-            text-align: center; margin-bottom: 24px; padding-bottom: 16px; 
-            border-bottom: 1px solid var(--green-border); 
-        }
-        .slide-menu .menu-header .flag { font-size: 2rem; margin-bottom: 6px; }
-        .slide-menu .menu-header h3 { color: var(--gold); font-size: 1rem; }
-        .slide-menu a {
-            display: flex; align-items: center; gap: 10px; padding: 13px 16px;
-            margin-bottom: 4px; border-radius: 12px; color: var(--text-dim);
-            font-size: 0.85rem; font-weight: 500; transition: 0.2s;
-        }
-        .slide-menu a:hover { 
-            color: var(--green-bright); background: var(--green-soft); 
-            transform: translateX(4px); 
-        }
-        .slide-menu .menu-footer { 
-            text-align: center; margin-top: 16px; padding-top: 12px; 
-            border-top: 1px solid var(--green-border); 
-        }
-        .slide-menu .lang-toggle-mobile { 
-            display: flex; gap: 4px; justify-content: center; margin: 12px 0; 
+            position: relative;
+            overflow: hidden;
+            background: var(--bg);
         }
 
-        /* Hero */
-        .hero-plain {
-            padding: 80px 20px 60px; text-align: center;
-            border-bottom: 1px solid var(--green-border); position: relative; overflow: hidden;
-        }
-        .hero-plain::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        .hero-home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: 
-                radial-gradient(circle at 30% 30%, rgba(34,197,94,0.08) 0%, transparent 60%),
-                radial-gradient(circle at 70% 70%, rgba(251,191,36,0.06) 0%, transparent 60%),
-                radial-gradient(circle at 50% 50%, rgba(239,68,68,0.04) 0%, transparent 60%);
+                radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 70% 70%, rgba(251, 191, 36, 0.06) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.03) 0%, transparent 60%);
             animation: heroPulse 10s ease-in-out infinite;
+            z-index: 0;
         }
-        @keyframes heroPulse { 0%,100%{opacity:0.8} 50%{opacity:1} }
-        .hero-plain > * { position: relative; z-index: 1; }
-        .hero-plain .badge-top {
-            display: inline-block; background: rgba(34,197,94,0.15);
-            color: var(--green-bright); padding: 7px 18px; border-radius: 30px;
-            font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
-            font-weight: 600; margin-bottom: 16px; border: 1px solid rgba(34,197,94,0.3);
-        }
-        .hero-plain h1 {
-            font-size: clamp(2rem,5vw,3.5rem); color: var(--gold-bright);
-            margin-bottom: 8px; line-height: 1.2; font-weight: 800; letter-spacing: -0.5px;
-        }
-        .hero-slogan {
-            display: flex; justify-content: center; align-items: center;
-            gap: 14px; flex-wrap: wrap; margin: 16px 0 20px;
-            font-size: clamp(1rem,2.5vw,1.3rem); font-weight: 700; 
-            color: var(--text); line-height: 1.5;
-        }
-        .hero-slogan .love { color: #ef4444; }
-        .hero-slogan .peace { color: var(--green-bright); }
-        .hero-slogan .unity { color: var(--gold-bright); }
-        .hero-slogan .divider { color: var(--text-muted); font-weight: 300; font-size: 1.1rem; }
-        .hero-plain .hero-sub {
-            font-size: clamp(0.9rem,2vw,1.15rem); color: var(--text-dim);
-            max-width: 700px; margin: 0 auto 22px; font-style: italic; line-height: 1.6;
-        }
-        .hero-stats {
-            display: flex; justify-content: center; gap: 14px;
-            flex-wrap: wrap; margin-bottom: 24px;
-        }
-        .hero-stat {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 30px; padding: 9px 18px; font-size: 0.8rem;
-            color: var(--text-dim); display: flex; align-items: center; gap: 6px;
-        }
-        .hero-stat strong { color: var(--gold-bright); font-size: 1.05rem; }
 
-        /* Palm decoration */
+        @keyframes heroPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .hero-home > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-home__badge {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--green-bright);
+            padding: 7px 20px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: var(--font-ui);
+            font-weight: 700;
+            margin-bottom: 18px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .hero-home__title {
+            font-size: clamp(2rem, 5.5vw, 3.8rem);
+            color: var(--gold-bright);
+            margin-bottom: 16px;
+            line-height: 1.15;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .hero-home__subtitle {
+            font-size: clamp(0.95rem, 2vw, 1.2rem);
+            color: var(--text-dim);
+            max-width: 680px;
+            margin: 0 auto 30px;
+            font-style: italic;
+            line-height: 1.7;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .hero-home__stats {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+
+        .hero-home__stat {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition, 0.25s ease);
+        }
+
+        .hero-home__stat:hover {
+            border-color: var(--green-border);
+            background: rgba(34, 197, 94, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .hero-home__stat strong {
+            color: var(--gold-bright);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .hero-home__actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+
+        /* ---- Palm Decoration ---- */
         .palm-decoration {
-            display: flex; justify-content: center; align-items: center;
-            gap: 16px; padding: 24px; margin-top: -20px;
-            position: relative; z-index: 10; font-size: 2.2rem; opacity: 0.85;
-        }
-        .palm-decoration span { 
-            animation: sway 3s ease-in-out infinite; display: inline-block; 
-            transition: transform 0.3s;
-        }
-        .palm-decoration span:hover { animation-play-state: paused; transform: scale(1.2); }
-        .palm-decoration span:nth-child(1){animation-delay:0s}
-        .palm-decoration span:nth-child(2){animation-delay:0.35s}
-        .palm-decoration span:nth-child(3){animation-delay:0.7s}
-        .palm-decoration span:nth-child(4){animation-delay:1.05s}
-        .palm-decoration span:nth-child(5){animation-delay:1.4s}
-        .palm-decoration span:nth-child(6){animation-delay:1.75s}
-        .palm-decoration span:nth-child(7){animation-delay:2.1s}
-        .palm-decoration span:nth-child(8){animation-delay:2.45s}
-        @keyframes sway { 
-            0%,100%{transform:rotate(0deg)} 
-            25%{transform:rotate(3deg)} 
-            75%{transform:rotate(-3deg)} 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            padding: 24px 20px;
+            margin-top: -25px;
+            position: relative;
+            z-index: 10;
+            font-size: 2.5rem;
+            opacity: 0.85;
         }
 
-        /* Buttons */
-        .btn {
-            display: inline-flex; align-items: center; gap: 7px;
-            padding: 13px 26px; border-radius: 30px; text-decoration: none;
-            font-weight: 700; font-size: 0.9rem; cursor: pointer; border: none;
-            font-family: var(--font-ui); transition: all 0.3s; letter-spacing: 0.3px;
+        .palm-decoration span {
+            animation: palmSway 3s ease-in-out infinite;
+            display: inline-block;
+            cursor: default;
+            transition: transform 0.3s ease;
         }
-        .btn-primary { background: var(--green-bright); color: #000; }
-        .btn-primary:hover { background: #16a34a; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(34,197,94,0.3); }
-        .btn-outline { border: 2px solid var(--green-bright); color: var(--green-bright); background: transparent; }
-        .btn-outline:hover { background: var(--green-soft); transform: translateY(-2px); }
-        .btn-gold { background: var(--gold); color: #000; }
-        .btn-gold:hover { background: var(--gold-bright); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(251,191,36,0.3); }
-        .btn-love { background: #ef4444; color: #fff; }
-        .btn-love:hover { background: #dc2626; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(239,68,68,0.3); }
 
-        /* Sections */
-        .section { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        .section-title {
-            font-size: 1.6rem; color: var(--gold-bright); margin-bottom: 20px;
-            border-left: 4px solid var(--green-bright); padding-left: 14px; font-family: var(--font-ui);
+        .palm-decoration span:hover {
+            animation-play-state: paused;
+            transform: scale(1.2);
         }
-        .section-subtitle { color: var(--text-dim); margin-bottom: 24px; font-size: 0.95rem; }
 
-        /* Cards */
-        .cards-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 16px; margin-bottom: 30px; 
-        }
-        .feature-card {
-            background: var(--surface); border: 1px solid rgba(34,197,94,0.10);
-            border-radius: var(--radius-lg); padding: 24px; transition: all 0.3s;
-            cursor: pointer; text-decoration: none; color: var(--text); display: block;
-        }
-        .feature-card:hover { 
-            border-color: var(--green-bright); transform: translateY(-3px); 
-            box-shadow: 0 12px 35px rgba(0,0,0,0.5); background: var(--surface-light); 
-        }
-        .feature-card .icon { font-size: 2rem; margin-bottom: 12px; }
-        .feature-card h3 { color: var(--gold); margin-bottom: 6px; font-family: var(--font-ui); font-size: 1.1rem; }
-        .feature-card p { color: var(--text-dim); font-size: 0.82rem; line-height: 1.5; }
+        .palm-decoration span:nth-child(1) { animation-delay: 0s; }
+        .palm-decoration span:nth-child(2) { animation-delay: 0.4s; }
+        .palm-decoration span:nth-child(3) { animation-delay: 0.8s; }
+        .palm-decoration span:nth-child(4) { animation-delay: 1.2s; }
+        .palm-decoration span:nth-child(5) { animation-delay: 1.6s; }
+        .palm-decoration span:nth-child(6) { animation-delay: 2s; }
+        .palm-decoration span:nth-child(7) { animation-delay: 2.4s; }
 
-        /* CTA Banner */
+        @keyframes palmSway {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(4deg); }
+            75% { transform: rotate(-4deg); }
+        }
+
+        /* ---- CTA Banner ---- */
         .cta-banner {
-            background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(251,191,36,0.1), rgba(239,68,68,0.05));
-            border: 1px solid var(--green-border); border-radius: var(--radius-lg);
-            padding: 40px; text-align: center;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(251, 191, 36, 0.1), rgba(239, 68, 68, 0.05));
+            border: 1px solid var(--green-border);
+            border-radius: var(--radius-lg);
+            padding: 48px 32px;
+            text-align: center;
+            transition: var(--transition, 0.25s ease);
         }
-        .cta-banner h2 { color: var(--gold); font-size: 1.5rem; margin-bottom: 8px; font-family: var(--font-ui); }
-        .cta-banner p { color: var(--text-dim); margin-bottom: 20px; }
 
-        /* Footer */
-        footer { 
-            background: #0a0f0c; border-top: 1px solid var(--green-border); 
-            padding: 30px 20px; text-align: center; color: var(--text-muted); 
-            font-size: 0.8rem; font-family: var(--font-ui); 
+        .cta-banner:hover {
+            border-color: rgba(251, 191, 36, 0.4);
+            box-shadow: 0 8px 40px rgba(251, 191, 36, 0.05);
         }
-        .footer-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-            gap: 20px; max-width: 1100px; margin: 0 auto 24px; text-align: left; 
-        }
-        .footer-col h4 { color: var(--gold); margin-bottom: 10px; font-size: 0.9rem; }
-        .footer-col a { 
-            display: block; color: var(--text-dim); padding: 3px 0; 
-            font-size: 0.78rem; transition: var(--transition); 
-        }
-        .footer-col a:hover { color: var(--green-bright); }
-        .footer-bottom { 
-            text-align: center; padding-top: 16px; 
-            border-top: 1px solid rgba(255,255,255,0.05); margin-top: 16px; 
-        }
-        .footer-bottom a { color: var(--text-dim); transition: var(--transition); }
-        .footer-bottom a:hover { color: var(--green-bright); }
-        .footer-slogan {
-            font-size: 1rem; margin-bottom: 8px; font-weight: 600;
-        }
-        .footer-slogan .love { color: #ef4444; }
-        .footer-slogan .peace { color: var(--green-bright); }
-        .footer-slogan .unity { color: var(--gold-bright); }
 
-        /* Mobile */
+        .cta-banner__title {
+            color: var(--gold);
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            font-family: var(--font-ui);
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .cta-banner__text {
+            color: var(--text-dim);
+            margin-bottom: 24px;
+            font-size: 1rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-banner__actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ---- Feature Cards (Enhanced) ---- */
+        .feature-card--home {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card--home::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--green-bright), var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .feature-card--home:hover::after {
+            opacity: 1;
+        }
+
+        /* ---- Footer Bottom ---- */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 20px;
+        }
+
+        /* ---- Animations ---- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ---- Responsive ---- */
         @media (max-width: 768px) {
-            .desktop-links { display: none; }
-            .lang-toggle { display: none; }
-            .hamburger { display: flex; }
-            .hero-plain { padding: 50px 16px 40px; }
-            .hero-plain h1 { font-size: 1.8rem; }
-            .hero-slogan { font-size: 0.9rem; gap: 6px; }
-            .hero-stats { gap: 8px; }
-            .hero-stat { padding: 7px 12px; font-size: 0.7rem; }
-            .hero-stat strong { font-size: 0.9rem; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
-            .palm-decoration { font-size: 1.6rem; gap: 10px; }
+            .hero-home {
+                padding: 50px 16px 40px;
+            }
+
+            .hero-home__title {
+                font-size: 1.8rem;
+            }
+
+            .hero-home__stats {
+                gap: 8px;
+            }
+
+            .hero-home__stat {
+                padding: 8px 14px;
+                font-size: 0.75rem;
+            }
+
+            .hero-home__stat strong {
+                font-size: 0.95rem;
+            }
+
+            .palm-decoration {
+                font-size: 1.8rem;
+                gap: 14px;
+                padding: 18px 14px;
+            }
+
+            .cta-banner {
+                padding: 32px 20px;
+            }
+
+            .cta-banner__title {
+                font-size: 1.3rem;
+            }
         }
+
         @media (max-width: 480px) {
-            .footer-grid { grid-template-columns: 1fr; }
-            .hero-stats { flex-direction: column; align-items: center; }
-            .hero-slogan { font-size: 0.8rem; }
+            .hero-home__stats {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-home__stat {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+
+            .palm-decoration {
+                font-size: 1.5rem;
+                gap: 10px;
+            }
+
+            .cta-banner__actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-banner__actions .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
-<nav>
-    <a href="index.html" class="logo">🕊️ We Need <span>Peace</span></a>
-    <div class="desktop-links">
-        <a href="index.html" class="active">Home</a>
-        <a href="voices.html">Voices</a>
-        <a href="blog.html">Blog</a>
-        <a href="courses.html">Courses</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="collaborate.html">✍️ Participate</a>
-        <a href="media.html">Media</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contribute.html">📝 Share Voice</a>
-        <a href="support.html" class="cta-nav">Support</a>
-        <span class="lang-toggle" id="langToggleDesktop">
-            <button class="lang-btn active" onclick="setLang('en')" data-lang="en">EN</button>
-            <button class="lang-btn" onclick="setLang('am')" data-lang="am">አማ</button>
-            <button class="lang-btn" onclick="setLang('om')" data-lang="om">Oromo</button>
-            <button class="lang-btn" onclick="setLang('ti')" data-lang="ti">ትግ</button>
-        </span>
-    </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
-    </button>
-</nav>
+    <!-- ========== NAVIGATION ========== -->
+    <nav role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+        
+        <div class="desktop-links" role="menubar">
+            <a href="index.html" class="active" data-i18n="home" role="menuitem" aria-current="page">Home</a>
+            <a href="voices.html" data-i18n="voices" role="menuitem">Voices</a>
+            <a href="blog.html" data-i18n="blog" role="menuitem">Blog</a>
+            <a href="courses.html" data-i18n="courses" role="menuitem">Courses</a>
+            <a href="dashboard.html" data-i18n="impact" role="menuitem">Dashboard</a>
+            <a href="media.html" data-i18n="media" role="menuitem">Media</a>
+            <a href="gallery.html" data-i18n="gallery" role="menuitem">Gallery</a>
+            <a href="thanks.html" data-i18n="thanks" role="menuitem">Thanks</a>
+            <a href="contribute.html" data-i18n="contribute" role="menuitem">Contribute</a>
+            <a href="support.html" class="cta-nav" data-i18n="support" role="menuitem">Support</a>
+            
+            <!-- Language Toggle -->
+            <span class="lang-toggle" aria-label="Language selector">
+                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')" aria-pressed="true">EN</button>
+                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')" aria-pressed="false">አማ</button>
+                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')" aria-pressed="false">Oromo</button>
+                <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')" aria-pressed="false">ትግ</button>
+            </span>
+        </div>
 
-<!-- SLIDE MENU -->
-<div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-<div class="slide-menu" id="slideMenu">
-    <div class="menu-header">
-        <div class="flag">🕊️❤️🤝</div>
-        <h3>We Need Peace</h3>
-        <p style="color:var(--text-muted);font-size:0.7rem">Wear Love. Speak Peace. Live Unity.</p>
-    </div>
-    <a href="index.html">🏠 Home</a>
-    <a href="voices.html">🗣️ Voice Archive</a>
-    <a href="blog.html">📝 Blog & Stories</a>
-    <a href="courses.html">🎓 Free Courses</a>
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="collaborate.html" style="background:var(--gold-soft);color:var(--gold-bright);font-weight:700;">✍️ Participate</a>
-    <a href="collaborate.html#story-chain">📖 Story Chain</a>
-    <a href="collaborate.html#wisdom-chain">🦉 Wisdom Chain</a>
-    <a href="media.html">📰 Media Coverage</a>
-    <a href="gallery.html">🖼️ Gallery</a>
-    <a href="contribute.html">📝 Share Your Voice</a>
-    <a href="about.html">📖 About Us</a>
-    <a href="support.html" style="background:var(--green-soft);color:var(--green-bright);font-weight:700;">❤️ Support</a>
-    <div class="lang-toggle-mobile" id="langToggleMobile">
-        <button class="lang-btn active" onclick="setLang('en')" data-lang="en">English</button>
-        <button class="lang-btn" onclick="setLang('am')" data-lang="am">አማርኛ</button>
-        <button class="lang-btn" onclick="setLang('om')" data-lang="om">Oromo</button>
-        <button class="lang-btn" onclick="setLang('ti')" data-lang="ti">ትግርኛ</button>
-    </div>
-    <div class="menu-footer">
-        <p style="color:var(--text-muted);font-size:0.65rem">&copy; 2026 We Need Peace</p>
-    </div>
-</div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
 
-<!-- HERO WITH SLOGAN -->
-<header class="hero-plain">
-    <div class="badge-top" data-i18n="badge">🌍 The Global Voice Archive</div>
-    <h1 data-i18n="title">We Need Peace</h1>
-    <div class="hero-slogan">
-        <span class="love">❤️ Wear Love.</span>
-        <span class="divider">·</span>
-        <span class="peace">🕊️ Speak Peace.</span>
-        <span class="divider">·</span>
-        <span class="unity">🤝 Live Unity.</span>
-    </div>
-    <p class="hero-sub" data-i18n="subtitle">Preserving human voices across <strong style="color:var(--gold-bright);">40 languages</strong>, <strong style="color:var(--gold-bright);">30 regions</strong>, and <strong style="color:var(--gold-bright);">57+ countries</strong>. Share your voice.</p>
-    <div class="hero-stats">
-        <div class="hero-stat">🗣️ <strong>1,000+</strong> <span data-i18n="voices">Voices</span></div>
-        <div class="hero-stat">🌐 <strong>40</strong> <span data-i18n="languages">Languages</span></div>
-        <div class="hero-stat">📍 <strong>30</strong> <span data-i18n="regions">Regions</span></div>
-        <div class="hero-stat">🌍 <strong>57+</strong> <span data-i18n="countries">Countries</span></div>
-        <div class="hero-stat">✍️ <strong>46+</strong> <span data-i18n="writers">Writers</span></div>
-    </div>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <a href="voices.html" class="btn btn-primary">🔍 <span data-i18n="exploreVoices">Explore Voices</span></a>
-        <a href="collaborate.html" class="btn btn-outline">✍️ <span data-i18n="participate">Participate</span></a>
-        <a href="collaborate.html#story-chain" class="btn btn-outline">📖 Story Chain</a>
-        <a href="collaborate.html#wisdom-chain" class="btn btn-outline">🦉 Wisdom Chain</a>
-        <a href="contribute.html" class="btn btn-gold">📝 <span data-i18n="shareVoice">Share Your Voice</span></a>
-    </div>
-</header>
-
-<!-- PALM DECORATION -->
-<div class="palm-decoration">
-    <span>🌿</span><span>🍃</span><span>❤️</span><span>🕊️</span><span>🤝</span><span>🍃</span><span>🌿</span><span>✨</span>
-</div>
-
-<!-- WHAT WE DO -->
-<section class="section">
-    <h2 class="section-title" data-i18n="whatWeDo">What We Do</h2>
-    <p class="section-subtitle" data-i18n="whatWeDoSub">A global platform preserving voices, educating communities, and driving peace action.</p>
-    <div class="cards-grid">
-        <a href="voices.html" class="feature-card">
-            <div class="icon">🗣️</div>
-            <h3 data-i18n="voiceArchive">Voice Archive</h3>
-            <p data-i18n="voiceArchiveDesc">Browse 1,000+ peace messages from all Ethiopian regions and global supporters in 40 languages.</p>
-        </a>
-        <a href="collaborate.html#story-chain" class="feature-card">
-            <div class="icon">📖</div>
-            <h3 data-i18n="storyChain">Story Chain</h3>
-            <p data-i18n="storyChainDesc">One writer starts. Another finds a thread and follows it somewhere new. Join the never-ending story.</p>
-        </a>
-        <a href="collaborate.html#wisdom-chain" class="feature-card">
-            <div class="icon">🦉</div>
-            <h3 data-i18n="wisdomChain">Wisdom Chain</h3>
-            <p data-i18n="wisdomChainDesc">Not a conversation. A compounding of insight. Each voice deepens the one before.</p>
-        </a>
-        <a href="courses.html" class="feature-card">
-            <div class="icon">🎓</div>
-            <h3 data-i18n="peaceCourses">Free Peace Courses</h3>
-            <p data-i18n="peaceCoursesDesc">Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required.</p>
-        </a>
-        <a href="blog.html" class="feature-card">
-            <div class="icon">📝</div>
-            <h3 data-i18n="blogResearch">Blog & Research</h3>
-            <p data-i18n="blogResearchDesc">Stories from the field, research findings, and updates on peace initiatives worldwide.</p>
-        </a>
-        <a href="dashboard.html" class="feature-card">
-            <div class="icon">📊</div>
-            <h3 data-i18n="impactDashboard">Impact Dashboard</h3>
-            <p data-i18n="impactDashboardDesc">Track our global reach. See how voices translate into action across 57+ countries.</p>
-        </a>
-        <a href="media.html" class="feature-card">
-            <div class="icon">📰</div>
-            <h3 data-i18n="mediaPress">Media & Press</h3>
-            <p data-i18n="mediaPressDesc">Coverage from 8+ media outlets including live TV. Explore our story and press kit.</p>
-        </a>
-        <a href="support.html" class="feature-card">
-            <div class="icon">❤️</div>
-            <h3 data-i18n="support">Support</h3>
-            <p data-i18n="supportDesc">Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.</p>
-        </a>
-    </div>
-</section>
-
-<!-- CTA -->
-<section class="section">
-    <div class="cta-banner">
-        <h2 data-i18n="joinVoices">🌍 Join 1,000+ Voices for Peace</h2>
-        <p data-i18n="joinVoicesSub">Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters. Wear Love. Speak Peace. Live Unity.</p>
-        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-            <a href="contribute.html" class="btn btn-primary">🕊️ <span data-i18n="shareVoiceBtn">Share Your Voice →</span></a>
-            <a href="collaborate.html#story-chain" class="btn btn-gold">📖 Join Story Chain</a>
-            <a href="collaborate.html#wisdom-chain" class="btn btn-gold">🦉 Join Wisdom Chain</a>
-            <a href="support.html" class="btn btn-love">❤️ Support the Movement</a>
+    <!-- ========== SLIDE MENU (MOBILE) ========== -->
+    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+    <div class="slide-menu" id="slideMenu" role="dialog" aria-label="Mobile menu">
+        <div class="menu-header">
+            <div class="flag">🇪🇹🕊️</div>
+            <h3>Ethiopian Peace Archive</h3>
+            <p style="color:var(--text-muted);font-size:0.7rem">Voices for Peace · Power of Unity</p>
+        </div>
+        
+        <a href="index.html">🏠 <span data-i18n="home">Home</span></a>
+        <a href="voices.html">🗣️ <span data-i18n="voices">Voice Archive</span></a>
+        <a href="blog.html">📝 <span data-i18n="blog">Blog & Stories</span></a>
+        <a href="courses.html">🎓 <span data-i18n="courses">Free Courses</span></a>
+        <a href="dashboard.html">📊 <span data-i18n="impact">Dashboard</span></a>
+        <a href="media.html">📰 <span data-i18n="media">Media Coverage</span></a>
+        <a href="gallery.html">🖼️ <span data-i18n="gallery">Gallery</span></a>
+        <a href="thanks.html">🙏 <span data-i18n="thanks">Thank You</span></a>
+        <a href="contribute.html">🤝 <span data-i18n="contribute">Contribute</span></a>
+        <a href="about.html">📖 <span data-i18n="about">About Us</span></a>
+        <a href="contact.html">📬 <span data-i18n="contact">Contact</span></a>
+        <a href="peace-techniques.html">🕊️ <span data-i18n="techniques">Peace Techniques</span></a>
+        <a href="research.html">🧠 <span data-i18n="research">AI Research</span></a>
+        <a href="support.html" class="cta-mobile">❤️ <span data-i18n="support">Support the Movement</span></a>
+        
+        <div class="menu-footer">
+            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:8px">
+                <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="am" onclick="setLanguage('am')">አማ</button>
+                <button class="lang-btn" data-lang="om" onclick="setLanguage('om')">Oromo</button>
+                <button class="lang-btn" data-lang="ti" onclick="setLanguage('ti')">ትግ</button>
+            </div>
+            <p style="color:var(--text-muted);font-size:0.65rem">&copy; 2026 Ethiopian Peace Archive</p>
         </div>
     </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-    <div class="footer-grid">
-        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog & Stories</a><a href="collaborate.html#story-chain">📖 Story Chain</a><a href="collaborate.html#wisdom-chain">🦉 Wisdom Chain</a><a href="dashboard.html">Dashboard</a><a href="media.html">Media Coverage</a><a href="gallery.html">Gallery</a></div>
-        <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Free Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="research.html">AI Research</a><a href="about.html">About Us</a></div>
-        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Your Voice</a><a href="collaborate.html">Story & Wisdom Chain</a><a href="support.html">Donate & Support</a><a href="contact.html">Contact</a></div>
-        <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 (Twitter)</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
-    </div>
-    <div class="footer-bottom">
-        <p class="footer-slogan">
-            <span class="love">❤️ Wear Love.</span> 
-            <span class="peace">🕊️ Speak Peace.</span> 
-            <span class="unity">🤝 Live Unity.</span>
+    <!-- ========== HERO SECTION ========== -->
+    <header class="hero-home" aria-labelledby="heroTitle">
+        <span class="hero-home__badge" data-i18n="tagline">🌍 Global Peace Movement</span>
+        
+        <h1 class="hero-home__title" id="heroTitle" data-i18n="heroTitle">
+            Voices of Peace.<br>Power of Unity.
+        </h1>
+        
+        <p class="hero-home__subtitle" data-i18n="heroSub">
+            1,000+ voices from Ethiopia and the world — preserved, amplified, 
+            and driving real change for diaspora and local communities.
         </p>
-        <p>We Need Peace &copy; 2026 · The Global Voice Archive · Built with ❤️ for the World</p>
-        <p style="margin-top:6px;font-size:0.7rem"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
-        <p style="margin-top:8px;color:var(--green-bright);font-weight:600">#WeNeedPeace #WearLoveSpeakPeaceLiveUnity #VoicesForPeace</p>
+        
+        <!-- Stats Row -->
+        <div class="hero-home__stats">
+            <div class="hero-home__stat">
+                🗣️ <strong>1,000+</strong> <span data-i18n="voices">Voices</span>
+            </div>
+            <div class="hero-home__stat">
+                🌐 <strong>40</strong> <span data-i18n="languages">Languages</span>
+            </div>
+            <div class="hero-home__stat">
+                📍 <strong>30</strong> <span data-i18n="regions">Regions</span>
+            </div>
+            <div class="hero-home__stat">
+                🌍 <strong>57+</strong> <span data-i18n="countries">Countries</span>
+            </div>
+        </div>
+        
+        <!-- CTA Buttons -->
+        <div class="hero-home__actions">
+            <a href="voices.html" class="btn btn-primary">
+                🔍 <span data-i18n="exploreVoices">Explore Voices</span>
+            </a>
+            <a href="courses.html" class="btn btn-outline">
+                🎓 <span data-i18n="freeCourses">Free Courses</span>
+            </a>
+            <a href="support.html" class="btn btn-gold">
+                ❤️ <span data-i18n="supportUs">Support</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ========== PALM DECORATION ========== -->
+    <div class="palm-decoration" aria-hidden="true">
+        <span>🌿</span>
+        <span>🍃</span>
+        <span>🕊️</span>
+        <span>❤️</span>
+        <span>🤝</span>
+        <span>🍃</span>
+        <span>🌿</span>
     </div>
-</footer>
 
-<script>
-    // ===== LANGUAGE TRANSLATION =====
-    const translations = {
-        en: {
-            badge: '🌍 The Global Voice Archive',
-            title: 'We Need Peace',
-            subtitle: 'Preserving human voices across <strong style="color:var(--gold-bright);">40 languages</strong>, <strong style="color:var(--gold-bright);">30 regions</strong>, and <strong style="color:var(--gold-bright);">57+ countries</strong>. Share your voice.',
-            voices: 'Voices',
-            languages: 'Languages',
-            regions: 'Regions',
-            countries: 'Countries',
-            writers: 'Writers',
-            exploreVoices: 'Explore Voices',
-            participate: 'Participate',
-            freeCourses: 'Free Courses',
-            shareVoice: 'Share Your Voice',
-            whatWeDo: 'What We Do',
-            whatWeDoSub: 'A global platform preserving voices, educating communities, and driving peace action.',
-            voiceArchive: 'Voice Archive',
-            voiceArchiveDesc: 'Browse 1,000+ peace messages from all Ethiopian regions and global supporters in 40 languages.',
-            storyChain: '📖 Story Chain',
-            storyChainDesc: 'One writer starts. Another finds a thread and follows it somewhere new. Join the never-ending story.',
-            wisdomChain: '🦉 Wisdom Chain',
-            wisdomChainDesc: 'Not a conversation. A compounding of insight. Each voice deepens the one before.',
-            peaceCourses: 'Free Peace Courses',
-            peaceCoursesDesc: 'Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required.',
-            blogResearch: 'Blog & Research',
-            blogResearchDesc: 'Stories from the field, research findings, and updates on peace initiatives worldwide.',
-            impactDashboard: 'Impact Dashboard',
-            impactDashboardDesc: 'Track our global reach. See how voices translate into action across 57+ countries.',
-            mediaPress: 'Media & Press',
-            mediaPressDesc: 'Coverage from 8+ media outlets including live TV. Explore our story and press kit.',
-            contribute: 'Contribute',
-            contributeDesc: 'Submit your voice, volunteer, partner with us, or share your expertise for peace.',
-            support: 'Support',
-            supportDesc: 'Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.',
-            joinVoices: '🌍 Join 1,000+ Voices for Peace',
-            joinVoicesSub: 'Whether you\'re in Ethiopia, the diaspora, or anywhere in the world — your voice matters. Wear Love. Speak Peace. Live Unity.',
-            shareVoiceBtn: 'Share Your Voice →'
-        },
-        am: {
-            badge: '🌍 ዓለም አቀፍ የድምፅ መዝገብ',
-            title: 'ሰላም እንፈልጋለን',
-            subtitle: 'በ<strong style="color:var(--gold-bright);">40 ቋንቋዎች</strong>፣ <strong style="color:var(--gold-bright);">30 ክልሎች</strong> እና <strong style="color:var(--gold-bright);">57+ አገራት</strong> የሰው ልጅ ድምፆችን ማቆየት። ድምፅዎን ያጋሩ።',
-            voices: 'ድምፆች',
-            languages: 'ቋንቋዎች',
-            regions: 'ክልሎች',
-            countries: 'አገራት',
-            writers: 'ጸሐፊዎች',
-            exploreVoices: 'ድምፆችን ያስሱ',
-            participate: 'ይሳተፉ',
-            freeCourses: 'ነፃ ኮርሶች',
-            shareVoice: 'ድምፅዎን ያጋሩ',
-            whatWeDo: 'ምን እናደርጋለን',
-            whatWeDoSub: 'ድምፆችን የሚጠብቅ፣ ማህበረሰቦችን የሚያስተምር እና የሰላም እርምጃን የሚያንቀሳቅስ ዓለም አቀፍ መድረክ።',
-            voiceArchive: 'የድምፅ መዝገብ',
-            voiceArchiveDesc: 'ከሁሉም የኢትዮጵያ ክልሎች እና ከዓለም አቀፍ ደጋፊዎች 1,000+ የሰላም መልእክቶችን በ40 ቋንቋዎች ያስሱ።',
-            storyChain: '📖 የታሪክ ሰንሰለት',
-            storyChainDesc: 'አንድ ጸሐፊ ይጀምራል። ሌላው ክር አግኝቶ ወደ አዲስ ቦታ ይከተላል። ማለቂያ የሌለውን ታሪክ ይቀላቀሉ።',
-            wisdomChain: '🦉 የጥበብ ሰንሰለት',
-            wisdomChainDesc: 'ውይይት አይደለም። የማስተዋል ማጠራቀሚያ ነው። እያንዳንዱ ድምፅ ከእሱ በፊት ያለውን ያጠልቃል።',
-            peaceCourses: 'ነፃ የሰላም ኮርሶች',
-            peaceCoursesDesc: 'የግጭት አፈታት፣ የኢትዮጵያ ታሪክ እና የሰላም ግንባታን ይማሩ። ምዝገባ አያስፈልግም።',
-            blogResearch: 'ብሎግ እና ምርምር',
-            blogResearchDesc: 'ከመስክ የተገኙ ታሪኮች፣ የምርምር ግኝቶች እና በዓለም ዙሪያ የሰላም ተነሳሽነቶች ዝመናዎች።',
-            impactDashboard: 'የተፅዕኖ ዳሽቦርድ',
-            impactDashboardDesc: 'ዓለም አቀፍ ተደራሽነታችንን ይከታተሉ። ድምፆች ከ57+ አገራት ወደ ተግባር እንዴት እንደሚተረጎሙ ይመልከቱ።',
-            mediaPress: 'ሚዲያ እና ፕሬስ',
-            mediaPressDesc: 'የቀጥታ ቴሌቪዥንን ጨምሮ ከ8+ የሚዲያ አውታሮች ሽፋን። ታሪካችንን እና የፕሬስ ኪታችንን ያስሱ።',
-            contribute: 'አስተዋፅኦ ያድርጉ',
-            contributeDesc: 'ድምፅዎን ያስገቡ፣ ፈቃደኛ ይሁኑ፣ ከእኛ ጋር ይተባበሩ ወይም ለሰላም እውቀትዎን ያጋሩ።',
-            support: 'ድጋፍ',
-            supportDesc: 'ይለግሱ፣ ስፖንሰር ያድርጉ፣ ይምከሩ ወይም ቁሳቁሶችን ያቅርቡ። እያንዳንዱ አስተዋፅኦ ሰላምን ያጎላል።',
-            joinVoices: '🌍 ከ1,000+ የሰላም ድምፆች ጋር ይቀላቀሉ',
-            joinVoicesSub: 'በኢትዮጵያ፣ በዳያስፖራ ወይም በየትኛውም የዓለም ክፍል ቢሆኑ — ድምፅዎ አስፈላጊ ነው። ፍቅርን ይልበሱ። ሰላምን ይናገሩ። አንድነትን ይኑሩ።',
-            shareVoiceBtn: 'ድምፅዎን ያጋሩ →'
-        }
-    };
+    <!-- ========== WHAT WE DO SECTION ========== -->
+    <section class="section" aria-labelledby="whatWeDoTitle">
+        <h2 class="section-title" id="whatWeDoTitle" data-i18n="whatWeDo">What We Do</h2>
+        <p class="section-subtitle" data-i18n="whatWeDoSub">
+            A global platform preserving voices, educating communities, and driving peace action.
+        </p>
+        
+        <div class="cards-grid">
+            <!-- Voice Archive -->
+            <a href="voices.html" class="feature-card feature-card--home">
+                <div class="icon">🗣️</div>
+                <h3 data-i18n="voiceArchive">Voice Archive</h3>
+                <p data-i18n="voiceArchiveDesc">
+                    Browse 1,000+ peace messages from all Ethiopian regions and global supporters.
+                </p>
+            </a>
+            
+            <!-- Free Courses -->
+            <a href="courses.html" class="feature-card feature-card--home">
+                <div class="icon">🎓</div>
+                <h3 data-i18n="peaceCourses">Free Peace Courses</h3>
+                <p data-i18n="peaceCoursesDesc">
+                    Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required.
+                </p>
+            </a>
+            
+            <!-- Blog & Research -->
+            <a href="blog.html" class="feature-card feature-card--home">
+                <div class="icon">📝</div>
+                <h3 data-i18n="blogResearch">Blog & Research</h3>
+                <p data-i18n="blogResearchDesc">
+                    Stories from the field, research findings, and updates on peace initiatives.
+                </p>
+            </a>
+            
+            <!-- Dashboard -->
+            <a href="dashboard.html" class="feature-card feature-card--home">
+                <div class="icon">📊</div>
+                <h3 data-i18n="impactDashboard">Your Dashboard</h3>
+                <p data-i18n="impactDashboardDesc">
+                    Track your activity, manage chapters, and connect with the community.
+                </p>
+            </a>
+            
+            <!-- Contribute -->
+            <a href="contribute.html" class="feature-card feature-card--home">
+                <div class="icon">🤝</div>
+                <h3 data-i18n="contributeTitle">Contribute</h3>
+                <p data-i18n="contributeDesc">
+                    Submit your voice, volunteer, partner with us, or share your expertise.
+                </p>
+            </a>
+            
+            <!-- Support -->
+            <a href="support.html" class="feature-card feature-card--home">
+                <div class="icon">❤️</div>
+                <h3 data-i18n="supportTitle">Support</h3>
+                <p data-i18n="supportDesc">
+                    Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.
+                </p>
+            </a>
+        </div>
+    </section>
 
-    function setLang(lang) {
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.lang === lang) btn.classList.add('active');
-        });
-        const t = translations[lang] || translations['en'];
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.dataset.i18n;
-            if (t[key]) {
-                if (key === 'subtitle') {
-                    el.innerHTML = t[key];
-                } else {
-                    el.textContent = t[key];
-                }
-            }
-        });
-        localStorage.setItem('peace_lang', lang);
-    }
+    <!-- ========== CTA BANNER ========== -->
+    <section class="section" aria-labelledby="ctaTitle">
+        <div class="cta-banner">
+            <h2 class="cta-banner__title" id="ctaTitle" data-i18n="joinVoices">
+                🌍 Join 1,000+ Voices for Peace
+            </h2>
+            <p class="cta-banner__text" data-i18n="joinVoicesSub">
+                Whether you're in Ethiopia or the diaspora — your voice matters.
+            </p>
+            <div class="cta-banner__actions">
+                <a href="contribute.html" class="btn btn-primary">
+                    🕊️ <span data-i18n="shareYourVoice">Share Your Voice</span> →
+                </a>
+                <a href="voices.html" class="btn btn-outline">
+                    🔍 <span data-i18n="browseVoices">Browse Voices</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const saved = localStorage.getItem('peace_lang') || 'en';
-        setLang(saved);
-    });
+    <!-- ========== FOOTER ========== -->
+    <footer role="contentinfo">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>🗣️ Explore</h4>
+                <a href="voices.html">Voice Archive</a>
+                <a href="blog.html">Blog & Stories</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="media.html">Media Coverage</a>
+                <a href="gallery.html">Gallery</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4>🎓 Learn</h4>
+                <a href="courses.html">Free Courses</a>
+                <a href="peace-techniques.html">Peace Techniques</a>
+                <a href="research.html">AI Research</a>
+                <a href="about.html">About Us</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4>🤝 Participate</h4>
+                <a href="contribute.html">Submit Your Voice</a>
+                <a href="support.html">Donate & Support</a>
+                <a href="thanks.html">Thank You</a>
+                <a href="contact.html">Volunteer</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4>📜 Legal & Contact</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4>🌍 Connect</h4>
+                <a href="#" aria-label="Follow on X (Twitter)">𝕏 (Twitter)</a>
+                <a href="#" aria-label="Follow on Facebook">Facebook</a>
+                <a href="#" aria-label="Follow on Instagram">Instagram</a>
+                <a href="#" aria-label="Join on Telegram">Telegram</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>🕊️ Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace · Built with ❤️ for Ethiopia and the World</p>
+            <p style="margin-top:6px;font-size:0.7rem">
+                <a href="privacy.html">Privacy</a> · 
+                <a href="terms.html">Terms</a> · 
+                <a href="contact.html">Contact</a> · 
+                <a href="thanks.html">Thank You</a>
+            </p>
+            <p style="margin-top:8px;color:var(--green-bright);font-weight:600">
+                #EthiopianPeaceArchive #VoicesForPeace
+            </p>
+        </div>
+    </footer>
 
-    // ===== MOBILE MENU =====
-    function toggleMenu() {
-        const menu = document.getElementById('slideMenu');
-        const overlay = document.getElementById('slideOverlay');
-        const hamburger = document.getElementById('hamburger');
-        if (!menu || !overlay || !hamburger) return;
-        menu.classList.toggle('open');
-        overlay.classList.toggle('open');
-        hamburger.classList.toggle('open');
-        document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
-    }
+    <!-- ========== SCRIPTS ========== -->
+    <script src="js/supabase.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/language.js"></script>
 
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            const menu = document.getElementById('slideMenu');
-            if (menu && menu.classList.contains('open')) toggleMenu();
-        }
-    });
-</script>
-<script src="js/supabase.js"></script>
-<script src="js/navigation.js"></script>
-<script src="js/language.js"></script>
 </body>
 </html>
