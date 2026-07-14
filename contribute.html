@@ -3,421 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Share your voice for peace. Simple form — name, email, country, message. Join 1,000+ voices from 57+ countries in the Ethiopian Peace Archive.">
+    <meta name="description" content="Share your voice for peace. No registration required. Join 1,000+ voices from 57+ countries in the Ethiopian Peace Archive.">
     <meta property="og:title" content="Share Your Voice — Ethiopian Peace Archive">
-    <meta property="og:description" content="Simple form. No registration. Just your voice for peace, love, and unity. Join 1,000+ voices from 57+ countries.">
+    <meta property="og:description" content="Simple form. No registration. Just your voice for peace, love, and unity.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ethiopianpeacearchive.org/contribute">
-    <meta property="og:site_name" content="Ethiopian Peace Archive">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Share Your Voice — Ethiopian Peace Archive">
-    <meta name="twitter:description" content="Simple form. No registration. Just your voice for peace. Join 1,000+ voices.">
     <link rel="canonical" href="https://ethiopianpeacearchive.org/contribute">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
     <title>Share Your Voice — Ethiopian Peace Archive</title>
-    
-    <!-- ========== MAIN STYLESHEET ========== -->
     <link rel="stylesheet" href="css/style.css">
-    
-    <!-- ========== PAGE-SPECIFIC STYLES ========== -->
     <style>
-        /* ============================================
-           CONTRIBUTE PAGE ENHANCEMENTS
-           Based on Ethiopian Peace Archive design system
-           ============================================ */
+        :root {
+            --bg: #060f1e; --card: #0d1b33; --card-hover: #111f3a;
+            --green: #22c55e; --green-bright: #4ade80; --green-dim: rgba(34,197,94,0.10);
+            --green-border: rgba(34,197,94,0.20); --gold: #fbbf24; --gold-bright: #fcd34d;
+            --gold-soft: rgba(251,191,36,0.1); --text: #e2e8f0; --text-dim: #94a3b8; --text-muted: #64748b;
+            --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --radius: 14px; --radius-lg: 20px; --transition: 0.25s ease;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:var(--bg); color:var(--text); font-family:var(--font-ui); line-height:1.6; -webkit-font-smoothing:antialiased; background-image:radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%), radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%); }
+        a { text-decoration:none; color:inherit; }
 
-        /* ---- Hero Section ---- */
-        .contribute-hero {
-            padding: 60px 20px 40px;
-            text-align: center;
-            border-bottom: 1px solid var(--green-border);
-            position: relative;
-            overflow: hidden;
-            background: var(--bg);
+        nav { display:flex; align-items:center; justify-content:space-between; padding:0.9rem 5%; background:rgba(6,15,30,0.97); backdrop-filter:blur(14px); border-bottom:1px solid var(--green-border); position:sticky; top:0; z-index:100; flex-wrap:wrap; gap:10px; }
+        .nav-logo { font-weight:700; font-size:1.1rem; color:#f0f2e9; display:flex; align-items:center; gap:6px; }
+        .nav-logo span { color:var(--green-bright); }
+        .nav-links { display:flex; gap:4px; flex-wrap:wrap; align-items:center; }
+        .nav-links a { font-size:0.78rem; font-weight:600; color:var(--text-dim); padding:7px 12px; border-radius:20px; transition:var(--transition); white-space:nowrap; }
+        .nav-links a:hover, .nav-links a.active { color:var(--gold-bright); background:var(--gold-soft); }
+        .nav-cta { background:var(--green) !important; color:#000 !important; font-weight:700 !important; padding:7px 16px !important; border-radius:24px !important; }
+        .nav-cta:hover { background:var(--green-bright) !important; }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; }
+        .hamburger span { width:24px; height:2px; background:var(--text-dim); border-radius:2px; }
+
+        .container { max-width:700px; margin:0 auto; padding:30px 20px 50px; }
+
+        .hero { text-align:center; padding:50px 20px 30px; border-bottom:1px solid var(--green-border); }
+        .hero-badge { display:inline-block; background:rgba(34,197,94,0.15); color:var(--green-bright); padding:7px 20px; border-radius:30px; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:16px; border:1px solid rgba(34,197,94,0.3); }
+        .hero h1 { font-size:clamp(1.8rem,4vw,2.5rem); color:var(--gold-bright); font-weight:800; margin-bottom:10px; }
+        .hero-slogan { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin:12px 0 16px; font-size:0.9rem; font-weight:700; }
+        .hero-slogan .love{color:#ef4444} .hero-slogan .peace{color:var(--green-bright)} .hero-slogan .unity{color:var(--gold-bright)}
+        .hero p { color:var(--text-dim); font-size:0.9rem; max-width:500px; margin:0 auto; }
+
+        .form-card { background:var(--card); border:2px solid var(--gold); border-radius:var(--radius-lg); padding:32px; margin-top:24px; box-shadow:0 4px 30px rgba(0,0,0,0.3); }
+        .form-card h2 { color:var(--gold); text-align:center; margin-bottom:4px; font-size:1.3rem; }
+        .form-card .subtitle { text-align:center; color:var(--text-dim); font-size:0.85rem; margin-bottom:24px; }
+        .form-group { margin-bottom:16px; }
+        .form-group label { display:block; color:var(--text-dim); font-size:0.82rem; font-weight:600; margin-bottom:5px; }
+        .form-group .hint { font-weight:400; color:var(--text-muted); font-size:0.72rem; }
+        .form-group input, .form-group textarea, .form-group select { width:100%; padding:13px 16px; background:#1b241f; border:1px solid #3a4f40; border-radius:10px; color:#e2e8e4; font-family:var(--font-ui); font-size:0.92rem; transition:0.2s; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(251,191,36,0.08); background:#1d2b23; }
+        .form-group textarea { min-height:140px; resize:vertical; line-height:1.7; }
+        .form-group select { cursor:pointer; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2394a3b8' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; padding-right:40px; }
+        .required { color:#ef4444; }
+
+        .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:15px; margin-top:6px; border-radius:40px; font-weight:700; font-size:1rem; cursor:pointer; border:none; font-family:var(--font-ui); transition:0.25s; }
+        .btn-gold { background:var(--gold); color:#000; }
+        .btn-gold:hover { background:var(--gold-bright); transform:translateY(-2px); box-shadow:0 8px 25px rgba(251,191,36,0.3); }
+        .btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; box-shadow:none; }
+        .spinner { display:none; width:18px; height:18px; border:2.5px solid rgba(0,0,0,0.3); border-top-color:#000; border-radius:50%; animation:spin 0.7s linear infinite; }
+        @keyframes spin { to{transform:rotate(360deg)} }
+
+        .msg-box { text-align:center; font-size:0.85rem; margin-top:14px; padding:12px 16px; border-radius:10px; display:none; animation:fadeIn 0.3s ease; }
+        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+        .msg-success { background:rgba(34,197,94,0.1); color:#4ade80; border:1px solid rgba(34,197,94,0.25); display:block; }
+        .msg-error { background:rgba(239,68,68,0.1); color:#f87171; border:1px solid rgba(239,68,68,0.25); display:block; }
+        .msg-loading { background:rgba(251,191,36,0.1); color:var(--gold-bright); border:1px solid rgba(251,191,36,0.25); display:block; }
+
+        .info-card { background:var(--green-dim); border:1px solid rgba(34,197,94,0.3); border-radius:var(--radius); padding:18px 20px; margin-top:20px; display:flex; gap:12px; align-items:flex-start; }
+        .info-card .icon { font-size:1.4rem; flex-shrink:0; }
+        .info-card h4 { color:var(--green-bright); margin-bottom:4px; font-size:0.9rem; }
+        .info-card p { color:var(--text-dim); font-size:0.82rem; line-height:1.5; }
+
+        footer { text-align:center; padding:25px; color:var(--text-muted); font-size:0.78rem; border-top:1px solid rgba(34,197,94,0.10); margin-top:40px; }
+        footer a { color:var(--text-dim); } footer a:hover { color:var(--green-bright); }
+
+        @media(max-width:768px) { .nav-links{display:none} .hamburger{display:flex} .hero{padding:35px 14px 25px} .hero h1{font-size:1.5rem} .form-card{padding:22px 16px} .hero-slogan{font-size:0.8rem;gap:6px} }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="voices.html">Voices</a>
+        <a href="blog.html">Blog</a>
+        <a href="courses.html">Courses</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="participate.html">✍️ Participate</a>
+        <a href="contribute.html" class="active">📝 Share Voice</a>
+        <a href="media.html">Media</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="support.html" class="nav-cta">❤️ Support</a>
+    </div>
+    <button class="hamburger" onclick="alert('Mobile menu')"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="container">
+    <header class="hero">
+        <div class="hero-badge">📝 Share Your Voice</div>
+        <h1>Contribute to Peace</h1>
+        <div class="hero-slogan">
+            <span>🕊️ <span class="peace">Peace is the goal.</span></span>
+            <span>·</span>
+            <span>❤️ <span class="love">Love is the way.</span></span>
+            <span>·</span>
+            <span>🤝 <span class="unity">Unity is the strength.</span></span>
+        </div>
+        <p>Simple form. <strong style="color:var(--gold-bright);">No registration required.</strong> Your voice joins 1,000+ others.</p>
+    </header>
+
+    <!-- FORM -->
+    <div class="form-card">
+        <h2>✍️ Write Your Message</h2>
+        <p class="subtitle">Fields marked <span class="required">*</span> are required</p>
+        
+        <form id="voiceForm" onsubmit="return false;">
+            <div class="form-group">
+                <label for="fullName">Your Full Name <span class="required">*</span></label>
+                <input type="text" id="fullName" placeholder="e.g., Bethlehem Tadesse" required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+                <label for="emailAddr">Your Email <span class="required">*</span> <span class="hint">(private, for verification)</span></label>
+                <input type="email" id="emailAddr" placeholder="your@email.com" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="countrySel">Your Country</label>
+                <select id="countrySel">
+                    <option value="">Select country</option>
+                    <option>Ethiopia</option><option>Kenya</option><option>Nigeria</option><option>Ghana</option>
+                    <option>Rwanda</option><option>South Africa</option><option>United States</option><option>United Kingdom</option>
+                    <option>Canada</option><option>Germany</option><option>France</option><option>Japan</option>
+                    <option>India</option><option>Brazil</option><option>Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="languageSel">Language of Your Message</label>
+                <select id="languageSel">
+                    <option value="English">English</option>
+                    <option value="Amharic">አማርኛ Amharic</option>
+                    <option value="Oromo">Afaan Oromo</option>
+                    <option value="Somali">Soomaali Somali</option>
+                    <option value="Tigrinya">ትግርኛ Tigrinya</option>
+                    <option value="Arabic">العربية Arabic</option>
+                    <option value="French">Français</option>
+                    <option value="Spanish">Español</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="typeSel">How do you want to participate?</label>
+                <select id="typeSel">
+                    <option value="voice">🗣️ Share a Peace Voice</option>
+                    <option value="story">📖 Add to Story Chain</option>
+                    <option value="wisdom">🦉 Add to Wisdom Chain</option>
+                    <option value="chapter">👨‍👩‍👧‍👦 Start a Family Chapter</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="messageTxt">Your Message <span class="required">*</span></label>
+                <textarea id="messageTxt" placeholder="What does peace, love, or unity mean to you? Write from your heart..." required></textarea>
+            </div>
+
+            <button type="button" class="btn btn-gold" id="submitBtn" onclick="submitVoice()">
+                <span class="spinner" id="spinner"></span>
+                <span id="btnText">🕊️ Submit My Voice</span>
+            </button>
+            
+            <div class="msg-box" id="msgBox"></div>
+        </form>
+    </div>
+
+    <div class="info-card">
+        <div class="icon">📋</div>
+        <div>
+            <h4>What happens next?</h4>
+            <p>Your submission is reviewed within 24 hours. Once approved, your voice becomes part of the permanent global archive with 1,000+ voices from 57+ countries. You'll receive a confirmation email.</p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p style="font-size:1rem;margin-bottom:4px;">🕊️ Peace is the goal. ❤️ Love is the way. 🤝 Unity is the strength.</p>
+    <p>Ethiopian Peace Archive &copy; 2026 · <a href="index.html">Home</a> · <a href="voices.html">Voices</a> · <a href="participate.html">Participate</a> · <a href="support.html">Support</a></p>
+    <p style="margin-top:6px;color:var(--green-bright);font-weight:600">#EthiopianPeaceArchive #VoicesForPeace</p>
+</footer>
+
+<!-- ============================================
+     WORKING JAVASCRIPT - FIXED VERSION
+     ============================================ -->
+<script>
+    // Supabase configuration
+    const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
+
+    let isSubmitting = false;
+
+    /**
+     * Main submit function - THIS IS WHAT WAS BROKEN
+     * Now properly connected to the button onclick
+     */
+    async function submitVoice() {
+        console.log('🟢 submitVoice() called');
+        
+        // Prevent double submission
+        if (isSubmitting) {
+            console.log('⚠️ Already submitting, ignoring...');
+            return;
         }
 
-        .contribute-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.06) 0%, transparent 60%),
-                radial-gradient(circle at 70% 70%, rgba(251, 191, 36, 0.05) 0%, transparent 60%);
-            animation: heroPulse 10s ease-in-out infinite;
-            z-index: 0;
+        // Get DOM elements
+        const btn = document.getElementById('submitBtn');
+        const msgBox = document.getElementById('msgBox');
+        const spinner = document.getElementById('spinner');
+        const btnText = document.getElementById('btnText');
+        
+        // Get form values
+        const fullName = document.getElementById('fullName').value.trim();
+        const emailAddr = document.getElementById('emailAddr').value.trim();
+        const country = document.getElementById('countrySel').value;
+        const language = document.getElementById('languageSel').value;
+        const type = document.getElementById('typeSel').value;
+        const message = document.getElementById('messageTxt').value.trim();
+
+        console.log('📝 Form data:', { fullName, emailAddr, country, language, type, messageLength: message.length });
+
+        // Reset message box
+        msgBox.className = 'msg-box';
+        msgBox.textContent = '';
+
+        // ===== VALIDATION =====
+        if (!fullName) {
+            msgBox.className = 'msg-box msg-error';
+            msgBox.textContent = '❌ Please enter your full name.';
+            document.getElementById('fullName').focus();
+            return;
         }
 
-        @keyframes heroPulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
+        if (!emailAddr) {
+            msgBox.className = 'msg-box msg-error';
+            msgBox.textContent = '❌ Please enter your email address.';
+            document.getElementById('emailAddr').focus();
+            return;
         }
 
-        .contribute-hero > * {
-            position: relative;
-            z-index: 1;
+        if (!emailAddr.includes('@') || !emailAddr.includes('.')) {
+            msgBox.className = 'msg-box msg-error';
+            msgBox.textContent = '❌ Please enter a valid email address (e.g., name@example.com).';
+            document.getElementById('emailAddr').focus();
+            return;
         }
 
-        .contribute-hero__badge {
-            display: inline-block;
-            background: rgba(34, 197, 94, 0.15);
-            color: var(--green-bright);
-            padding: 7px 20px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-family: var(--font-ui);
-            font-weight: 700;
-            margin-bottom: 18px;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            animation: fadeInDown 0.6s ease;
+        if (!message || message.length < 5) {
+            msgBox.className = 'msg-box msg-error';
+            msgBox.textContent = '❌ Please write your message (at least 5 characters).';
+            document.getElementById('messageTxt').focus();
+            return;
         }
 
-        .contribute-hero__title {
-            font-size: clamp(1.8rem, 4.5vw, 2.8rem);
-            color: var(--gold-bright);
-            margin-bottom: 14px;
-            line-height: 1.2;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            animation: fadeInUp 0.6s ease 0.1s both;
+        // ===== START SUBMISSION =====
+        isSubmitting = true;
+        btn.disabled = true;
+        spinner.style.display = 'inline-block';
+        btnText.textContent = 'Submitting...';
+        msgBox.className = 'msg-box msg-loading';
+        msgBox.textContent = '⏳ Submitting your voice to the global archive...';
+        
+        console.log('🚀 Sending to Supabase...');
+
+        try {
+            // Build payload
+            const payload = {
+                writer_name: fullName,
+                full_name: fullName,
+                quote_english: message,
+                quote_original: message,
+                region: country || 'Unknown',
+                language: language || 'English',
+                year: new Date().getFullYear(),
+                is_published: false,
+                is_founder: type === 'chapter',
+                chapter_id: type === 'story' ? 'story-chain' : 
+                            type === 'wisdom' ? 'wisdom-chain' : 
+                            type === 'chapter' ? 'chapter-' + Date.now() : 
+                            'voice-' + Date.now(),
+                themes: type === 'story' ? ['Story Chain', 'Collaborative', 'Peace'] :
+                        type === 'wisdom' ? ['Wisdom Chain', 'Insight', 'Peace'] :
+                        type === 'chapter' ? ['Family', 'Legacy', 'Peace'] :
+                        ['Peace', 'Love', 'Unity'],
+                sentiment: 0.75,
+                starting_likes: 50,
+                starting_shares: 20,
+                extracted_data: { 
+                    email: emailAddr, 
+                    submission_type: type,
+                    language: language 
+                },
+                created_at: new Date().toISOString()
+            };
+
+            console.log('📦 Payload:', payload);
+
+            // Send to Supabase
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/ethiopian_voices`, {
+                method: 'POST',
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_KEY,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            console.log('📡 Response status:', response.status);
+
+            if (response.ok) {
+                // SUCCESS
+                console.log('✅ Submission successful!');
+                msgBox.className = 'msg-box msg-success';
+                msgBox.textContent = `✅ Thank you, ${fullName}! Your voice has been submitted for review. You'll be notified at ${emailAddr} when it's published. 🕊️`;
+                
+                // Clear form
+                document.getElementById('fullName').value = '';
+                document.getElementById('emailAddr').value = '';
+                document.getElementById('messageTxt').value = '';
+                document.getElementById('countrySel').value = '';
+                document.getElementById('typeSel').value = 'voice';
+                
+                // Scroll to message
+                msgBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                // ERROR
+                const errorData = await response.json().catch(() => ({}));
+                console.error('❌ Supabase error:', errorData);
+                msgBox.className = 'msg-box msg-error';
+                msgBox.textContent = '❌ Error: ' + (errorData.message || 'Something went wrong. Please try again.');
+            }
+        } catch (error) {
+            // NETWORK ERROR
+            console.error('❌ Network error:', error);
+            msgBox.className = 'msg-box msg-error';
+            msgBox.textContent = '❌ Connection error. Please check your internet and try again.';
+        } finally {
+            // Reset button state
+            isSubmitting = false;
+            btn.disabled = false;
+            spinner.style.display = 'none';
+            btnText.textContent = '🕊️ Submit My Voice';
+            console.log('🏁 Submission process completed');
         }
+    }
 
-        .contribute-hero__tagline {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin: 14px 0 18px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            animation: fadeInUp 0.6s ease 0.2s both;
+    // ===== KEYBOARD SHORTCUT: Ctrl+Enter to submit =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const textarea = document.getElementById('messageTxt');
+        if (textarea) {
+            textarea.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    e.preventDefault();
+                    console.log('⌨️ Ctrl+Enter detected, submitting...');
+                    submitVoice();
+                }
+            });
         }
+        console.log('✅ Voice submission form initialized and ready');
+    });
+</script>
 
-        .contribute-hero__tagline .love { color: #ef4444; }
-        .contribute-hero__tagline .peace { color: var(--green-bright); }
-        .contribute-hero__tagline .unity { color: var(--gold-bright); }
-        .contribute-hero__tagline .divider { color: var(--text-muted); font-weight: 300; }
-
-        .contribute-hero__subtitle {
-            font-size: clamp(0.9rem, 2vw, 1.05rem);
-            color: var(--text-dim);
-            max-width: 600px;
-            margin: 0 auto 24px;
-            line-height: 1.7;
-            animation: fadeInUp 0.6s ease 0.3s both;
-        }
-
-        .contribute-hero__actions {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.6s ease 0.4s both;
-        }
-
-        /* ---- Main Container ---- */
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 30px 20px 60px;
-        }
-
-        /* ---- Form Card ---- */
-        .form-card {
-            background: var(--card);
-            border: 2px solid var(--gold);
-            border-radius: var(--radius-lg);
-            padding: 36px 32px;
-            margin-top: 8px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.7s ease 0.5s both;
-        }
-
-        .form-card:hover {
-            box-shadow: 0 8px 40px rgba(251, 191, 36, 0.06);
-            border-color: var(--gold-bright);
-        }
-
-        .form-card__header {
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .form-card__title {
-            color: var(--gold);
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-            font-family: var(--font-ui);
-            letter-spacing: -0.3px;
-        }
-
-        .form-card__subtitle {
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            font-family: var(--font-ui);
-        }
-
-        .form-card__required {
-            color: #ef4444;
-            font-weight: 600;
-        }
-
-        /* ---- Form Group ---- */
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group__label {
-            display: block;
-            color: var(--text-dim);
-            font-size: 0.82rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-            font-family: var(--font-ui);
-            letter-spacing: 0.2px;
-        }
-
-        .form-group__label-hint {
-            font-weight: 400;
-            color: var(--text-muted);
-            font-size: 0.73rem;
-        }
-
-        .form-group__input,
-        .form-group__textarea,
-        .form-group__select {
-            width: 100%;
-            padding: 13px 16px;
-            background: #1b241f;
-            border: 1px solid #3a4f40;
-            border-radius: var(--radius-sm);
-            color: #e2e8e4;
-            font-family: var(--font-ui);
-            font-size: 0.92rem;
-            line-height: 1.5;
-            transition: all 0.2s ease;
-        }
-
-        .form-group__input:hover,
-        .form-group__textarea:hover,
-        .form-group__select:hover {
-            border-color: #4a6b54;
-        }
-
-        .form-group__input:focus,
-        .form-group__textarea:focus,
-        .form-group__select:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.08);
-            background: #1d2b23;
-        }
-
-        .form-group__input::placeholder,
-        .form-group__textarea::placeholder {
-            color: var(--text-muted);
-            opacity: 0.65;
-        }
-
-        .form-group__textarea {
-            min-height: 140px;
-            resize: vertical;
-            line-height: 1.7;
-        }
-
-        .form-group__select {
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2394a3b8' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 40px;
-        }
-
-        .form-group__select option {
-            background: var(--card);
-            color: var(--text);
-            padding: 10px;
-        }
-
-        /* ---- Submit Button ---- */
-        .btn-submit {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 15px 24px;
-            margin-top: 10px;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            border: none;
-            font-family: var(--font-ui);
-            background: var(--gold);
-            color: #000;
-            transition: all 0.25s ease;
-            letter-spacing: 0.3px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-submit::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn-submit:hover::before {
-            left: 100%;
-        }
-
-        .btn-submit:hover {
-            background: var(--gold-bright);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.3);
-        }
-
-        .btn-submit:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-submit:disabled {
-            opacity: 0.55;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .btn-submit--loading {
-            background: var(--gold-hover, #f59e0b) !important;
-        }
-
-        /* Spinner */
-        .spinner {
-            display: none;
-            width: 18px;
-            height: 18px;
-            border: 2.5px solid rgba(0, 0, 0, 0.3);
-            border-top-color: #000;
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-        }
-
-        .btn-submit--loading .spinner {
-            display: inline-block;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* ---- Message Box ---- */
-        .message-box {
-            text-align: center;
-            font-size: 0.85rem;
-            margin-top: 16px;
-            min-height: 20px;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            display: none;
-            font-family: var(--font-ui);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .message-box--visible {
-            display: block;
-        }
-
-        .message-box--success {
-            background: rgba(34, 197, 94, 0.1);
-            color: #4ade80;
-            border: 1px solid rgba(34, 197, 94, 0.25);
-        }
-
-        .message-box--error {
-            background: rgba(239, 68, 68, 0.1);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.25);
-        }
-
-        .message-box--loading {
-            background: rgba(251, 191, 36, 0.1);
-            color: var(--gold-bright);
-            border: 1px solid rgba(251, 191, 36, 0.25);
-        }
-
-        /* ---- Info Card ---- */
-        .info-card {
-            background: var(--green-dim);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin-top: 24px;
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            animation: fadeInUp 0.7s ease 0.6s both;
-        }
-
-        .info-card__icon {
-            font-size: 1.6rem;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .info-card__content {
-            flex: 1;
-        }
-
-        .info-card__title {
-            color: var(--green-bright);
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 4px;
-            font-family: var(--font-ui);
-        }
-
-        .info-card__text {
-            color: var(--text-dim);
-            font-size: 0.82rem;
-            line-height: 1.6;
-        }
-
-        /* ---- Footer ---- */
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: var(--text-muted);
-            font-size: 0.78rem;
-            border-top: 1px solid rgba(34, 197, 94, 0.10);
-            margin-top: 50px;
-            font-family: var(--font-ui);
-        }
-
-        .footer__tagline {
-            font-size: 1rem;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-dim);
-        }
-
-        .footer__tagline .love { color: #ef4444; }
-        .footer__tagline .peace { color: var(--green-bright); }
-        .footer__tagline .unity {
+<script src="js/supabase.js"></script>
+<script src="js/navigation.js"></script>
+</body>
+</html>
