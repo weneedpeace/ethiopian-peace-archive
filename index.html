@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="We Need Peace — The Global Voice Archive preserving human voices across 40 languages, 30 regions, and 57+ countries. Peace is the goal. Love is the way. Unity is the strength. Share your voice.">
+    <meta name="description" content="We Need Peace — The Global Voice Archive preserving human voices across 40 languages, 30 regions, and 57+ countries. Wear Love. Speak Peace. Live Unity. Share your voice.">
     <meta name="keywords" content="peace, love, unity, voice archive, global peace, Ethiopian peace, collaborative writing, peace courses, wisdom chain, story chain">
     <meta name="author" content="We Need Peace">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="We Need Peace — The Global Voice Archive">
-    <meta property="og:description" content="Preserving human voices across 40 languages, 30 regions, and 57+ countries. Share your voice for peace, love, and unity.">
+    <meta property="og:description" content="Preserving human voices across 40 languages, 30 regions, and 57+ countries. Wear Love. Speak Peace. Live Unity.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://weneedpeace.pages.dev">
     <meta property="og:site_name" content="We Need Peace">
@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="Preserving human voices across 40 languages, 30 regions, and 57+ countries.">
     <link rel="canonical" href="https://weneedpeace.pages.dev">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
-    <title>We Need Peace — The Global Voice Archive</title>
+    <title>We Need Peace — Wear Love. Speak Peace. Live Unity.</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         :root {
@@ -25,6 +25,7 @@
             --green-border: rgba(34, 197, 94, 0.25); --green-bright: #22c55e;
             --green-soft: rgba(34, 197, 94, 0.12); --gold: #fbbf24;
             --gold-bright: #fcd34d; --gold-soft: rgba(251, 191, 36, 0.1);
+            --love: #ef4444; --love-soft: rgba(239, 68, 68, 0.12);
             --text: #e2e8f0; --text-dim: #94a3b8; --text-muted: #64748b;
             --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
             --radius: 14px; --radius-lg: 20px; --transition: 0.25s ease;
@@ -34,8 +35,10 @@
         body {
             background: var(--bg); color: var(--text); font-family: var(--font-ui);
             line-height: 1.6; -webkit-font-smoothing: antialiased;
-            background-image: radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%),
-                            radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%);
+            background-image: 
+                radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 40%, rgba(239,68,68,0.02) 0%, transparent 50%);
         }
         a { text-decoration: none; color: inherit; }
 
@@ -47,7 +50,10 @@
             border-bottom: 1px solid var(--green-border);
             position: sticky; top: 0; z-index: 100; flex-wrap: wrap;
         }
-        .logo { font-weight: 700; font-size: 1.25rem; color: #f0f2e9; display: flex; align-items: center; gap: 6px; }
+        .logo { 
+            font-weight: 700; font-size: 1.25rem; color: #f0f2e9; 
+            display: flex; align-items: center; gap: 6px; 
+        }
         .logo span { color: var(--green-bright); }
         .desktop-links { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
         .desktop-links a {
@@ -55,13 +61,19 @@
             transition: var(--transition); text-transform: uppercase;
             letter-spacing: 0.4px; padding: 6px 9px; border-radius: 18px; white-space: nowrap;
         }
-        .desktop-links a:hover, .desktop-links a.active { color: var(--gold-bright); background: var(--gold-soft); }
-        .cta-nav { background: var(--green-bright); color: #0b0f0e !important; padding: 7px 14px !important; border-radius: 24px; font-weight: 700; }
+        .desktop-links a:hover, .desktop-links a.active { 
+            color: var(--gold-bright); background: var(--gold-soft); 
+        }
+        .cta-nav { 
+            background: var(--green-bright); color: #0b0f0e !important; 
+            padding: 7px 14px !important; border-radius: 24px; font-weight: 700; 
+        }
         .cta-nav:hover { background: #16a34a !important; }
-        
+
         /* Language Toggle */
         .lang-toggle {
-            display: flex; gap: 3px; margin-left: 8px; border-left: 1px solid var(--green-border); padding-left: 8px;
+            display: flex; gap: 3px; margin-left: 8px; 
+            border-left: 1px solid var(--green-border); padding-left: 8px;
         }
         .lang-btn {
             padding: 5px 8px; border-radius: 12px; border: 1px solid var(--green-border);
@@ -69,17 +81,30 @@
             font-size: 0.65rem; font-family: var(--font-ui); font-weight: 600;
             transition: var(--transition);
         }
-        .lang-btn.active { background: var(--green-soft); color: var(--green-bright); border-color: var(--green-bright); }
+        .lang-btn.active { 
+            background: var(--green-soft); color: var(--green-bright); 
+            border-color: var(--green-bright); 
+        }
         .lang-btn:hover { background: var(--green-soft); color: var(--green-bright); }
 
-        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1001; }
-        .hamburger span { width: 24px; height: 2px; background: var(--text-dim); transition: 0.3s ease; border-radius: 2px; }
+        .hamburger { 
+            display: none; flex-direction: column; gap: 5px; background: none; 
+            border: none; cursor: pointer; padding: 8px; z-index: 1001; 
+        }
+        .hamburger span { 
+            width: 24px; height: 2px; background: var(--text-dim); 
+            transition: 0.3s ease; border-radius: 2px; 
+        }
         .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
         /* Slide Menu */
-        .slide-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 998; opacity: 0; visibility: hidden; transition: 0.4s; }
+        .slide-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.7); z-index: 998; 
+            opacity: 0; visibility: hidden; transition: 0.4s; 
+        }
         .slide-overlay.open { opacity: 1; visibility: visible; }
         .slide-menu {
             position: fixed; top: 0; right: -300px; width: 280px; height: 100%;
@@ -89,7 +114,10 @@
             padding: 80px 18px 30px; overflow-y: auto;
         }
         .slide-menu.open { right: 0; }
-        .slide-menu .menu-header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--green-border); }
+        .slide-menu .menu-header { 
+            text-align: center; margin-bottom: 24px; padding-bottom: 16px; 
+            border-bottom: 1px solid var(--green-border); 
+        }
         .slide-menu .menu-header .flag { font-size: 2rem; margin-bottom: 6px; }
         .slide-menu .menu-header h3 { color: var(--gold); font-size: 1rem; }
         .slide-menu a {
@@ -97,9 +125,17 @@
             margin-bottom: 4px; border-radius: 12px; color: var(--text-dim);
             font-size: 0.85rem; font-weight: 500; transition: 0.2s;
         }
-        .slide-menu a:hover { color: var(--green-bright); background: var(--green-soft); transform: translateX(4px); }
-        .slide-menu .menu-footer { text-align: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--green-border); }
-        .slide-menu .lang-toggle-mobile { display: flex; gap: 4px; justify-content: center; margin: 12px 0; }
+        .slide-menu a:hover { 
+            color: var(--green-bright); background: var(--green-soft); 
+            transform: translateX(4px); 
+        }
+        .slide-menu .menu-footer { 
+            text-align: center; margin-top: 16px; padding-top: 12px; 
+            border-top: 1px solid var(--green-border); 
+        }
+        .slide-menu .lang-toggle-mobile { 
+            display: flex; gap: 4px; justify-content: center; margin: 12px 0; 
+        }
 
         /* Hero */
         .hero-plain {
@@ -108,8 +144,10 @@
         }
         .hero-plain::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.08) 0%, transparent 60%),
-                        radial-gradient(circle at 70% 70%, rgba(251,191,36,0.06) 0%, transparent 60%);
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(34,197,94,0.08) 0%, transparent 60%),
+                radial-gradient(circle at 70% 70%, rgba(251,191,36,0.06) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, rgba(239,68,68,0.04) 0%, transparent 60%);
             animation: heroPulse 10s ease-in-out infinite;
         }
         @keyframes heroPulse { 0%,100%{opacity:0.8} 50%{opacity:1} }
@@ -121,18 +159,22 @@
             font-weight: 600; margin-bottom: 16px; border: 1px solid rgba(34,197,94,0.3);
         }
         .hero-plain h1 {
-            font-size: clamp(1.8rem,5vw,3.2rem); color: var(--gold-bright);
-            margin-bottom: 12px; line-height: 1.2; font-weight: 800; letter-spacing: -0.5px;
+            font-size: clamp(2rem,5vw,3.5rem); color: var(--gold-bright);
+            margin-bottom: 8px; line-height: 1.2; font-weight: 800; letter-spacing: -0.5px;
         }
-        .pillar-tagline {
+        .hero-slogan {
             display: flex; justify-content: center; align-items: center;
-            gap: 12px; flex-wrap: wrap; margin: 14px 0 18px;
-            font-size: 0.95rem; font-weight: 600; color: var(--text);
+            gap: 14px; flex-wrap: wrap; margin: 16px 0 20px;
+            font-size: clamp(1rem,2.5vw,1.3rem); font-weight: 700; 
+            color: var(--text); line-height: 1.5;
         }
-        .pillar-tagline .divider { color: var(--text-muted); font-weight: 300; }
+        .hero-slogan .love { color: #ef4444; }
+        .hero-slogan .peace { color: var(--green-bright); }
+        .hero-slogan .unity { color: var(--gold-bright); }
+        .hero-slogan .divider { color: var(--text-muted); font-weight: 300; font-size: 1.1rem; }
         .hero-plain .hero-sub {
             font-size: clamp(0.9rem,2vw,1.15rem); color: var(--text-dim);
-            max-width: 680px; margin: 0 auto 20px; font-style: italic; line-height: 1.6;
+            max-width: 700px; margin: 0 auto 22px; font-style: italic; line-height: 1.6;
         }
         .hero-stats {
             display: flex; justify-content: center; gap: 14px;
@@ -148,18 +190,27 @@
         /* Palm decoration */
         .palm-decoration {
             display: flex; justify-content: center; align-items: center;
-            gap: 20px; padding: 24px; margin-top: -20px;
-            position: relative; z-index: 10; font-size: 2.5rem; opacity: 0.85;
+            gap: 16px; padding: 24px; margin-top: -20px;
+            position: relative; z-index: 10; font-size: 2.2rem; opacity: 0.85;
         }
-        .palm-decoration span { animation: sway 3s ease-in-out infinite; display: inline-block; }
+        .palm-decoration span { 
+            animation: sway 3s ease-in-out infinite; display: inline-block; 
+            transition: transform 0.3s;
+        }
+        .palm-decoration span:hover { animation-play-state: paused; transform: scale(1.2); }
         .palm-decoration span:nth-child(1){animation-delay:0s}
-        .palm-decoration span:nth-child(2){animation-delay:0.4s}
-        .palm-decoration span:nth-child(3){animation-delay:0.8s}
-        .palm-decoration span:nth-child(4){animation-delay:1.2s}
-        .palm-decoration span:nth-child(5){animation-delay:1.6s}
-        .palm-decoration span:nth-child(6){animation-delay:2s}
-        .palm-decoration span:nth-child(7){animation-delay:2.4s}
-        @keyframes sway { 0%,100%{transform:rotate(0deg)} 25%{transform:rotate(3deg)} 75%{transform:rotate(-3deg)} }
+        .palm-decoration span:nth-child(2){animation-delay:0.35s}
+        .palm-decoration span:nth-child(3){animation-delay:0.7s}
+        .palm-decoration span:nth-child(4){animation-delay:1.05s}
+        .palm-decoration span:nth-child(5){animation-delay:1.4s}
+        .palm-decoration span:nth-child(6){animation-delay:1.75s}
+        .palm-decoration span:nth-child(7){animation-delay:2.1s}
+        .palm-decoration span:nth-child(8){animation-delay:2.45s}
+        @keyframes sway { 
+            0%,100%{transform:rotate(0deg)} 
+            25%{transform:rotate(3deg)} 
+            75%{transform:rotate(-3deg)} 
+        }
 
         /* Buttons */
         .btn {
@@ -174,6 +225,8 @@
         .btn-outline:hover { background: var(--green-soft); transform: translateY(-2px); }
         .btn-gold { background: var(--gold); color: #000; }
         .btn-gold:hover { background: var(--gold-bright); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(251,191,36,0.3); }
+        .btn-love { background: #ef4444; color: #fff; }
+        .btn-love:hover { background: #dc2626; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(239,68,68,0.3); }
 
         /* Sections */
         .section { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
@@ -184,20 +237,26 @@
         .section-subtitle { color: var(--text-dim); margin-bottom: 24px; font-size: 0.95rem; }
 
         /* Cards */
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 30px; }
+        .cards-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 16px; margin-bottom: 30px; 
+        }
         .feature-card {
             background: var(--surface); border: 1px solid rgba(34,197,94,0.10);
             border-radius: var(--radius-lg); padding: 24px; transition: all 0.3s;
             cursor: pointer; text-decoration: none; color: var(--text); display: block;
         }
-        .feature-card:hover { border-color: var(--green-bright); transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,0,0,0.5); background: var(--surface-light); }
+        .feature-card:hover { 
+            border-color: var(--green-bright); transform: translateY(-3px); 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.5); background: var(--surface-light); 
+        }
         .feature-card .icon { font-size: 2rem; margin-bottom: 12px; }
         .feature-card h3 { color: var(--gold); margin-bottom: 6px; font-family: var(--font-ui); font-size: 1.1rem; }
         .feature-card p { color: var(--text-dim); font-size: 0.82rem; line-height: 1.5; }
 
         /* CTA Banner */
         .cta-banner {
-            background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(251,191,36,0.1));
+            background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(251,191,36,0.1), rgba(239,68,68,0.05));
             border: 1px solid var(--green-border); border-radius: var(--radius-lg);
             padding: 40px; text-align: center;
         }
@@ -205,14 +264,33 @@
         .cta-banner p { color: var(--text-dim); margin-bottom: 20px; }
 
         /* Footer */
-        footer { background: #0a0f0c; border-top: 1px solid var(--green-border); padding: 30px 20px; text-align: center; color: var(--text-muted); font-size: 0.8rem; font-family: var(--font-ui); }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto 24px; text-align: left; }
+        footer { 
+            background: #0a0f0c; border-top: 1px solid var(--green-border); 
+            padding: 30px 20px; text-align: center; color: var(--text-muted); 
+            font-size: 0.8rem; font-family: var(--font-ui); 
+        }
+        .footer-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+            gap: 20px; max-width: 1100px; margin: 0 auto 24px; text-align: left; 
+        }
         .footer-col h4 { color: var(--gold); margin-bottom: 10px; font-size: 0.9rem; }
-        .footer-col a { display: block; color: var(--text-dim); padding: 3px 0; font-size: 0.78rem; transition: var(--transition); }
+        .footer-col a { 
+            display: block; color: var(--text-dim); padding: 3px 0; 
+            font-size: 0.78rem; transition: var(--transition); 
+        }
         .footer-col a:hover { color: var(--green-bright); }
-        .footer-bottom { text-align: center; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 16px; }
+        .footer-bottom { 
+            text-align: center; padding-top: 16px; 
+            border-top: 1px solid rgba(255,255,255,0.05); margin-top: 16px; 
+        }
         .footer-bottom a { color: var(--text-dim); transition: var(--transition); }
         .footer-bottom a:hover { color: var(--green-bright); }
+        .footer-slogan {
+            font-size: 1rem; margin-bottom: 8px; font-weight: 600;
+        }
+        .footer-slogan .love { color: #ef4444; }
+        .footer-slogan .peace { color: var(--green-bright); }
+        .footer-slogan .unity { color: var(--gold-bright); }
 
         /* Mobile */
         @media (max-width: 768px) {
@@ -220,18 +298,19 @@
             .lang-toggle { display: none; }
             .hamburger { display: flex; }
             .hero-plain { padding: 50px 16px 40px; }
-            .hero-plain h1 { font-size: 1.6rem; }
+            .hero-plain h1 { font-size: 1.8rem; }
+            .hero-slogan { font-size: 0.9rem; gap: 6px; }
             .hero-stats { gap: 8px; }
             .hero-stat { padding: 7px 12px; font-size: 0.7rem; }
             .hero-stat strong { font-size: 0.9rem; }
-            .pillar-tagline { font-size: 0.8rem; gap: 6px; }
             .cards-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: repeat(2, 1fr); }
-            .palm-decoration { font-size: 1.8rem; gap: 12px; }
+            .palm-decoration { font-size: 1.6rem; gap: 10px; }
         }
         @media (max-width: 480px) {
             .footer-grid { grid-template-columns: 1fr; }
             .hero-stats { flex-direction: column; align-items: center; }
+            .hero-slogan { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -258,7 +337,9 @@
             <button class="lang-btn" onclick="setLang('ti')" data-lang="ti">ትግ</button>
         </span>
     </div>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
 
 <!-- SLIDE MENU -->
@@ -267,7 +348,7 @@
     <div class="menu-header">
         <div class="flag">🕊️❤️🤝</div>
         <h3>We Need Peace</h3>
-        <p style="color:var(--text-muted);font-size:0.7rem">Peace · Love · Unity</p>
+        <p style="color:var(--text-muted);font-size:0.7rem">Wear Love. Speak Peace. Live Unity.</p>
     </div>
     <a href="index.html">🏠 Home</a>
     <a href="voices.html">🗣️ Voice Archive</a>
@@ -291,16 +372,16 @@
     </div>
 </div>
 
-<!-- HERO -->
+<!-- HERO WITH NEW SLOGAN -->
 <header class="hero-plain">
     <div class="badge-top" data-i18n="badge">🌍 The Global Voice Archive</div>
     <h1 data-i18n="title">We Need Peace</h1>
-    <div class="pillar-tagline">
-        <span>🕊️ <span data-i18n="peace">Peace is the goal.</span></span>
+    <div class="hero-slogan">
+        <span class="love">❤️ Wear Love.</span>
         <span class="divider">·</span>
-        <span>❤️ <span data-i18n="love">Love is the way.</span></span>
+        <span class="peace">🕊️ Speak Peace.</span>
         <span class="divider">·</span>
-        <span>🤝 <span data-i18n="unity">Unity is the strength.</span></span>
+        <span class="unity">🤝 Live Unity.</span>
     </div>
     <p class="hero-sub" data-i18n="subtitle">Preserving human voices across <strong style="color:var(--gold-bright);">40 languages</strong>, <strong style="color:var(--gold-bright);">30 regions</strong>, and <strong style="color:var(--gold-bright);">57+ countries</strong>. Share your voice.</p>
     <div class="hero-stats">
@@ -320,7 +401,7 @@
 
 <!-- PALM DECORATION -->
 <div class="palm-decoration">
-    <span>🌿</span><span>🍃</span><span>🕊️</span><span>❤️</span><span>🤝</span><span>🍃</span><span>🌿</span>
+    <span>🌿</span><span>🍃</span><span>❤️</span><span>🕊️</span><span>🤝</span><span>🍃</span><span>🌿</span><span>✨</span>
 </div>
 
 <!-- WHAT WE DO -->
@@ -375,8 +456,11 @@
 <section class="section">
     <div class="cta-banner">
         <h2 data-i18n="joinVoices">🌍 Join 1,000+ Voices for Peace</h2>
-        <p data-i18n="joinVoicesSub">Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters. Peace is the goal. Love is the way. Unity is the strength.</p>
-        <a href="contribute.html" class="btn btn-primary">🕊️ <span data-i18n="shareVoiceBtn">Share Your Voice →</span></a>
+        <p data-i18n="joinVoicesSub">Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters. Wear Love. Speak Peace. Live Unity.</p>
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <a href="contribute.html" class="btn btn-primary">🕊️ <span data-i18n="shareVoiceBtn">Share Your Voice →</span></a>
+            <a href="support.html" class="btn btn-love">❤️ Support the Movement</a>
+        </div>
     </div>
 </section>
 
@@ -389,22 +473,23 @@
         <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 (Twitter)</a><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Telegram</a></div>
     </div>
     <div class="footer-bottom">
-        <p style="font-size:1rem;margin-bottom:6px;">🕊️ Peace is the goal. ❤️ Love is the way. 🤝 Unity is the strength.</p>
+        <p class="footer-slogan">
+            <span class="love">❤️ Wear Love.</span> 
+            <span class="peace">🕊️ Speak Peace.</span> 
+            <span class="unity">🤝 Live Unity.</span>
+        </p>
         <p>We Need Peace &copy; 2026 · The Global Voice Archive · Built with ❤️ for the World</p>
         <p style="margin-top:6px;font-size:0.7rem"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></p>
-        <p style="margin-top:8px;color:var(--green-bright);font-weight:600">#WeNeedPeace #VoicesForPeace #PeaceLoveUnity</p>
+        <p style="margin-top:8px;color:var(--green-bright);font-weight:600">#WeNeedPeace #WearLoveSpeakPeaceLiveUnity #VoicesForPeace</p>
     </div>
 </footer>
 
 <script>
-    // ===== LANGUAGE TRANSLATION (Content Only - Not Navigation) =====
+    // ===== LANGUAGE TRANSLATION =====
     const translations = {
         en: {
             badge: '🌍 The Global Voice Archive',
             title: 'We Need Peace',
-            peace: 'Peace is the goal.',
-            love: 'Love is the way.',
-            unity: 'Unity is the strength.',
             subtitle: 'Preserving human voices across <strong style="color:var(--gold-bright);">40 languages</strong>, <strong style="color:var(--gold-bright);">30 regions</strong>, and <strong style="color:var(--gold-bright);">57+ countries</strong>. Share your voice.',
             voices: 'Voices',
             languages: 'Languages',
@@ -434,15 +519,12 @@
             support: 'Support',
             supportDesc: 'Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.',
             joinVoices: '🌍 Join 1,000+ Voices for Peace',
-            joinVoicesSub: "Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters. Peace is the goal. Love is the way. Unity is the strength.",
+            joinVoicesSub: 'Whether you\'re in Ethiopia, the diaspora, or anywhere in the world — your voice matters. Wear Love. Speak Peace. Live Unity.',
             shareVoiceBtn: 'Share Your Voice →'
         },
         am: {
             badge: '🌍 ዓለም አቀፍ የድምፅ መዝገብ',
             title: 'ሰላም እንፈልጋለን',
-            peace: 'ሰላም ግቡ ነው።',
-            love: 'ፍቅር መንገዱ ነው።',
-            unity: 'አንድነት ጥንካሬው ነው።',
             subtitle: 'በ<strong style="color:var(--gold-bright);">40 ቋንቋዎች</strong>፣ <strong style="color:var(--gold-bright);">30 ክልሎች</strong> እና <strong style="color:var(--gold-bright);">57+ አገራት</strong> የሰው ልጅ ድምፆችን ማቆየት። ድምፅዎን ያጋሩ።',
             voices: 'ድምፆች',
             languages: 'ቋንቋዎች',
@@ -472,15 +554,12 @@
             support: 'ድጋፍ',
             supportDesc: 'ይለግሱ፣ ስፖንሰር ያድርጉ፣ ይምከሩ ወይም ቁሳቁሶችን ያቅርቡ። እያንዳንዱ አስተዋፅኦ ሰላምን ያጎላል።',
             joinVoices: '🌍 ከ1,000+ የሰላም ድምፆች ጋር ይቀላቀሉ',
-            joinVoicesSub: 'በኢትዮጵያ፣ በዳያስፖራ ወይም በየትኛውም የዓለም ክፍል ቢሆኑ — ድምፅዎ አስፈላጊ ነው። ሰላም ግቡ ነው። ፍቅር መንገዱ ነው። አንድነት ጥንካሬው ነው።',
+            joinVoicesSub: 'በኢትዮጵያ፣ በዳያስፖራ ወይም በየትኛውም የዓለም ክፍል ቢሆኑ — ድምፅዎ አስፈላጊ ነው። ፍቅርን ይልበሱ። ሰላምን ይናገሩ። አንድነትን ይኑሩ።',
             shareVoiceBtn: 'ድምፅዎን ያጋሩ →'
         },
         om: {
             badge: '🌍 Kuusaa Sagalee Addunyaa',
             title: 'Nagaa Barbaanna',
-            peace: 'Nagaan galma keenya.',
-            love: 'Jaalalli karaa keenya.',
-            unity: 'Tokkummaan jabina keenya.',
             subtitle: 'Sagalee namootaa <strong style="color:var(--gold-bright);">afaan 40</strong>, <strong style="color:var(--gold-bright);">naannoo 30</strong> fi <strong style="color:var(--gold-bright);">biyyoota 57+</strong> keessatti tursuudha. Sagalee kee qoodi.',
             voices: 'Sagaleewwan',
             languages: 'Afaanota',
@@ -510,15 +589,12 @@
             support: 'Deeggarsa',
             supportDesc: 'Kennaa, sponseessuu, gorsa, ykn meeshaa dhiyeessi. Gumaachi hundi nagaa guddisa.',
             joinVoices: '🌍 Sagalee Nagaa 1,000+ Waliin Maki',
-            joinVoicesSub: 'Itoophiyaa, diaspora, ykn addunyaa kamiyyuu keessa jiraattu — sagaleen kee barbaachisaadha. Nagaan galma keenya. Jaalalli karaa keenya. Tokkummaan jabina keenya.',
+            joinVoicesSub: 'Itoophiyaa, diaspora, ykn addunyaa kamiyyuu keessa jiraattu — sagaleen kee barbaachisaadha. Jaalalla Uffadhu. Nagaa Dubbadhu. Tokkummaa Jiraadhu.',
             shareVoiceBtn: 'Sagalee Kee Qoodi →'
         },
         ti: {
             badge: '🌍 ዓለምለኻዊ መዝገብ ድምጺ',
             title: 'ሰላም ንደሊ',
-            peace: 'ሰላም ሸቶና እዩ።',
-            love: 'ፍቕሪ መንገዲና እዩ።',
-            unity: 'ሓድነት ሓይልና እዩ።',
             subtitle: 'ብ<strong style="color:var(--gold-bright);">40 ቋንቋታት</strong>፣ <strong style="color:var(--gold-bright);">30 ዞባታት</strong>ን <strong style="color:var(--gold-bright);">57+ ሃገራት</strong>ን ድምጺ ሰብኣውያን ምዕቃብ። ድምጽኻ ኣካፍል።',
             voices: 'ድምጽታት',
             languages: 'ቋንቋታት',
@@ -548,7 +624,7 @@
             support: 'ደገፍ',
             supportDesc: 'ወፈያ፣ ስፖንሰር፣ ምኽሪ ወይ ናውቲ ኣቕርብ። ኩሉ ኣበርክቶ ሰላም የማዕብል።',
             joinVoices: '🌍 ምስ 1,000+ ድምጽታት ሰላም ተሓብር',
-            joinVoicesSub: 'ኣብ ኢትዮጵያ፣ ዳያስፖራ ወይ ኣብ ዝኾነ ቦታ ዓለም ትኹን — ድምጽኻ ኣገዳሲ እዩ። ሰላም ሸቶና እዩ። ፍቕሪ መንገዲና እዩ። ሓድነት ሓይልና እዩ።',
+            joinVoicesSub: 'ኣብ ኢትዮጵያ፣ ዳያስፖራ ወይ ኣብ ዝኾነ ቦታ ዓለም ትኹን — ድምጽኻ ኣገዳሲ እዩ። ፍቕሪ ልበስ። ሰላም ተዛረብ። ሓድነት ንበር።',
             shareVoiceBtn: 'ድምጽኻ ኣካፍል →'
         }
     };
@@ -562,6 +638,8 @@
 
         // Translate all elements with data-i18n attribute
         const t = translations[lang];
+        if (!t) return;
+        
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.dataset.i18n;
             if (t[key]) {
@@ -589,14 +667,22 @@
         const menu = document.getElementById('slideMenu');
         const overlay = document.getElementById('slideOverlay');
         const hamburger = document.getElementById('hamburger');
+        
+        if (!menu || !overlay || !hamburger) return;
+        
         menu.classList.toggle('open');
         overlay.classList.toggle('open');
         hamburger.classList.toggle('open');
         document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
     }
+    
+    // Close menu on Escape key
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && document.getElementById('slideMenu').classList.contains('open')) {
-            toggleMenu();
+        if (e.key === 'Escape') {
+            const menu = document.getElementById('slideMenu');
+            if (menu && menu.classList.contains('open')) {
+                toggleMenu();
+            }
         }
     });
 </script>
