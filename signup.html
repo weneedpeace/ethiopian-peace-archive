@@ -3,281 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Share your voice for peace. Simple form — name, email, country, message. Join 1,000+ voices from 57+ countries.">
-    <meta property="og:title" content="Share Your Voice — We Need Peace">
-    <meta property="og:description" content="Simple form. No registration. Just your voice for peace, love, and unity.">
+    <meta name="description" content="Sign in to your Ethiopian Peace Archive account to manage your chapters and connect with the community.">
+    <meta property="og:title" content="Sign In — Ethiopian Peace Archive">
+    <meta property="og:description" content="Access your dashboard, manage chapters, and connect with peace voices worldwide.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://weneedpeace.pages.dev/contribute">
+    <link rel="canonical" href="https://ethiopianpeacearchive.org/signin">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
-    <title>Share Your Voice — We Need Peace</title>
+    <title>Sign In — Ethiopian Peace Archive</title>
+    <link rel="stylesheet" href="css/style.css">
     <style>
         :root {
-            --bg: #0b0f0e; --surface: #141a18; --green-border: rgba(34,197,94,0.25);
-            --green-bright: #22c55e; --green-soft: rgba(34,197,94,0.12);
+            --bg: #060f1e; --card: #0d1b33; --green: #22c55e; --green-bright: #4ade80;
+            --green-dim: rgba(34,197,94,0.10); --green-border: rgba(34,197,94,0.20);
             --gold: #fbbf24; --gold-bright: #fcd34d; --gold-soft: rgba(251,191,36,0.1);
             --text: #e2e8f0; --text-dim: #94a3b8; --text-muted: #64748b;
             --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            --radius: 16px; --radius-lg: 20px; --transition: 0.25s ease;
+            --radius: 14px; --radius-lg: 20px;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { background:var(--bg); color:var(--text); font-family:var(--font-ui); line-height:1.6; -webkit-font-smoothing:antialiased; background-image:radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%), radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%); }
+        body { background:var(--bg); color:var(--text); font-family:var(--font-ui); line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; align-items:center; justify-content:center; background-image:radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%), radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%); }
         a { text-decoration:none; color:inherit; }
 
-        nav { display:flex; align-items:center; justify-content:space-between; padding:0.9rem 5%; background:rgba(10,15,12,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--green-border); position:sticky; top:0; z-index:100; }
-        .logo { font-weight:700; font-size:1.25rem; color:#f0f2e9; display:flex; align-items:center; gap:6px; }
-        .logo span { color:var(--green-bright); }
-        .desktop-links { display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; }
-        .desktop-links a { font-size:0.78rem; font-weight:600; color:var(--text-dim); padding:6px 10px; border-radius:18px; transition:var(--transition); text-transform:uppercase; letter-spacing:0.4px; white-space:nowrap; }
-        .desktop-links a:hover, .desktop-links a.active { color:var(--gold-bright); background:var(--gold-soft); }
-        .hamburger { display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; }
-        .hamburger span { width:22px; height:2px; background:var(--text-dim); }
+        .auth-container { width:100%; max-width:440px; padding:20px; }
+        .auth-card { background:var(--card); border:2px solid var(--gold); border-radius:var(--radius-lg); padding:36px 32px; box-shadow:0 8px 40px rgba(0,0,0,0.5); }
+        .auth-header { text-align:center; margin-bottom:28px; }
+        .auth-logo { font-size:2.5rem; margin-bottom:10px; }
+        .auth-header h1 { color:var(--gold-bright); font-size:1.5rem; font-weight:800; margin-bottom:4px; }
+        .auth-header p { color:var(--text-dim); font-size:0.85rem; }
 
-        .container { max-width:650px; margin:0 auto; padding:40px 20px; }
+        .tabs { display:flex; gap:4px; margin-bottom:24px; background:rgba(255,255,255,0.03); border-radius:12px; padding:5px; }
+        .tab { flex:1; padding:12px; border-radius:8px; cursor:pointer; border:none; background:transparent; color:var(--text-dim); font-size:0.9rem; font-weight:600; font-family:var(--font-ui); transition:0.2s; }
+        .tab.active { background:var(--green-dim); color:var(--green-bright); }
 
-        .hero { text-align:center; padding:40px 20px 20px; }
-        .hero .badge { display:inline-block; background:var(--green-soft); color:var(--green-bright); padding:6px 16px; border-radius:30px; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; font-weight:600; margin-bottom:14px; border:1px solid rgba(34,197,94,0.3); }
-        .hero h1 { font-size:clamp(1.8rem,4vw,2.5rem); color:var(--gold-bright); font-weight:800; margin-bottom:8px; }
-        .hero .tagline { margin:10px 0; font-size:0.9rem; font-weight:600; }
-        .hero .tagline .sep { color:var(--text-muted); }
-        .hero p { color:var(--text-dim); font-size:0.9rem; }
+        .form-group { margin-bottom:16px; }
+        .form-group label { display:block; color:var(--text-dim); font-size:0.8rem; font-weight:600; margin-bottom:5px; }
+        .form-group input { width:100%; padding:12px 16px; background:#1b241f; border:1px solid #3a4f40; border-radius:10px; color:#e2e8e4; font-family:var(--font-ui); font-size:0.9rem; transition:0.2s; }
+        .form-group input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(251,191,36,0.08); }
 
-        .form-box { background:var(--surface); border:2px solid var(--gold); border-radius:var(--radius-lg); padding:30px; margin-top:20px; }
-        .form-box h2 { color:var(--gold); text-align:center; margin-bottom:4px; font-size:1.3rem; }
-        .form-box .subtitle { text-align:center; color:var(--text-dim); font-size:0.85rem; margin-bottom:20px; }
-        .form-box label { display:block; color:var(--text-dim); font-size:0.8rem; font-weight:600; margin-bottom:4px; margin-top:14px; }
-        .form-box input, .form-box textarea, .form-box select {
-            width:100%; padding:12px 16px; background:#1b241f; border:1px solid #3a4f40;
-            border-radius:10px; color:#e2e8e4; font-family:var(--font-ui); font-size:0.9rem;
-        }
-        .form-box input:focus, .form-box textarea:focus, .form-box select:focus { outline:none; border-color:var(--gold); }
-        .form-box textarea { min-height:130px; resize:vertical; }
-        .form-box .required { color:#ef4444; }
-        .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; width:100%; padding:14px; margin-top:16px; border-radius:40px; font-weight:700; font-size:1rem; cursor:pointer; border:none; font-family:var(--font-ui); transition:var(--transition); }
+        .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:13px; border-radius:40px; font-weight:700; font-size:0.95rem; cursor:pointer; border:none; font-family:var(--font-ui); transition:0.25s; }
         .btn-gold { background:var(--gold); color:#000; }
         .btn-gold:hover { background:var(--gold-bright); transform:translateY(-2px); box-shadow:0 8px 25px rgba(251,191,36,0.3); }
-        .btn:disabled { opacity:0.5; cursor:not-allowed; }
-        .msg { text-align:center; font-size:0.85rem; margin-top:10px; min-height:20px; padding:10px; border-radius:8px; }
+        .btn-green { background:var(--green); color:#000; }
+        .btn-green:hover { background:var(--green-bright); transform:translateY(-2px); }
+        .btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
 
-        .info-box { background:var(--green-soft); border:1px solid rgba(34,197,94,0.3); border-radius:var(--radius); padding:16px; margin-top:20px; text-align:center; }
-        .info-box p { color:var(--green-bright); font-size:0.85rem; }
+        .msg-box { text-align:center; font-size:0.8rem; margin-top:10px; padding:10px; border-radius:8px; display:none; }
+        .msg-error { background:rgba(239,68,68,0.1); color:#f87171; border:1px solid rgba(239,68,68,0.25); display:block; }
+        .msg-success { background:rgba(34,197,94,0.1); color:#4ade80; border:1px solid rgba(34,197,94,0.25); display:block; }
 
-        footer { text-align:center; padding:25px; color:var(--text-muted); font-size:0.78rem; border-top:1px solid var(--green-border); margin-top:40px; }
-        footer a { color:var(--text-dim); transition:var(--transition); }
-        footer a:hover { color:var(--green-bright); }
+        .divider { text-align:center; margin:20px 0; color:var(--text-muted); font-size:0.75rem; position:relative; }
+        .divider::before, .divider::after { content:''; position:absolute; top:50%; width:40%; height:1px; background:rgba(255,255,255,0.08); }
+        .divider::before { left:0; } .divider::after { right:0; }
 
-        @media(max-width:768px) { .desktop-links { display:none; } .hamburger { display:flex; } .form-box { padding:20px; } }
+        .social-btns { display:flex; gap:8px; }
+        .social-btn { flex:1; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.1); background:transparent; color:var(--text); cursor:pointer; font-size:0.85rem; font-family:var(--font-ui); transition:0.2s; text-align:center; }
+        .social-btn:hover { background:rgba(255,255,255,0.03); border-color:var(--green-border); }
+
+        .footer-link { text-align:center; margin-top:16px; color:var(--text-dim); font-size:0.8rem; }
+        .footer-link a { color:var(--green-bright); font-weight:600; cursor:pointer; }
+        .footer-link a:hover { text-decoration:underline; }
+
+        .hidden { display:none !important; }
+
+        @media(max-width:480px) { .auth-card{padding:24px 18px} }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.html" class="logo">🕊️ We Need <span>Peace</span></a>
-    <div class="desktop-links">
-        <a href="index.html">Home</a>
-        <a href="voices.html">Voices</a>
-        <a href="collaborate.html">✍️ Participate</a>
-        <a href="courses.html">Courses</a>
-        <a href="contribute.html" class="active">📝 Share Voice</a>
-        <a href="support.html">Support</a>
-    </div>
-    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-</nav>
-
-<main class="container">
-    <div class="hero">
-        <div class="badge">📝 Share Your Voice</div>
-        <h1>Contribute to Peace</h1>
-        <div class="tagline">
-            <span>🕊️ Peace is the goal.</span>
-            <span class="sep">·</span>
-            <span>❤️ Love is the way.</span>
-            <span class="sep">·</span>
-            <span>🤝 Unity is the strength.</span>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="auth-logo">🕊️</div>
+            <h1>Welcome Back</h1>
+            <p>Sign in to your Ethiopian Peace Archive account</p>
         </div>
-        <p>Simple form. <strong style="color:var(--gold-bright);">No registration required.</strong> Your voice will be reviewed and published.</p>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('signin')">Sign In</button>
+            <button class="tab" onclick="switchTab('signup')">Sign Up</button>
+        </div>
+
+        <!-- Sign In Form -->
+        <form id="signinForm" onsubmit="handleSignIn(event)">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="signinEmail" placeholder="your@email.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signinPassword" placeholder="Enter your password" required autocomplete="current-password" minlength="6">
+            </div>
+            <button type="submit" class="btn btn-gold" id="signinBtn">🔐 Sign In</button>
+            <div class="msg-box" id="signinMsg"></div>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form id="signupForm" class="hidden" onsubmit="handleSignUp(event)">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="signupName" placeholder="Your full name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="signupEmail" placeholder="your@email.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signupPassword" placeholder="Min 6 characters" required minlength="6" autocomplete="new-password">
+            </div>
+            <button type="submit" class="btn btn-green" id="signupBtn">✨ Create Account</button>
+            <div class="msg-box" id="signupMsg"></div>
+        </form>
+
+        <div class="divider">or continue with</div>
+        <div class="social-btns">
+            <button class="social-btn" onclick="alert('Google sign-in coming soon')">🔵 Google</button>
+            <button class="social-btn" onclick="alert('Email magic link coming soon')">📧 Magic Link</button>
+        </div>
+
+        <div class="footer-link" id="footerLink">
+            Don't have an account? <a onclick="switchTab('signup')">Sign up here</a>
+        </div>
     </div>
+</div>
 
-    <div class="form-box">
-        <h2>✍️ Write Your Message</h2>
-        <p class="subtitle">Fields marked with <span class="required">*</span> are required.</p>
-        
-        <label>Your Full Name <span class="required">*</span></label>
-        <input type="text" id="name" placeholder="e.g., Bethlehem Tadesse" required>
-
-        <label>Your Email <span class="required">*</span> <span style="font-weight:400;color:var(--text-muted);">(private, for verification)</span></label>
-        <input type="email" id="email" placeholder="your@email.com" required>
-
-        <label>Your Country</label>
-        <select id="country">
-            <option value="">Select country</option>
-            <option value="Ethiopia">🇪🇹 Ethiopia</option>
-            <option value="Kenya">🇰🇪 Kenya</option>
-            <option value="Nigeria">🇳🇬 Nigeria</option>
-            <option value="Ghana">🇬🇭 Ghana</option>
-            <option value="Rwanda">🇷🇼 Rwanda</option>
-            <option value="South Africa">🇿🇦 South Africa</option>
-            <option value="United States">🇺🇸 United States</option>
-            <option value="United Kingdom">🇬🇧 United Kingdom</option>
-            <option value="Canada">🇨🇦 Canada</option>
-            <option value="Germany">🇩🇪 Germany</option>
-            <option value="France">🇫🇷 France</option>
-            <option value="Japan">🇯🇵 Japan</option>
-            <option value="India">🇮🇳 India</option>
-            <option value="Brazil">🇧🇷 Brazil</option>
-            <option value="Other">🌍 Other</option>
-        </select>
-
-        <label>Language of Your Message</label>
-        <select id="language">
-            <option value="English">English</option>
-            <option value="Amharic">አማርኛ Amharic</option>
-            <option value="Oromo">Afaan Oromo</option>
-            <option value="Somali">Soomaali Somali</option>
-            <option value="Tigrinya">ትግርኛ Tigrinya</option>
-            <option value="Arabic">العربية Arabic</option>
-            <option value="French">Français</option>
-            <option value="Spanish">Español</option>
-            <option value="Other">Other</option>
-        </select>
-
-        <label>How do you want to participate?</label>
-        <select id="type">
-            <option value="voice">🗣️ Share a Peace Voice</option>
-            <option value="story">📖 Add to Story Chain</option>
-            <option value="wisdom">🦉 Add to Wisdom Chain</option>
-            <option value="chapter">👨‍👩‍👧‍👦 Start a Family Chapter</option>
-        </select>
-
-        <label>Your Message <span class="required">*</span></label>
-        <textarea id="message" placeholder="What does peace, love, or unity mean to you? Write from your heart...&#10;&#10;If joining Story Chain: Continue the story from where the last writer left off.&#10;If joining Wisdom Chain: Add your layer of insight and leave an edge for the next person." required></textarea>
-
-        <button class="btn btn-gold" id="submitBtn" onclick="submitVoice()">🕊️ Submit My Voice</button>
-        <div class="msg" id="msg"></div>
-    </div>
-
-    <div class="info-box">
-        <p>📋 <strong>What happens next?</strong> Your submission is reviewed within 24 hours. Once approved, your voice becomes part of the permanent global archive. You'll receive a confirmation link.</p>
-    </div>
-</main>
-
-<footer>
-    <p style="font-size:1rem;margin-bottom:4px;">🕊️ Peace is the goal. ❤️ Love is the way. 🤝 Unity is the strength.</p>
-    <p>We Need Peace &copy; 2026 · The Global Voice Archive</p>
-    <p style="margin-top:4px;font-size:0.7rem;">
-        <a href="index.html">Home</a> · <a href="voices.html">Voices</a> · <a href="collaborate.html">Participate</a> · <a href="courses.html">Courses</a>
-    </p>
-</footer>
-
+<script src="js/supabase.js"></script>
 <script>
     const SUPABASE_URL = 'https://rnafjznurgnrdonyxfgs.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWZqem51cmducmRvbnl4ZmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NzA1OTEsImV4cCI6MjA5NzM0NjU5MX0.lfJYkGg37CdOwsrvcgvD7I4T054yrPQj-ztfsSo2S0s';
 
-    async function submitVoice() {
-        const btn = document.getElementById('submitBtn');
-        const msg = document.getElementById('msg');
-        
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const country = document.getElementById('country').value;
-        const language = document.getElementById('language').value;
-        const type = document.getElementById('type').value;
-        const message = document.getElementById('message').value.trim();
+    function switchTab(tab) {
+        const signinForm = document.getElementById('signinForm');
+        const signupForm = document.getElementById('signupForm');
+        const tabs = document.querySelectorAll('.tab');
+        const footerLink = document.getElementById('footerLink');
 
-        // Validation
-        if (!name || !email || !message) {
-            msg.textContent = '❌ Please fill in all required fields (Name, Email, Message).';
-            msg.style.color = '#ef4444';
-            msg.style.background = 'rgba(239,68,68,0.1)';
-            return;
+        if (tab === 'signin') {
+            signinForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+            tabs[0].classList.add('active');
+            tabs[1].classList.remove('active');
+            footerLink.innerHTML = 'Don\'t have an account? <a onclick="switchTab(\'signup\')">Sign up here</a>';
+        } else {
+            signinForm.classList.add('hidden');
+            signupForm.classList.remove('hidden');
+            tabs[0].classList.remove('active');
+            tabs[1].classList.add('active');
+            footerLink.innerHTML = 'Already have an account? <a onclick="switchTab(\'signin\')">Sign in here</a>';
         }
+    }
 
-        if (!email.includes('@') || !email.includes('.')) {
-            msg.textContent = '❌ Please enter a valid email address.';
-            msg.style.color = '#ef4444';
-            msg.style.background = 'rgba(239,68,68,0.1)';
-            return;
-        }
+    async function handleSignIn(e) {
+        e.preventDefault();
+        const btn = document.getElementById('signinBtn');
+        const msg = document.getElementById('signinMsg');
+        const email = document.getElementById('signinEmail').value.trim();
+        const password = document.getElementById('signinPassword').value;
 
-        // Disable button
-        btn.disabled = true;
-        btn.textContent = '⏳ Submitting...';
-        msg.textContent = '';
-        msg.style.background = 'transparent';
+        msg.className = 'msg-box';
+        if (!email || !password) { msg.className = 'msg-box msg-error'; msg.textContent = 'Please fill all fields.'; return; }
 
+        btn.disabled = true; btn.textContent = '⏳ Signing in...';
         try {
-            const payload = {
-                writer_name: name,
-                full_name: name,
-                quote_english: message,
-                quote_original: message,
-                region: country || 'Unknown',
-                language: language || 'English',
-                year: new Date().getFullYear(),
-                is_published: false,
-                is_founder: type === 'chapter',
-                chapter_id: type === 'story' ? 'story-chain' : type === 'wisdom' ? 'wisdom-chain' : type === 'chapter' ? 'chapter-' + Date.now() : 'voice',
-                themes: type === 'story' ? ['Story Chain', 'Collaborative', 'Peace'] :
-                        type === 'wisdom' ? ['Wisdom Chain', 'Insight', 'Peace'] :
-                        type === 'chapter' ? ['Family', 'Legacy', 'Peace'] :
-                        ['Peace', 'Love', 'Unity'],
-                sentiment: 0.75,
-                starting_likes: 50,
-                starting_shares: 20,
-                extracted_data: { email: email },
-                created_at: new Date().toISOString()
-            };
-
-            const res = await fetch(SUPABASE_URL + '/rest/v1/ethiopian_voices', {
-                method: 'POST',
-                headers: {
-                    'apikey': SUPABASE_KEY,
-                    'Authorization': 'Bearer ' + SUPABASE_KEY,
-                    'Content-Type': 'application/json',
-                    'Prefer': 'return=minimal'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (res.ok) {
-                msg.textContent = '✅ Thank you, ' + name + '! Your voice has been submitted for review. You will be notified at ' + email + ' when it is published.';
-                msg.style.color = '#4ade80';
-                msg.style.background = 'rgba(34,197,94,0.1)';
-                
-                // Clear form
-                document.getElementById('name').value = '';
-                document.getElementById('email').value = '';
-                document.getElementById('message').value = '';
-                document.getElementById('country').value = '';
-                document.getElementById('type').value = 'voice';
+            // Try Supabase auth if available
+            if (typeof supabase !== 'undefined' && supabase.auth) {
+                const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+                localStorage.setItem('peace_user', JSON.stringify(data.user));
+                msg.className = 'msg-box msg-success'; msg.textContent = '✅ Signed in! Redirecting...';
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
             } else {
-                const err = await res.json();
-                msg.textContent = '❌ Error: ' + (err.message || 'Something went wrong. Please try again.');
-                msg.style.color = '#ef4444';
-                msg.style.background = 'rgba(239,68,68,0.1)';
+                // Fallback: store locally
+                localStorage.setItem('peace_user', JSON.stringify({ email, display_name: email.split('@')[0], signed_in_at: new Date().toISOString() }));
+                msg.className = 'msg-box msg-success'; msg.textContent = '✅ Signed in locally! Redirecting...';
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
             }
-        } catch (e) {
-            msg.textContent = '❌ Connection error. Please check your internet and try again.';
-            msg.style.color = '#ef4444';
-            msg.style.background = 'rgba(239,68,68,0.1)';
-            console.error('Submit error:', e);
+        } catch(err) {
+            msg.className = 'msg-box msg-error'; msg.textContent = '❌ ' + (err.message || 'Sign in failed.');
         }
-
-        // Re-enable button
-        btn.disabled = false;
-        btn.textContent = '🕊️ Submit My Voice';
+        btn.disabled = false; btn.textContent = '🔐 Sign In';
     }
 
-    function toggleMenu() {
-        alert('Mobile menu — integrate with your navigation.js');
-    }
+    async function handleSignUp(e) {
+        e.preventDefault();
+        const btn = document.getElementById('signupBtn');
+        const msg = document.getElementById('signupMsg');
+        const name = document.getElementById('signupName').value.trim();
+        const email = document.getElementById('signupEmail').value.trim();
+        const password = document.getElementById('signupPassword').value;
 
-    // Allow Enter key in textarea but submit only on button click
-    document.getElementById('message').addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && e.ctrlKey) {
-            submitVoice();
+        msg.className = 'msg-box';
+        if (!name || !email || !password) { msg.className = 'msg-box msg-error'; msg.textContent = 'Please fill all fields.'; return; }
+        if (password.length < 6) { msg.className = 'msg-box msg-error'; msg.textContent = 'Password must be at least 6 characters.'; return; }
+
+        btn.disabled = true; btn.textContent = '⏳ Creating account...';
+        try {
+            if (typeof supabase !== 'undefined' && supabase.auth) {
+                const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { display_name: name } } });
+                if (error) throw error;
+                localStorage.setItem('peace_user', JSON.stringify(data.user));
+                msg.className = 'msg-box msg-success'; msg.textContent = '✅ Account created! Check your email to confirm.';
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
+            } else {
+                localStorage.setItem('peace_user', JSON.stringify({ email, display_name: name, signed_up_at: new Date().toISOString() }));
+                msg.className = 'msg-box msg-success'; msg.textContent = '✅ Account created locally! Redirecting...';
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+            }
+        } catch(err) {
+            msg.className = 'msg-box msg-error'; msg.textContent = '❌ ' + (err.message || 'Sign up failed.');
         }
-    });
+        btn.disabled = false; btn.textContent = '✨ Create Account';
+    }
 </script>
 </body>
 </html>
