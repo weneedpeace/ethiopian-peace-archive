@@ -3,275 +3,306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Ethiopian Peace Archive — Story Chain & Wisdom Chain. Co-create stories and deepen wisdom across borders.">
-    <meta property="og:title" content="Story Chain & Wisdom Chain — Ethiopian Peace Archive">
-    <meta property="og:description" content="Join the Never-Ending Story and the Wisdom Chain. Write together across continents.">
+    <meta name="description" content="We Need Peace — Contribute. Share your voice, volunteer, partner, or sponsor the global peace archive across 57+ countries.">
+    <meta property="og:title" content="Contribute — We Need Peace | Global Voice Archive">
+    <meta property="og:description" content="Submit your peace message, volunteer, partner with us, or sponsor a competition. Peace is the goal. Love is the way. Unity is the strength.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <title>Story & Wisdom Chain · Ethiopian Peace Archive</title>
+    <title>Contribute · We Need Peace</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --bg: #0b0f0e;
+            --surface: #141a18;
+            --green-border: rgba(34, 197, 94, 0.25);
+            --green-bright: #22c55e;
+            --green-soft: rgba(34, 197, 94, 0.12);
+            --gold: #fbbf24;
+            --gold-bright: #fcd34d;
+            --gold-soft: rgba(251, 191, 36, 0.1);
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --text-muted: #64748b;
+            --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --radius: 14px;
+            --radius-lg: 20px;
+            --transition: 0.25s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-ui);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                radial-gradient(ellipse at 20% 20%, rgba(34, 197, 94, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 60%, rgba(251, 191, 36, 0.02) 0%, transparent 50%);
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* Navigation */
+        nav {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.9rem 5%; background: rgba(10, 15, 12, 0.92);
+            backdrop-filter: blur(14px); border-bottom: 1px solid var(--green-border);
+            position: sticky; top: 0; z-index: 100; flex-wrap: wrap;
+        }
+        .logo { font-weight: 700; font-size: 1.25rem; color: #f0f2e9; display: flex; align-items: center; gap: 6px; }
+        .logo span { color: var(--green-bright); }
+        .desktop-links { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .desktop-links a {
+            font-size: 0.8rem; font-weight: 600; color: var(--text-dim);
+            transition: var(--transition); text-transform: uppercase;
+            letter-spacing: 0.4px; padding: 6px 10px; border-radius: 18px;
+        }
+        .desktop-links a:hover, .desktop-links a.active { color: var(--gold-bright); background: var(--gold-soft); }
+        .cta-nav { background: var(--green-bright); color: #0b0f0e !important; padding: 7px 16px !important; border-radius: 24px; font-weight: 700; }
+        .hamburger { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; }
+        .hamburger span { width: 22px; height: 2px; background: var(--text-dim); transition: 0.2s; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 50px; }
+
+        /* Hero */
+        .contribute-hero {
+            text-align: center; padding: 55px 20px 35px;
+            background: linear-gradient(180deg, rgba(34,197,94,0.05) 0%, transparent 70%);
+            border-bottom: 1px solid var(--green-border);
+            position: relative; overflow: hidden;
+        }
+        .contribute-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.06) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 70%, rgba(251, 191, 36, 0.04) 0%, transparent 60%);
+            animation: heroPulse 10s ease-in-out infinite;
+        }
+        @keyframes heroPulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+        .contribute-hero > * { position: relative; z-index: 1; }
+        .contribute-hero .badge {
+            display: inline-block; background: var(--gold-soft);
+            border: 1px solid rgba(251,191,36,0.35); color: var(--gold);
+            padding: 6px 20px; border-radius: 30px; font-size: 0.7rem;
+            text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 14px;
+        }
+        .contribute-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-bright);
+            font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 8px;
+        }
+        .contribute-hero .subtitle {
+            font-size: 1.05rem; color: var(--text-dim);
+            max-width: 620px; margin: 12px auto 16px; font-style: italic;
+        }
+        .pillar-tagline {
+            display: flex; justify-content: center; align-items: center;
+            gap: 10px; flex-wrap: wrap; margin: 10px 0 20px;
+            font-size: 0.9rem; font-weight: 600; color: var(--text);
+        }
+        .pillar-tagline .divider { color: var(--text-muted); font-weight: 300; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 11px 24px; border-radius: 40px; font-weight: 600;
+            font-size: 0.9rem; transition: var(--transition); cursor: pointer;
+            border: 1px solid var(--green-border); background: var(--surface);
+            color: var(--text); text-decoration: none; font-family: var(--font-ui);
+        }
+        .btn-primary { background: var(--green-bright); border-color: var(--green-bright); color: #0a120c; font-weight: 700; }
+        .btn-primary:hover { background: #16a34a; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(34,197,94,0.3); }
+        .btn-outline { border: 2px solid var(--green-bright); color: var(--green-bright); background: transparent; }
+        .btn-outline:hover { background: var(--green-soft); transform: translateY(-2px); }
+        .btn-gold { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
+        .btn-gold:hover { background: var(--gold-bright); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(251,191,36,0.3); }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.6rem; font-weight: 700; color: #f0f2e9;
+            margin-bottom: 6px; display: flex; align-items: center; gap: 10px;
+        }
+        .section-subtitle { color: var(--text-dim); margin-bottom: 24px; font-size: 0.9rem; line-height: 1.5; }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px; margin-top: 20px;
+        }
+        .card {
+            background: var(--surface); border: 1px solid var(--green-border);
+            border-radius: var(--radius-lg); padding: 24px; transition: var(--transition);
+            text-align: center;
+        }
+        .card:hover {
+            border-color: var(--gold); transform: translateY(-3px);
+            box-shadow: 0 14px 30px -10px rgba(0,0,0,0.5);
+        }
+        .card .card-icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .card h3 { color: var(--gold); font-size: 1.2rem; margin-bottom: 8px; }
+        .card p { color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin-bottom: 16px; }
+        .card .tag {
+            display: inline-block; background: var(--green-soft);
+            color: var(--green-bright); padding: 4px 12px;
+            border-radius: 16px; font-size: 0.7rem; font-weight: 600; margin-bottom: 12px;
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            display: flex; justify-content: center; gap: 20px;
+            flex-wrap: wrap; margin: 30px 0; padding: 20px;
+            background: var(--surface); border-radius: var(--radius-lg);
+            border: 1px solid var(--green-border);
+        }
+        .stat-item { text-align: center; min-width: 80px; }
+        .stat-item .num { font-size: 1.8rem; font-weight: 800; color: var(--gold-bright); }
+        .stat-item .lbl { font-size: 0.7rem; color: var(--text-dim); margin-top: 2px; }
+
+        /* CTA Banner */
+        .cta-banner {
+            text-align: center; margin: 40px 0 20px;
+            background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(251,191,36,0.08));
+            border-radius: 40px; padding: 35px 20px;
+            border: 1px solid var(--green-border);
+        }
+        .cta-banner h2 { color: var(--gold-bright); font-size: 1.5rem; margin-bottom: 6px; }
+        .cta-banner p { color: var(--text-dim); max-width: 500px; margin: 8px auto 18px; }
+
+        /* Footer */
+        footer {
+            background: #0a0f0c; border-top: 1px solid var(--green-border);
+            padding: 30px 20px; text-align: center; color: var(--text-muted); font-size: 0.8rem;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px; max-width: 1000px; margin: 0 auto 20px; text-align: left;
+        }
+        .footer-col h4 { color: var(--gold); margin-bottom: 10px; font-size: 0.9rem; }
+        .footer-col a { display: block; color: var(--text-dim); padding: 3px 0; font-size: 0.78rem; transition: var(--transition); }
+        .footer-col a:hover { color: var(--green-bright); }
+
+        @media (max-width: 768px) {
+            .desktop-links { display: none; }
+            .hamburger { display: flex; }
+            .container { padding: 20px 14px 40px; }
+            .contribute-hero { padding: 40px 16px 30px; }
+            .contribute-hero h1 { font-size: 1.6rem; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
 <!-- NAVIGATION -->
 <nav>
-    <a href="index.html" class="logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <a href="index.html" class="logo">🕊️ We Need <span>Peace</span></a>
     <div class="desktop-links">
         <a href="index.html">Home</a>
         <a href="voices.html">Voices</a>
         <a href="blog.html">Blog</a>
         <a href="courses.html">Courses</a>
         <a href="dashboard.html">Dashboard</a>
-        <a href="collaborate.html" class="active">✍️ Collaborate</a>
-        <a href="contribute.html">Contribute</a>
-        <a href="support.html">Support</a>
+        <a href="collaborate.html">✍️ Participate</a>
+        <a href="contribute.html" class="active">Contribute</a>
+        <a href="support.html" class="cta-nav">Support</a>
     </div>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO -->
-<header class="hero" style="padding:60px 20px 40px;">
-    <div class="badge-top">✍️ Collaborative Writing</div>
-    <h1>Story Chain &<br>Wisdom Chain</h1>
-    <p class="hero-sub">Write together across borders. One story flows through many hands. One truth deepens through many lives.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;">
-        <a href="#story-chain" class="btn btn-primary">📖 Join the Story</a>
-        <a href="#wisdom-chain" class="btn btn-outline">🦉 Add Wisdom</a>
+<header class="contribute-hero">
+    <div class="badge">🤝 Get Involved</div>
+    <h1>Contribute</h1>
+    <div class="pillar-tagline">
+        <span>🕊️ Peace is the goal.</span>
+        <span class="divider">·</span>
+        <span>❤️ Love is the way.</span>
+        <span class="divider">·</span>
+        <span>🤝 Unity is the strength.</span>
     </div>
+    <p class="subtitle">Your voice. Your skills. Your support. Every contribution builds a more peaceful world across <strong style="color:var(--gold-bright);">57+ countries</strong> and <strong style="color:var(--gold-bright);">40 languages</strong>.</p>
 </header>
 
 <main class="container">
 
-    <!-- LIVE COLLABORATION FEED -->
-    <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:16px 20px;margin-bottom:30px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-            <h3 style="color:#f0f2e9;font-size:1rem;font-family:var(--font-ui);">📡 Live Collaboration Feed</h3>
-            <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">8 writers online</span>
+    <!-- STATS -->
+    <div class="stats-banner">
+        <div class="stat-item"><div class="num">1,000+</div><div class="lbl">Voices</div></div>
+        <div class="stat-item"><div class="num">40</div><div class="lbl">Languages</div></div>
+        <div class="stat-item"><div class="num">30</div><div class="lbl">Regions</div></div>
+        <div class="stat-item"><div class="num">57+</div><div class="lbl">Countries</div></div>
+        <div class="stat-item"><div class="num">8</div><div class="lbl">Media Features</div></div>
+    </div>
+
+    <!-- WAYS TO CONTRIBUTE -->
+    <h2 class="section-title">🤝 Ways to Contribute</h2>
+    <p class="section-subtitle">Choose how you want to make a difference. Every action amplifies peace.</p>
+
+    <div class="cards-grid">
+        <!-- Share Your Voice -->
+        <div class="card">
+            <div class="card-icon">🗣️</div>
+            <span class="tag">Most Popular</span>
+            <h3>Share Your Voice</h3>
+            <p>Submit your personal message of peace, love, or unity in any language. Your words will be preserved in the global archive forever.</p>
+            <a href="collaborate.html" class="btn btn-primary" style="display:block;text-align:center;">✍️ Share Your Voice →</a>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;color:var(--text-dim);">
-            <span style="font-size:1.2rem;">🌿</span> <strong style="color:var(--gold-bright);">Bethlehem T.</strong> added to Story Chain · Addis Ababa · 3 min ago
+
+        <!-- Join Story/Wisdom Chain -->
+        <div class="card">
+            <div class="card-icon">📖</div>
+            <span class="tag">Creative</span>
+            <h3>Co-Create Stories & Wisdom</h3>
+            <p>Join the Never-Ending Story or add your layer to the Wisdom Chain. Write collaboratively with people across 57+ countries.</p>
+            <a href="collaborate.html#story-chain" class="btn btn-outline" style="display:block;text-align:center;">📖 Join the Chains →</a>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;color:var(--text-dim);">
-            <span style="font-size:1.2rem;">🦉</span> <strong style="color:var(--gold-bright);">Odette U.</strong> deepened Wisdom Chain · Rwanda · 12 min ago
+
+        <!-- Volunteer -->
+        <div class="card">
+            <div class="card-icon">🙋</div>
+            <span class="tag">Give Time</span>
+            <h3>Volunteer With Us</h3>
+            <p>Help translate voices, moderate submissions, mentor writers, or spread the word. We need translators, editors, and community ambassadors.</p>
+            <a href="https://formspress.com/your-volunteer-form" class="btn btn-gold" style="display:block;text-align:center;" target="_blank">🙋 Apply to Volunteer →</a>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;color:var(--text-dim);">
-            <span style="font-size:1.2rem;">📖</span> <strong style="color:var(--gold-bright);">Carlos R.</strong> continued Story · Colombia · 28 min ago
+
+        <!-- Partner -->
+        <div class="card">
+            <div class="card-icon">🏛️</div>
+            <span class="tag">Organizations</span>
+            <h3>Partner With Us</h3>
+            <p>Is your organization working on peace, education, or cultural preservation? Let's collaborate on events, research, or exhibitions.</p>
+            <a href="https://formspress.com/your-partner-form" class="btn btn-outline" style="display:block;text-align:center;" target="_blank">🤝 Explore Partnership →</a>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;font-size:0.85rem;color:var(--text-dim);">
-            <span style="font-size:1.2rem;">✨</span> <strong style="color:var(--gold-bright);">Yuki T.</strong> added layer to Wisdom Chain · Japan · 1 hour ago
+
+        <!-- Sponsor -->
+        <div class="card">
+            <div class="card-icon">💼</div>
+            <span class="tag">Sponsors</span>
+            <h3>Sponsor a Competition</h3>
+            <p>Put your brand behind peace. Sponsor our monthly writing competition and reach a global audience of peace-minded readers.</p>
+            <a href="https://formspress.com/your-sponsor-form" class="btn btn-gold" style="display:block;text-align:center;" target="_blank">💼 Become a Sponsor →</a>
+        </div>
+
+        <!-- Donate -->
+        <div class="card">
+            <div class="card-icon">❤️</div>
+            <span class="tag">Support</span>
+            <h3>Donate & Support</h3>
+            <p>Every contribution — big or small — helps keep the archive free, courses open, and voices heard across the world.</p>
+            <a href="support.html" class="btn btn-primary" style="display:block;text-align:center;">❤️ Support the Movement →</a>
         </div>
     </div>
 
-    <!-- ==================== STORY CHAIN ==================== -->
-    <div id="story-chain">
-        <h2 class="section-title">📖 The Never-Ending Story</h2>
-        <p class="section-subtitle">One writer starts. Another finds a <strong style="color:var(--gold-bright);">thread</strong> — a character, an object, a consequence — and follows it somewhere <strong style="color:var(--gold-bright);">new</strong>. The story crosses countries, genres, and lives. Read the last entry. Find a ripple. Take it somewhere unexpected.</p>
-
-        <div style="background:rgba(34,197,94,0.05);border-radius:12px;padding:16px 20px;margin-bottom:24px;border:1px solid rgba(34,197,94,0.15);">
-            <h4 style="color:var(--green-bright);margin-bottom:6px;font-family:var(--font-ui);font-size:0.9rem;">📜 Rules for Story Chain</h4>
-            <ul style="color:var(--text-dim);font-size:0.8rem;padding-left:20px;font-family:var(--font-ui);">
-                <li>Read the last entry carefully.</li>
-                <li>Find a <strong>thread</strong> — a person, object, emotion, question, or consequence.</li>
-                <li>Follow it into a <strong>new scene, new country, or new genre.</strong></li>
-                <li>Write 3–8 sentences. Leave a thread for the next writer.</li>
-                <li>Tag your entry: 🕊️ Peace · ❤️ Love · 🤝 Unity.</li>
-            </ul>
-        </div>
-
-        <!-- Entry 1 -->
-        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;transition:all 0.3s;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-                <span style="font-size:1.5rem;">🇪🇹</span>
-                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Bethlehem Tadesse</span>
-                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Addis Ababa, Ethiopia · 🕊️ Peace</span>
-            </div>
-            <div style="color:var(--text);font-style:italic;line-height:1.8;margin-bottom:12px;font-size:0.95rem;">
-                "The day everything changed, it was raining. Not the gentle rain that kisses the tin roofs of our neighborhood. A hard rain. The kind that floods the streets and keeps children home from school. I was standing at the window, watching the water rise, when I saw an old man slip and fall in the mud. No one stopped. Everyone was running for shelter. But a street dog — that yellow stray we all ignored — walked over and stood beside him. Just stood there. As if to say: <em>you are not alone.</em> I put on my shoes and went outside."
-            </div>
-            <span style="display:inline-block;background:rgba(251,191,36,0.12);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:500;font-family:var(--font-ui);">🧵 Thread left: The old man. The dog. The person who finally went outside.</span>
-        </div>
-
-        <div style="text-align:center;color:var(--green-bright);font-size:1.4rem;margin:6px 0 10px;opacity:0.7;">⬇️</div>
-
-        <!-- Entry 2 -->
-        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;transition:all 0.3s;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-                <span style="font-size:1.5rem;">🇨🇴</span>
-                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Carlos Eduardo Ramírez</span>
-                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Former Combatant, Colombia · 🤝 Unity</span>
-            </div>
-            <div style="color:var(--text);font-style:italic;line-height:1.8;margin-bottom:12px;font-size:0.95rem;">
-                "The old man — I understand him. I was once that man in the mud. Not literally. But after I put down my rifle, I fell. Fell into silence. Fell into shame. Fell into a world that did not want former combatants. And someone — a coffee farmer — reached down and pulled me up. Not with a speech. With coffee. With a question about my mother. The old man in Addis was not alone because a dog stood by him. I was not alone because a farmer handed me a cup. Who reached down to you?"
-            </div>
-            <span style="display:inline-block;background:rgba(251,191,36,0.12);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:500;font-family:var(--font-ui);">🧵 Thread left: The coffee farmer. The question about the mother. Who reached down to you?</span>
-        </div>
-
-        <div style="text-align:center;color:var(--green-bright);font-size:1.4rem;margin:6px 0 10px;opacity:0.7;">⬇️</div>
-
-        <!-- Entry 3 -->
-        <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;transition:all 0.3s;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-                <span style="font-size:1.5rem;">🇯🇵</span>
-                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Yuki Tanaka</span>
-                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Zen Practitioner, Japan · ❤️ Love</span>
-            </div>
-            <div style="color:var(--text);font-style:italic;line-height:1.8;margin-bottom:12px;font-size:0.95rem;">
-                "The question about the mother — Carlos, your farmer knew something we forget. In Kyoto, my teacher said: <em>'The deepest peace is the face of your mother before you were born.'</em> I meditated on this for ten years. Then my own mother died. I never asked her what she dreamed before I arrived. Now I ask strangers: what did your mother want before she became a mother? The answers break me open. One woman in Tokyo said: 'She wanted to be a dancer.' A dancer. I light incense for that lost dancer now. What did your mother want?"
-            </div>
-            <span style="display:inline-block;background:rgba(251,191,36,0.12);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:500;font-family:var(--font-ui);">🧵 Thread left: Mothers' lost dreams. The dancer. What did your mother want?</span>
-        </div>
-
-        <div style="text-align:center;color:var(--green-bright);font-size:1.4rem;margin:6px 0 10px;opacity:0.7;">⬇️</div>
-
-        <!-- Entry 4 - Placeholder for next writer -->
-        <div style="background:var(--card);border:2px dashed var(--green-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;opacity:0.85;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-                <span style="font-size:1.5rem;">🌍</span>
-                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Your Name Here</span>
-                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Your Country · 🕊️❤️🤝</span>
-            </div>
-            <div style="color:var(--text-muted);font-style:italic;line-height:1.8;margin-bottom:12px;font-size:0.95rem;">
-                <em>The story is waiting for you. Read the last entry. Find a thread. Follow it — to your country, your experience, your imagination. What did <strong>your</strong> mother want? Or follow another thread: the dog, the coffee farmer, the incense, the dancer. The story bends toward whoever picks it up.</em>
-            </div>
-            <span style="display:inline-block;background:rgba(251,191,36,0.12);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:500;font-family:var(--font-ui);">🧵 Your thread will guide the next writer.</span>
-        </div>
-
-        <a href="contribute.html" class="btn btn-primary" style="display:block;width:100%;text-align:center;padding:14px;font-size:1rem;margin-top:8px;">✍️ Add Your Part to the Story</a>
-    </div>
-
-    <!-- ==================== WISDOM CHAIN ==================== -->
-    <div id="wisdom-chain" style="margin-top:55px;">
-        <h2 class="section-title">🦉 The Wisdom Chain</h2>
-        <p class="section-subtitle">Not a conversation. A <strong style="color:var(--gold-bright);">compounding of insight.</strong> One person articulates a truth. The next does not reply — they <strong style="color:var(--gold-bright);">add a deeper layer, sharpen it, or reveal what the previous person could not see.</strong> Each entry makes the wisdom more concrete, more lived. Always leave an edge for the next voice.</p>
-
-        <div style="background:rgba(34,197,94,0.05);border-radius:12px;padding:16px 20px;margin-bottom:24px;border:1px solid rgba(34,197,94,0.15);">
-            <h4 style="color:var(--green-bright);margin-bottom:6px;font-family:var(--font-ui);font-size:0.9rem;">📜 Rules for Wisdom Chain</h4>
-            <ul style="color:var(--text-dim);font-size:0.8rem;padding-left:20px;font-family:var(--font-ui);">
-                <li>Read the wisdom that came before you.</li>
-                <li>Do not agree or disagree. <strong>Add.</strong> What did they miss? What is the deeper layer?</li>
-                <li>Speak from your own life — not theory, not quotes. Experience.</li>
-                <li>End with a question or an edge — something unresolved for the next person.</li>
-            </ul>
-        </div>
-
-        <!-- Wisdom Entry 1 -->
-        <div style="background:var(--card);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px 24px;margin-bottom:14px;transition:all 0.3s;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-                <span style="font-size:1.5rem;">🇬🇭</span>
-                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Kwame Asante</span>
-                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Taxi Driver, Ghana · 58 years old</span>
-                <span style="display:inline-block;background:var(--gold);color:#000;padding:2px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;font-family:var(--font-ui);">Layer 1</span>
-            </div>
-            <div style="color:var(--text);line-height:1.8;margin-bottom:10px;font-size:0.95rem;">
-                "The most important thing I have learned in 58 years: people do not change when you argue with them. They change when you listen to them — really listen, without preparing your reply. I drove a taxi for 22 years. I listened to drunk people, heartbroken people, angry people, lost people. I did not fix anyone. But many of them fixed themselves, just because someone was quiet while they spoke. Listening is not passive. Listening is a form of love."
-            </div>
-            <div style="color:var(--green-bright);font-style:italic;font-weight:500;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.85rem;">
-                🔪 Edge: Listening is easy with strangers. What about with people who have hurt you? Is listening still enough when your heart is full of rage?
-            </div>
-        </div>
-
-        <!-- Wisdom Entry 2 -->
-        <div style="background:var(--card);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px 24px;margin-bottom:14px;transition:all 0.3s;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-                <span style="font-size:1.5rem;">🇷🇼</span>
-                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Odette Uwimana</span>
-                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Reconciliation Survivor, Rwanda</span>
-                <span style="display:inline-block;background:var(--gold);color:#000;padding:2px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;font-family:var(--font-ui);">Layer 2</span>
-            </div>
-            <div style="color:var(--text);line-height:1.8;margin-bottom:10px;font-size:0.95rem;">
-                "Kwame asks: is listening enough when your heart is full of rage? I sat across from the man who killed my brother. I did not listen with my ears. I listened with my survival. I listened to his shaking hands. I listened to his silence — it was louder than any confession. And I learned: listening to an enemy is not about understanding them. It is about refusing to let their violence turn you into someone who cannot hear at all. Listening to someone who hurt you is not forgiveness. It is self-defense of the soul."
-            </div>
-            <div style="color:var(--green-bright);font-style:italic;font-weight:500;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.85rem;">
-                🔪 Edge: I listened. I survived it. But I still dream of my brother. Listening healed something in me — but it did not bring him back. So what is listening for, if it cannot undo the past? What is the purpose of peace if the dead stay dead?
-            </div>
-        </div>
-
-        <!-- Wisdom Entry 3 -->
-        <div style="background:var(--card);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px 24px;margin-bottom:14px;transition:all 0.3s;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-                <span style="font-size:1.5rem;">🇸🇾</span>
-                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Samir Al-Khatib</span>
-                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Former Teacher, Syria</span>
-                <span style="display:inline-block;background:var(--gold);color:#000;padding:2px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;font-family:var(--font-ui);">Layer 3</span>
-            </div>
-            <div style="color:var(--text);line-height:1.8;margin-bottom:10px;font-size:0.95rem;">
-                "Odette asks: what is listening for if it cannot undo the past? I taught children who are now buried. I listened to their laughter. I listened to their questions about algebra and the stars. That listening did not save them. But it meant that before they died, someone heard them. Someone knew they were alive. The dead stay dead. Peace does not resurrect them. But listening <strong>witnesses</strong> them. It says: you were here. You mattered. The purpose of listening — of peace — is not to undo the past. It is to honor what was lost so completely that the future cannot repeat the crime."
-            </div>
-            <div style="color:var(--green-bright);font-style:italic;font-weight:500;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.85rem;">
-                🔪 Edge: Witnessing is heavy. I carry my students' voices in my chest like stones. Who carries the witness when the witness collapses? Who listens to the listener?
-            </div>
-        </div>
-
-        <!-- Wisdom Entry 4 - Placeholder -->
-        <div style="background:var(--card);border-left:4px dashed var(--gold);border-radius:0 12px 12px 0;padding:20px 24px;margin-bottom:14px;opacity:0.85;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-                <span style="font-size:1.5rem;">🌍</span>
-                <span style="font-weight:700;color:var(--gold-bright);font-family:var(--font-ui);">Your Name Here</span>
-                <span style="color:var(--text-muted);font-size:0.75rem;font-family:var(--font-ui);">· Your Role, Your Country</span>
-                <span style="display:inline-block;background:var(--gold);color:#000;padding:2px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;font-family:var(--font-ui);">Layer 4</span>
-            </div>
-            <div style="color:var(--text-muted);line-height:1.8;margin-bottom:10px;font-size:0.95rem;">
-                <em>Samir asks: who listens to the listener? You have carried something heavy. You have witnessed something that broke you — or someone who was breaking. What did you learn that Samir, Odette, and Kwame have not yet spoken? Add your layer. Sharpen the truth. Then leave your own edge for the next voice.</em>
-            </div>
-            <div style="color:var(--green-bright);font-style:italic;font-weight:500;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.85rem;">
-                🔪 Your edge will guide the next layer of wisdom.
-            </div>
-        </div>
-
-        <a href="contribute.html" class="btn btn-primary" style="display:block;width:100%;text-align:center;padding:14px;font-size:1rem;margin-top:8px;">🦉 Add Your Layer to the Wisdom Chain</a>
-    </div>
-
-    <!-- FEATURED WRITERS -->
-    <div style="margin-top:50px;">
-        <h2 class="section-title">🖋️ Featured Collaborative Writers</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:20px;">
-            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
-                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">🌿</div>
-                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Bethlehem Tadesse</h4>
-                <p style="color:var(--text-muted);font-size:0.75rem;">Storyteller · Addis Ababa</p>
-                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Story Chain starter</span>
-            </div>
-            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
-                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">☕</div>
-                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Carlos Ramírez</h4>
-                <p style="color:var(--text-muted);font-size:0.75rem;">Former Combatant · Colombia</p>
-                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Story & Wisdom</span>
-            </div>
-            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
-                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">🦉</div>
-                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Odette Uwimana</h4>
-                <p style="color:var(--text-muted);font-size:0.75rem;">Survivor · Rwanda</p>
-                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Wisdom Layer 2</span>
-            </div>
-            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
-                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">📖</div>
-                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Yuki Tanaka</h4>
-                <p style="color:var(--text-muted);font-size:0.75rem;">Zen Practitioner · Japan</p>
-                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Story Layer 3</span>
-            </div>
-            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
-                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">🕊️</div>
-                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Samir Al-Khatib</h4>
-                <p style="color:var(--text-muted);font-size:0.75rem;">Teacher · Syria</p>
-                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Wisdom Layer 3</span>
-            </div>
-            <div style="background:var(--card);border:1px solid var(--green-border);border-radius:14px;padding:20px;text-align:center;">
-                <div style="width:50px;height:50px;background:#2f4f3a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.5rem;">🚕</div>
-                <h4 style="color:var(--gold);font-family:var(--font-ui);margin-bottom:4px;">Kwame Asante</h4>
-                <p style="color:var(--text-muted);font-size:0.75rem;">Taxi Driver · Ghana</p>
-                <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--green-bright);">Wisdom Layer 1</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- CTA BANNER -->
-    <div style="text-align:center;margin:50px 0 25px;background:rgba(251,191,36,0.05);border-radius:40px;padding:35px 20px;border:1px solid rgba(251,191,36,0.2);">
-        <h2 style="color:var(--gold-bright);font-family:var(--font-ui);">🤝 Your words can build bridges</h2>
-        <p style="color:var(--text-dim);max-width:500px;margin:10px auto 20px;">Join the Story Chain or Wisdom Chain. All languages and experience levels welcome. Your voice is the next link.</p>
-        <a href="contribute.html" class="btn btn-primary" style="font-size:1rem;">✍️ Become a Co-Writer</a>
-        <p style="margin-top:15px;font-size:0.85rem;">
-            <a href="voices.html" style="color:var(--green-bright);">← Browse existing voices</a>
-        </p>
+    <!-- CTA -->
+    <div class="cta-banner">
+        <h2>🌍 Your Contribution Matters</h2>
+        <p>Whether you share a voice, volunteer an hour, or sponsor a prize — you are building a more peaceful world. Peace is the goal. Love is the way. Unity is the strength.</p>
+        <a href="collaborate.html" class="btn btn-gold" style="font-size:1rem;">✍️ Start Now — Share Your Voice</a>
     </div>
 
 </main>
@@ -279,15 +310,15 @@
 <!-- FOOTER -->
 <footer>
     <div class="footer-grid">
-        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog & Stories</a><a href="collaborate.html">Story & Wisdom Chain</a><a href="dashboard.html">Dashboard</a></div>
+        <div class="footer-col"><h4>🗣️ Explore</h4><a href="voices.html">Voice Archive</a><a href="blog.html">Blog & Stories</a><a href="collaborate.html">Participate</a><a href="dashboard.html">Dashboard</a></div>
         <div class="footer-col"><h4>🎓 Learn</h4><a href="courses.html">Free Courses</a><a href="peace-techniques.html">Peace Techniques</a><a href="about.html">About Us</a></div>
-        <div class="footer-col"><h4>🤝 Participate</h4><a href="contribute.html">Submit Your Voice</a><a href="support.html">Donate & Support</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>🤝 Contribute</h4><a href="collaborate.html">Share Your Voice</a><a href="contribute.html">Volunteer</a><a href="contribute.html">Partner</a><a href="support.html">Donate</a></div>
         <div class="footer-col"><h4>🌍 Connect</h4><a href="#">𝕏 (Twitter)</a><a href="#">Facebook</a><a href="#">Instagram</a></div>
     </div>
     <div style="text-align:center;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);margin-top:16px;">
-        <p>🕊️ Ethiopian Peace Archive &copy; 2026 · Story Chain & Wisdom Chain</p>
-        <p style="margin-top:4px;color:var(--green-bright);font-weight:600;">Peace is the goal. Love is the way. Unity is the strength.</p>
-        <p style="font-size:0.7rem;margin-top:4px;color:var(--text-muted);">#WriteForPeace · #StoryChain · #WisdomChain</p>
+        <p style="font-size:1rem;margin-bottom:4px;">🕊️ Peace is the goal. ❤️ Love is the way. 🤝 Unity is the strength.</p>
+        <p>We Need Peace &copy; 2026 · The Global Voice Archive</p>
+        <p style="font-size:0.7rem;margin-top:4px;color:var(--text-muted);">#WeNeedPeace #VoicesForPeace #PeaceLoveUnity</p>
     </div>
 </footer>
 
