@@ -1,990 +1,948 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Ethiopian Peace Archive — A global movement preserving 1,000+ voices for peace. Free courses, research, and community action across 57+ countries.">
-    <meta property="og:title" content="Ethiopian Peace Archive — Global Peace Movement">
-    <meta property="og:description" content="1,000+ voices from Ethiopia and the world. Join the movement for peace, love, and unity.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ethiopianpeacearchive.org">
-    <meta property="og:site_name" content="Ethiopian Peace Archive">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ethiopian Peace Archive — Global Peace Movement">
-    <meta name="twitter:description" content="1,000+ voices from Ethiopia and the world. Join the movement for peace.">
-    <link rel="canonical" href="https://ethiopianpeacearchive.org">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
-    <title>Ethiopian Peace Archive — Global Movement for Peace</title>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* ============================================
-           HOMEPAGE ENHANCEMENTS
-           Premium production-ready styles
-           ============================================ */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <meta name="description" content="Ethiopian Peace Archive — A global movement preserving 1,000+ voices for peace. Free courses, research, and community action across 57+ countries." />
+  <meta property="og:title" content="Ethiopian Peace Archive — Global Peace Movement" />
+  <meta property="og:description" content="1,000+ voices from Ethiopia and the world. Join the movement for peace, love, and unity." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ethiopianpeacearchive.org" />
+  <meta property="og:site_name" content="Ethiopian Peace Archive" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ethiopian Peace Archive — Global Peace Movement" />
+  <meta name="twitter:description" content="1,000+ voices from Ethiopia and the world. Join the movement for peace." />
+  <link rel="canonical" href="https://ethiopianpeacearchive.org" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>" />
+  <title>Ethiopian Peace Archive — Global Movement for Peace</title>
+  <style>
+    /* ============================================
+       HOMEPAGE ENHANCEMENTS
+       Premium production-ready styles - NO RED COLOR
+       ============================================ */
+    :root {
+      --bg: #060f1e;
+      --card: #0d1b33;
+      --card-hover: #111f3a;
+      --green: #22c55e;
+      --green-bright: #4ade80;
+      --green-dim: rgba(34, 197, 94, 0.10);
+      --green-border: rgba(34, 197, 94, 0.20);
+      --gold: #fbbf24;
+      --gold-bright: #fcd34d;
+      --gold-soft: rgba(251, 191, 36, 0.1);
+      --text: #e2e8f0;
+      --text-dim: #94a3b8;
+      --text-muted: #64748b;
+      --love-color: #f59e0b;
+      --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-body: 'Georgia', 'Times New Roman', serif;
+      --radius: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 30px;
+      --transition: 0.25s ease;
+      --transition-slow: 0.35s ease;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+      --shadow-gold: 0 8px 25px rgba(251, 191, 36, 0.3);
+      --shadow-green: 0 8px 25px rgba(34, 197, 94, 0.3);
+    }
 
-        :root {
-            --bg: #060f1e;
-            --card: #0d1b33;
-            --card-hover: #111f3a;
-            --green: #22c55e;
-            --green-bright: #4ade80;
-            --green-dim: rgba(34, 197, 94, 0.10);
-            --green-border: rgba(34, 197, 94, 0.20);
-            --gold: #fbbf24;
-            --gold-bright: #fcd34d;
-            --gold-soft: rgba(251, 191, 36, 0.1);
-            --text: #e2e8f0;
-            --text-dim: #94a3b8;
-            --text-muted: #64748b;
-            --red: #ef4444;
-            --red-soft: rgba(239, 68, 68, 0.12);
-            --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            --font-body: 'Georgia', 'Times New Roman', serif;
-            --radius: 14px;
-            --radius-lg: 20px;
-            --radius-xl: 30px;
-            --transition: 0.25s ease;
-            --transition-slow: 0.35s ease;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-            --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
-            --shadow-gold: 0 8px 25px rgba(251, 191, 36, 0.3);
-            --shadow-green: 0 8px 25px rgba(34, 197, 94, 0.3);
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(ellipse at 20% 20%, rgba(34, 197, 94, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 60%, rgba(251, 191, 36, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(74, 222, 128, 0.03) 0%, transparent 50%);
+    }
+    a { text-decoration: none; color: inherit; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: var(--font-ui);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(ellipse at 20% 20%, rgba(34, 197, 94, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 60%, rgba(251, 191, 36, 0.02) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(239, 68, 68, 0.02) 0%, transparent 50%);
-        }
-        a { text-decoration: none; color: inherit; }
+    /* ========== NAVIGATION ========== */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 5%;
+      background: rgba(6, 15, 30, 0.97);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--green-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav__logo {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #f0f2e9;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+    .nav__logo:hover { opacity: 0.85; }
+    .nav__logo span { color: var(--green-bright); }
+    .nav__links {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .nav__link {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      padding: 7px 12px;
+      border-radius: 20px;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+      position: relative;
+    }
+    .nav__link:hover {
+      color: var(--gold-bright);
+      background: var(--gold-soft);
+    }
+    .nav__link--active {
+      color: var(--gold-bright) !important;
+      background: var(--gold-soft) !important;
+    }
+    .nav__link--active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .nav__cta {
+      background: var(--green) !important;
+      color: #000 !important;
+      font-weight: 700 !important;
+      padding: 7px 16px !important;
+      border-radius: 24px !important;
+    }
+    .nav__cta:hover {
+      background: var(--green-bright) !important;
+      color: #000 !important;
+    }
 
-        /* ========== NAVIGATION ========== */
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.9rem 5%;
-            background: rgba(6, 15, 30, 0.97);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--green-border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .nav__logo {
-            font-weight: 700;
-            font-size: 1.15rem;
-            color: #f0f2e9;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-        }
-        .nav__logo:hover { opacity: 0.85; }
-        .nav__logo span { color: var(--green-bright); }
-        .nav__links {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .nav__link {
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--text-dim);
-            padding: 7px 12px;
-            border-radius: 20px;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            white-space: nowrap;
-            position: relative;
-        }
-        .nav__link:hover {
-            color: var(--gold-bright);
-            background: var(--gold-soft);
-        }
-        .nav__link--active {
-            color: var(--gold-bright) !important;
-            background: var(--gold-soft) !important;
-        }
-        .nav__link--active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 18px;
-            height: 2px;
-            background: var(--gold);
-            border-radius: 2px;
-        }
-        .nav__cta {
-            background: var(--green) !important;
-            color: #000 !important;
-            font-weight: 700 !important;
-            padding: 7px 16px !important;
-            border-radius: 24px !important;
-        }
-        .nav__cta:hover {
-            background: var(--green-bright) !important;
-            color: #000 !important;
-        }
+    .lang-toggle {
+      display: flex;
+      gap: 3px;
+      margin-left: 8px;
+      border-left: 1px solid var(--green-border);
+      padding-left: 8px;
+    }
+    .lang-btn {
+      padding: 5px 8px;
+      border-radius: 12px;
+      border: 1px solid var(--green-border);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.65rem;
+      font-weight: 600;
+      font-family: var(--font-ui);
+      transition: var(--transition);
+    }
+    .lang-btn--active {
+      background: var(--green-dim);
+      color: var(--green-bright);
+      border-color: var(--green-bright);
+    }
+    .lang-btn:hover {
+      background: var(--green-dim);
+      color: var(--green-bright);
+    }
 
-        /* Language Toggle */
-        .lang-toggle {
-            display: flex;
-            gap: 3px;
-            margin-left: 8px;
-            border-left: 1px solid var(--green-border);
-            padding-left: 8px;
-        }
-        .lang-btn {
-            padding: 5px 8px;
-            border-radius: 12px;
-            border: 1px solid var(--green-border);
-            background: transparent;
-            color: var(--text-dim);
-            cursor: pointer;
-            font-size: 0.65rem;
-            font-weight: 600;
-            font-family: var(--font-ui);
-            transition: var(--transition);
-        }
-        .lang-btn--active {
-            background: var(--green-dim);
-            color: var(--green-bright);
-            border-color: var(--green-bright);
-        }
-        .lang-btn:hover {
-            background: var(--green-dim);
-            color: var(--green-bright);
-        }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 101;
+    }
+    .hamburger__line {
+      width: 24px;
+      height: 2px;
+      background: var(--text-dim);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
 
-        /* Hamburger */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-            z-index: 101;
-        }
-        .hamburger__line {
-            width: 24px;
-            height: 2px;
-            background: var(--text-dim);
-            border-radius: 2px;
-            transition: var(--transition);
-        }
+    .slide-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 98;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.4s ease;
+    }
+    .slide-overlay--open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .slide-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: linear-gradient(180deg, #0a1628 0%, #0d1b33 50%, #060f1e 100%);
+      border-left: 2px solid var(--green-border);
+      z-index: 99;
+      transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+      padding: 80px 18px 30px;
+      overflow-y: auto;
+    }
+    .slide-menu--open { right: 0; }
+    .slide-menu__header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--green-border);
+    }
+    .slide-menu__flag { font-size: 2rem; margin-bottom: 6px; }
+    .slide-menu__title { color: var(--gold); font-size: 1rem; font-weight: 700; }
+    .slide-menu__link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 16px;
+      margin-bottom: 4px;
+      border-radius: 12px;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .slide-menu__link:hover {
+      color: var(--green-bright);
+      background: var(--green-dim);
+      transform: translateX(4px);
+    }
+    .slide-menu__footer {
+      text-align: center;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--green-border);
+    }
 
-        /* Slide Menu */
-        .slide-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 98;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.4s ease;
-        }
-        .slide-overlay--open {
-            opacity: 1;
-            visibility: visible;
-        }
-        .slide-menu {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 280px;
-            height: 100%;
-            background: linear-gradient(180deg, #0a1628 0%, #0d1b33 50%, #060f1e 100%);
-            border-left: 2px solid var(--green-border);
-            z-index: 99;
-            transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-            padding: 80px 18px 30px;
-            overflow-y: auto;
-        }
-        .slide-menu--open { right: 0; }
-        .slide-menu__header {
-            text-align: center;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--green-border);
-        }
-        .slide-menu__flag { font-size: 2rem; margin-bottom: 6px; }
-        .slide-menu__title { color: var(--gold); font-size: 1rem; font-weight: 700; }
-        .slide-menu__link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 13px 16px;
-            margin-bottom: 4px;
-            border-radius: 12px;
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-        .slide-menu__link:hover {
-            color: var(--green-bright);
-            background: var(--green-dim);
-            transform: translateX(4px);
-        }
-        .slide-menu__footer {
-            text-align: center;
-            margin-top: 16px;
-            padding-top: 12px;
-            border-top: 1px solid var(--green-border);
-        }
+    /* ========== FULL-WIDTH SHORT HERO BANNER ========== */
+    .hero-banner {
+      width: 100%;
+      height: auto;
+      max-height: 180px;
+      overflow: hidden;
+      border-bottom: 2px solid var(--green-border);
+      position: relative;
+      z-index: 5;
+    }
+    .hero-banner__image {
+      width: 100%;
+      height: auto;
+      max-height: 180px;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      border: none;
+    }
 
-        /* ========== HERO ========== */
-        .hero {
-            padding: 70px 20px 50px;
-            text-align: center;
-            border-bottom: 1px solid var(--green-border);
-            position: relative;
-            overflow: hidden;
-            background: var(--bg);
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.08) 0%, transparent 60%),
-                radial-gradient(circle at 70% 70%, rgba(251, 191, 36, 0.06) 0%, transparent 60%),
-                radial-gradient(circle at 50% 40%, rgba(239, 68, 68, 0.04) 0%, transparent 60%);
-            animation: heroPulse 10s ease-in-out infinite;
-            z-index: 0;
-        }
-        @keyframes heroPulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-        .hero > * { position: relative; z-index: 1; }
-        .hero__badge {
-            display: inline-block;
-            background: rgba(34, 197, 94, 0.15);
-            color: var(--green-bright);
-            padding: 7px 20px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 18px;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            animation: fadeInDown 0.6s ease;
-        }
-        .hero__title {
-            font-size: clamp(2rem, 5.5vw, 3.8rem);
-            color: var(--gold-bright);
-            margin-bottom: 12px;
-            line-height: 1.15;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            animation: fadeInUp 0.6s ease 0.1s both;
-        }
-        .hero__slogan {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin: 14px 0 18px;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            font-weight: 700;
-            color: var(--text);
-            animation: fadeInUp 0.6s ease 0.15s both;
-        }
-        .hero__slogan .love { color: #ef4444; }
-        .hero__slogan .peace { color: var(--green-bright); }
-        .hero__slogan .unity { color: var(--gold-bright); }
-        .hero__slogan .divider { color: var(--text-muted); font-weight: 300; }
-        .hero__subtitle {
-            font-size: clamp(0.9rem, 2vw, 1.15rem);
-            color: var(--text-dim);
-            max-width: 680px;
-            margin: 0 auto 24px;
-            font-style: italic;
-            line-height: 1.7;
-            animation: fadeInUp 0.6s ease 0.2s both;
-        }
-        .hero__stats {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-            animation: fadeInUp 0.6s ease 0.25s both;
-        }
-        .hero__stat {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 30px;
-            padding: 10px 20px;
-            font-size: 0.82rem;
-            color: var(--text-dim);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-        }
-        .hero__stat:hover {
-            border-color: var(--green-border);
-            background: rgba(34, 197, 94, 0.05);
-            transform: translateY(-2px);
-        }
-        .hero__stat strong {
-            color: var(--gold-bright);
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-        .hero__actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.6s ease 0.3s both;
-        }
+    /* ========== HERO TEXT SECTION ========== */
+    .hero {
+      padding: 2rem 20px 2.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--green-border);
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(251, 191, 36, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at 50% 40%, rgba(74, 222, 128, 0.04) 0%, transparent 60%);
+      animation: heroPulse 10s ease-in-out infinite;
+      z-index: 0;
+    }
+    @keyframes heroPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+    .hero > * { position: relative; z-index: 1; }
 
-        /* ========== PALM DECORATION ========== */
-        .palm {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            padding: 24px 20px;
-            margin-top: -25px;
-            position: relative;
-            z-index: 10;
-            font-size: 2.5rem;
-            opacity: 0.85;
-        }
-        .palm__leaf {
-            animation: palmSway 3s ease-in-out infinite;
-            display: inline-block;
-            cursor: default;
-            transition: transform 0.3s ease;
-        }
-        .palm__leaf:hover {
-            animation-play-state: paused;
-            transform: scale(1.2);
-        }
-        .palm__leaf:nth-child(1) { animation-delay: 0s; }
-        .palm__leaf:nth-child(2) { animation-delay: 0.35s; }
-        .palm__leaf:nth-child(3) { animation-delay: 0.7s; }
-        .palm__leaf:nth-child(4) { animation-delay: 1.05s; }
-        .palm__leaf:nth-child(5) { animation-delay: 1.4s; }
-        .palm__leaf:nth-child(6) { animation-delay: 1.75s; }
-        .palm__leaf:nth-child(7) { animation-delay: 2.1s; }
-        @keyframes palmSway {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(4deg); }
-            75% { transform: rotate(-4deg); }
-        }
+    .hero__badge {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--green-bright);
+      padding: 7px 20px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 18px;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      animation: fadeInDown 0.6s ease;
+    }
+    .hero__title {
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      color: var(--gold-bright);
+      margin-bottom: 12px;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      animation: fadeInUp 0.6s ease 0.1s both;
+    }
+    .hero__slogan {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 14px 0 18px;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-weight: 700;
+      color: var(--text);
+      animation: fadeInUp 0.6s ease 0.15s both;
+    }
+    .hero__slogan .love { color: var(--love-color); }
+    .hero__slogan .peace { color: var(--green-bright); }
+    .hero__slogan .unity { color: var(--gold-bright); }
+    .hero__slogan .divider { color: var(--text-muted); font-weight: 300; }
+    .hero__subtitle {
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      color: var(--text-dim);
+      max-width: 680px;
+      margin: 0 auto 24px;
+      font-style: italic;
+      line-height: 1.7;
+      animation: fadeInUp 0.6s ease 0.2s both;
+    }
+    .hero__stats {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+      animation: fadeInUp 0.6s ease 0.25s both;
+    }
+    .hero__stat {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+    .hero__stat:hover {
+      border-color: var(--green-border);
+      background: rgba(34, 197, 94, 0.05);
+      transform: translateY(-2px);
+    }
+    .hero__stat strong {
+      color: var(--gold-bright);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .hero__actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease 0.3s both;
+    }
 
-        /* ========== BUTTONS ========== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 13px 26px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border: none;
-            font-family: var(--font-ui);
-            transition: all 0.3s ease;
-            letter-spacing: 0.3px;
-        }
-        .btn--primary {
-            background: var(--green);
-            color: #000;
-        }
-        .btn--primary:hover {
-            background: var(--green-bright);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-green);
-        }
-        .btn--outline {
-            border: 2px solid var(--green);
-            color: var(--green-bright);
-            background: transparent;
-        }
-        .btn--outline:hover {
-            background: var(--green-dim);
-            transform: translateY(-2px);
-        }
-        .btn--gold {
-            background: var(--gold);
-            color: #000;
-        }
-        .btn--gold:hover {
-            background: var(--gold-bright);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-gold);
-        }
-        .btn--love {
-            background: var(--red);
-            color: #fff;
-        }
-        .btn--love:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
-        }
+    /* ========== PALM DECORATION ========== */
+    .palm {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 20px;
+      margin-top: -25px;
+      position: relative;
+      z-index: 10;
+      font-size: 2.5rem;
+      opacity: 0.85;
+    }
+    .palm__leaf {
+      animation: palmSway 3s ease-in-out infinite;
+      display: inline-block;
+      cursor: default;
+      transition: transform 0.3s ease;
+    }
+    .palm__leaf:hover {
+      animation-play-state: paused;
+      transform: scale(1.2);
+    }
+    .palm__leaf:nth-child(1) { animation-delay: 0s; }
+    .palm__leaf:nth-child(2) { animation-delay: 0.35s; }
+    .palm__leaf:nth-child(3) { animation-delay: 0.7s; }
+    .palm__leaf:nth-child(4) { animation-delay: 1.05s; }
+    .palm__leaf:nth-child(5) { animation-delay: 1.4s; }
+    .palm__leaf:nth-child(6) { animation-delay: 1.75s; }
+    .palm__leaf:nth-child(7) { animation-delay: 2.1s; }
+    @keyframes palmSway {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(4deg); }
+      75% { transform: rotate(-4deg); }
+    }
 
-        /* ========== SECTIONS ========== */
-        .section {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .section__title {
-            font-size: 1.6rem;
-            color: var(--gold-bright);
-            margin-bottom: 6px;
-            border-left: 4px solid var(--green);
-            padding-left: 14px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-        }
-        .section__subtitle {
-            color: var(--text-dim);
-            margin-bottom: 24px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
+    /* ========== BUTTONS ========== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 13px 26px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-ui);
+      transition: all 0.3s ease;
+      letter-spacing: 0.3px;
+    }
+    .btn--primary {
+      background: var(--green);
+      color: #000;
+    }
+    .btn--primary:hover {
+      background: var(--green-bright);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-green);
+    }
+    .btn--outline {
+      border: 2px solid var(--green);
+      color: var(--green-bright);
+      background: transparent;
+    }
+    .btn--outline:hover {
+      background: var(--green-dim);
+      transform: translateY(-2px);
+    }
+    .btn--gold {
+      background: var(--gold);
+      color: #000;
+    }
+    .btn--gold:hover {
+      background: var(--gold-bright);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
+    }
+    .btn--love {
+      background: var(--love-color);
+      color: #000;
+    }
+    .btn--love:hover {
+      background: #f59e0b;
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+    }
 
-        /* ========== CARDS GRID ========== */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-            margin-bottom: 30px;
-        }
-        .feature-card {
-            background: var(--card);
-            border: 1px solid rgba(34, 197, 94, 0.10);
-            border-radius: var(--radius-lg);
-            padding: 26px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text);
-            display: block;
-            position: relative;
-            overflow: hidden;
-        }
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--green-bright), var(--gold));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        }
-        .feature-card:hover::after {
-            opacity: 1;
-        }
-        .feature-card:hover {
-            border-color: var(--green);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            background: var(--card-hover);
-        }
-        .feature-card__icon {
-            font-size: 2.2rem;
-            margin-bottom: 14px;
-        }
-        .feature-card__title {
-            color: var(--gold);
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-        .feature-card__text {
-            color: var(--text-dim);
-            font-size: 0.82rem;
-            line-height: 1.6;
-        }
+    /* ========== SECTIONS ========== */
+    .section {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .section__title {
+      font-size: 1.6rem;
+      color: var(--gold-bright);
+      margin-bottom: 6px;
+      border-left: 4px solid var(--green);
+      padding-left: 14px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .section__subtitle {
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
 
-        /* ========== CTA BANNER ========== */
-        .cta-banner {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(251, 191, 36, 0.1), rgba(239, 68, 68, 0.05));
-            border: 1px solid var(--green-border);
-            border-radius: var(--radius-lg);
-            padding: 48px 32px;
-            text-align: center;
-            transition: var(--transition-slow);
-        }
-        .cta-banner:hover {
-            border-color: rgba(251, 191, 36, 0.4);
-            box-shadow: 0 8px 40px rgba(251, 191, 36, 0.05);
-        }
-        .cta-banner__title {
-            color: var(--gold);
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-        }
-        .cta-banner__text {
-            color: var(--text-dim);
-            margin-bottom: 24px;
-            font-size: 1rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-        .cta-banner__actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    /* ========== CARDS GRID ========== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .feature-card {
+      background: var(--card);
+      border: 1px solid rgba(34, 197, 94, 0.10);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-bright), var(--gold));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .feature-card:hover::after { opacity: 1; }
+    .feature-card:hover {
+      border-color: var(--green);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      background: var(--card-hover);
+    }
+    .feature-card__icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .feature-card__title {
+      color: var(--gold);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .feature-card__text {
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
 
-        /* ========== FOOTER ========== */
-        .footer {
-            background: #0a0f0c;
-            border-top: 1px solid var(--green-border);
-            padding: 40px 20px 30px;
-            color: var(--text-muted);
-            font-size: 0.78rem;
-            margin-top: 50px;
-        }
-        .footer__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 24px;
-            max-width: 1100px;
-            margin: 0 auto 24px;
-            text-align: left;
-        }
-        .footer__col-title {
-            color: var(--gold);
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-        .footer__link {
-            display: block;
-            color: var(--text-dim);
-            padding: 3px 0;
-            font-size: 0.78rem;
-            transition: var(--transition);
-        }
-        .footer__link:hover {
-            color: var(--green-bright);
-        }
-        .footer__bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 20px;
-            max-width: 1100px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .footer__slogan {
-            font-size: 1rem;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-dim);
-        }
-        .footer__slogan .love { color: #ef4444; }
-        .footer__slogan .peace { color: var(--green-bright); }
-        .footer__slogan .unity { color: var(--gold-bright); }
-        .footer__hashtag {
-            color: var(--green-bright);
-            font-weight: 600;
-            margin-top: 8px;
-        }
+    /* ========== CTA BANNER ========== */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(251, 191, 36, 0.1), rgba(74, 222, 128, 0.05));
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius-lg);
+      padding: 48px 32px;
+      text-align: center;
+      transition: var(--transition-slow);
+    }
+    .cta-banner:hover {
+      border-color: rgba(251, 191, 36, 0.4);
+      box-shadow: 0 8px 40px rgba(251, 191, 36, 0.05);
+    }
+    .cta-banner__title {
+      color: var(--gold);
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .cta-banner__text {
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      font-size: 1rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-banner__actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-        /* ========== ANIMATIONS ========== */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
+    /* ========== FOOTER ========== */
+    .footer {
+      background: #0a0f0c;
+      border-top: 1px solid var(--green-border);
+      padding: 40px 20px 30px;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-top: 50px;
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto 24px;
+    }
+    .footer__col-title { color: var(--gold); margin-bottom: 10px; font-size: 0.9rem; font-weight: 700; }
+    .footer__link { display: block; color: var(--text-dim); padding: 3px 0; font-size: 0.78rem; transition: var(--transition); }
+    .footer__link:hover { color: var(--green-bright); }
+    .footer__bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      max-width: 1100px;
+      margin: 20px auto 0;
+    }
+    .footer__slogan { font-size: 1rem; margin-bottom: 8px; font-weight: 600; color: var(--text-dim); }
+    .footer__slogan .love { color: var(--love-color); }
+    .footer__slogan .peace { color: var(--green-bright); }
+    .footer__slogan .unity { color: var(--gold-bright); }
+    .footer__hashtag { color: var(--green-bright); font-weight: 600; margin-top: 8px; }
 
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 768px) {
-            .nav__links { display: none; }
-            .lang-toggle { display: none; }
-            .hamburger { display: flex; }
-            .hero { padding: 50px 16px 40px; }
-            .hero__title { font-size: 1.8rem; }
-            .hero__slogan { font-size: 0.85rem; gap: 6px; }
-            .hero__stats { gap: 8px; }
-            .hero__stat { padding: 8px 14px; font-size: 0.75rem; }
-            .hero__stat strong { font-size: 0.95rem; }
-            .palm { font-size: 1.8rem; gap: 12px; padding: 16px 12px; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .cta-banner { padding: 32px 20px; }
-            .cta-banner__title { font-size: 1.3rem; }
-            .footer__grid { grid-template-columns: repeat(2, 1fr); }
-            .section__title { font-size: 1.3rem; }
-        }
-        @media (max-width: 480px) {
-            .hero__stats { flex-direction: column; align-items: center; }
-            .hero__stat { width: 100%; max-width: 280px; justify-content: center; }
-            .hero__actions { flex-direction: column; align-items: center; }
-            .hero__actions .btn { width: 100%; max-width: 300px; justify-content: center; }
-            .palm { font-size: 1.4rem; gap: 8px; }
-            .footer__grid { grid-template-columns: 1fr; }
-            .cta-banner__actions { flex-direction: column; align-items: center; }
-            .cta-banner__actions .btn { width: 100%; max-width: 300px; justify-content: center; }
-        }
-    </style>
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .nav__links { display: none; }
+      .lang-toggle { display: none; }
+      .hamburger { display: flex; }
+      .hero-banner { max-height: 130px; }
+      .hero-banner__image { max-height: 130px; }
+      .hero { padding: 1.5rem 16px 2rem; }
+      .hero__title { font-size: 1.8rem; }
+      .hero__slogan { font-size: 0.85rem; gap: 6px; }
+      .hero__stats { gap: 8px; }
+      .hero__stat { padding: 8px 14px; font-size: 0.75rem; }
+      .hero__stat strong { font-size: 0.95rem; }
+      .palm { font-size: 1.8rem; gap: 12px; padding: 16px 12px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .cta-banner { padding: 32px 20px; }
+      .cta-banner__title { font-size: 1.3rem; }
+      .footer__grid { grid-template-columns: repeat(2, 1fr); }
+      .section__title { font-size: 1.3rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-banner { max-height: 100px; }
+      .hero-banner__image { max-height: 100px; }
+      .hero__stats { flex-direction: column; align-items: center; }
+      .hero__stat { width: 100%; max-width: 280px; justify-content: center; }
+      .hero__actions { flex-direction: column; align-items: center; }
+      .hero__actions .btn { width: 100%; max-width: 300px; justify-content: center; }
+      .palm { font-size: 1.4rem; gap: 8px; }
+      .footer__grid { grid-template-columns: 1fr; }
+      .cta-banner__actions { flex-direction: column; align-items: center; }
+      .cta-banner__actions .btn { width: 100%; max-width: 300px; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
-
-    <!-- ========== NAVIGATION ========== -->
-    <nav class="nav" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="nav__logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-        
-        <div class="nav__links" role="menubar">
-            <a href="index.html" class="nav__link nav__link--active" role="menuitem" aria-current="page">Home</a>
-            <a href="voices.html" class="nav__link" role="menuitem">Voices</a>
-            <a href="blog.html" class="nav__link" role="menuitem">Blog</a>
-            <a href="courses.html" class="nav__link" role="menuitem">Courses</a>
-            <a href="dashboard.html" class="nav__link" role="menuitem">Dashboard</a>
-            <a href="participate.html" class="nav__link" role="menuitem">✍️ Participate</a>
-            <a href="media.html" class="nav__link" role="menuitem">Media</a>
-            <a href="gallery.html" class="nav__link" role="menuitem">Gallery</a>
-            <a href="contribute.html" class="nav__link" role="menuitem">📝 Share Voice</a>
-            <a href="support.html" class="nav__link nav__cta" role="menuitem">❤️ Support</a>
-            
-            <span class="lang-toggle" aria-label="Language selector">
-                <button class="lang-btn lang-btn--active" data-lang="en" aria-pressed="true">EN</button>
-                <button class="lang-btn" data-lang="am" aria-pressed="false">አማ</button>
-                <button class="lang-btn" data-lang="om" aria-pressed="false">Oromo</button>
-                <button class="lang-btn" data-lang="ti" aria-pressed="false">ትግ</button>
-            </span>
-        </div>
-
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
-            <span class="hamburger__line"></span>
-            <span class="hamburger__line"></span>
-            <span class="hamburger__line"></span>
-        </button>
-    </nav>
-
-    <!-- ========== SLIDE MENU ========== -->
-    <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
-    <div class="slide-menu" id="slideMenu" role="dialog" aria-label="Mobile menu">
-        <div class="slide-menu__header">
-            <div class="slide-menu__flag">🇪🇹🕊️</div>
-            <h3 class="slide-menu__title">Ethiopian Peace Archive</h3>
-            <p style="color:var(--text-muted);font-size:0.7rem">Voices for Peace · Power of Unity</p>
-        </div>
-        <a href="index.html" class="slide-menu__link">🏠 Home</a>
-        <a href="voices.html" class="slide-menu__link">🗣️ Voice Archive</a>
-        <a href="blog.html" class="slide-menu__link">📝 Blog & Stories</a>
-        <a href="courses.html" class="slide-menu__link">🎓 Free Courses</a>
-        <a href="dashboard.html" class="slide-menu__link">📊 Dashboard</a>
-        <a href="participate.html" class="slide-menu__link">✍️ Participate</a>
-        <a href="media.html" class="slide-menu__link">📰 Media Coverage</a>
-        <a href="gallery.html" class="slide-menu__link">🖼️ Gallery</a>
-        <a href="contribute.html" class="slide-menu__link">📝 Share Your Voice</a>
-        <a href="about.html" class="slide-menu__link">📖 About Us</a>
-        <a href="contact.html" class="slide-menu__link">📬 Contact</a>
-        <a href="support.html" class="slide-menu__link" style="background:var(--green-dim);color:var(--green-bright);font-weight:700;">❤️ Support the Movement</a>
-        <div class="slide-menu__footer">
-            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:8px">
-                <button class="lang-btn lang-btn--active" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="am">አማ</button>
-                <button class="lang-btn" data-lang="om">Oromo</button>
-                <button class="lang-btn" data-lang="ti">ትግ</button>
-            </div>
-            <p style="color:var(--text-muted);font-size:0.65rem">&copy; 2026 Ethiopian Peace Archive</p>
-        </div>
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav__logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="nav__links" role="menubar">
+      <a href="index.html" class="nav__link nav__link--active" role="menuitem" aria-current="page">Home</a>
+      <a href="voices.html" class="nav__link" role="menuitem">Voices</a>
+      <a href="blog.html" class="nav__link" role="menuitem">Blog</a>
+      <a href="courses.html" class="nav__link" role="menuitem">Courses</a>
+      <a href="dashboard.html" class="nav__link" role="menuitem">Dashboard</a>
+      <a href="participate.html" class="nav__link" role="menuitem">✍️ Participate</a>
+      <a href="media.html" class="nav__link" role="menuitem">Media</a>
+      <a href="gallery.html" class="nav__link" role="menuitem">Gallery</a>
+      <a href="contribute.html" class="nav__link" role="menuitem">📝 Share Voice</a>
+      <a href="support.html" class="nav__link nav__cta" role="menuitem">❤️ Support</a>
+      <span class="lang-toggle" aria-label="Language selector">
+        <button class="lang-btn lang-btn--active" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang="am" aria-pressed="false">አማ</button>
+        <button class="lang-btn" data-lang="om" aria-pressed="false">Oromo</button>
+        <button class="lang-btn" data-lang="ti" aria-pressed="false">ትግ</button>
+      </span>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
+  </nav>
 
-    <!-- ========== HERO ========== -->
-    <header class="hero" aria-labelledby="heroTitle">
-        <span class="hero__badge">🌍 Global Peace Movement</span>
-        <h1 class="hero__title" id="heroTitle">Voices of Peace.<br>Power of Unity.</h1>
-        
-        <p class="hero__slogan">
-            <span>❤️ <span class="love">Wear Love.</span></span>
-            <span class="divider">·</span>
-            <span>🕊️ <span class="peace">Speak Peace.</span></span>
-            <span class="divider">·</span>
-            <span>🤝 <span class="unity">Live Unity.</span></span>
-        </p>
-        
-        <p class="hero__subtitle">
-            Preserving <strong style="color:var(--gold-bright);">1,000+ voices</strong> from 
-            <strong style="color:var(--gold-bright);">40 languages</strong>, 
-            <strong style="color:var(--gold-bright);">30 regions</strong>, and 
-            <strong style="color:var(--gold-bright);">57+ countries</strong> — driving real change for diaspora and local communities.
-        </p>
-        
-        <div class="hero__stats">
-            <div class="hero__stat">🗣️ <strong>1,000+</strong> Voices</div>
-            <div class="hero__stat">🌐 <strong>40</strong> Languages</div>
-            <div class="hero__stat">📍 <strong>30</strong> Regions</div>
-            <div class="hero__stat">🌍 <strong>57+</strong> Countries</div>
-            <div class="hero__stat">✍️ <strong>46+</strong> Writers</div>
-        </div>
-        
-        <div class="hero__actions">
-            <a href="voices.html" class="btn btn--primary">🔍 Explore Voices</a>
-            <a href="participate.html" class="btn btn--outline">✍️ Participate</a>
-            <a href="courses.html" class="btn btn--outline">🎓 Free Courses</a>
-            <a href="contribute.html" class="btn btn--gold">📝 Share Your Voice</a>
-        </div>
-    </header>
-
-    <!-- ========== PALM DECORATION ========== -->
-    <div class="palm" aria-hidden="true">
-        <span class="palm__leaf">🌿</span>
-        <span class="palm__leaf">🍃</span>
-        <span class="palm__leaf">❤️</span>
-        <span class="palm__leaf">🕊️</span>
-        <span class="palm__leaf">🤝</span>
-        <span class="palm__leaf">🍃</span>
-        <span class="palm__leaf">🌿</span>
+  <!-- ========== SLIDE MENU ========== -->
+  <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+  <div class="slide-menu" id="slideMenu" role="dialog" aria-label="Mobile menu">
+    <div class="slide-menu__header">
+      <div class="slide-menu__flag">🇪🇹🕊️</div>
+      <h3 class="slide-menu__title">Ethiopian Peace Archive</h3>
+      <p style="color:var(--text-muted);font-size:0.7rem">Voices for Peace · Power of Unity</p>
     </div>
+    <a href="index.html" class="slide-menu__link">🏠 Home</a>
+    <a href="voices.html" class="slide-menu__link">🗣️ Voice Archive</a>
+    <a href="blog.html" class="slide-menu__link">📝 Blog & Stories</a>
+    <a href="courses.html" class="slide-menu__link">🎓 Free Courses</a>
+    <a href="dashboard.html" class="slide-menu__link">📊 Dashboard</a>
+    <a href="participate.html" class="slide-menu__link">✍️ Participate</a>
+    <a href="media.html" class="slide-menu__link">📰 Media Coverage</a>
+    <a href="gallery.html" class="slide-menu__link">🖼️ Gallery</a>
+    <a href="contribute.html" class="slide-menu__link">📝 Share Your Voice</a>
+    <a href="about.html" class="slide-menu__link">📖 About Us</a>
+    <a href="contact.html" class="slide-menu__link">📬 Contact</a>
+    <a href="support.html" class="slide-menu__link" style="background:var(--green-dim);color:var(--green-bright);font-weight:700;">❤️ Support the Movement</a>
+    <div class="slide-menu__footer">
+      <div style="display:flex;gap:4px;justify-content:center;margin-bottom:8px">
+        <button class="lang-btn lang-btn--active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="am">አማ</button>
+        <button class="lang-btn" data-lang="om">Oromo</button>
+        <button class="lang-btn" data-lang="ti">ትግ</button>
+      </div>
+      <p style="color:var(--text-muted);font-size:0.65rem">&copy; 2026 Ethiopian Peace Archive</p>
+    </div>
+  </div>
 
-    <!-- ========== WHAT WE DO ========== -->
-    <section class="section" aria-labelledby="whatWeDoTitle">
-        <h2 class="section__title" id="whatWeDoTitle">What We Do</h2>
-        <p class="section__subtitle">A global platform preserving voices, educating communities, and driving peace action.</p>
-        
-        <div class="cards-grid">
-            <a href="voices.html" class="feature-card">
-                <div class="feature-card__icon">🗣️</div>
-                <h3 class="feature-card__title">Voice Archive</h3>
-                <p class="feature-card__text">Browse 1,000+ peace messages from all Ethiopian regions and global supporters in 40 languages.</p>
-            </a>
-            
-            <a href="participate.html" class="feature-card">
-                <div class="feature-card__icon">📖</div>
-                <h3 class="feature-card__title">Story & Wisdom Chain</h3>
-                <p class="feature-card__text">Join the never-ending story. One writer starts, another finds a thread. Compounding insight across borders.</p>
-            </a>
-            
-            <a href="courses.html" class="feature-card">
-                <div class="feature-card__icon">🎓</div>
-                <h3 class="feature-card__title">Free Peace Courses</h3>
-                <p class="feature-card__text">Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required — start learning instantly.</p>
-            </a>
-            
-            <a href="blog.html" class="feature-card">
-                <div class="feature-card__icon">📝</div>
-                <h3 class="feature-card__title">Blog & Research</h3>
-                <p class="feature-card__text">Stories from the field, research findings, and updates on peace initiatives worldwide. Evidence-based insights.</p>
-            </a>
-            
-            <a href="dashboard.html" class="feature-card">
-                <div class="feature-card__icon">📊</div>
-                <h3 class="feature-card__title">Impact Dashboard</h3>
-                <p class="feature-card__text">Track our global reach. See how voices translate into action across 57+ countries. Real-time data.</p>
-            </a>
-            
-            <a href="media.html" class="feature-card">
-                <div class="feature-card__icon">📰</div>
-                <h3 class="feature-card__title">Media & Press</h3>
-                <p class="feature-card__text">Coverage from 8+ media outlets including live TV. Explore our story, press kit, and global recognition.</p>
-            </a>
-            
-            <a href="contribute.html" class="feature-card">
-                <div class="feature-card__icon">🤝</div>
-                <h3 class="feature-card__title">Contribute</h3>
-                <p class="feature-card__text">Submit your voice, volunteer, partner with us, or share your expertise. Every contribution amplifies peace.</p>
-            </a>
-            
-            <a href="support.html" class="feature-card">
-                <div class="feature-card__icon">❤️</div>
-                <h3 class="feature-card__title">Support the Movement</h3>
-                <p class="feature-card__text">Donate, sponsor, advise, or provide materials. Every contribution amplifies peace across the globe.</p>
-            </a>
-        </div>
-    </section>
+  <!-- ========== FULL-WIDTH SHORT HERO BANNER ========== -->
+  <div class="hero-banner" aria-hidden="true">
+    <img 
+      src="https://raw.githubusercontent.com/weneedpeace/ethiopian-peace-archive/39c580dbaa55a2cb739cacfcf0d06b5f07597227/hero-image.png" 
+      alt="Ethiopian Peace Archive - Voices for Peace" 
+      class="hero-banner__image"
+      loading="eager"
+    />
+  </div>
 
-    <!-- ========== CTA BANNER ========== -->
-    <section class="section" aria-labelledby="ctaTitle">
-        <div class="cta-banner">
-            <h2 class="cta-banner__title" id="ctaTitle">🌍 Join 1,000+ Voices for Peace</h2>
-            <p class="cta-banner__text">
-                Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters. 
-                Wear Love. Speak Peace. Live Unity.
-            </p>
-            <div class="cta-banner__actions">
-                <a href="contribute.html" class="btn btn--primary">🕊️ Share Your Voice →</a>
-                <a href="participate.html" class="btn btn--gold">📖 Join Story Chain</a>
-                <a href="participate.html" class="btn btn--gold">🦉 Join Wisdom Chain</a>
-                <a href="support.html" class="btn btn--love">❤️ Support the Movement</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer" role="contentinfo">
-        <div class="footer__grid">
-            <div>
-                <h4 class="footer__col-title">🗣️ Explore</h4>
-                <a href="voices.html" class="footer__link">Voice Archive</a>
-                <a href="blog.html" class="footer__link">Blog & Stories</a>
-                <a href="participate.html" class="footer__link">📖 Story Chain</a>
-                <a href="participate.html" class="footer__link">🦉 Wisdom Chain</a>
-                <a href="dashboard.html" class="footer__link">Dashboard</a>
-                <a href="media.html" class="footer__link">Media Coverage</a>
-                <a href="gallery.html" class="footer__link">Gallery</a>
-            </div>
-            <div>
-                <h4 class="footer__col-title">🎓 Learn</h4>
-                <a href="courses.html" class="footer__link">Free Courses</a>
-                <a href="peace-techniques.html" class="footer__link">Peace Techniques</a>
-                <a href="research.html" class="footer__link">AI Research</a>
-                <a href="about.html" class="footer__link">About Us</a>
-            </div>
-            <div>
-                <h4 class="footer__col-title">🤝 Participate</h4>
-                <a href="contribute.html" class="footer__link">Submit Your Voice</a>
-                <a href="participate.html" class="footer__link">Story & Wisdom Chain</a>
-                <a href="support.html" class="footer__link">Donate & Support</a>
-                <a href="contact.html" class="footer__link">Contact</a>
-            </div>
-            <div>
-                <h4 class="footer__col-title">🌍 Connect</h4>
-                <a href="#" class="footer__link">𝕏 (Twitter)</a>
-                <a href="#" class="footer__link">Facebook</a>
-                <a href="#" class="footer__link">Instagram</a>
-                <a href="#" class="footer__link">Telegram</a>
-            </div>
-        </div>
-        
-        <div class="footer__bottom">
-            <p class="footer__slogan">
-                <span class="love">❤️ Wear Love.</span> · 
-                <span class="peace">🕊️ Speak Peace.</span> · 
-                <span class="unity">🤝 Live Unity.</span>
-            </p>
-            <p>Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace · Built with ❤️ for Ethiopia and the World</p>
-            <p style="margin-top:4px;font-size:0.7rem">
-                <a href="privacy.html" class="footer__link" style="display:inline;">Privacy</a> · 
-                <a href="terms.html" class="footer__link" style="display:inline;">Terms</a> · 
-                <a href="contact.html" class="footer__link" style="display:inline;">Contact</a> · 
-                <a href="thanks.html" class="footer__link" style="display:inline;">Thank You</a>
-            </p>
-            <p class="footer__hashtag">#EthiopianPeaceArchive #VoicesForPeace #WearLoveSpeakPeaceLiveUnity</p>
-        </div>
-    </footer>
-
-    <!-- ========== SCRIPTS ========== -->
-    <script>
-        /**
-         * Toggle mobile slide menu
-         */
-        function toggleMenu() {
-            const menu = document.getElementById('slideMenu');
-            const overlay = document.getElementById('slideOverlay');
-            const hamburger = document.getElementById('hamburger');
-            
-            if (!menu || !overlay || !hamburger) return;
-            
-            const isOpen = menu.classList.contains('slide-menu--open');
-            
-            if (isOpen) {
-                menu.classList.remove('slide-menu--open');
-                overlay.classList.remove('slide-overlay--open');
-                hamburger.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            } else {
-                menu.classList.add('slide-menu--open');
-                overlay.classList.add('slide-overlay--open');
-                hamburger.setAttribute('aria-expanded', 'true');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        /**
-         * Close menu on Escape key
-         */
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const menu = document.getElementById('slideMenu');
-                if (menu && menu.classList.contains('slide-menu--open')) {
-                    toggleMenu();
-                }
-            }
-        });
-
-        /**
-         * Language switcher
-         */
-        function setLanguage(lang) {
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('lang-btn--active');
-                if (btn.dataset.lang === lang) {
-                    btn.classList.add('lang-btn--active');
-                    btn.setAttribute('aria-pressed', 'true');
-                } else {
-                    btn.setAttribute('aria-pressed', 'false');
-                }
-            });
-            localStorage.setItem('epa_lang', lang);
-            console.log('Language set to:', lang);
-        }
-
-        // Attach language button events
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                setLanguage(this.dataset.lang);
-            });
-        });
-
-        // Load saved language
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('epa_lang') || 'en';
-            setLanguage(savedLang);
-        });
-    </script>
+  <!-- ========== HERO TEXT SECTION ========== -->
+  <header class="hero" aria-labelledby="heroTitle">
+    <span class="hero__badge">🌍 Global Peace Movement</span>
+    <h1 class="hero__title" id="heroTitle">Voices of Peace.<br>Power of Unity.</h1>
     
-    <script src="js/supabase.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/language.js"></script>
+    <p class="hero__slogan">
+      <span>❤️ <span class="love">Wear Love.</span></span>
+      <span class="divider">·</span>
+      <span>🕊️ <span class="peace">Speak Peace.</span></span>
+      <span class="divider">·</span>
+      <span>🤝 <span class="unity">Live Unity.</span></span>
+    </p>
+    
+    <p class="hero__subtitle">
+      Preserving <strong style="color:var(--gold-bright);">1,000+ voices</strong> from 
+      <strong style="color:var(--gold-bright);">40 languages</strong>, 
+      <strong style="color:var(--gold-bright);">30 regions</strong>, and 
+      <strong style="color:var(--gold-bright);">57+ countries</strong> — driving real change for diaspora and local communities.
+    </p>
+    
+    <div class="hero__stats">
+      <div class="hero__stat">🗣️ <strong>1,000+</strong> Voices</div>
+      <div class="hero__stat">🌐 <strong>40</strong> Languages</div>
+      <div class="hero__stat">📍 <strong>30</strong> Regions</div>
+      <div class="hero__stat">🌍 <strong>57+</strong> Countries</div>
+      <div class="hero__stat">✍️ <strong>46+</strong> Writers</div>
+    </div>
+    
+    <div class="hero__actions">
+      <a href="voices.html" class="btn btn--primary">🔍 Explore Voices</a>
+      <a href="participate.html" class="btn btn--outline">✍️ Participate</a>
+      <a href="courses.html" class="btn btn--outline">🎓 Free Courses</a>
+      <a href="contribute.html" class="btn btn--gold">📝 Share Your Voice</a>
+    </div>
+  </header>
+
+  <!-- ========== PALM DECORATION ========== -->
+  <div class="palm" aria-hidden="true">
+    <span class="palm__leaf">🌿</span>
+    <span class="palm__leaf">🍃</span>
+    <span class="palm__leaf">❤️</span>
+    <span class="palm__leaf">🕊️</span>
+    <span class="palm__leaf">🤝</span>
+    <span class="palm__leaf">🍃</span>
+    <span class="palm__leaf">🌿</span>
+  </div>
+
+  <!-- ========== WHAT WE DO ========== -->
+  <section class="section" aria-labelledby="whatWeDoTitle">
+    <h2 class="section__title" id="whatWeDoTitle">What We Do</h2>
+    <p class="section__subtitle">A global platform preserving voices, educating communities, and driving peace action.</p>
+    <div class="cards-grid">
+      <a href="voices.html" class="feature-card">
+        <div class="feature-card__icon">🗣️</div>
+        <h3 class="feature-card__title">Voice Archive</h3>
+        <p class="feature-card__text">Browse 1,000+ peace messages from all Ethiopian regions and global supporters in 40 languages.</p>
+      </a>
+      <a href="participate.html" class="feature-card">
+        <div class="feature-card__icon">📖</div>
+        <h3 class="feature-card__title">Story & Wisdom Chain</h3>
+        <p class="feature-card__text">Join the never-ending story. One writer starts, another finds a thread. Compounding insight across borders.</p>
+      </a>
+      <a href="courses.html" class="feature-card">
+        <div class="feature-card__icon">🎓</div>
+        <h3 class="feature-card__title">Free Peace Courses</h3>
+        <p class="feature-card__text">Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required — start learning instantly.</p>
+      </a>
+      <a href="blog.html" class="feature-card">
+        <div class="feature-card__icon">📝</div>
+        <h3 class="feature-card__title">Blog & Research</h3>
+        <p class="feature-card__text">Stories from the field, research findings, and updates on peace initiatives worldwide.</p>
+      </a>
+      <a href="dashboard.html" class="feature-card">
+        <div class="feature-card__icon">📊</div>
+        <h3 class="feature-card__title">Impact Dashboard</h3>
+        <p class="feature-card__text">Track our global reach. See how voices translate into action across 57+ countries.</p>
+      </a>
+      <a href="media.html" class="feature-card">
+        <div class="feature-card__icon">📰</div>
+        <h3 class="feature-card__title">Media & Press</h3>
+        <p class="feature-card__text">Coverage from 8+ media outlets including live TV. Explore our story and global recognition.</p>
+      </a>
+      <a href="contribute.html" class="feature-card">
+        <div class="feature-card__icon">🤝</div>
+        <h3 class="feature-card__title">Contribute</h3>
+        <p class="feature-card__text">Submit your voice, volunteer, partner with us, or share your expertise.</p>
+      </a>
+      <a href="support.html" class="feature-card">
+        <div class="feature-card__icon">❤️</div>
+        <h3 class="feature-card__title">Support the Movement</h3>
+        <p class="feature-card__text">Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== CTA BANNER ========== -->
+  <section class="section" aria-labelledby="ctaTitle">
+    <div class="cta-banner">
+      <h2 class="cta-banner__title" id="ctaTitle">🌍 Join 1,000+ Voices for Peace</h2>
+      <p class="cta-banner__text">Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters. Wear Love. Speak Peace. Live Unity.</p>
+      <div class="cta-banner__actions">
+        <a href="contribute.html" class="btn btn--primary">🕊️ Share Your Voice →</a>
+        <a href="participate.html" class="btn btn--gold">📖 Join Story Chain</a>
+        <a href="participate.html" class="btn btn--gold">🦉 Join Wisdom Chain</a>
+        <a href="support.html" class="btn btn--love">❤️ Support the Movement</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__grid">
+      <div>
+        <h4 class="footer__col-title">🗣️ Explore</h4>
+        <a href="voices.html" class="footer__link">Voice Archive</a>
+        <a href="blog.html" class="footer__link">Blog & Stories</a>
+        <a href="participate.html" class="footer__link">📖 Story Chain</a>
+        <a href="participate.html" class="footer__link">🦉 Wisdom Chain</a>
+        <a href="dashboard.html" class="footer__link">Dashboard</a>
+        <a href="media.html" class="footer__link">Media Coverage</a>
+        <a href="gallery.html" class="footer__link">Gallery</a>
+      </div>
+      <div>
+        <h4 class="footer__col-title">🎓 Learn</h4>
+        <a href="courses.html" class="footer__link">Free Courses</a>
+        <a href="peace-techniques.html" class="footer__link">Peace Techniques</a>
+        <a href="research.html" class="footer__link">AI Research</a>
+        <a href="about.html" class="footer__link">About Us</a>
+      </div>
+      <div>
+        <h4 class="footer__col-title">🤝 Participate</h4>
+        <a href="contribute.html" class="footer__link">Submit Your Voice</a>
+        <a href="participate.html" class="footer__link">Story & Wisdom Chain</a>
+        <a href="support.html" class="footer__link">Donate & Support</a>
+        <a href="contact.html" class="footer__link">Contact</a>
+      </div>
+      <div>
+        <h4 class="footer__col-title">🌍 Connect</h4>
+        <a href="#" class="footer__link">𝕏 (Twitter)</a>
+        <a href="#" class="footer__link">Facebook</a>
+        <a href="#" class="footer__link">Instagram</a>
+        <a href="#" class="footer__link">Telegram</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__slogan">
+        <span class="love">❤️ Wear Love.</span> · 
+        <span class="peace">🕊️ Speak Peace.</span> · 
+        <span class="unity">🤝 Live Unity.</span>
+      </p>
+      <p>Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace · Built with ❤️ for Ethiopia and the World</p>
+      <p style="margin-top:4px;font-size:0.7rem">
+        <a href="privacy.html" class="footer__link" style="display:inline;">Privacy</a> · 
+        <a href="terms.html" class="footer__link" style="display:inline;">Terms</a> · 
+        <a href="contact.html" class="footer__link" style="display:inline;">Contact</a> · 
+        <a href="thanks.html" class="footer__link" style="display:inline;">Thank You</a>
+      </p>
+      <p class="footer__hashtag">#EthiopianPeaceArchive #VoicesForPeace #WearLoveSpeakPeaceLiveUnity</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('slideMenu');
+      const overlay = document.getElementById('slideOverlay');
+      const hamburger = document.getElementById('hamburger');
+      if (!menu || !overlay || !hamburger) return;
+      const isOpen = menu.classList.contains('slide-menu--open');
+      if (isOpen) {
+        menu.classList.remove('slide-menu--open');
+        overlay.classList.remove('slide-overlay--open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      } else {
+        menu.classList.add('slide-menu--open');
+        overlay.classList.add('slide-overlay--open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const menu = document.getElementById('slideMenu');
+        if (menu && menu.classList.contains('slide-menu--open')) {
+          toggleMenu();
+        }
+      }
+    });
+
+    function setLanguage(lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('lang-btn--active');
+        if (btn.dataset.lang === lang) {
+          btn.classList.add('lang-btn--active');
+          btn.setAttribute('aria-pressed', 'true');
+        } else {
+          btn.setAttribute('aria-pressed', 'false');
+        }
+      });
+      localStorage.setItem('epa_lang', lang);
+      console.log('Language set to:', lang);
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        setLanguage(this.dataset.lang);
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedLang = localStorage.getItem('epa_lang') || 'en';
+      setLanguage(savedLang);
+    });
+  </script>
 </body>
 </html>
