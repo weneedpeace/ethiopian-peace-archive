@@ -1,857 +1,578 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Join the Story & Wisdom Chain. Co-create stories and deepen wisdom with writers from 57+ countries.">
-    <meta property="og:title" content="Participate — Ethiopian Peace Archive">
-    <meta property="og:description" content="Join writers from 57+ countries. Co-create stories and deepen wisdom.">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://ethiopianpeacearchive.org/participate">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
-    <title>Participate — Ethiopian Peace Archive</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg: #060f1e; --card: #0d1b33; --card-hover: #111f3a;
-            --green: #22c55e; --green-bright: #4ade80; --green-dim: rgba(34,197,94,0.10);
-            --green-border: rgba(34,197,94,0.20); --gold: #fbbf24; --gold-bright: #fcd34d;
-            --gold-soft: rgba(251,191,36,0.1); --text: #e2e8f0; --text-dim: #94a3b8; --text-muted: #64748b;
-            --blue: #3b82f6; --blue-bright: #60a5fa; --blue-dim: rgba(59,130,246,0.12);
-            --cyan: #06b6d4; --cyan-bright: #22d3ee; --cyan-dim: rgba(6,182,212,0.12);
-            --purple: #8b5cf6; --purple-bright: #a78bfa; --purple-dim: rgba(139,92,246,0.12);
-            --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            --radius: 14px; --radius-lg: 20px; --transition: 0.25s ease;
-        }
-        *{margin:0;padding:0;box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        body{
-            background:var(--bg);color:var(--text);font-family:var(--font-ui);line-height:1.6;
-            -webkit-font-smoothing:antialiased;
-            background-image:radial-gradient(ellipse at 20% 20%, rgba(34,197,94,0.03) 0%, transparent 50%),
-                             radial-gradient(ellipse at 80% 60%, rgba(251,191,36,0.02) 0%, transparent 50%);
-        }
-        a{text-decoration:none;color:inherit}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <meta name="description" content="Ethiopian Peace Archive — A global movement preserving 1,000+ voices for peace. Free courses, research, and community action across 57+ countries." />
+  <meta property="og:title" content="Ethiopian Peace Archive — Global Peace Movement" />
+  <meta property="og:description" content="1,000+ voices from Ethiopia and the world. Join the movement for peace, love, and unity." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ethiopianpeacearchive.org" />
+  <meta property="og:site_name" content="Ethiopian Peace Archive" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ethiopian Peace Archive — Global Peace Movement" />
+  <meta name="twitter:description" content="1,000+ voices from Ethiopia and the world. Join the movement for peace." />
+  <link rel="canonical" href="https://ethiopianpeacearchive.org" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>" />
+  <title>Ethiopian Peace Archive — Global Movement for Peace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #060f1e;
+      --card: #0d1b33;
+      --card-hover: #111f3a;
+      --green: #22c55e;
+      --green-bright: #4ade80;
+      --green-dim: rgba(34, 197, 94, 0.10);
+      --green-border: rgba(34, 197, 94, 0.20);
+      --gold: #fbbf24;
+      --gold-bright: #fcd34d;
+      --gold-soft: rgba(251, 191, 36, 0.1);
+      --text: #e2e8f0;
+      --text-dim: #94a3b8;
+      --text-muted: #64748b;
+      --love-color: #f59e0b;
+      --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --radius: 14px;
+      --radius-lg: 20px;
+      --transition: 0.25s ease;
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+      --shadow-gold: 0 8px 25px rgba(251, 191, 36, 0.3);
+      --shadow-green: 0 8px 25px rgba(34, 197, 94, 0.3);
+    }
 
-        nav{
-            display:flex;align-items:center;justify-content:space-between;padding:0.9rem 5%;
-            background:rgba(6,15,30,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--green-border);
-            position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;
-        }
-        .nav-logo{font-weight:700;font-size:1.15rem;color:#f0f2e9;display:flex;align-items:center;gap:6px}
-        .nav-logo span{color:var(--green-bright)}
-        .nav-links{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-        .nav-links a{
-            font-size:0.78rem;font-weight:600;color:var(--text-dim);padding:7px 12px;
-            border-radius:20px;transition:var(--transition);white-space:nowrap;
-        }
-        .nav-links a:hover,.nav-links a.active{color:var(--gold-bright);background:var(--gold-soft)}
-        .nav-links a.active{color:var(--gold-bright)!important;background:var(--gold-soft)!important}
-        .nav-cta{background:var(--green)!important;color:#000!important;font-weight:700!important;padding:7px 16px!important;border-radius:24px!important}
-        .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
-        .hamburger span{width:24px;height:2px;background:var(--text-dim);border-radius:2px}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(ellipse at 20% 20%, rgba(34, 197, 94, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 60%, rgba(251, 191, 36, 0.03) 0%, transparent 50%);
+    }
+    a { text-decoration: none; color: inherit; }
 
-        .container{max-width:1100px;margin:0 auto;padding:30px 20px 50px}
+    /* ========== NAVIGATION ========== */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 5%;
+      background: rgba(6, 15, 30, 0.97);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--green-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .nav__logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #f0f2e9;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .nav__logo:hover { opacity: 0.85; }
+    .nav__logo span { color: var(--green-bright); }
+    .nav__links {
+      display: flex;
+      gap: 3px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .nav__link {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      padding: 6px 10px;
+      border-radius: 18px;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .nav__link:hover {
+      color: var(--gold-bright);
+      background: var(--gold-soft);
+    }
+    .nav__link--active {
+      color: var(--gold-bright) !important;
+      background: var(--gold-soft) !important;
+    }
+    .nav__cta {
+      background: var(--green) !important;
+      color: #000 !important;
+      font-weight: 700 !important;
+      padding: 6px 14px !important;
+      border-radius: 20px !important;
+    }
+    .nav__cta:hover { background: var(--green-bright) !important; color: #000 !important; }
 
-        /* ========== FULL-WIDTH SHORT HERO BANNER ========== */
-        .hero-banner {
-            width: 100%;
-            height: auto;
-            max-height: 200px;
-            overflow: hidden;
-            border-bottom: 2px solid var(--green-border);
-            position: relative;
-            z-index: 5;
-        }
-        .hero-banner__image {
-            width: 100%;
-            height: auto;
-            max-height: 200px;
-            display: block;
-            object-fit: cover;
-            object-position: center;
-            border: none;
-        }
+    .hamburger { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 101; }
+    .hamburger__line { width: 22px; height: 2px; background: var(--text-dim); border-radius: 2px; transition: var(--transition); }
 
-        .hero{text-align:center;padding:45px 20px 35px;border-bottom:1px solid var(--green-border);position:relative;overflow:hidden}
-        .hero::before{
-            content:'';position:absolute;inset:0;
-            background:radial-gradient(circle at 30% 30%, rgba(34,197,94,0.06) 0%, transparent 60%),
-                       radial-gradient(circle at 70% 70%, rgba(251,191,36,0.04) 0%, transparent 60%);
-            animation:pulse 10s ease-in-out infinite;z-index:0;
-        }
-        @keyframes pulse{0%,100%{opacity:0.8}50%{opacity:1}}
-        .hero>*{position:relative;z-index:1}
-        .hero-badge{
-            display:inline-block;background:var(--gold-soft);border:1px solid rgba(251,191,36,0.35);
-            color:var(--gold);padding:6px 20px;border-radius:30px;font-size:0.7rem;
-            text-transform:uppercase;font-weight:700;letter-spacing:1.5px;margin-bottom:14px;
-        }
-        .hero h1{font-size:clamp(1.8rem,5vw,2.8rem);color:var(--gold-bright);font-weight:800;margin-bottom:8px}
-        .hero-slogan{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 14px;font-size:0.95rem;font-weight:700}
-        .hero-slogan .love{color:var(--cyan-bright)}.hero-slogan .peace{color:var(--green-bright)}.hero-slogan .unity{color:var(--gold-bright)}
-        .hero p{color:var(--text-dim);font-size:0.95rem;max-width:550px;margin:0 auto 20px}
+    .slide-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 98; opacity: 0; visibility: hidden; transition: 0.3s ease; }
+    .slide-overlay--open { opacity: 1; visibility: visible; }
+    .slide-menu {
+      position: fixed; top: 0; right: -280px; width: 260px; height: 100%;
+      background: linear-gradient(180deg, #0a1628 0%, #0d1b33 50%, #060f1e 100%);
+      border-left: 2px solid var(--green-border); z-index: 99;
+      transition: right 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+      padding: 70px 16px 24px; overflow-y: auto;
+    }
+    .slide-menu--open { right: 0; }
+    .slide-menu__link {
+      display: flex; align-items: center; gap: 8px; padding: 11px 14px;
+      margin-bottom: 3px; border-radius: 10px; color: var(--text-dim);
+      font-size: 0.8rem; font-weight: 500; transition: 0.2s;
+    }
+    .slide-menu__link:hover { color: var(--green-bright); background: var(--green-dim); transform: translateX(4px); }
 
-        .btn{
-            display:inline-flex;align-items:center;gap:6px;padding:11px 22px;border-radius:40px;
-            font-weight:600;font-size:0.9rem;cursor:pointer;border:1px solid var(--green-border);
-            background:var(--card);color:var(--text);text-decoration:none;font-family:var(--font-ui);transition:0.25s;
-        }
-        .btn-primary{background:var(--green-bright);border-color:var(--green-bright);color:#0a120c;font-weight:700}
-        .btn-primary:hover{background:#16a34a;transform:translateY(-2px);box-shadow:0 8px 25px rgba(34,197,94,0.3)}
-        .btn-outline{border:2px solid var(--green-bright);color:var(--green-bright);background:transparent}
-        .btn-outline:hover{background:var(--green-dim);transform:translateY(-2px)}
-        .btn-gold{background:var(--gold);color:#000;border-color:var(--gold);font-weight:700}
-        .btn-gold:hover{background:var(--gold-bright);transform:translateY(-2px);box-shadow:0 8px 25px rgba(251,191,36,0.3)}
-        .btn-purple{background:var(--purple);color:#fff;border-color:var(--purple);font-weight:700}
-        .btn-purple:hover{background:#7c3aed;transform:translateY(-2px);box-shadow:0 8px 25px rgba(139,92,246,0.3)}
-        .btn-block{display:block;width:100%;text-align:center;justify-content:center}
+    /* ========== FULL-WIDTH SHORT HERO BANNER ========== */
+    .hero-banner {
+      width: 100%; max-height: 160px; overflow: hidden;
+      border-bottom: 2px solid var(--green-border); position: relative; z-index: 5;
+    }
+    .hero-banner__image {
+      width: 100%; height: auto; max-height: 160px; display: block;
+      object-fit: cover; object-position: center;
+    }
 
-        .steps{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:20px 0 30px}
-        .step{
-            background:var(--card);border:1px solid var(--green-border);border-radius:var(--radius);
-            padding:20px 16px;text-align:center;flex:1;min-width:140px;max-width:200px;transition:0.3s;
-        }
-        .step:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,0.4)}
-        .step-num{
-            width:38px;height:38px;background:var(--green);color:#000;border-radius:50%;
-            display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 10px;
-        }
-        .step h4{color:var(--gold);font-size:0.9rem;margin-bottom:4px}
-        .step p{color:var(--text-dim);font-size:0.75rem}
+    /* ========== HERO SECTION ========== */
+    .hero {
+      padding: 1.8rem 16px 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--green-border);
+      position: relative; overflow: hidden; background: var(--bg);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.06) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 70%, rgba(251,191,36,0.04) 0%, transparent 60%);
+      animation: heroPulse 10s ease-in-out infinite; z-index: 0;
+    }
+    @keyframes heroPulse { 0%,100%{opacity:0.7} 50%{opacity:1} }
+    .hero>*{position:relative;z-index:1}
 
-        .section-title{
-            font-size:1.5rem;color:var(--gold-bright);margin-bottom:6px;
-            border-left:4px solid var(--green);padding-left:14px;font-weight:700;
-        }
-        .section-subtitle{color:var(--text-dim);margin-bottom:20px;font-size:0.9rem}
+    .hero__badge {
+      display: inline-block; background: rgba(34,197,94,0.15); color: var(--green-bright);
+      padding: 5px 16px; border-radius: 24px; font-size: 0.7rem;
+      letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
+      margin-bottom: 12px; border: 1px solid rgba(34,197,94,0.3);
+    }
+    .hero__title {
+      font-size: clamp(1.7rem, 5vw, 3.2rem); color: var(--gold-bright);
+      margin-bottom: 8px; line-height: 1.15; font-weight: 800; letter-spacing: -0.5px;
+    }
+    .hero__slogan {
+      display: flex; justify-content: center; align-items: center; gap: 8px;
+      flex-wrap: wrap; margin: 10px 0 14px; font-size: clamp(0.8rem, 1.8vw, 0.95rem); font-weight: 700;
+    }
+    .hero__slogan .love { color: var(--love-color); }
+    .hero__slogan .peace { color: var(--green-bright); }
+    .hero__slogan .unity { color: var(--gold-bright); }
+    .hero__slogan .divider { color: var(--text-muted); font-weight: 300; }
+    .hero__subtitle {
+      font-size: clamp(0.8rem, 1.8vw, 0.95rem); color: var(--text-dim);
+      max-width: 600px; margin: 0 auto 18px; font-style: italic; line-height: 1.6;
+    }
 
-        /* ========== CONTRIBUTE CTA BOX ========== */
-        .contribute-cta-box{
-            background:linear-gradient(135deg, rgba(34,197,94,0.08), rgba(251,191,36,0.06));
-            border:2px solid var(--green-border);border-radius:var(--radius-lg);
-            padding:35px 30px;margin:30px 0;text-align:center;
-            position:relative;overflow:hidden;
-        }
-        .contribute-cta-box::before{
-            content:'';position:absolute;inset:0;
-            background:radial-gradient(circle at 30% 50%, rgba(34,197,94,0.06) 0%, transparent 60%);
-            z-index:0;
-        }
-        .contribute-cta-box>*{position:relative;z-index:1}
-        .contribute-cta-box h2{color:var(--gold-bright);margin-bottom:4px;font-size:1.3rem}
-        .contribute-cta-box .subtitle{color:var(--text-dim);font-size:0.85rem;margin-bottom:16px}
-        .contribute-cta-box .features-list{
-            list-style:none;max-width:450px;margin:0 auto 20px;text-align:left;
-        }
-        .contribute-cta-box .features-list li{
-            padding:6px 0;color:var(--text-dim);font-size:0.85rem;
-            display:flex;align-items:center;gap:8px;
-        }
-        .contribute-cta-box .features-list li::before{content:'✅';font-size:0.9rem}
+    /* ========== STATS ROW ========== */
+    .hero__stats {
+      display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .hero__stat {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px; padding: 8px 14px; font-size: 0.72rem; color: var(--text-dim);
+      display: flex; align-items: center; gap: 6px; transition: var(--transition);
+    }
+    .hero__stat:hover { border-color: var(--green-border); background: rgba(34,197,94,0.05); transform: translateY(-2px); }
+    .hero__stat strong { color: var(--gold-bright); font-size: 0.9rem; font-weight: 700; }
 
-        /* ========== VOICES GRID ========== */
-        .voices-grid{
-            display:grid;grid-template-columns:repeat(auto-fill, minmax(340px,1fr));
-            gap:20px;margin-top:16px;
-        }
-        .voice-card{
-            background:var(--card);border:1px solid var(--green-border);
-            border-radius:var(--radius-lg);overflow:hidden;transition:0.3s;
-            position:relative;display:flex;flex-direction:column;
-        }
-        .voice-card:hover{
-            border-color:var(--gold);transform:translateY(-4px);
-            box-shadow:0 16px 48px rgba(0,0,0,0.5);
-        }
-        .voice-card-top{
-            position:relative;padding:28px 20px 14px;text-align:center;
-            background:linear-gradient(180deg, rgba(34,197,94,0.06) 0%, transparent 100%);
-        }
-        .voice-flag{font-size:2.2rem;position:absolute;top:16px;right:16px;opacity:0.9}
-        .voice-avatar{
-            width:75px;height:75px;border-radius:50%;margin:0 auto 12px;
-            border:3px solid var(--gold);box-shadow:0 6px 24px rgba(251,191,36,0.25);
-            overflow:hidden;transition:0.3s;
-        }
-        .voice-card:hover .voice-avatar{
-            transform:scale(1.08);border-color:var(--gold-bright);
-            box-shadow:0 8px 32px rgba(251,191,36,0.4);
-        }
-        .voice-avatar img{width:100%;height:100%;object-fit:cover}
-        .voice-name{font-size:1.05rem;font-weight:700;color:var(--gold-bright);margin-bottom:3px}
-        .voice-role{font-size:0.75rem;color:var(--text-dim);font-style:italic;margin-bottom:4px}
-        .voice-location{font-size:0.72rem;color:var(--text-muted);margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:4px}
-        .voice-tags{display:flex;justify-content:center;gap:5px;flex-wrap:wrap}
-        .voice-tag{
-            padding:4px 12px;border-radius:14px;font-size:0.67rem;font-weight:600;
-        }
-        .tag-country{background:var(--green-dim);color:var(--green-bright)}
-        .tag-lang{background:var(--blue-dim);color:var(--blue-bright)}
-        .tag-genre{background:var(--purple-dim);color:var(--purple-bright)}
-        .voice-card-body{
-            padding:8px 20px 14px;flex:1;
-        }
-        .voice-quote{
-            font-size:0.84rem;color:var(--text-dim);line-height:1.65;font-style:italic;
-            display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
-        }
-        .voice-quote.expanded{-webkit-line-clamp:unset;display:block}
-        .read-more{
-            font-size:0.72rem;color:var(--gold);cursor:pointer;font-weight:600;
-            display:inline-block;margin-top:6px;transition:0.2s;
-        }
-        .read-more:hover{color:var(--gold-bright)}
+    /* ========== BUTTON GRID FOR MOBILE ========== */
+    .hero__actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .hero__actions .btn { justify-content: center; text-align: center; }
 
-        /* ========== CARD FOOTER WITH LIKE & SOCIAL SHARE ========== */
-        .voice-card-footer{
-            padding:12px 20px 16px;border-top:1px solid rgba(255,255,255,0.05);
-            display:flex;flex-direction:column;gap:10px;
-        }
-        .like-section{
-            display:flex;align-items:center;justify-content:space-between;
-        }
-        .like-btn{
-            display:inline-flex;align-items:center;gap:6px;
-            padding:7px 14px;border-radius:20px;font-size:0.78rem;font-weight:600;
-            cursor:pointer;border:1px solid rgba(255,255,255,0.12);
-            background:transparent;color:var(--text-dim);
-            transition:0.25s;font-family:var(--font-ui);
-        }
-        .like-btn:hover{
-            background:rgba(34,197,94,0.08);border-color:var(--green-bright);
-            color:var(--green-bright);
-        }
-        .like-btn.liked{
-            background:rgba(34,197,94,0.15);border-color:var(--green-bright);
-            color:var(--green-bright);
-        }
-        .like-btn .fa-heart{margin-right:2px;transition:0.3s}
-        .like-btn.liked .fa-heart{animation:heartBeat 0.5s ease}
-        @keyframes heartBeat{
-            0%{transform:scale(1)}25%{transform:scale(1.3)}50%{transform:scale(0.95)}100%{transform:scale(1)}
-        }
-        .like-count{font-weight:700;color:var(--green-bright)}
+    .btn {
+      display: inline-flex; align-items: center; gap: 5px; padding: 11px 16px;
+      border-radius: 28px; font-weight: 700; font-size: 0.82rem; cursor: pointer;
+      border: none; font-family: var(--font-ui); transition: all 0.3s ease; letter-spacing: 0.3px;
+    }
+    .btn--primary { background: var(--green); color: #000; }
+    .btn--primary:hover { background: var(--green-bright); transform: translateY(-2px); box-shadow: var(--shadow-green); }
+    .btn--outline { border: 2px solid var(--green); color: var(--green-bright); background: transparent; }
+    .btn--outline:hover { background: var(--green-dim); transform: translateY(-2px); }
+    .btn--gold { background: var(--gold); color: #000; }
+    .btn--gold:hover { background: var(--gold-bright); transform: translateY(-2px); box-shadow: var(--shadow-gold); }
 
-        .share-section{
-            display:flex;align-items:center;gap:6px;flex-wrap:wrap;
-        }
-        .share-label{
-            font-size:0.68rem;color:var(--text-muted);font-weight:600;
-            text-transform:uppercase;letter-spacing:0.5px;margin-right:2px;
-        }
-        .share-btn{
-            width:34px;height:34px;border-radius:50%;display:inline-flex;
-            align-items:center;justify-content:center;cursor:pointer;
-            border:none;font-size:0.85rem;transition:0.25s;color:#fff;
-            flex-shrink:0;
-        }
-        .share-btn:hover{transform:translateY(-2px) scale(1.1)}
-        .share-facebook{background:#1877f2}.share-facebook:hover{box-shadow:0 4px 16px rgba(24,119,242,0.4)}
-        .share-telegram{background:#0088cc}.share-telegram:hover{box-shadow:0 4px 16px rgba(0,136,204,0.4)}
-        .share-tiktok{background:#000000;border:1px solid #ff0050}.share-tiktok:hover{box-shadow:0 4px 16px rgba(255,0,80,0.4)}
-        .share-twitter{background:#1da1f2}.share-twitter:hover{box-shadow:0 4px 16px rgba(29,161,242,0.4)}
-        .share-instagram{background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)}.share-instagram:hover{box-shadow:0 4px 16px rgba(188,24,136,0.4)}
-        .share-copy{background:#475569}.share-copy:hover{box-shadow:0 4px 16px rgba(71,85,105,0.4)}
-        .share-copy.copied{background:var(--green);animation:copyPulse 0.6s ease}
-        @keyframes copyPulse{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+    /* ========== PALM DECORATION ========== */
+    .palm {
+      display: flex; justify-content: center; align-items: center; gap: 14px;
+      padding: 18px 14px; margin-top: -20px; position: relative; z-index: 10;
+      font-size: 1.8rem; opacity: 0.85; flex-wrap: wrap;
+    }
+    .palm__leaf {
+      animation: palmSway 3s ease-in-out infinite; display: inline-block;
+      cursor: default; transition: transform 0.3s ease;
+    }
+    .palm__leaf:hover { animation-play-state: paused; transform: scale(1.2); }
+    .palm__leaf:nth-child(1){animation-delay:0s}.palm__leaf:nth-child(2){animation-delay:0.35s}
+    .palm__leaf:nth-child(3){animation-delay:0.7s}.palm__leaf:nth-child(4){animation-delay:1.05s}
+    .palm__leaf:nth-child(5){animation-delay:1.4s}.palm__leaf:nth-child(6){animation-delay:1.75s}
+    .palm__leaf:nth-child(7){animation-delay:2.1s}
+    @keyframes palmSway { 0%,100%{transform:rotate(0deg)}25%{transform:rotate(3deg)}75%{transform:rotate(-3deg)} }
 
-        /* ========== CREATIVE CHAIN CARDS (Story & Wisdom) ========== */
-        .creative-chain-grid{
-            display:grid;grid-template-columns:repeat(auto-fill, minmax(340px,1fr));
-            gap:20px;margin-top:16px;
-        }
-        .chain-voice-card{
-            background:var(--card);border:2px solid var(--purple);
-            border-radius:var(--radius-lg);overflow:hidden;transition:0.3s;
-            position:relative;display:flex;flex-direction:column;
-        }
-        .chain-voice-card.wisdom-card{border-color:var(--gold)}
-        .chain-voice-card:hover{
-            transform:translateY(-4px);
-            box-shadow:0 16px 48px rgba(139,92,246,0.2);
-        }
-        .chain-voice-card.wisdom-card:hover{
-            box-shadow:0 16px 48px rgba(251,191,36,0.2);
-        }
-        .chain-card-top{
-            position:relative;padding:24px 20px 14px;text-align:center;
-            background:linear-gradient(180deg, rgba(139,92,246,0.08) 0%, transparent 100%);
-        }
-        .wisdom-card .chain-card-top{
-            background:linear-gradient(180deg, rgba(251,191,36,0.08) 0%, transparent 100%);
-        }
-        .chain-flag{font-size:2rem;position:absolute;top:14px;right:14px}
-        .chain-avatar{
-            width:65px;height:65px;border-radius:50%;margin:0 auto 10px;
-            border:3px solid var(--purple-bright);
-            box-shadow:0 4px 20px rgba(139,92,246,0.2);
-            overflow:hidden;transition:0.3s;
-        }
-        .wisdom-card .chain-avatar{
-            border-color:var(--gold);
-            box-shadow:0 4px 20px rgba(251,191,36,0.2);
-        }
-        .chain-voice-card:hover .chain-avatar{transform:scale(1.06)}
-        .chain-avatar img{width:100%;height:100%;object-fit:cover}
-        .chain-name{font-size:1rem;font-weight:700;color:var(--purple-bright);margin-bottom:2px}
-        .wisdom-card .chain-name{color:var(--gold-bright)}
-        .chain-role{font-size:0.72rem;color:var(--text-dim);font-style:italic;margin-bottom:4px}
-        .chain-location{font-size:0.7rem;color:var(--text-muted);margin-bottom:6px}
-        .chain-tags{display:flex;justify-content:center;gap:4px;flex-wrap:wrap}
-        .chain-tag{
-            padding:3px 10px;border-radius:12px;font-size:0.65rem;font-weight:600;
-        }
-        .chain-tag-genre{background:var(--purple-dim);color:var(--purple-bright)}
-        .chain-tag-thread{background:var(--green-dim);color:var(--green-bright)}
-        .wisdom-card .chain-tag-thread{background:var(--gold-soft);color:var(--gold)}
-        .chain-card-body{padding:8px 20px 14px;flex:1}
-        .chain-quote{
-            font-size:0.84rem;color:var(--text-dim);line-height:1.65;font-style:italic;
-            display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
-        }
-        .chain-quote.expanded{-webkit-line-clamp:unset;display:block}
-        .chain-footer{
-            padding:12px 20px 16px;border-top:1px solid rgba(255,255,255,0.05);
-            display:flex;flex-direction:column;gap:10px;
-        }
-        .connector-badge{
-            text-align:center;padding:4px 0;color:var(--purple-bright);
-            font-size:0.75rem;font-weight:600;
-        }
-        .wisdom-card .connector-badge{color:var(--gold)}
-        .depth-badge{
-            display:inline-block;background:var(--gold);color:#000;
-            padding:3px 12px;border-radius:12px;font-size:0.7rem;font-weight:700;
-            margin:0 auto;
-        }
-        .chain-empty-card{
-            border:2px dashed var(--purple);opacity:0.7;
-        }
-        .wisdom-card.chain-empty-card{border-color:var(--gold);opacity:0.7}
-        .chain-empty-card .chain-card-top{
-            background:linear-gradient(180deg, rgba(139,92,246,0.03) 0%, transparent 100%);
-        }
-        .wisdom-card.chain-empty-card .chain-card-top{
-            background:linear-gradient(180deg, rgba(251,191,36,0.03) 0%, transparent 100%);
-        }
+    /* ========== SECTIONS ========== */
+    .section { max-width: 1100px; margin: 30px auto; padding: 0 16px; }
+    .section__title {
+      font-size: 1.3rem; color: var(--gold-bright); margin-bottom: 4px;
+      border-left: 4px solid var(--green); padding-left: 12px; font-weight: 700;
+    }
+    .section__subtitle { color: var(--text-dim); margin-bottom: 18px; font-size: 0.85rem; }
 
-        /* ========== CTA BANNER ========== */
-        .cta-banner{
-            text-align:center;margin:40px 0 20px;
-            background:linear-gradient(135deg, rgba(34,197,94,0.08), rgba(251,191,36,0.08));
-            border-radius:40px;padding:35px 20px;border:1px solid var(--green-border);
-        }
-        .cta-banner h2{color:var(--gold-bright);font-size:1.4rem;margin-bottom:6px}
-        .cta-banner p{color:var(--text-dim);margin-bottom:16px}
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .feature-card {
+      background: var(--card); border: 1px solid rgba(34,197,94,0.10);
+      border-radius: var(--radius-lg); padding: 20px; transition: all 0.3s ease;
+      cursor: pointer; text-decoration: none; color: var(--text); display: block;
+      position: relative; overflow: hidden;
+    }
+    .feature-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green-bright), var(--gold));
+      opacity: 0; transition: opacity 0.3s ease; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .feature-card:hover::after { opacity: 1; }
+    .feature-card:hover { border-color: var(--green); transform: translateY(-3px); box-shadow: var(--shadow-lg); background: var(--card-hover); }
+    .feature-card__icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .feature-card__title { color: var(--gold); margin-bottom: 6px; font-size: 0.95rem; font-weight: 700; }
+    .feature-card__text { color: var(--text-dim); font-size: 0.75rem; line-height: 1.5; }
 
-        footer{
-            text-align:center;padding:25px;color:var(--text-muted);font-size:0.78rem;
-            border-top:1px solid rgba(34,197,94,0.10);margin-top:40px;
-        }
-        footer a{color:var(--text-dim)}footer a:hover{color:var(--green-bright)}
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(251,191,36,0.1));
+      border: 1px solid var(--green-border); border-radius: var(--radius-lg);
+      padding: 32px 20px; text-align: center;
+    }
+    .cta-banner__title { color: var(--gold); font-size: 1.3rem; margin-bottom: 8px; font-weight: 700; }
+    .cta-banner__text { color: var(--text-dim); margin-bottom: 18px; font-size: 0.85rem; max-width: 450px; margin-left: auto; margin-right: auto; }
+    .cta-banner__actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
 
-        @media(max-width:768px){
-            .nav-links{display:none}.hamburger{display:flex}
-            .hero-banner{max-height:140px}
-            .hero-banner__image{max-height:140px}
-            .hero{padding:35px 16px 30px}.hero h1{font-size:1.6rem}
-            .voices-grid,.creative-chain-grid{grid-template-columns:1fr}
-            .contribute-cta-box{padding:25px 16px}
-            .cta-banner{padding:30px 16px}
-            .share-section{justify-content:center}
-        }
-        @media(max-width:480px){
-            .hero-banner{max-height:110px}
-            .hero-banner__image{max-height:110px}
-            .steps{flex-direction:column;align-items:center}.step{max-width:100%}
-            .share-btn{width:30px;height:30px;font-size:0.75rem}
-        }
-    </style>
+    .footer {
+      background: #0a0f0c; border-top: 1px solid var(--green-border);
+      padding: 30px 16px 24px; color: var(--text-muted); font-size: 0.72rem; margin-top: 40px; text-align: center;
+    }
+    .footer__grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 16px; max-width: 1100px; margin: 0 auto 20px; text-align: left;
+    }
+    .footer__col-title { color: var(--gold); margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; }
+    .footer__link { display: block; color: var(--text-dim); padding: 2px 0; font-size: 0.72rem; transition: var(--transition); }
+    .footer__link:hover { color: var(--green-bright); }
+    .footer__slogan { font-size: 0.9rem; margin-bottom: 6px; font-weight: 600; color: var(--text-dim); }
+    .footer__slogan .love { color: var(--love-color); }
+    .footer__slogan .peace { color: var(--green-bright); }
+    .footer__slogan .unity { color: var(--gold-bright); }
+    .footer__hashtag { color: var(--green-bright); font-weight: 600; margin-top: 6px; font-size: 0.7rem; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .nav__links { display: none; }
+      .hamburger { display: flex; }
+      .hero-banner { max-height: 120px; }
+      .hero-banner__image { max-height: 120px; }
+      .hero { padding: 1.4rem 14px 1.6rem; }
+      .hero__title { font-size: 1.6rem; }
+      .hero__slogan { font-size: 0.78rem; gap: 5px; }
+      .hero__stats { gap: 5px; }
+      .hero__stat { padding: 6px 10px; font-size: 0.68rem; }
+      .hero__stat strong { font-size: 0.8rem; }
+      .hero__actions { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      .hero__actions .btn { font-size: 0.75rem; padding: 10px 12px; }
+      .palm { font-size: 1.4rem; gap: 10px; padding: 14px 10px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .cta-banner { padding: 24px 16px; }
+      .cta-banner__title { font-size: 1.1rem; }
+      .cta-banner__actions { flex-direction: column; align-items: center; }
+      .cta-banner__actions .btn { width: 100%; max-width: 280px; justify-content: center; }
+      .footer__grid { grid-template-columns: repeat(2, 1fr); }
+      .section__title { font-size: 1.1rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-banner { max-height: 100px; }
+      .hero-banner__image { max-height: 100px; }
+      .hero { padding: 1.2rem 10px 1.4rem; }
+      .hero__badge { font-size: 0.62rem; padding: 4px 12px; }
+      .hero__title { font-size: 1.4rem; }
+      .hero__slogan { font-size: 0.7rem; gap: 3px; flex-wrap: wrap; }
+      .hero__subtitle { font-size: 0.72rem; margin-bottom: 14px; }
+      .hero__stats { gap: 4px; }
+      .hero__stat { padding: 5px 8px; font-size: 0.62rem; border-radius: 20px; }
+      .hero__stat strong { font-size: 0.72rem; }
+      .hero__actions { grid-template-columns: 1fr 1fr; gap: 5px; }
+      .hero__actions .btn { font-size: 0.7rem; padding: 9px 10px; border-radius: 22px; gap: 3px; }
+      .palm { font-size: 1.1rem; gap: 6px; padding: 10px 6px; }
+      .footer__grid { grid-template-columns: 1fr; }
+      .cta-banner__actions .btn { max-width: 100%; }
+      .feature-card { padding: 16px; }
+      .feature-card__icon { font-size: 1.5rem; }
+      .feature-card__title { font-size: 0.85rem; }
+      .feature-card__text { font-size: 0.7rem; }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.html" class="nav-logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="voices.html">Voices</a>
-        <a href="blog.html">Blog</a>
-        <a href="courses.html">Courses</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="participate.html" class="active">✍️ Participate</a>
-        <a href="contribute.html">📝 Share Voice</a>
-        <a href="media.html">Media</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="support.html" class="nav-cta">💚 Support</a>
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav__logo">🕊️ Ethiopian <span>Peace</span> Archive</a>
+    <div class="nav__links" role="menubar">
+      <a href="index.html" class="nav__link nav__link--active" role="menuitem" aria-current="page">Home</a>
+      <a href="voices.html" class="nav__link" role="menuitem">Voices</a>
+      <a href="blog.html" class="nav__link" role="menuitem">Blog</a>
+      <a href="courses.html" class="nav__link" role="menuitem">Courses</a>
+      <a href="dashboard.html" class="nav__link" role="menuitem">Dashboard</a>
+      <a href="participate.html" class="nav__link" role="menuitem">✍️ Participate</a>
+      <a href="contribute.html" class="nav__link" role="menuitem">📝 Share Voice</a>
+      <a href="media.html" class="nav__link" role="menuitem">Media</a>
+      <a href="gallery.html" class="nav__link" role="menuitem">Gallery</a>
+      <a href="support.html" class="nav__link nav__cta" role="menuitem">💚 Support</a>
     </div>
-    <button class="hamburger" onclick="alert('Mobile menu')"><span></span><span></span><span></span></button>
-</nav>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
+  </nav>
 
-<!-- ========== FULL-WIDTH SHORT HERO BANNER ========== -->
-<div class="hero-banner" aria-hidden="true">
+  <!-- ========== SLIDE MENU ========== -->
+  <div class="slide-overlay" id="slideOverlay" onclick="toggleMenu()"></div>
+  <div class="slide-menu" id="slideMenu" role="dialog" aria-label="Mobile menu">
+    <a href="index.html" class="slide-menu__link">🏠 Home</a>
+    <a href="voices.html" class="slide-menu__link">🗣️ Voice Archive</a>
+    <a href="blog.html" class="slide-menu__link">📝 Blog & Stories</a>
+    <a href="courses.html" class="slide-menu__link">🎓 Free Courses</a>
+    <a href="dashboard.html" class="slide-menu__link">📊 Dashboard</a>
+    <a href="participate.html" class="slide-menu__link">✍️ Participate</a>
+    <a href="media.html" class="slide-menu__link">📰 Media Coverage</a>
+    <a href="gallery.html" class="slide-menu__link">🖼️ Gallery</a>
+    <a href="contribute.html" class="slide-menu__link">📝 Share Your Voice</a>
+    <a href="about.html" class="slide-menu__link">📖 About Us</a>
+    <a href="contact.html" class="slide-menu__link">📬 Contact</a>
+    <a href="support.html" class="slide-menu__link" style="background:var(--green-dim);color:var(--green-bright);font-weight:700;">💚 Support the Movement</a>
+  </div>
+
+  <!-- ========== FULL-WIDTH SHORT HERO BANNER ========== -->
+  <div class="hero-banner" aria-hidden="true">
     <img 
-        src="https://raw.githubusercontent.com/weneedpeace/ethiopian-peace-archive/63b0d32bb3a959a8d84176521c61cba70e57b3a2/fresh-green-leaf-with-dew-drop-close-up-generated-by-ai_188544-15524.png" 
-        alt="Fresh green leaf with dew drop - symbol of peace and new beginnings" 
-        class="hero-banner__image"
-        loading="eager"
+      src="https://raw.githubusercontent.com/weneedpeace/ethiopian-peace-archive/63b0d32bb3a959a8d84176521c61cba70e57b3a2/fresh-green-leaf-with-dew-drop-close-up-generated-by-ai_188544-15524.png" 
+      alt="Fresh green leaf with dew drop - symbol of peace and new beginnings" 
+      class="hero-banner__image"
+      loading="eager"
     />
-</div>
+  </div>
 
-<main class="container">
-
-    <header class="hero">
-        <div class="hero-badge">✍️ Collaborative Writing Hub</div>
-        <h1>Participate</h1>
-        <div class="hero-slogan">
-            <span>💙 <span class="love">Wear Love.</span></span> ·
-            <span>🕊️ <span class="peace">Speak Peace.</span></span> ·
-            <span>🤝 <span class="unity">Live Unity.</span></span>
-        </div>
-        <p>Join writers from <strong style="color:var(--gold-bright);">57+ countries</strong>. Co-create stories, deepen wisdom, and publish peace literature together.</p>
-        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-            <a href="contribute.html" class="btn btn-gold">📝 Join the Chain — It's Free</a>
-            <a href="#creative-spark" class="btn btn-purple">✨ Creative Spark</a>
-            <a href="#wisdom-chain" class="btn btn-outline">🦉 Depth Builders</a>
-        </div>
-    </header>
-
-    <div class="steps">
-        <div class="step"><div class="step-num">1</div><h4>Go to Contribute</h4><p>Click the button to visit our contribution page.</p></div>
-        <div class="step"><div class="step-num">2</div><h4>Fill Quick Form</h4><p>Name, email, and your message. No password needed.</p></div>
-        <div class="step"><div class="step-num">3</div><h4>Get Published</h4><p>Reviewed and published within 24 hours.</p></div>
+  <!-- ========== HERO ========== -->
+  <header class="hero" aria-labelledby="heroTitle">
+    <span class="hero__badge">🌍 GLOBAL PEACE MOVEMENT</span>
+    <h1 class="hero__title" id="heroTitle">Voices of Peace.<br>Power of Unity.</h1>
+    
+    <p class="hero__slogan">
+      <span>❤️ <span class="love">Wear Love.</span></span>
+      <span class="divider">·</span>
+      <span>🕊️ <span class="peace">Speak Peace.</span></span>
+      <span class="divider">·</span>
+      <span>🤝 <span class="unity">Live Unity.</span></span>
+    </p>
+    
+    <p class="hero__subtitle">
+      Preserving <strong style="color:var(--gold-bright);">1,000+ voices</strong> from 
+      <strong style="color:var(--gold-bright);">40 languages</strong>, 
+      <strong style="color:var(--gold-bright);">30 regions</strong>, and 
+      <strong style="color:var(--gold-bright);">57+ countries</strong> — driving real change for diaspora and local communities.
+    </p>
+    
+    <div class="hero__stats">
+      <div class="hero__stat">🗣️ <strong>1,000+</strong> Voices</div>
+      <div class="hero__stat">🌐 <strong>40</strong> Languages</div>
+      <div class="hero__stat">📍 <strong>30</strong> Regions</div>
+      <div class="hero__stat">🌍 <strong>57+</strong> Countries</div>
+      <div class="hero__stat">✍️ <strong>46+</strong> Writers</div>
     </div>
-
-    <div class="contribute-cta-box" id="join-chain">
-        <h2>📝 Ready to Join the Chain?</h2>
-        <p class="subtitle">No registration. No password. Just your voice.</p>
-        <ul class="features-list">
-            <li>Share your peace message with the world</li>
-            <li>Write fiction, adventure, poetry — any style</li>
-            <li>Contribute a layer to the Wisdom Chain</li>
-            <li>Get published within 24 hours</li>
-            <li>Join writers from 57+ countries</li>
-        </ul>
-        <a href="contribute.html" class="btn btn-gold" style="font-size:1rem;padding:14px 32px;">✍️ Go to Contribution Form</a>
+    
+    <div class="hero__actions">
+      <a href="voices.html" class="btn btn--primary">🔍 Explore Voices</a>
+      <a href="participate.html" class="btn btn--outline">✍️ Participate</a>
+      <a href="courses.html" class="btn btn--outline">🎓 Free Courses</a>
+      <a href="contribute.html" class="btn btn--gold">📝 Share Your Voice</a>
     </div>
+  </header>
 
-    <!-- ========== PEACE VOICES ========== -->
-    <h2 class="section-title" style="margin-top:10px;">🌍 Voices of Peace</h2>
-    <p class="section-subtitle">Real messages from people across Ethiopia and the world.</p>
-    <div class="voices-grid" id="voicesGrid"></div>
+  <!-- ========== PALM DECORATION ========== -->
+  <div class="palm" aria-hidden="true">
+    <span class="palm__leaf">🌿</span>
+    <span class="palm__leaf">🍃</span>
+    <span class="palm__leaf">❤️</span>
+    <span class="palm__leaf">🕊️</span>
+    <span class="palm__leaf">🤝</span>
+    <span class="palm__leaf">🍃</span>
+    <span class="palm__leaf">🌿</span>
+  </div>
 
-    <!-- ========== CREATIVE SPARK (Former Story Chain) ========== -->
-    <div id="creative-spark" style="margin-top:55px;">
-        <h2 class="section-title" style="border-left-color:var(--purple);">✨ The Infinite Inkwell</h2>
-        <p class="section-subtitle">Fiction. Poetry. Adventure. Memoir. Any genre. One writer sparks — the next ignites a new flame.</p>
-        <div class="creative-chain-grid" id="creativeGrid"></div>
-        <a href="contribute.html" class="btn btn-purple btn-block" style="margin-top:12px;">✨ Add Your Spark</a>
+  <!-- ========== WHAT WE DO ========== -->
+  <section class="section" aria-labelledby="whatWeDoTitle">
+    <h2 class="section__title" id="whatWeDoTitle">What We Do</h2>
+    <p class="section__subtitle">A global platform preserving voices, educating communities, and driving peace action.</p>
+    <div class="cards-grid">
+      <a href="voices.html" class="feature-card">
+        <div class="feature-card__icon">🗣️</div>
+        <h3 class="feature-card__title">Voice Archive</h3>
+        <p class="feature-card__text">Browse 1,000+ peace messages from all Ethiopian regions and global supporters in 40 languages.</p>
+      </a>
+      <a href="participate.html" class="feature-card">
+        <div class="feature-card__icon">📖</div>
+        <h3 class="feature-card__title">Story & Wisdom Chain</h3>
+        <p class="feature-card__text">Join the never-ending story. One writer starts, another finds a thread. Compounding insight across borders.</p>
+      </a>
+      <a href="courses.html" class="feature-card">
+        <div class="feature-card__icon">🎓</div>
+        <h3 class="feature-card__title">Free Peace Courses</h3>
+        <p class="feature-card__text">Learn conflict resolution, Ethiopian history, and peacebuilding. No signup required — start learning instantly.</p>
+      </a>
+      <a href="blog.html" class="feature-card">
+        <div class="feature-card__icon">📝</div>
+        <h3 class="feature-card__title">Blog & Research</h3>
+        <p class="feature-card__text">Stories from the field, research findings, and updates on peace initiatives worldwide.</p>
+      </a>
+      <a href="dashboard.html" class="feature-card">
+        <div class="feature-card__icon">📊</div>
+        <h3 class="feature-card__title">Impact Dashboard</h3>
+        <p class="feature-card__text">Track our global reach. See how voices translate into action across 57+ countries.</p>
+      </a>
+      <a href="media.html" class="feature-card">
+        <div class="feature-card__icon">📰</div>
+        <h3 class="feature-card__title">Media & Press</h3>
+        <p class="feature-card__text">Coverage from 8+ media outlets including live TV. Explore our story and global recognition.</p>
+      </a>
+      <a href="contribute.html" class="feature-card">
+        <div class="feature-card__icon">🤝</div>
+        <h3 class="feature-card__title">Contribute</h3>
+        <p class="feature-card__text">Submit your voice, volunteer, partner with us, or share your expertise.</p>
+      </a>
+      <a href="support.html" class="feature-card">
+        <div class="feature-card__icon">💚</div>
+        <h3 class="feature-card__title">Support the Movement</h3>
+        <p class="feature-card__text">Donate, sponsor, advise, or provide materials. Every contribution amplifies peace.</p>
+      </a>
     </div>
+  </section>
 
-    <!-- ========== WISDOM CHAIN (Redesigned as Cards) ========== -->
-    <div id="wisdom-chain" style="margin-top:55px;">
-        <h2 class="section-title" style="border-left-color:var(--gold);">🦉 Depth Builders</h2>
-        <p class="section-subtitle">Not a conversation. A compounding of insight. Each voice sharpens the truth and leaves a new edge.</p>
-        <div class="creative-chain-grid" id="wisdomGrid"></div>
-        <a href="contribute.html" class="btn btn-gold btn-block" style="margin-top:12px;">🦉 Add Your Layer</a>
-    </div>
-
+  <!-- ========== CTA BANNER ========== -->
+  <section class="section" aria-labelledby="ctaTitle">
     <div class="cta-banner">
-        <h2>🤝 Your words build bridges</h2>
-        <p>All languages, all experience levels, all countries welcome. <strong>Wear Love. Speak Peace. Live Unity.</strong></p>
-        <a href="contribute.html" class="btn btn-gold" style="font-size:1rem;">✍️ Go to Contribution Form</a>
+      <h2 class="cta-banner__title" id="ctaTitle">🌍 Join 1,000+ Voices for Peace</h2>
+      <p class="cta-banner__text">Whether you're in Ethiopia, the diaspora, or anywhere in the world — your voice matters. Wear Love. Speak Peace. Live Unity.</p>
+      <div class="cta-banner__actions">
+        <a href="contribute.html" class="btn btn--primary">🕊️ Share Your Voice →</a>
+        <a href="participate.html" class="btn btn--gold">📖 Join Story Chain</a>
+        <a href="participate.html" class="btn btn--gold">🦉 Join Wisdom Chain</a>
+        <a href="support.html" class="btn btn--outline">💚 Support the Movement</a>
+      </div>
     </div>
-</main>
+  </section>
 
-<footer>
-    <p style="font-size:1rem;margin-bottom:4px;">🕊️ Peace is the goal. 💙 Love is the way. 🤝 Unity is the strength.</p>
-    <p>Ethiopian Peace Archive &copy; 2026 · <a href="index.html">Home</a> · <a href="voices.html">Voices</a> · <a href="contribute.html">Share Voice</a></p>
-    <p style="margin-top:6px;color:var(--green-bright);font-weight:600">#EthiopianPeaceArchive #VoicesForPeace #InfiniteInkwell</p>
-</footer>
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__grid">
+      <div>
+        <h4 class="footer__col-title">🗣️ Explore</h4>
+        <a href="voices.html" class="footer__link">Voice Archive</a>
+        <a href="blog.html" class="footer__link">Blog & Stories</a>
+        <a href="participate.html" class="footer__link">📖 Story Chain</a>
+        <a href="dashboard.html" class="footer__link">Dashboard</a>
+        <a href="media.html" class="footer__link">Media Coverage</a>
+        <a href="gallery.html" class="footer__link">Gallery</a>
+      </div>
+      <div>
+        <h4 class="footer__col-title">🎓 Learn</h4>
+        <a href="courses.html" class="footer__link">Free Courses</a>
+        <a href="peace-techniques.html" class="footer__link">Peace Techniques</a>
+        <a href="research.html" class="footer__link">AI Research</a>
+        <a href="about.html" class="footer__link">About Us</a>
+      </div>
+      <div>
+        <h4 class="footer__col-title">🤝 Participate</h4>
+        <a href="contribute.html" class="footer__link">Submit Your Voice</a>
+        <a href="participate.html" class="footer__link">Story & Wisdom Chain</a>
+        <a href="support.html" class="footer__link">Donate & Support</a>
+        <a href="contact.html" class="footer__link">Contact</a>
+      </div>
+      <div>
+        <h4 class="footer__col-title">🌍 Connect</h4>
+        <a href="#" class="footer__link">𝕏 (Twitter)</a>
+        <a href="#" class="footer__link">Facebook</a>
+        <a href="#" class="footer__link">Instagram</a>
+        <a href="#" class="footer__link">Telegram</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__slogan">
+        <span class="love">❤️ Wear Love.</span> · 
+        <span class="peace">🕊️ Speak Peace.</span> · 
+        <span class="unity">🤝 Live Unity.</span>
+      </p>
+      <p>Ethiopian Peace Archive &copy; 2026 · A Global Movement for Peace · Built with ❤️ for Ethiopia and the World</p>
+      <p style="margin-top:4px;font-size:0.65rem">
+        <a href="privacy.html" class="footer__link" style="display:inline;">Privacy</a> · 
+        <a href="terms.html" class="footer__link" style="display:inline;">Terms</a> · 
+        <a href="contact.html" class="footer__link" style="display:inline;">Contact</a> · 
+        <a href="thanks.html" class="footer__link" style="display:inline;">Thank You</a>
+      </p>
+      <p class="footer__hashtag">#EthiopianPeaceArchive #VoicesForPeace #WearLoveSpeakPeaceLiveUnity</p>
+    </div>
+  </footer>
 
-<script>
-    // ========== ALL PEACE VOICES FROM YOUR DATA ==========
-    const peaceVoices = [
-        {
-            id: 1, name: "Lemma Mekonnen", role: "Citizen", location: "Ethiopia", flag: "🇪🇹",
-            language: "Oromo", year: 2019,
-            themes: ["National Progress", "Hope", "Overcoming Challenges"],
-            quote: "I cannot thank enough for what I have for my country. Just as we are living right now, as the country moves forward, it shows hope and no doubt that our country is growing. These things are the foundation of the nation. Even though there are challenges that come with development, I believe our country will handle them and prosper.",
-            img: "https://images.unsplash.com/photo-1529068755536-a5ade0dcb4e8?w=200&h=200&fit=crop&crop=face",
-            likes: 247, liked: false
-        },
-        {
-            id: 2, name: "Yohannes W/Michael", role: "Student", location: "Ethiopia", flag: "🇪🇹",
-            language: "Amharic", year: 2018,
-            themes: ["Pride", "Harmony", "Unity"],
-            quote: "I am Ethiopian, I am a child of this country. That means I am proud to be an Ethiopian citizen. As we all know, Ethiopia is full of harmony & delightful things to have, to feel or sense. Everybody must see our country growing up high. We are one not 100 millions!",
-            img: "https://images.unsplash.com/photo-1531384440684-b8e0c3e5c7a2?w=200&h=200&fit=crop&crop=face",
-            likes: 183, liked: false
-        },
-        {
-            id: 3, name: "Mohamed Ziyad", role: "Student", location: "Somalia", flag: "🇸🇴",
-            language: "Somali", year: 2018,
-            themes: ["Inter-ethnic Unity", "Love", "Coexistence"],
-            quote: "Ethiopia is a famous country where different ethnic groups live together and love each other. Among these ethnic groups are Somalis. The Somali people are the most numerous in the history of Ethiopia. Ethiopia is a great country that will always be known as a land of unity and coexistence.",
-            img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
-            likes: 312, liked: false
-        },
-        {
-            id: 4, name: "Halala Dinsa", role: "Pharmacist", location: "Ethiopia", flag: "🇪🇹",
-            language: "Oromo", year: 2016,
-            themes: ["Divine Blessing", "Protection", "Prayer"],
-            quote: "Oh God, my country! Bless my country! Protect my country! My country! Grant it power! Protect my country! My country! May it eat and be blessed! May we be blessed by you!",
-            img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face",
-            likes: 421, liked: false
-        },
-        {
-            id: 5, name: "Alexandra et Benoît", role: "Infirmière (Nurse)", location: "France", flag: "🇫🇷",
-            language: "French", year: 2018,
-            themes: ["Natural Beauty", "Environmental Conservation", "Equality"],
-            quote: "Ethiopia is a beautiful country with many resources and stunning landscapes. We wish: more equality among the populations, ecological improvement to preserve the natural wealth of this beautiful country, that all children can have access to learning and knowledge, that every Ethiopian can easily find work.",
-            img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face",
-            likes: 156, liked: false
-        },
-        {
-            id: 6, name: "Olav Lundesgaard", role: "Visitor", location: "Norway", flag: "🇳🇴",
-            language: "Norwegian", year: 2018,
-            themes: ["Family", "Tourism", "Connection"],
-            quote: "Hi, Aurora and Tindra. Grandma and Grandpa are having a nice time in Ethiopia right now in November 2018. We are now going to visit the National Museum.",
-            img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
-            likes: 89, liked: false
-        },
-        {
-            id: 7, name: "Alice Schippers", role: "Director Disability Studies", location: "Netherlands", flag: "🇳🇱",
-            language: "Dutch", year: 2018,
-            themes: ["Disability Rights", "Quality of Life", "International Collaboration"],
-            quote: "On my journey to Ethiopia, my nephew skated for drinking water wells in Ethiopia. Now I am here for a Family-based approach project in collaboration with researchers from Ethiopia. We strive for more awareness and visibility for people with disabilities worldwide.",
-            img: "https://images.unsplash.com/photo-1592621385612-4d7129426394?w=200&h=200&fit=crop&crop=face",
-            likes: 278, liked: false
-        },
-        {
-            id: 8, name: "Anonymous", role: "Citizen", location: "Ethiopia", flag: "🇪🇹",
-            language: "Amharic", year: 2010,
-            themes: ["Honest Reflection", "Hard Work", "Leadership"],
-            quote: "Peace, to my beloved Ethiopia. My opinion is that Ethiopia is a country that lacks peace. Although Ethiopia has resources for everyone, its development is not at the desired level. This is due to the negligence of the people and a lack of adherence to the law.",
-            img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face",
-            likes: 534, liked: false
-        }
-    ];
-
-    // ========== CREATIVE SPARK CHAIN (Infinite Inkwell) ==========
-    const creativeSparks = [
-        {
-            id: 'c1', name: "Bethlehem Tadesse", role: "Storyteller & Poet", location: "Ethiopia", flag: "🇪🇹",
-            genre: "Fiction", thread: "The old man. The dog. The rain.",
-            quote: "The day everything changed, it was raining. I saw an old man fall in the mud. No one stopped. But a street dog walked over and stood beside him. As if to say: you are not alone. I put on my shoes and went outside.",
-            img: "https://images.unsplash.com/photo-1531384440684-b8e0c3e5c7a2?w=200&h=200&fit=crop&crop=face",
-            likes: 623, liked: false
-        },
-        {
-            id: 'c2', name: "Carlos Ramírez", role: "Former Combatant · Coffee Farmer", location: "Colombia", flag: "🇨🇴",
-            genre: "Memoir", thread: "The coffee farmer. The mother.",
-            quote: "After I put down my rifle, I fell into silence. A coffee farmer reached down and pulled me up. With coffee. With a question about my mother. Who reached down to you?",
-            img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
-            likes: 891, liked: false
-        },
-        {
-            id: 'c3', name: "Yuki Tanaka", role: "Zen Practitioner & Poet", location: "Japan", flag: "🇯🇵",
-            genre: "Poetry", thread: "Silence. The mother. Lost dreams.",
-            quote: "What did your mother want before she became a mother? I light incense for her lost dreams. The smoke rises. It does not answer. But it moves. And movement, I have learned, is its own kind of hope.",
-            img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face",
-            likes: 1047, liked: false
-        }
-    ];
-
-    // ========== WISDOM CHAIN (Depth Builders) ==========
-    const wisdomBuilders = [
-        {
-            id: 'w1', name: "Kwame Asante", role: "Taxi Driver · 22 Years", location: "Ghana", flag: "🇬🇭",
-            layer: 1,
-            quote: "People change when you listen — really listen. I drove a taxi for 22 years. I never fixed anyone. But many fixed themselves because someone was quiet while they spoke.",
-            edge: "🔪 Edge: What about people who have hurt you?",
-            img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face",
-            likes: 756, liked: false
-        },
-        {
-            id: 'w2', name: "Odette Uwimana", role: "Reconciliation Survivor", location: "Rwanda", flag: "🇷🇼",
-            layer: 2,
-            quote: "I sat across from the man who killed my brother. I listened to his shaking hands. Listening to an enemy is self-defense of the soul.",
-            edge: "🔪 Edge: What is listening for if it cannot undo the past?",
-            img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&crop=face",
-            likes: 1203, liked: false
-        },
-        {
-            id: 'w3', name: "Samir Al-Khatib", role: "Former Teacher · Syria", location: "Syria", flag: "🇸🇾",
-            layer: 3,
-            quote: "My school became rubble. Now I teach in a tent. A child's laughter is the bravest sound I have ever heard. Braver than bombs. Braver than silence.",
-            edge: "🔪 Edge: How do we rebuild when the foundation is gone?",
-            img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
-            likes: 938, liked: false
-        }
-    ];
-
-    // ========== RENDER VOICES ==========
-    function renderVoices() {
-        const grid = document.getElementById('voicesGrid');
-        if (!grid) return;
-        grid.innerHTML = peaceVoices.map((v, i) => createVoiceCard(v, 'voice-card', 'voices')).join('');
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('slideMenu');
+      const overlay = document.getElementById('slideOverlay');
+      const hamburger = document.getElementById('hamburger');
+      if (!menu || !overlay || !hamburger) return;
+      const isOpen = menu.classList.contains('slide-menu--open');
+      if (isOpen) {
+        menu.classList.remove('slide-menu--open');
+        overlay.classList.remove('slide-overlay--open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      } else {
+        menu.classList.add('slide-menu--open');
+        overlay.classList.add('slide-overlay--open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
     }
-
-    function renderCreativeSparks() {
-        const grid = document.getElementById('creativeGrid');
-        if (!grid) return;
-        grid.innerHTML = creativeSparks.map((v, i) => createChainCard(v, 'creative', 'chain-voice-card')).join('') + `
-            <div class="chain-voice-card chain-empty-card">
-                <div class="chain-card-top">
-                    <span style="font-size:2rem;">🌍</span>
-                    <div class="chain-avatar" style="background:var(--purple-dim);display:flex;align-items:center;justify-content:center;font-size:1.8rem;">✨</div>
-                    <div class="chain-name">Your Name Here</div>
-                    <div class="chain-role">Writer · Any Genre</div>
-                    <div class="chain-location">Your Country</div>
-                    <div class="chain-tags">
-                        <span class="chain-tag chain-tag-genre">🎨 Fiction</span>
-                        <span class="chain-tag chain-tag-genre">📜 Poetry</span>
-                        <span class="chain-tag chain-tag-genre">🗺️ Adventure</span>
-                    </div>
-                </div>
-                <div class="chain-card-body">
-                    <div class="chain-quote" style="color:var(--text-muted);"><em>The inkwell is infinite. What story will you spill into the world?</em></div>
-                </div>
-                <div class="chain-footer">
-                    <a href="contribute.html" class="btn btn-purple btn-block" style="font-size:0.8rem;">✨ Start Writing</a>
-                </div>
-            </div>`;
-    }
-
-    function renderWisdomBuilders() {
-        const grid = document.getElementById('wisdomGrid');
-        if (!grid) return;
-        grid.innerHTML = wisdomBuilders.map((v, i) => createWisdomCard(v)).join('') + `
-            <div class="chain-voice-card wisdom-card chain-empty-card">
-                <div class="chain-card-top">
-                    <span style="font-size:2rem;">🌍</span>
-                    <div class="chain-avatar wisdom-avatar" style="background:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-size:1.8rem;">🦉</div>
-                    <div class="chain-name">Your Name Here</div>
-                    <div class="chain-role">Thinker · Philosopher · Human</div>
-                    <div class="chain-location">Your Country</div>
-                    <div class="chain-tags">
-                        <span class="depth-badge">Layer 4</span>
-                    </div>
-                </div>
-                <div class="chain-card-body">
-                    <div class="chain-quote" style="color:var(--text-muted);"><em>Add your layer. Sharpen the truth. Leave your edge for the next builder.</em></div>
-                </div>
-                <div class="chain-footer">
-                    <a href="contribute.html" class="btn btn-gold btn-block" style="font-size:0.8rem;">🦉 Add Your Layer</a>
-                </div>
-            </div>`;
-    }
-
-    function createVoiceCard(v, cardClass, type) {
-        return `
-            <div class="voice-card" id="${type}-${v.id}">
-                <div class="voice-card-top">
-                    <span class="voice-flag">${v.flag}</span>
-                    <div class="voice-avatar"><img src="${v.img}" alt="${v.name}" loading="lazy" onerror="this.innerHTML='<span style=font-size:2rem;color:var(--gold-bright);font-weight:700>${v.name.charAt(0)}</span>'"></div>
-                    <div class="voice-name">${v.name}</div>
-                    <div class="voice-role">💼 ${v.role}</div>
-                    <div class="voice-location"><span>📍 ${v.location}</span><span>·</span><span>📅 ${v.year}</span></div>
-                    <div class="voice-tags">
-                        <span class="voice-tag tag-country">📍 ${v.location}</span>
-                        <span class="voice-tag tag-lang">🌐 ${v.language}</span>
-                        ${v.themes.slice(0,2).map(t => `<span class="voice-tag tag-lang">#${t.replace(/\s+/g,'')}</span>`).join('')}
-                    </div>
-                </div>
-                <div class="voice-card-body">
-                    <div class="voice-quote" id="quote-${v.id}">"${v.quote}"</div>
-                    <span class="read-more" onclick="toggleQuote('quote-${v.id}', this)">Read more →</span>
-                </div>
-                <div class="voice-card-footer">
-                    <div class="like-section">
-                        <button class="like-btn ${v.liked ? 'liked' : ''}" id="like-btn-${v.id}" onclick="toggleLike('peaceVoices',${v.id})">
-                            <i class="${v.liked ? 'fas' : 'far'} fa-heart"></i><span>Like</span>
-                            <span class="like-count" id="like-count-${v.id}">${formatLikes(v.likes)}</span>
-                        </button>
-                        <a href="contribute.html" style="font-size:0.72rem;color:var(--gold);font-weight:600;padding:6px 12px;border-radius:16px;border:1px solid var(--gold);transition:0.25s;" onmouseover="this.style.background='var(--gold-soft)'" onmouseout="this.style.background='transparent'">✍️ Join</a>
-                    </div>
-                    <div class="share-section">
-                        <span class="share-label">Share:</span>
-                        <button class="share-btn share-facebook" onclick="shareFacebook(${v.id})"><i class="fab fa-facebook-f"></i></button>
-                        <button class="share-btn share-telegram" onclick="shareTelegram(${v.id})"><i class="fab fa-telegram-plane"></i></button>
-                        <button class="share-btn share-tiktok" onclick="shareTikTok(${v.id})"><i class="fab fa-tiktok"></i></button>
-                        <button class="share-btn share-twitter" onclick="shareTwitter(${v.id})"><i class="fab fa-x-twitter"></i></button>
-                        <button class="share-btn share-instagram" onclick="shareInstagram(${v.id})"><i class="fab fa-instagram"></i></button>
-                        <button class="share-btn share-copy" id="copy-btn-${v.id}" onclick="copyLink(${v.id})"><i class="fas fa-link"></i></button>
-                    </div>
-                </div>
-            </div>`;
-    }
-
-    function createChainCard(v, type, cardClass) {
-        return `
-            <div class="${cardClass}" id="${type}-${v.id}">
-                <div class="chain-card-top">
-                    <span class="chain-flag">${v.flag}</span>
-                    <div class="chain-avatar"><img src="${v.img}" alt="${v.name}" loading="lazy" onerror="this.innerHTML='<span style=font-size:1.8rem;color:var(--purple-bright);font-weight:700>${v.name.charAt(0)}</span>'"></div>
-                    <div class="chain-name">${v.name}</div>
-                    <div class="chain-role">${v.role}</div>
-                    <div class="chain-location">📍 ${v.location}</div>
-                    <div class="chain-tags">
-                        <span class="chain-tag chain-tag-genre">🎨 ${v.genre}</span>
-                        <span class="chain-tag chain-tag-thread">🧵 ${v.thread}</span>
-                    </div>
-                </div>
-                <div class="chain-card-body">
-                    <div class="chain-quote" id="chain-quote-${v.id}">"${v.quote}"</div>
-                    <span class="read-more" onclick="toggleQuote('chain-quote-${v.id}', this)">Read more →</span>
-                </div>
-                <div class="chain-footer">
-                    <div class="like-section">
-                        <button class="like-btn ${v.liked ? 'liked' : ''}" id="like-btn-${v.id}" onclick="toggleLike('creativeSparks','${v.id}')">
-                            <i class="${v.liked ? 'fas' : 'far'} fa-heart"></i><span>Like</span>
-                            <span class="like-count" id="like-count-${v.id}">${formatLikes(v.likes)}</span>
-                        </button>
-                    </div>
-                </div>
-            </div>`;
-    }
-
-    function createWisdomCard(v) {
-        return `
-            <div class="chain-voice-card wisdom-card" id="wisdom-${v.id}">
-                <div class="chain-card-top">
-                    <span class="chain-flag">${v.flag}</span>
-                    <div class="chain-avatar wisdom-avatar"><img src="${v.img}" alt="${v.name}" loading="lazy" onerror="this.innerHTML='<span style=font-size:1.8rem;color:var(--gold-bright);font-weight:700>${v.name.charAt(0)}</span>'"></div>
-                    <div class="chain-name">${v.name}</div>
-                    <div class="chain-role">${v.role}</div>
-                    <div class="chain-location">📍 ${v.location}</div>
-                    <div class="chain-tags"><span class="depth-badge">Layer ${v.layer}</span></div>
-                </div>
-                <div class="chain-card-body">
-                    <div class="chain-quote" id="wisdom-quote-${v.id}">"${v.quote}"</div>
-                    <span class="read-more" onclick="toggleQuote('wisdom-quote-${v.id}', this)">Read more →</span>
-                    <div style="color:var(--green-bright);font-style:italic;font-weight:500;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:0.78rem;">${v.edge}</div>
-                </div>
-                <div class="chain-footer">
-                    <div class="like-section">
-                        <button class="like-btn ${v.liked ? 'liked' : ''}" id="like-btn-${v.id}" onclick="toggleLike('wisdomBuilders','${v.id}')">
-                            <i class="${v.liked ? 'fas' : 'far'} fa-heart"></i><span>Like</span>
-                            <span class="like-count" id="like-count-${v.id}">${formatLikes(v.likes)}</span>
-                        </button>
-                    </div>
-                </div>
-            </div>`;
-    }
-
-    // ========== TOGGLE QUOTE ==========
-    function toggleQuote(quoteId, btn) {
-        const quote = document.getElementById(quoteId);
-        if (!quote) return;
-        if (quote.classList.contains('expanded')) {
-            quote.classList.remove('expanded');
-            btn.textContent = 'Read more →';
-        } else {
-            quote.classList.add('expanded');
-            btn.textContent = 'Show less ←';
-        }
-    }
-
-    // ========== TOGGLE LIKE ==========
-    function toggleLike(arrayName, id) {
-        let arr;
-        if (arrayName === 'peaceVoices') arr = peaceVoices;
-        else if (arrayName === 'creativeSparks') arr = creativeSparks;
-        else if (arrayName === 'wisdomBuilders') arr = wisdomBuilders;
-        else return;
-        
-        const item = arr.find(v => v.id == id);
-        if (!item) return;
-        
-        item.liked = !item.liked;
-        item.likes += item.liked ? 1 : -1;
-        
-        const likeBtn = document.getElementById('like-btn-' + id);
-        const likeCount = document.getElementById('like-count-' + id);
-        
-        if (likeBtn) {
-            likeBtn.classList.toggle('liked', item.liked);
-            likeBtn.querySelector('i').className = item.liked ? 'fas fa-heart' : 'far fa-heart';
-        }
-        if (likeCount) likeCount.textContent = formatLikes(item.likes);
-    }
-
-    function formatLikes(num) {
-        if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-        return num.toString();
-    }
-
-    // ========== SOCIAL SHARE ==========
-    function getVoiceShareData(voiceId) {
-        const allVoices = [...peaceVoices, ...creativeSparks, ...wisdomBuilders];
-        const voice = allVoices.find(v => v.id == voiceId);
-        if (!voice) return null;
-        const text = `"${voice.quote.substring(0, 100)}..." — ${voice.name} (${voice.location})\n\n🕊️ Ethiopian Peace Archive`;
-        const url = window.location.href.split('?')[0] + '?voice=' + voiceId;
-        return { text, url, voice };
-    }
-
-    function shareFacebook(voiceId) {
-        const data = getVoiceShareData(voiceId);
-        if (!data) return;
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(data.url)}&quote=${encodeURIComponent(data.text)}`, '_blank', 'width=600,height=400');
-    }
-
-    function shareTelegram(voiceId) {
-        const data = getVoiceShareData(voiceId);
-        if (!data) return;
-        window.open(`https://t.me/share/url?url=${encodeURIComponent(data.url)}&text=${encodeURIComponent(data.text)}`, '_blank', 'width=600,height=400');
-    }
-
-    function shareTikTok(voiceId) {
-        const data = getVoiceShareData(voiceId);
-        if (!data) return;
-        alert(`📱 TikTok Share\n\n"${data.voice.quote.substring(0, 150)}..."\n\n— ${data.voice.name}\n\n🔗 ${data.url}`);
-    }
-
-    function shareTwitter(voiceId) {
-        const data = getVoiceShareData(voiceId);
-        if (!data) return;
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(data.voice.quote.substring(0, 80) + '... — ' + data.voice.name)}&url=${encodeURIComponent(data.url)}&hashtags=EthiopianPeaceArchive,VoicesForPeace`, '_blank', 'width=600,height=400');
-    }
-
-    function shareInstagram(voiceId) {
-        const data = getVoiceShareData(voiceId);
-        if (!data) return;
-        alert(`📸 Instagram Share\n\n"${data.voice.quote.substring(0, 150)}..."\n\n— ${data.voice.name}\n\n🔗 ${data.url}\n\n#EthiopianPeaceArchive #VoicesForPeace`);
-    }
-
-    function copyLink(voiceId) {
-        const data = getVoiceShareData(voiceId);
-        if (!data) return;
-        const fullText = `"${data.voice.quote}"\n\n— ${data.voice.name} (${data.voice.location})\n\n🕊️ Ethiopian Peace Archive\n${data.url}`;
-        navigator.clipboard.writeText(fullText).then(() => {
-            const copyBtn = document.getElementById('copy-btn-' + voiceId);
-            if (copyBtn) {
-                copyBtn.classList.add('copied');
-                copyBtn.querySelector('i').className = 'fas fa-check';
-                setTimeout(() => { copyBtn.classList.remove('copied'); copyBtn.querySelector('i').className = 'fas fa-link'; }, 1500);
-            }
-        }).catch(() => alert('📋 ' + fullText));
-    }
-
-    // ========== INIT ==========
-    document.addEventListener('DOMContentLoaded', () => {
-        renderVoices();
-        renderCreativeSparks();
-        renderWisdomBuilders();
-        console.log('✅ All sections loaded — Voices of Peace, Infinite Inkwell, Depth Builders');
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const menu = document.getElementById('slideMenu');
+        if (menu && menu.classList.contains('slide-menu--open')) toggleMenu();
+      }
     });
-</script>
-
-<script src="js/supabase.js"></script>
-<script src="js/navigation.js"></script>
+  </script>
 </body>
 </html>
